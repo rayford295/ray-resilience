@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DisasterPilot — From Public Disaster Information to Decisions That Help</title>
+<meta name="description" content="An open multi-agent pipeline from public disaster information to auditable decisions. Live case study: Super Typhoon Bavi (2026).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0e1b2e; --navy-2:#15263f; --paper:#f7f6f2; --ink:#1c2733;
+  --amber:#f59e0b; --amber-deep:#d97706; --teal:#0d9488; --red:#dc2626;
+  --muted:#5b6b7c; --border:#e3e1d8; --radius:14px;
+}
+html{scroll-behavior:smooth}
+body{font-family:"Manrope",system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+.mono{font-family:"IBM Plex Mono",monospace}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(247,246,242,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font-weight:800;font-size:18px;letter-spacing:-.3px;text-decoration:none}
+.brand .dot{color:var(--amber)}
+.nav-links{display:flex;gap:22px;list-style:none;align-items:center}
+.nav-links a{font-size:13.5px;font-weight:600;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--ink)}
+.gh-btn{background:var(--navy);color:#fff !important;padding:8px 16px;border-radius:8px;font-size:13px}
+
+/* EMERGENCY STRIP */
+.emergency{background:linear-gradient(90deg,#7f1d1d,#991b1b);color:#fff}
+.emergency-inner{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;padding:10px 0;font-size:13.5px}
+.emergency b{font-weight:800}
+.emergency a{color:#fecaca;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.emergency .zh{opacity:.92}
+
+/* HERO */
+#hero{background:var(--navy);color:#fff;padding:84px 0 70px;position:relative;overflow:hidden}
+#hero::after{content:"";position:absolute;right:-160px;top:-160px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,158,11,.16),transparent 65%);pointer-events:none}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--amber);margin-bottom:18px}
+.hero-kicker::before{content:"";width:26px;height:2px;background:var(--amber)}
+h1{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-1px;line-height:1.12;max-width:760px}
+.hero-sub{margin-top:20px;font-size:17px;color:rgba(255,255,255,.72);max-width:640px}
+.hero-sub .zh{display:block;margin-top:6px;font-size:15px;color:rgba(255,255,255,.55)}
+.hero-ctas{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-amber{background:var(--amber);color:#221a05}
+.btn-ghost{border:1px solid rgba(255,255,255,.3);color:#fff}
+.live-badge{margin-top:38px;display:inline-flex;gap:10px;align-items:center;background:rgba(220,38,38,.14);
+  border:1px solid rgba(248,113,113,.4);border-radius:999px;padding:8px 16px;font-size:13px;color:#fecaca}
+.pulse{width:9px;height:9px;border-radius:50%;background:#f87171;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(248,113,113,.5)}70%{box-shadow:0 0 0 9px rgba(248,113,113,0)}100%{box-shadow:0 0 0 0 rgba(248,113,113,0)}}
+
+/* PIPELINE */
+section{padding:76px 0}
+.sec-kicker{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber-deep);margin-bottom:10px}
+h2{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.6px;margin-bottom:12px}
+.sec-sub{color:var(--muted);max-width:640px;margin-bottom:42px;font-size:15.5px}
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.pipe-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px 18px;position:relative;
+  transition:transform .18s,box-shadow .18s}
+.pipe-card:hover{transform:translateY(-3px);box-shadow:0 12px 34px rgba(14,27,46,.10)}
+.pipe-num{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--amber-deep);font-weight:600;margin-bottom:10px}
+.pipe-name{font-weight:800;font-size:15px;margin-bottom:8px}
+.pipe-desc{font-size:12.5px;color:var(--muted);line-height:1.55}
+.pipe-state{margin-top:12px;display:inline-block;font-size:10px;font-weight:700;letter-spacing:.8px;padding:3px 9px;border-radius:999px}
+.state-live{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}
+.state-gated{background:#fffbeb;color:#b45309;border:1px solid #fde68a}
+
+/* CASE */
+#case{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.case-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.case-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.stat{background:var(--paper);border:1px solid var(--border);border-radius:12px;padding:18px}
+.stat-num{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.stat-lbl{font-size:12px;color:var(--muted);margin-top:2px}
+.case-files{background:var(--navy);border-radius:var(--radius);padding:26px;color:#fff}
+.case-files h3{font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+.file-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:13px}
+.file-row:last-child{border-bottom:none}
+.file-row a{color:#fcd34d;text-decoration:none;font-family:"IBM Plex Mono",monospace;font-size:12px;white-space:nowrap}
+.file-row a:hover{text-decoration:underline}
+.file-row span{color:rgba(255,255,255,.65)}
+
+/* PRINCIPLES */
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pri{background:#fff;border:1px solid var(--border);border-left:4px solid var(--teal);border-radius:12px;padding:24px}
+.pri h3{font-size:16px;font-weight:800;margin-bottom:8px}
+.pri p{font-size:13.5px;color:var(--muted)}
+
+/* WHO */
+#who{background:var(--navy-2);color:#fff}
+#who .sec-kicker{color:var(--amber)}
+#who .sec-sub{color:rgba(255,255,255,.6)}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.who-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:26px}
+.who-card h3{font-size:16px;font-weight:800;margin-bottom:10px;color:#fcd34d}
+.who-card p{font-size:13.5px;color:rgba(255,255,255,.7)}
+.who-card ul{margin-top:10px;padding-left:18px;font-size:13px;color:rgba(255,255,255,.7)}
+.who-card li{margin-bottom:5px}
+
+/* QUICKSTART */
+.code{background:var(--navy);color:#d8e2ef;border-radius:12px;padding:22px 24px;font-family:"IBM Plex Mono",monospace;
+  font-size:13px;line-height:1.9;overflow-x:auto;margin-top:8px}
+.code .c{color:#6b8bb5}
+.qs-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start}
+
+/* FOOTER */
+footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-size:13px}
+.foot-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.foot-links{display:flex;gap:20px}
+.foot-links a{color:rgba(255,255,255,.55);text-decoration:none}
+.foot-links a:hover{color:#fff}
+.disclaimer{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;line-height:1.7;color:rgba(255,255,255,.45)}
+
+@media(max-width:840px){
+  .pipe{grid-template-columns:1fr 1fr}
+  .case-grid,.qs-grid{grid-template-columns:1fr}
+  .principles,.who-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="emergency">
+  <div class="wrap emergency-inner">
+    <b>⚠️ In an affected area? Use official channels:</b>
+    <a href="https://weather.cma.cn" target="_blank" rel="noopener">CMA 中国气象局</a>
+    <a href="https://typhoon.slt.zj.gov.cn" target="_blank" rel="noopener">实时台风路径</a>
+    <a href="https://www.mem.gov.cn" target="_blank" rel="noopener">应急管理部</a>
+    <span class="zh">国家预警信息发布：<b>12379</b> · 紧急求助：<b>110 / 119 / 120</b> — DisasterPilot 是研究工具，不能替代官方预警。</span>
+  </div>
+</div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="brand" href="#">Disaster<span class="dot">Pilot</span></a>
+    <ul class="nav-links">
+      <li><a href="#pipeline">Pipeline</a></li>
+      <li><a href="#case">Live Case</a></li>
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#who">Who It Helps</a></li>
+      <li><a href="#quickstart">Quickstart</a></li>
+      <li><a class="gh-btn" href="https://github.com/rayford295/DisasterPilot" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-kicker">Open Source · Multi-Agent · Disaster Intelligence</div>
+    <h1>From public disaster information to decisions that help.</h1>
+    <p class="hero-sub">
+      DisasterPilot is an open multi-agent pipeline that watches public sources,
+      builds auditable event records, maps exposure, and turns evidence into
+      actionable bulletins — honestly, with every unknown declared.
+      <span class="zh">从公开灾害信息到可审计决策的开源多智能体流水线——灾前监测到灾后证据，每一步可追溯。</span>
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-amber" href="https://github.com/rayford295/DisasterPilot" target="_blank" rel="noopener">View on GitHub</a>
+      <a class="btn btn-ghost" href="#case">See the live case study ↓</a>
+    </div>
+    <div class="live-badge">
+      <span class="pulse"></span>
+      LIVE · Super Typhoon Bavi (2026) — landfall sequence auto-captured every 3 hours
+    </div>
+  </div>
+</section>
+
+<section id="pipeline">
+  <div class="wrap">
+    <div class="sec-kicker">How It Works</div>
+    <h2>Five agents, one chain of custody</h2>
+    <p class="sec-sub">Each agent consumes and produces auditable artifacts. Nothing is fabricated, nothing is skipped silently — the pipeline either delivers evidence or tells you exactly why it can't.</p>
+    <div class="pipe">
+      <div class="pipe-card">
+        <div class="pipe-num">01 · PRE-EVENT</div>
+        <div class="pipe-name">Watcher</div>
+        <div class="pipe-desc">Polls public sources, registers hazard events, snapshots live tracks — append-only, timestamped.</div>
+        <span class="pipe-state state-live">LIVE</span>
+      </div>
+      <div class="pipe-card">
+        <div class="pipe-num">02 · PRE-EVENT</div>
+        <div class="pipe-name">Dossier</div>
+        <div class="pipe-desc">Structured event record from captured payloads. Machine-verifiable numbers only; narrative facts stay human-curated with citations.</div>
+        <span class="pipe-state state-live">LIVE</span>
+      </div>
+      <div class="pipe-card">
+        <div class="pipe-num">03 · PRE-EVENT</div>
+        <div class="pipe-name">Exposure</div>
+        <div class="pipe-desc">Quadrant wind-swath footprints as GeoJSON, ready to intersect with population and building layers.</div>
+        <span class="pipe-state state-live">LIVE</span>
+      </div>
+      <div class="pipe-card">
+        <div class="pipe-num">04 · POST-EVENT</div>
+        <div class="pipe-name">Evidence</div>
+        <div class="pipe-desc">Reliability-gated cross-view damage assessment. Fails closed: no imagery, no damage numbers.</div>
+        <span class="pipe-state state-gated">FAIL-CLOSED</span>
+      </div>
+      <div class="pipe-card">
+        <div class="pipe-num">05 · DECISION</div>
+        <div class="pipe-name">Decision</div>
+        <div class="pipe-desc">Watch bulletins, tile priorities, inspection routes — every action cites its evidence, every unknown is declared.</div>
+        <span class="pipe-state state-live">LIVE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="case">
+  <div class="wrap case-grid">
+    <div>
+      <div class="sec-kicker">Live Case Study</div>
+      <h2>Super Typhoon Bavi (2026)</h2>
+      <p class="sec-sub" style="margin-bottom:0">
+        Bavi (2609, 巴威) made landfall on the Fujian–Zhejiang coast on the night of
+        2026-07-11. DisasterPilot began capturing its track <b>before landfall</b> —
+        the forecast-conditioned record is frozen, so post-event validation is honest
+        by construction.
+      </p>
+      <div class="case-stats">
+        <div class="stat"><div class="stat-num">910 hPa</div><div class="stat-lbl">Peak central pressure</div></div>
+        <div class="stat"><div class="stat-num">89+</div><div class="stat-lbl">Track points captured (growing every 3 h)</div></div>
+        <div class="stat"><div class="stat-num">255</div><div class="stat-lbl">Wind-footprint polygons (Beaufort 7/10/12)</div></div>
+        <div class="stat"><div class="stat-num">4/4</div><div class="stat-lbl">Pre-event agents ran end-to-end live</div></div>
+      </div>
+    </div>
+    <div class="case-files">
+      <h3>Open Artifacts</h3>
+      <div class="file-row"><span>Sourced event dossier + reconciliation ledger</span><a href="https://github.com/rayford295/DisasterPilot/blob/main/events/bavi-2026/DOSSIER.md" target="_blank" rel="noopener">DOSSIER.md ↗</a></div>
+      <div class="file-row"><span>Append-only live track snapshots</span><a href="https://github.com/rayford295/DisasterPilot/tree/main/events/bavi-2026/snapshots" target="_blank" rel="noopener">snapshots/ ↗</a></div>
+      <div class="file-row"><span>Structured event record</span><a href="https://github.com/rayford295/DisasterPilot/blob/main/events/bavi-2026/dossier/event_record.json" target="_blank" rel="noopener">event_record.json ↗</a></div>
+      <div class="file-row"><span>Wind footprints (GeoJSON)</span><a href="https://github.com/rayford295/DisasterPilot/blob/main/events/bavi-2026/exposure/wind_footprints.geojson" target="_blank" rel="noopener">wind_footprints ↗</a></div>
+      <div class="file-row"><span>Watch bulletin with declared unknowns</span><a href="https://github.com/rayford295/DisasterPilot/blob/main/events/bavi-2026/decision/watch_bulletin.md" target="_blank" rel="noopener">watch_bulletin.md ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="principles">
+  <div class="wrap">
+    <div class="sec-kicker">Why Trust It</div>
+    <h2>Honest by construction</h2>
+    <p class="sec-sub">Disaster tools earn trust by admitting what they don't know. Three rules are enforced in code, not just promised in prose.</p>
+    <div class="principles">
+      <div class="pri">
+        <h3>Append-only provenance</h3>
+        <p>Every artifact records its agent, UTC timestamp, and inputs. Pre-event products are frozen — post-event validation can't be quietly rewritten.</p>
+      </div>
+      <div class="pri">
+        <h3>Fail closed</h3>
+        <p>No imagery → no damage numbers. Missing inputs → a recorded failure with the reason. The pipeline never interpolates its way past missing evidence.</p>
+      </div>
+      <div class="pri">
+        <h3>Declared unknowns</h3>
+        <p>Every decision product lists what is <em>not</em> known as prominently as what is. An emergency manager deserves the full picture, including the gaps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="sec-kicker">Who It Helps</div>
+    <h2>Built to be useful, not just publishable</h2>
+    <p class="sec-sub">The same artifact chain serves three audiences without modification.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <h3>Emergency managers</h3>
+        <p>Timestamped watch bulletins with cited actions and explicit unknowns; exposure footprints ready for population overlays; inspection priorities under real budgets.</p>
+      </div>
+      <div class="who-card">
+        <h3>Researchers</h3>
+        <p>A reproducible, fail-closed pipeline with tests and CI. The frozen pre-event record enables honest "did we predict the harm?" validation — rare in disaster ML.</p>
+        <ul>
+          <li>Cross-view methodology: <a href="https://github.com/rayford295/CrossViewGate" target="_blank" rel="noopener" style="color:#fcd34d">CrossViewGate ↗</a></li>
+          <li>Entry: OASIS @ ACM SIGSPATIAL 2026, Track A</li>
+        </ul>
+      </div>
+      <div class="who-card">
+        <h3>Affected communities</h3>
+        <p>Open artifacts anyone can inspect, in plain formats (Markdown, GeoJSON, JSON). And a hard rule: we always point to official warning channels first — this tool augments, never replaces, them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quickstart">
+  <div class="wrap qs-grid">
+    <div>
+      <div class="sec-kicker">Get Started</div>
+      <h2>Run the pipeline in two minutes</h2>
+      <p class="sec-sub" style="margin-bottom:0">Offline mode replays the committed Bavi snapshots — no network needed to reproduce every artifact on this page.</p>
+    </div>
+    <div>
+      <div class="code">
+<span class="c"># install</span><br>
+pip install -e .<br><br>
+<span class="c"># reproduce the Bavi pre-event pipeline (offline)</span><br>
+python scripts/run_pre_event.py --event-id bavi-2026 \<br>
+&nbsp;&nbsp;--tfid 202609 --offline<br><br>
+<span class="c"># capture a fresh live snapshot</span><br>
+python scripts/fetch_bavi_track.py<br><br>
+<span class="c"># tests</span><br>
+python -m unittest discover -s tests
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div><b style="color:#fff">DisasterPilot</b> · Open source (MIT) · Built by Yifan Yang 杨一帆 (Texas A&M University, Geography)</div>
+      <div class="foot-links">
+        <a href="https://github.com/rayford295/DisasterPilot" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/rayford295/DisasterPilot/blob/main/docs/architecture.md" target="_blank" rel="noopener">Architecture</a>
+        <a href="https://github.com/rayford295/CrossViewGate" target="_blank" rel="noopener">CrossViewGate</a>
+        <a href="https://rayford295.github.io/" target="_blank" rel="noopener">Author</a>
+      </div>
+    </div>
+    <div class="disclaimer">
+      DisasterPilot is a research tool. It is not an official forecasting or warning service and must not be used
+      as the sole basis for safety decisions. In an emergency, follow your local government's instructions and the
+      official channels listed at the top of this page. 本工具为科研用途，不构成官方预报或预警；紧急情况请以政府与
+      官方渠道信息为准。
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

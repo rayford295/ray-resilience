@@ -40,4 +40,4 @@ python -m unittest discover -s tests
 ```
 
 架构详见 [`docs/architecture.md`](docs/architecture.md)。
-作者：杨一凡（Texas A&M University, Geography）。MIT License。
+作者：杨一帆（Texas A&M University, Geography）。MIT License。
