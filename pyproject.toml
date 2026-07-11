@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bavi-resilience"
+version = "0.1.0"
+description = "Near-real-time resilience and vulnerability analysis for Super Typhoon Bavi (2026) — OASIS @ ACM SIGSPATIAL 2026 Track A."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Yifan Yang" }]
+dependencies = []
+
+[project.optional-dependencies]
+geo = [
+  "numpy>=1.26",
+  "pandas>=2.0",
+  "shapely>=2.0",
+  "matplotlib>=3.8",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

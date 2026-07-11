@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.ipynb_checkpoints/
+outputs/
+# large rasters/vectors stay local; snapshots (small JSON) are tracked
+data/raw/
+data/imagery/
