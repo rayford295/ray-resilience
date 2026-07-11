@@ -3,6 +3,8 @@
 **A multi-agent pipeline from public disaster information to auditable
 decisions — pre-event watch to post-event evidence.**
 
+🌐 **Website: https://rayford295.github.io/DisasterPilot/**
+
 Entry for **OASIS @ ACM SIGSPATIAL 2026 · Track A: Disaster Resilience &
 Vulnerability Analysis**. First live case study: **Super Typhoon Bavi
 (2026)**, whose landfall on the Fujian–Zhejiang coast this pipeline captured
