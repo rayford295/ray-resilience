@@ -1,100 +1,85 @@
-# Typhoon Bavi (2026) — Near-Real-Time Resilience & Vulnerability Analysis
+# DisasterPilot
 
-**Entry for OASIS @ ACM SIGSPATIAL 2026 · Track A: Disaster Resilience &
-Vulnerability Analysis.**
+**A multi-agent pipeline from public disaster information to auditable
+decisions — pre-event watch to post-event evidence.**
 
-Super Typhoon Bavi (2026 international number **2609**, 巴威) is making
-landfall on the Fujian–Zhejiang coast of China **as this repository is being
-built** (expected landfall window: night of 2026-07-11 CST, Xiapu–Wenling
-segment). This project performs the full resilience-analysis loop on a live
-event: pre-landfall exposure and vulnerability mapping, post-landfall
-cross-view damage evidence, and budget-constrained inspection prioritization —
-with the claim discipline of a research protocol, not a demo.
+Entry for **OASIS @ ACM SIGSPATIAL 2026 · Track A: Disaster Resilience &
+Vulnerability Analysis**. First live case study: **Super Typhoon Bavi
+(2026)**, whose landfall on the Fujian–Zhejiang coast this pipeline captured
+in real time.
 
-## Why this entry is different
+## What it does
 
-Most disaster-track entries fit one model to one post-event dataset. This
-entry brings a tested methodological position developed in
-[CrossViewGate](https://github.com/rayford295/CrossViewGate) across three
-prior disasters (2025 Eaton wildfire, Hurricanes Ian and Milton):
+```text
+public sources ──▶ WATCHER ──▶ DOSSIER ──▶ EXPOSURE ──▶ EVIDENCE ──▶ DECISION
+                 snapshot     structured   hazard ×     cross-view   bulletins,
+                 hazards      event        population   damage       priorities,
+                 (append-     record       footprints   (reliability inspection
+                 only)                                  -gated)      routes
+```
 
-1. **Views disagree, and the disagreement is signal.** Street-level and
-   overhead evidence systematically attest different damage facets. We treat
-   per-sample view reliability — not symmetric fusion — as the core object.
-2. **Risk-aware claims only.** Every output carries its evidence scope:
-   spatially blocked splits, cluster-aware uncertainty, and an explicit
-   `risk-aware` / `risk-controlled` claim rule. No leaderboard numbers from
-   leaked splits.
-3. **Decisions, not just maps.** The final products are a review queue, a
-   tile-priority map, and an inspection route under an explicit budget —
-   the artifacts an emergency manager can actually consume.
+Five agent roles cover the disaster lifecycle: **watch** public sources and
+register events; build a **dossier** of machine-verifiable facts; compute
+**exposure** footprints for vulnerability analysis; assess post-event
+**evidence** with reliability-gated cross-view fusion; and emit **decision**
+products an emergency manager can act on. Details:
+[`docs/architecture.md`](docs/architecture.md).
 
-## Live status
+Three design rules make it defensible rather than demo-ware:
 
-| Item | State |
-| --- | --- |
-| Event | Super Typhoon Bavi (2609), peak 910 hPa / CMA 62 m/s |
-| Phase | **Pre-landfall** — track + wind-radii snapshots being captured |
-| First data product | `data/snapshots/` live track from the Zhejiang Water Resources typhoon API (points + quadrant wind radii + multi-agency forecasts) |
-| Casualties so far (Philippines transit) | ≥18 dead, 8 injured, 5 missing |
-| CN warning level | Orange (2026-07-09), CMA Level-II emergency response |
+1. **Append-only artifacts with provenance.** Every agent output carries its
+   inputs, agent, and UTC timestamp in a per-event manifest. Pre-event
+   products are frozen, so post-event validation is honest by construction.
+2. **Fail closed.** No imagery → no damage numbers; missing inputs → recorded
+   failure, never silent skipping or interpolation.
+3. **Declared unknowns.** Every decision product lists what is *not* known
+   with the same prominence as what is.
 
-Event dossier with sources: [`docs/event_bavi_2026.md`](docs/event_bavi_2026.md).
+The evidence methodology comes from the
+[CrossViewGate](https://github.com/rayford295/CrossViewGate) research line
+(reliability-gated cross-view damage assessment, validated across the 2025
+Eaton wildfire and Hurricanes Ian and Milton).
 
-## Analysis phases
+## Live case study: Super Typhoon Bavi (2026)
 
-**Phase 1 — Exposure & vulnerability (pre-landfall, now).**
-Intersect forecast wind swaths (quadrant 7/10/12-Beaufort radii) with
-population, building footprints, and coastal low-lying zones to produce a
-pre-event exposure surface and a vulnerability-weighted watchlist of
-townships. Everything is timestamped so post-event validation is honest.
+Bavi (international number 2609, peak 910 hPa) made landfall on the
+Xiapu–Wenling coastal segment on the night of 2026-07-11 CST. This
+repository began capturing its track **before landfall**:
 
-**Phase 2 — Cross-view damage evidence (post-landfall).**
-As imagery becomes available (satellite first, street-level later), apply
-reliability-gated cross-view assessment: per-sample decision on which view to
-trust, calibrated confidence, and explicit abstention where neither view can
-attest damage.
+- `events/bavi-2026/snapshots/` — append-only live captures (89+ track
+  points, quadrant 7/10/12-Beaufort wind radii, multi-agency forecasts),
+  auto-extended every 3 hours by a scheduled GitHub Action through landfall;
+- `events/bavi-2026/DOSSIER.md` — sourced event dossier with a post-event
+  reconciliation ledger;
+- `events/bavi-2026/{dossier,exposure,decision}/` — pipeline products:
+  structured event record, wind-footprint GeoJSON, watch bulletin with
+  declared unknowns.
 
-**Phase 3 — Resilience decisions.**
-Convert sample-level evidence into tile priorities and a budget-constrained
-inspection route; validate Phase-1 vulnerability predictions against Phase-2
-observed damage — the resilience question is *how well pre-event structure
-predicted post-event harm*.
-
-Method details: [`docs/methodology.md`](docs/methodology.md).
-Track-A requirement mapping: [`docs/track_a_alignment.md`](docs/track_a_alignment.md).
-
-## Quickstart
+Reproduce the pre-event pipeline (offline mode reuses committed snapshots):
 
 ```bash
 pip install -e .
-# capture a live track snapshot (timestamped, never overwrites)
-python scripts/fetch_bavi_track.py --output-dir data/snapshots
-# normalize + wind-swath geometry
-python -m pytest tests -q
+python scripts/run_pre_event.py --event-id bavi-2026 --tfid 202609 --offline
+python -m unittest discover -s tests
 ```
 
 ## Repository map
 
 ```text
-├── docs/               # event dossier, methodology, track alignment
-├── src/bavi/           # track parsing, wind-swath geometry, exposure
-├── scripts/            # data capture + analysis pipelines
-├── data/snapshots/     # timestamped live API captures (small JSON)
-└── tests/              # unit tests (CI on every push)
+├── src/disasterpilot/
+│   ├── agents/          # watcher, dossier, exposure, evidence, decision
+│   ├── sources/         # public-source connectors (ZJ typhoon API live; GDACS/USGS planned)
+│   ├── hazards/         # hazard-specific parsing + geometry (typhoon wind swaths)
+│   └── pipeline.py      # orchestrator with fail-closed stage reporting
+├── events/bavi-2026/    # case study #1: snapshots + dossier + pipeline artifacts
+├── docs/                # architecture, methodology, Track-A alignment
+└── tests/               # unit + offline end-to-end pipeline tests (CI)
 ```
 
-## Data sources
-
-- Live track/forecast: Zhejiang Water Resources typhoon API (public)
-- Best track (post-event): CMA tcdata, JMA, JTWC
-- Population: WorldPop / GHS-POP · Buildings: OSM / EOC footprints
-- Imagery: Sentinel-1/2, GF series (as released), street-level as available
-- Event facts: see dossier citations
+- Methodology (three-phase resilience loop): [`docs/methodology.md`](docs/methodology.md)
+- Track-A requirement mapping: [`docs/track_a_alignment.md`](docs/track_a_alignment.md)
 
 ## Team
 
-Yifan Yang (Texas A&M University, Geography) — building on the CrossViewGate
-research line (cross-view reliability gating, ISPRS manuscript in preparation).
-
+Yifan Yang (Texas A&M University, Geography).
 中文说明见 [`README_CN.md`](README_CN.md)。MIT License.

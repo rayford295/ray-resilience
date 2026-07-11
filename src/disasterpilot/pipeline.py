@@ -1,0 +1,52 @@
+"""Pipeline orchestrator: run the agent sequence for one event.
+
+The pre-event pipeline is watcher -> dossier -> exposure -> decision.
+The evidence agent joins post-event (it fails closed without imagery).
+Agents that cannot run report why; the pipeline never fabricates a stage.
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any
+
+from disasterpilot.agents.base import EventContext
+from disasterpilot.agents.decision import WatchBulletin
+from disasterpilot.agents.dossier import TyphoonDossier
+from disasterpilot.agents.exposure import TyphoonExposure
+from disasterpilot.agents.watcher import TyphoonWatcher
+
+PRE_EVENT_AGENTS = (TyphoonWatcher, TyphoonDossier, TyphoonExposure, WatchBulletin)
+
+
+def run_pre_event(
+    event_id: str,
+    tfid: str,
+    events_root: Path = Path("events"),
+    skip_watcher: bool = False,
+) -> dict[str, Any]:
+    context = EventContext(
+        event_id=event_id,
+        event_dir=events_root / event_id,
+        hazard="typhoon",
+        metadata={"tfid": tfid},
+    )
+    report: dict[str, Any] = {"event_id": event_id, "stages": []}
+    for agent_cls in PRE_EVENT_AGENTS:
+        agent = agent_cls()
+        if skip_watcher and isinstance(agent, TyphoonWatcher):
+            report["stages"].append({"agent": agent.name, "status": "skipped (offline mode)"})
+            continue
+        try:
+            artifacts = agent.run(context)
+            report["stages"].append(
+                {
+                    "agent": agent.name,
+                    "status": "ok",
+                    "artifacts": [a.path.as_posix() for a in artifacts],
+                }
+            )
+        except Exception as error:  # noqa: BLE001 - surfaced, not swallowed
+            report["stages"].append({"agent": agent.name, "status": f"failed: {error}"})
+            break
+    return report

@@ -1,0 +1,32 @@
+{
+ "event_id": "bavi-2026",
+ "generated_utc": "20260711T051125Z",
+ "last_position": {
+  "lat": 26.1,
+  "lng": 123.9
+ },
+ "last_grade": "台风",
+ "peak_pressure_hpa": 915.0,
+ "actions": [
+  {
+   "action": "maintain_track_capture",
+   "reason": "event isactive=1",
+   "evidence": "bavi_202609_20260711T045650Z.json"
+  },
+  {
+   "action": "prepare_imagery_tasking",
+   "reason": "SAR (Sentinel-1) first post-landfall pass sees through cloud",
+   "evidence": "methodology.md Phase 2"
+  },
+  {
+   "action": "intersect_footprints_with_population",
+   "reason": "166 Beaufort>=10 footprint polygons available",
+   "evidence": "exposure/wind_footprints.geojson"
+  }
+ ],
+ "declared_unknowns": [
+  "population/building exposure counts (grids not yet integrated)",
+  "landfall parameters until best-track reconciliation",
+  "post-event damage (evidence agent fails closed pre-imagery)"
+ ]
+}

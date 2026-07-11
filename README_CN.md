@@ -1,35 +1,43 @@
-# 台风"巴威"(2026) 近实时韧性与脆弱性分析（中文说明）
+# DisasterPilot（中文说明）
 
-**OASIS @ ACM SIGSPATIAL 2026 · Track A: Disaster Resilience & Vulnerability
-Analysis 参赛项目。**
+**从公开灾害信息到可审计决策的多智能体流水线——覆盖灾前监测到灾后证据的
+完整生命周期。**
 
-2026 年第 9 号超强台风"巴威"（国际编号 2609，峰值 910 hPa）预计于
-2026-07-11 夜间在福建霞浦至浙江温岭一带登陆——本仓库在登陆前实时建立，
-完整执行"灾前预测 → 灾后观测 → 韧性验证"闭环：
+OASIS @ ACM SIGSPATIAL 2026 · Track A 参赛项目。首个实战案例：**2026 年
+第 9 号超强台风"巴威"**——本流水线在其登陆闽浙沿海之前开始实时捕获。
 
-1. **Phase 1（登陆前，进行中）**：用实时路径快照（含 7/10/12 级风圈四象限
-   半径与多机构预报）叠加人口格网、建筑轮廓与沿海低洼区，生成带时间戳的
-   暴露度面与脆弱性观察名单——**灾前冻结，不做事后修改**；
-2. **Phase 2（登陆后）**：跨视图损伤证据——卫星（Sentinel-1 SAR 优先，
-   不受云影响）与街景/社会影像按逐样本可靠性门控仲裁，无法证实的单元
-   显式输出 abstain + 待核查，而不是强行给标签；
-3. **Phase 3（验证）**：瓦片优先级图 + 预算约束巡检路线 + **韧性记分卡**
-   ——核心问题是"灾前结构在多大程度上预测了灾后损伤"，未命中与命中
-   同等醒目地公布。
+## 五个智能体角色
 
-方法学基因来自 [CrossViewGate](https://github.com/rayford295/CrossViewGate)
-（跨视图可靠性门控、空间分块评估、risk-aware 声明纪律，覆盖 2025 Eaton
-野火与飓风 Ian/Milton 三个灾害）。
+| 角色 | 职责 | 状态 |
+| --- | --- | --- |
+| **Watcher** | 轮询公开数据源、注册事件、追加式快照存档 | ✅ 实装（浙江水利厅台风 API） |
+| **Dossier** | 从捕获数据生成机器可验证的结构化事件档案 | ✅ 实装 |
+| **Exposure** | 风圈扫掠面 × 人口/建筑 → 暴露度与脆弱性观察名单 | ✅ 几何层实装 |
+| **Evidence** | 跨视图损伤评估（可靠性门控，无影像时拒绝输出） | 接口冻结，灾后激活 |
+| **Decision** | 观察通报 → 瓦片优先级 → 巡检路线 → 韧性记分卡 | ✅ 通报阶段实装 |
 
-- 事件档案（含来源）：[`docs/event_bavi_2026.md`](docs/event_bavi_2026.md)
-- 方法：[`docs/methodology.md`](docs/methodology.md)
-- 赛道要求对齐：[`docs/track_a_alignment.md`](docs/track_a_alignment.md)
-- 实时路径快照：`data/snapshots/`（浙江省水利厅台风 API，追加式存档）
+三条让它区别于 demo 的设计规则：
+
+1. **追加式产物 + 完整溯源**：每个产物带智能体名、UTC 时间戳、输入清单；
+   灾前产物被冻结，灾后验证天然诚实；
+2. **fail-closed**：没有影像就没有损伤数字，缺输入就记录失败，绝不静默跳过；
+3. **显式未知**：每份决策产物把"不知道什么"列得和"知道什么"一样醒目。
+
+证据方法学来自 [CrossViewGate](https://github.com/rayford295/CrossViewGate)
+研究线（跨视图可靠性门控，已在 Eaton 野火与飓风 Ian/Milton 验证）。
+
+## 巴威案例
+
+- `events/bavi-2026/snapshots/`：登陆前开始的追加式路径快照（89+ 点，
+  含 7/10/12 级风圈四象限半径），GitHub Actions 每 3 小时自动续档；
+- `events/bavi-2026/DOSSIER.md`：带来源的事件档案 + 灾后核对台账；
+- `events/bavi-2026/{dossier,exposure,decision}/`：流水线产物。
 
 ```bash
 pip install -e .
-python scripts/fetch_bavi_track.py   # 抓取一次实时路径快照
+python scripts/run_pre_event.py --event-id bavi-2026 --tfid 202609 --offline
 python -m unittest discover -s tests
 ```
 
+架构详见 [`docs/architecture.md`](docs/architecture.md)。
 作者：杨一凡（Texas A&M University, Geography）。MIT License。

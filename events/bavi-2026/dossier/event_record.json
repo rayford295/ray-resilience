@@ -1,0 +1,23 @@
+{
+ "event_id": "bavi-2026",
+ "hazard": "typhoon",
+ "tfid": "202609",
+ "name": "巴威",
+ "enname": "BAVI",
+ "isactive": "1",
+ "source_snapshot": "bavi_202609_20260711T045650Z.json",
+ "track": {
+  "n_points": 89,
+  "first_time": "2026-07-02 08:00:00",
+  "last_time": "2026-07-11 12:00:00",
+  "peak_pressure_hpa": 915.0,
+  "peak_wind_ms": 62.0,
+  "peak_time": "2026-07-04 14:00:00",
+  "last_position": {
+   "lat": 26.1,
+   "lng": 123.9
+  },
+  "last_grade": "台风"
+ },
+ "landfalls_reported_by_source": []
+}

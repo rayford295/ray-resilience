@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-"""Capture a timestamped snapshot of the live Bavi (202609) track.
+"""Capture a timestamped snapshot of a live typhoon track (default: Bavi 202609).
 
-Snapshots are append-only: each run writes a new UTC-stamped file plus a
-normalized summary, never overwriting earlier captures. That preserves the
-forecast-conditioned record needed for honest post-event validation.
+Thin wrapper over the DisasterPilot watcher's source connector. Snapshots are
+append-only: each run writes a new UTC-stamped file plus an index row, never
+overwriting earlier captures — the forecast-conditioned record stays frozen
+for honest post-event validation.
 """
 
 from __future__ import annotations
@@ -12,36 +13,22 @@ import argparse
 import datetime as dt
 import json
 import sys
-import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from bavi.tracks import parse_track, track_summary
-
-API_URL = "https://typhoon.slt.zj.gov.cn/Api/TyphoonInfo/{tfid}"
-
-
-def fetch(tfid: str, timeout: int = 30) -> dict:
-    request = urllib.request.Request(
-        API_URL.format(tfid=tfid),
-        headers={
-            "Referer": "https://typhoon.slt.zj.gov.cn/",
-            "User-Agent": "Mozilla/5.0 (research snapshot; bavi-resilience)",
-        },
-    )
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        return json.loads(response.read().decode("utf-8"))
+from disasterpilot.hazards.typhoon import parse_track, track_summary
+from disasterpilot.sources.zj_typhoon import typhoon_detail
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tfid", default="202609", help="Typhoon id (default Bavi 202609)")
-    parser.add_argument("--output-dir", type=Path, default=Path("data/snapshots"))
+    parser.add_argument("--output-dir", type=Path, default=Path("events/bavi-2026/snapshots"))
     args = parser.parse_args()
 
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    payload = fetch(args.tfid)
+    payload = typhoon_detail(args.tfid)
     points = parse_track(payload)
     summary = {
         "captured_utc": stamp,

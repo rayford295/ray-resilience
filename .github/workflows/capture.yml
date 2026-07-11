@@ -18,11 +18,11 @@ jobs:
         with:
           python-version: "3.11"
       - name: Capture live track snapshot
-        run: python scripts/fetch_bavi_track.py --output-dir data/snapshots
+        run: python scripts/fetch_bavi_track.py --output-dir events/bavi-2026/snapshots
       - name: Commit snapshot if changed
         run: |
-          git config user.name "bavi-capture-bot"
+          git config user.name "disasterpilot-capture-bot"
           git config user.email "actions@github.com"
-          git add data/snapshots
+          git add events/bavi-2026/snapshots
           git diff --cached --quiet || git commit -m "Auto-capture Bavi track snapshot ($(date -u +%Y-%m-%dT%H:%MZ))"
           git push

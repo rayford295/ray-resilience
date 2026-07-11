@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bavi-resilience"
-version = "0.1.0"
-description = "Near-real-time resilience and vulnerability analysis for Super Typhoon Bavi (2026) — OASIS @ ACM SIGSPATIAL 2026 Track A."
+name = "disasterpilot"
+version = "0.2.0"
+description = "Multi-agent pipeline from public disaster information to auditable decisions — pre-event watch to post-event evidence. Case study: Super Typhoon Bavi (2026), OASIS @ ACM SIGSPATIAL 2026 Track A."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
