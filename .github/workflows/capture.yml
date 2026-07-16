@@ -2,7 +2,8 @@ name: capture-track
 
 on:
   schedule:
-    # Every 3 hours while Bavi is active; disable after the event closes.
+    # Poll every 3 hours. The script exits without writing once the source
+    # marks Bavi inactive, preserving the final captured record.
     - cron: "17 */3 * * *"
   workflow_dispatch:
 

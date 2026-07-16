@@ -1,0 +1,52 @@
+{
+ "event_id": "bavi-2026",
+ "event_status": "closed_by_source",
+ "closure_basis": "The final committed Zhejiang Water Resources API payload marks isactive=0; this is not an official best-track reconciliation.",
+ "source": "Zhejiang Water Resources typhoon API",
+ "source_snapshot": "bavi_202609_20260716T142351Z.json",
+ "source_capture_utc": "2026-07-16T14:23:51+00:00",
+ "source_isactive": "0",
+ "track": {
+  "n_points": 168,
+  "first_time": "2026-07-02 08:00:00",
+  "last_time": "2026-07-14 19:00:00",
+  "peak_pressure_hpa": 915.0,
+  "peak_wind_ms": 62.0,
+  "peak_time": "2026-07-04 14:00:00",
+  "last_position": {
+   "lat": 38.4,
+   "lng": 124.8
+  },
+  "last_grade": "热带风暴"
+ },
+ "source_reported_landfalls": [
+  {
+   "landaddress": "浙江省玉环市坎门街道沿海",
+   "landtime": "2026-07-11 23:20:00",
+   "lng": "121.29",
+   "lat": "28.10",
+   "info": " 今年第9号台风“巴威”已于7月11日晚上23时20分前后在浙江省玉环市坎门街道沿海登陆",
+   "strong": null
+  },
+  {
+   "landaddress": "浙江省温州乐清市清江镇沿海",
+   "landtime": "2026-07-12 00:00:00",
+   "lng": "121.12",
+   "lat": "28.29",
+   "info": "今年第9号台风“巴威”（台风级）的中心已于7月12日0点前后在浙江省温州乐清市清江镇沿海再次登陆",
+   "strong": null
+  }
+ ],
+ "frozen_pre_event_artifacts": [
+  "events/bavi-2026/dossier/event_record.json",
+  "events/bavi-2026/exposure/wind_footprints.geojson",
+  "events/bavi-2026/decision/watch_bulletin.json",
+  "events/bavi-2026/decision/watch_bulletin.md"
+ ],
+ "declared_unknowns": [
+  "Official best-track reconciliation of intensity and landfall parameters.",
+  "Population and building exposure counts; the required grids are not integrated.",
+  "Post-event damage evidence; no imagery manifest has been ingested.",
+  "A watchlist validation scorecard; observed damage labels are not available."
+ ]
+}

@@ -111,5 +111,30 @@ class EvidenceFailClosedTests(unittest.TestCase):
                 CrossViewEvidence().run(context)
 
 
+class EventClosureTests(unittest.TestCase):
+    def test_closure_records_inactive_source_without_rewriting_pre_event_files(self) -> None:
+        from scripts.close_event import close_event
+
+        with tempfile.TemporaryDirectory() as tmp:
+            event_dir = Path(tmp) / "bavi-2026"
+            snapshots = event_dir / "snapshots"
+            snapshots.mkdir(parents=True)
+            payload = dict(SNAPSHOT, isactive="0", land=[{"landtime": "2026-07-11 23:20:00"}])
+            snapshot = snapshots / "bavi_202609_20260716T142351Z.json"
+            snapshot.write_text(json.dumps(payload), encoding="utf-8")
+            (event_dir / "artifact_manifest.jsonl").write_text(
+                json.dumps({"path": "events/bavi-2026/dossier/event_record.json", "agent": "dossier.typhoon"})
+                + "\n",
+                encoding="utf-8",
+            )
+
+            record = close_event(event_dir)
+
+            self.assertEqual(record["event_status"], "closed_by_source")
+            self.assertEqual(record["track"]["n_points"], 2)
+            self.assertTrue((event_dir / "closure" / "event_close.json").exists())
+            self.assertTrue((event_dir / "closure" / "CLOSURE.md").exists())
+
+
 if __name__ == "__main__":
     unittest.main()

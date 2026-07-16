@@ -21,10 +21,15 @@ from public information to defensible decisions.
 ```
 
 Implemented today: watcher, dossier, exposure, decision (watch-bulletin
-stage) — the full pre-event chain runs end-to-end on live data. The evidence
-agent is an enforced fail-closed interface until post-event imagery
-manifests exist; its methodology is the CrossViewGate reliability-gating
-line, validated on three prior disasters.
+stage), and source-based event closure. The full pre-event chain ran
+end-to-end on Bavi live data. The evidence agent is an enforced fail-closed
+interface until post-event imagery manifests exist; its methodology is the
+CrossViewGate reliability-gating line, validated on three prior disasters.
+
+The closure stage is deliberately separate from pre-event artifacts. It stops
+new scheduled captures once the source marks the event inactive, records the
+final source payload and reported landfalls, and lists the still-missing
+official reconciliation, exposure counts, imagery, and validation labels.
 
 ## The artifact contract
 

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DisasterPilot — From Public Disaster Information to Decisions That Help</title>
-<meta name="description" content="An open multi-agent pipeline from public disaster information to auditable decisions. Live case study: Super Typhoon Bavi (2026).">
+<meta name="description" content="A multi-agent pipeline from public disaster information to auditable decisions. Closed case study: Super Typhoon Bavi (2026).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -52,10 +52,9 @@ h1{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-1px;line-heigh
 .btn:hover{transform:translateY(-1px)}
 .btn-amber{background:var(--amber);color:#221a05}
 .btn-ghost{border:1px solid rgba(255,255,255,.3);color:#fff}
-.live-badge{margin-top:38px;display:inline-flex;gap:10px;align-items:center;background:rgba(220,38,38,.14);
-  border:1px solid rgba(248,113,113,.4);border-radius:999px;padding:8px 16px;font-size:13px;color:#fecaca}
-.pulse{width:9px;height:9px;border-radius:50%;background:#f87171;animation:pulse 1.6s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(248,113,113,.5)}70%{box-shadow:0 0 0 9px rgba(248,113,113,0)}100%{box-shadow:0 0 0 0 rgba(248,113,113,0)}}
+.live-badge{margin-top:38px;display:inline-flex;gap:10px;align-items:center;background:rgba(13,148,136,.16);
+  border:1px solid rgba(94,234,212,.38);border-radius:999px;padding:8px 16px;font-size:13px;color:#ccfbf1}
+.pulse{width:9px;height:9px;border-radius:50%;background:#5eead4}
 
 /* PIPELINE */
 section{padding:76px 0}
@@ -144,18 +143,17 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
     <a class="brand" href="#">Disaster<span class="dot">Pilot</span></a>
     <ul class="nav-links">
       <li><a href="#pipeline">Pipeline</a></li>
-      <li><a href="#case">Live Case</a></li>
+      <li><a href="#case">Case Study</a></li>
       <li><a href="#principles">Principles</a></li>
       <li><a href="#who">Who It Helps</a></li>
       <li><a href="#quickstart">Quickstart</a></li>
-      <li><a class="gh-btn" href="https://github.com/rayford295/DisasterPilot" target="_blank" rel="noopener">GitHub ↗</a></li>
     </ul>
   </div>
 </nav>
 
 <section id="hero">
   <div class="wrap">
-    <div class="hero-kicker">Open Source · Multi-Agent · Disaster Intelligence</div>
+    <div class="hero-kicker">MIT-Licensed · Multi-Agent · Disaster Intelligence</div>
     <h1>From public disaster information to decisions that help.</h1>
     <p class="hero-sub">
       DisasterPilot is an open multi-agent pipeline that watches public sources,
@@ -164,12 +162,12 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
       <span class="zh">从公开灾害信息到可审计决策的开源多智能体流水线——灾前监测到灾后证据，每一步可追溯。</span>
     </p>
     <div class="hero-ctas">
-      <a class="btn btn-amber" href="https://github.com/rayford295/DisasterPilot" target="_blank" rel="noopener">View on GitHub</a>
-      <a class="btn btn-ghost" href="#case">See the live case study ↓</a>
+      <a class="btn btn-amber" href="#case">See the Bavi case study ↓</a>
+      <a class="btn btn-ghost" href="#quickstart">Reproduce the pipeline</a>
     </div>
     <div class="live-badge">
       <span class="pulse"></span>
-      LIVE · Super Typhoon Bavi (2026) — landfall sequence auto-captured every 3 hours
+      CASE CLOSED · Bavi (2026) — pre-landfall record preserved; post-event evidence remains explicitly pending
     </div>
   </div>
 </section>
@@ -184,19 +182,19 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
         <div class="pipe-num">01 · PRE-EVENT</div>
         <div class="pipe-name">Watcher</div>
         <div class="pipe-desc">Polls public sources, registers hazard events, snapshots live tracks — append-only, timestamped.</div>
-        <span class="pipe-state state-live">LIVE</span>
+        <span class="pipe-state state-live">VERIFIED</span>
       </div>
       <div class="pipe-card">
         <div class="pipe-num">02 · PRE-EVENT</div>
         <div class="pipe-name">Dossier</div>
         <div class="pipe-desc">Structured event record from captured payloads. Machine-verifiable numbers only; narrative facts stay human-curated with citations.</div>
-        <span class="pipe-state state-live">LIVE</span>
+        <span class="pipe-state state-live">VERIFIED</span>
       </div>
       <div class="pipe-card">
         <div class="pipe-num">03 · PRE-EVENT</div>
         <div class="pipe-name">Exposure</div>
         <div class="pipe-desc">Quadrant wind-swath footprints as GeoJSON, ready to intersect with population and building layers.</div>
-        <span class="pipe-state state-live">LIVE</span>
+        <span class="pipe-state state-live">VERIFIED</span>
       </div>
       <div class="pipe-card">
         <div class="pipe-num">04 · POST-EVENT</div>
@@ -207,8 +205,8 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
       <div class="pipe-card">
         <div class="pipe-num">05 · DECISION</div>
         <div class="pipe-name">Decision</div>
-        <div class="pipe-desc">Watch bulletins, tile priorities, inspection routes — every action cites its evidence, every unknown is declared.</div>
-        <span class="pipe-state state-live">LIVE</span>
+        <div class="pipe-desc">A verified watch bulletin is implemented. Tile priorities and inspection routes await exposure and damage inputs.</div>
+        <span class="pipe-state state-gated">PARTIAL</span>
       </div>
     </div>
   </div>
@@ -217,28 +215,26 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
 <section id="case">
   <div class="wrap case-grid">
     <div>
-      <div class="sec-kicker">Live Case Study</div>
+      <div class="sec-kicker">Closed Case Study</div>
       <h2>Super Typhoon Bavi (2026)</h2>
       <p class="sec-sub" style="margin-bottom:0">
-        Bavi (2609, 巴威) made landfall on the Fujian–Zhejiang coast on the night of
-        2026-07-11. DisasterPilot began capturing its track <b>before landfall</b> —
-        the forecast-conditioned record is frozen, so post-event validation is honest
-        by construction.
+        Bavi (2609, 巴威) was captured <b>before landfall</b>. The final committed
+        source payload marks the storm inactive and reports two Zhejiang landfalls;
+        the forecast-conditioned pre-event record remains frozen for later validation.
       </p>
       <div class="case-stats">
-        <div class="stat"><div class="stat-num">910 hPa</div><div class="stat-lbl">Peak central pressure</div></div>
-        <div class="stat"><div class="stat-num">89+</div><div class="stat-lbl">Track points captured (growing every 3 h)</div></div>
-        <div class="stat"><div class="stat-num">255</div><div class="stat-lbl">Wind-footprint polygons (Beaufort 7/10/12)</div></div>
-        <div class="stat"><div class="stat-num">4/4</div><div class="stat-lbl">Pre-event agents ran end-to-end live</div></div>
+        <div class="stat"><div class="stat-num">41</div><div class="stat-lbl">Append-only source captures</div></div>
+        <div class="stat"><div class="stat-num">168</div><div class="stat-lbl">Track points in final source payload</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-lbl">Source-reported Zhejiang landfalls</div></div>
+        <div class="stat"><div class="stat-num">4/4</div><div class="stat-lbl">Pre-event stages completed before closure</div></div>
       </div>
     </div>
     <div class="case-files">
-      <h3>Open Artifacts</h3>
-      <div class="file-row"><span>Sourced event dossier + reconciliation ledger</span><a href="https://github.com/rayford295/DisasterPilot/blob/main/events/bavi-2026/DOSSIER.md" target="_blank" rel="noopener">DOSSIER.md ↗</a></div>
-      <div class="file-row"><span>Append-only live track snapshots</span><a href="https://github.com/rayford295/DisasterPilot/tree/main/events/bavi-2026/snapshots" target="_blank" rel="noopener">snapshots/ ↗</a></div>
-      <div class="file-row"><span>Structured event record</span><a href="https://github.com/rayford295/DisasterPilot/blob/main/events/bavi-2026/dossier/event_record.json" target="_blank" rel="noopener">event_record.json ↗</a></div>
-      <div class="file-row"><span>Wind footprints (GeoJSON)</span><a href="https://github.com/rayford295/DisasterPilot/blob/main/events/bavi-2026/exposure/wind_footprints.geojson" target="_blank" rel="noopener">wind_footprints ↗</a></div>
-      <div class="file-row"><span>Watch bulletin with declared unknowns</span><a href="https://github.com/rayford295/DisasterPilot/blob/main/events/bavi-2026/decision/watch_bulletin.md" target="_blank" rel="noopener">watch_bulletin.md ↗</a></div>
+      <h3>Verified Case Record</h3>
+      <div class="file-row"><span>Source status at closure</span><span>inactive</span></div>
+      <div class="file-row"><span>Source-reported landfalls</span><span>Yuhuan · Yueqing</span></div>
+      <div class="file-row"><span>Frozen pre-event products</span><span>watch · dossier · footprint</span></div>
+      <div class="file-row"><span>Still pending</span><span>imagery · damage · validation</span></div>
     </div>
   </div>
 </section>
@@ -273,19 +269,19 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
     <div class="who-grid">
       <div class="who-card">
         <h3>Emergency managers</h3>
-        <p>Timestamped watch bulletins with cited actions and explicit unknowns; exposure footprints ready for population overlays; inspection priorities under real budgets.</p>
+        <p>Timestamped watch bulletins with cited actions and explicit unknowns. Population overlays, inspection priorities, and routes remain future work.</p>
       </div>
       <div class="who-card">
         <h3>Researchers</h3>
         <p>A reproducible, fail-closed pipeline with tests and CI. The frozen pre-event record enables honest "did we predict the harm?" validation — rare in disaster ML.</p>
         <ul>
-          <li>Cross-view methodology: <a href="https://github.com/rayford295/CrossViewGate" target="_blank" rel="noopener" style="color:#fcd34d">CrossViewGate ↗</a></li>
+          <li>Cross-view methodology: CrossViewGate research line</li>
           <li>Entry: OASIS @ ACM SIGSPATIAL 2026, Track A</li>
         </ul>
       </div>
       <div class="who-card">
         <h3>Affected communities</h3>
-        <p>Open artifacts anyone can inspect, in plain formats (Markdown, GeoJSON, JSON). And a hard rule: we always point to official warning channels first — this tool augments, never replaces, them.</p>
+        <p>A hard rule: we point to official warning channels first. DisasterPilot augments official information; it never replaces it.</p>
       </div>
     </div>
   </div>
@@ -296,7 +292,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
     <div>
       <div class="sec-kicker">Get Started</div>
       <h2>Run the pipeline in two minutes</h2>
-      <p class="sec-sub" style="margin-bottom:0">Offline mode replays the committed Bavi snapshots — no network needed to reproduce every artifact on this page.</p>
+      <p class="sec-sub" style="margin-bottom:0">Offline mode replays committed Bavi snapshots. The closure record stays separate so it cannot revise the pre-event record.</p>
     </div>
     <div>
       <div class="code">
@@ -307,6 +303,8 @@ python scripts/run_pre_event.py --event-id bavi-2026 \<br>
 &nbsp;&nbsp;--tfid 202609 --offline<br><br>
 <span class="c"># capture a fresh live snapshot</span><br>
 python scripts/fetch_bavi_track.py<br><br>
+<span class="c"># close an inactive event from its final committed snapshot</span><br>
+python scripts/close_event.py --event-dir events/bavi-2026<br><br>
 <span class="c"># tests</span><br>
 python -m unittest discover -s tests
       </div>
@@ -317,11 +315,8 @@ python -m unittest discover -s tests
 <footer>
   <div class="wrap">
     <div class="foot-inner">
-      <div><b style="color:#fff">DisasterPilot</b> · Open source (MIT) · Built by Yifan Yang 杨一帆 (Texas A&M University, Geography)</div>
+      <div><b style="color:#fff">DisasterPilot</b> · MIT-licensed research prototype · Built by Yifan Yang 杨一帆 (Texas A&M University, Geography)</div>
       <div class="foot-links">
-        <a href="https://github.com/rayford295/DisasterPilot" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://github.com/rayford295/DisasterPilot/blob/main/docs/architecture.md" target="_blank" rel="noopener">Architecture</a>
-        <a href="https://github.com/rayford295/CrossViewGate" target="_blank" rel="noopener">CrossViewGate</a>
         <a href="https://rayford295.github.io/" target="_blank" rel="noopener">Author</a>
       </div>
     </div>

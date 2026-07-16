@@ -13,7 +13,7 @@ official requirements below when available and reconcile.**
 
 | Expected challenge element | This repository |
 | --- | --- |
-| Real disaster case study | Super Typhoon Bavi (2026), landfall captured live — see `docs/event_bavi_2026.md` |
+| Real disaster case study | Super Typhoon Bavi (2026), landfall captured live; see `events/bavi-2026/closure/CLOSURE.md` |
 | Vulnerability analysis | Phase-1 exposure × vulnerability watchlist (pre-registered before landfall) |
 | Resilience analysis | Phase-3 scorecard: did pre-event structure predict post-event harm? |
 | Geospatial method depth | Quadrant wind-swath geometry, spatially blocked evaluation, cluster-aware uncertainty |

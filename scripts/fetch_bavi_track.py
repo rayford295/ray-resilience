@@ -25,6 +25,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tfid", default="202609", help="Typhoon id (default Bavi 202609)")
     parser.add_argument("--output-dir", type=Path, default=Path("events/bavi-2026/snapshots"))
+    parser.add_argument(
+        "--include-inactive",
+        action="store_true",
+        help="Write a snapshot even after the source marks the storm inactive.",
+    )
     args = parser.parse_args()
 
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -38,6 +43,11 @@ def main() -> None:
         "isactive": payload.get("isactive"),
         **track_summary(points),
     }
+
+    if payload.get("isactive") != "1" and not args.include_inactive:
+        summary["capture_status"] = "not_written_inactive"
+        print(json.dumps(summary, ensure_ascii=True, indent=2))
+        return
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     raw_path = args.output_dir / f"bavi_{args.tfid}_{stamp}.json"

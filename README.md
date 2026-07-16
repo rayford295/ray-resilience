@@ -6,9 +6,9 @@ decisions — pre-event watch to post-event evidence.**
 🌐 **Website: https://rayford295.github.io/DisasterPilot/**
 
 Entry for **OASIS @ ACM SIGSPATIAL 2026 · Track A: Disaster Resilience &
-Vulnerability Analysis**. First live case study: **Super Typhoon Bavi
-(2026)**, whose landfall on the Fujian–Zhejiang coast this pipeline captured
-in real time.
+Vulnerability Analysis**. Its first case study, **Super Typhoon Bavi (2026)**,
+captured the pre-landfall track in real time and now preserves a separate
+post-event closure record.
 
 ## What it does
 
@@ -42,26 +42,30 @@ The evidence methodology comes from the
 (reliability-gated cross-view damage assessment, validated across the 2025
 Eaton wildfire and Hurricanes Ian and Milton).
 
-## Live case study: Super Typhoon Bavi (2026)
+## Closed case study: Super Typhoon Bavi (2026)
 
 Bavi (international number 2609, peak 910 hPa) made landfall on the
 Xiapu–Wenling coastal segment on the night of 2026-07-11 CST. This
 repository began capturing its track **before landfall**:
 
-- `events/bavi-2026/snapshots/` — append-only live captures (89+ track
-  points, quadrant 7/10/12-Beaufort wind radii, multi-agency forecasts),
-  auto-extended every 3 hours by a scheduled GitHub Action through landfall;
+- `events/bavi-2026/snapshots/` — 41 append-only captures, ending with an
+  inactive-source snapshot containing 168 track points, quadrant 7/10/12-
+  Beaufort wind radii, and multi-agency forecasts;
 - `events/bavi-2026/DOSSIER.md` — sourced event dossier with a post-event
   reconciliation ledger;
 - `events/bavi-2026/{dossier,exposure,decision}/` — pipeline products:
   structured event record, wind-footprint GeoJSON, watch bulletin with
   declared unknowns.
+- `events/bavi-2026/closure/` — a separate closure record built from the
+  final committed source payload. It reports source-recorded landfalls without
+  rewriting frozen pre-event products.
 
 Reproduce the pre-event pipeline (offline mode reuses committed snapshots):
 
 ```bash
 pip install -e .
 python scripts/run_pre_event.py --event-id bavi-2026 --tfid 202609 --offline
+python scripts/close_event.py --event-dir events/bavi-2026
 python -m unittest discover -s tests
 ```
 

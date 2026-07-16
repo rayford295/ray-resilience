@@ -72,11 +72,17 @@ Peak intensity on record so far: **910 hPa**; JTWC one-minute winds
 - [证券时报：巨型台风"巴威"将登陆我国：直径达1300公里](https://www.stcn.com/article/detail/4005591.html)
 - [上海本地宝：2026年第9号台风"巴威"最新路径图](https://sh.bendibao.com/news/202676/307386.shtm)
 - Live track: Zhejiang Water Resources typhoon API (`typhoon.slt.zj.gov.cn`),
-  snapshots in `data/snapshots/`.
+  snapshots in `events/bavi-2026/snapshots/`.
 
 ## Reconciliation ledger
 
-Post-event, the following will be re-verified against CMA best track
+The source's final committed payload reports landfalls at Yuhuan at 23:20 CST
+on 2026-07-11 and Yueqing at 00:00 CST on 2026-07-12. These are source-reported
+records, not yet a CMA best-track reconciliation. The separate
+`closure/CLOSURE.md` preserves this status without changing this pre-landfall
+dossier.
+
+The following still need re-verification against CMA best track
 (tcdata.typhoon.org.cn) and official casualty/damage releases: landfall time
 and location, landfall intensity, peak intensity, wind radii, and all
 casualty/economic figures. Forecast-based statements above must not be cited
