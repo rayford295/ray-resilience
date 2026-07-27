@@ -1,5 +1,7 @@
 # DisasterPilot
 
+> 📦 **Datasets:** [disaster-crossview-datasets](https://github.com/Rayford-AI/disaster-crossview-datasets) — the shared cross-view disaster data backbone for the Rayford-AI org.
+
 **A multi-agent pipeline from public disaster information to auditable
 decisions — pre-event watch to post-event evidence.**
 
