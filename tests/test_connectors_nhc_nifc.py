@@ -57,5 +57,18 @@ class TestNifcParse(unittest.TestCase):
         self.assertIn("f=geojson", nifc.URL)
 
 
+class TestRaiseOnArcgisError(unittest.TestCase):
+    def test_raises_on_arcgis_error_payload(self) -> None:
+        payload = {"error": {"code": 400, "details": ["'outFields' parameter is invalid"]}}
+        with self.assertRaises(RuntimeError) as ctx:
+            nifc.raise_on_arcgis_error(payload)
+        self.assertIn("ArcGIS error", str(ctx.exception))
+        self.assertIn("outFields", str(ctx.exception))
+
+    def test_returns_normal_payload_unchanged(self) -> None:
+        payload = load("nifc_incidents.json")
+        self.assertIs(nifc.raise_on_arcgis_error(payload), payload)
+
+
 if __name__ == "__main__":
     unittest.main()
