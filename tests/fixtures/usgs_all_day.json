@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "us7000quake1",
+      "properties": {"mag": 4.6, "place": "10 km NE of Ridgecrest, CA", "time": 1787136000000, "type": "earthquake"},
+      "geometry": {"type": "Point", "coordinates": [-117.55, 35.68, 8.1]}
+    },
+    {
+      "type": "Feature",
+      "id": "us7000quake2",
+      "properties": {"mag": 2.1, "place": "Kenai Peninsula, Alaska", "time": 1787139600000, "type": "earthquake"},
+      "geometry": {"type": "Point", "coordinates": [-151.2, 60.1, 40.0]}
+    },
+    {
+      "type": "Feature",
+      "id": "usbadfeature",
+      "properties": {"mag": null, "place": "No geometry", "time": 1787139600000, "type": "earthquake"},
+      "geometry": null
+    }
+  ]
+}

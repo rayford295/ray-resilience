@@ -1,0 +1,17 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "urn:oid:2.49.0.1.840.0.alert1",
+      "geometry": {"type": "Polygon", "coordinates": [[[-97.5, 30.2], [-97.3, 30.2], [-97.3, 30.4], [-97.5, 30.4], [-97.5, 30.2]]]},
+      "properties": {"event": "Flood Warning", "severity": "Severe", "areaDesc": "Travis, TX", "effective": "2026-08-19T06:00:00-05:00", "headline": "Flood Warning for Travis County"}
+    },
+    {
+      "type": "Feature",
+      "id": "urn:oid:2.49.0.1.840.0.alert2",
+      "geometry": null,
+      "properties": {"event": "Heat Advisory", "severity": "Moderate", "areaDesc": "Maricopa, AZ", "effective": "2026-08-19T08:00:00-07:00", "headline": "Heat Advisory"}
+    }
+  ]
+}
