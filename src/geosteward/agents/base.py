@@ -29,6 +29,7 @@ class Artifact:
     created_utc: str
     inputs: list[str] = field(default_factory=list)
     notes: str = ""
+    sha256: str = ""
 
     def manifest_row(self) -> dict[str, Any]:
         return {
@@ -38,6 +39,7 @@ class Artifact:
             "created_utc": self.created_utc,
             "inputs": self.inputs,
             "notes": self.notes,
+            "sha256": self.sha256,
         }
 
 
@@ -73,6 +75,8 @@ class EventContext:
         path.write_text(
             json.dumps(payload, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
         )
+        from geosteward.harness.audit import sha256_file
+
         return self.register(
             Artifact(
                 path=path,
@@ -81,6 +85,7 @@ class EventContext:
                 created_utc=utc_stamp(),
                 inputs=inputs or [],
                 notes=notes,
+                sha256=sha256_file(path),
             )
         )
 
