@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DisasterPilot — From Public Disaster Information to Decisions That Help</title>
-<meta name="description" content="A multi-agent pipeline from public disaster information to auditable decisions. Closed case study: Super Typhoon Bavi (2026).">
+<title>GeoSteward — An Accountable GeoAI Risk Analyst for Location-Based Resilience</title>
+<meta name="description" content="GeoSteward: an accountable GeoAI risk analyst for location-based resilience understanding and decision-making. AI-powered WebGIS / smartphone PWA with a verifiable harness.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -131,16 +131,16 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
 <div class="emergency">
   <div class="wrap emergency-inner">
     <b>⚠️ In an affected area? Use official channels:</b>
-    <a href="https://weather.cma.cn" target="_blank" rel="noopener">CMA 中国气象局</a>
-    <a href="https://typhoon.slt.zj.gov.cn" target="_blank" rel="noopener">实时台风路径</a>
-    <a href="https://www.mem.gov.cn" target="_blank" rel="noopener">应急管理部</a>
-    <span class="zh">国家预警信息发布：<b>12379</b> · 紧急求助：<b>110 / 119 / 120</b> — DisasterPilot 是研究工具，不能替代官方预警。</span>
+    <a href="https://www.weather.gov" target="_blank" rel="noopener">National Weather Service</a>
+    <a href="https://www.nhc.noaa.gov" target="_blank" rel="noopener">National Hurricane Center</a>
+    <a href="https://www.fema.gov" target="_blank" rel="noopener">FEMA</a>
+    <span class="zh">Emergencies: <b>911</b> — GeoSteward is a research tool and never replaces official warnings.</span>
   </div>
 </div>
 
 <nav>
   <div class="wrap nav-inner">
-    <a class="brand" href="#">Disaster<span class="dot">Pilot</span></a>
+    <a class="brand" href="#">Geo<span class="dot">Steward</span></a>
     <ul class="nav-links">
       <li><a href="#pipeline">Pipeline</a></li>
       <li><a href="#case">Case Study</a></li>
@@ -153,16 +153,16 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
 
 <section id="hero">
   <div class="wrap">
-    <div class="hero-kicker">MIT-Licensed · Multi-Agent · Disaster Intelligence</div>
-    <h1>From public disaster information to decisions that help.</h1>
+    <div class="hero-kicker">MIT-Licensed · Accountable GeoAI · OASIS @ ACM SIGSPATIAL 2026</div>
+    <h1>Know any location's resilience. Trust only what the evidence supports.</h1>
     <p class="hero-sub">
-      DisasterPilot is an open multi-agent pipeline that watches public sources,
-      builds auditable event records, maps exposure, and turns evidence into
-      actionable bulletins — honestly, with every unknown declared.
-      <span class="zh">从公开灾害信息到可审计决策的开源多智能体流水线——灾前监测到灾后证据，每一步可追溯。</span>
+      GeoSteward is an AI-powered WebGIS and smartphone app: a risk-analyst agent
+      operating inside a verifiable harness that checks every spatial operation,
+      preserves full provenance, and refuses claims beyond its evidence —
+      with every unknown declared as prominently as every finding.
     </p>
     <div class="hero-ctas">
-      <a class="btn btn-amber" href="#case">See the Bavi case study ↓</a>
+      <a class="btn btn-amber" href="#pipeline">How the harness works ↓</a>
       <a class="btn btn-ghost" href="#quickstart">Reproduce the pipeline</a>
     </div>
     <div class="live-badge">
@@ -281,7 +281,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
       </div>
       <div class="who-card">
         <h3>Affected communities</h3>
-        <p>A hard rule: we point to official warning channels first. DisasterPilot augments official information; it never replaces it.</p>
+        <p>A hard rule: we point to official warning channels first. GeoSteward augments official information; it never replaces it.</p>
       </div>
     </div>
   </div>
@@ -315,13 +315,13 @@ python -m unittest discover -s tests
 <footer>
   <div class="wrap">
     <div class="foot-inner">
-      <div><b style="color:#fff">DisasterPilot</b> · MIT-licensed research prototype · Built by Yifan Yang 杨一帆 (Texas A&M University, Geography)</div>
+      <div><b style="color:#fff">GeoSteward</b> · MIT-licensed research prototype · Built by Yifan Yang 杨一帆 (Texas A&M University, Geography)</div>
       <div class="foot-links">
         <a href="https://rayford295.github.io/" target="_blank" rel="noopener">Author</a>
       </div>
     </div>
     <div class="disclaimer">
-      DisasterPilot is a research tool. It is not an official forecasting or warning service and must not be used
+      GeoSteward is a research tool. It is not an official forecasting or warning service and must not be used
       as the sole basis for safety decisions. In an emergency, follow your local government's instructions and the
       official channels listed at the top of this page. 本工具为科研用途，不构成官方预报或预警；紧急情况请以政府与
       官方渠道信息为准。

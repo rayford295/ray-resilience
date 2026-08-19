@@ -1,93 +1,80 @@
-# DisasterPilot
+# GeoSteward
 
-> 📦 **Datasets:** [disaster-crossview-datasets](https://github.com/Rayford-AI/disaster-crossview-datasets) — the shared cross-view disaster data backbone for the Rayford-AI org.
+**An accountable GeoAI risk analyst for location-based resilience understanding
+and decision-making.**
 
-**A multi-agent pipeline from public disaster information to auditable
-decisions — pre-event watch to post-event evidence.**
+AI-powered WebGIS / smartphone app (PWA): enter any US location and understand its
+resilience — what hazards threaten it now, how exposed and vulnerable it is, and what
+decisions the evidence actually supports. Entry for **OASIS @ ACM SIGSPATIAL 2026 ·
+Track A: Disaster Resilience & Vulnerability Analysis**.
 
-🌐 **Website: https://rayford295.github.io/DisasterPilot/**
+> 🚧 **Rework in progress.** This repository (formerly *DisasterPilot*) is being
+> rebuilt around the design in
+> [`docs/superpowers/specs/2026-08-19-geosteward-design.md`](docs/superpowers/specs/2026-08-19-geosteward-design.md).
+> The previous Super Typhoon Bavi case study is preserved under `events/` and will
+> move to `events/archive/` — append-only history is a core principle here.
 
-Entry for **OASIS @ ACM SIGSPATIAL 2026 · Track A: Disaster Resilience &
-Vulnerability Analysis**. Its first case study, **Super Typhoon Bavi (2026)**,
-captured the pre-landfall track in real time and now preserves a separate
-post-event closure record.
+## Why "Steward"?
 
-## What it does
+Most agent submissions demonstrate autonomy: an LLM that runs a GIS pipeline.
+GeoSteward demonstrates **accountability**: a risk-analyst agent that operates inside
+the **Steward Harness** — a technical layer that enforces three validity conditions
+during operation, following *From Autonomous GIS to Accountable GeoAI Agents:
+Verifiable Evaluation Environments and Geospatial Harness Engineering* (Yang & Zou):
 
-```text
-public sources ──▶ WATCHER ──▶ DOSSIER ──▶ EXPOSURE ──▶ EVIDENCE ──▶ DECISION
-                 snapshot     structured   hazard ×     cross-view   bulletins,
-                 hazards      event        population   damage       priorities,
-                 (append-     record       footprints   (reliability inspection
-                 only)                                  -gated)      routes
+| Validity layer | What the harness enforces |
+|---|---|
+| **Outcome** | Executable spatial checks — CRS assertions, multiscale raster×vector join integrity, sanity bounds, mandatory uncertainty fields |
+| **Process** | Append-only provenance for every artifact; fail-closed stages; clickable lineage from any map layer back to timestamped source snapshots |
+| **Institutional** | Declarative policy scoping what the agent may claim, by role, evidence tier, resolution, and geographic authority — tile-level evidence never yields parcel-level claims |
+
+Every claim the agent makes must cite an artifact ID. Every human trade-off
+adjustment is audited too.
+
+## Architecture
+
+```
+Data plane (GitHub Actions)      Presentation plane (PWA)       Agent plane (Cloud Run)
+USGS / FIRMS+NIFC / NHC / NWS    React + Vite + MapLibre GL     Gemini wrapped in the
+→ append-only snapshots          Resident mode: address →       Steward Harness:
+→ 5-agent pipeline through       resilience dossier             policy pre-check →
+  the Steward Harness            Planner mode: HITL trade-off   artifact-grounded
+→ static artifacts + manifest    sliders, priority tiles,       generation → claim
+  (GitHub Pages)                 lineage viewer                 post-check → audit
 ```
 
-Five agent roles cover the disaster lifecycle: **watch** public sources and
-register events; build a **dossier** of machine-verifiable facts; compute
-**exposure** footprints for vulnerability analysis; assess post-event
-**evidence** with reliability-gated cross-view fusion; and emit **decision**
-products an emergency manager can act on. Details:
-[`docs/architecture.md`](docs/architecture.md).
+Three loosely coupled planes: if the agent gateway goes down, the maps and analysis
+products keep working — graceful degradation is fail-closed design made visible.
 
-Three design rules make it defensible rather than demo-ware:
+## Hazard coverage (tiered)
 
-1. **Append-only artifacts with provenance.** Every agent output carries its
-   inputs, agent, and UTC timestamp in a per-event manifest. Pre-event
-   products are frozen, so post-event validation is honest by construction.
-2. **Fail closed.** No imagery → no damage numbers; missing inputs → recorded
-   failure, never silent skipping or interpolation.
-3. **Declared unknowns.** Every decision product lists what is *not* known
-   with the same prominence as what is.
+- **Tier 1 — Watch:** all active US hazards, near-real-time (earthquakes, wildfires,
+  tropical cyclones, flood alerts).
+- **Tier 2 — Analysis:** two flagship deep cases — **Hurricane Milton (2024)** and the
+  **Eaton Fire (2025)** — full exposure × social-vulnerability analysis with
+  stakeholder-adjustable value trade-offs.
+- **Tier 3 — Evidence:** reliability-gated cross-view damage assessment from the
+  [CrossViewGate](https://github.com/rayford295/CrossViewGate) research line, using
+  the org's [disaster-crossview-datasets](https://github.com/Rayford-AI/disaster-crossview-datasets).
 
-The evidence methodology comes from the
-[CrossViewGate](https://github.com/rayford295/CrossViewGate) research line
-(reliability-gated cross-view damage assessment, validated across the 2025
-Eaton wildfire and Hurricanes Ian and Milton).
+Events with only Tier-1 data get an explicit "monitoring data only — no damage
+conclusions supported." Declared unknowns are rendered with the same prominence as
+findings.
 
-## Closed case study: Super Typhoon Bavi (2026)
+## Repository map (target layout)
 
-Bavi (international number 2609, peak 910 hPa) made landfall on the
-Xiapu–Wenling coastal segment on the night of 2026-07-11 CST. This
-repository began capturing its track **before landfall**:
-
-- `events/bavi-2026/snapshots/` — 41 append-only captures, ending with an
-  inactive-source snapshot containing 168 track points, quadrant 7/10/12-
-  Beaufort wind radii, and multi-agency forecasts;
-- `events/bavi-2026/DOSSIER.md` — sourced event dossier with a post-event
-  reconciliation ledger;
-- `events/bavi-2026/{dossier,exposure,decision}/` — pipeline products:
-  structured event record, wind-footprint GeoJSON, watch bulletin with
-  declared unknowns.
-- `events/bavi-2026/closure/` — a separate closure record built from the
-  final committed source payload. It reports source-recorded landfalls without
-  rewriting frozen pre-event products.
-
-Reproduce the pre-event pipeline (offline mode reuses committed snapshots):
-
-```bash
-pip install -e .
-python scripts/run_pre_event.py --event-id bavi-2026 --tfid 202609 --offline
-python scripts/close_event.py --event-dir events/bavi-2026
-python -m unittest discover -s tests
 ```
-
-## Repository map
-
-```text
-├── src/disasterpilot/
-│   ├── agents/          # watcher, dossier, exposure, evidence, decision
-│   ├── sources/         # public-source connectors (ZJ typhoon API live; GDACS/USGS planned)
-│   ├── hazards/         # hazard-specific parsing + geometry (typhoon wind swaths)
-│   └── pipeline.py      # orchestrator with fail-closed stage reporting
-├── events/bavi-2026/    # case study #1: snapshots + dossier + pipeline artifacts
-├── docs/                # architecture, methodology, Track-A alignment
-└── tests/               # unit + offline end-to-end pipeline tests (CI)
+├── app/                 # PWA frontend (WebGIS + smartphone)
+├── gateway/             # Cloud Run agent gateway (Gemini + harness middleware)
+├── src/geosteward/      # pipeline, agents, sources, hazards, harness/
+├── events/              # milton-2024/, eaton-2025/, archive/bavi-2026/
+├── docs/                # design spec, methodology, Track-A alignment
+└── tests/               # doubles as a verifiable evaluation environment
 ```
-
-- Methodology (three-phase resilience loop): [`docs/methodology.md`](docs/methodology.md)
-- Track-A requirement mapping: [`docs/track_a_alignment.md`](docs/track_a_alignment.md)
 
 ## Team
 
-Yifan Yang (Texas A&M University, Geography).
-中文说明见 [`README_CN.md`](README_CN.md)。MIT License.
+Yifan Yang (Texas A&M University, Geography). MIT License.
+
+GeoSteward is a research prototype. It is not an official forecasting or warning
+service — always follow official emergency guidance.
