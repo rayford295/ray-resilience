@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -54,6 +54,10 @@ class EventContext:
     artifacts: list[Artifact] = field(default_factory=list)
 
     def register(self, artifact: Artifact) -> Artifact:
+        if not artifact.sha256 and artifact.path.exists():
+            from geosteward.harness.audit import sha256_file
+
+            artifact = replace(artifact, sha256=sha256_file(artifact.path))
         self.artifacts.append(artifact)
         manifest = self.event_dir / "artifact_manifest.jsonl"
         manifest.parent.mkdir(parents=True, exist_ok=True)
@@ -75,8 +79,6 @@ class EventContext:
         path.write_text(
             json.dumps(payload, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
         )
-        from geosteward.harness.audit import sha256_file
-
         return self.register(
             Artifact(
                 path=path,
@@ -85,7 +87,6 @@ class EventContext:
                 created_utc=utc_stamp(),
                 inputs=inputs or [],
                 notes=notes,
-                sha256=sha256_file(path),
             )
         )
 

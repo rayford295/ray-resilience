@@ -32,6 +32,10 @@ class PolicyDecision:
 
 
 _EXACT_KEYS = ("role", "purpose", "resolution", "in_aoi")
+_KNOWN_MATCH_KEYS = frozenset(
+    {"role", "purpose", "resolution", "in_aoi", "evidence_tier_at_least", "evidence_tier_below"}
+)
+_KNOWN_EFFECTS = frozenset({"allow", "deny"})
 
 
 def _matches(match: dict[str, Any], request: PolicyRequest) -> bool:
@@ -45,13 +49,47 @@ def _matches(match: dict[str, Any], request: PolicyRequest) -> bool:
     return True
 
 
+def _validate_rules(rules: Any) -> list[dict[str, Any]]:
+    if not isinstance(rules, list):
+        raise ValueError("Policy document's 'rules' must be a list of rule mappings.")
+    for rule in rules:
+        if not isinstance(rule, dict):
+            raise ValueError(f"Policy rule must be a mapping, got: {rule!r}")
+        rule_id = rule.get("id")
+        if not isinstance(rule_id, str) or not rule_id:
+            raise ValueError(f"Policy rule is missing a valid string 'id': {rule!r}")
+        effect = rule.get("effect")
+        if effect not in _KNOWN_EFFECTS:
+            raise ValueError(
+                f"Rule '{rule_id}' has unknown effect {effect!r}; "
+                f"expected one of {sorted(_KNOWN_EFFECTS)}."
+            )
+        reason = rule.get("reason")
+        if not isinstance(reason, str) or not reason:
+            raise ValueError(f"Rule '{rule_id}' is missing a valid string 'reason'.")
+        match = rule.get("match", {})
+        if not isinstance(match, dict):
+            raise ValueError(f"Rule '{rule_id}' has a 'match' that is not a mapping: {match!r}")
+        for key in match:
+            if key not in _KNOWN_MATCH_KEYS:
+                raise ValueError(
+                    f"Rule '{rule_id}' has unknown match key '{key}'; "
+                    f"expected one of {sorted(_KNOWN_MATCH_KEYS)}."
+                )
+    return rules
+
+
 class PolicyEngine:
     def __init__(self, rules: list[dict[str, Any]]):
-        self.rules = rules
+        self.rules = _validate_rules(rules)
 
     @classmethod
     def from_yaml(cls, path: Path) -> "PolicyEngine":
         payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict) or not isinstance(payload.get("rules"), list):
+            raise ValueError(
+                f"Policy file {path} must be a mapping containing a 'rules' list."
+            )
         return cls(payload["rules"])
 
     def evaluate(self, request: PolicyRequest) -> PolicyDecision:

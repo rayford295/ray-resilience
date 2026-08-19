@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from geosteward.agents.base import EventContext
+from geosteward.agents.base import Artifact, EventContext
 from geosteward.harness.audit import AuditLog, sha256_file
 
 
@@ -48,6 +48,32 @@ class TestManifestHashing(unittest.TestCase):
             manifest = context.event_dir / "artifact_manifest.jsonl"
             row = json.loads(manifest.read_text().splitlines()[-1])
             self.assertEqual(row["sha256"], artifact.sha256)
+
+
+class TestRegisterHashesArtifactsWithoutSha256(unittest.TestCase):
+    def test_register_fills_sha256_for_directly_registered_artifact(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            context = EventContext(
+                event_id="teststorm-2026",
+                event_dir=Path(tmp) / "teststorm-2026",
+                hazard="hurricane",
+            )
+            md_path = context.event_dir / "decision" / "watch_bulletin.md"
+            md_path.parent.mkdir(parents=True, exist_ok=True)
+            md_path.write_text("# Watch bulletin\n", encoding="utf-8")
+            artifact = context.register(
+                Artifact(
+                    path=md_path,
+                    kind="watch_bulletin_md",
+                    agent="decision.watch_bulletin",
+                    created_utc="20260101T000000Z",
+                    sha256="",
+                )
+            )
+            self.assertEqual(artifact.sha256, sha256_file(md_path))
+            manifest = context.event_dir / "artifact_manifest.jsonl"
+            row = json.loads(manifest.read_text().splitlines()[-1])
+            self.assertEqual(row["sha256"], sha256_file(md_path))
 
 
 if __name__ == "__main__":

@@ -102,5 +102,54 @@ class TestYamlLoading(unittest.TestCase):
             self.assertTrue(decision.allowed)
 
 
+class TestPolicyValidation(unittest.TestCase):
+    def test_unknown_match_key_raises_value_error_naming_rule_and_key(self) -> None:
+        rules = [
+            {
+                "id": "typo-role",
+                "effect": "allow",
+                "reason": "Should never construct.",
+                "match": {"rol": "planner"},
+            }
+        ]
+        with self.assertRaises(ValueError) as ctx:
+            PolicyEngine(rules)
+        message = str(ctx.exception)
+        self.assertIn("typo-role", message)
+        self.assertIn("rol", message)
+
+    def test_from_yaml_empty_document_raises_value_error(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "empty.yaml"
+            path.write_text("", encoding="utf-8")
+            with self.assertRaises(ValueError):
+                PolicyEngine.from_yaml(path)
+
+    def test_unknown_effect_raises_value_error(self) -> None:
+        rules = [
+            {
+                "id": "bad-effect",
+                "effect": "alow",
+                "reason": "Typo'd effect.",
+                "match": {"purpose": "watch"},
+            }
+        ]
+        with self.assertRaises(ValueError) as ctx:
+            PolicyEngine(rules)
+        self.assertIn("bad-effect", str(ctx.exception))
+
+    def test_rule_missing_reason_raises_value_error(self) -> None:
+        rules = [
+            {
+                "id": "no-reason",
+                "effect": "allow",
+                "match": {"purpose": "watch"},
+            }
+        ]
+        with self.assertRaises(ValueError) as ctx:
+            PolicyEngine(rules)
+        self.assertIn("no-reason", str(ctx.exception))
+
+
 if __name__ == "__main__":
     unittest.main()
