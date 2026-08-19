@@ -1,1 +1,1 @@
-"""DisasterPilot subpackage."""
+"""GeoSteward subpackage."""

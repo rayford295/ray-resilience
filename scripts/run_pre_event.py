@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Run the DisasterPilot pre-event pipeline for a typhoon event.
+"""Run the GeoSteward pre-event pipeline for a typhoon event.
 
 Example (Bavi 2026):
     python scripts/run_pre_event.py --event-id bavi-2026 --tfid 202609

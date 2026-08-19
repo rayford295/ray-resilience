@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Capture a timestamped snapshot of a live typhoon track (default: Bavi 202609).
 
-Thin wrapper over the DisasterPilot watcher's source connector. Snapshots are
+Thin wrapper over the GeoSteward watcher's source connector. Snapshots are
 append-only: each run writes a new UTC-stamped file plus an index row, never
 overwriting earlier captures — the forecast-conditioned record stays frozen
 for honest post-event validation.

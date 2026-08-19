@@ -1,6 +1,5 @@
-"""DisasterPilot: a multi-agent pipeline from public disaster information to
-auditable decisions — pre-event watch, dossier, exposure, post-event evidence,
-and prioritized action.
+"""GeoSteward: an accountable GeoAI risk analyst for location-based resilience
+understanding and decision-making.
 """
 
-__version__ = "0.2.0"
+__version__ = "1.0.0.dev1"
