@@ -57,6 +57,12 @@ products keep working — graceful degradation is fail-closed design made visibl
   [CrossViewGate](https://github.com/rayford295/CrossViewGate) research line, using
   the org's [disaster-crossview-datasets](https://github.com/Rayford-AI/disaster-crossview-datasets).
 
+**Live watch data** is refreshed hourly by CI onto the
+[`live-data`](https://github.com/rayford295/GeoSteward/tree/live-data) branch:
+`live/products/national_watch.geojson` (all active US hazards) and
+`live/products/watch_status.json` (per-source health, declared unknowns), with
+append-only raw snapshots under `live/snapshots/`.
+
 Events with only Tier-1 data get an explicit "monitoring data only — no damage
 conclusions supported." Declared unknowns are rendered with the same prominence as
 findings.
