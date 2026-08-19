@@ -22,3 +22,6 @@ geo = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+geosteward = ["harness/*.yaml"]
