@@ -17,7 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from disasterpilot.hazards.typhoon import parse_track, track_summary
+from geosteward.hazards.typhoon import parse_track, track_summary
 
 
 def _capture_time_from_name(path: Path) -> str:

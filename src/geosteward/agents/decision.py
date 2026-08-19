@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from disasterpilot.agents.base import Agent, Artifact, EventContext, utc_stamp
+from geosteward.agents.base import Agent, Artifact, EventContext, utc_stamp
 
 
 class WatchBulletin:

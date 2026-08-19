@@ -14,7 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from disasterpilot.pipeline import run_pre_event
+from geosteward.pipeline import run_pre_event
 
 
 def main() -> None:

@@ -5,8 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from disasterpilot.agents.base import Agent, Artifact, EventContext
-from disasterpilot.hazards.typhoon import parse_track, track_summary
+from geosteward.agents.base import Agent, Artifact, EventContext
+from geosteward.hazards.typhoon import parse_track, track_summary
 
 
 def latest_snapshot(context: EventContext) -> Path | None:

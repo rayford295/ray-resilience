@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from disasterpilot.hazards.typhoon import WindRadii, parse_point, parse_track, track_summary, wind_sector_polygon
+from geosteward.hazards.typhoon import WindRadii, parse_point, parse_track, track_summary, wind_sector_polygon
 
 SAMPLE_POINT = {
     "time": "2026-07-08 05:00:00",

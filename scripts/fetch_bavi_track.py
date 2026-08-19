@@ -17,8 +17,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from disasterpilot.hazards.typhoon import parse_track, track_summary
-from disasterpilot.sources.zj_typhoon import typhoon_detail
+from geosteward.hazards.typhoon import parse_track, track_summary
+from geosteward.sources.zj_typhoon import typhoon_detail
 
 
 def main() -> None:

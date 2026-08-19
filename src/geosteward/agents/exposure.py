@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import json
 
-from disasterpilot.agents.base import Agent, Artifact, EventContext
-from disasterpilot.agents.dossier import latest_snapshot
-from disasterpilot.hazards.typhoon import parse_track, wind_sector_polygon
+from geosteward.agents.base import Agent, Artifact, EventContext
+from geosteward.agents.dossier import latest_snapshot
+from geosteward.hazards.typhoon import parse_track, wind_sector_polygon
 
 
 class TyphoonExposure:

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import datetime as dt
 
-from disasterpilot.agents.base import Agent, Artifact, EventContext, utc_stamp
-from disasterpilot.sources import zj_typhoon
+from geosteward.agents.base import Agent, Artifact, EventContext, utc_stamp
+from geosteward.sources import zj_typhoon
 
 
 class TyphoonWatcher:

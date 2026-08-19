@@ -11,7 +11,7 @@ It deliberately fails closed until then — no synthetic damage numbers.
 
 from __future__ import annotations
 
-from disasterpilot.agents.base import Agent, Artifact, EventContext
+from geosteward.agents.base import Agent, Artifact, EventContext
 
 
 class CrossViewEvidence:

@@ -10,11 +10,11 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from disasterpilot.agents.base import EventContext
-from disasterpilot.agents.decision import WatchBulletin
-from disasterpilot.agents.dossier import TyphoonDossier
-from disasterpilot.agents.exposure import TyphoonExposure
-from disasterpilot.agents.watcher import TyphoonWatcher
+from geosteward.agents.base import EventContext
+from geosteward.agents.decision import WatchBulletin
+from geosteward.agents.dossier import TyphoonDossier
+from geosteward.agents.exposure import TyphoonExposure
+from geosteward.agents.watcher import TyphoonWatcher
 
 PRE_EVENT_AGENTS = (TyphoonWatcher, TyphoonDossier, TyphoonExposure, WatchBulletin)
 

@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from disasterpilot.pipeline import run_pre_event
+from geosteward.pipeline import run_pre_event
 
 SNAPSHOT = {
     "tfid": "209999",
@@ -100,8 +100,8 @@ class OfflinePipelineTests(unittest.TestCase):
 
 class EvidenceFailClosedTests(unittest.TestCase):
     def test_evidence_agent_requires_imagery(self) -> None:
-        from disasterpilot.agents.base import EventContext
-        from disasterpilot.agents.evidence import CrossViewEvidence
+        from geosteward.agents.base import EventContext
+        from geosteward.agents.evidence import CrossViewEvidence
 
         with tempfile.TemporaryDirectory() as tmp:
             context = EventContext(
