@@ -18,6 +18,12 @@
       "id": "usbadfeature",
       "properties": {"mag": null, "place": "No geometry", "time": 1787139600000, "type": "earthquake"},
       "geometry": null
+    },
+    {
+      "type": "Feature",
+      "id": "us7000quake3",
+      "properties": {"mag": null, "place": "5 km SW of Nowhere, NV", "time": 1787143200000, "type": "earthquake"},
+      "geometry": {"type": "Point", "coordinates": [-118.5, 39.2, 5.0]}
     }
   ]
 }

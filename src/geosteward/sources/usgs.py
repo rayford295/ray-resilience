@@ -26,15 +26,18 @@ def parse(payload: Any) -> tuple[list[WatchEvent], int]:
             observed = dt.datetime.fromtimestamp(
                 props["time"] / 1000, tz=dt.timezone.utc
             ).strftime("%Y%m%dT%H%M%SZ")
+            mag = props["mag"]
+            name = f"M ? - {props['place']}" if mag is None else f"M {mag} - {props['place']}"
+            severity = "" if mag is None else str(mag)
             events.append(
                 WatchEvent(
                     source=SOURCE,
                     source_id=str(feature["id"]),
                     hazard=HAZARD,
-                    name=f"M {props['mag']} - {props['place']}",
+                    name=name,
                     lat=float(lat),
                     lon=float(lon),
-                    severity=str(props["mag"]),
+                    severity=severity,
                     observed_utc=observed,
                     properties={"depth_km": float(depth_km)},
                 )

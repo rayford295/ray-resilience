@@ -8,13 +8,14 @@ the exact bytes a source served at a specific time.
 from __future__ import annotations
 
 import datetime as dt
+import gzip
 import json
 import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (GeoSteward research snapshot)"}
+HEADERS = {"User-Agent": "GeoSteward-watch/1.0 (https://github.com/rayford295/GeoSteward)"}
 
 
 def utc_stamp() -> str:
@@ -64,11 +65,33 @@ def save_snapshot(root: Path, source: str, payload: Any) -> Path:
     snapshots = root / "snapshots"
     snapshots.mkdir(parents=True, exist_ok=True)
     stamp = utc_stamp()
-    path = snapshots / f"{source}_{stamp}.json"
-    while path.exists():  # same-second rerun: never overwrite
-        stamp += "x"
-        path = snapshots / f"{source}_{stamp}.json"
-    path.write_text(json.dumps(payload, ensure_ascii=False) + "\n", encoding="utf-8")
+    path = snapshots / f"{source}_{stamp}.json.gz"
+    suffix = 1
+    while path.exists():  # same-second rerun: never overwrite, never touch the stamp
+        suffix += 1
+        path = snapshots / f"{source}_{stamp}_{suffix}.json.gz"
+    with gzip.open(path, "wt", encoding="utf-8") as handle:
+        handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
     with (snapshots / "capture_index.jsonl").open("a", encoding="utf-8") as handle:
         handle.write(json.dumps({"source": source, "path": path.name, "utc": stamp}) + "\n")
     return path
+
+
+def merge_pages(pages: list[dict[str, Any]]) -> dict[str, Any]:
+    """Merge a sequence of paginated FeatureCollection payloads into one.
+
+    Keeps every top-level key from the first page (``type``, ``context``,
+    etc.) but replaces ``features`` with the concatenation of every page's
+    features, and drops any ``pagination`` key since the merged result is
+    already the complete, fully-followed set.
+    """
+
+    if not pages:
+        return {"type": "FeatureCollection", "features": []}
+    merged = dict(pages[0])
+    features: list[Any] = []
+    for page in pages:
+        features.extend(page.get("features", []))
+    merged["features"] = features
+    merged.pop("pagination", None)
+    return merged

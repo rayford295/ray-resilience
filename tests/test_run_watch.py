@@ -62,7 +62,7 @@ class TestRunWatch(unittest.TestCase):
                 (live_root / "products" / "watch_status.json").read_text()
             )
             self.assertEqual(written_status["sources"]["bad"]["error"], "HTTP 503")
-            snapshots = list((live_root / "snapshots").glob("good_*.json"))
+            snapshots = list((live_root / "snapshots").glob("good_*.json.gz"))
             self.assertEqual(len(snapshots), 1)
             audit_rows = [
                 json.loads(line)
@@ -72,6 +72,24 @@ class TestRunWatch(unittest.TestCase):
             self.assertIn("source_ok", actions)
             self.assertIn("source_failed", actions)
             self.assertIn("product_built", actions)
+
+    def test_source_that_fails_after_earlier_success_never_contributes_features(self) -> None:
+        # Two connectors sharing the same source name: the first call succeeds
+        # (populating parsed["dup"]), the second fails. The status row for
+        # "dup" must say failed, and no leftover features from the earlier
+        # success may sneak into the product underneath that failed status.
+        with tempfile.TemporaryDirectory() as tmp:
+            live_root = Path(tmp)
+            status = run_watch_module.run_watch(
+                connectors=[fake_connector("dup", True), fake_connector("dup", False)],
+                live_root=live_root,
+            )
+            self.assertEqual(status["sources"]["dup"]["status"], "failed")
+            self.assertEqual(status["sources"]["dup"]["events"], 0)
+            collection = json.loads(
+                (live_root / "products" / "national_watch.geojson").read_text()
+            )
+            self.assertEqual(len(collection["features"]), 0)
 
 
 if __name__ == "__main__":

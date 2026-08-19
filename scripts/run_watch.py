@@ -40,6 +40,7 @@ def run_watch(connectors: list, live_root: Path, timeout: int = 30) -> dict:
             )
         except Exception as error:  # noqa: BLE001 - recorded, never swallowed
             failures[source] = str(error)
+            parsed.pop(source, None)  # never let partial progress before the failure count as data
             audit.record("source_failed", f"watch.{source}", payload={"error": str(error)})
 
     generated = utc_stamp()

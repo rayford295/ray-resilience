@@ -59,7 +59,8 @@ def build_watch_product(
     total_dropped = sum(row["dropped_bounds"] for row in sources.values())
     if total_skipped or total_dropped:
         unknowns.append(
-            f"{total_skipped} feature(s) skipped as malformed; {total_dropped} dropped by bounds checks."
+            f"{total_skipped} feature(s) not displayed (no mappable geometry or malformed); "
+            f"{total_dropped} dropped by bounds checks."
         )
 
     collection = {

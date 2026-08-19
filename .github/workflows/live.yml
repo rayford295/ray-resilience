@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: live-watch
+  cancel-in-progress: false
+
 jobs:
   watch:
     runs-on: ubuntu-latest
@@ -31,4 +35,5 @@ jobs:
           git config user.email "actions@github.com"
           git add live
           git diff --cached --quiet || git commit -m "watch: hourly capture $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase origin live-data
           git push

@@ -71,7 +71,9 @@ class TestBuildWatchProduct(unittest.TestCase):
         )
         joined = " ".join(degraded_status["declared_unknowns"])
         self.assertIn("nifc", joined)
-        self.assertIn("skipped", joined)
+        self.assertNotIn("skipped as malformed", joined)
+        self.assertIn("not displayed", joined)
+        self.assertIn("no mappable geometry", joined)
 
 
 if __name__ == "__main__":
