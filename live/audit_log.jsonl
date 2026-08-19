@@ -1,0 +1,5 @@
+{"action": "source_ok", "actor": "watch.usgs", "utc": "20260819T231307Z", "payload": {"snapshot": "usgs_20260819T231307Z.json", "events": 348, "skipped": 0}, "rule_id": null}
+{"action": "source_ok", "actor": "watch.nws", "utc": "20260819T231307Z", "payload": {"snapshot": "nws_20260819T231307Z.json", "events": 105, "skipped": 176}, "rule_id": null}
+{"action": "source_ok", "actor": "watch.nhc", "utc": "20260819T231307Z", "payload": {"snapshot": "nhc_20260819T231307Z.json", "events": 1, "skipped": 0}, "rule_id": null}
+{"action": "source_ok", "actor": "watch.nifc", "utc": "20260819T231308Z", "payload": {"snapshot": "nifc_20260819T231308Z.json", "events": 528, "skipped": 0}, "rule_id": null}
+{"action": "product_built", "actor": "watch.builder", "utc": "20260819T231308Z", "payload": {"features": 982, "failed_sources": [], "generated_utc": "20260819T231308Z"}, "rule_id": null}

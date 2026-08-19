@@ -1,0 +1,44 @@
+{
+ "generated_utc": "20260819T231308Z",
+ "sources": {
+  "usgs": {
+   "status": "ok",
+   "events": 348,
+   "skipped": 0,
+   "dropped_bounds": 0,
+   "error": null
+  },
+  "nws": {
+   "status": "ok",
+   "events": 105,
+   "skipped": 176,
+   "dropped_bounds": 0,
+   "error": null
+  },
+  "nhc": {
+   "status": "ok",
+   "events": 1,
+   "skipped": 0,
+   "dropped_bounds": 0,
+   "error": null
+  },
+  "nifc": {
+   "status": "ok",
+   "events": 528,
+   "skipped": 0,
+   "dropped_bounds": 0,
+   "error": null
+  }
+ },
+ "declared_unknowns": [
+  "Watch data supports monitoring only; no damage or exposure conclusions.",
+  "176 feature(s) skipped as malformed; 0 dropped by bounds checks."
+ ],
+ "checks": [
+  {
+   "check": "crs",
+   "passed": true,
+   "detail": "CRS EPSG:4326 matches expected"
+  }
+ ]
+}
