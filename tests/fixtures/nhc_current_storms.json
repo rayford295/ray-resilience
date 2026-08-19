@@ -1,0 +1,37 @@
+{
+  "activeStorms": [
+    {
+      "id": "al062026",
+      "binNumber": "AT1",
+      "name": "Franklin",
+      "classification": "HU",
+      "intensity": "85",
+      "pressure": "962",
+      "latitudeNumeric": 24.9,
+      "longitudeNumeric": -83.4,
+      "movementDir": 315,
+      "movementSpeed": 12,
+      "lastUpdate": "2026-08-19T09:00:00.000Z"
+    },
+    {
+      "id": "ep092026",
+      "binNumber": "EP2",
+      "name": "Gil",
+      "classification": "TS",
+      "intensity": "50",
+      "pressure": "997",
+      "latitudeNumeric": 16.2,
+      "longitudeNumeric": -128.7,
+      "movementDir": 280,
+      "movementSpeed": 9,
+      "lastUpdate": "2026-08-19T09:00:00.000Z"
+    },
+    {
+      "id": "brokenstorm",
+      "name": "NoCoords",
+      "classification": "TD",
+      "intensity": "30",
+      "lastUpdate": "2026-08-19T09:00:00.000Z"
+    }
+  ]
+}

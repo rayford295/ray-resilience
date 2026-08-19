@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {"type": "Point", "coordinates": [-118.13, 34.19]},
+      "properties": {"IncidentName": "EATON", "FireDiscoveryDateTime": 1736035200000, "DailyAcres": 14021.0, "PercentContained": 100.0, "POOState": "US-CA"}
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {"type": "Point", "coordinates": [-105.6, 40.2]},
+      "properties": {"IncidentName": "Ridge Creek", "FireDiscoveryDateTime": 1755400000000, "DailyAcres": 312.5, "PercentContained": 20.0, "POOState": "US-CO"}
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": null,
+      "properties": {"IncidentName": "NoGeom", "FireDiscoveryDateTime": 1755400000000, "DailyAcres": 1.0, "PercentContained": 0.0, "POOState": "US-MT"}
+    }
+  ]
+}
