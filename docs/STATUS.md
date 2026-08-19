@@ -54,6 +54,7 @@ Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/pla
 | 3 | **Raw imagery transfer** | Plan 3 evidence tier (full depth) | Full-resolution Eaton (DINS/Altadena, ~27 GB) and Milton imagery live only on the owner's offline workstation and a private backup; this machine and the repos hold manifests/skeletons only. Tile-level statistics are possible without it; image-level evidence demos are not. |
 | 4 | **GenDisasterSVI provenance ruling** | Whether Milton GenDisasterSVI may be used as evidence | The repo's own audit notes it cannot establish which post-event street images are collected vs. generated. Until resolved, GeoSteward treats it as **not usable for evidence claims** (candor rule); the Bi-Temporal set (verified, published) is used instead. |
 | 5 | **OASIS submission portal details** | 09-04 submission | Exact paper format/page limit and code-submission mechanism from the event portal. |
+| 6 | **Repository visibility decision** | Judge access + PWA data path | Both repos are currently **private**. Judges reviewing the code, and the PWA fetching `live-data` via `raw.githubusercontent.com`, require public visibility. The timing of flipping to public is the owner's call (it also interacts with prior-disclosure considerations the owner is managing); the fallback for a private demo is token-gated access or copying products into the Pages tree. |
 
 ## Known limitations (tracked, not blocking)
 
