@@ -1,6 +1,7 @@
 # GeoSteward — Design Document
 
 **Date:** 2026-08-19
+**Version:** 1 — this design defines GeoSteward v1, the OASIS 2026 submission line; the v1.0.0 tag is cut when this design is fully implemented
 **Status:** Approved by project owner (design review completed in brainstorming session)
 **Supersedes:** DisasterPilot's current positioning (multi-agent pipeline, Bavi case study)
 
