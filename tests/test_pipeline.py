@@ -123,7 +123,7 @@ class EventClosureTests(unittest.TestCase):
             snapshot = snapshots / "bavi_202609_20260716T142351Z.json"
             snapshot.write_text(json.dumps(payload), encoding="utf-8")
             (event_dir / "artifact_manifest.jsonl").write_text(
-                json.dumps({"path": "events/bavi-2026/dossier/event_record.json", "agent": "dossier.typhoon"})
+                json.dumps({"path": "events/archive/bavi-2026/dossier/event_record.json", "agent": "dossier.typhoon"})
                 + "\n",
                 encoding="utf-8",
             )

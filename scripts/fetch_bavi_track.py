@@ -24,7 +24,7 @@ from geosteward.sources.zj_typhoon import typhoon_detail
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tfid", default="202609", help="Typhoon id (default Bavi 202609)")
-    parser.add_argument("--output-dir", type=Path, default=Path("events/bavi-2026/snapshots"))
+    parser.add_argument("--output-dir", type=Path, default=Path("events/archive/bavi-2026/snapshots"))
     parser.add_argument(
         "--include-inactive",
         action="store_true",

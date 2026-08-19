@@ -11,8 +11,8 @@ Track A: Disaster Resilience & Vulnerability Analysis**.
 > 🚧 **Rework in progress.** This repository (formerly *DisasterPilot*) is being
 > rebuilt around the design in
 > [`docs/superpowers/specs/2026-08-19-geosteward-design.md`](docs/superpowers/specs/2026-08-19-geosteward-design.md).
-> The previous Super Typhoon Bavi case study is preserved under `events/` and will
-> move to `events/archive/` — append-only history is a core principle here.
+> The previous Super Typhoon Bavi case study is preserved under
+> `events/archive/bavi-2026/` — append-only history is a core principle here.
 
 ## Why "Steward"?
 
