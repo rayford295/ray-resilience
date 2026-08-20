@@ -31,7 +31,7 @@ function paintFor(view, geojson) {
   return rampExpr(["coalesce", ["get", view.metric], 0], max);
 }
 
-export default function MapView({ view, geojson, priorityT, flyTarget, onSelect }) {
+export default function MapView({ view, geojson, priorityT, flyTarget, onSelect, live }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const [ready, setReady] = useState(false);
@@ -93,6 +93,30 @@ export default function MapView({ view, geojson, priorityT, flyTarget, onSelect 
       map.setFeatureState({ source: SRC, id: cell }, { score: v.score });
     }
   }, [ready, geojson, view, priorityT]);
+
+  // Tier-1 national watch: live hazard points over whatever view is active.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready || live?.status !== "ok") return;
+    if (map.getSource("live")) return;
+    map.addSource("live", { type: "geojson", data: live.data });
+    map.addLayer({
+      id: "live-points",
+      type: "circle",
+      source: "live",
+      paint: {
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 3, 2.5, 10, 6],
+        "circle-color": "#6fd3a8",
+        "circle-opacity": 0.75,
+        "circle-stroke-color": "#0b1c30",
+        "circle-stroke-width": 0.8,
+      },
+    });
+    map.on("click", "live-points", (e) => {
+      const f = e.features?.[0];
+      if (f) onSelect(f.properties);
+    });
+  }, [ready, live, onSelect]);
 
   useEffect(() => {
     const map = mapRef.current;

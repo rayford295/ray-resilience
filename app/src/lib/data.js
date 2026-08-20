@@ -108,20 +108,31 @@ export async function geocodeAddress(oneline) {
 }
 
 /**
- * Tier-1 live watch (hourly, published to the live-data branch). While the
- * repo is private this fetch fails; the UI shows a declared-unavailable
- * badge instead — graceful degradation is part of the design, not a bug.
+ * Tier-1 live watch. Preferred source: the Pages tree (/live/, republished
+ * hourly by the deploy workflow, works while the repo is private). Fallback:
+ * the live-data branch raw URL (works once the repo is public). When both
+ * fail the UI shows a declared-unavailable badge — graceful degradation is
+ * part of the design, not a bug.
  */
+const LIVE_SOURCES = [
+  "../live/products/national_watch.geojson",
+  "https://raw.githubusercontent.com/rayford295/GeoSteward/live-data/live/products/national_watch.geojson",
+];
+
 export async function fetchLiveWatch() {
-  const url =
-    "https://raw.githubusercontent.com/rayford295/GeoSteward/live-data/live/products/national_watch.geojson";
-  try {
-    const r = await fetch(url);
-    if (!r.ok) throw new Error(`${r.status}`);
-    return { status: "ok", data: await r.json(), fetchedUtc: new Date().toISOString() };
-  } catch (err) {
-    return { status: "unavailable", reason: String(err) };
+  const reasons = [];
+  for (const url of LIVE_SOURCES) {
+    try {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`${r.status}`);
+      const data = await r.json();
+      if (!Array.isArray(data.features)) throw new Error("not a FeatureCollection");
+      return { status: "ok", data, source: url, fetchedUtc: new Date().toISOString() };
+    } catch (err) {
+      reasons.push(`${url}: ${err}`);
+    }
   }
+  return { status: "unavailable", reason: reasons.join(" | ") };
 }
 
 /** Local audit trail for HITL adjustments (design: POST to gateway; that

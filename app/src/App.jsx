@@ -202,6 +202,7 @@ export default function App() {
             priorityT={t}
             flyTarget={flyTarget}
             onSelect={onSelect}
+            live={live}
           />
         </main>
       </div>

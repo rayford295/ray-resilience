@@ -1,0 +1,69 @@
+name: deploy-pages
+
+# One Pages site, three parts:
+#   /        landing page (docs/)
+#   /app/    the PWA, built from app/ with the committed deep-case artifacts
+#   /live/   hourly Tier-1 watch products, copied from the live-data branch
+#
+# The hourly schedule trails live.yml (:23) so each deploy picks up the
+# freshest snapshot. Pages stays public even while the repo is private, so
+# only reviewed, committed products belong in the site tree.
+
+on:
+  push:
+    branches: [main]
+    paths: ["app/**", "events/**", "docs/**", ".github/workflows/pages.yml"]
+  schedule:
+    - cron: "40 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: live-data
+          path: _live-data
+        continue-on-error: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - name: Build PWA
+        run: npm ci && npm run build
+        working-directory: app
+      - name: Assemble site
+        run: |
+          mkdir -p _site/app _site/live/products
+          cp -r docs/. _site/
+          cp -r app/dist/. _site/app/
+          if [ -d _live-data/live/products ]; then
+            cp -r _live-data/live/products/. _site/live/products/
+          else
+            echo "live-data branch unavailable; site ships without /live (app degrades gracefully)"
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
