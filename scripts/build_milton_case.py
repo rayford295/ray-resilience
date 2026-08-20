@@ -267,16 +267,19 @@ def stage_event_record(ctx: EventContext, audit: AuditLog) -> None:
         "data_sources": [
             "Bi-Temporal street-view damage set (published_verified; Figshare DOI)",
             "Pinellas County H3 debris grids (Rayford-AI/debris-estimate)",
+            "GenDisasterSVI post_sat satellite images (2,555; owner-confirmed real "
+            "acquisitions, ruling 2026-08-20 — usable as evidence)",
         ],
         "excluded_sources": [
             {
-                "dataset": "hurrican-milton-GenDisasterSVI",
+                "dataset": "hurrican-milton-GenDisasterSVI (street imagery only)",
                 "reason": "post-event street images are InstructPix2Pix-generated "
                 "(source paths reference experiment2_ip2p); candor rule forbids "
                 "generated imagery as evidence",
                 "registry_tier": "generated_excluded",
-                "open_question": "2,555 post_sat satellite images may be real; "
-                "owner to confirm provenance before any use",
+                "post_sat_ruling": "the dataset's 2,555 post_sat satellite images "
+                "were confirmed real acquisitions by the owner on 2026-08-20 and "
+                "moved to data_sources; the exclusion covers street imagery only",
             }
         ],
         "declared_unknowns": [

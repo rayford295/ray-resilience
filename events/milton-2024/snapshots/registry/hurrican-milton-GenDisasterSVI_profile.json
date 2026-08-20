@@ -1,7 +1,7 @@
 {
   "schema_version": "yifan-disaster-registry-v1",
   "dataset_name": "hurrican-milton-GenDisasterSVI",
-  "generated_utc": "2026-08-20T01:47:24+00:00",
+  "generated_utc": "2026-08-20T02:34:55+00:00",
   "event": "Hurricane Milton 2024 (Horseshoe Beach AOI)",
   "hazard_type": "hurricane",
   "role": "EXCLUDED from evidence claims (candor rule): post-damage street images are InstructPix2Pix-generated (source paths reference experiment2_ip2p)",
@@ -13,7 +13,10 @@
   },
   "n_post_sat_images": 2555,
   "evidence_tier": "generated_excluded",
-  "open_question": "post_sat satellite images may be real acquisitions - provenance check pending before any use",
+  "component_tiers": {
+    "post_damage_street_images": "generated_excluded (InstructPix2Pix)",
+    "post_sat": "owner_confirmed_real (ruling 2026-08-20): real satellite acquisitions, usable as evidence"
+  },
   "provenance": "GenDisasterSVI generation experiment; upstream paths on /home/bbo (offsite)",
   "files": {
     "n_image_files": 7665,
