@@ -6,3 +6,7 @@
 {"source": "nws", "path": "nws_20260819T234241Z.json.gz", "utc": "20260819T234241Z"}
 {"source": "nhc", "path": "nhc_20260819T234241Z.json.gz", "utc": "20260819T234241Z"}
 {"source": "nifc", "path": "nifc_20260819T234242Z.json.gz", "utc": "20260819T234242Z"}
+{"source": "usgs", "path": "usgs_20260820T015553Z.json.gz", "utc": "20260820T015553Z"}
+{"source": "nws", "path": "nws_20260820T015553Z.json.gz", "utc": "20260820T015553Z"}
+{"source": "nhc", "path": "nhc_20260820T015553Z.json.gz", "utc": "20260820T015553Z"}
+{"source": "nifc", "path": "nifc_20260820T015554Z.json.gz", "utc": "20260820T015554Z"}
