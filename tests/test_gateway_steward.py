@@ -126,11 +126,95 @@ class TestCheckClaims(unittest.TestCase):
 
     def test_uncited_number_fails(self):
         text = f"The tile was assessed [artifact:{GRID_ID}]. 90% of homes are gone."
-        self.assertTrue(any("numeric claim" in v for v in check_claims(text, self.IDS)))
+        self.assertTrue(any("90%" in v for v in check_claims(text, self.IDS)))
 
     def test_parcel_statement_fails(self):
         text = f"Your house at 12 Oak Ave is destroyed [artifact:{GRID_ID}]."
         self.assertTrue(any("parcel" in v for v in check_claims(text, self.IDS)))
+
+
+class TestUncitedAssertions(unittest.TestCase):
+    """Assertions without digits used to pass uncited.
+
+    The rule was "a sentence containing a digit needs a citation", which is a
+    blocklist: it enumerates the dangerous shape and lets everything else
+    through. "Your neighborhood was not significantly affected." carries no
+    digit and asserted something the evidence never said.
+
+    The rule is now the other way round — every sentence needs a citation
+    unless it is structurally non-assertive — so a form nobody anticipated
+    produces a refusal rather than an uncited claim.
+    """
+
+    IDS = {GRID_ID}
+
+    def cited(self, sentence: str) -> str:
+        return f"The tile was assessed [artifact:{GRID_ID}]. {sentence}"
+
+    def test_digitless_assertion_about_the_world_is_rejected(self):
+        violations = check_claims(
+            self.cited("Your neighborhood was not significantly affected."), self.IDS
+        )
+        self.assertTrue(any("uncited assertion" in v for v in violations))
+
+    def test_evaluative_assertion_is_rejected(self):
+        for sentence in (
+            "Most structures nearby survived.",
+            "The area is highly vulnerable.",
+            "Conditions here are safe.",
+            "Damage was severe across the neighborhood.",
+        ):
+            with self.subTest(sentence=sentence):
+                violations = check_claims(self.cited(sentence), self.IDS)
+                self.assertTrue(
+                    any("uncited assertion" in v for v in violations),
+                    f"passed uncited: {sentence}",
+                )
+
+    def test_cited_assertion_passes(self):
+        text = (
+            f"Your neighborhood was not significantly affected [artifact:{GRID_ID}]."
+        )
+        self.assertEqual(check_claims(text, self.IDS), [])
+
+    def test_safety_advice_needs_no_citation(self):
+        # Advice asserts nothing about this place, so requiring a citation
+        # would only push the model into fabricating one.
+        for sentence in (
+            "Contact your county emergency management office.",
+            "Call 911 if you smell gas.",
+            "Consider photographing any damage before repairs.",
+            "If you were displaced, register with FEMA.",
+            "Do not enter a structure that has been red-tagged.",
+        ):
+            with self.subTest(sentence=sentence):
+                self.assertEqual(check_claims(self.cited(sentence), self.IDS), [])
+
+    def test_question_needs_no_citation(self):
+        self.assertEqual(
+            check_claims(self.cited("Would you like the tile-level breakdown?"), self.IDS), []
+        )
+
+    def test_declared_limit_of_competence_needs_no_citation(self):
+        for sentence in (
+            "GeoSteward makes no claim about this location.",
+            "The evidence does not answer that question.",
+            "This location is outside the evaluated areas.",
+            "I cannot assess an individual property.",
+        ):
+            with self.subTest(sentence=sentence):
+                self.assertEqual(check_claims(self.cited(sentence), self.IDS), [])
+
+    def test_advice_verb_inside_an_assertion_does_not_exempt_it(self):
+        # "Check" exempts an imperative, not any sentence containing it.
+        violations = check_claims(
+            self.cited("Inspectors will check every home on your street."), self.IDS
+        )
+        self.assertTrue(any("uncited assertion" in v for v in violations))
+
+    def test_violation_names_the_offending_sentence(self):
+        violations = check_claims(self.cited("The area is highly vulnerable."), self.IDS)
+        self.assertTrue(any("highly vulnerable" in v for v in violations))
 
 
 class TestPolicyGate(GatewayTestCase):

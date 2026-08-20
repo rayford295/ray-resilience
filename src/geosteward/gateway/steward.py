@@ -30,6 +30,57 @@ _EXPOSURE_KEYWORDS = re.compile(r"\b(exposure|exposed|vulnerab\w*|svi|risk|safe|
 _CITATION = re.compile(r"\[artifact:([0-9a-f]{12})\]")
 _SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
 
+# --- non-assertive sentence forms ------------------------------------------
+#
+# Every sentence needs a citation unless it appears here. The direction matters
+# more than the contents: the previous rule required citations on sentences
+# containing a digit, which is a blocklist — it named the dangerous shape and
+# let every other shape through, so "Your neighborhood was not significantly
+# affected." passed with no evidence behind it.
+#
+# Inverting it makes the exemptions a closed set. A sentence form nobody
+# anticipated is now refused rather than published, so the failure mode of
+# getting this list wrong is an over-strict refusal instead of an uncited
+# claim. That is the direction the rest of the harness fails in.
+
+_QUESTION = re.compile(r"\?\s*$")
+
+#: Advice asserts nothing about the location, so a citation requirement would
+#: only push the model toward attaching an unrelated one. Matched at the head
+#: of the sentence — optionally behind a leading conditional or "please" — so
+#: "Inspectors will check every home" stays an assertion.
+_IMPERATIVE_ADVICE = re.compile(
+    r"^(?:if\s+[^,]{1,80},\s*)?(?:please\s+)?"
+    r"(?:contact|call|check|consider|follow|monitor|review|see|visit|ask|keep|"
+    r"avoid|report|register|apply|document|photograph|save|bring|wear|stay|"
+    r"do not|don't|never)\b",
+    re.I,
+)
+
+#: Statements about the answer's own limits. These are metadiscourse — they
+#: describe what the system will not say, which the harness itself decided.
+_DECLARED_LIMIT = re.compile(
+    r"\b(?:makes? no claim|no claim (?:is|can be)|not authoriz|"
+    r"(?:evidence|record|data|analysis)\s+(?:here\s+)?does not\s+"
+    r"(?:answer|cover|include|support|extend)|"
+    r"outside the evaluated|not (?:been )?evaluated|"
+    r"i cannot|i can't|i do not have|i don't have|"
+    r"geosteward (?:does not|cannot|makes no))\b",
+    re.I,
+)
+
+
+def is_non_assertive(sentence: str) -> bool:
+    """True when a sentence states no fact about the world, so needs no cite."""
+    stripped = sentence.strip()
+    if not stripped:
+        return True
+    return bool(
+        _QUESTION.search(stripped)
+        or _IMPERATIVE_ADVICE.match(stripped)
+        or _DECLARED_LIMIT.search(stripped)
+    )
+
 
 def classify(question: str) -> tuple[str, str]:
     """(purpose, resolution) from the question text — rule-based on purpose:
@@ -61,9 +112,11 @@ def check_claims(text: str, allowed_ids: set[str]) -> list[str]:
         violations.append(f"fabricated citation ids: {sorted(fabricated)}")
     stripped = _CITATION.sub("", text)
     for sentence in _SENTENCE_SPLIT.split(text):
-        bare = _CITATION.sub("", sentence)
-        if re.search(r"\d", bare) and not _CITATION.search(sentence):
-            violations.append(f"numeric claim without citation: {bare.strip()[:80]!r}")
+        if _CITATION.search(sentence):
+            continue
+        bare = _CITATION.sub("", sentence).strip()
+        if bare and not is_non_assertive(bare):
+            violations.append(f"uncited assertion: {bare[:80]!r}")
     for pattern in _PARCEL_PATTERNS:
         if pattern.search(stripped):
             violations.append("parcel-level statement in the answer")
@@ -76,7 +129,7 @@ def check_claims(text: str, allowed_ids: set[str]) -> list[str]:
 _SYSTEM_PROMPT = """You are GeoSteward, an accountable GeoAI risk analyst.
 Rules you MUST follow:
 1. Use ONLY the facts in the EVIDENCE block. Never use outside knowledge for factual claims.
-2. Every sentence containing ANY digit (counts, percentages, rates, years, IDs) MUST end with the citation tag of the fact it came from, in the exact form [artifact:XXXXXXXXXXXX], copied verbatim from the evidence. This includes sentences about declared unknowns — cite the record they come from.
+2. EVERY sentence that states a fact about this place — counts, rates, comparisons, severity, safety, vulnerability, whether somewhere was affected — MUST end with the citation tag of the fact it came from, in the exact form [artifact:XXXXXXXXXXXX], copied verbatim from the evidence. This includes sentences with no numbers in them, and sentences about declared unknowns: cite the record they come from. Only three kinds of sentence may omit a citation: a question, general safety advice addressed to the reader ("Contact your county emergency management office."), and a statement about what you cannot say ("The evidence does not answer that."). If you cannot cite a factual sentence, delete the sentence.
 3. Never make statements about a specific parcel, house, or street address. Your resolution limit is the tile (H3 r9, roughly 0.1 km^2).
 4. State uncertainty and declared unknowns as prominently as findings.
 5. If the evidence does not answer the question, say so plainly.
