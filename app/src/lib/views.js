@@ -20,6 +20,14 @@ export const EVENTS = {
     manifest: "/events/milton-2024/artifact_manifest.jsonl",
     audit: "/events/milton-2024/audit_log.jsonl",
   },
+  "ian-2022": {
+    title: "Hurricane Ian 2022",
+    center: [-82.0, 26.55],
+    zoom: 10.3,
+    record: "/events/ian-2022/dossier/event_record.json",
+    manifest: "/events/ian-2022/artifact_manifest.jsonl",
+    audit: "/events/ian-2022/audit_log.jsonl",
+  },
 };
 
 export const VIEWS = [
@@ -77,6 +85,28 @@ export const VIEWS = [
     legend: "county debris-program volume per tile",
     tier: 2,
     focus: { center: [-82.72, 27.9], zoom: 10.5 },
+  },
+  {
+    id: "ian-evidence",
+    event: "ian-2022",
+    label: "Cross-view evidence (Fort Myers)",
+    url: "/events/ian-2022/evidence/crossview_h3_r9_grid.geojson",
+    stage: "evidence.crossview_grid",
+    kind: "count",
+    metric: "n_samples",
+    legend: "reliability-gated matched samples per tile (3-class severity)",
+    tier: 3,
+  },
+  {
+    id: "ian-density",
+    event: "ian-2022",
+    label: "Street-view sample density",
+    url: "/events/ian-2022/evidence/svi_density_h3_r9_grid.geojson",
+    stage: "evidence.svi_sample_density",
+    kind: "count",
+    metric: "n_samples",
+    legend: "unlabeled sample positions per tile — where evidence exists, not what it concludes",
+    tier: 3,
   },
 ];
 

@@ -91,7 +91,19 @@ Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/pla
   while the repo is private (graceful degradation, not a fake layer).
 - CI: new `app-build` job (Node 22, `npm ci && npm run build`).
 - Not yet: PMTiles/vector-tile pipeline (debris layer ships as 5.8 MB GeoJSON — fine
-  for now), Playwright smoke tests, agent chat (Plan 5), Pages deployment workflow.
+  for now), Playwright smoke tests, agent chat (Plan 5).
+
+### Plan 4 — deployment + third deep case (2026-08-20)
+- **Live site:** https://rayford295.github.io/GeoSteward/ — landing page at root
+  (content refreshed from the Bavi narrative to the current three-case state), PWA at
+  `/app/`, and `/live/` republished hourly (`:40`, trailing `live.yml` at `:23`) via
+  the new `deploy-pages` workflow — the Tier-1 national watch layer works publicly
+  while the repo stays private. Pages switched from legacy (main/docs) to workflow.
+- **Hurricane Ian 2022 deep case** (`events/ian-2022/`, `scripts/build_ian_case.py`):
+  886 reliability-gated matched samples → 190-cell evidence grid (Fort Myers AOI) +
+  4,121 CVIAN street-view positions → 413-cell **density-only** layer (no verifiable
+  per-point severity link exists, so no damage labels are claimed — candor over
+  coverage). Third event, second hazard, same harness; in the app's layer catalog.
 
 ## 🔜 Next (not blocked)
 

@@ -1,0 +1,37 @@
+{
+  "schema_version": "yifan-disaster-registry-v1",
+  "dataset_name": "IAN_hurricane",
+  "generated_utc": "2026-08-20T01:47:24+00:00",
+  "event": "Hurricane Ian 2022",
+  "hazard_type": "hurricane",
+  "role": "satellite/street-view paired set with captions",
+  "n_samples": 4121,
+  "label_counts": {
+    "0_MinorDamage": 1407,
+    "1_ModerateDamage": 1538,
+    "2_SevereDamage": 1176
+  },
+  "split_counts": {
+    "train": 3821,
+    "test": 300
+  },
+  "has_upstream_checksums_sha512": true,
+  "evidence_tier": "matched_derived",
+  "provenance": "paired sat/SVI with generated captions; geo positions in CVIAN_position.geojson",
+  "files": {
+    "n_image_files": 8242,
+    "n_other_files": 13,
+    "total_bytes": 2265462372
+  },
+  "canonical_label_counts": {
+    "minor": 1407,
+    "moderate": 1538,
+    "severe": 1176
+  },
+  "canonical_label_field": "human_damage_perception",
+  "checksums": {
+    "file": "checksums/IAN_hurricane.sha256",
+    "n_files_hashed": 8255,
+    "images_included": true
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "canonical_field": "human_damage_perception",
+  "canonical_scale": [
+    "none",
+    "minor",
+    "moderate",
+    "severe",
+    "destroyed",
+    "unknown"
+  ],
+  "note": "Mappings across percent-loss (DINS), repairability (Eaton matched) and perception (Bi-Temporal/IAN) scales are approximate and flagged for owner review before any cross-dataset training or evidence claim.",
+  "datasets": {
+    "Eaton_Fire": {
+      "native_field": "DAMAGE",
+      "native_scheme": "CAL FIRE DINS percent structural loss",
+      "map": {
+        "No Damage": "none",
+        "Affected (1-9%)": "minor",
+        "Minor (10-25%)": "moderate",
+        "Major (26-50%)": "severe",
+        "Destroyed (>50%)": "destroyed",
+        "Inaccessible": "unknown"
+      }
+    },
+    "EATON_wildfire_mapillary_matched": {
+      "native_field": "label_name",
+      "native_scheme": "3-class repairability",
+      "map": {
+        "no_or_trace_damage": "none",
+        "damaged_repairable": "moderate",
+        "destroyed": "destroyed"
+      }
+    },
+    "IAN_hurricane_mapillary_matched": {
+      "native_field": "label_name",
+      "native_scheme": "3-class ordinal severity",
+      "map": {
+        "0_MinorDamage": "minor",
+        "1_ModerateDamage": "moderate",
+        "2_SevereDamage": "severe"
+      }
+    },
+    "IAN_hurricane": {
+      "native_field": "severity",
+      "native_scheme": "3-class ordinal severity",
+      "map": {
+        "0_MinorDamage": "minor",
+        "1_ModerateDamage": "moderate",
+        "2_SevereDamage": "severe"
+      }
+    },
+    "Bi-temporal_hurricane": {
+      "native_field": "human_damage_perception",
+      "native_scheme": "perception-based (canonical anchor dataset)",
+      "map": {
+        "mild": "minor",
+        "moderate": "moderate",
+        "severe": "severe"
+      }
+    },
+    "hurrican-milton-GenDisasterSVI": {
+      "native_field": "damage_level",
+      "native_scheme": "3-class generation prompt label",
+      "map": {
+        "mild_damage": "minor",
+        "moderate_damage": "moderate",
+        "severe_damage": "severe"
+      }
+    },
+    "SAGINDisaster": {
+      "native_field": null,
+      "native_scheme": "unlabeled RSI/VGI pairs (labels pending owner input)",
+      "map": {}
+    },
+    "Altadena_Images": {
+      "native_field": null,
+      "native_scheme": "imagery only; damage labels live in Eaton_Fire DINS points",
+      "map": {}
+    }
+  }
+}

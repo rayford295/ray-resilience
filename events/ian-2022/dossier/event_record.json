@@ -1,0 +1,26 @@
+{
+ "event_id": "ian-2022",
+ "name": "Hurricane Ian",
+ "hazard": "hurricane",
+ "landfall": "2022-09-28, Cayo Costa, FL (Cat 4)",
+ "aoi_bbox_wgs84": {
+  "min_lat": 26.3,
+  "max_lat": 26.8,
+  "min_lon": -82.4,
+  "max_lon": -81.7
+ },
+ "evidence_tier": 3,
+ "data_sources": [
+  "IAN_hurricane_mapillary_matched cross-view set (matched_derived; 886 samples)",
+  "CVIAN street-view positions (4,121 samples; density only)"
+ ],
+ "declared_unknowns": [
+  "the 4,121-position layer has no verifiable per-point severity link — it shows where evidence exists, not what it concludes",
+  "no exposure layer yet (no ground-truth structure damage source ingested); evidence-tier claims only",
+  "social-vulnerability join pending: no vulnerability claims",
+  "no parcel-level claims anywhere: all products are tile (H3 r9) resolution"
+ ],
+ "uncertainty": {
+  "label_crosswalk": "3-class ordinal severity mapped to canonical minor/moderate/severe; see snapshots/registry/label_crosswalk.json"
+ }
+}

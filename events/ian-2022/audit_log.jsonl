@@ -1,0 +1,18 @@
+{"action": "stage", "actor": "snapshot.registry", "utc": "20260820T033819Z", "payload": {"status": "ok", "copied": ["IAN_hurricane_mapillary_matched_profile.json", "IAN_hurricane_profile.json", "label_crosswalk.json"]}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_grid", "utc": "20260820T033819Z", "payload": {"check": "crs", "passed": true, "detail": "CRS EPSG:4326 matches expected"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_grid", "utc": "20260820T033819Z", "payload": {"check": "bounds", "passed": true, "detail": "min_lat=26.42368605340228 within [26.3, 26.8]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_grid", "utc": "20260820T033819Z", "payload": {"check": "bounds", "passed": true, "detail": "max_lat=26.66682255411969 within [26.3, 26.8]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_grid", "utc": "20260820T033819Z", "payload": {"check": "bounds", "passed": true, "detail": "min_lon=-82.19782948493956 within [-82.4, -81.7]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_grid", "utc": "20260820T033819Z", "payload": {"check": "bounds", "passed": true, "detail": "max_lon=-81.82953536510468 within [-82.4, -81.7]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_grid", "utc": "20260820T033819Z", "payload": {"check": "join_integrity", "passed": true, "detail": "coverage 100.00%, no orphans"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_grid", "utc": "20260820T033819Z", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
+{"action": "stage", "actor": "evidence.crossview_grid", "utc": "20260820T033819Z", "payload": {"status": "ok", "n_samples": 886, "n_cells": 190}, "rule_id": null}
+{"action": "check", "actor": "evidence.svi_sample_density", "utc": "20260820T033819Z", "payload": {"check": "crs", "passed": true, "detail": "CRS EPSG:4326 matches expected"}, "rule_id": null}
+{"action": "check", "actor": "evidence.svi_sample_density", "utc": "20260820T033819Z", "payload": {"check": "bounds", "passed": true, "detail": "min_lat=26.423503501795068 within [26.3, 26.8]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.svi_sample_density", "utc": "20260820T033819Z", "payload": {"check": "bounds", "passed": true, "detail": "max_lat=26.728957 within [26.3, 26.8]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.svi_sample_density", "utc": "20260820T033819Z", "payload": {"check": "bounds", "passed": true, "detail": "min_lon=-82.197829 within [-82.4, -81.7]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.svi_sample_density", "utc": "20260820T033819Z", "payload": {"check": "bounds", "passed": true, "detail": "max_lon=-81.829535 within [-82.4, -81.7]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.svi_sample_density", "utc": "20260820T033819Z", "payload": {"check": "join_integrity", "passed": true, "detail": "coverage 100.00%, no orphans"}, "rule_id": null}
+{"action": "check", "actor": "evidence.svi_sample_density", "utc": "20260820T033820Z", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
+{"action": "stage", "actor": "evidence.svi_sample_density", "utc": "20260820T033820Z", "payload": {"status": "ok", "n_samples": 4121, "n_cells": 413}, "rule_id": null}
+{"action": "stage", "actor": "dossier.event_record", "utc": "20260820T033820Z", "payload": {"status": "ok"}, "rule_id": null}

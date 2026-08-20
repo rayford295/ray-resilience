@@ -18,7 +18,7 @@ if (!existsSync(src)) {
 }
 rmSync(dest, { recursive: true, force: true });
 mkdirSync(dest, { recursive: true });
-for (const event of ["eaton-2025", "milton-2024"]) {
+for (const event of ["eaton-2025", "milton-2024", "ian-2022"]) {
   cpSync(join(src, event), join(dest, event), { recursive: true });
 }
 console.log(`synced deep-case artifacts -> ${dest}`);

@@ -143,7 +143,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
     <a class="brand" href="#">Geo<span class="dot">Steward</span></a>
     <ul class="nav-links">
       <li><a href="#pipeline">Pipeline</a></li>
-      <li><a href="#case">Case Study</a></li>
+      <li><a href="#case">Deep Cases</a></li>
       <li><a href="#principles">Principles</a></li>
       <li><a href="#who">Who It Helps</a></li>
       <li><a href="#quickstart">Quickstart</a></li>
@@ -168,7 +168,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
     </div>
     <div class="live-badge">
       <span class="pulse"></span>
-      CASE CLOSED · Bavi (2026) — pre-landfall record preserved; post-event evidence remains explicitly pending
+      LIVE · hourly national watch (USGS · NWS · NHC · NIFC) + three harness-checked deep cases: Eaton Fire · Hurricane Milton · Hurricane Ian
     </div>
   </div>
 </section>
@@ -180,34 +180,34 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
     <p class="sec-sub">Each agent consumes and produces auditable artifacts. Nothing is fabricated, nothing is skipped silently — the pipeline either delivers evidence or tells you exactly why it can't.</p>
     <div class="pipe">
       <div class="pipe-card">
-        <div class="pipe-num">01 · PRE-EVENT</div>
+        <div class="pipe-num">01 · LIVE</div>
         <div class="pipe-name">Watcher</div>
-        <div class="pipe-desc">Polls public sources, registers hazard events, snapshots live tracks — append-only, timestamped.</div>
-        <span class="pipe-state state-live">VERIFIED</span>
+        <div class="pipe-desc">Four keyless US connectors (USGS, NWS, NHC, NIFC/WFIGS) refresh hourly via CI — append-only gzip snapshots, per-source health, fail-closed on source errors.</div>
+        <span class="pipe-state state-live">LIVE · HOURLY</span>
       </div>
       <div class="pipe-card">
-        <div class="pipe-num">02 · PRE-EVENT</div>
+        <div class="pipe-num">02 · PER EVENT</div>
         <div class="pipe-name">Dossier</div>
-        <div class="pipe-desc">Structured event record from captured payloads. Machine-verifiable numbers only; narrative facts stay human-curated with citations.</div>
+        <div class="pipe-desc">Machine-readable event records with data sources, excluded sources (with reasons), and declared unknowns — attribution caveats stated per feature, not buried.</div>
         <span class="pipe-state state-live">VERIFIED</span>
       </div>
       <div class="pipe-card">
-        <div class="pipe-num">03 · PRE-EVENT</div>
+        <div class="pipe-num">03 · TIER 2</div>
         <div class="pipe-name">Exposure</div>
-        <div class="pipe-desc">Quadrant wind-swath footprints as GeoJSON, ready to intersect with population and building layers.</div>
+        <div class="pipe-desc">Ground-truth structure damage (CAL FIRE DINS), county debris volumes, and CDC SVI joined onto H3 tiles — CRS asserted, join integrity checked, uncertainty mandatory.</div>
         <span class="pipe-state state-live">VERIFIED</span>
       </div>
       <div class="pipe-card">
-        <div class="pipe-num">04 · POST-EVENT</div>
+        <div class="pipe-num">04 · TIER 3</div>
         <div class="pipe-name">Evidence</div>
-        <div class="pipe-desc">Reliability-gated cross-view damage assessment. Fails closed: no imagery, no damage numbers.</div>
-        <span class="pipe-state state-gated">FAIL-CLOSED</span>
+        <div class="pipe-desc">Reliability-gated cross-view damage grids from matched pre/post street-view imagery. Still fails closed: generated imagery is excluded and the exclusion is auditable.</div>
+        <span class="pipe-state state-live">VERIFIED</span>
       </div>
       <div class="pipe-card">
         <div class="pipe-num">05 · DECISION</div>
         <div class="pipe-name">Decision</div>
-        <div class="pipe-desc">A verified watch bulletin is implemented. Tile priorities and inspection routes await exposure and damage inputs.</div>
-        <span class="pipe-state state-gated">PARTIAL</span>
+        <div class="pipe-desc">Damage × social-vulnerability trade-off sliders re-rank tile priorities client-side in the app; every human adjustment is audit-logged. Agent chat ships with the gateway.</div>
+        <span class="pipe-state state-gated">IN THE APP</span>
       </div>
     </div>
   </div>
@@ -216,26 +216,28 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
 <section id="case">
   <div class="wrap case-grid">
     <div>
-      <div class="sec-kicker">Closed Case Study</div>
-      <h2>Super Typhoon Bavi (2026)</h2>
+      <div class="sec-kicker">Deep Cases</div>
+      <h2>Three events, two hazards, one harness</h2>
       <p class="sec-sub" style="margin-bottom:0">
-        Bavi (2609, 巴威) was captured <b>before landfall</b>. The final committed
-        source payload marks the storm inactive and reports two Zhejiang landfalls;
-        the forecast-conditioned pre-event record remains frozen for later validation.
+        Every layer in the app traces back to hashed source snapshots through the
+        Steward Harness — CRS asserted, joins verified, uncertainty mandatory,
+        failures preserved in the audit log. Explore all three in the
+        <a href="./app/">app</a>. (Super Typhoon Bavi 2026, the project's first
+        pre-event capture, is archived append-only and never deleted.)
       </p>
       <div class="case-stats">
-        <div class="stat"><div class="stat-num">41</div><div class="stat-lbl">Append-only source captures</div></div>
-        <div class="stat"><div class="stat-num">168</div><div class="stat-lbl">Track points in final source payload</div></div>
-        <div class="stat"><div class="stat-num">2</div><div class="stat-lbl">Source-reported Zhejiang landfalls</div></div>
-        <div class="stat"><div class="stat-num">4/4</div><div class="stat-lbl">Pre-event stages completed before closure</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Deep cases (wildfire + 2 hurricanes)</div></div>
+        <div class="stat"><div class="stat-num">18,428</div><div class="stat-lbl">Ground-truth structure damage points (DINS)</div></div>
+        <div class="stat"><div class="stat-num">5,686</div><div class="stat-lbl">Labeled cross-view evidence samples</div></div>
+        <div class="stat"><div class="stat-num">134k</div><div class="stat-lbl">Source files SHA-256 hashed in the registry</div></div>
       </div>
     </div>
     <div class="case-files">
-      <h3>Verified Case Record</h3>
-      <div class="file-row"><span>Source status at closure</span><span>inactive</span></div>
-      <div class="file-row"><span>Source-reported landfalls</span><span>Yuhuan · Yueqing</span></div>
-      <div class="file-row"><span>Frozen pre-event products</span><span>watch · dossier · footprint</span></div>
-      <div class="file-row"><span>Still pending</span><span>imagery · damage · validation</span></div>
+      <h3>Committed Case Records</h3>
+      <div class="file-row"><span>Eaton Fire 2025 (CA)</span><span>damage grid · SVI join · evidence</span></div>
+      <div class="file-row"><span>Hurricane Milton 2024 (FL)</span><span>debris grid · dual-AOI evidence</span></div>
+      <div class="file-row"><span>Hurricane Ian 2022 (FL)</span><span>evidence grid · sample density</span></div>
+      <div class="file-row"><span>Declared, not hidden</span><span>attribution caveats · excluded sources</span></div>
     </div>
   </div>
 </section>
@@ -270,7 +272,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
     <div class="who-grid">
       <div class="who-card">
         <h3>Emergency managers</h3>
-        <p>Timestamped watch bulletins with cited actions and explicit unknowns. Population overlays, inspection priorities, and routes remain future work.</p>
+        <p>Tile-level damage × social-vulnerability priorities with hands-on trade-off sliders, validity badges on every layer, and explicit unknowns. Inspection routes remain future work.</p>
       </div>
       <div class="who-card">
         <h3>Researchers</h3>
@@ -293,21 +295,20 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
     <div>
       <div class="sec-kicker">Get Started</div>
       <h2>Run the pipeline in two minutes</h2>
-      <p class="sec-sub" style="margin-bottom:0">Offline mode replays committed Bavi snapshots. The closure record stays separate so it cannot revise the pre-event record.</p>
+      <p class="sec-sub" style="margin-bottom:0">The test suite doubles as the verifiable evaluation environment: outcome checks, the policy matrix, and pipeline audits all run in CI on every push. Deep-case builders replay against the hashed dataset registry.</p>
     </div>
     <div>
       <div class="code">
-<span class="c"># install</span><br>
-pip install -e .<br><br>
-<span class="c"># reproduce the Bavi pre-event pipeline (offline)</span><br>
-python scripts/run_pre_event.py --event-id bavi-2026 \<br>
-&nbsp;&nbsp;--tfid 202609 --offline<br><br>
-<span class="c"># capture a fresh live snapshot</span><br>
-python scripts/fetch_bavi_track.py<br><br>
-<span class="c"># close an inactive event from its final committed snapshot</span><br>
-python scripts/close_event.py --event-dir events/bavi-2026<br><br>
-<span class="c"># tests</span><br>
-python -m unittest discover -s tests
+<span class="c"># install (h3 powers the tile grids)</span><br>
+pip install -e .[deepcase]<br><br>
+<span class="c"># run the evaluation environment (89 tests)</span><br>
+python -m unittest discover -s tests<br><br>
+<span class="c"># capture a live national watch snapshot (keyless)</span><br>
+python scripts/run_watch.py<br><br>
+<span class="c"># rebuild a deep case from the registered datasets</span><br>
+python scripts/build_eaton_case.py --data-root &lt;registry root&gt;<br><br>
+<span class="c"># run the app locally</span><br>
+cd app &amp;&amp; npm install &amp;&amp; npm run dev
       </div>
     </div>
   </div>

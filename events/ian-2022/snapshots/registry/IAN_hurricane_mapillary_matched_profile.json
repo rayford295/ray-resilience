@@ -1,0 +1,48 @@
+{
+  "schema_version": "yifan-disaster-registry-v1",
+  "dataset_name": "IAN_hurricane_mapillary_matched",
+  "generated_utc": "2026-08-20T01:47:24+00:00",
+  "event": "Hurricane Ian 2022",
+  "hazard_type": "hurricane",
+  "role": "cross-view pre/post matched evidence set (Tier-3, CrossViewGate line)",
+  "n_samples": 886,
+  "label_counts": {
+    "0_MinorDamage": 512,
+    "1_ModerateDamage": 288,
+    "2_SevereDamage": 86
+  },
+  "split_counts": {
+    "train": 797,
+    "test": 50,
+    "val": 39
+  },
+  "quality_counts": {
+    "usable": 235,
+    "good": 651
+  },
+  "bbox_wgs84": {
+    "min_lon": -82.19782948493956,
+    "min_lat": 26.42368605340228,
+    "max_lon": -81.82953536510468,
+    "max_lat": 26.66682255411969
+  },
+  "evidence_tier": "matched_derived",
+  "provenance": "post-event field/SVI matched to pre-event Mapillary; see local README.md",
+  "upstream_profile": "ian-mapillary-matched-dataset-v1",
+  "files": {
+    "n_image_files": 2658,
+    "n_other_files": 9,
+    "total_bytes": 745374329
+  },
+  "canonical_label_counts": {
+    "minor": 512,
+    "moderate": 288,
+    "severe": 86
+  },
+  "canonical_label_field": "human_damage_perception",
+  "checksums": {
+    "file": "checksums/IAN_hurricane_mapillary_matched.sha256",
+    "n_files_hashed": 2667,
+    "images_included": true
+  }
+}
