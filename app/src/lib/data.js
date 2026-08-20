@@ -196,8 +196,9 @@ export async function fetchLiveWatch() {
   return { status: "unavailable", reason: reasons.join(" | ") };
 }
 
-/** Local audit trail for HITL adjustments (design: POST to gateway; that
- * plane doesn't exist yet, so records queue locally and say so). */
+/** Audit trail for HITL adjustments. The gateway exists, but nothing posts
+ * these to it yet, so they live for the length of the session and say so —
+ * "audited" would overstate a record that a page reload discards. */
 const localAudit = [];
 export function recordAdjustment(payload) {
   localAudit.push({
@@ -205,7 +206,7 @@ export function recordAdjustment(payload) {
     actor: "planner-ui",
     utc: new Date().toISOString(),
     payload,
-    delivery: "local-only (agent gateway pending)",
+    delivery: "session-only; not persisted and not sent to the gateway",
   });
   return localAudit;
 }

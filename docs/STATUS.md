@@ -42,7 +42,10 @@ Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/pla
   - Tier-2 exposure: 18,428 CAL FIRE DINS structure points → **265-cell H3 r9 damage
     grid** with per-severity counts, destroyed rates, and mandatory uncertainty
     (`n_unassessed`, `low_n`); parcel-level source registered as a
-    resolution-capped lineage artifact, never served to residents.
+    resolution-capped lineage artifact, **never served — enforced by the
+    distribution plane and a CI gate on the assembled site**, after it reached
+    the public site on 2026-08-20 (see
+    [`incidents/2026-08-20-publication-boundary.md`](incidents/2026-08-20-publication-boundary.md)).
   - Tier-3 evidence: 2,244 cross-view matched samples → **109-cell reliability-gated
     coverage grid** (`match_quality ∈ {good, usable}`); the `damaged_repairable`
     class (n=30) is declared as lacking statistical power, not hidden.
@@ -139,25 +142,46 @@ Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/pla
   end-to-end over HTTP: health, CORS preflight, refusal, and a cited quantitative
   answer through gpt-oss:20b.
 
+### Correctness pass (2026-08-20)
+
+Four defects that made the system state something untrue, found by auditing the
+deployed site rather than the code:
+
+- **Publication boundary.** A parcel-level DINS source was live on Pages. The harness
+  had a claim plane and no distribution plane, so the file was published without
+  violating a rule — nothing ever claimed it. Full account in
+  [`incidents/2026-08-20-publication-boundary.md`](incidents/2026-08-20-publication-boundary.md).
+  Public surface went from 30 files to 16.
+- **Validity badge.** Rendered "✓ 9 checks passed" for a stage whose successful run had
+  six checks and whose earlier run failed one. Now reports the latest run and keeps
+  superseded runs visible; `AuditLog` stamps a `run_id` so new logs carry their own
+  grouping.
+- **Claim post-check.** Required citations only on sentences containing a digit, so
+  "Your neighborhood was not significantly affected." passed uncited. Inverted to
+  citation-by-default with a closed exemption set; acceptance over 13 representative
+  drafts went 9/13 → 7/13 (three uncited assertions closed, one false positive fixed).
+- **Resident lookup.** 156 of Eaton's 265 evaluated tiles were reported as "outside the
+  evaluated deep-case areas" because the grid map was keyed by event and the narrowest
+  layer won. Coverage is now the union across layers, and `not_covered` is distinguished
+  from `unknown` — an unreadable layer no longer produces a confident negative.
+
 ## 🔜 Next (not blocked)
 
-- **Plan 3 — deep cases:** Hurricane Milton exposure/evidence build can start from
-  *public* assets: the Bi-Temporal street-view dataset (Figshare
-  `10.6084/m9.figshare.28801208.v2`, Hugging Face `Rayford295/BiTemporal-StreetView-Damage`,
-  2,556 pre/post pairs + Horseshoe Beach boundary), the committed Pinellas County H3
-  debris grids in `Rayford-AI/debris-estimate`, and public FEMA/SVI/TIGER layers.
-  Eaton Fire tile-level layers can start from the committed
-  `EATON_wildfire_mapillary_matched` manifests/GeoJSON (2,244 matched samples) plus the
-  public CAL FIRE perimeter for the AOI.
-- **Plan 4 — PWA** (dual-mode WebGIS frontend) and **Plan 5 — agent gateway**: designs
-  ready; Plan 5 requires credentials (below).
+- Surface `watch_status.json` in the map UI: source health, staleness, and the skipped
+  features it already declares. The product is published; the app does not read it.
+- Citation click-through: resolve an answer's `[artifact:…]` id to its manifest row,
+  inputs, and check results.
+- Gateway hardening before any hosted deployment — origin allowlist, rate limiting,
+  and coordinate/question redaction in the audit (`gateway/main.py` defaults CORS to
+  `*`, and `steward.py` records exact lat/lon and the verbatim question).
+- Persist planner adjustments past the session.
 
 ## 🚧 Blocked / needs the project owner
 
 | # | Item | Needed for | Notes |
 |---|------|-----------|-------|
-| 1 | **Gemini API key** | Plan 5 agent gateway | Free tier is sufficient for development. |
-| 2 | **Google Cloud project** (Cloud Run enabled) | Plan 5 gateway deployment | Free tier sufficient; needed before the 11-03 finalist demo, not necessarily before 09-04. |
+| 1 | **Hosted LLM endpoint** | Public chat demo | The gateway is provider-agnostic over the OpenAI-compatible shape (`STEWARD_LLM_BASE_URL`/`_MODEL`/`_API_KEY`); local Ollama works today. A hosted endpoint is needed only for a public demo, and not before the gateway hardening above. |
+| 2 | **Google Cloud project** (Cloud Run enabled) | Gateway deployment | Free tier sufficient; needed before the 11-03 finalist demo, not necessarily before 09-04. |
 | 3 | ~~**Raw imagery transfer**~~ **RESOLVED 2026-08-20** | Plan 3 evidence tier (full depth) | The full collection was located on the owner's workstation (`Desktop/disaster-dataset-Yifan-all`, ~33 GB): DINS points + 19,780 attachment photos, NOAA Altadena orthoimagery, EATON/IAN matched sets, Bi-Temporal pairs. All registered and SHA-256-hashed in `_registry/`; image-level evidence demos are now possible. Remaining sub-question: where to host raw imagery for judges (HF datasets, following the Bi-Temporal precedent). |
 | 4 | ~~**GenDisasterSVI provenance ruling**~~ **RESOLVED 2026-08-20** | Whether Milton GenDisasterSVI may be used as evidence | Street imagery: **excluded** — `dataset.csv` source paths reference `experiment2_ip2p` (InstructPix2Pix), confirming model-generated. The 2,555 `post_sat` satellite images: **owner confirmed real acquisitions (2026-08-20)** — usable as evidence, recorded in the registry profile (`component_tiers`) and the Milton dossier. The Bi-Temporal set remains the street-view evidence source. |
 | 5 | **OASIS submission portal details** | 09-04 submission | Exact paper format/page limit and code-submission mechanism from the event portal. |
@@ -169,7 +193,11 @@ Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/pla
   (declared in `watch_status.json`); zone-centroid resolution is a Plan 4 candidate.
 - Legacy typhoon modules (`sources/zj_typhoon.py`, `hazards/typhoon.py`) remain until
   Plan 3 rewires the pipeline agents to the US connectors, then retire to the archive.
-- `docs/architecture.md` still describes the pre-rework pipeline; rewritten in Plan 3's
-  narrative pass.
+- `docs/architecture.md` still describes the pre-rework pipeline.
+- Run grouping in logs written before `run_id` existed is recovered from the check
+  sequence (a repeat of a run's first check marks a restart). Those logs are
+  append-only and are not rewritten to suit the reader.
+- The published manifests redact absolute workstation paths to `<workstation>`; the
+  sha256 remains the verifiable anchor. The repository copy keeps the full paths.
 - Live snapshot growth is mitigated by gzip; an archive/rotate policy will be decided in
   the Plan 4 design before consumer URLs freeze.

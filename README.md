@@ -3,16 +3,42 @@
 **An accountable GeoAI risk analyst for location-based resilience understanding
 and decision-making.**
 
-AI-powered WebGIS / smartphone app (PWA): enter any US location and understand its
-resilience — what hazards threaten it now, how exposed and vulnerable it is, and what
-decisions the evidence actually supports. Entry for **OASIS @ ACM SIGSPATIAL 2026 ·
-Track A: Disaster Resilience & Vulnerability Analysis**.
+AI-powered WebGIS / smartphone app (PWA) for understanding a place's resilience —
+what hazards threaten it now, how exposed and vulnerable it is, and what decisions
+the evidence actually supports. Entry for **OASIS @ ACM SIGSPATIAL 2026 · Track A:
+Disaster Resilience & Vulnerability Analysis**.
+
+**Live:** [rayford295.github.io/GeoSteward](https://rayford295.github.io/GeoSteward/)
+· [the app](https://rayford295.github.io/GeoSteward/app/)
+
+**What "a place" means here, precisely.** Hazard monitoring is nationwide: any US
+location gets the current Tier-1 watch layer. Exposure, vulnerability, and damage
+analysis exist only inside the three deep-case AOIs below, and the app says so
+rather than extrapolating — an address outside them is told the location is outside
+the evaluated areas, and an address the app cannot yet resolve is told that instead
+of being guessed at. Competence is conditional on place, and saying where it ends is
+part of the design.
 
 > 🚧 **Rework in progress.** This repository (formerly *DisasterPilot*) is being
 > rebuilt around the design in
 > [`docs/superpowers/specs/2026-08-19-geosteward-design.md`](docs/superpowers/specs/2026-08-19-geosteward-design.md).
 > The previous Super Typhoon Bavi case study is preserved under
 > `events/archive/bavi-2026/` — append-only history is a core principle here.
+
+## What works today, and what does not
+
+| | State |
+|---|---|
+| Tier-1 nationwide watch (USGS, NWS, NHC, NIFC) | Working; refreshed hourly by CI, per-source failures declared not hidden |
+| Three deep cases (Eaton 2025, Milton 2024, Ian 2022) | Working; tile-level exposure, SVI, and cross-view evidence |
+| PWA, installable, offline-caching | Working |
+| Steward Harness: outcome checks, append-only audit, policy pre-check, claim post-check | Working |
+| Publication boundary (distribution plane + CI gate) | Working |
+| Agent gateway | Working locally against any OpenAI-compatible endpoint (Ollama by default). **Not hosted** — the public demo has no chat backend, and the gateway has no auth, rate limiting, or log redaction yet, so it should not be exposed as-is |
+| Live-watch source health surfaced in the map UI | **Not done** — `watch_status.json` is published but the app does not read it |
+| Citation click-through from an answer to its artifact | **Not done** — answers carry artifact IDs; the UI does not yet resolve them |
+| Planner slider adjustments persisted | **Not done** — recorded in session memory only |
+| Releases, CHANGELOG, CITATION.cff, contributor docs | **Not done** |
 
 ## Why "Steward"?
 
@@ -26,21 +52,24 @@ Verifiable Evaluation Environments and Geospatial Harness Engineering* (Yang & Z
 |---|---|
 | **Outcome** | Executable spatial checks — CRS assertions, multiscale raster×vector join integrity, sanity bounds, mandatory uncertainty fields |
 | **Process** | Append-only provenance for every artifact; fail-closed stages; clickable lineage from any map layer back to timestamped source snapshots |
-| **Institutional** | Declarative policy scoping what the agent may claim, by role, evidence tier, resolution, and geographic authority — tile-level evidence never yields parcel-level claims |
+| **Institutional** | Two declarative policy planes in one file. The **claim** plane scopes what the agent may assert, by role, evidence tier, resolution, and geographic authority — tile-level evidence never yields parcel-level claims. The **distribution** plane scopes what a build may publish, by artifact resolution cap and audience; CI verifies the assembled site against it and fails the deploy on a violation. The second plane exists because the first was not enough: see [the 2026-08-20 incident](docs/incidents/2026-08-20-publication-boundary.md) |
 
-Every claim the agent makes must cite an artifact ID. Every human trade-off
-adjustment is audited too.
+Every factual sentence the agent produces must cite an artifact ID. Sentences that
+cannot be cited are refused, not softened — the exemptions are a closed set
+(questions, general safety advice, and statements about what the answer cannot say),
+so a form nobody anticipated costs a refusal rather than an uncited claim.
 
 ## Architecture
 
 ```
-Data plane (GitHub Actions)      Presentation plane (PWA)       Agent plane (Cloud Run)
-USGS / FIRMS+NIFC / NHC / NWS    React + Vite + MapLibre GL     Gemini wrapped in the
-→ append-only snapshots          Resident mode: address →       Steward Harness:
-→ 5-agent pipeline through       resilience dossier             policy pre-check →
-  the Steward Harness            Planner mode: HITL trade-off   artifact-grounded
-→ static artifacts + manifest    sliders, priority tiles,       generation → claim
-  (GitHub Pages)                 lineage viewer                 post-check → audit
+Data plane (GitHub Actions)      Presentation plane (PWA)       Agent plane (local today)
+USGS / NIFC / NHC / NWS          React + Vite + MapLibre GL     Any OpenAI-compatible
+→ append-only snapshots          Resident mode: address →       endpoint (Ollama by
+→ pipeline through the           resilience dossier             default) wrapped in the
+  Steward Harness                Planner mode: HITL trade-off   Steward Harness: policy
+→ artifacts + manifest, gated    sliders, priority tiles,       pre-check → grounded
+  by the distribution plane      lineage viewer                 generation → claim
+  (GitHub Pages)                                                post-check → audit
 ```
 
 Three loosely coupled planes: if the agent gateway goes down, the maps and analysis
@@ -50,9 +79,10 @@ products keep working — graceful degradation is fail-closed design made visibl
 
 - **Tier 1 — Watch:** all active US hazards, near-real-time (earthquakes, wildfires,
   tropical cyclones, flood alerts).
-- **Tier 2 — Analysis:** two flagship deep cases — **Hurricane Milton (2024)** and the
-  **Eaton Fire (2025)** — full exposure × social-vulnerability analysis with
-  stakeholder-adjustable value trade-offs.
+- **Tier 2 — Analysis:** three deep cases — the **Eaton Fire (2025)**, **Hurricane
+  Milton (2024)**, and **Hurricane Ian (2022)** — tile-level exposure × social-
+  vulnerability analysis with stakeholder-adjustable value trade-offs. Analysis
+  exists inside these AOIs and nowhere else.
 - **Tier 3 — Evidence:** reliability-gated cross-view damage assessment from the
   [CrossViewGate](https://github.com/rayford295/CrossViewGate) research line, using
   the org's [disaster-crossview-datasets](https://github.com/Rayford-AI/disaster-crossview-datasets).
@@ -67,13 +97,33 @@ Events with only Tier-1 data get an explicit "monitoring data only — no damage
 conclusions supported." Declared unknowns are rendered with the same prominence as
 findings.
 
-## Repository map (target layout)
+## Quick start
+
+```bash
+git clone https://github.com/rayford295/GeoSteward && cd GeoSteward
+python -m pip install -e ".[deepcase]"
+python -m unittest discover -s tests          # 149 tests
+
+python scripts/publication_boundary.py plan   # which artifacts may be published
+cd app && npm ci && npm test && npm run dev   # PWA at http://localhost:5173
+```
+
+The app serves the committed deep-case artifacts, so it works with no keys and no
+services. To run the agent gateway too:
+
+```bash
+ollama pull gpt-oss:20b
+python -m pip install -e ".[deepcase,gateway]"
+uvicorn gateway.main:app --port 8080
+```
+
+## Repository map
 
 ```
 ├── app/                 # PWA frontend (WebGIS + smartphone)
-├── gateway/             # Cloud Run agent gateway (Gemini + harness middleware)
+├── gateway/             # FastAPI agent gateway (LLM-agnostic + harness middleware)
 ├── src/geosteward/      # pipeline, agents, sources, hazards, harness/
-├── events/              # milton-2024/, eaton-2025/, archive/bavi-2026/
+├── events/              # eaton-2025/, milton-2024/, ian-2022/, archive/bavi-2026/
 ├── docs/                # design spec, methodology, Track-A alignment
 └── tests/               # doubles as a verifiable evaluation environment
 ```
