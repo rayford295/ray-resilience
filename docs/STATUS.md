@@ -105,6 +105,31 @@ Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/pla
   per-point severity link exists, so no damage labels are claimed — candor over
   coverage). Third event, second hazard, same harness; in the app's layer catalog.
 
+### Plan 5 — agent gateway, first cut (2026-08-20)
+- **Steward middleware** (`src/geosteward/gateway/`): policy pre-check (reusing
+  `policy_v1.yaml`, first-match-wins, default-deny) → evidence retrieval from
+  manifest-listed artifacts only (each fact tagged with its SHA-256-derived artifact
+  ID) → LLM generation → **claim post-check** (≥1 citation, no fabricated IDs, every
+  numeric sentence cited, no parcel statements; up to 3 attempts then fail-closed
+  refusal) → full audit. Deterministic code classifies purpose/resolution — the LLM
+  never decides its own authorization.
+- **Provider-agnostic LLM client** (stdlib, OpenAI-compatible): local **Ollama +
+  gpt-oss:20b** by default (verified on the owner's RTX 3090: 100% GPU, ~154 tok/s);
+  any hosted provider is a `STEWARD_LLM_*` env-var change. No Gemini key required for
+  development or adversarial evaluation.
+- **Live verification against the real model** (`scripts/ask_steward.py`): planner
+  damage question on a hot Eaton tile → fully cited quantitative answer (3 artifacts);
+  resident safety question → plain-language cited answer via `allow-exposure-in-aoi`;
+  resident damage question → `deny-resident-damage-assessment`; parcel question →
+  `deny-parcel-any-role`; post-check caught and refused uncited drafts in testing —
+  live fail-closed catches, preserved in the audit log.
+- **Adversarial test suite** (`tests/test_gateway_steward.py`, 20 tests): out-of-AOI,
+  fabricated citations, uncited numerics, parcel elicitation, LLM outage, retry
+  repair, audit completeness. Suite total: **109 tests green**.
+- Thin FastAPI skin (`gateway/main.py`, `.[gateway]` extra) for Cloud Run later;
+  Gemini/GCP now needed only for the hosted judge-facing deployment, not for Plan 5
+  functionality.
+
 ## 🔜 Next (not blocked)
 
 - **Plan 3 — deep cases:** Hurricane Milton exposure/evidence build can start from
