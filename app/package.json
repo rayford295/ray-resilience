@@ -1,0 +1,23 @@
+{
+  "name": "geosteward-app",
+  "private": true,
+  "version": "1.0.0-dev.1",
+  "type": "module",
+  "scripts": {
+    "sync-artifacts": "node scripts/sync-artifacts.mjs",
+    "dev": "npm run sync-artifacts && vite",
+    "build": "npm run sync-artifacts && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "h3-js": "^4.1.0",
+    "maplibre-gl": "^4.7.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11",
+    "vite-plugin-pwa": "^0.21.1"
+  }
+}

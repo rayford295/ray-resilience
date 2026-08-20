@@ -71,6 +71,28 @@ Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/pla
   tracts) was rejected by the harness and corrected — quotable in the paper.
 - Test suite **89 tests green** (new `test_deepcase_grids_svi.py`).
 
+### Plan 4 — PWA first cut (2026-08-20)
+- **`app/` committed**: React + Vite + MapLibre GL + `vite-plugin-pwa` (installable,
+  offline-caching), OpenFreeMap basemap (no keys). `npm run dev` / `npm run build`;
+  deep-case artifacts are vendored from `events/` at build time (`sync-artifacts`),
+  so the app always serves exactly the committed, hashed products.
+- **Both deep cases fully displayed**: 5 layers — Eaton damage grid, Damage × SVI
+  priority, cross-view evidence coverage; Milton street-view evidence (Horseshoe
+  Beach) and Pinellas debris volumes.
+- **Planner mode**: damage ↔ social-vulnerability trade-off slider re-weights tile
+  priorities client-side (feature-state, instant); top-10 priority list; every slider
+  move is audit-logged (locally until the gateway ships, and it says so).
+- **Resident mode**: Census-geocoder address search → plain-language dossier card;
+  outside the deep-case AOIs it answers "outside the evaluated competence"; declared
+  unknowns render with the same prominence as findings.
+- **Accountability in the UI**: validity badges (live check counts from the committed
+  audit logs), lineage viewer (manifest rows with agents/hashes/inputs), mandatory
+  uncertainty shown per tile; Tier-1 live watch renders a declared-unavailable badge
+  while the repo is private (graceful degradation, not a fake layer).
+- CI: new `app-build` job (Node 22, `npm ci && npm run build`).
+- Not yet: PMTiles/vector-tile pipeline (debris layer ships as 5.8 MB GeoJSON — fine
+  for now), Playwright smoke tests, agent chat (Plan 5), Pages deployment workflow.
+
 ## 🔜 Next (not blocked)
 
 - **Plan 3 — deep cases:** Hurricane Milton exposure/evidence build can start from

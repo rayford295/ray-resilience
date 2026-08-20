@@ -10,3 +10,9 @@ outputs/
 # large rasters/vectors stay local; snapshots (small JSON) are tracked
 data/raw/
 data/imagery/
+
+# PWA frontend: vendored artifacts are synced from events/ at build time
+app/node_modules/
+app/dist/
+app/dev-dist/
+app/public/events/
