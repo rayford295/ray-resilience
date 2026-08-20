@@ -3,6 +3,7 @@ import MapView from "./components/MapView.jsx";
 import PlannerPanel from "./components/PlannerPanel.jsx";
 import ResidentPanel from "./components/ResidentPanel.jsx";
 import LineagePanel from "./components/LineagePanel.jsx";
+import ChatPanel from "./components/ChatPanel.jsx";
 import { LiveWatchBadge, TierBadge, ValidityBadge } from "./components/Badges.jsx";
 import { EVENTS, VIEWS } from "./lib/views.js";
 import {
@@ -23,6 +24,7 @@ export default function App() {
   const [flyTarget, setFlyTarget] = useState(null);
   const [live, setLive] = useState(null);
   const [showLineage, setShowLineage] = useState(false);
+  const [mapCenter, setMapCenter] = useState(null);
 
   const view = VIEWS.find((v) => v.id === viewId);
   const event = EVENTS[view.event];
@@ -182,6 +184,11 @@ export default function App() {
           )}
 
           <section>
+            <h2>Ask the steward</h2>
+            <ChatPanel role={mode} location={mapCenter} />
+          </section>
+
+          <section>
             <button className="linkish" onClick={() => setShowLineage((s) => !s)}>
               {showLineage ? "hide" : "show"} lineage & provenance
             </button>
@@ -203,6 +210,7 @@ export default function App() {
             flyTarget={flyTarget}
             onSelect={onSelect}
             live={live}
+            onCenter={setMapCenter}
           />
         </main>
       </div>

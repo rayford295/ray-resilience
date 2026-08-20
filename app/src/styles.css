@@ -104,6 +104,25 @@ select, input[type="text"], .search input {
 
 .linkish { background: none; border: 0; color: var(--accent); cursor: pointer; padding: 0; font-size: 0.85rem; }
 
+.chat-log { display: flex; flex-direction: column; gap: 0.45rem; margin: 0.5rem 0; max-height: 40vh; overflow-y: auto; }
+.msg { border-radius: 10px; padding: 0.5rem 0.65rem; font-size: 0.85rem; line-height: 1.5; }
+.msg.user { background: var(--panel-2); align-self: flex-end; max-width: 92%; }
+.msg.steward { background: #0d2438; border-left: 3px solid var(--accent); }
+.msg.steward.refusal { border-left-color: var(--fail); }
+.msg.steward.refusal strong { color: var(--fail); }
+.msg.steward.noev { border-left-color: var(--warn); }
+.msg.steward.noev strong { color: var(--warn); }
+.msg.steward.outage { border-left-color: var(--dim); }
+.msg.steward.outage strong { color: var(--dim); }
+.msg-meta { margin-top: 0.4rem; font-size: 0.72rem; color: var(--dim); }
+.cite {
+  display: inline-block; background: #103826; color: var(--accent);
+  border: 1px solid #1e5c40; border-radius: 6px; padding: 0 0.3rem;
+  font-family: ui-monospace, Consolas, monospace; font-size: 0.72rem; margin: 0 0.15rem;
+}
+.endpoint { margin-top: 0.4rem; font-size: 0.78rem; }
+.endpoint input { margin-top: 0.3rem; font-family: ui-monospace, Consolas, monospace; font-size: 0.78rem; }
+
 footer { font-size: 0.72rem; padding-top: 0.4rem; border-top: 1px solid #274a6d; }
 
 @media (max-width: 760px) {

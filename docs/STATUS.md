@@ -129,6 +129,15 @@ Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/pla
 - Thin FastAPI skin (`gateway/main.py`, `.[gateway]` extra) for Cloud Run later;
   Gemini/GCP now needed only for the hosted judge-facing deployment, not for Plan 5
   functionality.
+- **PWA chat panel wired to the gateway** ("Ask the steward", both modes): role
+  follows the mode switch, location follows the map center, citations render as
+  artifact chips, and all four gateway response types render as themselves —
+  cited answer, rule-ID refusal, declared no-evidence, declared outage (with the
+  command to start the gateway). Endpoint configurable (default
+  `http://localhost:8080` — browsers treat localhost as a trustworthy origin, so
+  even the deployed Pages app can talk to a locally running gateway). Verified
+  end-to-end over HTTP: health, CORS preflight, refusal, and a cited quantitative
+  answer through gpt-oss:20b.
 
 ## 🔜 Next (not blocked)
 

@@ -31,7 +31,7 @@ function paintFor(view, geojson) {
   return rampExpr(["coalesce", ["get", view.metric], 0], max);
 }
 
-export default function MapView({ view, geojson, priorityT, flyTarget, onSelect, live }) {
+export default function MapView({ view, geojson, priorityT, flyTarget, onSelect, live, onCenter }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const [ready, setReady] = useState(false);
@@ -46,10 +46,14 @@ export default function MapView({ view, geojson, priorityT, flyTarget, onSelect,
     });
     map.addControl(new maplibregl.NavigationControl(), "top-right");
     map.addControl(new maplibregl.GeolocateControl({ trackUserLocation: true }), "top-right");
-    map.on("load", () => setReady(true));
+    map.on("load", () => {
+      setReady(true);
+      onCenter?.(map.getCenter());
+    });
+    map.on("moveend", () => onCenter?.(map.getCenter()));
     mapRef.current = map;
     return () => map.remove();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Swap the grid layer whenever the active view's data arrives.
   useEffect(() => {
