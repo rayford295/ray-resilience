@@ -1,0 +1,45 @@
+{
+  "schema_version": "yifan-disaster-registry-v1",
+  "dataset_name": "Eaton_Fire",
+  "generated_utc": "2026-08-20T01:47:24+00:00",
+  "event": "Eaton Fire 2025",
+  "hazard_type": "wildfire",
+  "role": "ground-truth structure damage points (Tier-2 exposure truth)",
+  "n_samples": 18428,
+  "n_attachment_index_rows": 19780,
+  "label_counts": {
+    "Affected (1-9%)": 858,
+    "Destroyed (>50%)": 9419,
+    "Inaccessible": 40,
+    "Major (26-50%)": 70,
+    "Minor (10-25%)": 148,
+    "No Damage": 7893
+  },
+  "bbox_wgs84": {
+    "min_lon": -118.16359507363843,
+    "min_lat": 34.160975621700885,
+    "max_lon": -118.0183346885543,
+    "max_lat": 34.232169296043935
+  },
+  "evidence_tier": "verified_official",
+  "provenance": "CAL FIRE Damage Inspection (DINS) survey points + field attachment photos",
+  "files": {
+    "n_image_files": 19780,
+    "n_other_files": 8,
+    "total_bytes": 4646123002
+  },
+  "canonical_label_counts": {
+    "minor": 858,
+    "destroyed": 9419,
+    "unknown": 40,
+    "severe": 70,
+    "moderate": 148,
+    "none": 7893
+  },
+  "canonical_label_field": "human_damage_perception",
+  "checksums": {
+    "file": "checksums/Eaton_Fire.sha256",
+    "n_files_hashed": 19788,
+    "images_included": true
+  }
+}

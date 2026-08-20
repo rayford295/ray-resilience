@@ -1,0 +1,23 @@
+{
+  "schema_version": "yifan-disaster-registry-v1",
+  "dataset_name": "Altadena_Images",
+  "generated_utc": "2026-08-20T01:47:24+00:00",
+  "event": "Eaton Fire 2025 (Altadena, CA)",
+  "hazard_type": "wildfire",
+  "role": "post-event NOAA orthoimagery tiles + downloaded DINS attachments",
+  "n_orthoimagery_tiles": 91,
+  "n_downloaded_attachments": 79754,
+  "has_pre_disaster_svi_tif": true,
+  "evidence_tier": "verified_official",
+  "provenance": "NOAA emergency response imagery 2025-01-28; DINS attachment downloads",
+  "files": {
+    "n_image_files": 79833,
+    "n_other_files": 2274,
+    "total_bytes": 24302981375
+  },
+  "checksums": {
+    "file": "checksums/Altadena_Images.sha256",
+    "n_files_hashed": 79874,
+    "images_included": true
+  }
+}

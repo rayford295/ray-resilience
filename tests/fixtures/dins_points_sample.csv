@@ -1,0 +1,7 @@
+OBJECTID,GLOBALID,DAMAGE,STRUCTURETYPE,lat,lon,_fire,_category
+1,g1,Destroyed (>50%),Single Family Residence Single Story,34.19,-118.10,Eaton_Fire,Destroyed (>50%)
+2,g2,Destroyed (>50%),Single Family Residence Single Story,34.190001,-118.100001,Eaton_Fire,Destroyed (>50%)
+3,g3,No Damage,Single Family Residence Multi Story,34.190002,-118.100002,Eaton_Fire,No Damage
+4,g4,Affected (1-9%),Mobile Home Single Wide,34.21,-118.05,Eaton_Fire,Affected (1-9%)
+5,g5,Inaccessible,Utility Misc Structure,34.22,-118.03,Eaton_Fire,Inaccessible
+6,g6,Major (26-50%),Single Family Residence Single Story,,-118.10,Eaton_Fire,Major (26-50%)

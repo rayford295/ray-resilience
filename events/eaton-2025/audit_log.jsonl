@@ -1,0 +1,16 @@
+{"action": "stage", "actor": "snapshot.registry", "utc": "20260820T015631Z", "payload": {"status": "ok", "copied": ["Eaton_Fire_profile.json", "EATON_wildfire_mapillary_matched_profile.json", "Altadena_Images_profile.json", "label_crosswalk.json"]}, "rule_id": null}
+{"action": "check", "actor": "exposure.dins_grid", "utc": "20260820T015631Z", "payload": {"check": "crs", "passed": true, "detail": "CRS EPSG:4326 matches expected"}, "rule_id": null}
+{"action": "check", "actor": "exposure.dins_grid", "utc": "20260820T015631Z", "payload": {"check": "bounds", "passed": true, "detail": "min_lat=34.160975621700885 within [34.1, 34.3]"}, "rule_id": null}
+{"action": "check", "actor": "exposure.dins_grid", "utc": "20260820T015631Z", "payload": {"check": "bounds", "passed": true, "detail": "max_lat=34.232169296043935 within [34.1, 34.3]"}, "rule_id": null}
+{"action": "check", "actor": "exposure.dins_grid", "utc": "20260820T015631Z", "payload": {"check": "bounds", "passed": true, "detail": "min_lon=-118.16359507363843 within [-118.2, -117.95]"}, "rule_id": null}
+{"action": "check", "actor": "exposure.dins_grid", "utc": "20260820T015631Z", "payload": {"check": "bounds", "passed": true, "detail": "max_lon=-118.0183346885543 within [-118.2, -117.95]"}, "rule_id": null}
+{"action": "check", "actor": "exposure.dins_grid", "utc": "20260820T015631Z", "payload": {"check": "join_integrity", "passed": true, "detail": "coverage 100.00%, no orphans"}, "rule_id": null}
+{"action": "check", "actor": "exposure.dins_grid", "utc": "20260820T015631Z", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
+{"action": "stage", "actor": "exposure.dins_grid", "utc": "20260820T015631Z", "payload": {"status": "ok", "n_points": 18428, "n_cells": 265}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_coverage", "utc": "20260820T015631Z", "payload": {"check": "crs", "passed": true, "detail": "CRS EPSG:4326 matches expected"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_coverage", "utc": "20260820T015631Z", "payload": {"check": "bounds", "passed": true, "detail": "min_lat=34.160975621700885 within [34.1, 34.3]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_coverage", "utc": "20260820T015631Z", "payload": {"check": "bounds", "passed": true, "detail": "max_lat=34.21909186380386 within [34.1, 34.3]"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_coverage", "utc": "20260820T015631Z", "payload": {"check": "join_integrity", "passed": true, "detail": "coverage 100.00%, no orphans"}, "rule_id": null}
+{"action": "check", "actor": "evidence.crossview_coverage", "utc": "20260820T015631Z", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
+{"action": "stage", "actor": "evidence.crossview_coverage", "utc": "20260820T015631Z", "payload": {"status": "ok", "n_gated": 2244, "n_cells": 109}, "rule_id": null}
+{"action": "stage", "actor": "dossier.event_record", "utc": "20260820T015631Z", "payload": {"status": "ok"}, "rule_id": null}

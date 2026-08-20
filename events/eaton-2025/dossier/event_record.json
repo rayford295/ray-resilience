@@ -1,0 +1,27 @@
+{
+ "event_id": "eaton-2025",
+ "name": "Eaton Fire",
+ "hazard": "wildfire",
+ "start_date": "2025-01-07",
+ "location": "Altadena / Pasadena, Los Angeles County, CA",
+ "aoi_bbox_wgs84": {
+  "min_lat": 34.1,
+  "max_lat": 34.3,
+  "min_lon": -118.2,
+  "max_lon": -117.95
+ },
+ "evidence_tier": 3,
+ "data_sources": [
+  "CAL FIRE DINS structure damage points (verified_official)",
+  "EATON_wildfire_mapillary_matched cross-view set (matched_derived)",
+  "NOAA post-event orthoimagery 2025-01-28 (verified_official; imagery not committed)"
+ ],
+ "declared_unknowns": [
+  "40 DINS points are Inaccessible: no damage conclusion supported there",
+  "damaged_repairable evidence class has n=30 — no tile-level rate claims from it",
+  "social-vulnerability join (SVI x exposure) pending: no vulnerability claims yet"
+ ],
+ "uncertainty": {
+  "label_crosswalk": "percent-loss to perception mapping is approximate; see snapshots/registry/label_crosswalk.json"
+ }
+}

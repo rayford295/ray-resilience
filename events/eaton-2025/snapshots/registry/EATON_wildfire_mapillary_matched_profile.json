@@ -1,0 +1,48 @@
+{
+  "schema_version": "yifan-disaster-registry-v1",
+  "dataset_name": "EATON_wildfire_mapillary_matched",
+  "generated_utc": "2026-08-20T01:47:24+00:00",
+  "event": "Eaton Fire 2025",
+  "hazard_type": "wildfire",
+  "role": "cross-view pre/post matched evidence set (Tier-3, CrossViewGate line)",
+  "n_samples": 2244,
+  "label_counts": {
+    "destroyed": 740,
+    "damaged_repairable": 30,
+    "no_or_trace_damage": 1474
+  },
+  "split_counts": {
+    "model_fit": 1072,
+    "spatial_confirmation": 852,
+    "model_validation": 320
+  },
+  "quality_counts": {
+    "usable": 1167,
+    "good": 1077
+  },
+  "bbox_wgs84": {
+    "min_lon": -118.16090742030951,
+    "min_lat": 34.160975621700885,
+    "max_lon": -118.02154749699828,
+    "max_lat": 34.21909186380386
+  },
+  "evidence_tier": "matched_derived",
+  "provenance": "post-event field/SVI matched to pre-event Mapillary; see local README.md",
+  "upstream_profile": "eaton-mapillary-matched-dataset-v1",
+  "files": {
+    "n_image_files": 6732,
+    "n_other_files": 9,
+    "total_bytes": 1611020256
+  },
+  "canonical_label_counts": {
+    "destroyed": 740,
+    "moderate": 30,
+    "none": 1474
+  },
+  "canonical_label_field": "human_damage_perception",
+  "checksums": {
+    "file": "checksums/EATON_wildfire_mapillary_matched.sha256",
+    "n_files_hashed": 6741,
+    "images_included": true
+  }
+}

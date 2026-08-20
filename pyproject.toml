@@ -13,6 +13,7 @@ authors = [{ name = "Yifan Yang" }]
 dependencies = ["pyyaml>=6.0"]
 
 [project.optional-dependencies]
+deepcase = ["h3>=4.0"]
 geo = [
   "numpy>=1.26",
   "pandas>=2.0",
