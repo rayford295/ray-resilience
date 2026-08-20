@@ -173,8 +173,26 @@ deployed site rather than the code:
   inputs, and check results.
 - Gateway hardening before any hosted deployment — origin allowlist, rate limiting,
   and coordinate/question redaction in the audit (`gateway/main.py` defaults CORS to
-  `*`, and `steward.py` records exact lat/lon and the verbatim question).
+  `*`, and `steward.py` records exact lat/lon and the verbatim question). **Now also a
+  prerequisite** for the Google Maps Platform work below: a keyed API in a public demo
+  is the same class of billing-abuse surface, and the live-evidence audit record has to
+  be written server-side.
 - Persist planner adjustments past the session.
+- **Accountability for non-retainable evidence** — design agreed 2026-08-20, not yet
+  implemented: [`superpowers/specs/2026-08-20-non-retainable-evidence-design.md`](superpowers/specs/2026-08-20-non-retainable-evidence-design.md).
+  Investigating Google Maps Platform surfaced a structural problem: GMP terms forbid
+  retaining Maps Content, while GeoSteward proves traceability by hashing and freezing
+  every input. The design adds a `verifiability` axis (`retained` > `re-derivable` >
+  `cited-only`, weakest-link semantics), a `license` attribute on the distribution
+  plane, and a published audit record that is publishable *because* it holds request
+  parameters and a response hash but no content. Three decisions still open, recorded in
+  §11 of the spec. Blocked on a GMP key (obtainable) and on gateway hardening.
+- Deferred from that design and worth doing for the 2026-11-03 demo rather than the
+  paper: **Routes API for budget-constrained inspection routing** (the README lists
+  inspection routing as not implemented, and Track A asks for decision relevance), plus
+  **Air Quality** (wildfire smoke, Eaton) and **Elevation** (surge and flood, Ian and
+  Milton) — two real hazard dimensions currently absent, both fitting the `re-derivable`
+  regime once it exists.
 
 ## 🚧 Blocked / needs the project owner
 
