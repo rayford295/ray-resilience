@@ -1,5 +1,17 @@
 # GeoSteward v1 policy — institutional validity as computable constraints.
-# Ordered rules; first match wins; anything unmatched is denied.
+#
+# Two planes, one grammar. Ordered rules; first match wins; anything unmatched
+# is denied.
+#
+#   rules:        the CLAIM plane — what the agent may assert, per request.
+#   distribution: the DISTRIBUTION plane — what a build may publish, per artifact.
+#
+# The second plane exists because the first was not enough. On 2026-08-20 a
+# parcel-level DINS source reached the public Pages site while satisfying every
+# claim rule below, because nothing ever claimed it — the build copied it. See
+# docs/incidents/2026-08-20-publication-boundary.md.
+
+# --- claim plane: what may be asserted -------------------------------------
 rules:
   # --- hard denials (checked first) ---
   - id: deny-outside-aoi
@@ -32,3 +44,74 @@ rules:
     effect: allow
     reason: Planners may see tile-level damage assessment where Tier 3 cross-view evidence exists.
     match: {role: planner, purpose: damage_assessment, resolution: tile, in_aoi: true, evidence_tier_at_least: 3}
+
+# --- distribution plane: what may be published -----------------------------
+#
+# Which events form the public surface. A deep case is published only once it
+# is listed here, and retiring one is an edit to this list — not a deletion of
+# its artifacts, which stay on disk with their provenance intact. This list
+# used to live as a constant inside app/scripts/sync-artifacts.mjs, which is
+# the same mistake that produced the 2026-08-20 incident: a governance
+# decision expressed as build-script trivia.
+published_events: [eaton-2025, milton-2024, ian-2022]
+#
+# Every artifact kind the repository produces declares two attributes:
+#
+#   resolution_cap  the finest geography the artifact can support a statement
+#                   about. `parcel` is the disclosure risk; `tile` (H3 r9,
+#                   ~0.1 km^2) is the public evidence surface.
+#   audience        who the artifact is FOR. `public` ships. `lineage` exists
+#                   so a hashed chain leads back to the source. `internal`
+#                   supports reproduction on the maintainer's workstation.
+#
+# A kind absent from this table is denied publication. That is the point: a new
+# product cannot widen the public surface until someone classifies it here.
+artifact_classes:
+  # Tile products — the public evidence surface.
+  damage_grid:               {resolution_cap: tile,    audience: public}
+  svi_context_grid:          {resolution_cap: tile,    audience: public}
+  debris_exposure_grid:      {resolution_cap: tile,    audience: public}
+  evidence_grid:             {resolution_cap: tile,    audience: public}
+  evidence_coverage_grid:    {resolution_cap: tile,    audience: public}
+  sample_density_grid:       {resolution_cap: tile,    audience: public}
+
+  # Accountability records — publishing these IS the accountability claim.
+  event_record:              {resolution_cap: event,   audience: public}
+  artifact_manifest:         {resolution_cap: event,   audience: public}
+  audit_log:                 {resolution_cap: event,   audience: public}
+
+  # Parcel-level ground truth: lineage only, never served.
+  damage_points_restricted:  {resolution_cap: parcel,  audience: lineage}
+
+  # Upstream state frozen for reproduction. Not needed by the app, and the
+  # registry profiles describe a private 33 GB corpus, so they stay internal.
+  dataset_registry_snapshot: {resolution_cap: dataset, audience: internal}
+  source_snapshot:           {resolution_cap: source,  audience: internal}
+
+distribution:
+  # --- hard denials (checked first) ---
+  - id: deny-publish-parcel-resolution
+    effect: deny
+    reason: Parcel-resolution artifacts are lineage-only and are never served.
+    match: {resolution_cap: parcel}
+
+  - id: deny-publish-internal-audience
+    effect: deny
+    reason: Internal snapshots support reproduction on the maintainer's workstation, not publication.
+    match: {audience: internal}
+
+  - id: deny-publish-lineage-audience
+    effect: deny
+    reason: Lineage artifacts are reachable by hash through the manifest, not by URL.
+    match: {audience: lineage}
+
+  # --- authorizations ---
+  - id: allow-publish-tile-products
+    effect: allow
+    reason: Tile-resolution products are the public evidence surface the app is built to show.
+    match: {resolution_cap: tile, audience: public}
+
+  - id: allow-publish-event-accountability-records
+    effect: allow
+    reason: Dossiers, manifests, and audit logs carry the declared unknowns and the provenance chain; withholding them would defeat the design.
+    match: {resolution_cap: event, audience: public}

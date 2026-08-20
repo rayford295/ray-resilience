@@ -4,6 +4,11 @@ Policies are ordered rules loaded from YAML. Evaluation is first match wins;
 anything unmatched is denied ('default-deny'). Duties like authorization and
 candor become computable constraints: the engine returns WHICH rule decided
 and WHY, so refusals are as traceable as approvals.
+
+This module owns the *claim* plane: what the agent may assert. The parallel
+*distribution* plane — what a build may publish — lives in `distribution.py`
+and reuses `PolicyDecision` and `validate_rules` from here, so both planes
+share one grammar and one fail-closed default.
 """
 
 from __future__ import annotations
@@ -49,15 +54,25 @@ def _matches(match: dict[str, Any], request: PolicyRequest) -> bool:
     return True
 
 
-def _validate_rules(rules: Any) -> list[dict[str, Any]]:
+def validate_rules(
+    rules: Any,
+    known_match_keys: frozenset[str],
+    section: str = "rules",
+) -> list[dict[str, Any]]:
+    """Shape-check an ordered rule list; shared by every policy plane.
+
+    Typos are the realistic failure mode for a hand-edited YAML policy, and a
+    misspelled match key would silently widen a rule instead of narrowing it.
+    So unknown keys raise here rather than being ignored at evaluation time.
+    """
     if not isinstance(rules, list):
-        raise ValueError("Policy document's 'rules' must be a list of rule mappings.")
+        raise ValueError(f"Policy document's '{section}' must be a list of rule mappings.")
     for rule in rules:
         if not isinstance(rule, dict):
-            raise ValueError(f"Policy rule must be a mapping, got: {rule!r}")
+            raise ValueError(f"Policy rule in '{section}' must be a mapping, got: {rule!r}")
         rule_id = rule.get("id")
         if not isinstance(rule_id, str) or not rule_id:
-            raise ValueError(f"Policy rule is missing a valid string 'id': {rule!r}")
+            raise ValueError(f"Policy rule in '{section}' is missing a valid string 'id': {rule!r}")
         effect = rule.get("effect")
         if effect not in _KNOWN_EFFECTS:
             raise ValueError(
@@ -71,17 +86,22 @@ def _validate_rules(rules: Any) -> list[dict[str, Any]]:
         if not isinstance(match, dict):
             raise ValueError(f"Rule '{rule_id}' has a 'match' that is not a mapping: {match!r}")
         for key in match:
-            if key not in _KNOWN_MATCH_KEYS:
+            if key not in known_match_keys:
                 raise ValueError(
                     f"Rule '{rule_id}' has unknown match key '{key}'; "
-                    f"expected one of {sorted(_KNOWN_MATCH_KEYS)}."
+                    f"expected one of {sorted(known_match_keys)}."
                 )
     return rules
 
 
+def default_deny(reason: str, rule_id: str = "default-deny") -> PolicyDecision:
+    """The decision every plane falls back to when no rule matches."""
+    return PolicyDecision(allowed=False, rule_id=rule_id, reason=reason)
+
+
 class PolicyEngine:
     def __init__(self, rules: list[dict[str, Any]]):
-        self.rules = _validate_rules(rules)
+        self.rules = validate_rules(rules, _KNOWN_MATCH_KEYS)
 
     @classmethod
     def from_yaml(cls, path: Path) -> "PolicyEngine":
@@ -100,8 +120,6 @@ class PolicyEngine:
                     rule_id=rule["id"],
                     reason=rule["reason"],
                 )
-        return PolicyDecision(
-            allowed=False,
-            rule_id="default-deny",
-            reason="No policy rule authorizes this request; the harness fails closed.",
+        return default_deny(
+            "No policy rule authorizes this request; the harness fails closed."
         )
