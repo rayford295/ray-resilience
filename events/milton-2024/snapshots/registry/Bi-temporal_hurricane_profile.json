@@ -1,0 +1,40 @@
+{
+  "schema_version": "yifan-disaster-registry-v1",
+  "dataset_name": "Bi-temporal_hurricane",
+  "generated_utc": "2026-08-20T01:47:24+00:00",
+  "event": "Hurricane Idalia/Milton corridor (Horseshoe Beach, FL)",
+  "hazard_type": "hurricane",
+  "role": "published bi-temporal street-view damage set (canonical label anchor)",
+  "n_samples": 2556,
+  "n_pair_folders": 2556,
+  "label_counts": {
+    "mild": 657,
+    "Moderate": 1196,
+    "Severe": 703
+  },
+  "bbox_wgs84": {
+    "min_lon": -83.29552889,
+    "min_lat": 29.43700005,
+    "max_lon": -83.28146338,
+    "max_lat": 29.44565662
+  },
+  "evidence_tier": "published_verified",
+  "provenance": "Figshare 10.6084/m9.figshare.28801208.v2; HF Rayford295/BiTemporal-StreetView-Damage",
+  "data_quality_notes": "human_damage_perception values have inconsistent case ('mild' vs 'Moderate'/'Severe'); crosswalk matches case-insensitively",
+  "files": {
+    "n_image_files": 5112,
+    "n_other_files": 9,
+    "total_bytes": 388808584
+  },
+  "canonical_label_counts": {
+    "minor": 657,
+    "moderate": 1196,
+    "severe": 703
+  },
+  "canonical_label_field": "human_damage_perception",
+  "checksums": {
+    "file": "checksums/Bi-temporal_hurricane.sha256",
+    "n_files_hashed": 5118,
+    "images_included": true
+  }
+}

@@ -1,0 +1,772 @@
+{
+ "type": "FeatureCollection",
+ "crs_declared": "EPSG:4326",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28507143885477,
+       29.43849746555336
+      ],
+      [
+       -83.28371462352665,
+       29.439786919011716
+      ],
+      [
+       -83.28424350802855,
+       29.441559617361154
+      ],
+      [
+       -83.2861292774759,
+       29.44204288550596
+      ],
+      [
+       -83.28748613376473,
+       29.44075341215251
+      ],
+      [
+       -83.28695717964575,
+       29.438980690549755
+      ],
+      [
+       -83.28507143885477,
+       29.43849746555336
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28a23ffff",
+    "n_samples": 382,
+    "labels": {
+     "minor": 42,
+     "moderate": 177,
+     "severe": 163
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28748613376473,
+       29.44075341215251
+      ],
+      [
+       -83.2861292774759,
+       29.44204288550596
+      ],
+      [
+       -83.28665822742677,
+       29.44381560216645
+      ],
+      [
+       -83.28854410328745,
+       29.444298868724275
+      ],
+      [
+       -83.28990100053456,
+       29.443009375476088
+      ],
+      [
+       -83.28937198096295,
+       29.441236635565218
+      ],
+      [
+       -83.28748613376473,
+       29.44075341215251
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28a27ffff",
+    "n_samples": 477,
+    "labels": {
+     "minor": 40,
+     "moderate": 190,
+     "severe": 247
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28182896048902,
+       29.439303649289798
+      ],
+      [
+       -83.28047215330335,
+       29.44059303476749
+      ],
+      [
+       -83.28100096818832,
+       29.442365709858148
+      ],
+      [
+       -83.28288665987613,
+       29.442849022730286
+      ],
+      [
+       -83.28424350802855,
+       29.441559617361154
+      ],
+      [
+       -83.28371462352665,
+       29.439786919011716
+      ],
+      [
+       -83.28182896048902,
+       29.439303649289798
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28a2bffff",
+    "n_samples": 44,
+    "labels": {
+     "minor": 44
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28424350802855,
+       29.441559617361154
+      ],
+      [
+       -83.28288665987613,
+       29.442849022730286
+      ],
+      [
+       -83.28341554020642,
+       29.444621716134968
+      ],
+      [
+       -83.28530133830996,
+       29.445105027426706
+      ],
+      [
+       -83.28665822742677,
+       29.44381560216645
+      ],
+      [
+       -83.2861292774759,
+       29.44204288550596
+      ],
+      [
+       -83.28424350802855,
+       29.441559617361154
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28a2fffff",
+    "n_samples": 307,
+    "labels": {
+     "minor": 81,
+     "moderate": 117,
+     "severe": 109
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28589933268717,
+       29.435435260729644
+      ],
+      [
+       -83.28454255018235,
+       29.43672476226892
+      ],
+      [
+       -83.28507143885477,
+       29.43849746555336
+      ],
+      [
+       -83.28695717964575,
+       29.438980690549755
+      ],
+      [
+       -83.28831400310763,
+       29.437691169111414
+      ],
+      [
+       -83.2877850448217,
+       29.435918442576135
+      ],
+      [
+       -83.28589933268717,
+       29.435435260729644
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28a33ffff",
+    "n_samples": 51,
+    "labels": {
+     "minor": 15,
+     "moderate": 27,
+     "severe": 9
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28831400310763,
+       29.437691169111414
+      ],
+      [
+       -83.28695717964575,
+       29.438980690549755
+      ],
+      [
+       -83.28748613376473,
+       29.44075341215251
+      ],
+      [
+       -83.28937198096295,
+       29.441236635565218
+      ],
+      [
+       -83.29072884537946,
+       29.439947094228145
+      ],
+      [
+       -83.29019982164334,
+       29.438174349377515
+      ],
+      [
+       -83.28831400310763,
+       29.437691169111414
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28a37ffff",
+    "n_samples": 483,
+    "labels": {
+     "minor": 134,
+     "moderate": 280,
+     "severe": 69
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28265691579495,
+       29.436241535698716
+      ],
+      [
+       -83.28130014142997,
+       29.437530969261648
+      ],
+      [
+       -83.28182896048902,
+       29.439303649289798
+      ],
+      [
+       -83.28371462352665,
+       29.439786919011716
+      ],
+      [
+       -83.28507143885477,
+       29.43849746555336
+      ],
+      [
+       -83.28454255018235,
+       29.43672476226892
+      ],
+      [
+       -83.28265691579495,
+       29.436241535698716
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28a3bffff",
+    "n_samples": 2,
+    "labels": {
+     "moderate": 2
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.29238442408897,
+       29.43382237268926
+      ],
+      [
+       -83.29102762533068,
+       29.435112010179203
+      ],
+      [
+       -83.29155665323022,
+       29.43688475995986
+      ],
+      [
+       -83.29344254950199,
+       29.437367895490897
+      ],
+      [
+       -83.29479938920514,
+       29.436078238094627
+      ],
+      [
+       -83.29427029169189,
+       29.434305465074047
+      ],
+      [
+       -83.29238442408897,
+       29.43382237268926
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28aa7ffff",
+    "n_samples": 10,
+    "labels": {
+     "minor": 9,
+     "moderate": 1
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28990100053456,
+       29.443009375476088
+      ],
+      [
+       -83.28854410328745,
+       29.444298868724275
+      ],
+      [
+       -83.2890731186934,
+       29.446071603685613
+      ],
+      [
+       -83.29095910097108,
+       29.44655486864657
+      ],
+      [
+       -83.29231603917405,
+       29.445265355503974
+      ],
+      [
+       -83.29178695414372,
+       29.44349259729521
+      ],
+      [
+       -83.28990100053456,
+       29.443009375476088
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28b53ffff",
+    "n_samples": 17,
+    "labels": {
+     "minor": 2,
+     "moderate": 12,
+     "severe": 3
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28665822742677,
+       29.44381560216645
+      ],
+      [
+       -83.28530133830996,
+       29.445105027426706
+      ],
+      [
+       -83.28583028409165,
+       29.446877739135168
+      ],
+      [
+       -83.28771618861464,
+       29.447361048836644
+      ],
+      [
+       -83.2890731186934,
+       29.446071603685613
+      ],
+      [
+       -83.28854410328745,
+       29.444298868724275
+      ],
+      [
+       -83.28665822742677,
+       29.44381560216645
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28b5bffff",
+    "n_samples": 47,
+    "labels": {
+     "minor": 41,
+     "moderate": 6
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.2939716428554,
+       29.439140663583974
+      ],
+      [
+       -83.29261477031997,
+       29.440430272903974
+      ],
+      [
+       -83.29314385951241,
+       29.44220303605976
+      ],
+      [
+       -83.29502989086141,
+       29.44268621313543
+      ],
+      [
+       -83.29638680434293,
+       29.44139658391341
+      ],
+      [
+       -83.29585764552958,
+       29.439623797518138
+      ],
+      [
+       -83.2939716428554,
+       29.439140663583974
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28bc3ffff",
+    "n_samples": 12,
+    "labels": {
+     "minor": 7,
+     "moderate": 5
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.29072884537946,
+       29.439947094228145
+      ],
+      [
+       -83.28937198096295,
+       29.441236635565218
+      ],
+      [
+       -83.28990100053456,
+       29.443009375476088
+      ],
+      [
+       -83.29178695414372,
+       29.44349259729521
+      ],
+      [
+       -83.29314385951241,
+       29.44220303605976
+      ],
+      [
+       -83.29261477031997,
+       29.440430272903974
+      ],
+      [
+       -83.29072884537946,
+       29.439947094228145
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28bcbffff",
+    "n_samples": 81,
+    "labels": {
+     "minor": 5,
+     "moderate": 37,
+     "severe": 39
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.29479938920514,
+       29.436078238094627
+      ],
+      [
+       -83.29344254950199,
+       29.437367895490897
+      ],
+      [
+       -83.2939716428554,
+       29.439140663583974
+      ],
+      [
+       -83.29585764552958,
+       29.439623797518138
+      ],
+      [
+       -83.29721452617518,
+       29.438334120215867
+      ],
+      [
+       -83.29668536320438,
+       29.43656132888582
+      ],
+      [
+       -83.29479938920514,
+       29.436078238094627
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28bd3ffff",
+    "n_samples": 103,
+    "labels": {
+     "minor": 68,
+     "moderate": 32,
+     "severe": 3
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.29155665323022,
+       29.43688475995986
+      ],
+      [
+       -83.29019982164334,
+       29.438174349377515
+      ],
+      [
+       -83.29072884537946,
+       29.439947094228145
+      ],
+      [
+       -83.29261477031997,
+       29.440430272903974
+      ],
+      [
+       -83.2939716428554,
+       29.439140663583974
+      ],
+      [
+       -83.29344254950199,
+       29.437367895490897
+      ],
+      [
+       -83.29155665323022,
+       29.43688475995986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441b28bdbffff",
+    "n_samples": 448,
+    "labels": {
+     "minor": 99,
+     "moderate": 288,
+     "severe": 61
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -83.28100096818832,
+       29.442365709858148
+      ],
+      [
+       -83.27964412818103,
+       29.443655047242313
+      ],
+      [
+       -83.28017293889083,
+       29.445427717385694
+      ],
+      [
+       -83.28205865922865,
+       29.445911073406613
+      ],
+      [
+       -83.28341554020642,
+       29.444621716134968
+      ],
+      [
+       -83.28288665987613,
+       29.442849022730286
+      ],
+      [
+       -83.28100096818832,
+       29.442365709858148
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944f592493ffff",
+    "n_samples": 92,
+    "labels": {
+     "minor": 70,
+     "moderate": 22
+    },
+    "uncertainty": {
+     "event_attribution": "2024-season cumulative, not Milton-specific",
+     "label_source": "human perception scoring of image pairs"
+    }
+   }
+  }
+ ],
+ "properties": {
+  "h3_resolution": 9,
+  "n_cells": 15,
+  "resolution_cap": "tile",
+  "n_samples": 2556,
+  "canonical_label_field": "human_damage_perception",
+  "source": "Bi-Temporal street-view set (Figshare 10.6084/m9.figshare.28801208.v2)",
+  "attribution_caveat": "post imagery is 2024 season cumulative (Debby + Helene + Milton); single-event attribution not supported"
+ }
+}

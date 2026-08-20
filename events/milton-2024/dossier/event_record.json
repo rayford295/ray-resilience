@@ -1,0 +1,41 @@
+{
+ "event_id": "milton-2024",
+ "name": "Hurricane Milton",
+ "hazard": "hurricane",
+ "landfall": "2024-10-09, Siesta Key, FL (Cat 3)",
+ "aoi": {
+  "horseshoe_beach": {
+   "min_lat": 29.35,
+   "max_lat": 29.55,
+   "min_lon": -83.4,
+   "max_lon": -83.2
+  },
+  "pinellas_county": {
+   "min_lat": 27.55,
+   "max_lat": 28.25,
+   "min_lon": -82.95,
+   "max_lon": -82.5
+  }
+ },
+ "evidence_tier": 3,
+ "data_sources": [
+  "Bi-Temporal street-view damage set (published_verified; Figshare DOI)",
+  "Pinellas County H3 debris grids (Rayford-AI/debris-estimate)"
+ ],
+ "excluded_sources": [
+  {
+   "dataset": "hurrican-milton-GenDisasterSVI",
+   "reason": "post-event street images are InstructPix2Pix-generated (source paths reference experiment2_ip2p); candor rule forbids generated imagery as evidence",
+   "registry_tier": "generated_excluded",
+   "open_question": "2,555 post_sat satellite images may be real; owner to confirm provenance before any use"
+  }
+ ],
+ "declared_unknowns": [
+  "Horseshoe Beach post imagery is 2024-season cumulative (Debby + Helene + Milton) — damage there is NOT attributable to Milton alone",
+  "no parcel-level claims anywhere: all products are tile (H3 r9) resolution",
+  "social-vulnerability join (SVI x exposure) pending: no vulnerability claims yet"
+ ],
+ "uncertainty": {
+  "label_crosswalk": "perception labels mild/moderate/severe mapped to canonical minor/moderate/severe; see snapshots/registry/label_crosswalk.json"
+ }
+}

@@ -51,6 +51,26 @@ Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/pla
 - Test suite now **81 tests green** (new `test_deepcase_dins.py`); CI installs the
   `deepcase` extra (`h3`).
 
+### Plan 3 — Milton deep case + Eaton SVI join (2026-08-20)
+- **`events/milton-2024/` committed** (`scripts/build_milton_case.py`), two AOIs, one
+  harness — the cross-hazard-transfer claim in working code:
+  - Evidence: 2,556 Bi-Temporal labeled pairs → 15-cell H3 r9 grid at Horseshoe Beach,
+    with the honest attribution caveat **declared per feature**: post imagery is
+    2024-season cumulative (Debby + Helene + Milton) — damage is NOT attributable to
+    Milton alone.
+  - Exposure: 5,618 Pinellas County H3 r9 cells with county debris volumes
+    (VolCD/VolVG) + Milton wind/rain covariates from `Rayford-AI/debris-estimate`;
+    upstream CSV frozen (gzip) with sha256.
+  - GenDisasterSVI exclusion is now **auditable**: its registry profile
+    (`generated_excluded`) is frozen into the event's snapshots, and the dossier lists
+    it under `excluded_sources` with the evidence.
+- **Eaton SVI × exposure join** (`scripts/build_eaton_svi.py`): 265 damage-grid cells
+  → 20 Census 2020 tracts (TIGERweb captured) → CDC SVI 2022 ranks attached, 0 cells
+  missing; downscaling approximation declared per feature. The audit log also preserves
+  a **real fail-closed catch**: an over-strict join assertion (envelope tracts vs. burn
+  tracts) was rejected by the harness and corrected — quotable in the paper.
+- Test suite **89 tests green** (new `test_deepcase_grids_svi.py`).
+
 ## 🔜 Next (not blocked)
 
 - **Plan 3 — deep cases:** Hurricane Milton exposure/evidence build can start from
