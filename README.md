@@ -35,7 +35,7 @@ part of the design.
 | Steward Harness: outcome checks, append-only audit, policy pre-check, claim post-check | Working |
 | Publication boundary (distribution plane + CI gate) | Working |
 | Agent gateway | Working locally against any OpenAI-compatible endpoint (Ollama by default). **Not hosted** — the public demo has no chat backend, and the gateway has no auth, rate limiting, or log redaction yet, so it should not be exposed as-is |
-| Live-watch source health surfaced in the map UI | **Not done** — `watch_status.json` is published but the app does not read it |
+| Live-watch source health surfaced in the map UI | Working — the badge reports mapped-of-total, features it could not map, failed sources, and product generation time from `watch_status.json` |
 | Citation click-through from an answer to its artifact | **Not done** — answers carry artifact IDs; the UI does not yet resolve them |
 | Planner slider adjustments persisted | **Not done** — recorded in session memory only |
 | Releases, CHANGELOG, CITATION.cff, contributor docs | **Not done** |

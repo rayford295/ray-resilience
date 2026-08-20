@@ -7,11 +7,13 @@ import ChatPanel from "./components/ChatPanel.jsx";
 import { LiveWatchBadge, TierBadge, ValidityBadge } from "./components/Badges.jsx";
 import { EVENTS, VIEWS } from "./lib/views.js";
 import { buildCoverageIndex } from "./lib/coverage.js";
+import { watchSummary } from "./lib/watch.js";
 import {
   artifactLineage,
   fetchJson,
   fetchJsonl,
   fetchLiveWatch,
+  fetchWatchStatus,
   stageValidity,
 } from "./lib/data.js";
 
@@ -25,14 +27,18 @@ export default function App() {
   const [selected, setSelected] = useState(null);
   const [flyTarget, setFlyTarget] = useState(null);
   const [live, setLive] = useState(null);
+  const [watchStatus, setWatchStatus] = useState(null);
   const [showLineage, setShowLineage] = useState(false);
   const [mapCenter, setMapCenter] = useState(null);
 
   const view = VIEWS.find((v) => v.id === viewId);
   const event = EVENTS[view.event];
 
+  // The layer and its own account of what it is missing, fetched together —
+  // the hazard count is only presentable alongside the count it excludes.
   useEffect(() => {
     fetchLiveWatch().then(setLive);
+    fetchWatchStatus().then(setWatchStatus);
   }, []);
 
   // Lazy-load the active view's artifact; failures render as failures.
@@ -131,7 +137,7 @@ export default function App() {
           <span className="dim"> · accountable GeoAI risk analyst</span>
         </div>
         <div className="header-right">
-          <LiveWatchBadge live={live} />
+          <LiveWatchBadge summary={live && watchStatus ? watchSummary(live, watchStatus) : null} />
           <nav className="mode-switch" role="tablist">
             {["resident", "planner"].map((m) => (
               <button

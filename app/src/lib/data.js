@@ -175,25 +175,42 @@ export async function geocodeAddress(oneline) {
  * fail the UI shows a declared-unavailable badge — graceful degradation is
  * part of the design, not a bug.
  */
-const LIVE_SOURCES = [
-  "../live/products/national_watch.geojson",
-  "https://raw.githubusercontent.com/rayford295/GeoSteward/live-data/live/products/national_watch.geojson",
+const LIVE_ROOTS = [
+  "../live/products",
+  "https://raw.githubusercontent.com/rayford295/GeoSteward/live-data/live/products",
 ];
 
-export async function fetchLiveWatch() {
+async function fetchFirst(filename, validate) {
   const reasons = [];
-  for (const url of LIVE_SOURCES) {
+  for (const root of LIVE_ROOTS) {
+    const url = `${root}/${filename}`;
     try {
       const r = await fetch(url);
       if (!r.ok) throw new Error(`${r.status}`);
       const data = await r.json();
-      if (!Array.isArray(data.features)) throw new Error("not a FeatureCollection");
+      validate(data);
       return { status: "ok", data, source: url, fetchedUtc: new Date().toISOString() };
     } catch (err) {
       reasons.push(`${url}: ${err}`);
     }
   }
   return { status: "unavailable", reason: reasons.join(" | ") };
+}
+
+export function fetchLiveWatch() {
+  return fetchFirst("national_watch.geojson", (data) => {
+    if (!Array.isArray(data.features)) throw new Error("not a FeatureCollection");
+  });
+}
+
+/** The watch product's own account of its gaps: per-source health and the
+ * declared unknowns, including how many features it could not map. Published
+ * alongside the layer; without it the UI must not present its hazard count as
+ * a complete one. */
+export function fetchWatchStatus() {
+  return fetchFirst("watch_status.json", (data) => {
+    if (!Array.isArray(data.declared_unknowns)) throw new Error("no declared_unknowns");
+  });
 }
 
 /** Audit trail for HITL adjustments. The gateway exists, but nothing posts

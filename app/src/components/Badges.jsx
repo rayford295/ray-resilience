@@ -67,18 +67,61 @@ export function TierBadge({ tier }) {
   return <span className="badge tier">{label}</span>;
 }
 
-export function LiveWatchBadge({ live }) {
-  if (!live) return <span className="badge pending">live watch: checking…</span>;
-  if (live.status === "ok") {
+/**
+ * The nationwide watch layer, reported with its own declared gaps.
+ *
+ * This used to read "882 active hazards", which was the count of features the
+ * pipeline could map — while the same pipeline's status product declared 198
+ * more it had fetched and dropped for want of usable geometry. Displaying the
+ * kept subset as the total is a quieter failure than faking a layer, and the
+ * same kind of failure.
+ */
+export function LiveWatchBadge({ summary }) {
+  if (!summary) return <span className="badge pending">live watch: checking…</span>;
+  if (!summary.available) {
     return (
-      <span className="badge ok">
-        live watch: {live.data.features?.length ?? 0} active hazards
+      <span className="badge stale" title={summary.reason}>
+        live watch unavailable — no nationwide layer shown (declared, not faked)
       </span>
     );
   }
   return (
-    <span className="badge stale" title={live.reason}>
-      live watch unavailable — no nationwide layer shown (declared, not faked)
-    </span>
+    <>
+      <span
+        className="badge ok"
+        title={
+          summary.generatedUtc
+            ? `watch product generated ${summary.generatedUtc}`
+            : "watch status product unavailable"
+        }
+      >
+        live watch: {summary.mapped} hazards mapped
+        {summary.total !== null && !summary.complete && ` of ${summary.total}`}
+      </span>
+
+      {summary.undisplayed > 0 && (
+        <span
+          className="badge stale"
+          title={summary.unknowns.join("\n")}
+        >
+          {summary.undisplayed} not mappable — declared, not dropped quietly
+        </span>
+      )}
+
+      {!summary.statusAvailable && (
+        <span className="badge stale" title="live/products/watch_status.json could not be read">
+          completeness unknown — status product unreadable
+        </span>
+      )}
+
+      {summary.failedSources.length > 0 && (
+        <span
+          className="badge fail"
+          title={summary.failedSources.map((f) => `${f.source}: ${f.error}`).join("\n")}
+        >
+          {summary.failedSources.length} source(s) failed
+        </span>
+      )}
+    </>
   );
 }
