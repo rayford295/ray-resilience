@@ -40,18 +40,79 @@ export async function fetchJsonl(rawUrl) {
   return promise;
 }
 
-/** Harness check summary for one pipeline stage -> validity badge input. */
+/**
+ * Harness check summary for one pipeline stage, grouped by run.
+ *
+ * A stage can run more than once: the harness fails closed, the maintainer
+ * fixes the input, the stage runs again. The audit log is append-only, so both
+ * attempts are in there. Summing every check row and taking pass/fail from the
+ * last stage row produces a sentence about no run in particular — "9 checks
+ * passed" for eaton-2025's SVI stage, where the successful run had six and an
+ * earlier one failed.
+ *
+ * Runs are recovered from two structural markers, not from timestamps:
+ *
+ *   - a `stage` row closes the run it belongs to;
+ *   - a check whose name repeats the open run's *first* check name means the
+ *     stage's fixed check sequence started over, so the previous attempt died
+ *     without writing a stage row.
+ *
+ * Timestamps cannot do this job. eaton-2025's SVI stage aborted two minutes
+ * before its successful re-run, but ian-2022's sample-density stage writes one
+ * sequence across a second boundary — grouping by timestamp would merge the
+ * first pair and split the second. `run_id`, stamped by the harness on new
+ * runs, supersedes both markers when present; the sequence heuristic exists
+ * only for logs written before it, which are append-only and never rewritten.
+ */
 export function stageValidity(auditRows, stage) {
-  const checks = auditRows.filter((r) => r.action === "check" && r.actor === stage);
-  const failed = checks.filter((r) => !r.payload.passed);
-  const stages = auditRows.filter((r) => r.action === "stage" && r.actor === stage);
-  const lastStatus = stages.length ? stages[stages.length - 1].payload.status : "unknown";
+  const rows = auditRows.filter((r) => r.actor === stage);
+  const runs = [];
+  let current = null;
+
+  const open = (runId) => {
+    current = { runId, checks: [], status: "aborted", utc: null };
+    runs.push(current);
+    return current;
+  };
+
+  for (const row of rows) {
+    const runId = row.run_id ?? null;
+    const name = row.payload?.check;
+    const sequenceRestarted =
+      current !== null &&
+      row.action === "check" &&
+      current.checks.length > 0 &&
+      name === current.checks[0].check;
+
+    if (current === null || sequenceRestarted || (runId !== null && runId !== current.runId)) {
+      open(runId);
+    }
+    current.utc = row.utc ?? current.utc;
+    if (row.action === "check") {
+      current.checks.push(row.payload);
+    } else {
+      current.status = row.payload?.status ?? "unknown";
+      if (runId === null) current = null; // the stage row closes this run
+    }
+  }
+
+  const summaries = runs.map((run) => {
+    const failedChecks = run.checks.filter((c) => !c.passed);
+    return {
+      nChecks: run.checks.length,
+      nFailed: failedChecks.length,
+      failedChecks,
+      status: run.status,
+      utc: run.utc,
+      ok: run.status === "ok" && failedChecks.length === 0,
+    };
+  });
+
+  const latest = summaries.length ? summaries[summaries.length - 1] : null;
   return {
-    nChecks: checks.length,
-    nFailed: failed.length,
-    failedChecks: failed.map((r) => r.payload),
-    lastStatus,
-    ok: checks.length > 0 && lastStatus === "ok",
+    latest,
+    superseded: summaries.slice(0, -1),
+    ok: Boolean(latest?.ok),
   };
 }
 

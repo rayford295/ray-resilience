@@ -33,6 +33,43 @@ class TestAuditLog(unittest.TestCase):
             self.assertTrue(rows[0]["utc"].endswith("Z"))
 
 
+class TestRunIdentity(unittest.TestCase):
+    """Every row carries the run that wrote it.
+
+    Without this, reconstructing runs from an append-only log means inferring
+    boundaries from timestamps and check sequences — which the frontend still
+    does for logs written before `run_id` existed, because those logs are not
+    rewritten. New logs should not need the inference.
+    """
+
+    def test_rows_from_one_log_share_a_run_id(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log = AuditLog(Path(tmp) / "audit_log.jsonl")
+            log.record("check", "stage.a", payload={"check": "crs", "passed": True})
+            log.record("stage", "stage.a", payload={"status": "ok"})
+            rows = [json.loads(line) for line in log.path.read_text().splitlines()]
+            self.assertTrue(rows[0]["run_id"])
+            self.assertEqual(rows[0]["run_id"], rows[1]["run_id"])
+
+    def test_separate_logs_get_separate_run_ids(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            first = AuditLog(Path(tmp) / "a.jsonl")
+            second = AuditLog(Path(tmp) / "b.jsonl")
+            first.record("stage", "stage.a", payload={"status": "ok"})
+            second.record("stage", "stage.a", payload={"status": "ok"})
+            a = json.loads(first.path.read_text().splitlines()[0])["run_id"]
+            b = json.loads(second.path.read_text().splitlines()[0])["run_id"]
+            self.assertNotEqual(a, b)
+
+    def test_run_id_can_be_supplied_so_a_rerun_is_distinguishable(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "audit_log.jsonl"
+            AuditLog(path, run_id="run-one").record("stage", "stage.a", payload={"status": "failed"})
+            AuditLog(path, run_id="run-two").record("stage", "stage.a", payload={"status": "ok"})
+            rows = [json.loads(line) for line in path.read_text().splitlines()]
+            self.assertEqual([r["run_id"] for r in rows], ["run-one", "run-two"])
+
+
 class TestManifestHashing(unittest.TestCase):
     def test_write_json_records_sha256_in_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

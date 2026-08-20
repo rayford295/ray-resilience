@@ -7,7 +7,8 @@
     "sync-artifacts": "node scripts/sync-artifacts.mjs",
     "dev": "npm run sync-artifacts && vite",
     "build": "npm run sync-artifacts && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run"
   },
   "dependencies": {
     "h3-js": "^4.1.0",
@@ -18,6 +19,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^5.4.11",
-    "vite-plugin-pwa": "^0.21.1"
+    "vite-plugin-pwa": "^0.21.1",
+    "vitest": "^2.1.9"
   }
 }

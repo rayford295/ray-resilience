@@ -32,12 +32,31 @@ export default function LineagePanel({ view, lineage, validity }) {
       )}
 
       <h4>Harness checks on this stage</h4>
-      {validity ? (
-        <p className={validity.ok ? "ok-text" : "fail-text"}>
-          {validity.nChecks - validity.nFailed}/{validity.nChecks} outcome checks passed
-          {validity.nFailed > 0 &&
-            ` — failures are preserved in the audit log, not erased`}
-        </p>
+      {validity?.latest ? (
+        <>
+          <p className={validity.ok ? "ok-text" : "fail-text"}>
+            Latest run ({validity.latest.utc}):{" "}
+            {validity.latest.nChecks - validity.latest.nFailed}/{validity.latest.nChecks} outcome
+            checks passed
+          </p>
+          {validity.superseded.map((run, i) => (
+            <p className="dim" key={`${run.utc}-${i}`}>
+              Superseded run ({run.utc}): {run.nChecks - run.nFailed}/{run.nChecks} passed
+              {run.nFailed > 0 && (
+                <>
+                  {" — "}
+                  {run.failedChecks.map((c) => `${c.check}: ${c.detail}`).join("; ")}
+                </>
+              )}
+            </p>
+          ))}
+          {validity.superseded.some((r) => r.nFailed > 0) && (
+            <p className="hint">
+              A rejected run stays in the append-only log. The harness stopped that
+              build; the record of it stopping is the point.
+            </p>
+          )}
+        </>
       ) : (
         <p className="hint">audit log loading…</p>
       )}
@@ -46,8 +65,8 @@ export default function LineagePanel({ view, lineage, validity }) {
         <>
           <h4>Your adjustments (audited)</h4>
           <p className="hint">
-            {localAudit.length} slider move{localAudit.length > 1 ? "s" : ""} recorded
-            locally — will POST to the agent gateway once it ships.
+            {localAudit.length} slider move{localAudit.length > 1 ? "s" : ""} recorded in this
+            session only — they are not yet sent to the gateway.
           </p>
         </>
       )}
