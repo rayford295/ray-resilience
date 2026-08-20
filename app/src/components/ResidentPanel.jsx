@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { latLngToCell } from "h3-js";
 import { geocodeAddress } from "../lib/data.js";
+import { eventsOf, lookupCoverage, mergedProps } from "../lib/coverage.js";
 
 /**
- * Resident mode: address -> plain-language resilience dossier. Inside a
- * deep-case AOI the card cites tile-level facts; outside it says, honestly,
- * that the location is outside the evaluated competence.
+ * Resident mode: address -> plain-language resilience dossier.
+ *
+ * The lookup resolves against the coverage index over every layer, so an
+ * address is judged by what GeoSteward has evaluated rather than by which
+ * layer the map is currently drawing. And it has three answers, not two:
+ * "no evidence covers you" is a claim, while "some evidence is unreadable"
+ * is an admission, and collapsing the second into the first is how a resident
+ * gets told their covered address was never evaluated.
  */
-export default function ResidentPanel({ grids, records, onFly }) {
+export default function ResidentPanel({ coverage, records, onFly }) {
   const [query, setQuery] = useState("");
   const [state, setState] = useState({ status: "idle" });
 
@@ -22,19 +28,16 @@ export default function ResidentPanel({ grids, records, onFly }) {
         return;
       }
       onFly({ center: [hit.lon, hit.lat], zoom: 13.5 });
-      const cell = latLngToCell(hit.lat, hit.lon, 9);
-      let found = null;
-      for (const [eventId, grid] of Object.entries(grids)) {
-        const feature = grid?.features?.find((f) => f.properties.h3_cell === cell);
-        if (feature) found = { eventId, props: feature.properties };
-      }
-      setState({ status: "done", hit, cell, found });
+      setState({ status: "done", hit, cell: latLngToCell(hit.lat, hit.lon, 9) });
     } catch (err) {
       setState({ status: "error", error: String(err) });
     }
   }
 
-  const record = state.found ? records[state.found.eventId] : null;
+  // Resolved at render, not at submit: layers still arriving upgrade an
+  // "unknown" answer to a real one without the resident searching again.
+  const result = state.status === "done" ? lookupCoverage(coverage, state.cell) : null;
+  const events = result?.hits.length ? eventsOf(result.hits) : [];
 
   return (
     <div>
@@ -59,30 +62,54 @@ export default function ResidentPanel({ grids, records, onFly }) {
       {state.status === "done" && (
         <div className="dossier">
           <h3>{state.hit.matched}</h3>
-          {state.found ? (
+
+          {result.status === "covered" && (
             <>
               <p>
                 This address falls in an evaluated tile of{" "}
-                <strong>{state.found.eventId}</strong>.
+                <strong>{events.join(", ")}</strong>.
               </p>
-              <DossierFacts props={state.found.props} />
+              <DossierFacts props={mergedProps(result.hits)} />
+              {result.incomplete && (
+                <p className="hint">
+                  Some other layers are still unread, so more may apply here than is
+                  shown.
+                </p>
+              )}
             </>
-          ) : (
+          )}
+
+          {result.status === "not_covered" && (
             <p className="outside">
               This location is <strong>outside the evaluated deep-case areas</strong>.
               GeoSteward makes no damage or vulnerability claims here — competence is
-              conditional on place.
+              conditional on place. Every evaluated layer was read to establish this.
             </p>
           )}
-          {record && (
-            <>
-              <h4>Declared unknowns for this event</h4>
-              <ul className="unknowns">
-                {record.declared_unknowns.map((u) => (
-                  <li key={u}>{u}</li>
-                ))}
-              </ul>
-            </>
+
+          {result.status === "unknown" && (
+            <p className="outside">
+              <strong>Not determined.</strong>{" "}
+              {result.unreadable.length > 0
+                ? `${result.unreadable.length} evaluated layer(s) could not be read, so`
+                : "The evaluated layers are still loading, so"}{" "}
+              GeoSteward cannot yet tell whether this address is covered. It will not
+              guess that it is outside the evaluated areas — that would be a claim
+              about a place it has not managed to look at.
+            </p>
+          )}
+
+          {events.map((eventId) =>
+            records[eventId] ? (
+              <div key={eventId}>
+                <h4>Declared unknowns — {eventId}</h4>
+                <ul className="unknowns">
+                  {records[eventId].declared_unknowns.map((u) => (
+                    <li key={u}>{u}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null
           )}
         </div>
       )}

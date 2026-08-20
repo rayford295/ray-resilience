@@ -6,6 +6,7 @@ import LineagePanel from "./components/LineagePanel.jsx";
 import ChatPanel from "./components/ChatPanel.jsx";
 import { LiveWatchBadge, TierBadge, ValidityBadge } from "./components/Badges.jsx";
 import { EVENTS, VIEWS } from "./lib/views.js";
+import { buildCoverageIndex } from "./lib/coverage.js";
 import {
   artifactLineage,
   fetchJson,
@@ -19,6 +20,7 @@ export default function App() {
   const [viewId, setViewId] = useState("eaton-priority");
   const [layers, setLayers] = useState({}); // viewId -> geojson | {error}
   const [meta, setMeta] = useState({}); // eventId -> {manifest, audit, record}
+  const [dossiers, setDossiers] = useState({}); // eventId -> event_record (resident lookup)
   const [t, setT] = useState(0.5);
   const [selected, setSelected] = useState(null);
   const [flyTarget, setFlyTarget] = useState(null);
@@ -72,20 +74,52 @@ export default function App() {
     [eventMeta, view.url]
   );
 
-  const grids = useMemo(() => {
-    const out = {};
+  // Resident lookup asks about coverage across every layer, so it cannot ride
+  // on whichever layer the map happens to be showing. Entering resident mode
+  // requests all of them; until they answer, a miss is "unknown", never
+  // "outside the evaluated areas".
+  useEffect(() => {
+    if (mode !== "resident") return;
     for (const v of VIEWS) {
-      if (layers[v.id] && !layers[v.id].error) out[v.event] = layers[v.id];
+      if (layers[v.id]) continue;
+      fetchJson(v.url)
+        .then((data) => setLayers((s) => (s[v.id] ? s : { ...s, [v.id]: data })))
+        .catch((err) =>
+          setLayers((s) => (s[v.id] ? s : { ...s, [v.id]: { error: String(err) } }))
+        );
     }
-    return out;
-  }, [layers]);
+    // Dossiers too: an address can match any event, and its declared unknowns
+    // belong with the answer rather than behind a layer switch. Kept separate
+    // from `meta`, which is the full manifest+audit+record triple the lineage
+    // and validity panels need — a partial entry there would short-circuit
+    // their fetch and silently empty both panels.
+    for (const [eventId, ev] of Object.entries(EVENTS)) {
+      if (dossiers[eventId]) continue;
+      fetchJson(ev.record)
+        .then((record) => setDossiers((s) => (s[eventId] ? s : { ...s, [eventId]: record })))
+        .catch(() => {});
+    }
+  }, [mode, layers, dossiers]);
+
+  const coverage = useMemo(
+    () =>
+      buildCoverageIndex(
+        VIEWS.map((v) => ({
+          viewId: v.id,
+          event: v.event,
+          geojson: layers[v.id]?.error ? undefined : layers[v.id],
+          error: layers[v.id]?.error,
+        }))
+      ),
+    [layers]
+  );
   const records = useMemo(() => {
-    const out = {};
+    const out = { ...dossiers };
     for (const [eventId, m] of Object.entries(meta)) {
       if (m?.record) out[eventId] = m.record;
     }
     return out;
-  }, [meta]);
+  }, [meta, dossiers]);
 
   const onSelect = useCallback((props) => setSelected(props), []);
 
@@ -149,7 +183,7 @@ export default function App() {
                 onFlyToCell={setFlyTarget}
               />
             ) : (
-              <ResidentPanel grids={grids} records={records} onFly={setFlyTarget} />
+              <ResidentPanel coverage={coverage} records={records} onFly={setFlyTarget} />
             )}
           </section>
 
