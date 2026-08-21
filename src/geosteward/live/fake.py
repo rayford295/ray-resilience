@@ -111,6 +111,17 @@ class FakeLiveSource:
     #: was recorded.
     calls: list[LiveRequest] = field(default_factory=list)
 
+    def request_for_cell(self, h3_cell: str) -> LiveRequest:
+        return LiveRequest(
+            api=self.api,
+            parameters={
+                "h3_cell": h3_cell,
+                "radius_m": 1200,
+                "included_types": ["hospital", "school", "fire_station"],
+                "fields": ["id", "displayName", "location", "primaryType"],
+            },
+        )
+
     def lookup(self, request: LiveRequest) -> LiveResult:
         if self.unavailable:
             raise LiveUnavailable(f"{self.provider}: no key configured for {self.api}")
@@ -122,6 +133,13 @@ class FakeLiveSource:
             display_payload=self.payload,
             n_results=len(places),
         )
+
+    def summarize(self, result: LiveResult) -> dict[str, int]:
+        counts: dict[str, int] = {}
+        for place in result.display_payload.get("places", []) or []:
+            category = place.get("primaryType") or "unspecified"
+            counts[category] = counts.get(category, 0) + 1
+        return dict(sorted(counts.items()))
 
 
 @dataclass

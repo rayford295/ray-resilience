@@ -101,7 +101,35 @@ class LiveSource(Protocol):
     attribution: str
     retention: str
 
+    def request_for_cell(self, h3_cell: str) -> LiveRequest:
+        """This source's own default request for one tile.
+
+        Parameters are API-specific — a radius and a type list mean nothing to
+        an elevation lookup — so the source builds its own request and the
+        caller never has to know the shape. It also keeps the tile-only rule in
+        one place: a caller cannot ask for a point because it cannot express one.
+        """
+        ...
+
     def lookup(self, request: LiveRequest) -> LiveResult:
+        ...
+
+    def summarize(self, result: LiveResult) -> dict[str, int]:
+        """Counts by category — never names, ratings, or numbers.
+
+        This is what an agent is given to reason over, and it is deliberately
+        thinner than what the provider returned. "One hospital and one fire
+        station within 1.2 km" answers a resident's question as well as a list
+        of names does, and it means no third-party content string ever leaves
+        this process — a distinct question from retention, and one the licence
+        does not obviously settle in our favour when the model is hosted
+        somewhere else. Counts are ours: we derived them.
+
+        Names stay in `display_payload` for a surface that renders them live,
+        with attribution, and does not keep them.
+
+        Each adapter implements this because each knows its own response shape.
+        """
         ...
 
 

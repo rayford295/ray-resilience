@@ -58,9 +58,14 @@ class MockLLM:
     def __init__(self, responses):
         self.responses = list(responses)
         self.calls = 0
+        #: What the steward actually sent. Kept so a test can assert on the
+        #: evidence block itself — which is how the containment property is
+        #: checked at the model boundary, not just at the audit record.
+        self.last_messages = None
 
     def __call__(self, messages):
         self.calls += 1
+        self.last_messages = [dict(m) for m in messages]
         response = self.responses.pop(0)
         if isinstance(response, Exception):
             raise response

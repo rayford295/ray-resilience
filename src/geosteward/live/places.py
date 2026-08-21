@@ -117,6 +117,9 @@ class PlacesSource:
             )
         return key
 
+    def request_for_cell(self, h3_cell: str) -> LiveRequest:
+        return build_request(h3_cell)
+
     def lookup(self, request: LiveRequest) -> LiveResult:
         parameters = request.parameters
         try:
@@ -185,3 +188,14 @@ class PlacesSource:
             display_payload=payload,
             n_results=len(places),
         )
+
+    def summarize(self, result: LiveResult) -> dict[str, int]:
+        """Facility counts by `primaryType`. No names, no ratings."""
+        counts: dict[str, int] = {}
+        places = result.display_payload.get("places", []) or []
+        for place in places:
+            if not isinstance(place, dict):
+                continue
+            category = place.get("primaryType") or "unspecified"
+            counts[str(category)] = counts.get(str(category), 0) + 1
+        return dict(sorted(counts.items()))

@@ -13,10 +13,20 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable
 
-from geosteward.gateway.context import EvidenceStore, EventEvidence
+import h3
+
+from geosteward.gateway.context import RESOLUTION, EvidenceStore, EventEvidence
 from geosteward.gateway.llm import LLMUnavailable, chat_completion
 from geosteward.harness.audit import AuditLog
-from geosteward.harness.policy import PolicyEngine, PolicyRequest
+from geosteward.harness.policy import (
+    RE_DERIVABLE,
+    RETAINED,
+    PolicyEngine,
+    PolicyRequest,
+    weakest,
+)
+from geosteward.live.base import LiveSource, LiveUnavailable
+from geosteward.live.record import LiveEvidenceRecorder
 
 # --- deterministic request classification (auditable, testable) -----------
 
@@ -26,8 +36,19 @@ _PARCEL_PATTERNS = (
 )
 _DAMAGE_KEYWORDS = re.compile(r"\b(damage|damaged|destroyed|destruction|burned|burnt|ruined|loss(es)?)\b", re.I)
 _EXPOSURE_KEYWORDS = re.compile(r"\b(exposure|exposed|vulnerab\w*|svi|risk|safe|safety|priorit\w*|resilien\w*)\b", re.I)
+_FACILITY_KEYWORDS = re.compile(
+    r"\b(hospitals?|clinics?|shelters?|schools?|police|pharmac\w*|"
+    r"fire\s+stations?|urgent\s+care|evacuation\s+cent\w*|facilit\w*)\b",
+    re.I,
+)
 
 _CITATION = re.compile(r"\[artifact:([0-9a-f]{12})\]")
+#: The second citation form. Same 12-hex shape as an artifact id, because it is
+#: the same kind of thing — the head of a sha256 — except the digest is over a
+#: response this project never kept rather than over a file it did. It resolves
+#: to a row in `events/live_evidence.jsonl`.
+_LIVE_CITATION = re.compile(r"\[live:([0-9a-f]{12})\]")
+_ANY_CITATION = re.compile(r"\[(?:artifact|live):[0-9a-f]{12}\]")
 _SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
 
 # --- non-assertive sentence forms ------------------------------------------
@@ -84,7 +105,16 @@ def is_non_assertive(sentence: str) -> bool:
 
 def classify(question: str) -> tuple[str, str]:
     """(purpose, resolution) from the question text — rule-based on purpose:
-    the LLM must never decide what the request is authorized to be."""
+    the LLM must never decide what the request is authorized to be.
+
+    The order is the policy. `damage_assessment` stays first because it is the
+    heaviest claim and the most constrained. `exposure` precedes
+    `facility_context` deliberately: a question that mentions both vulnerability
+    and hospitals is routed to the retained grids rather than to a live lookup,
+    so ambiguity resolves toward the stronger verifiability. The cost is that
+    such a question is answered from retained evidence only and simply does not
+    address the facility half — which the answer then has to say.
+    """
     resolution = "tile"
     for pattern in _PARCEL_PATTERNS:
         if pattern.search(question):
@@ -94,6 +124,8 @@ def classify(question: str) -> tuple[str, str]:
         purpose = "damage_assessment"
     elif _EXPOSURE_KEYWORDS.search(question):
         purpose = "exposure"
+    elif _FACILITY_KEYWORDS.search(question):
+        purpose = "facility_context"
     else:
         purpose = "watch"
     return purpose, resolution
@@ -101,20 +133,43 @@ def classify(question: str) -> tuple[str, str]:
 
 # --- claim post-check ------------------------------------------------------
 
-def check_claims(text: str, allowed_ids: set[str]) -> list[str]:
-    """Violations found in a draft answer; empty list means it passes."""
+def check_claims(
+    text: str,
+    allowed_ids: set[str],
+    allowed_live_ids: set[str] | None = None,
+) -> list[str]:
+    """Violations found in a draft answer; empty list means it passes.
+
+    Two citation forms, and one rule relating them: an answer that cites a
+    non-retained source must ALSO cite a retained one. That is "cited-only
+    cannot stand alone" in computable form — a live lookup may add facility
+    context to a finding grounded in hashed evidence, but it may not be the
+    only thing holding an answer up.
+    """
+    allowed_live_ids = allowed_live_ids or set()
     violations: list[str] = []
     cited = set(_CITATION.findall(text))
-    if not cited:
-        violations.append("no artifact citations at all")
+    live_cited = set(_LIVE_CITATION.findall(text))
+
+    if not cited and not live_cited:
+        violations.append("no citations at all")
     fabricated = cited - allowed_ids
     if fabricated:
         violations.append(f"fabricated citation ids: {sorted(fabricated)}")
-    stripped = _CITATION.sub("", text)
+    fabricated_live = live_cited - allowed_live_ids
+    if fabricated_live:
+        violations.append(f"fabricated live citation ids: {sorted(fabricated_live)}")
+    if live_cited and not cited:
+        violations.append(
+            "live citations with no retained citation: a non-retainable source "
+            "cannot be the only support for an answer"
+        )
+
+    stripped = _ANY_CITATION.sub("", text)
     for sentence in _SENTENCE_SPLIT.split(text):
-        if _CITATION.search(sentence):
+        if _ANY_CITATION.search(sentence):
             continue
-        bare = _CITATION.sub("", sentence).strip()
+        bare = _ANY_CITATION.sub("", sentence).strip()
         if bare and not is_non_assertive(bare):
             violations.append(f"uncited assertion: {bare[:80]!r}")
     for pattern in _PARCEL_PATTERNS:
@@ -130,11 +185,27 @@ _SYSTEM_PROMPT = """You are GeoSteward, an accountable GeoAI risk analyst.
 Rules you MUST follow:
 1. Use ONLY the facts in the EVIDENCE block. Never use outside knowledge for factual claims.
 2. EVERY sentence that states a fact about this place — counts, rates, comparisons, severity, safety, vulnerability, whether somewhere was affected — MUST end with the citation tag of the fact it came from, in the exact form [artifact:XXXXXXXXXXXX], copied verbatim from the evidence. This includes sentences with no numbers in them, and sentences about declared unknowns: cite the record they come from. Only three kinds of sentence may omit a citation: a question, general safety advice addressed to the reader ("Contact your county emergency management office."), and a statement about what you cannot say ("The evidence does not answer that."). If you cannot cite a factual sentence, delete the sentence.
-3. Never make statements about a specific parcel, house, or street address. Your resolution limit is the tile (H3 r9, roughly 0.1 km^2).
-4. State uncertainty and declared unknowns as prominently as findings.
-5. If the evidence does not answer the question, say so plainly.
-6. Output ONLY the final answer prose. No preamble, no analysis of these rules, no lists of which sentences contain numbers — just the answer a {role} should read.
+3. Some evidence lines carry a [live:XXXXXXXXXXXX] tag instead. Those come from a live third-party lookup that was NOT retained: it can be re-checked by re-issuing the request, but no stored copy exists. Cite them the same way, verbatim. One extra rule: an answer that uses a [live:] fact MUST also use at least one [artifact:] fact. Never build an answer out of live facts alone.
+4. Never make statements about a specific parcel, house, or street address. Your resolution limit is the tile (H3 r9, roughly 0.1 km^2).
+5. State uncertainty and declared unknowns as prominently as findings.
+6. If the evidence does not answer the question, say so plainly.
+7. Output ONLY the final answer prose. No preamble, no analysis of these rules, no lists of which sentences contain numbers — just the answer a {role} should read.
 Audience: {role}. For residents use plain, calm language; for planners be precise and quantitative."""
+
+
+#: Purposes that can only be served by a non-retainable live source, mapped to
+#: the verifiability such a source supplies.
+#:
+#: The mapping exists so the policy can still answer the LOCATION question when
+#: no source is configured. Without it the request would carry `retained`, match
+#: no allow rule, and be refused with "no policy rule authorizes this request" —
+#: which is not why it failed. A request for facility context inside an AOI is
+#: authorized; the capability is simply absent, and saying the wrong one of
+#: those two things is the defect class the 2026-08-20 correctness pass was
+#: about. Asking the policy what it would decide if the capability existed keeps
+#: both answers honest: an out-of-AOI request still gets its real rule ID, and
+#: an in-AOI one gets "not configured".
+LIVE_PURPOSES: dict[str, str] = {"facility_context": RE_DERIVABLE}
 
 
 @dataclass
@@ -144,24 +215,97 @@ class Steward:
     audit: AuditLog
     llm: Callable[[list[dict[str, str]]], str] = chat_completion
     max_attempts: int = 3
+    #: Optional non-retainable source for `facility_context`. Absent by
+    #: default: the public build ships without a key, and the honest response to
+    #: "what hospitals are near me" with no source configured is a declared
+    #: capability gap, not a keyless approximation from some other dataset.
+    live_source: LiveSource | None = None
+    #: Where live lookups are attested. Without it the lookup still happens and
+    #: is still cited, but nothing durable records that it did — so the gateway
+    #: declares the capability unavailable instead. Accountability is not the
+    #: optional part.
+    live_recorder: LiveEvidenceRecorder | None = None
 
     def __post_init__(self) -> None:
         self.store = EvidenceStore(self.events_root)
 
+    def _live_unavailable(self, reason: str, detail: str | None = None) -> dict[str, Any]:
+        self.audit.record(
+            "gateway_live_unavailable", "steward", payload={"reason": reason, "detail": detail}
+        )
+        return {"type": "live_source_unavailable", "reason": reason}
+
+    def _lookup(
+        self, source: LiveSource, evidence: EventEvidence, lat: float, lon: float
+    ) -> dict[str, Any]:
+        """One live lookup: attest to it, then reduce it to a citable line.
+
+        The order is load-bearing. The record is written BEFORE the result is
+        used, so a lookup cannot influence an answer without having been
+        attested — the reverse order would let a crash between the two leave a
+        cited fact with no record of where it came from.
+
+        What reaches the evidence block is the summary, not the response:
+        counts by category, which this project derived, rather than the names
+        the provider returned. That keeps the answer useful — "one hospital and
+        one fire station within 1.2 km" is what a resident asked for — while no
+        third-party content string is sent on to the model. Retention and
+        onward disclosure are different questions, and a hosted model endpoint
+        is onward disclosure.
+        """
+        cell = h3.latlng_to_cell(lat, lon, RESOLUTION)
+        request = source.request_for_cell(cell)
+        result = source.lookup(request)
+
+        assert self.live_recorder is not None  # guarded by `live_ready`
+        self.live_recorder.record(source, request, result)
+
+        live_id = result.response_sha256[:12]
+        counts = source.summarize(result)
+        rendered = ", ".join(f"{category}={n}" for category, n in counts.items()) or "none"
+        radius = request.parameters.get("radius_m")
+        return {
+            "live_id": live_id,
+            "attribution": source.attribution,
+            "line": (
+                f"[live {source.provider} / {source.api} / tile {cell}] "
+                f"facility counts within {radius} m: {rendered}; "
+                f"n_results={result.n_results} | verifiability: {source.verifiability} "
+                f"(re-check by re-issuing the recorded request; no copy is retained) "
+                f"| attribution: {source.attribution} [live:{live_id}]"
+            ),
+        }
+
     def answer(self, role: str, lat: float, lon: float, question: str) -> dict[str, Any]:
         purpose, resolution = classify(question)
         evidence = self.store.evidence_for(lat, lon)
+
+        # Verifiability is decided before anything is fetched, from what the
+        # configured sources DECLARE — so the policy gates the request before a
+        # keyed, billable call is made, and an unauthorized question never
+        # spends money or touches a third party.
+        uses_live = purpose in LIVE_PURPOSES
+        live_ready = self.live_source is not None and self.live_recorder is not None
+        if not uses_live:
+            verifiability = RETAINED
+        elif self.live_source is not None:
+            verifiability = weakest([RETAINED, self.live_source.verifiability])
+        else:
+            verifiability = LIVE_PURPOSES[purpose]
+
         request = PolicyRequest(
             role=role,
             purpose=purpose,
             resolution=resolution,
             evidence_tier=evidence.evidence_tier,
             in_aoi=evidence.in_aoi,
+            verifiability=verifiability,
         )
         self.audit.record(
             "gateway_request", "steward",
             payload={"role": role, "lat": lat, "lon": lon, "question": question,
                      "purpose": purpose, "resolution": resolution,
+                     "verifiability": verifiability,
                      "event": evidence.event_id, "tier": evidence.evidence_tier},
         )
 
@@ -187,7 +331,31 @@ class Steward:
                           "this location — monitoring data only, no conclusions supported.",
             }
 
-        evidence_block = "\n".join(f.as_evidence_line() for f in evidence.facts)
+        live_lines: list[str] = []
+        allowed_live_ids: set[str] = set()
+        attribution: str | None = None
+        if uses_live:
+            if not live_ready:
+                return self._live_unavailable(
+                    "Facility context needs a live third-party lookup, and no live source "
+                    "with an audit record is configured. No substitute is served in its "
+                    "place."
+                )
+            try:
+                live = self._lookup(self.live_source, evidence, lat, lon)
+            except LiveUnavailable as error:
+                return self._live_unavailable(
+                    "The live facility source is unreachable; no cached or approximated "
+                    "facility answer is served in its place.",
+                    detail=str(error),
+                )
+            live_lines.append(live["line"])
+            allowed_live_ids.add(live["live_id"])
+            attribution = live["attribution"]
+
+        evidence_block = "\n".join(
+            [f.as_evidence_line() for f in evidence.facts] + live_lines
+        )
         example_id = evidence.facts[0].artifact_id
         messages = [
             {"role": "system", "content": _SYSTEM_PROMPT.format(role=role)},
@@ -212,30 +380,47 @@ class Steward:
                     "reason": "The language model is unreachable; no cached or fabricated "
                               "answer is served in its place.",
                 }
-            violations = check_claims(draft, evidence.artifact_ids)
+            violations = check_claims(draft, evidence.artifact_ids, allowed_live_ids)
             self.audit.record(
                 "gateway_post_check", "steward",
                 payload={"attempt": attempt + 1, "violations": violations},
             )
             if not violations:
-                self.audit.record("gateway_response", "steward",
-                                  payload={"citations": sorted(set(_CITATION.findall(draft)))},
-                                  rule_id=decision.rule_id)
-                return {
+                live_citations = sorted(set(_LIVE_CITATION.findall(draft)))
+                self.audit.record(
+                    "gateway_response", "steward",
+                    payload={"citations": sorted(set(_CITATION.findall(draft))),
+                             "live_citations": live_citations,
+                             "verifiability": verifiability},
+                    rule_id=decision.rule_id,
+                )
+                response = {
                     "type": "answer",
                     "text": draft,
                     "rule_id": decision.rule_id,
                     "event": evidence.event_id,
                     "n_facts": len(evidence.facts),
                     "citations": sorted(set(_CITATION.findall(draft))),
+                    "live_citations": live_citations,
+                    #: The reader's standing, not a quality score: what they can
+                    #: do to check this answer. `re-derivable` means part of it
+                    #: rests on something no copy of exists here.
+                    "verifiability": verifiability,
                 }
+                if attribution and live_citations:
+                    # Required wherever the content is surfaced, and carried in
+                    # the response so the client cannot render the answer
+                    # without also receiving the attribution it owes.
+                    response["attribution"] = attribution
+                return response
             messages.append({"role": "assistant", "content": draft})
             messages.append({
                 "role": "user",
                 "content": "Your draft violated claim rules: "
                            + "; ".join(violations)
                            + ". Rewrite it so every factual sentence carries a valid "
-                             "[artifact:ID] tag from the evidence and no parcel-level "
+                             "[artifact:ID] or [live:ID] tag from the evidence, at least "
+                             "one [artifact:ID] tag is present, and no parcel-level "
                              "statement remains.",
             })
 
