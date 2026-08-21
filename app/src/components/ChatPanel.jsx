@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 
+import { parseCitations, verifiabilityLabel } from "../lib/citations.js";
+
 const DEFAULT_ENDPOINT =
   localStorage.getItem("steward-endpoint") || "http://localhost:8080";
 
@@ -103,29 +105,75 @@ export default function ChatPanel({ role, location }) {
 }
 
 function renderCitations(text) {
-  const parts = text.split(/(\[artifact:[0-9a-f]{12}\])/g);
-  return parts.map((part, i) => {
-    const match = part.match(/^\[artifact:([0-9a-f]{12})\]$/);
-    if (match) {
+  return parseCitations(text).map((token, i) => {
+    if (token.kind === "artifact") {
       return (
         <span key={i} className="cite" title="cites a committed, hashed artifact">
-          {match[1].slice(0, 6)}
+          {token.id.slice(0, 6)}
         </span>
       );
     }
-    return <span key={i}>{part}</span>;
+    if (token.kind === "live") {
+      return (
+        <span
+          key={i}
+          className="cite live"
+          title={
+            "cites a live third-party lookup — re-derivable, not retained. " +
+            "No copy of the response is kept; the recorded request and its " +
+            "response hash are in events/live_evidence.jsonl."
+          }
+        >
+          ↻ {token.id.slice(0, 6)}
+        </span>
+      );
+    }
+    return <span key={i}>{token.value}</span>;
   });
 }
 
 function StewardMessage({ reply }) {
   if (reply.type === "answer") {
+    const live = reply.live_citations ?? [];
+    const verifiability = verifiabilityLabel(reply.verifiability);
     return (
       <div className="msg steward">
         <div>{renderCitations(reply.text)}</div>
         <div className="msg-meta">
           rule {reply.rule_id} · {reply.event} · {reply.citations.length} artifact
           {reply.citations.length > 1 ? "s" : ""} cited
+          {live.length > 0 && (
+            <> · {live.length} live lookup{live.length > 1 ? "s" : ""}</>
+          )}
+          {verifiability && (
+            <>
+              {" · "}
+              <span className={`verif ${reply.verifiability}`} title={verifiability.detail}>
+                {verifiability.label}
+              </span>
+            </>
+          )}
         </div>
+        {/* Required wherever third-party content is surfaced, and rendered from
+            the gateway's own field so the app cannot show the content while
+            forgetting the credit. */}
+        {reply.attribution && live.length > 0 && (
+          <div className="msg-meta attribution">
+            Live facility context: {reply.attribution}. Not retained — re-derivable from
+            the recorded request.
+          </div>
+        )}
+      </div>
+    );
+  }
+  if (reply.type === "live_source_unavailable") {
+    // Distinct from an agent outage: the model is fine, the third-party
+    // capability is absent. Saying "agent unavailable" here would misdescribe
+    // which part of the system failed.
+    return (
+      <div className="msg steward outage">
+        <strong>Live source unavailable</strong>
+        <div>{reply.reason}</div>
       </div>
     );
   }

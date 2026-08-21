@@ -120,6 +120,18 @@ select, input[type="text"], .search input {
   border: 1px solid #1e5c40; border-radius: 6px; padding: 0 0.3rem;
   font-family: ui-monospace, Consolas, monospace; font-size: 0.72rem; margin: 0 0.15rem;
 }
+/* A live citation is checkable, but not the same way: nothing is stored, so a
+   reader re-issues the request instead of opening a file. Dashed border and a
+   distinct hue so the two are not read as interchangeable at a glance. */
+.cite.live {
+  background: #2c2410; color: #e0b64a;
+  border: 1px dashed #6b5320;
+}
+.verif { font-family: ui-monospace, Consolas, monospace; }
+.verif.retained { color: var(--accent); }
+.verif.re-derivable { color: #e0b64a; }
+.verif.cited-only { color: var(--warn); }
+.msg-meta.attribution { color: #e0b64a; }
 .endpoint { margin-top: 0.4rem; font-size: 0.78rem; }
 .endpoint input { margin-top: 0.3rem; font-family: ui-monospace, Consolas, monospace; font-size: 0.78rem; }
 
