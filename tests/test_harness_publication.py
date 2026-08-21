@@ -119,6 +119,27 @@ class TestPlanPublication(unittest.TestCase):
                 {d.path for d in plan.denied},
             )
 
+    def test_plan_order_does_not_depend_on_filesystem_case_folding(self) -> None:
+        # The allowlist is a committed file and CI regenerates it to diff
+        # against the commit, so its order has to be a function of the policy
+        # and nothing else. Sorting `Path` objects is not: `PurePath` ordering
+        # case-folds on Windows and does not on POSIX, so names differing only
+        # in case swapped places between the maintainer's workstation and CI
+        # and failed the `plan --check` gate on a cosmetic difference.
+        with TemporaryDirectory() as tmp:
+            root = fake_events(Path(tmp))
+            exposure = root / "demo-2026" / "exposure"
+            names = ["Alpha_grid.geojson", "ALPHA_wide_grid.geojson", "alpha_zone.geojson"]
+            rows = [manifest_row("events/demo-2026/exposure/grid.geojson", "damage_grid")]
+            for name in names:
+                (exposure / name).write_text("{}", encoding="utf-8")
+                rows.append(manifest_row(f"events/demo-2026/exposure/{name}", "damage_grid"))
+            (root / "demo-2026" / "artifact_manifest.jsonl").write_text(
+                "\n".join(rows) + "\n", encoding="utf-8"
+            )
+            planned = [f.path for f in plan_publication(root, self.policy, DEMO).allowed]
+            self.assertEqual(planned, sorted(planned))
+
 
 class TestVerifySite(unittest.TestCase):
     def setUp(self) -> None:

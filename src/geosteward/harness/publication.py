@@ -102,10 +102,27 @@ class Violation:
     detail: str
 
 
+#: Sort key for anything whose order reaches a committed file.
+#:
+#: `sorted()` over `Path` objects compares platform-dependently: `PurePath`
+#: ordering is case-folded on Windows and case-sensitive on POSIX, so
+#: `EATON_wildfire_..._profile.json` and `Eaton_Fire_profile.json` swap places
+#: between the maintainer's workstation and CI. The allowlist is generated and
+#: CI diffs it against a regeneration, so that turns a cosmetic difference into
+#: a failing build for whoever regenerates on the other platform. Ordering by
+#: the POSIX string makes the artifact a function of the policy alone.
+def _sort_key(path: Path, root: Path) -> str:
+    return path.relative_to(root).as_posix()
+
+
 def _kinds_by_path(events_root: Path) -> dict[str, str]:
     """Artifact path -> kind, from every committed manifest."""
     kinds: dict[str, str] = {}
-    for manifest in sorted(events_root.glob("*/artifact_manifest.jsonl")):
+    manifests = sorted(
+        events_root.glob("*/artifact_manifest.jsonl"),
+        key=lambda p: _sort_key(p, events_root),
+    )
+    for manifest in manifests:
         for line in manifest.read_text(encoding="utf-8").splitlines():
             if line.strip():
                 row = json.loads(line)
@@ -130,7 +147,8 @@ def plan_publication(
     plan = PublicationPlan()
     repo_root = events_root.parent
     roots = [events_root / event for event in scope]
-    for path in sorted(p for root in roots for p in root.rglob("*") if p.is_file()):
+    files = [p for root in roots for p in root.rglob("*") if p.is_file()]
+    for path in sorted(files, key=lambda p: _sort_key(p, repo_root)):
         rel = path.relative_to(repo_root).as_posix()
         kind = META_KINDS.get(path.name) or kinds.get(rel)
         if kind is None:
@@ -178,7 +196,8 @@ def verify_site(site_dir: Path, allowlist: list[str]) -> list[Violation]:
     """Violations in an assembled site tree; empty list means it may deploy."""
     allowed = set(allowlist)
     violations: list[Violation] = []
-    for path in sorted(p for p in site_dir.rglob("*") if p.is_file()):
+    files = [p for p in site_dir.rglob("*") if p.is_file()]
+    for path in sorted(files, key=lambda p: _sort_key(p, site_dir)):
         rel = path.relative_to(site_dir).as_posix()
         # A site places the events tree under a deploy prefix (e.g. app/).
         # Normalise to the repository-relative form the allowlist speaks.
