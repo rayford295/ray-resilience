@@ -35,6 +35,7 @@ part of the design.
 | Steward Harness: outcome checks, append-only audit, policy pre-check, claim post-check | Working |
 | Publication boundary (distribution plane + CI gate) | Working |
 | Agent gateway | Working locally against any OpenAI-compatible endpoint (Ollama by default). **Not hosted** — the public demo has no chat backend, and the gateway has no auth, rate limiting, or log redaction yet, so it should not be exposed as-is |
+| Accountability for non-retainable evidence (`verifiability` axis, `license` attribute, content-free lookup record) | Working and policed in code; **never run against a live API** — there is no Google Maps Platform key, so both adapters are tested against an in-process stub and `events/live_evidence.jsonl` does not exist outside tests. [Design and implementation notes](docs/superpowers/specs/2026-08-20-non-retainable-evidence-design.md) |
 | Live-watch source health surfaced in the map UI | Working — the badge reports mapped-of-total, features it could not map, failed sources, and product generation time from `watch_status.json` |
 | Citation click-through from an answer to its artifact | **Not done** — answers carry artifact IDs; the UI does not yet resolve them |
 | Planner slider adjustments persisted | **Not done** — recorded in session memory only |
@@ -53,6 +54,7 @@ Verifiable Evaluation Environments and Geospatial Harness Engineering* (Yang & Z
 | **Outcome** | Executable spatial checks — CRS assertions, multiscale raster×vector join integrity, sanity bounds, mandatory uncertainty fields |
 | **Process** | Append-only provenance for every artifact; fail-closed stages; clickable lineage from any map layer back to timestamped source snapshots |
 | **Institutional** | Two declarative policy planes in one file. The **claim** plane scopes what the agent may assert, by role, evidence tier, resolution, and geographic authority — tile-level evidence never yields parcel-level claims. The **distribution** plane scopes what a build may publish, by artifact resolution cap and audience; CI verifies the assembled site against it and fails the deploy on a violation. The second plane exists because the first was not enough: see [the 2026-08-20 incident](docs/incidents/2026-08-20-publication-boundary.md) |
+| **Verifiability** | Both planes answer questions about what *this project* does. A third question comes from outside it — what may be retained at all, and can a reader check it? The `verifiability` axis (`retained` > `re-derivable` > `cited-only`, weakest-link) and the `license` attribute carry it, so a claim resting partly on evidence nobody is allowed to keep says so instead of borrowing the standing of the hashed evidence beside it |
 
 Every factual sentence the agent produces must cite an artifact ID. Sentences that
 cannot be cited are refused, not softened — the exemptions are a closed set
@@ -102,7 +104,7 @@ findings.
 ```bash
 git clone https://github.com/rayford295/GeoSteward && cd GeoSteward
 python -m pip install -e ".[deepcase]"
-python -m unittest discover -s tests          # 149 tests
+python -m unittest discover -s tests          # 212 tests
 
 python scripts/publication_boundary.py plan   # which artifacts may be published
 cd app && npm ci && npm test && npm run dev   # PWA at http://localhost:5173
@@ -122,7 +124,7 @@ uvicorn gateway.main:app --port 8080
 ```
 ├── app/                 # PWA frontend (WebGIS + smartphone)
 ├── gateway/             # FastAPI agent gateway (LLM-agnostic + harness middleware)
-├── src/geosteward/      # pipeline, agents, sources, hazards, harness/
+├── src/geosteward/      # pipeline, agents, sources, hazards, harness/, live/
 ├── events/              # eaton-2025/, milton-2024/, ian-2022/, archive/bavi-2026/
 ├── docs/                # design spec, methodology, Track-A alignment
 └── tests/               # doubles as a verifiable evaluation environment

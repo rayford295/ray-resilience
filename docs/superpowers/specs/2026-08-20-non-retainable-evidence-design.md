@@ -1,7 +1,10 @@
 # Accountability for non-retainable evidence — Design Document
 
 **Date:** 2026-08-20
-**Status:** Design agreed in brainstorming; three decisions still open (§11). Not yet implemented.
+**Status:** **Implemented 2026-08-21**, except the two live API calls, which have never run
+(no GMP key — §10 blocker 1). The three open decisions were ruled by the project owner on
+2026-08-20 and are recorded inline in §11. What the implementation changed about this design,
+including one thing it got wrong, is in §13.
 **Motivating context:** The author is a Google Maps Platform Innovator, and OASIS 2026 is
 Google-hosted, so Google Maps Platform (GMP) is a natural capability source. Investigating
 how to add it surfaced a structural problem worth more than the capabilities themselves.
@@ -255,9 +258,10 @@ Also:
 Blocker 2 is a real change of ordering: gateway hardening was the one deferred item carrying
 genuine risk, and it is now also on the critical path for this work.
 
-## 11. Open decisions
+## 11. Open decisions — all three ruled by the owner, 2026-08-20
 
-Recorded rather than decided, because each changes the work materially.
+Each was recorded rather than decided because each changed the work materially. All three were
+resolved in favour of the recommendation, and the implementation follows them.
 
 **11.1 Should `facility_context` be an agent purpose at all?**
 The alternative is to keep Places strictly as a planner-side map overlay and out of the
@@ -265,12 +269,17 @@ question-answering path. That is narrower and lowers the surface where a live so
 influence a claim, at the cost of the resident-facing "what critical facilities are near me"
 answer, which is one of the more genuinely useful things this data enables. *Recommendation:*
 include it, because the policy rules constrain it properly and the resident use case is real.
+**Ruled 2026-08-20: include it.** Implemented as a `classify()` purpose. See §13.3 on where it
+sits in the classification order.
 
 **11.2 Should place IDs appear in the published record?**
 §6 omits them out of caution. Including them would let a reader see which facilities were
 found without holding a key, which is a real gain in transparency. This needs a reading of the
 terms on redistribution, not a technical decision. *Recommendation:* leave them out until
 confirmed; the verification story does not need them.
+**Ruled 2026-08-20: leave them out.** `LiveResult.reference_ids` carries them for the project's
+own joins; `record.py` never names the field, and a test asserts no reference id reaches the
+written row.
 
 **11.3 Gateway-first, or an interim in-memory browser version?**
 Gateway-first is coherent and matches every other stance in the project, but delivers nothing
@@ -278,6 +287,10 @@ demonstrable before 2026-09-04. An interim browser-side version with a referrer-
 and an explicitly session-only, non-persistent record would show the idea sooner — at the cost
 of the audit record not persisting, which is the mechanism's whole point. *Recommendation:*
 gateway-first; the paper can describe and test the mechanism without a public demo of it.
+**Ruled 2026-08-20: gateway-first.** The mechanism lives in `gateway/steward.py`, the record is
+a real file, and there is no browser-side key. The cost landed as predicted: there is nothing
+demonstrable on the public site before 2026-09-04, and the paper describes a mechanism that is
+tested but not publicly deployed.
 
 ## 12. Out of scope
 
@@ -300,3 +313,99 @@ gateway-first; the paper can describe and test the mechanism without a public de
   Ian and Milton). Both are real missing hazard dimensions and both fit the `re-derivable`
   regime this design establishes, so they are cheap follow-ons rather than part of the first
   spec.
+
+## 13. What implementation changed (2026-08-21)
+
+Written after the fact, because a design that describes only what it got right is not much use
+to whoever reads it next.
+
+### 13.1 The containment boundary is content values, not provider strings
+
+The load-bearing test in §9 was written as specified — seed the fake with poison strings, assert
+none reach the record — and it failed immediately on `displayName`.
+
+It was right to fail and the design was imprecise. `displayName` appears in the written record
+as a **field name inside the request**, because the request is ours and must be recorded verbatim
+for a reader to replay it: a replay with a different field mask is a different request. Recording
+that we asked for display names discloses nothing about any place. Recording a display name does.
+
+So the boundary is content **values**, and §6's "no Maps Content" needed that precision. Two
+consequences, both in `fake.py`: field names are deliberately absent from `POISON_STRINGS`, and
+so are bare numerics like a rating of `4.7` — a short digit string can occur inside a
+64-character hex digest by chance, and a test that fails on the day the hash contains it teaches
+people to ignore it. Numeric content is covered by distinctive phone numbers instead, and by the
+`RECORDED_KEYS` assertion, which is the guarantee that actually generalises: any field nobody
+approved fails the write regardless of what it contains.
+
+### 13.2 Counts, not names, reach the model — retention is not the only question
+
+Not in the design, and it should have been. §7 says `display_payload` is "returned to the caller
+for immediate rendering and never written to disk", which settles retention and quietly assumes
+the only risk is disk.
+
+It is not. The gateway hands evidence to a language model, and `STEWARD_LLM_BASE_URL` may point
+at a hosted provider. Sending Maps Content there is **onward disclosure**, a different question
+from retention, and one the terms do not obviously settle in our favour. Local Ollama — the
+default — keeps it in-process, but the design must not depend on which endpoint is configured.
+
+So `LiveSource` gained `summarize()`, and the evidence block carries counts by category rather
+than the response: `hospital=1, fire_station=1 within 1200 m`. That answers what a resident asked
+as well as a list of names does, and no third-party content string leaves the process. Names stay
+in `display_payload` for a surface that renders them live, with attribution, and keeps nothing.
+
+This is the §6 observation happening a second time: taking the licence seriously produced the
+smaller design, and the smaller design is better on its own merits.
+
+### 13.3 Classification order is a policy decision
+
+`facility_context` is checked after `damage_assessment` and after `exposure`. Damage stays first
+as the heaviest claim. Exposure precedes facilities so that a question mentioning both
+vulnerability and hospitals resolves toward the retained grids — ambiguity should fall toward the
+**stronger** verifiability, not toward the live lookup. The cost is real and worth stating: such
+a question is answered from retained evidence only and does not address the facility half.
+
+### 13.4 A capability gap is not a policy refusal
+
+Found by a test. With no live source configured, a facility question inside an AOI was refused
+with "No policy rule authorizes this request" — which is false. It *is* authorized; the
+capability is absent. The request carried `retained`, matched no allow rule (the facility rule
+requires `re-derivable` exactly), and fell to `default-deny`.
+
+The fix is a `LIVE_PURPOSES` mapping from purpose to the verifiability its source would supply,
+so the policy can be asked what it *would* decide if the capability existed. An out-of-AOI
+request still gets its real rule ID; an in-AOI one gets "not configured". Ordering matters here:
+policy is still evaluated first, so an unauthorized question never reaches a third party — no
+billing surface, no disclosure — and the capability gap is only reported once the location
+question has passed.
+
+This is the same defect class as the four in the 2026-08-20 correctness pass: the system stating
+something untrue about itself, in a case nobody had a reason to look at.
+
+### 13.5 Attestation precedes use, and a source without a recorder is refused
+
+Two orderings the design left implicit and the implementation makes explicit and tested. The
+record is written **before** the result reaches the model, so no cited fact can exist without a
+row saying where it came from — including when the answer is ultimately refused. And a live
+source configured without a recorder is refused outright rather than used unattested:
+accountability is not the optional half of the feature.
+
+### 13.6 There is no recorder for the `cited-only` regime
+
+§3 promised the grounded regime "its contract, its policy rules, and a fake adapter", and it has
+all three. It has no published record, deliberately, and the gap is worth naming rather than
+leaving as an omission: no rule authorizes a cited-only claim, so there is no authorized lookup
+to record. If one is ever permitted, the shape of its record is a genuine open question, because
+grounding citations are simultaneously the smallest accountable unit (§3) and third-party
+identifiers of exactly the kind §11.2 keeps out of published records. That tension should be
+resolved on purpose.
+
+### 13.7 Not done
+
+- **Neither live API call has run.** No GMP key. `places.py` and `grounded.py` are tested against
+  an in-process stub, which establishes this code's behaviour and nothing about Google's. Every
+  unexpected wire shape raises `LiveUnavailable` rather than returning a partial result, because
+  the format is unverified. The measured numbers belong in this document once it runs.
+- **`events/live_evidence.jsonl` does not exist yet.** The class is declared in the distribution
+  plane and the recorder writes the file on first use; no lookup has happened outside tests.
+- **Gateway hardening is still open** — origin allowlist, rate limiting, audit redaction — and
+  remains the prerequisite for any hosted deployment carrying a key (§10 blocker 2).

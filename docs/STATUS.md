@@ -1,6 +1,6 @@
 # GeoSteward v1 — Project Status
 
-**Updated:** 2026-08-19 · **Target:** OASIS @ ACM SIGSPATIAL 2026 Track A
+**Updated:** 2026-08-21 · **Target:** OASIS @ ACM SIGSPATIAL 2026 Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 
 Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/plans/), all derived from the
@@ -165,6 +165,75 @@ deployed site rather than the code:
   layer won. Coverage is now the union across layers, and `not_covered` is distinguished
   from `unknown` — an unreadable layer no longer produces a confident negative.
 
+A fifth, found on 2026-08-21 while regenerating the allowlist on the maintainer's
+workstation:
+
+- **Publication plan order depended on the filesystem, not the policy.** The allowlist is
+  generated and CI regenerates it to diff against the commit, so its bytes must be a
+  function of the distribution policy alone. They were not: `plan_publication` sorted
+  `Path` objects, and `PurePath` ordering case-folds on Windows and does not on POSIX. Two
+  registry profiles differing only in case swapped places between the workstation and CI,
+  so regenerating on Windows failed the `plan --check` gate on a difference that meant
+  nothing — and a gate that fails for cosmetic reasons is a gate people learn to
+  override. Ordering is now by the POSIX relative path string everywhere an ordering
+  reaches a committed file.
+
+### Accountability for non-retainable evidence (2026-08-21)
+
+Design: [`superpowers/specs/2026-08-20-non-retainable-evidence-design.md`](superpowers/specs/2026-08-20-non-retainable-evidence-design.md)
+(§11 rulings and §13 implementation notes). Investigating Google Maps Platform surfaced
+a structural problem worth more than the capabilities: GMP terms forbid retaining Maps
+Content, while GeoSteward proves traceability by hashing and freezing every input. So —
+**when you are contractually forbidden from retaining the evidence, what makes a claim
+derived from it accountable?**
+
+- **`verifiability`, a third axis in the claim plane**, orthogonal to the tier ladder.
+  Tier encodes how fresh and deep the evidence is; verifiability encodes what a *reader*
+  can do to check it: `retained` > `re-derivable` > `cited-only`, totally ordered, with
+  **weakest-link** semantics — a claim is no more verifiable than its weakest support.
+  Damage assessment now requires retained evidence by rule. Tile-level
+  `facility_context` inside an AOI may use a re-derivable source. Nothing permits
+  `cited-only`: it matches no allow rule and the fail-closed default carries the
+  non-deterministic regime without a rule being written for it.
+- **`license`, a third attribute in the distribution plane**, required on every artifact
+  class. The other two record what *this project* judges safe to serve, and a third
+  party's terms are not ours to judge. `third-party-restricted` is denied publication
+  ahead of every other rule; the value set is validated at load, because
+  `third-party-restrcited` would match no deny rule and publish the file.
+- **The core result: `events/live_evidence.jsonl` is publishable because it holds no
+  content.** It carries the request — entirely ours, since we chose the cell, the radius
+  and the field mask — plus a response sha256, a count, and the source's own licence and
+  retention declarations. A reader with their own key replays the request and compares
+  digests; drift is reported as drift (the provider's data moved), not as failure. Place
+  IDs are deliberately absent (owner ruling, §11.2). The payload is built from a named
+  key list and asserted against it on every write, and the request must name an
+  `h3_cell` — a record classified at tile resolution cannot carry a point.
+- **`src/geosteward/live/`**: `base.py` contracts (content quarantined from attestation;
+  `GroundedResult` has no digest field, because hashing non-reproducible prose would
+  look like an anchor and hold nothing), `places.py`, `grounded.py`, `fake.py`,
+  `record.py`.
+- **The gateway serves it**: policy decides before anything is fetched, so an
+  unauthorized question never reaches a third party — no billing surface, no disclosure.
+  The lookup is attested before it is used. A source configured without a recorder is
+  refused outright. `[live:HASH12]` is a second citation form, and an answer citing one
+  must also cite an `[artifact:]` — "cited-only cannot stand alone", made computable.
+- **The model is given counts, not names** (`hospital=1, fire_station=1 within 1200 m`).
+  Retention and onward disclosure are different questions, and a hosted model endpoint is
+  onward disclosure. Not in the original design; see §13.2.
+- **The app renders the difference**: a live chip is visually distinct and says
+  "re-derivable, not retained"; the answer reports its own weakest-link verifiability;
+  attribution comes from the gateway's field so the app cannot show the content while
+  forgetting the credit.
+- Test suite **212 Python tests + 37 app tests green**, led by a containment property
+  test: a fake source is seeded with content of exactly the kinds the licence forbids
+  warehousing, the recorder is driven for real, and the bytes on disk are searched for
+  every one of those strings. After the publication-boundary incident, "the record cannot
+  contain restricted content" is not left as an intention.
+- **Not done, and load-bearing:** neither live API call has ever run — there is no GMP
+  key, so both adapters are tested against an in-process stub, which establishes this
+  code's behaviour and nothing about Google's. `events/live_evidence.jsonl` therefore
+  does not exist yet outside tests.
+
 ## 🔜 Next (not blocked)
 
 - Surface `watch_status.json` in the map UI: source health, staleness, and the skipped
@@ -178,15 +247,6 @@ deployed site rather than the code:
   is the same class of billing-abuse surface, and the live-evidence audit record has to
   be written server-side.
 - Persist planner adjustments past the session.
-- **Accountability for non-retainable evidence** — design agreed 2026-08-20, not yet
-  implemented: [`superpowers/specs/2026-08-20-non-retainable-evidence-design.md`](superpowers/specs/2026-08-20-non-retainable-evidence-design.md).
-  Investigating Google Maps Platform surfaced a structural problem: GMP terms forbid
-  retaining Maps Content, while GeoSteward proves traceability by hashing and freezing
-  every input. The design adds a `verifiability` axis (`retained` > `re-derivable` >
-  `cited-only`, weakest-link semantics), a `license` attribute on the distribution
-  plane, and a published audit record that is publishable *because* it holds request
-  parameters and a response hash but no content. Three decisions still open, recorded in
-  §11 of the spec. Blocked on a GMP key (obtainable) and on gateway hardening.
 - Deferred from that design and worth doing for the 2026-11-03 demo rather than the
   paper: **Routes API for budget-constrained inspection routing** (the README lists
   inspection routing as not implemented, and Track A asks for decision relevance), plus
