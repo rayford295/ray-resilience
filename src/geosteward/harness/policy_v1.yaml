@@ -6,6 +6,11 @@
 #   rules:        the CLAIM plane — what the agent may assert, per request.
 #   distribution: the DISTRIBUTION plane — what a build may publish, per artifact.
 #
+# Both planes answer questions about what THIS project does. A third question
+# comes from outside it — what may be retained at all, and can a reader check
+# it — and is carried by the `verifiability` match key in the claim plane and
+# the `license` attribute in the distribution plane.
+#
 # The second plane exists because the first was not enough. On 2026-08-20 a
 # parcel-level DINS source reached the public Pages site while satisfying every
 # claim rule below, because nothing ever claimed it — the build copied it. See
@@ -29,6 +34,16 @@ rules:
     reason: Residents receive exposure context and guidance, not raw damage assessments.
     match: {role: resident, purpose: damage_assessment}
 
+  # The `verifiability` axis: what a READER can do to check the support, which
+  # is orthogonal to how fresh or deep it is. A live third-party lookup can be
+  # current and accurate and still be uncheckable by anyone without a key.
+  # Damage assessment is the project's heaviest claim, so it is the one that
+  # requires a hashed copy in the repository and not merely a good source.
+  - id: deny-damage-assessment-without-retained-evidence
+    effect: deny
+    reason: Damage assessment requires retained, hashed cross-view evidence; a live third-party lookup cannot support it.
+    match: {purpose: damage_assessment, verifiability_below: retained}
+
   # --- authorizations ---
   - id: allow-watch-anywhere
     effect: allow
@@ -45,6 +60,16 @@ rules:
     reason: Planners may see tile-level damage assessment where Tier 3 cross-view evidence exists.
     match: {role: planner, purpose: damage_assessment, resolution: tile, in_aoi: true, evidence_tier_at_least: 3}
 
+  # Note what this rule does NOT permit: `cited-only`. A grounded answer about
+  # facilities — model prose that can be neither retained nor reproduced —
+  # matches no allow rule and falls through to `default-deny`. The fail-closed
+  # default carries the non-deterministic regime without a rule being written
+  # for it, which is the behaviour to want.
+  - id: allow-facility-context-re-derivable
+    effect: allow
+    reason: Tile-level facility context may come from a re-derivable live source when paired with retained exposure.
+    match: {purpose: facility_context, resolution: tile, in_aoi: true, verifiability: re-derivable}
+
 # --- distribution plane: what may be published -----------------------------
 #
 # Which events form the public surface. A deep case is published only once it
@@ -55,7 +80,7 @@ rules:
 # decision expressed as build-script trivia.
 published_events: [eaton-2025, milton-2024, ian-2022]
 #
-# Every artifact kind the repository produces declares two attributes:
+# Every artifact kind the repository produces declares three attributes:
 #
 #   resolution_cap  the finest geography the artifact can support a statement
 #                   about. `parcel` is the disclosure risk; `tile` (H3 r9,
@@ -63,33 +88,58 @@ published_events: [eaton-2025, milton-2024, ian-2022]
 #   audience        who the artifact is FOR. `public` ships. `lineage` exists
 #                   so a hashed chain leads back to the source. `internal`
 #                   supports reproduction on the maintainer's workstation.
+#   license         whether the content is OURS TO REDISTRIBUTE. The first two
+#                   attributes record what this project judges safe to serve;
+#                   a third party's terms are not ours to judge, so they get
+#                   their own attribute and their own denial.
 #
 # A kind absent from this table is denied publication. That is the point: a new
 # product cannot widen the public surface until someone classifies it here.
 artifact_classes:
   # Tile products — the public evidence surface.
-  damage_grid:               {resolution_cap: tile,    audience: public}
-  svi_context_grid:          {resolution_cap: tile,    audience: public}
-  debris_exposure_grid:      {resolution_cap: tile,    audience: public}
-  evidence_grid:             {resolution_cap: tile,    audience: public}
-  evidence_coverage_grid:    {resolution_cap: tile,    audience: public}
-  sample_density_grid:       {resolution_cap: tile,    audience: public}
+  damage_grid:               {resolution_cap: tile,    audience: public,   license: project}
+  svi_context_grid:          {resolution_cap: tile,    audience: public,   license: project}
+  debris_exposure_grid:      {resolution_cap: tile,    audience: public,   license: project}
+  evidence_grid:             {resolution_cap: tile,    audience: public,   license: project}
+  evidence_coverage_grid:    {resolution_cap: tile,    audience: public,   license: project}
+  sample_density_grid:       {resolution_cap: tile,    audience: public,   license: project}
 
   # Accountability records — publishing these IS the accountability claim.
-  event_record:              {resolution_cap: event,   audience: public}
-  artifact_manifest:         {resolution_cap: event,   audience: public}
-  audit_log:                 {resolution_cap: event,   audience: public}
+  event_record:              {resolution_cap: event,   audience: public,   license: project}
+  artifact_manifest:         {resolution_cap: event,   audience: public,   license: project}
+  audit_log:                 {resolution_cap: event,   audience: public,   license: project}
 
-  # Parcel-level ground truth: lineage only, never served.
-  damage_points_restricted:  {resolution_cap: parcel,  audience: lineage}
+  # The record of a non-retainable lookup. Licensed `project` because it holds
+  # no third-party content at all — request parameters, a response digest, and
+  # a count. That is the whole result: it is publishable BECAUSE it is empty of
+  # the content it attests to. See docs/superpowers/specs/
+  # 2026-08-20-non-retainable-evidence-design.md.
+  live_lookup_record:        {resolution_cap: tile,    audience: public,   license: project}
+
+  # Parcel-level ground truth: lineage only, never served. CAL FIRE DINS is
+  # public-domain data; `parcel` is a disclosure judgment, not a licence one,
+  # and the two attributes are kept separate so neither excuses the other.
+  damage_points_restricted:  {resolution_cap: parcel,  audience: lineage,  license: public-domain-source}
 
   # Upstream state frozen for reproduction. Not needed by the app, and the
   # registry profiles describe a private 33 GB corpus, so they stay internal.
-  dataset_registry_snapshot: {resolution_cap: dataset, audience: internal}
-  source_snapshot:           {resolution_cap: source,  audience: internal}
+  dataset_registry_snapshot: {resolution_cap: dataset, audience: internal, license: project}
+  source_snapshot:           {resolution_cap: source,  audience: internal, license: public-domain-source}
 
 distribution:
   # --- hard denials (checked first) ---
+  #
+  # First, and structural rather than advisory: any third-party-restricted file
+  # that reaches `events/` cannot be published, however it got there and
+  # whether or not anyone recorded it in a manifest. Combined with
+  # `verify_site`'s set difference over the assembled tree, that is two
+  # independent defences — this one denies a CLASSIFIED artifact, that one
+  # denies an UNRECOGNISED file.
+  - id: deny-publish-third-party-restricted
+    effect: deny
+    reason: Third-party licensed content may not be redistributed in the public site.
+    match: {license: third-party-restricted}
+
   - id: deny-publish-parcel-resolution
     effect: deny
     reason: Parcel-resolution artifacts are lineage-only and are never served.

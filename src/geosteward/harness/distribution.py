@@ -29,9 +29,29 @@ from geosteward.harness.policy import PolicyDecision, default_deny, validate_rul
 
 #: Publication attributes a kind may declare. Kept deliberately small: each
 #: one must be answerable about any artifact without opening the file.
-KNOWN_CLASS_ATTRIBUTES = frozenset({"resolution_cap", "audience"})
+#:
+#: `license` answers a question the other two cannot: `resolution_cap` and
+#: `audience` are both about what *this project* judges safe to serve, and a
+#: third party's terms are not ours to judge. It was suggested in the review
+#: that produced this plane and left out because nothing needed it; live
+#: third-party lookups are what need it.
+KNOWN_CLASS_ATTRIBUTES = frozenset({"resolution_cap", "audience", "license"})
 
 KNOWN_MATCH_KEYS = KNOWN_CLASS_ATTRIBUTES
+
+#: A closed set, validated at load. Unlike `resolution_cap` and `audience`,
+#: whose values are only ever compared against rules in the same file, a
+#: license names an external constraint — and `third-party-restrcited` would
+#: match no deny rule and publish the file. Same reasoning as the unknown-key
+#: check in `validate_rules`: a typo must narrow or fail, never widen.
+#:
+#:   project                  Produced by this project from sources it may
+#:                            redistribute; the public evidence surface.
+#:   public-domain-source     Frozen upstream state from a public-domain
+#:                            provider (US government APIs and datasets).
+#:   third-party-restricted   Content under third-party terms that forbid
+#:                            redistribution. Never published, by rule.
+KNOWN_LICENSES = frozenset({"project", "public-domain-source", "third-party-restricted"})
 
 
 @dataclass(frozen=True)
@@ -59,6 +79,11 @@ def _validate_classes(classes: Any) -> dict[str, dict[str, str]]:
                 raise ValueError(
                     f"Artifact class '{kind}' is missing required attribute '{required}'."
                 )
+        if attributes["license"] not in KNOWN_LICENSES:
+            raise ValueError(
+                f"Artifact class '{kind}' has unknown license "
+                f"{attributes['license']!r}; expected one of {sorted(KNOWN_LICENSES)}."
+            )
     return classes
 
 

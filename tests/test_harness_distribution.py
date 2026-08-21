@@ -16,13 +16,26 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 POLICY_V1 = REPO_ROOT / "src" / "geosteward" / "harness" / "policy_v1.yaml"
 
 CLASSES = {
-    "damage_points_restricted": {"resolution_cap": "parcel", "audience": "lineage"},
-    "damage_grid": {"resolution_cap": "tile", "audience": "public"},
-    "event_record": {"resolution_cap": "event", "audience": "public"},
-    "source_snapshot": {"resolution_cap": "source", "audience": "internal"},
+    "damage_points_restricted": {
+        "resolution_cap": "parcel", "audience": "lineage", "license": "public-domain-source",
+    },
+    "damage_grid": {"resolution_cap": "tile", "audience": "public", "license": "project"},
+    "event_record": {"resolution_cap": "event", "audience": "public", "license": "project"},
+    "source_snapshot": {
+        "resolution_cap": "source", "audience": "internal", "license": "public-domain-source",
+    },
+    "google_places_response": {
+        "resolution_cap": "tile", "audience": "public", "license": "third-party-restricted",
+    },
 }
 
 RULES = [
+    {
+        "id": "deny-publish-third-party-restricted",
+        "effect": "deny",
+        "reason": "Third-party licensed content may not be redistributed in the public site.",
+        "match": {"license": "third-party-restricted"},
+    },
     {
         "id": "deny-publish-parcel-resolution",
         "effect": "deny",
@@ -88,12 +101,25 @@ class TestDistributionPolicy(unittest.TestCase):
 
     def test_classified_kind_matching_no_rule_is_denied(self) -> None:
         policy = DistributionPolicy(
-            artifact_classes={"orphan": {"resolution_cap": "block", "audience": "public"}},
+            artifact_classes={
+                "orphan": {
+                    "resolution_cap": "block", "audience": "public", "license": "project",
+                }
+            },
             rules=RULES,
         )
         decision = policy.evaluate(ref("orphan"))
         self.assertFalse(decision.allowed)
         self.assertEqual(decision.rule_id, "default-deny")
+
+    def test_third_party_restricted_content_is_denied_even_at_tile_resolution(self) -> None:
+        # The tile-product allow rule would otherwise authorize this: it is
+        # public, tile-capped, and classified. The licence is the only thing
+        # standing between it and the public site, which is why it needs an
+        # attribute of its own rather than a note in a docstring.
+        decision = self.policy.evaluate(ref("google_places_response"))
+        self.assertFalse(decision.allowed)
+        self.assertEqual(decision.rule_id, "deny-publish-third-party-restricted")
 
 
 class TestDistributionValidation(unittest.TestCase):

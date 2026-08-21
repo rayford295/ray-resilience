@@ -20,6 +20,46 @@ from typing import Any
 import yaml
 
 
+#: The `verifiability` axis, weakest first — so a list index IS the strength
+#: rank and comparisons are ordinary integer comparisons.
+#:
+#: This axis is orthogonal to the tier ladder. Tier encodes freshness and depth
+#: of evidence; verifiability encodes *what a reader can do to check it*: open a
+#: hashed copy in this repository (`retained`), re-issue the request with their
+#: own key and compare digests (`re-derivable`), or check only that the cited
+#: references exist (`cited-only`). Third-party content does not fail on tier —
+#: a live facility lookup can be perfectly current and still be uncheckable by
+#: a reader without a key. Folding the two axes together would erase that.
+VERIFIABILITY_ORDER = ("cited-only", "re-derivable", "retained")
+
+RETAINED, RE_DERIVABLE, CITED_ONLY = "retained", "re-derivable", "cited-only"
+
+
+def verifiability_rank(value: str) -> int:
+    """Strength rank; raises on an unknown value rather than guessing one."""
+    try:
+        return VERIFIABILITY_ORDER.index(value)
+    except ValueError:
+        raise ValueError(
+            f"Unknown verifiability {value!r}; expected one of {list(VERIFIABILITY_ORDER)}."
+        ) from None
+
+
+def weakest(values: Any) -> str:
+    """The weakest-link verifiability over several supporting sources.
+
+    A claim is no more verifiable than its weakest support, so an answer drawing
+    on both a hashed grid and a live lookup is `re-derivable` — not `retained`
+    because most of it happens to be. Taking the maximum here, or averaging,
+    would let strong evidence launder weak evidence into the same standing.
+    """
+    ranked = [(verifiability_rank(v), v) for v in values]
+    if not ranked:
+        # No supporting source is not "perfectly verifiable"; it is the floor.
+        return CITED_ONLY
+    return min(ranked)[1]
+
+
 @dataclass(frozen=True)
 class PolicyRequest:
     role: str
@@ -27,6 +67,10 @@ class PolicyRequest:
     resolution: str
     evidence_tier: int
     in_aoi: bool
+    #: Defaults to `retained`: every product built before this axis existed has
+    #: a hashed copy in the repository, so the default states a fact rather than
+    #: waving the field through.
+    verifiability: str = RETAINED
 
 
 @dataclass(frozen=True)
@@ -36,10 +80,23 @@ class PolicyDecision:
     reason: str
 
 
-_EXACT_KEYS = ("role", "purpose", "resolution", "in_aoi")
+_EXACT_KEYS = ("role", "purpose", "resolution", "in_aoi", "verifiability")
 _KNOWN_MATCH_KEYS = frozenset(
-    {"role", "purpose", "resolution", "in_aoi", "evidence_tier_at_least", "evidence_tier_below"}
+    {
+        "role",
+        "purpose",
+        "resolution",
+        "in_aoi",
+        "evidence_tier_at_least",
+        "evidence_tier_below",
+        "verifiability",
+        "verifiability_below",
+    }
 )
+#: Match keys whose value names a point on the verifiability order. Checked at
+#: construction time: a typo here would silently widen a rule, which is the
+#: failure mode `validate_rules` exists to prevent.
+_VERIFIABILITY_VALUE_KEYS = ("verifiability", "verifiability_below")
 _KNOWN_EFFECTS = frozenset({"allow", "deny"})
 
 
@@ -50,6 +107,10 @@ def _matches(match: dict[str, Any], request: PolicyRequest) -> bool:
     if "evidence_tier_at_least" in match and request.evidence_tier < match["evidence_tier_at_least"]:
         return False
     if "evidence_tier_below" in match and request.evidence_tier >= match["evidence_tier_below"]:
+        return False
+    if "verifiability_below" in match and verifiability_rank(
+        request.verifiability
+    ) >= verifiability_rank(match["verifiability_below"]):
         return False
     return True
 
@@ -99,9 +160,28 @@ def default_deny(reason: str, rule_id: str = "default-deny") -> PolicyDecision:
     return PolicyDecision(allowed=False, rule_id=rule_id, reason=reason)
 
 
+def _validate_verifiability_values(rules: list[dict[str, Any]]) -> None:
+    """Reject an unknown point on the verifiability order at load time.
+
+    `validate_rules` checks that match *keys* are known; it says nothing about
+    values, because most values are free-form strings. Verifiability is not:
+    it is a closed, ordered set, and a rule matching `verifiability: retianed`
+    would match nothing and therefore never deny anything.
+    """
+    for rule in rules:
+        match = rule.get("match", {})
+        for key in _VERIFIABILITY_VALUE_KEYS:
+            if key in match:
+                try:
+                    verifiability_rank(match[key])
+                except ValueError as error:
+                    raise ValueError(f"Rule '{rule['id']}' {error}") from None
+
+
 class PolicyEngine:
     def __init__(self, rules: list[dict[str, Any]]):
         self.rules = validate_rules(rules, _KNOWN_MATCH_KEYS)
+        _validate_verifiability_values(self.rules)
 
     @classmethod
     def from_yaml(cls, path: Path) -> "PolicyEngine":
