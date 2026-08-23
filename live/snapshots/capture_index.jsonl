@@ -342,3 +342,7 @@
 {"source": "nws", "path": "nws_20260823T174045Z.json.gz", "utc": "20260823T174045Z"}
 {"source": "nhc", "path": "nhc_20260823T174045Z.json.gz", "utc": "20260823T174045Z"}
 {"source": "nifc", "path": "nifc_20260823T174045Z.json.gz", "utc": "20260823T174045Z"}
+{"source": "usgs", "path": "usgs_20260823T185255Z.json.gz", "utc": "20260823T185255Z"}
+{"source": "nws", "path": "nws_20260823T185255Z.json.gz", "utc": "20260823T185255Z"}
+{"source": "nhc", "path": "nhc_20260823T185255Z.json.gz", "utc": "20260823T185255Z"}
+{"source": "nifc", "path": "nifc_20260823T185255Z.json.gz", "utc": "20260823T185255Z"}
