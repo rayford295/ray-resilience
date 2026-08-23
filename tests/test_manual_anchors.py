@@ -77,6 +77,19 @@ class TemplateAndAbsenceTests(unittest.TestCase):
     def test_no_stale_skips_in_this_repo(self):
         self.assertEqual(ma.stale_skips(REPO), [])
 
+    def test_stale_skip_is_reported_when_its_subject_is_gone(self):
+        # Mirrors test_declared_absent_path_that_now_exists_is_reported: a
+        # SKIP_PATHS entry that outlives its subject is a silent hole, so an
+        # empty root (naming neither docs/design/ nor docs/architecture.md)
+        # must surface both as stale.
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stale = ma.stale_skips(root)
+            self.assertIn("docs/architecture.md", stale)
+            self.assertIn("docs/design/", stale)
+
     def test_declared_absent_path_resolves(self):
         # Cited in order to say it is not there; must not fail the gate.
         (anchor,) = ma.extract_anchors("`events/live_evidence.jsonl`", Path("x.md"))

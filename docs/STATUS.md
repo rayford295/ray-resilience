@@ -250,7 +250,7 @@ derived from it accountable?**
   in one place.
 - **Bilingual manual: spec and plan committed, no content yet.**
   [Spec](design/specs/2026-08-23-bilingual-manual-design.md) ·
-  [plan](design/plans/2026-08-23-bilingual-manual.md). Thirteen files under docs/manual/,
+  [plan](design/plans/2026-08-23-bilingual-manual.md). Thirteen files under `docs/manual/`,
   English with a Chinese restatement per subsection, plus `scripts/manual_anchors.py` to
   make cited paths checkable in CI. Fourteen tasks; **none executed**. Tasks 1–4 form a
   coherent stopping point if the work is interrupted.

@@ -64,6 +64,11 @@ DECLARED_ABSENT = {
     # The manual cites this path precisely to say the file is not there.
     # See docs/manual/05-verifiability-and-live.md.
     "events/live_evidence.jsonl": "no GMP key; both adapters are tested against a stub",
+    # Created by Task 2 of the bilingual-manual plan. Declared rather than
+    # de-formatted on purpose: when the directory appears, stale_absences fails
+    # the gate, which is what forces this citation to become a live link
+    # instead of quietly staying a bare string.
+    "docs/manual/": "created by Task 2 of docs/design/plans/2026-08-23-bilingual-manual.md",
 }
 
 # Source-file prefixes whose own anchors are not checked. This is keyed on
