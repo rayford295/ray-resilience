@@ -50,6 +50,8 @@ Lands before any manual content so every later file is gated as it is written.
   - `extract_anchors(text: str, source: Path) -> list[Anchor]`
   - `Anchor` — a frozen dataclass with fields `raw: str`, `path: str`, `line_ref: str | None`, `source: Path`, `source_line: int`
   - `DECLARED_ABSENT: dict[str, str]` — path to the reason it is expected to be missing
+  - `SKIP_PATHS: tuple[str, ...]` — source-file prefixes whose anchors are not checked
+  - `stale_skips(repo_root: Path) -> list[str]` — `SKIP_PATHS` entries that no longer exist
   - `resolve(anchor: Anchor, repo_root: Path) -> bool` — true when the path exists **or** is declared absent
   - `stale_absences(repo_root: Path) -> list[str]` — declared-absent paths that now exist
   - `collect(roots: list[Path], repo_root: Path) -> list[Anchor]`
@@ -85,7 +87,31 @@ DECLARED_ABSENT = {
 
 **Known misses, to be documented in the script's module docstring rather than fixed.** Bare (un-backticked) paths in prose are not extracted, because the false-positive rate over English text is not worth it. A path broken across two lines is not extracted — `src/geosteward/harness/policy_v1.yaml` line 115 wraps `docs/design/specs/` onto the next line and this script will not catch it. And an anchor that resolves says nothing about whether the behaviour behind it still matches the sentence citing it. Stating the limits is the point; a gate whose coverage is overstated is worse than one whose coverage is known.
 
-**Not in scope for the gate:** `docs/design/plans/` and `docs/design/specs/`. Plans cite files they are about to create and specs cite paths as historical record — including, deliberately, `src/disasterpilot/sources/usgs.py` as an example of a path that must *not* resolve. Running the gate over design records would report dozens of correct citations as failures. Only pass it roots whose paths are meant to be live.
+**Sources the gate skips, by path prefix.** Two directories legitimately cite paths that do not resolve, so the script carries a `SKIP_PATHS` tuple checked against each *source file* before extraction — not against the anchors:
+
+```python
+SKIP_PATHS = (
+    # Design records cite paths that are planned, or historical, or cited as
+    # counterexamples: this plan cites the thirteen files it is about to create,
+    # and the specs cite `src/disasterpilot/` precisely because it no longer
+    # exists. 80 correct citations would report as failures.
+    "docs/design/",
+    # Scheduled for deletion in Task 14. Until then it cites
+    # src/disasterpilot/sources/, which is the very staleness this gate exists to
+    # catch — but a gate that is red for thirteen tasks is a gate people learn to
+    # override. Task 14 deletes the file AND this entry, together.
+    "docs/architecture.md",
+)
+```
+
+Task 14 removes the second entry when it removes the file. A skip that outlives its subject is a silent hole, so `stale_absences` has a sibling: `main` reports any `SKIP_PATHS` entry that no longer exists on disk, which is what forces the entry to be cleaned up.
+
+**Two more token shapes that are not paths.** The pre-flight scan over the existing `docs/` tree found both:
+
+- `docs/superpowers/{specs,plans}/` in `docs/STATUS.md` is brace notation describing two directories, not one path. Reject any token containing `{` or `}` alongside `<`, `>`, `*`.
+- `tests/test_harness_publication.py::test_planted_restricted_artifact_is_reported` in `docs/incidents/2026-08-20-publication-boundary.md` is a test node ID. Strip a `::`-suffix the same way `:N` is stripped, then resolve the file part.
+
+**One real finding from the same scan, to record rather than fix here.** `docs/design/specs/2026-08-20-non-retainable-evidence-design.md` cites `gateway/steward.py` and `gateway/llm.py`; the real paths are `src/geosteward/gateway/steward.py` and `src/geosteward/gateway/llm.py`. That file is inside `SKIP_PATHS`, so it will not fail the gate. Note it in the commit message and in the ledger; correcting a historical decision record is out of scope for this task.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -147,6 +173,29 @@ class TemplateAndAbsenceTests(unittest.TestCase):
         text = "`events/<event-id>/artifact_manifest.jsonl` and `events/*/dossier/`"
         self.assertEqual(ma.extract_anchors(text, Path("x.md")), [])
 
+    def test_brace_notation_is_not_an_anchor(self):
+        text = "moved `docs/superpowers/{specs,plans}/` to `docs/design/`"
+        self.assertEqual([a.path for a in ma.extract_anchors(text, Path("x.md"))], ["docs/design/"])
+
+    def test_test_node_id_resolves_to_its_file(self):
+        (anchor,) = ma.extract_anchors(
+            "`tests/test_harness_publication.py::test_planted_restricted_artifact_is_reported`",
+            Path("x.md"),
+        )
+        self.assertEqual(anchor.path, "tests/test_harness_publication.py")
+        self.assertTrue(ma.resolve(anchor, REPO))
+
+    def test_skipped_sources_contribute_no_anchors(self):
+        # docs/design/ cites paths it is about to create; docs/architecture.md is
+        # stale and scheduled for deletion. Neither may fail the gate.
+        anchors = ma.collect([Path("docs")], REPO)
+        sources = {str(a.source) for a in anchors}
+        self.assertFalse([s for s in sources if s.startswith("docs/design/")])
+        self.assertNotIn("docs/architecture.md", sources)
+
+    def test_no_stale_skips_in_this_repo(self):
+        self.assertEqual(ma.stale_skips(REPO), [])
+
     def test_declared_absent_path_resolves(self):
         # Cited in order to say it is not there; must not fail the gate.
         (anchor,) = ma.extract_anchors("`events/live_evidence.jsonl`", Path("x.md"))
@@ -207,7 +256,7 @@ Write `scripts/manual_anchors.py` satisfying the interface above. Required eleme
 - [ ] **Step 4: Run the tests to verify they pass**
 
 Run: `python -m unittest tests.test_manual_anchors -v`
-Expected: PASS, 15 tests.
+Expected: PASS, 20 tests.
 
 - [ ] **Step 5: Run the gate over the repository as it stands**
 
@@ -235,7 +284,7 @@ In `.github/workflows/test.yml`, append to the `unit-tests` job:
 - [ ] **Step 7: Full suite, then commit**
 
 Run: `python -m unittest discover -s tests`
-Expected: PASS — 212 existing tests plus 15 new ones. Record the actual total; it is the number `10-getting-started.md` will cite in Task 13.
+Expected: PASS — 212 existing tests plus 20 new ones. Record the actual total; it is the number `10-getting-started.md` will cite in Task 13.
 
 ```bash
 git add scripts/manual_anchors.py tests/test_manual_anchors.py .github/workflows/test.yml
@@ -912,11 +961,16 @@ grep -l "witnesses with different competence\|reliability gate" docs/manual/06-d
 ```
 Expected: both files listed. If either is empty, the content was not absorbed — go back to Task 5 or Task 9 rather than deleting the source.
 
-- [ ] **Step 2: Delete `docs/architecture.md`**
+- [ ] **Step 2: Delete `docs/architecture.md` and its skip entry, together**
 
 ```bash
 git rm docs/architecture.md
 ```
+
+Then remove the `"docs/architecture.md"` entry from `SKIP_PATHS` in `scripts/manual_anchors.py`. The two must move in the same commit: the entry exists only because the file was still present, and `stale_skips` will fail the gate if the entry outlives its subject. That failure is the mechanism working — it is what stops the skip list from quietly becoming a permanent hole.
+
+Run: `python -m unittest tests.test_manual_anchors -v`
+Expected: PASS. `test_skipped_sources_contribute_no_anchors` still passes because `docs/design/` remains skipped; `test_no_stale_skips_in_this_repo` now passes because the dead entry is gone.
 
 - [ ] **Step 3: Move `docs/methodology.md` and add its header**
 
