@@ -78,7 +78,7 @@ SKIP_PATHS = (
     "docs/design/",
     # Scheduled for deletion in Task 14. Until then it cites
     # src/disasterpilot/sources/, which is the very staleness this gate exists to
-    # catch -- but a gate that is red for thirteen tasks is a gate people learn to
+    # catch — but a gate that is red for thirteen tasks is a gate people learn to
     # override. Task 14 deletes the file AND this entry, together.
     "docs/architecture.md",
 )
