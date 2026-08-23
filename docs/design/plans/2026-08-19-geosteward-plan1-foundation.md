@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python >=3.10, stdlib + PyYAML (the only new dependency), unittest (`python -m unittest discover -s tests`).
 
-**Spec:** `docs/superpowers/specs/2026-08-19-geosteward-design.md` (Plan 1 of 5; later plans: Tier-1 connectors, deep cases, PWA, gateway).
+**Spec:** `docs/design/specs/2026-08-19-geosteward-design.md` (Plan 1 of 5; later plans: Tier-1 connectors, deep cases, PWA, gateway).
 
 ## Global Constraints
 

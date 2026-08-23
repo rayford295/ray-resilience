@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python stdlib (urllib, json) + existing deps only (pyyaml). No new dependencies. unittest runner.
 
-**Spec:** `docs/superpowers/specs/2026-08-19-geosteward-design.md` (Plan 2 of 5).
+**Spec:** `docs/design/specs/2026-08-19-geosteward-design.md` (Plan 2 of 5).
 
 **Recorded deviation from spec:** live artifacts publish to a dedicated **`live-data` branch** (readable via `raw.githubusercontent.com`, which sends `Access-Control-Allow-Origin: *`) instead of `gh-pages`, because GitHub Pages currently serves `docs/` on `main` and switching the Pages source now would break the existing site URL. Plan 4 (PWA) decides final hosting and may consolidate.
 

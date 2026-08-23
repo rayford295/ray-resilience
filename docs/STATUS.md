@@ -1,10 +1,12 @@
 # GeoSteward v1 — Project Status
 
-**Updated:** 2026-08-21 · **Target:** OASIS @ ACM SIGSPATIAL 2026 Track A
+**Updated:** 2026-08-23 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
+**Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
+dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
 
-Roadmap: five sequential plans under [`docs/superpowers/plans/`](superpowers/plans/), all derived from the
-[design spec](superpowers/specs/2026-08-19-geosteward-design.md).
+Roadmap: five sequential plans under [`docs/design/plans/`](design/plans/), all derived from the
+[design spec](design/specs/2026-08-19-geosteward-design.md).
 
 ## ✅ Done
 
@@ -180,7 +182,7 @@ workstation:
 
 ### Accountability for non-retainable evidence (2026-08-21)
 
-Design: [`superpowers/specs/2026-08-20-non-retainable-evidence-design.md`](superpowers/specs/2026-08-20-non-retainable-evidence-design.md)
+Design: [`design/specs/2026-08-20-non-retainable-evidence-design.md`](design/specs/2026-08-20-non-retainable-evidence-design.md)
 (§11 rulings and §13 implementation notes). Investigating Google Maps Platform surfaced
 a structural problem worth more than the capabilities: GMP terms forbid retaining Maps
 Content, while GeoSteward proves traceability by hashing and freezing every input. So —

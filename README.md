@@ -5,11 +5,17 @@ and decision-making.**
 
 AI-powered WebGIS / smartphone app (PWA) for understanding a place's resilience —
 what hazards threaten it now, how exposed and vulnerable it is, and what decisions
-the evidence actually supports. Entry for **OASIS @ ACM SIGSPATIAL 2026 · Track A:
-Disaster Resilience & Vulnerability Analysis**.
+the evidence actually supports. Entry for
+[**OASIS @ ACM SIGSPATIAL 2026**](https://rsvp.withgoogle.com/events/oasis-2026/)
+· **Track A: Disaster Resilience & Vulnerability Analysis**.
 
 **Live:** [rayford295.github.io/GeoSteward](https://rayford295.github.io/GeoSteward/)
 · [the app](https://rayford295.github.io/GeoSteward/app/)
+
+**Event portal:** [rsvp.withgoogle.com/events/oasis-2026](https://rsvp.withgoogle.com/events/oasis-2026/)
+— submission dates, Track A brief, and the code-submission mechanism live behind the
+event login. Key dates and their current status are tracked in
+[`docs/STATUS.md`](docs/STATUS.md).
 
 **What "a place" means here, precisely.** Hazard monitoring is nationwide: any US
 location gets the current Tier-1 watch layer. Exposure, vulnerability, and damage
@@ -21,7 +27,7 @@ part of the design.
 
 > 🚧 **Rework in progress.** This repository (formerly *DisasterPilot*) is being
 > rebuilt around the design in
-> [`docs/superpowers/specs/2026-08-19-geosteward-design.md`](docs/superpowers/specs/2026-08-19-geosteward-design.md).
+> [`docs/design/specs/2026-08-19-geosteward-design.md`](docs/design/specs/2026-08-19-geosteward-design.md).
 > The previous Super Typhoon Bavi case study is preserved under
 > `events/archive/bavi-2026/` — append-only history is a core principle here.
 
@@ -35,7 +41,7 @@ part of the design.
 | Steward Harness: outcome checks, append-only audit, policy pre-check, claim post-check | Working |
 | Publication boundary (distribution plane + CI gate) | Working |
 | Agent gateway | Working locally against any OpenAI-compatible endpoint (Ollama by default). **Not hosted** — the public demo has no chat backend, and the gateway has no auth, rate limiting, or log redaction yet, so it should not be exposed as-is |
-| Accountability for non-retainable evidence (`verifiability` axis, `license` attribute, content-free lookup record) | Working and policed in code; **never run against a live API** — there is no Google Maps Platform key, so both adapters are tested against an in-process stub and `events/live_evidence.jsonl` does not exist outside tests. [Design and implementation notes](docs/superpowers/specs/2026-08-20-non-retainable-evidence-design.md) |
+| Accountability for non-retainable evidence (`verifiability` axis, `license` attribute, content-free lookup record) | Working and policed in code; **never run against a live API** — there is no Google Maps Platform key, so both adapters are tested against an in-process stub and `events/live_evidence.jsonl` does not exist outside tests. [Design and implementation notes](docs/design/specs/2026-08-20-non-retainable-evidence-design.md) |
 | Live-watch source health surfaced in the map UI | Working — the badge reports mapped-of-total, features it could not map, failed sources, and product generation time from `watch_status.json` |
 | Citation click-through from an answer to its artifact | **Not done** — answers carry artifact IDs; the UI does not yet resolve them |
 | Planner slider adjustments persisted | **Not done** — recorded in session memory only |
@@ -126,7 +132,8 @@ uvicorn gateway.main:app --port 8080
 ├── gateway/             # FastAPI agent gateway (LLM-agnostic + harness middleware)
 ├── src/geosteward/      # pipeline, agents, sources, hazards, harness/, live/
 ├── events/              # eaton-2025/, milton-2024/, ian-2022/, archive/bavi-2026/
-├── docs/                # design spec, methodology, Track-A alignment
+├── docs/                # STATUS.md, Track-A alignment, incidents/, design/
+│   └── design/          # specs (decision records) and plans (execution)
 └── tests/               # doubles as a verifiable evaluation environment
 ```
 

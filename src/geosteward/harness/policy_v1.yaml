@@ -112,7 +112,7 @@ artifact_classes:
   # The record of a non-retainable lookup. Licensed `project` because it holds
   # no third-party content at all — request parameters, a response digest, and
   # a count. That is the whole result: it is publishable BECAUSE it is empty of
-  # the content it attests to. See docs/superpowers/specs/
+  # the content it attests to. See docs/design/specs/
   # 2026-08-20-non-retainable-evidence-design.md.
   live_lookup_record:        {resolution_cap: tile,    audience: public,   license: project}
 
