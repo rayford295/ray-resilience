@@ -21,6 +21,15 @@ jobs:
         # widen the public surface without touching the policy. Regenerating
         # here and diffing makes that edit fail CI instead of shipping.
         run: python scripts/publication_boundary.py plan --check
+      - name: Documentation path anchors resolve
+        # The failure this catches is docs/architecture.md pointing at
+        # src/disasterpilot/ for four days after the package was renamed: a
+        # path asserted in prose with nothing to check it. Scope includes the
+        # source files that cite documentation paths, because two of those
+        # went stale in the 2026-08-23 folder move.
+        run: >-
+          python scripts/manual_anchors.py check
+          docs README.md src/geosteward/live/__init__.py
 
   app-build:
     runs-on: ubuntu-latest

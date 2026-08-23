@@ -244,13 +244,13 @@ derived from it accountable?**
   the nine references fixed were in *code* — a docstring in
   [`src/geosteward/live/__init__.py`](../src/geosteward/live/__init__.py) and a comment in
   [`policy_v1.yaml`](../src/geosteward/harness/policy_v1.yaml) — the same decay that left
-  `docs/architecture.md` pointing at `src/disasterpilot/`.
+  `docs/architecture.md` pointing at src/disasterpilot/.
 - **OASIS event portal linked** from this file, `README.md`, and
   [`track_a_alignment.md`](track_a_alignment.md). It was previously a bare unlinked string
   in one place.
 - **Bilingual manual: spec and plan committed, no content yet.**
   [Spec](design/specs/2026-08-23-bilingual-manual-design.md) ·
-  [plan](design/plans/2026-08-23-bilingual-manual.md). Thirteen files under `docs/manual/`,
+  [plan](design/plans/2026-08-23-bilingual-manual.md). Thirteen files under docs/manual/,
   English with a Chinese restatement per subsection, plus `scripts/manual_anchors.py` to
   make cited paths checkable in CI. Fourteen tasks; **none executed**. Tasks 1–4 form a
   coherent stopping point if the work is interrupted.
