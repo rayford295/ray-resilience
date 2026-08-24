@@ -30,8 +30,8 @@ passing.
 ## Two modes, one map
 
 `App.jsx` holds one `mode` state, `"resident"` or `"planner"`, switched by a
-tab in the header; both modes share the same [MapLibre GL](12-glossary.md)
-map (`app/src/components/MapView.jsx`) and the same layer selector, and
+tab in the header; both modes share the same MapLibre GL map
+(`app/src/components/MapView.jsx`) and the same layer selector, and
 differ only in which panel fills the sidebar beneath it.
 
 **Resident mode** (`app/src/components/ResidentPanel.jsx`) takes a US
@@ -172,10 +172,11 @@ The third state exists because of a specific, already-fixed defect. Coverage
 used to be indexed by event, with each event's layers loaded into the same
 map in catalog order — so within one event, a narrower layer overwrote a
 wider one rather than adding to it. Eaton's catalog order ends on its
-109-cell cross-view evidence coverage grid, so 156 of the 265 tiles Eaton's
-damage grid had actually evaluated came back as "outside the evaluated
-deep-case areas" purely because the narrower grid had overwritten the wider
-one in the same event's map — a resident asking about their own,
+109-cell cross-view evidence coverage grid, so 156 of the 265 tiles the
+event had actually evaluated (both its damage grid and its exposure×SVI
+context grid carry 265 cells) came back as "outside the evaluated deep-case
+areas" purely because the narrower grid had overwritten the wider one in
+the same event's map — a resident asking about their own,
 already-evaluated address would have been told, confidently, that it fell
 outside coverage. `app/src/lib/coverage.js` carries this history directly in
 its own comments, and `app/src/lib/coverage.test.js` pins the fixed
@@ -210,8 +211,9 @@ exact failure the fix above closed.
 > 源于一处具体的、已经修复的缺陷。覆盖范围以前是按事件建索引的，同一事件的
 > 各图层按目录顺序加载进同一张地图——于是同一事件内，一个覆盖面更窄的图层会
 > 覆盖掉一个更宽的图层，而不是与它相加。Eaton 事件在目录顺序里排在最后的是它
-> 109 格的跨视角证据覆盖网格，于是 Eaton 损毁网格实际评估过的 265 个瓦片里，
-> 有 156 个仅仅因为同一事件的地图里窄图层覆盖掉了宽图层，就被误判为"超出
+> 109 格的跨视角证据覆盖网格，于是这个事件实际评估过的 265 个瓦片（它的损毁网格
+> 与暴露度×SVI 关联网格都是 265 格）里，有 156 个仅仅因为同一事件的地图里窄
+> 图层覆盖掉了宽图层，就被误判为"超出
 > 评估范围"——如果一位居民查询自己那个其实已被评估过的地址，得到的会是一个
 > 自信的错误答案。`app/src/lib/coverage.js` 的注释里直接记录了这段历史，
 > `app/src/lib/coverage.test.js` 用一个按照缺陷原型构造的测试把修复后的行为
