@@ -62,7 +62,7 @@ served from watch data.
 > 事件。四个数据源各自独立抓取和解析；某一个源失败时，会在本次运行的审计日志里记为
 > `source_failed` 并点名该源，绝不会悄悄丢弃，也不会把"该类灾害零起"当作正常结果
 > 报告出去。这项能力在全美任何地点、任何时间都有效，与关注区域（AOI）无关——是本系统
-> 覆盖面最广的一项，对应证据阶梯上的层级（1/2/3 级）中的第 1 层级（Watch）。每次构建
+> 覆盖面最广的一项，对应证据阶梯——层级（1/2/3 级）——中的 1 级（Watch）。每次构建
 > 监测产品时都会附带同一句声明未知项，无论本次抓到多少条灾害都不例外："监测数据仅支持
 > 观察，不支持损毁或暴露度结论"（原文英文见左侧引用）；断言平面在请求侧也保证了这一点
 > ——"损毁评估"这一请求目的走的是完全不同的代码路径，永远不会用监测数据来回答。
@@ -261,14 +261,19 @@ that started over).
 
 **Implemented in** — `app/src/components/Badges.jsx`, `app/src/lib/data.js`.
 
-**Refuses** — Summing checks across runs. The pre-2026-08-20 behaviour did
-exactly that: it added up every check row ever written for a stage and took
-pass/fail from the last row, which for Eaton's SVI stage rendered "✓ 9 checks
-passed" — a run that never happened, since the successful run had six checks
-and an earlier, different run had failed one. Correctness required stamping
-new audit rows with a `run_id` so a stage's attempts stay distinguishable, and
-now the badge speaks about one run because, as the code comment on
-`stageValidity()` puts it, that is the only thing a count can be true of.
+**Refuses** — Summing checks across runs. `events/eaton-2025/audit_log.jsonl`
+still carries the exact run pair this bug summed over, for the
+`exposure.svi_context` stage: an aborted attempt at `20260820T022423Z` logged
+3 checks, one `join_integrity` check marked `"passed": false`; a successful
+re-run at `20260820T022620Z` then logged 6 checks, all `"passed": true`,
+closed by a `stage` row with `"status": "ok"`. The pre-2026-08-20 behaviour
+summed every check row ever written for the stage (3 + 6 = 9) and took
+pass/fail from the last row, rendering "✓ 9 checks passed" for a run that
+never happened — no six-check run ever produced nine passing checks, and no
+nine-check run ever passed outright. Correctness required stamping new audit
+rows with a `run_id` so a stage's attempts stay distinguishable, and now the
+badge speaks about one run because, as the code comment on `stageValidity()`
+puts it, that is the only thing a count can be true of.
 
 > **中文。** 有效性徽章把 harness 对当前所看图层的检查结果实时展示出来——例如
 > "✓ 最近一次运行：6/6 项检查通过"——数据直接来自已提交、只增不改的审计日志，且只
@@ -276,13 +281,18 @@ now the badge speaks about one run because, as the code comment on
 > 总数。只要一个处理阶段的事件在 `audit_log.jsonl` 里留有审计记录，这项能力就能
 > 对该图层生效。其实现依据日志中的 `run_id` 字段对审计行分组；对没有
 > `run_id` 的旧日志，则用"某项检查名称与本轮首项检查重名"这一启发式规则识别出
-> "上一轮攻击尝试半途夭折、新一轮重新开始"。2026-08-20 之前的行为恰恰是被拒绝的
-> 那种做法：把一个阶段历史上写过的所有检查行累加求和，再用最后一行判定通过与否——
-> 这样 Eaton 事件的 SVI 阶段曾显示"✓ 9 项检查通过"，但那是一次从未真实发生过的
-> "运行"：真正成功的那次运行只有六项检查，而更早、失败了一项检查的是完全不同的一次
-> 运行。修正的办法是给新写入的审计行盖上 `run_id`，让同一阶段的多次尝试彼此可区分；
-> 现在徽章只谈论"最近一次运行"，因为正如 `stageValidity()` 代码注释所说，一个计数
-> 只能对某一次具体的运行为真。
+> "上一轮尝试半途夭折、新一轮重新开始"。`events/eaton-2025/audit_log.jsonl` 里
+> 至今仍留着这个缺陷曾经累加过的那两次运行的原始记录，都属于
+> `exposure.svi_context` 阶段：一次在 `20260820T022423Z` 中途夭折的尝试，记录了
+> 3 项检查，其中一项 `join_integrity` 检查标记为 `"passed": false`；随后在
+> `20260820T022620Z` 的一次成功重跑，记录了 6 项检查、全部
+> `"passed": true`，并以一行 `"status": "ok"` 的 `stage` 记录收尾。2026-08-20
+> 之前的行为恰恰是被拒绝的那种做法：把这个阶段历史上写过的所有检查行累加求和
+> （3 + 6 = 9），再用最后一行判定通过与否——这样便显示出"✓ 9 项检查通过"，但那是
+> 一次从未真实发生过的"运行"：既没有哪一次六项检查的运行产生过九项通过，也没有
+> 哪一次九项检查的运行真正整体通过过。修正的办法是给新写入的审计行盖上 `run_id`，
+> 让同一阶段的多次尝试彼此可区分；现在徽章只谈论"最近一次运行"，因为正如
+> `stageValidity()` 代码注释所说，一个计数只能对某一次具体的运行为真。
 
 ### 6. Lineage viewer
 
@@ -355,17 +365,31 @@ model's draft against the evidence it was given, and the full audit trail
 **Implemented in** — `src/geosteward/gateway/steward.py`,
 `app/src/components/ChatPanel.jsx`.
 
-**Refuses** — Three things, all caught by `check_claims()` before an answer is
-returned. Uncited factual sentences: every sentence is required to carry a
-citation tag unless it matches a closed set of non-assertive forms (a
-question, imperative advice, or a statement about the answer's own declared
-limits) — anything else without a tag is flagged `"uncited assertion: …"`.
-Fabricated artifact IDs: a cited ID not present in the evidence given to the
-model is flagged `"fabricated citation ids: […]"`. And an answer that cites a
-live lookup without also citing a retained artifact: flagged `"live citations
-with no retained citation: a non-retainable source cannot be the only support
-for an answer"` — a [re-derivable](12-glossary.md), non-retained source may
-add context to a retained finding, never stand in for one alone.
+**Refuses** — Six distinct violations, all caught by `check_claims()` before
+an answer is returned, none of them optional: a draft failing any one is sent
+back for revision, and one still failing after three attempts is refused
+outright (`claim-post-check`).
+
+1. No citations of either kind anywhere in the draft — `"no citations at
+   all"`.
+2. An uncited factual sentence — every sentence must carry a citation tag
+   unless it matches a closed set of non-assertive forms (a question,
+   imperative advice, or a statement about the answer's own declared limits)
+   — `"uncited assertion: …"`.
+3. A cited artifact ID not present in the evidence given to the model —
+   `"fabricated citation ids: […]"`.
+4. A cited live-lookup ID not present in the evidence given to the model —
+   `"fabricated live citation ids: […]"`.
+5. A live citation with no retained citation anywhere in the same answer —
+   `"live citations with no retained citation: a non-retainable source
+   cannot be the only support for an answer"`; a
+   [re-derivable](12-glossary.md), non-retained source may add context to a
+   retained finding, never stand in for one alone.
+6. Any parcel-level statement surviving in the answer, citation or not —
+   `"parcel-level statement in the answer"`. This is the same resolution
+   boundary capabilities 4 and 8 enforce, appearing a third time at the point
+   where the model itself speaks: a citation makes a tile-level claim
+   checkable, it does not make a parcel-level claim authorized.
 
 > **中文。** agent 对话回路沿着同一条流水线回答一个带地理位置的问题——策略预检查
 > → 只从制品清单里登记过的产物中检索证据 → 大语言模型生成草稿 → 断言后检查 →
@@ -375,16 +399,27 @@ add context to a retained finding, never stand in for one alone.
 > 前都要经过校验，三次尝试后仍未通过就直接拒绝，而不会放宽标准迁就它。这项能力可以
 > 在本地针对任意兼容 OpenAI 接口的模型服务运行（默认用 Ollama，已用 `gpt-oss:20b`
 > 验证过），但**尚未对外部署**：公开网站没有配套的对话后端，网关本身也还没有鉴权、
-> 限流或日志脱敏，因此不适合原样暴露给公众访问。这项能力在代码里拒绝三件事，
-> 全部由 `check_claims()` 在回答返回前拦截：其一，无引用的事实性句子——除了一个
-> 封闭的"非断言"句型集合（疑问句、行动建议、关于回答自身声明局限的陈述）之外，
-> 每句话都必须带引用标签，否则会被标记为"无引用断言：……"；其二，伪造的制品
-> ID——引用了一个不在提供给模型的证据里的 ID，会被标记为"伪造引用 ID：[…]"；
-> 其三，只引用实时查询而不同时引用留存产物的回答——会被标记为"存在无留存引用陪伴的
-> 实时引用：不可留存的来源不能单独支撑一条回答"——一个
-> 可验证性（retained 留存 / re-derivable 可复现 / cited-only 仅可引证）中
-> "可复现"级别的、未被留存的来源，只能为一条已有留存证据支撑的结论补充背景，
-> 不能单独撑起结论本身。
+> 限流或日志脱敏，因此不适合原样暴露给公众访问。这项能力在代码里拒绝六种不同的
+> 违规，全部由 `check_claims()` 在回答返回前拦截，没有一项是可选的：任何一项没
+> 通过，草稿都会被打回重写，三次尝试后仍未通过就直接拒绝（规则
+> `claim-post-check`）。
+>
+> 1. 整份草稿完全没有任何一种引用——标记为"完全没有引用"。
+> 2. 存在无引用的事实性句子——除了一个封闭的"非断言"句型集合（疑问句、行动建议、
+>    关于回答自身声明局限的陈述）之外，每句话都必须带引用标签——标记为
+>    "无引用断言：……"。
+> 3. 引用了一个不在提供给模型的证据里的制品 ID——标记为"伪造引用 ID：[…]"。
+> 4. 引用了一个不在提供给模型的证据里的实时查询 ID——标记为
+>    "伪造实时引用 ID：[…]"。
+> 5. 引用了实时查询却在同一份回答里没有引用任何留存产物——标记为"存在无留存引用
+>    陪伴的实时引用：不可留存的来源不能单独支撑一条回答"；一个
+>    可验证性（retained 留存 / re-derivable 可复现 / cited-only 仅可引证）中
+>    "可复现"级别的、未被留存的来源，只能为一条已有留存证据支撑的结论补充背景，
+>    不能单独撑起结论本身。
+> 6. 回答中残留任何 parcel（地块）级陈述，无论是否带了引用标签——标记为
+>    "回答中出现 parcel 级陈述"。这正是能力 4 与能力 8 所强制的同一条分辨率
+>    边界，第三次出现在模型本身开口说话的这个环节：引用只能让一条瓦片级结论
+>    变得可核查，不能让一条 parcel 级结论变得被允许。
 
 ### 8. The publication boundary
 
