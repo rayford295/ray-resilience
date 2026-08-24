@@ -27,14 +27,15 @@ what it will.
 > 什么结论"三个问题，是 ACM SIGSPATIAL 大会 OASIS 竞赛 Track A（灾害韧性与脆弱性
 > 分析赛道）的参赛项目。
 >
-> 灾害监测（第 1 层）覆盖全美国；暴露度与损毁分析（第 2、3 层）只在三个深度案例
-> 关注区域（AOI）内存在——2025 年 Eaton 火灾、2024 年 Milton 飓风、2022 年 Ian
-> 飓风——之外的地方一律被明确告知"超出评估范围"，而不是被外推出结论。
+> 系统按层级（1/2/3 级）组织证据强度：第 1 层级（Watch）覆盖全美国；第 2、3 层级
+> （暴露度与损毁分析）只在三个深度案例关注区域（AOI）内存在——2025 年 Eaton 火灾、
+> 2024 年 Milton 飓风、2022 年 Ian 飓风——之外的地方一律被明确告知"超出评估范围"，
+> 而不是被外推出结论。
 >
 > 系统最独特之处不是覆盖面大，而是每条断言边界都被**强制执行**而非仅是文档建议：
-> Steward Harness 让地理边界与引证要求都做到失败即拒绝——AOI 外的请求被拒绝，
-> tile 级证据推不出 parcel 级断言，无法引证的语句被拒绝而非软化。它不说什么，和
-> 说什么同样重要。
+> Steward Harness（问责框架）让地理边界与引证要求都做到失败即拒绝（fail-closed）——
+> AOI 外的请求被拒绝，tile 级证据推不出 parcel 级断言，无法引证的语句被拒绝而非
+> 软化。它不说什么，和说什么同样重要。
 
 ## Which parts to read
 
@@ -50,8 +51,10 @@ question rather than at chapter `01`:
   because that question comes before mechanism, with the glossary open
   throughout for terms without a settled Chinese rendering.
 - **Mechanism study:** `02` → `03` → `04` → `05` → `07` — starts inside the
-  harness itself, in the order its four validity layers are enforced at
-  request time, before reaching the agent that sits on top of them.
+  harness itself, in the order it runs at request time: outcome and process
+  checks, what the agent may assert, what a build may publish, then what can
+  be retained as evidence at all — before reaching the agent that sits on
+  top of all four.
 
 A reader who is none of the three: start at `01`. It states what the system
 does and, for every capability, what it refuses to do — the fastest way to
@@ -62,8 +65,9 @@ learn whether any of the three paths above is worth following further.
 > 模块索引（`09`），最后读 harness 为什么这样设计（`02`–`05`）；**中文同行或学生**
 > 先弄清系统做什么、不做什么，再进入机制，所以从 `README` 起，经 `01`、`06`，到
 > `10`，术语表（`12`）全程放在手边，供查阅还没有固定译法的术语；**机制研究**者
-> 直接进入 harness 内部，按四层有效性在一次请求中被执行的顺序阅读（`02` → `03` →
-> `04` → `05`），最后看坐在这些层之上的 agent（`07`）。
+> 直接进入 harness 内部，按它在一次请求里实际执行的顺序阅读——先是结果与过程检查
+> （`02`），再是 agent 可以断言什么（`03`）、构建可以发布什么（`04`），最后是什么
+> 能作为证据被留存（`05`）——再看坐在这四层之上的 agent（`07`）。
 >
 > 如果读者不属于以上三类：从 `01` 开始——它说明系统能做什么，以及**每一项能力拒绝
 > 做什么**，是判断上面三条路径哪一条值得继续读下去的最快方式。
@@ -73,7 +77,10 @@ learn whether any of the three paths above is worth following further.
 `01`–`11` do not exist yet; they are listed here as plain names because the
 [anchor gate](../../scripts/manual_anchors.py) treats a linked or
 inline-code path as a claim that the file resolves. Each becomes a working
-link as its chapter is written.
+link as its chapter is written. The bare chapter numbers used elsewhere in
+this file (`10`, `09`, `02`–`05`, `07`, `01`, `06`, `12`) are not covered by
+this rule: they are digits, not filenames, so the gate — which only extracts
+tokens containing a slash — never reads them as a claim that a file exists.
 
 | File | Subject |
 |---|---|
@@ -93,7 +100,9 @@ link as its chapter is written.
 
 > **中文。** `01`–`11` 尚未写出，这里以纯文本列出文件名，因为
 > [锚点检查脚本](../../scripts/manual_anchors.py) 会把链接或行内代码形式的路径当作
-> "这个文件已存在"的断言；每一章写完后才把对应行改成可用链接。
+> "这个文件已存在"的断言；每一章写完后才把对应行改成可用链接。本文件其他地方出现的
+> 裸章节号（`10`、`09`、`02`–`05`、`07`、`01`、`06`、`12`）不受此规则约束——它们是
+> 数字，不是文件名，而检查脚本只提取含斜杠的文本，不会把裸数字当作"某文件存在"的断言。
 >
 > | 文件 | 主题（中文） |
 > |---|---|
