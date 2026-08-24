@@ -2,9 +2,10 @@
 
 The [Steward Harness](12-glossary.md) enforces three conditions during
 operation — [validity (outcome / process / institutional)](12-glossary.md) —
-and this chapter covers the first two: outcome, the executable spatial
-checks an artifact must pass before it is accepted, and process, the
-append-only record of what ran, on what inputs, and with what result. The
+and this chapter covers outcome and process: outcome, the executable
+spatial checks an artifact must pass before it is accepted, and process,
+the append-only record of what ran, on what inputs, and with what result.
+The
 institutional condition's two planes (what an agent may assert, what a build
 may publish) are `03` and `04`; what a reader can independently verify about
 any of it is `05`. Read in that order, this chapter is where the harness
@@ -13,7 +14,7 @@ survive the checks below, and every attempt — successful or not — becomes a
 permanent row in the record this chapter describes.
 
 > **中文。** Steward Harness（问责框架）在运行期间强制执行三项条件——
-> 有效性（结果 / 过程 / 制度）——本章讲其中前两项：结果，即一个产物在被接受前必须
+> 有效性（结果 / 过程 / 制度）——本章讲结果与过程：结果，即一个产物在被接受前必须
 > 通过的可执行空间检查；过程，即"跑了什么、用了什么输入、结果如何"的只增不改的
 > 记录。制度条件的两个平面（agent 可以断言什么、构建可以发布什么）留给 `03`、
 > `04` 两章；读者能独立核实到什么程度，留给 `05`。按这个顺序读下去，
@@ -121,16 +122,23 @@ deep-case build script:
   reason rather than producing a hollow result. `CrossViewEvidence.run()`
   in `src/geosteward/agents/evidence.py` raises `FileNotFoundError` naming
   the missing `evidence/imagery_manifest.csv` if post-event imagery has not
-  arrived yet, rather than interpolating a damage number. Where an
-  orchestrator runs a sequence of such agents, it records the failure
-  instead of continuing as if nothing happened:
-  `run_pre_event()` in `src/geosteward/pipeline.py` wraps each agent's
-  `run()` in a `try`/`except`, and on failure writes
+  arrived yet, rather than interpolating a damage number. Separately, where
+  an orchestrator runs a sequence of agents, it records a failure instead of
+  continuing as if nothing happened: `run_pre_event()` in
+  `src/geosteward/pipeline.py` wraps each agent's `run()` in a
+  `try`/`except`, and on failure writes
   `{"agent": ..., "status": f"failed: {error}"}` as that stage's audit row
   before stopping the sequence — the exception's own reason ends up in the
-  permanent record, not just on a console. The deep-case build scripts
-  enforce the same contract locally rather than through this orchestrator:
-  see the next section for how, and the final section for what it caught.
+  permanent record, not just on a console. These are two separate
+  mechanisms today, not two ends of one: `CrossViewEvidence` is not
+  currently part of any orchestrator's agent sequence — it is absent from
+  `run_pre_event()`'s `PRE_EVENT_AGENTS` tuple, and the only other place it
+  is instantiated is `tests/test_pipeline.py` — so no committed audit log
+  actually carries a recorded `CrossViewEvidence` failure; its fail-closed
+  raise has no orchestrator wrapped around it yet to catch and record one.
+  The deep-case build scripts enforce the same fail-closed contract
+  locally, independent of either: see the next section for how, and the
+  final section for what it caught.
 
 > **中文。** 每个 agent 的产出都遵循同一套契约，定义在
 > `src/geosteward/agents/base.py` 里，被每一个流水线阶段和每一个深度案例构建脚本
@@ -160,13 +168,18 @@ deep-case build script:
 > 记录，读者始终能拿到，因为清单从不遗忘任何一行。缺少所需输入的 agent 会带着明确
 > 理由主动拒绝，而不是生成一个空洞的结果：`src/geosteward/agents/evidence.py` 里
 > 的 `CrossViewEvidence.run()`，在灾后影像尚未到位时会抛出 `FileNotFoundError`，
-> 点名缺失的 `evidence/imagery_manifest.csv`，而不是插值出一个损毁数字。当有编排者
-> 依次运行这样一串 agent 时，它会把失败记录下来而不是当作无事发生继续往下走：
-> `src/geosteward/pipeline.py` 里的 `run_pre_event()` 用 `try`/`except` 包住每个
-> agent 的 `run()`，失败时把 `{"agent": ..., "status": f"failed: {error}"}`
-> 写作该阶段的审计行，然后终止这一串运行——异常本身的理由进了永久记录，而不只是
-> 打印在控制台上。深度案例构建脚本不是通过这个编排器、而是各自在本地落实同一套契约
-> ——具体怎么做见下一节，它拦下过什么见本章最后一节。
+> 点名缺失的 `evidence/imagery_manifest.csv`，而不是插值出一个损毁数字。另一件
+> 独立的事情是：当有编排者依次运行一串 agent 时，它会把失败记录下来而不是当作
+> 无事发生继续往下走——`src/geosteward/pipeline.py` 里的 `run_pre_event()` 用
+> `try`/`except` 包住每个 agent 的 `run()`，失败时把
+> `{"agent": ..., "status": f"failed: {error}"}` 写作该阶段的审计行，然后终止
+> 这一串运行，异常本身的理由进了永久记录，而不只是打印在控制台上。这是今天两套
+> 各自独立的机制，不是同一件事的两端：`CrossViewEvidence` 目前并不在任何编排器的
+> agent 序列里——它不在 `run_pre_event()` 的 `PRE_EVENT_AGENTS` 元组中，唯一
+> 实例化它的地方是 `tests/test_pipeline.py`——所以目前没有任何一份已提交的审计
+> 日志里真正记录过一次 `CrossViewEvidence` 的失败；它那处失败即拒绝的抛出，眼下
+> 还没有编排器包在外面去接住并记录它。深度案例构建脚本是各自在本地落实同一套
+> 失败即拒绝的契约，与二者都无关——具体怎么做见下一节，它拦下过什么见本章最后一节。
 
 ## The audit log is append-only
 
