@@ -79,6 +79,30 @@ authorizes.
 > 拒绝。三十，正是这套平面出现之前，一次不加区分的 `cpSync` 会发布出去的数字；
 > 十六，是现在策略实际授权的数字。
 
+A second instance of the same category of mistake sat right next to the
+first, inside the very loop that copied whole directories: which events
+form the public surface — `["eaton-2025", "milton-2024", "ian-2022"]` —
+was a JavaScript array literal in `app/scripts/sync-artifacts.mjs`, the
+second finding the incident names alongside the first: a governance
+decision expressed as build-script trivia. That list now lives in
+`policy_v1.yaml` as `published_events`, and `DistributionPolicy.published_events`
+is what `plan_publication` walks by default rather than a scope its caller
+has to supply. Retiring an event is therefore an edit to this one list,
+not a deletion of anything: the retired event's artifacts and their
+provenance stay on disk under `events/` exactly as before — they simply
+stop being walked, and so stop appearing in the next generated allowlist.
+
+> **中文。** 同一类错误还有第二个例子，就藏在第一个的近旁——就在那个整目录
+> 复制的循环里面：哪些事件构成公开面——`["eaton-2025", "milton-2024",
+> "ian-2022"]`——曾经是 `app/scripts/sync-artifacts.mjs` 里的一个
+> JavaScript 数组字面量，这正是事故报告和第一个发现并列点名的第二个发现：
+> 一项治理决策被当成了构建脚本里的琐碎细节来表达。这份列表现在住进了
+> `policy_v1.yaml`，成为 `published_events`；`plan_publication` 默认遍历的
+> 就是 `DistributionPolicy.published_events`，不需要调用者另外传入范围。
+> 退休一个事件因此只是编辑这一份列表，不是删除任何东西：被退休事件的制品
+> 和它们的溯源信息照样留在 `events/` 磁盘上，只是不再被遍历，因而也就不再
+> 出现在下一次生成的白名单里。
+
 ## Three attributes per artifact class
 
 `policy_v1.yaml`'s `artifact_classes` section maps every artifact `kind`
@@ -125,7 +149,7 @@ public surface.
 > 强制执行这个"恰好"：一个类缺了其中任何一个属性，或者带了
 > `KNOWN_CLASS_ATTRIBUTES` 之外的键，都会在构造阶段——早于任何文件被真正
 > 评估之前——抛出 `ValueError`。`resolution_cap`（分辨率上限（resolution cap）
-> ）是该制品能够支撑一个陈述的最细地理层级——`parcel`、`tile`、`event`、
+> ）是该制品能够支撑一个陈述的最细地理粒度——`parcel`、`tile`、`event`、
 > `dataset` 或 `source`。`audience` 是这个制品是为谁准备的：`public` 发布到
 > 站点，`lineage` 只通过清单以哈希可达、而不通过 URL，`internal` 仅支持在
 > 维护者本机上复现。`license` 则是这份内容本项目是否有权再分发。
