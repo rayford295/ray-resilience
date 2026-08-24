@@ -46,29 +46,39 @@ files; the chapters explain why each one is shaped the way it is.
 | `src/geosteward/harness/policy.py` | The claim plane: `PolicyEngine.evaluate()` runs ordered rules first-match-wins over a `PolicyRequest`, returning a `PolicyDecision`; also owns `verifiability_rank`, `weakest`, and `default_deny`. | stdlib + PyYAML | `tests/test_harness_policy.py`, `tests/test_policy_v1_matrix.py` |
 | `src/geosteward/harness/publication.py` | Plans and verifies the public surface: `plan_publication()` walks `events/` against the distribution policy to build an allowlist; `verify_site()` checks an assembled site tree against that allowlist by set difference. Also defines `redact()` (see callout below). | `src/geosteward/harness/distribution.py` | `tests/test_harness_publication.py` |
 
-**`redact()` has no callers.** It is defined at `publication.py` and covered
-by its own tests in `tests/test_harness_publication.py`, but nothing in this
-repository invokes it outside those tests — `grep -rn "redact("` across the
-tree turns up only the definition and its test. The redaction that actually
-runs in production lives in `app/scripts/sync-artifacts.mjs`, which reads
-the `redact_workstation_paths` flag `publication.py` sets on each planned
-file (from `REDACTED_KINDS`) and does the string replacement itself in
-JavaScript, in step with the same `WORKSTATION_PATH` pattern kept
-independently in both files. So the *decision* — which files carry
-workstation paths and should be redacted — lives in the policy layer here,
-and the *execution* lives in the build script; `redact()` is a second,
-unused implementation of the same replacement, not the one the pipeline
-runs.
+**`redact()` has no callers, anywhere, including its own test file.** It is
+defined at `publication.py` — `grep -rn "redact(" --include="*.py" .` across
+the whole repository turns up exactly one line, the `def redact(text: str)`
+itself. `tests/test_harness_publication.py` does exercise the neighboring
+mechanism — `test_manifest_is_flagged_for_workstation_path_redaction` checks
+the `redact_workstation_paths` flag `plan_publication()` sets, and
+`test_redacted_manifest_passes` checks already-redacted manifest content —
+but neither test, nor anything else in the file, calls `redact()` itself.
+The redaction that actually runs in production lives in
+`app/scripts/sync-artifacts.mjs`, which reads that same
+`redact_workstation_paths` flag (set from `REDACTED_KINDS`) and does the
+string replacement itself in JavaScript, against a `WORKSTATION_PATH`
+pattern kept independently in step with the Python one. So the *decision* —
+which files carry workstation paths and should be redacted — lives in the
+policy layer here, and the *execution* lives in the build script;
+`redact()` is a second, wholly unused implementation of the same
+replacement — not exercised by its own tests, let alone called by the
+pipeline.
 
-> **中文。** `redact()` 没有任何调用方。它定义在 `publication.py` 里，也有自己的
-> 测试（`tests/test_harness_publication.py`），但在整个仓库里，除了测试之外没有
-> 任何地方调用它——对全仓库 `grep -rn "redact("` 只能找到这一处定义和它的测试。
-> 真正在生产流程里执行脱敏的是 `app/scripts/sync-artifacts.mjs`：它读取
-> `publication.py` 为每个规划文件设置的 `redact_workstation_paths` 标志（来自
-> `REDACTED_KINDS`），用 JavaScript 自己做字符串替换，并且与本文件里的
-> `WORKSTATION_PATH` 正则各自独立维护、保持一致。也就是说，"哪些文件带工作站
-> 路径、应该脱敏"这个**决策**在策略层（本文件），而**执行**在构建脚本里；
-> `redact()` 是同一次替换的第二份实现，从未被流水线用到过。
+> **中文。** `redact()` 没有任何调用方——包括它自己的测试文件在内。它定义在
+> `publication.py` 里；对全仓库执行 `grep -rn "redact(" --include="*.py" .`，
+> 只能找到 `def redact(text: str)` 这一行定义本身。
+> `tests/test_harness_publication.py` 确实测试了与它相邻的机制——
+> `test_manifest_is_flagged_for_workstation_path_redaction` 检查
+> `plan_publication()` 设置的 `redact_workstation_paths` 标志，
+> `test_redacted_manifest_passes` 检查已脱敏的清单内容——但无论是这两个测试，
+> 还是文件里的其他任何地方，都没有调用 `redact()` 本身。真正在生产流程里执行
+> 脱敏的是 `app/scripts/sync-artifacts.mjs`：它读取同一个
+> `redact_workstation_paths` 标志（来自 `REDACTED_KINDS`），用 JavaScript 自己
+> 做字符串替换，对应的 `WORKSTATION_PATH` 正则与 Python 版本各自独立维护、
+> 保持一致。也就是说，"哪些文件带工作站路径、应该脱敏"这个**决策**在策略层
+> （本文件），而**执行**在构建脚本里；`redact()` 是同一次替换的第二份实现，
+> 完全没被用到——连自己的测试都没有调用它，更不用说被流水线调用。
 
 ## src/geosteward/sources/
 
@@ -145,27 +155,44 @@ lifecycle; this table is the files that implement it.
 
 ## src/geosteward/agents/
 
-**This subpackage is not on the deep-case path.** `base.py`, `watcher.py`,
-`dossier.py`, `exposure.py`, `evidence.py`, and `decision.py` are real,
-present, and imported by `src/geosteward/pipeline.py` — they are the
-organising structure of the pre-rework, single-hazard (typhoon) pipeline.
-But the three deep cases this project actually ships — Eaton Fire,
-Hurricane Milton, Hurricane Ian — are built by `scripts/build_eaton_case.py`,
-`scripts/build_milton_case.py`, and `scripts/build_ian_case.py`, and none of
-those three scripts imports anything from `src/geosteward/agents/`. A reader
-who finds `agents/watcher.py`, sees it is a real, working, tested class, and
-assumes it therefore sits somewhere on the path that produces the map the
+**The four agent *role* classes are not on the deep-case path; `base.py` is
+not one of them.** `watcher.py`, `dossier.py`, `exposure.py`, and
+`decision.py` — `TyphoonWatcher`, `TyphoonDossier`, `TyphoonExposure`,
+`WatchBulletin` — are real, present, and imported by
+`src/geosteward/pipeline.py`, where they are the organising structure of the
+pre-rework, single-hazard (typhoon) pipeline. The three deep cases this
+project actually ships — Eaton Fire, Hurricane Milton, Hurricane Ian — are
+built by `scripts/build_eaton_case.py`, `scripts/build_milton_case.py`, and
+`scripts/build_ian_case.py`, and none of those three scripts imports any of
+those four role classes. `base.py` is a different kind of file: it is the
+artifact-contract infrastructure (`Artifact`, `EventContext`, `utc_stamp`) —
+current, not legacy — and all three build scripts import it directly
+(`from geosteward.agents.base import Artifact, EventContext, utc_stamp`), the
+same way chapter `02` documents it being reused "by every pipeline stage and
+every deep-case build script." So the accurate statement is narrower than
+"nothing here is used": the deep-case builders reuse `agents/base.py`'s
+primitives and go *around* the role classes — which is also the answer to
+why this subpackage is still here at all. A reader who finds
+`agents/watcher.py`, sees it is a real, working, tested class, and assumes it
+therefore sits somewhere on the path that produces the map the
 resident-facing app renders, has misread the whole system: it does not.
 
-> **中文。** **这个子包不在深度案例的路径上。** `base.py`、`watcher.py`、
-> `dossier.py`、`exposure.py`、`evidence.py`、`decision.py` 都是真实存在、
-> 被 `src/geosteward/pipeline.py` 引入的代码——它们是重构前那条单一灾种
-> （台风）流水线的组织结构。但这个项目真正对外发布的三个深度案例——Eaton 火灾、
+> **中文。** **不在深度案例路径上的是四个 agent 角色类，`base.py` 不算在内。**
+> `watcher.py`、`dossier.py`、`exposure.py`、`decision.py`——也就是
+> `TyphoonWatcher`、`TyphoonDossier`、`TyphoonExposure`、`WatchBulletin`——
+> 都是真实存在、被 `src/geosteward/pipeline.py` 引入的代码，是重构前那条单一
+> 灾种（台风）流水线的组织结构。这个项目真正对外发布的三个深度案例——Eaton 火灾、
 > Milton 飓风、Ian 飓风——分别由 `scripts/build_eaton_case.py`、
 > `scripts/build_milton_case.py`、`scripts/build_ian_case.py` 构建，这三个脚本
-> 没有一个从 `src/geosteward/agents/` 导入任何东西。如果读者发现
-> `agents/watcher.py` 是一个真实、可运行、有测试的类，就认定它一定在生成居民端
-> 应用所渲染地图的路径上，那就误读了整个系统：事实并非如此。
+> 没有一个导入上述四个角色类。`base.py` 是另一类文件：它是制品契约基础设施
+> （`Artifact`、`EventContext`、`utc_stamp`）——是现役机制，不是遗留代码——三个
+> 构建脚本都直接导入它（`from geosteward.agents.base import Artifact,
+> EventContext, utc_stamp`），与第 `02` 章所写的"被每一个流水线阶段和每一个
+> 深度案例构建脚本复用"完全一致。所以准确的说法比"这里的东西都没用上"更窄：
+> 深度案例构建脚本复用了 `agents/base.py` 的基础设施，绕开的是那四个角色类——
+> 这也回答了这个子包为什么还留在这里。如果读者发现 `agents/watcher.py` 是一个
+> 真实、可运行、有测试的类，就认定它一定在生成居民端应用所渲染地图的路径上，
+> 那就误读了整个系统：事实并非如此。
 
 The one exception worth naming precisely is `evidence.py`'s
 `CrossViewEvidence`. Its `.name` attribute is the string
@@ -194,7 +221,7 @@ pieces of code with similar-looking names and no relationship to
 | Path | Responsibility | Depends on | Tests |
 |---|---|---|---|
 | `src/geosteward/agents/__init__.py` | Package docstring only. | — | no direct test |
-| `src/geosteward/agents/base.py` | Agent contract: `Artifact`, `EventContext`, the `Agent` protocol; a rerun writes a new timestamped artifact rather than overwriting. | stdlib only | `tests/test_harness_audit.py` (imports `Artifact`, `EventContext` directly); also exercised through the pipeline tests below |
+| `src/geosteward/agents/base.py` | Agent contract: `Artifact`, `EventContext`, the `Agent` protocol; a rerun writes a new timestamped artifact rather than overwriting. Current infrastructure, not legacy — imported directly by all three `scripts/build_*_case.py` deep-case builders, not just by the four role classes below. | stdlib only | `tests/test_harness_audit.py` (imports `Artifact`, `EventContext` directly); also exercised through the pipeline tests below |
 | `src/geosteward/agents/watcher.py` | `TyphoonWatcher`: polls `zj_typhoon` for one `tfid`, snapshots the live track. | `src/geosteward/sources/zj_typhoon.py`, `base.py` | no dedicated unit test — exercised via `tests/test_pipeline.py` / `tests/test_pipeline_audit.py` through `run_pre_event` |
 | `src/geosteward/agents/dossier.py` | `TyphoonDossier`: turns the latest snapshot into a structured, source-attributed event record. | `src/geosteward/hazards/typhoon.py`, `base.py` | same as above (pipeline tests) |
 | `src/geosteward/agents/exposure.py` | `TyphoonExposure`: Beaufort-threshold (7/10/12) wind-sector polygons per track point, as GeoJSON. | `src/geosteward/hazards/typhoon.py`, `dossier.py` (`latest_snapshot`) | same as above (pipeline tests) |
@@ -220,14 +247,14 @@ pieces of code with similar-looking names and no relationship to
 | Path | Responsibility | Depends on | Tests |
 |---|---|---|---|
 | `scripts/ask_steward.py` | CLI: runs the full gateway chain locally (policy pre-check → evidence → LLM → claim post-check → audit) against a committed deep case. | `src/geosteward/gateway/steward.py`, `src/geosteward/harness/audit.py` | no direct test |
-| `scripts/build_eaton_case.py` | Builds the Eaton Fire 2025 deep case (Tier 2 exposure + Tier 3 evidence) from the owner's local dataset registry; offline, fail-closed. | `src/geosteward/deepcase/dins.py`, `src/geosteward/harness/checks/`, `src/geosteward/harness/audit.py` | no direct test — offline pipeline requiring the private dataset registry |
+| `scripts/build_eaton_case.py` | Builds the Eaton Fire 2025 deep case (Tier 2 exposure + Tier 3 evidence) from the owner's local dataset registry; offline, fail-closed. | `src/geosteward/deepcase/dins.py`, `src/geosteward/harness/checks/`, `src/geosteward/harness/audit.py`, `src/geosteward/agents/base.py` (`Artifact`, `EventContext`, `utc_stamp` — not the role classes) | no direct test — offline pipeline requiring the private dataset registry |
 | `scripts/build_eaton_svi.py` | Appends the CDC SVI join stage to the already-built Eaton case: assigns each cell to one census tract by centroid point-in-polygon. | `src/geosteward/deepcase/svi.py`, `src/geosteward/harness/audit.py` | no direct test |
-| `scripts/build_ian_case.py` | Builds the Hurricane Ian 2022 deep case (Tier 3 evidence): reliability-gated matched street-view severity samples, plus a sample-density-only layer where no reliable per-point label exists. | `src/geosteward/deepcase/grids.py`, `src/geosteward/harness/checks/`, `src/geosteward/harness/audit.py` | no direct test |
-| `scripts/build_milton_case.py` | Builds the Hurricane Milton 2024 deep case (Tier 2/3) across two AOIs; explicitly excludes GenDisasterSVI street imagery (model-generated) while freezing its registry profile so the exclusion is auditable. | `src/geosteward/deepcase/grids.py`, `src/geosteward/harness/checks/`, `src/geosteward/harness/audit.py` | no direct test |
+| `scripts/build_ian_case.py` | Builds the Hurricane Ian 2022 deep case (Tier 3 evidence): reliability-gated matched street-view severity samples, plus a sample-density-only layer where no reliable per-point label exists. | `src/geosteward/deepcase/grids.py`, `src/geosteward/harness/checks/`, `src/geosteward/harness/audit.py`, `src/geosteward/agents/base.py` (`Artifact`, `EventContext`, `utc_stamp` — not the role classes) | no direct test |
+| `scripts/build_milton_case.py` | Builds the Hurricane Milton 2024 deep case (Tier 2/3) across two AOIs; explicitly excludes GenDisasterSVI street imagery (model-generated) while freezing its registry profile so the exclusion is auditable. | `src/geosteward/deepcase/grids.py`, `src/geosteward/harness/checks/`, `src/geosteward/harness/audit.py`, `src/geosteward/agents/base.py` (`Artifact`, `EventContext`, `utc_stamp` — not the role classes) | no direct test |
 | `scripts/close_event.py` | Closes an event from its final committed source snapshot into a separate post-event closure artifact, without altering the frozen pre-event dossier/footprints/bulletin. | `src/geosteward/hazards/typhoon.py` | no direct test |
 | `scripts/fetch_bavi_track.py` | CLI wrapper over the watcher's source connector: captures one append-only, UTC-stamped typhoon-track snapshot. | `src/geosteward/hazards/typhoon.py`, `src/geosteward/sources/zj_typhoon.py` | no direct test |
 | `scripts/manual_anchors.py` | This manual's own gate: extracts path-shaped tokens from inline code spans and Markdown link targets and checks each resolves on disk, or is declared absent on purpose. | stdlib only | `tests/test_manual_anchors.py` |
-| `scripts/publication_boundary.py` | Enforces the distribution plane at the two points it can be enforced: `plan` writes the public allowlist from the policy; `verify` checks an assembled site tree against it and fails the deploy on a violation. | `src/geosteward/harness/publication.py`, `src/geosteward/harness/audit.py` | no dedicated pytest file — run directly in CI: `python scripts/publication_boundary.py plan --check` and `verify` in `.github/workflows/test.yml` and `.github/workflows/pages.yml` |
+| `scripts/publication_boundary.py` | Enforces the distribution plane at the two points it can be enforced: `plan` writes the public allowlist from the policy; `verify` checks an assembled site tree against it and fails the deploy on a violation. | `src/geosteward/harness/publication.py`, `src/geosteward/harness/distribution.py` (`DistributionPolicy`), `src/geosteward/harness/audit.py` | no dedicated pytest file — run directly in CI: `python scripts/publication_boundary.py plan --check` and `verify` in `.github/workflows/test.yml` and `.github/workflows/pages.yml` |
 | `scripts/run_pre_event.py` | CLI wrapper: parses `--event-id` / `--tfid` / `--offline` and calls `run_pre_event()`. | `src/geosteward/pipeline.py` | no direct test of the CLI itself — the function it calls is `tests/test_pipeline.py` / `tests/test_pipeline_audit.py` |
 | `scripts/run_watch.py` | Runs the Tier-1 watch loop once: fetches all four connectors, builds the national product; each source's failure is recorded and audited independently, never allowed to block the others. | `src/geosteward/sources/nhc.py`, `src/geosteward/sources/nifc.py`, `src/geosteward/sources/nws.py`, `src/geosteward/sources/usgs.py`, `src/geosteward/sources/watchbase.py`, `src/geosteward/watch.py`, `src/geosteward/harness/audit.py` | `tests/test_run_watch.py` (loads the script directly via `importlib`) |
 
