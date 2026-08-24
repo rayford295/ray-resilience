@@ -43,10 +43,20 @@ manifest-listed artifacts cover that location — the evidence tier and
 which is why it runs before the policy engine can evaluate anything; reading
 a local, already-hashed, already-committed file costs nothing and discloses
 nothing to anyone, which is a different property from the one the next
-paragraph is about. Verifiability is computed next (lines 283–294): `RETAINED`
-for any purpose that never touches a live source, or the
+paragraph is about — the one that actually matters for a keyed, billable
+third-party call: that call only happens later, inside `_lookup`, strictly
+after the policy engine has authorized the request, so an unauthorized
+question never reaches a third party and never spends money. Verifiability is
+computed next (lines 283–294), in three branches keyed on whether the purpose
+needs a live source at all and, if so, whether one is configured: `RETAINED`
+for any purpose that never touches a live source; the
 [weakest-link](12-glossary.md) of `RETAINED` and the configured source's own
-declared verifiability for `facility_context`. A `PolicyRequest` is built from
+declared verifiability when a live source *is* configured; and, when the
+purpose needs one but none is configured, the fixed value `LIVE_PURPOSES`
+declares for that purpose (`RE_DERIVABLE` for `facility_context`) — a
+deliberate stand-in so the policy can still tell "in an AOI, but the
+capability is absent" apart from "out of the AOI entirely," rather than
+collapsing both into the same `default-deny`. A `PolicyRequest` is built from
 `role`, `purpose`, `resolution`, the evidence's tier and AOI membership, and
 that verifiability value (lines 296–303), the whole request is written to the
 audit log as a `gateway_request` row — role, exact `lat`, `lon`, and the
@@ -85,12 +95,20 @@ naming every violation the last draft still carried.
 > `(purpose, resolution)`——这是普通 Python 代码，不涉及调用模型，具体模式顺序
 > 如何编码策略，`03` 章已经讲清楚。接着 `self.store.evidence_for(lat, lon)`
 > （281 行）加载覆盖这个位置的、已提交且在制品清单里登记过的产物——`PolicyRequest`
-> 需要的证据层级和是否在 AOI（关注区域）之内，正是从这次调用里来的，这也是为什么
+> 需要的证据层级和是否在关注区域（AOI）之内，正是从这次调用里来的，这也是为什么
 > 它要在策略引擎能评估任何东西之前先跑：读取一份本地的、已经哈希、已经提交的文件
-> 不花任何代价，也不向任何人披露任何东西，这和下一段要讲的那个属性是两回事。接下来
-> 计算可验证性（283–294 行）：任何从不接触实时数据源的目的都取 `RETAINED`（留存）；
-> `facility_context`（设施背景）则取 `RETAINED` 与所配置数据源自身声明的可验证性
-> 二者中的短板原则（weakest-link）结果。`PolicyRequest` 由 `role`（角色）、
+> 不花任何代价，也不向任何人披露任何东西，这和下一段要讲的那个属性是两回事——真正
+> 关乎一次带密钥、要计费的第三方调用的是另一件事：那次调用只发生在更后面，在
+> `_lookup` 内部，且严格晚于策略引擎授权这个请求之后，所以一个未获授权的问题
+> 永远不会触达第三方，也永远不会花一分钱。接下来计算可验证性（283–294 行），
+> 分三支：是否需要实时数据源、以及若需要，是否配置了数据源——任何从不接触实时
+> 数据源的目的都取 `RETAINED`（留存）；`facility_context`（设施背景）在配置了
+> 数据源时，取 `RETAINED` 与所配置数据源自身声明的可验证性二者中的
+> 短板原则（weakest-link）结果；而当目的需要实时数据源、却没有配置任何数据源时，取
+> `LIVE_PURPOSES` 为该目的声明的固定值（`facility_context` 对应
+> `RE_DERIVABLE`）——这是一个有意为之的占位值，让策略还能分清"在关注区域内、
+> 只是能力未配置"和"根本不在关注区域内"这两种情况，而不是把二者都归并进同一个
+> `default-deny`。`PolicyRequest` 由 `role`（角色）、
 > `purpose`（目的）、`resolution`（分辨率）、证据的层级与是否在 AOI 内、以及这个
 > 可验证性值构造出来（296–303 行），整个请求被写入审计日志、记为一条
 > `gateway_request`——角色、精确的 `lat`、`lon`、问题原文，都未经任何脱敏；这个事实
