@@ -607,18 +607,47 @@ runs:
   the intended shape of a future evidence product, not because a grid
   matching it exists yet.
 
-Two honesty rules from the same document do describe current behavior
-exactly, and this chapter has been following them throughout: forecast-conditioned
-and observed products are never mixed in one table (every grid above is
-either a Tier-1 nowcast or a Tier-2/3 observed product built from
-post-event or ground-survey data — nothing here blends a forecast with an
-observation and calls the result one number), and unknowns are declared in
-every decision product rather than left implicit (`uncertainty` on every
-feature, `declared_unknowns` on every dossier, the fixed monitoring-only
-string on every watch run). The document's remaining claim rule — *"no
-damage estimate without imagery"* — is exactly why Ian has no exposure
-layer and why the density grid ships without labels rather than borrowed
-ones.
+Two honesty rules this chapter has, until now, cited as
+`docs/methodology.md`'s are actually written in `docs/architecture.md`, and
+that correction is worth making precisely because both documents retire
+soon — `docs/methodology.md` moves under docs/archive, `docs/architecture.md`
+is deleted outright — and once that happens this chapter becomes the only
+surviving place a reader can check which document said what.
+`docs/architecture.md`'s own list, headed *"Honesty rules (inherited from
+the CrossViewGate research line),"* states as its third and fourth items:
+*"Unknowns are declared in every decision product, not omitted"* and *"No
+damage estimate without imagery: the evidence agent raises rather than
+interpolates."* Those are the two rules this chapter has been following
+throughout — `uncertainty` on every feature, `declared_unknowns` on every
+dossier, the fixed monitoring-only string on every watch run, and Ian's
+missing exposure layer plus its unlabeled density grid — and they belong to
+`docs/architecture.md`, not to `docs/methodology.md`.
+
+`docs/methodology.md`'s own `## Claim rules` section is a separate list of
+four items, and this chapter accounts for all four rather than resting on
+the one it already leaned on. *"Forecast-conditioned vs observed products
+are never mixed in one table"* is the rule already covered above and still
+true today: no grid in this chapter blends a Tier-1 nowcast with a
+Tier-2/3 observed product. *"Any statistical claim carries its
+spatial-dependence treatment (block bootstrap at minimum) or is labeled
+descriptive"* is inherited principle with nothing currently bound to it:
+the string `bootstrap` appears nowhere under `src/geosteward/` or
+`scripts/`, because none of the three deep cases fits a statistical model
+at all — every value in every grid above is a direct count or ratio over
+labeled or measured points, so neither branch of this rule is currently
+exercised. *"Casualty/damage figures cite official releases only and carry
+access dates"* is likewise unbound today: none of Eaton's, Milton's, or
+Ian's dossiers states a casualty figure, and no `access_date`-shaped field
+exists anywhere in the current codebase — the one case that ever reported
+casualties is the archived Bavi typhoon case, outside the three this
+chapter covers. *"Negative validation results (watchlist misses) are
+published, not pruned"* is the one item that partially has real code behind
+it, just not here: `scripts/close_event.py` builds exactly this kind of
+artifact — a "watchlist validation scorecard" scoring a pre-event exposure
+watchlist against post-event outcomes and publishing misses alongside
+hits — but that machinery belongs to the archived Bavi case's pre/post-event
+pipeline. None of Eaton, Milton, or Ian builds a pre-event watchlist of its
+own, so none of the three has anything for this rule to validate against.
 
 > **中文。** `docs/methodology.md`——一份即将被归档的重构前文档（本手册自身构建
 > 的后续一个任务会把它移到 docs/archive 目录下）——描述的是为更早的
@@ -648,14 +677,35 @@ ones.
 > 都没有发布一个专门的跨视角分歧图层；今天已提交的最接近的对应物是
 > `match_quality` 本身，它记录的是一个样本匹配得有多好，而不是两个视角是否对它
 > 产生了分歧。这条原则之所以保留在这里，是因为它仍然是未来某个证据产物应有的样子，
-> 而不是因为已经存在一份与之匹配的网格。同一份文档里有两条诚实规则确实精确描述了
-> 当前行为，本章从头到尾都在遵循它们：预测条件下的产物和实测产物从不混进同一张表
-> （上文每一份网格要么是 1 级临近预报，要么是基于灾后或地面实测数据构建的 2/3 级
-> 实测产物——没有任何一处把预测和实测混在一起、当作一个数字报出来）；每一份决策
-> 产物里的未知项都被声明出来，而不是隐含不提（每个要素上的 `uncertainty`、每份
-> 档案里的 `declared_unknowns`、每次监测运行里那句固定的"仅支持观察"声明）。文档
-> 里剩下的那条断言规则——"没有影像就没有损毁估计"——正是 Ian 没有暴露度图层、
-> 密度网格宁可不带标签也不借用标签发布的原因。
+> 而不是因为已经存在一份与之匹配的网格。本章此前一直把两条诚实规则算作
+> `docs/methodology.md` 里的内容，其实它们写在 `docs/architecture.md` 里——这个
+> 更正值得专门做出，正是因为这两份文档都即将退场：`docs/methodology.md` 会被移到
+> docs/archive 目录下，`docs/architecture.md` 则会被直接删除；那之后，本章就成了
+> 读者唯一能核对"哪句话出自哪份文档"的地方。`docs/architecture.md` 自己那份标题为
+> "继承自 CrossViewGate 研究脉络的诚实规则"的清单，第三条和第四条分别写着："每一份
+> 决策产物里的未知项都要被声明，不能省略"和"没有影像就没有损毁估计：证据 agent
+> 遇到这种情况会报错，而不是插值填补"。本章从头到尾遵循的正是这两条规则——每个
+> 要素上的 `uncertainty`、每份档案里的 `declared_unknowns`、每次监测运行里那句固定
+> 的"仅支持观察"声明，以及 Ian 缺失的暴露度图层和它不带标签发布的密度网格——它们
+> 属于 `docs/architecture.md`，不属于 `docs/methodology.md`。
+>
+> `docs/methodology.md` 自己的 `## Claim rules` 一节是另外一份独立的四条清单，
+> 本章要把四条都讲清楚，而不是只靠已经用过的那一条。"预测条件下的产物和实测产物
+> 从不混进同一张表"就是上文已经讲过、且今天依然成立的那条规则：本章里没有任何一份
+> 网格把 1 级临近预报和 2/3 级实测产物混在一起。"任何统计断言都要携带其空间相关性
+> 处理（至少是分块自助法 block bootstrap）、否则就标注为描述性结论"是继承下来的
+> 原则，目前没有任何代码与之绑定：`src/geosteward/` 或 `scripts/` 下任何地方都找不到
+> `bootstrap` 这个词，因为三个深度案例里没有一个真正拟合过统计模型——上文每一份
+> 网格里的每一个值，都是对已标注或已实测点的直接计数或比率，这条规则的两个分支
+> 目前都没有被触发过。"伤亡/损毁数字只能引用官方发布、并携带获取日期"同样目前没有
+> 绑定：Eaton、Milton、Ian 三份档案里没有任何一份陈述过伤亡数字，当前代码库里也
+> 找不到任何形如 `access_date` 的字段——唯一报告过伤亡数字的是已归档的 Bavi 台风
+> 案例，不在本章覆盖的三个案例之内。"负面验证结果（观察名单误判）要照实发布，
+> 不能剔除"是四条里唯一确实有真实代码支撑、只是不在这里的一条：
+> `scripts/close_event.py` 恰好构建了这样一份产物——一份"观察名单验证记分卡"，
+> 把灾前的暴露度观察名单拿去和灾后结果对照打分，把误判和命中一并发布——但这套机制
+> 属于已归档的 Bavi 案例的灾前/灾后流水线。Eaton、Milton、Ian 三者都没有构建属于
+> 自己的灾前观察名单，所以三者都没有可供这条规则去验证的对象。
 
 ## The dataset registry, and what cannot be rebuilt
 
