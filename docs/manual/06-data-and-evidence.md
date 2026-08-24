@@ -641,13 +641,22 @@ Ian's dossiers states a casualty figure, and no `access_date`-shaped field
 exists anywhere in the current codebase — the one case that ever reported
 casualties is the archived Bavi typhoon case, outside the three this
 chapter covers. *"Negative validation results (watchlist misses) are
-published, not pruned"* is the one item that partially has real code behind
-it, just not here: `scripts/close_event.py` builds exactly this kind of
-artifact — a "watchlist validation scorecard" scoring a pre-event exposure
-watchlist against post-event outcomes and publishing misses alongside
-hits — but that machinery belongs to the archived Bavi case's pre/post-event
-pipeline. None of Eaton, Milton, or Ian builds a pre-event watchlist of its
-own, so none of the three has anything for this rule to validate against.
+published, not pruned"* is unbound everywhere in the repository, Bavi
+included — and it is worth being precise about how that was checked, because
+the phrase "a watchlist validation scorecard" appears in exactly three
+places (`scripts/close_event.py`, and the closure artifacts it produced for
+the archived Bavi case, `events/archive/bavi-2026/closure/event_close.json`
+and `events/archive/bavi-2026/closure/CLOSURE.md`), and all three read, in
+full, *"A watchlist validation
+scorecard; observed damage labels are not available"* — inside a
+`declared_unknowns` list, under a heading that in `CLOSURE.md` literally
+reads "What This Does Not Establish." That sentence documents the
+scorecard's absence, not its existence: `close_event.py` reads a final
+track snapshot and writes a closure record, and scores nothing. A separate
+search for scoring logic, a hit/miss table, or any comparison of a
+watchlist against an outcome turns up nothing anywhere in the repository.
+So this rule, like the two before it, has no code bound to it — not in any
+of the three deep cases, and not in the archived Bavi case either.
 
 > **中文。** `docs/methodology.md`——一份即将被归档的重构前文档（本手册自身构建
 > 的后续一个任务会把它移到 docs/archive 目录下）——描述的是为更早的
@@ -701,11 +710,18 @@ own, so none of the three has anything for this rule to validate against.
 > 绑定：Eaton、Milton、Ian 三份档案里没有任何一份陈述过伤亡数字，当前代码库里也
 > 找不到任何形如 `access_date` 的字段——唯一报告过伤亡数字的是已归档的 Bavi 台风
 > 案例，不在本章覆盖的三个案例之内。"负面验证结果（观察名单误判）要照实发布，
-> 不能剔除"是四条里唯一确实有真实代码支撑、只是不在这里的一条：
-> `scripts/close_event.py` 恰好构建了这样一份产物——一份"观察名单验证记分卡"，
-> 把灾前的暴露度观察名单拿去和灾后结果对照打分，把误判和命中一并发布——但这套机制
-> 属于已归档的 Bavi 案例的灾前/灾后流水线。Eaton、Milton、Ian 三者都没有构建属于
-> 自己的灾前观察名单，所以三者都没有可供这条规则去验证的对象。
+> 不能剔除"这一条，在整个仓库里都没有代码与之绑定，Bavi 案例也不例外——这一点
+> 值得说清楚是怎么核实的："观察名单验证记分卡"这个短语在仓库里恰好出现三次
+> （`scripts/close_event.py`，以及它为已归档 Bavi 案例生成的两份收尾产物
+> `events/archive/bavi-2026/closure/event_close.json` 和
+> `events/archive/bavi-2026/closure/CLOSURE.md`），三处的完整原文都是"一份观察
+> 名单验证记分卡；未能获得实测损毁标签"——都出现在一份 `declared_unknowns`
+> 列表里，`CLOSURE.md` 里这份列表所在的标题写的就是"本产物不能确立什么"。这句话
+> 陈述的是这份记分卡**不存在**，而不是它存在：`close_event.py` 读取最终的一份
+> 台风路径快照并写出一份收尾记录，不做任何打分。另外单独搜索过打分逻辑、命中/
+> 误判对照表，或任何"观察名单对照实际结果"的比较代码，整个仓库里都没有找到。所以
+> 这一条规则和前两条一样，没有任何代码与之绑定——不论是三个深度案例，还是已归档的
+> Bavi 案例。
 
 ## The dataset registry, and what cannot be rebuilt
 
