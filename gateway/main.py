@@ -14,7 +14,7 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from geosteward.gateway.steward import Steward
 from geosteward.harness.audit import AuditLog
@@ -40,18 +40,50 @@ steward = Steward(
 )
 
 
+class AreaBox(BaseModel):
+    min_lat: float = Field(ge=-90, le=90)
+    min_lon: float = Field(ge=-180, le=180)
+    max_lat: float = Field(ge=-90, le=90)
+    max_lon: float = Field(ge=-180, le=180)
+
+
 class AskRequest(BaseModel):
     role: str = Field(pattern="^(resident|planner)$")
-    lat: float = Field(ge=-90, le=90)
-    lon: float = Field(ge=-180, le=180)
     question: str = Field(min_length=1, max_length=2000)
+    lat: float | None = Field(default=None, ge=-90, le=90)
+    lon: float | None = Field(default=None, ge=-180, le=180)
+    area: AreaBox | None = None
+
+    @model_validator(mode="after")
+    def exactly_one_location(self):
+        #: Rejected here, before the harness sees it, so an ambiguous request
+        #: never reaches the plane that decides authorization.
+        #:
+        #: A lone coordinate does not make a point, so `has_point` needs
+        #: both -- but it is still a coordinate, and a coordinate given
+        #: alongside an area is "both", not "neither". Checking `has_any_coord`
+        #: against `area` first catches that shape before it can hide behind
+        #: `has_point` being `False`; the second check then handles the
+        #: ordinary neither-given and lone-coordinate cases.
+        has_area = self.area is not None
+        has_any_coord = self.lat is not None or self.lon is not None
+        has_point = self.lat is not None and self.lon is not None
+        if has_area and has_any_coord:
+            raise ValueError("give either lat/lon or area, not both and not neither")
+        if not has_area and not has_point:
+            raise ValueError("give either lat/lon or area, not both and not neither")
+        return self
 
 
 @app.post("/ask")
 def ask(request: AskRequest) -> dict:
-    # Task 3 finishes this: AskRequest gains an `area` field and this call
-    # passes it through as `area=request.area`.
-    return steward.answer(request.role, request.question, lat=request.lat, lon=request.lon)
+    return steward.answer(
+        request.role,
+        request.question,
+        lat=request.lat,
+        lon=request.lon,
+        area=request.area.model_dump() if request.area else None,
+    )
 
 
 @app.get("/health")

@@ -285,10 +285,22 @@ class Steward:
         lon: float | None = None,
         area: dict[str, float] | None = None,
     ) -> dict[str, Any]:
+        #: A lone coordinate does not make a point, so `has_point` needs both
+        #: -- but it is still a coordinate, and a coordinate given alongside
+        #: an area is "both", not "neither". The old check compared
+        #: `has_point == (area is not None)`, so `lat=5.0, lon=None,
+        #: area=BOX` read as `False == True`, i.e. "neither", and passed.
+        #: Checking `has_any_coord` against `area` first catches that shape
+        #: before it can hide behind `has_point` being `False`; the second
+        #: check then handles the ordinary neither-given and lone-coordinate
+        #: cases. The check is here rather than only in the endpoint so a
+        #: direct caller cannot skip it.
+        has_area = area is not None
+        has_any_coord = lat is not None or lon is not None
         has_point = lat is not None and lon is not None
-        if has_point == (area is not None):
-            #: Exactly one, and the check is here rather than only in the
-            #: endpoint so a direct caller cannot skip it.
+        if has_area and has_any_coord:
+            raise ValueError("give either lat/lon or area, not both and not neither")
+        if not has_area and not has_point:
             raise ValueError("give either lat/lon or area, not both and not neither")
 
         purpose, resolution = classify(question)
@@ -321,7 +333,16 @@ class Steward:
         )
         self.audit.record(
             "gateway_request", "steward",
-            payload={"role": role, "lat": lat, "lon": lon, "question": question,
+            #: `area` is an addition alongside `lat`/`lon`, not a replacement:
+            #: this project's product is a defensible record of why it said
+            #: what it said, and a record that cannot answer "about where"
+            #: for an area query is not that. Recorded exactly as received --
+            #: full precision, not redacted or coarsened -- matching the
+            #: exact coordinates and verbatim question this row already
+            #: stores; redaction is a separately tracked, whole-audit concern
+            #: (docs/STATUS.md), and solving half of it here would make the
+            #: record inconsistent without making it safe.
+            payload={"role": role, "lat": lat, "lon": lon, "area": area, "question": question,
                      "purpose": purpose, "resolution": resolution,
                      "verifiability": verifiability,
                      "event": evidence.event_id, "tier": evidence.evidence_tier},

@@ -6,7 +6,7 @@ from pathlib import Path
 from geosteward.gateway.context import EvidenceStore, boxes_intersect, normalise_bbox
 
 from tests.test_gateway_live import LiveGatewayTestCase
-from tests.test_gateway_steward import GatewayTestCase, MockLLM
+from tests.test_gateway_steward import GRID_ID, IN_AOI, GatewayTestCase, MockLLM
 
 EVENTS = Path(__file__).resolve().parents[1] / "events"
 
@@ -181,6 +181,19 @@ class AnswerAreaContractTests(GatewayTestCase):
                 "planner", "how bad is it?", lat=34.19, lon=-118.1, area=EATON_BOX
             )
 
+    def test_half_point_with_area_is_rejected(self):
+        # `has_point` requires both coordinates, so a lone `lat` reads as "no
+        # point" -- which used to make this combination read as exactly one
+        # of {point, area}, and pass. It is really "both": a coordinate AND
+        # an area. Any coordinate alongside an area must raise.
+        with self.assertRaises(ValueError):
+            self.steward.answer("planner", "how bad is it?", lat=34.19, area=EATON_BOX)
+
+    def test_half_point_with_area_the_other_coordinate_is_also_rejected(self):
+        # Same defect, the other axis: lon alone alongside an area.
+        with self.assertRaises(ValueError):
+            self.steward.answer("planner", "how bad is it?", lon=-118.1, area=EATON_BOX)
+
 
 # Matches `build_fixture_events`'s aoi_bbox_wgs84 in tests/test_gateway_steward.py
 # -- NOT EATON_BOX, which sits inside the real events/eaton-2025 AOI. This box has
@@ -220,6 +233,76 @@ class AnswerAreaFacilityContextTests(LiveGatewayTestCase):
         # served, live source configured or not.
         self.assertEqual(self.source.calls, [])
         self.assertEqual(self.live_rows(), [])
+
+
+class GatewayRequestAuditPayloadTests(GatewayTestCase):
+    """Addition 1: the `gateway_request` audit row must record the area for
+    an area query -- both are `None` there today, and the bounding box is
+    recorded nowhere, so every area query in the audit log looks identical to
+    every other one. Existing fields (`lat`, `lon`, and the rest) must stay
+    exactly as they are; this is an addition, not a reshaping.
+    """
+
+    QUESTION = "How severe is the damage in this area?"
+
+    def _gateway_request_payload(self):
+        rows = [r for r in self.audit_rows() if r["action"] == "gateway_request"]
+        self.assertEqual(len(rows), 1)
+        return rows[0]["payload"]
+
+    def test_area_query_audit_payload_records_the_bounding_box(self):
+        llm = MockLLM([f"5 of 10 structures destroyed [artifact:{GRID_ID}]."])
+        self.make_steward(llm).answer("planner", self.QUESTION, area=TESTFIRE_BOX)
+        payload = self._gateway_request_payload()
+        self.assertEqual(payload["area"], TESTFIRE_BOX)
+        # Unchanged from a point query: no coordinates were given, so both
+        # stay None rather than being repurposed to carry box edges.
+        self.assertIsNone(payload["lat"])
+        self.assertIsNone(payload["lon"])
+
+    def test_point_query_audit_payload_is_unchanged_apart_from_a_null_area(self):
+        llm = MockLLM([f"5 of 10 structures destroyed [artifact:{GRID_ID}]."])
+        self.make_steward(llm).answer(
+            "planner", self.QUESTION, lat=IN_AOI[0], lon=IN_AOI[1]
+        )
+        payload = self._gateway_request_payload()
+        self.assertEqual(payload["lat"], IN_AOI[0])
+        self.assertEqual(payload["lon"], IN_AOI[1])
+        self.assertIsNone(payload["area"])
+
+
+class AskRequestValidationTests(unittest.TestCase):
+    def test_area_only_validates(self):
+        from gateway.main import AskRequest
+        r = AskRequest(role="planner", question="how bad?", area=EATON_BOX)
+        self.assertIsNotNone(r.area)
+
+    def test_neither_is_rejected(self):
+        from pydantic import ValidationError
+        from gateway.main import AskRequest
+        with self.assertRaises(ValidationError):
+            AskRequest(role="planner", question="how bad?")
+
+    def test_both_is_rejected(self):
+        from pydantic import ValidationError
+        from gateway.main import AskRequest
+        with self.assertRaises(ValidationError):
+            AskRequest(
+                role="planner", question="how bad?",
+                lat=34.19, lon=-118.1, area=EATON_BOX,
+            )
+
+    def test_half_point_with_area_is_rejected(self):
+        # Addition 2, mirrored at the request-validation layer: `lat` alone
+        # (no `lon`) reads as "no point" to a naive `bool(lat and lon)`
+        # check, so this shape used to pass both the endpoint's validator and
+        # `Steward.answer`. It is a coordinate given alongside an area, which
+        # the contract calls "both" -- it must be rejected here too, so the
+        # two layers agree about what an ambiguous request looks like.
+        from pydantic import ValidationError
+        from gateway.main import AskRequest
+        with self.assertRaises(ValidationError):
+            AskRequest(role="planner", question="how bad?", lat=34.19, area=EATON_BOX)
 
 
 if __name__ == "__main__":
