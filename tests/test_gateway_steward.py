@@ -225,26 +225,26 @@ class TestUncitedAssertions(unittest.TestCase):
 class TestPolicyGate(GatewayTestCase):
     def test_damage_outside_aoi_refused_without_llm_call(self):
         llm = MockLLM(["should never be used"])
-        result = self.make_steward(llm).answer("planner", *OUTSIDE, "How much damage is there?")
+        result = self.make_steward(llm).answer("planner", "How much damage is there?", lat=OUTSIDE[0], lon=OUTSIDE[1])
         self.assertEqual(result["type"], "refusal")
         self.assertEqual(result["rule_id"], "deny-outside-aoi")
         self.assertEqual(llm.calls, 0)
 
     def test_resident_damage_assessment_refused(self):
         llm = MockLLM(["never"])
-        result = self.make_steward(llm).answer("resident", *IN_AOI, "How many homes were destroyed?")
+        result = self.make_steward(llm).answer("resident", "How many homes were destroyed?", lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(result["rule_id"], "deny-resident-damage-assessment")
         self.assertEqual(llm.calls, 0)
 
     def test_parcel_question_refused_any_role(self):
         llm = MockLLM(["never"])
-        result = self.make_steward(llm).answer("planner", *IN_AOI, "Was my house damaged?")
+        result = self.make_steward(llm).answer("planner", "Was my house damaged?", lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(result["rule_id"], "deny-parcel-any-role")
         self.assertEqual(llm.calls, 0)
 
     def test_watch_outside_aoi_allowed_but_declares_no_evidence(self):
         llm = MockLLM(["never"])
-        result = self.make_steward(llm).answer("resident", *OUTSIDE, "Anything happening here?")
+        result = self.make_steward(llm).answer("resident", "Anything happening here?", lat=OUTSIDE[0], lon=OUTSIDE[1])
         self.assertEqual(result["type"], "no_evidence")
         self.assertEqual(result["rule_id"], "allow-watch-anywhere")
         self.assertEqual(llm.calls, 0)
@@ -255,7 +255,7 @@ class TestClaimGate(GatewayTestCase):
 
     def test_valid_cited_answer_passes(self):
         llm = MockLLM([f"Half of the 10 assessed structures were destroyed [artifact:{GRID_ID}]."])
-        result = self.make_steward(llm).answer("planner", *IN_AOI, self.QUESTION)
+        result = self.make_steward(llm).answer("planner", self.QUESTION, lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(result["type"], "answer")
         self.assertEqual(result["rule_id"], "allow-planner-damage-tier3")
         self.assertIn(GRID_ID, result["citations"])
@@ -263,7 +263,7 @@ class TestClaimGate(GatewayTestCase):
     def test_fabricated_citation_refused_after_retries(self):
         bad = "Ten homes burned [artifact:deadbeef0000]."
         llm = MockLLM([bad, bad, bad])
-        result = self.make_steward(llm).answer("planner", *IN_AOI, self.QUESTION)
+        result = self.make_steward(llm).answer("planner", self.QUESTION, lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(result["type"], "refusal")
         self.assertEqual(result["rule_id"], "claim-post-check")
         self.assertEqual(llm.calls, 3)
@@ -273,18 +273,18 @@ class TestClaimGate(GatewayTestCase):
             "90% of homes are gone.",
             f"Records show 5 of 10 assessed structures destroyed [artifact:{GRID_ID}].",
         ])
-        result = self.make_steward(llm).answer("planner", *IN_AOI, self.QUESTION)
+        result = self.make_steward(llm).answer("planner", self.QUESTION, lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(result["type"], "answer")
         self.assertEqual(llm.calls, 2)
 
     def test_llm_outage_is_declared_not_faked(self):
         llm = MockLLM([LLMUnavailable("connection refused")])
-        result = self.make_steward(llm).answer("planner", *IN_AOI, self.QUESTION)
+        result = self.make_steward(llm).answer("planner", self.QUESTION, lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(result["type"], "agent_unavailable")
 
     def test_every_path_is_audited(self):
         llm = MockLLM([f"5 of 10 structures destroyed [artifact:{GRID_ID}]."])
-        self.make_steward(llm).answer("planner", *IN_AOI, self.QUESTION)
+        self.make_steward(llm).answer("planner", self.QUESTION, lat=IN_AOI[0], lon=IN_AOI[1])
         actions = [r["action"] for r in self.audit_rows()]
         self.assertIn("gateway_request", actions)
         self.assertIn("gateway_post_check", actions)

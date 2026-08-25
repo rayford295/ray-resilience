@@ -43,7 +43,7 @@ def main() -> None:
         policy=PolicyEngine.from_yaml(POLICY),
         audit=AuditLog(args.audit),
     )
-    result = steward.answer(args.role, args.lat, args.lon, args.question)
+    result = steward.answer(args.role, args.question, lat=args.lat, lon=args.lon)
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
 

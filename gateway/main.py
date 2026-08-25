@@ -49,7 +49,9 @@ class AskRequest(BaseModel):
 
 @app.post("/ask")
 def ask(request: AskRequest) -> dict:
-    return steward.answer(request.role, request.lat, request.lon, request.question)
+    # Task 3 finishes this: AskRequest gains an `area` field and this call
+    # passes it through as `area=request.area`.
+    return steward.answer(request.role, request.question, lat=request.lat, lon=request.lon)
 
 
 @app.get("/health")

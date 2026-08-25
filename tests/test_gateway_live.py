@@ -223,7 +223,7 @@ class TestPolicyGatesBeforeSpending(LiveGatewayTestCase):
         # party is never contacted, so an unauthorized question costs nothing
         # and discloses nothing.
         steward = self.make_live_steward(MockLLM([]))
-        response = steward.answer("resident", *OUTSIDE, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=OUTSIDE[0], lon=OUTSIDE[1])
 
         self.assertEqual(response["type"], "refusal")
         self.assertEqual(self.source.calls, [])
@@ -231,7 +231,7 @@ class TestPolicyGatesBeforeSpending(LiveGatewayTestCase):
 
     def test_the_refusal_names_a_rule(self) -> None:
         steward = self.make_live_steward(MockLLM([]))
-        response = steward.answer("resident", *OUTSIDE, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=OUTSIDE[0], lon=OUTSIDE[1])
         self.assertTrue(response["rule_id"])
 
 
@@ -243,7 +243,7 @@ class TestDeclaredCapabilityGaps(LiveGatewayTestCase):
             audit=AuditLog(self.audit_path),
             llm=MockLLM([]),
         )
-        response = steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(response["type"], "live_source_unavailable")
         self.assertIn("No substitute", response["reason"])
 
@@ -252,13 +252,13 @@ class TestDeclaredCapabilityGaps(LiveGatewayTestCase):
         # would produce a cited fact with no provenance, which is the failure
         # this whole design exists to avoid.
         steward = self.make_live_steward(MockLLM([]), with_recorder=False)
-        response = steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(response["type"], "live_source_unavailable")
         self.assertEqual(self.source.calls, [])
 
     def test_an_outage_is_declared_rather_than_cached(self) -> None:
         steward = self.make_live_steward(MockLLM([]), source=FakeLiveSource(unavailable=True))
-        response = steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(response["type"], "live_source_unavailable")
         self.assertIn("no cached or approximated", response["reason"])
         self.assertEqual(self.live_rows(), [])
@@ -267,7 +267,7 @@ class TestDeclaredCapabilityGaps(LiveGatewayTestCase):
 class TestLiveAnswer(LiveGatewayTestCase):
     def test_authorized_facility_answer_carries_both_citation_forms(self) -> None:
         steward = self.make_live_steward(MockLLM([self.compliant_draft()]))
-        response = steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
 
         self.assertEqual(response["type"], "answer")
         self.assertEqual(response["rule_id"], "allow-facility-context-re-derivable")
@@ -276,20 +276,20 @@ class TestLiveAnswer(LiveGatewayTestCase):
 
     def test_the_answer_reports_its_own_verifiability(self) -> None:
         steward = self.make_live_steward(MockLLM([self.compliant_draft()]))
-        response = steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
         # Weakest link: most of this answer rests on hashed grids, and it is
         # still only re-derivable, because one part of it is.
         self.assertEqual(response["verifiability"], RE_DERIVABLE)
 
     def test_attribution_travels_with_the_answer(self) -> None:
         steward = self.make_live_steward(MockLLM([self.compliant_draft()]))
-        response = steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(response["attribution"], "Fake Maps Provider")
 
     def test_retained_only_answers_do_not_claim_an_attribution(self) -> None:
         draft = f"About 10 structures were assessed in this tile [artifact:{GRID_ID}]."
         steward = self.make_live_steward(MockLLM([draft]))
-        response = steward.answer("planner", *IN_AOI, "How vulnerable is this area?")
+        response = steward.answer("planner", "How vulnerable is this area?", lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(response["type"], "answer")
         self.assertEqual(response["verifiability"], RETAINED)
         self.assertNotIn("attribution", response)
@@ -297,7 +297,7 @@ class TestLiveAnswer(LiveGatewayTestCase):
     def test_the_model_is_given_counts_not_names(self) -> None:
         llm = MockLLM([self.compliant_draft()])
         steward = self.make_live_steward(llm)
-        steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
 
         sent = json.dumps(llm.last_messages)
         self.assertIn("hospital=1", sent)
@@ -310,7 +310,7 @@ class TestLiveAnswer(LiveGatewayTestCase):
 class TestAttestationOrdering(LiveGatewayTestCase):
     def test_the_lookup_is_recorded(self) -> None:
         steward = self.make_live_steward(MockLLM([self.compliant_draft()]))
-        steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
 
         rows = self.live_rows()
         self.assertEqual(len(rows), 1)
@@ -324,7 +324,7 @@ class TestAttestationOrdering(LiveGatewayTestCase):
         # would let a crash leave a cited fact with no provenance.
         uncited = ["The area is fine." for _ in range(3)]
         steward = self.make_live_steward(MockLLM(uncited))
-        response = steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
 
         self.assertEqual(response["type"], "refusal")
         self.assertEqual(response["rule_id"], "claim-post-check")
@@ -332,7 +332,7 @@ class TestAttestationOrdering(LiveGatewayTestCase):
 
     def test_the_record_holds_no_third_party_content(self) -> None:
         steward = self.make_live_steward(MockLLM([self.compliant_draft()]))
-        steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
 
         written = self.live_path.read_text(encoding="utf-8")
         for poison in POISON_STRINGS:
@@ -341,7 +341,7 @@ class TestAttestationOrdering(LiveGatewayTestCase):
 
     def test_the_request_is_recorded_at_tile_resolution(self) -> None:
         steward = self.make_live_steward(MockLLM([self.compliant_draft()]))
-        steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
 
         recorded = self.live_rows()[0]["payload"]["request"]
         self.assertIn("h3_cell", recorded)
@@ -349,7 +349,7 @@ class TestAttestationOrdering(LiveGatewayTestCase):
 
     def test_the_audit_log_records_the_verifiability_of_the_request(self) -> None:
         steward = self.make_live_steward(MockLLM([self.compliant_draft()]))
-        steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
 
         requests = [r for r in self.audit_rows() if r["action"] == "gateway_request"]
         self.assertEqual(requests[-1]["payload"]["verifiability"], RE_DERIVABLE)
@@ -358,7 +358,7 @@ class TestAttestationOrdering(LiveGatewayTestCase):
 class TestLiveAndModelOutagesAreDistinct(LiveGatewayTestCase):
     def test_model_outage_after_a_successful_lookup_is_reported_as_a_model_outage(self) -> None:
         steward = self.make_live_steward(MockLLM([LLMUnavailable("no model")]))
-        response = steward.answer("resident", *IN_AOI, "What hospitals are near here?")
+        response = steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(response["type"], "agent_unavailable")
         # The lookup still happened, so it is still attested.
         self.assertEqual(len(self.live_rows()), 1)

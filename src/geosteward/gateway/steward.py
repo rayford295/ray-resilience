@@ -276,9 +276,27 @@ class Steward:
             ),
         }
 
-    def answer(self, role: str, lat: float, lon: float, question: str) -> dict[str, Any]:
+    def answer(
+        self,
+        role: str,
+        question: str,
+        *,
+        lat: float | None = None,
+        lon: float | None = None,
+        area: dict[str, float] | None = None,
+    ) -> dict[str, Any]:
+        has_point = lat is not None and lon is not None
+        if has_point == (area is not None):
+            #: Exactly one, and the check is here rather than only in the
+            #: endpoint so a direct caller cannot skip it.
+            raise ValueError("give either lat/lon or area, not both and not neither")
+
         purpose, resolution = classify(question)
-        evidence = self.store.evidence_for(lat, lon)
+        evidence = (
+            self.store.evidence_for_area(area)
+            if area is not None
+            else self.store.evidence_for(lat, lon)
+        )
 
         # Verifiability is decided before anything is fetched, from what the
         # configured sources DECLARE — so the policy gates the request before a
@@ -400,6 +418,10 @@ class Steward:
                     "rule_id": decision.rule_id,
                     "event": evidence.event_id,
                     "n_facts": len(evidence.facts),
+                    #: The tiles this answer drew on, so the map can show what
+                    #: it is about. r9 identifiers only, the resolution already
+                    #: published in the grids the app renders.
+                    "cells": evidence.cells,
                     "citations": sorted(set(_CITATION.findall(draft))),
                     "live_citations": live_citations,
                     #: The reader's standing, not a quality score: what they can

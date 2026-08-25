@@ -5,6 +5,8 @@ from pathlib import Path
 
 from geosteward.gateway.context import EvidenceStore, boxes_intersect, normalise_bbox
 
+from tests.test_gateway_steward import GatewayTestCase, MockLLM
+
 EVENTS = Path(__file__).resolve().parents[1] / "events"
 
 # Eaton's AOI, comfortably inside it. Verified against
@@ -148,6 +150,35 @@ class TierWeakestLinkTests(unittest.TestCase):
 
             self.assertEqual(sorted(ev.event_ids), ["strongcase-2025", "weakcase-2025"])
             self.assertEqual(ev.evidence_tier, 1)  # the weaker of {1, 3}, not the stronger
+
+
+class AnswerAreaContractTests(GatewayTestCase):
+    """The either-or contract, checked without invoking a model.
+
+    Built on `GatewayTestCase` (from `tests.test_gateway_steward`) rather than
+    the brief's `Steward(store=..., llm=None, policy=None)`: `Steward` is a
+    dataclass with no `store` field -- `__post_init__` builds the store from
+    `events_root` -- and `policy`/`audit` are required, not optional. Reusing
+    the existing fixture also means the two assertions below are checked
+    against the same construction every other gateway test already trusts.
+    """
+
+    def setUp(self):
+        super().setUp()
+        #: A response that would fail the claim post-check if it were ever
+        #: sent to the model. Both cases below must raise before either
+        #: purpose classification or an LLM call happens.
+        self.steward = self.make_steward(MockLLM(["should never be used"]))
+
+    def test_neither_point_nor_area_is_rejected(self):
+        with self.assertRaises(ValueError):
+            self.steward.answer("planner", "how bad is it?")
+
+    def test_both_point_and_area_is_rejected(self):
+        with self.assertRaises(ValueError):
+            self.steward.answer(
+                "planner", "how bad is it?", lat=34.19, lon=-118.1, area=EATON_BOX
+            )
 
 
 if __name__ == "__main__":
