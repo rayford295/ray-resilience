@@ -108,6 +108,60 @@ class TemplateAndAbsenceTests(unittest.TestCase):
         self.assertEqual(ma.stale_absences(REPO), [])
 
 
+class GeneratedPathTests(unittest.TestCase):
+    def test_generated_path_resolves_when_absent(self):
+        # app/dist doesn't exist in a fresh checkout -- npm run build hasn't
+        # run -- but the citation is still correct and must resolve.
+        (anchor,) = ma.extract_anchors("`app/dist`", Path("x.md"))
+        self.assertIn(anchor.path, ma.GENERATED_PATHS)
+        self.assertTrue(ma.resolve(anchor, REPO))
+
+    def test_generated_path_resolves_when_present(self):
+        # On a machine that HAS built the app, the path exists on disk too.
+        # A generated path must resolve either way -- that's what makes it
+        # different from an ordinary anchor.
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "app" / "dist").mkdir(parents=True)
+            (anchor,) = ma.extract_anchors("`app/dist`", Path("x.md"))
+            self.assertTrue(ma.resolve(anchor, root))
+
+    def test_generated_path_trailing_slash_variants_both_resolve(self):
+        # The manual cites app/public/events/ with and without the
+        # trailing slash across different lines; both must resolve.
+        anchors = ma.extract_anchors("`app/public/events` and `app/public/events/`", Path("x.md"))
+        self.assertEqual(len(anchors), 2)
+        for anchor in anchors:
+            self.assertTrue(ma.resolve(anchor, REPO))
+
+    def test_entry_not_in_gitignore_is_reported(self):
+        # This is the self-policing check: a GENERATED_PATHS entry that
+        # isn't actually git-ignored is indistinguishable from a typo that
+        # happens not to exist yet, and must be caught the same way a
+        # stale absence or a stale skip is.
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / ".gitignore").write_text("some/other/path/\n")
+            stale = ma.stale_generated_paths(root)
+            self.assertEqual(set(stale), set(ma.GENERATED_PATHS))
+
+    def test_no_stale_generated_paths_in_this_repo(self):
+        # Mirrors test_no_stale_skips_in_this_repo /
+        # test_no_stale_absences_in_this_repo: the repo's own .gitignore
+        # must actually cover every entry in GENERATED_PATHS right now.
+        self.assertEqual(ma.stale_generated_paths(REPO), [])
+
+    def test_generated_paths_seeded_with_exactly_the_two_build_outputs(self):
+        self.assertEqual(
+            {p.rstrip("/") for p in ma.GENERATED_PATHS},
+            {"app/dist", "app/public/events"},
+        )
+
+
 class CliTests(unittest.TestCase):
     def test_check_passes_on_the_repo_docs(self):
         self.assertEqual(ma.main(["check", "docs"]), 0)

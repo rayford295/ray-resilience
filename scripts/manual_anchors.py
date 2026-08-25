@@ -17,6 +17,12 @@ worse):
   example `src/geosteward/harness/policy_v1.yaml` line 115 wraps
   `docs/design/specs/` onto the next line; this script checks each line
   independently and will not join them.
+- A code span containing whitespace is not extracted at all, even if it
+  contains a path -- `_looks_like_path` rejects the whole span on the
+  no-whitespace rule (see rule 3, above `TOP_LEVEL`). So a command-shaped
+  span naming more than one path, e.g. `` `python scripts/manual_anchors.py
+  check docs README.md` ``, is silently not checked for any of the paths
+  inside it.
 - An anchor that resolves says nothing about whether the behaviour behind it
   still matches the sentence citing it. This script checks that the path
   exists, not that the prose describing it is still true.
@@ -31,6 +37,21 @@ the declaration itself is now stale and `stale_absences` reports it — the
 same shape as `artifact_classes` in
 `src/geosteward/harness/policy_v1.yaml`: declare the exception, then check
 the declaration so it cannot silently rot.
+
+`GENERATED_PATHS` exists for the opposite reason: some paths are cited
+because a build makes them exist — `app/dist` and `app/public/events/` are
+produced by `npm run build`, are listed in `.gitignore`, and are not present
+in a fresh checkout (in particular, not in CI). The citations are still
+correct: `.github/workflows/test.yml`'s `app-build` job really does run
+`python scripts/publication_boundary.py verify app/dist`, and the manual
+correctly describes the sync into `app/public/events/`. An anchor here must
+resolve whether or not the path exists on disk right now, in either
+direction, unlike `DECLARED_ABSENT` (which asserts non-existence as the
+content) or an ordinary anchor (which asserts existence). The self-policing
+check, `stale_generated_paths`, asserts that every entry is actually listed
+in `.gitignore` -- that is what distinguishes a real build output from a
+typo that happens not to exist yet, and it is what keeps this list from
+becoming a place to hide anchors someone doesn't want to fix.
 
 Usage:
     python scripts/manual_anchors.py list [ROOT ...]
@@ -64,6 +85,19 @@ DECLARED_ABSENT = {
     # The manual cites this path precisely to say the file is not there.
     # See docs/manual/05-verifiability-and-live.md.
     "events/live_evidence.jsonl": "no GMP key; both adapters are tested against a stub",
+}
+
+# Paths that exist only after `npm run build` has run -- vendored or emitted
+# frontend artifacts, both git-ignored (see .gitignore) and both absent in a
+# fresh checkout, including CI. Citing them is legitimate: the app-build job
+# in .github/workflows/test.yml runs `publication_boundary.py verify
+# app/dist`, and docs/manual/10-getting-started.md correctly describes the
+# events/ -> app/public/events/ sync. An entry here must resolve regardless
+# of whether the path currently exists on disk -- see `resolve` and
+# `stale_generated_paths` below.
+GENERATED_PATHS = {
+    "app/dist": "npm run build output; verified with scripts/publication_boundary.py in CI",
+    "app/public/events/": "npm run build vendors events/ here; see docs/manual/10-getting-started.md",
 }
 
 # Source-file prefixes whose own anchors are not checked. This is keyed on
@@ -155,9 +189,20 @@ def extract_anchors(text: str, source: Path) -> list[Anchor]:
     return found
 
 
+_GENERATED_ROOTS = {path.rstrip("/") for path in GENERATED_PATHS}
+
+
 def resolve(anchor: Anchor, repo_root: Path) -> bool:
-    """True when the anchor's path exists, or is declared absent on purpose."""
+    """True when the anchor's path exists, is declared absent on purpose, or
+    is a build output that only exists after `npm run build` has run.
+
+    The trailing slash is normalised away for the GENERATED_PATHS comparison
+    because the manual cites the same directory both ways (`app/dist` and
+    `app/dist/`) across different sentences, and both are the same anchor.
+    """
     if anchor.path in DECLARED_ABSENT:
+        return True
+    if anchor.path.rstrip("/") in _GENERATED_ROOTS:
         return True
     return (repo_root / anchor.path).exists()
 
@@ -181,6 +226,39 @@ def stale_skips(repo_root: Path) -> list[str]:
     that removes (or renames) the file it names.
     """
     return [prefix for prefix in SKIP_PATHS if not (repo_root / prefix.rstrip("/")).exists()]
+
+
+def _gitignore_lines(repo_root: Path) -> set[str]:
+    """The non-blank, non-comment lines of the repo's `.gitignore`, verbatim.
+
+    Read directly rather than shelling out to `git check-ignore`: this
+    script has no other dependency on the `git` binary being present, and a
+    literal-line read is enough to tell a declared build output from one
+    that was never added to `.gitignore` at all.
+    """
+    gitignore = repo_root / ".gitignore"
+    if not gitignore.exists():
+        return set()
+    lines = gitignore.read_text(encoding="utf-8").splitlines()
+    return {line.strip() for line in lines if line.strip() and not line.strip().startswith("#")}
+
+
+def stale_generated_paths(repo_root: Path) -> list[str]:
+    """GENERATED_PATHS entries that are not actually listed in `.gitignore`.
+
+    This is what distinguishes "this is a real build output" from "this is
+    a typo, or a path someone doesn't want to fix, that happens not to
+    exist yet" -- the same self-policing shape as `stale_absences` and
+    `stale_skips`: declare the exception, then check the declaration so it
+    cannot silently rot into a place anchors go to be ignored.
+    """
+    ignored = _gitignore_lines(repo_root)
+    stale = []
+    for path in GENERATED_PATHS:
+        normalized = path.rstrip("/")
+        if normalized not in ignored and f"{normalized}/" not in ignored:
+            stale.append(path)
+    return stale
 
 
 def _is_skipped(source: Path) -> bool:
@@ -245,6 +323,9 @@ def _run_check(roots: list[Path]) -> int:
         failures += 1
     for prefix in stale_skips(REPO_ROOT):
         print(f"SKIP_PATHS entry no longer exists: {prefix} — remove it")
+        failures += 1
+    for path in stale_generated_paths(REPO_ROOT):
+        print(f"GENERATED_PATHS entry is not git-ignored: {path} — add it to .gitignore or remove it")
         failures += 1
 
     print(f"\n{len(anchors)} anchor(s) checked, {failures} failure(s)")
