@@ -1,16 +1,16 @@
 {
- "generated_utc": "20260825T032309Z",
+ "generated_utc": "20260825T040808Z",
  "sources": {
   "usgs": {
    "status": "ok",
-   "events": 265,
+   "events": 266,
    "skipped": 0,
    "dropped_bounds": 0,
    "error": null
   },
   "nws": {
    "status": "ok",
-   "events": 25,
+   "events": 22,
    "skipped": 182,
    "dropped_bounds": 0,
    "error": null
@@ -24,7 +24,7 @@
   },
   "nifc": {
    "status": "ok",
-   "events": 633,
+   "events": 627,
    "skipped": 0,
    "dropped_bounds": 0,
    "error": null
