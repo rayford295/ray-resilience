@@ -1,7 +1,9 @@
+import json
+import tempfile
 import unittest
 from pathlib import Path
 
-from geosteward.gateway.context import EvidenceStore, boxes_intersect
+from geosteward.gateway.context import EvidenceStore, boxes_intersect, normalise_bbox
 
 EVENTS = Path(__file__).resolve().parents[1] / "events"
 
@@ -28,6 +30,24 @@ class BoxesIntersectTests(unittest.TestCase):
         a = {"min_lat": 0, "min_lon": 0, "max_lat": 1, "max_lon": 1}
         b = {"min_lat": 1, "min_lon": 1, "max_lat": 2, "max_lon": 2}
         self.assertTrue(boxes_intersect(a, b))
+
+
+class NormaliseBboxTests(unittest.TestCase):
+    def test_fully_inverted_box_normalises_to_the_correct_box(self):
+        correct = {"min_lat": 34.15, "min_lon": -118.16, "max_lat": 34.23, "max_lon": -118.06}
+        inverted = {"min_lat": 34.23, "min_lon": -118.06, "max_lat": 34.15, "max_lon": -118.16}
+        self.assertEqual(normalise_bbox(inverted), correct)
+
+    def test_single_axis_inverted_box_normalises_to_the_correct_box(self):
+        # Only latitude swapped -- the common case of dragging a rectangle
+        # upward on a map while longitude stays left-to-right.
+        correct = {"min_lat": 0.0, "min_lon": 0.0, "max_lat": 1.0, "max_lon": 1.0}
+        lat_inverted = {"min_lat": 1.0, "min_lon": 0.0, "max_lat": 0.0, "max_lon": 1.0}
+        self.assertEqual(normalise_bbox(lat_inverted), correct)
+
+    def test_already_correct_box_is_unchanged(self):
+        correct = {"min_lat": 0.0, "min_lon": 0.0, "max_lat": 1.0, "max_lon": 1.0}
+        self.assertEqual(normalise_bbox(correct), correct)
 
 
 class AreaEvidenceTests(unittest.TestCase):
@@ -64,13 +84,70 @@ class AreaEvidenceTests(unittest.TestCase):
         self.assertTrue(coverage, "expected a declared coverage fact")
         self.assertTrue(any("eaton-2025" in t for t in coverage))
 
+    def test_inverted_box_behaves_identically_to_the_box_written_correctly(self):
+        # A rectangle dragged on a map can have its corners in either order.
+        # Before normalise_bbox, this exact swap made locate_area report
+        # in_aoi=True on a geometrically empty box -- the audit would then
+        # record "no evidence" for what should have been a real AOI hit with
+        # zero matched cells, or worse, mask a genuine deny-outside-aoi.
+        inverted = {
+            "min_lat": EATON_BOX["max_lat"],
+            "min_lon": EATON_BOX["max_lon"],
+            "max_lat": EATON_BOX["min_lat"],
+            "max_lon": EATON_BOX["min_lon"],
+        }
+        correct = self.store.evidence_for_area(EATON_BOX)
+        flipped = self.store.evidence_for_area(inverted)
+        self.assertEqual(flipped.in_aoi, correct.in_aoi)
+        self.assertEqual(flipped.event_ids, correct.event_ids)
+        self.assertEqual(sorted(flipped.cells), sorted(correct.cells))
+
+    def test_single_axis_inverted_box_behaves_identically(self):
+        lat_inverted = dict(EATON_BOX)
+        lat_inverted["min_lat"], lat_inverted["max_lat"] = (
+            EATON_BOX["max_lat"],
+            EATON_BOX["min_lat"],
+        )
+        correct = self.store.evidence_for_area(EATON_BOX)
+        flipped = self.store.evidence_for_area(lat_inverted)
+        self.assertEqual(sorted(flipped.cells), sorted(correct.cells))
+
+
+def _write_minimal_event(root: Path, event_id: str, tier: int, aoi: dict) -> None:
+    dossier = root / event_id / "dossier"
+    dossier.mkdir(parents=True)
+    (dossier / "event_record.json").write_text(
+        json.dumps({"event_id": event_id, "evidence_tier": tier, "aoi_bbox_wgs84": aoi}),
+        encoding="utf-8",
+    )
+
+
+class TierWeakestLinkTests(unittest.TestCase):
+    """Every committed event today is Tier 3, so no real bounding box can
+    distinguish min(tiers) from max(tiers) -- or from "first event touched".
+    A synthetic two-event fixture is the cheapest way to make the weakest-
+    link rule an assertion that can actually fail."""
+
     def test_tier_is_the_weakest_among_events_touched(self):
-        ev = self.store.evidence_for_area(EATON_BOX)
-        tiers = [
-            int(self.store.events[e]["record"].get("evidence_tier", 1))
-            for e in ev.event_ids
-        ]
-        self.assertEqual(ev.evidence_tier, min(tiers))
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "events"
+            # Overlapping AOIs so one bbox touches both. Tiers deliberately
+            # apart (1 vs 3) so min() and max() disagree.
+            _write_minimal_event(
+                root, "weakcase-2025", tier=1,
+                aoi={"min_lat": 34.05, "max_lat": 34.2, "min_lon": -118.05, "max_lon": -117.9},
+            )
+            _write_minimal_event(
+                root, "strongcase-2025", tier=3,
+                aoi={"min_lat": 34.0, "max_lat": 34.1, "min_lon": -118.1, "max_lon": -118.0},
+            )
+            store = EvidenceStore(root)
+            bbox = {"min_lat": 34.06, "max_lat": 34.09, "min_lon": -118.06, "max_lon": -118.01}
+
+            ev = store.evidence_for_area(bbox)
+
+            self.assertEqual(sorted(ev.event_ids), ["strongcase-2025", "weakcase-2025"])
+            self.assertEqual(ev.evidence_tier, 1)  # the weaker of {1, 3}, not the stronger
 
 
 if __name__ == "__main__":

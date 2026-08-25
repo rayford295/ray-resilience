@@ -41,11 +41,34 @@ class EventEvidence:
         return {f.artifact_id for f in self.facts}
 
 
+def normalise_bbox(bbox: dict[str, float]) -> dict[str, float]:
+    """Swap any inverted min/max pair so the box is geometrically well-formed.
+
+    A rectangle dragged on a map (or typed by hand) can have its corners in
+    either order per axis. Left unnormalised, an inverted box slips past
+    `boxes_intersect`'s comparisons as a false "overlap" — the wrong answer
+    reaches `EventEvidence.in_aoi`, which becomes `PolicyRequest.in_aoi` and
+    gates policy rules, and the audit ends up recording the wrong reason for
+    a refusal. Called at the entry points, not inside `boxes_intersect`
+    itself, so every caller of `locate_area`/`evidence_for_area` is covered
+    regardless of how they built the box.
+    """
+    return {
+        "min_lat": min(bbox["min_lat"], bbox["max_lat"]),
+        "max_lat": max(bbox["min_lat"], bbox["max_lat"]),
+        "min_lon": min(bbox["min_lon"], bbox["max_lon"]),
+        "max_lon": max(bbox["min_lon"], bbox["max_lon"]),
+    }
+
+
 def boxes_intersect(a: dict[str, float], b: dict[str, float]) -> bool:
     """Do two WGS84 bounding boxes overlap? Touching edges count.
 
     A selection dragged flush against an AOI edge is a real selection; treating
     it as a miss would make the boundary behave differently from either side.
+
+    Assumes both boxes are already normalised (min <= max on each axis); it is
+    a pure geometric predicate and does not defend against malformed input.
     """
     return (
         a["min_lat"] <= b["max_lat"]
@@ -173,6 +196,7 @@ class EvidenceStore:
         `locate` returns on its first match, which is right for a point — it can
         sit in only one deep case — and wrong for a rectangle, which can span two.
         """
+        bbox = normalise_bbox(bbox)
         hits = []
         for event_id, entry in self.events.items():
             boxes = self._aoi_boxes(entry["record"])
@@ -181,6 +205,7 @@ class EvidenceStore:
         return sorted(hits)
 
     def evidence_for_area(self, bbox: dict[str, float]) -> EventEvidence:
+        bbox = normalise_bbox(bbox)
         event_ids = self.locate_area(bbox)
         if not event_ids:
             return EventEvidence(event_id="none", evidence_tier=1, in_aoi=False)
