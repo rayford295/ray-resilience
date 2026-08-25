@@ -33,10 +33,26 @@ class EventEvidence:
     evidence_tier: int
     in_aoi: bool
     facts: list[Fact] = field(default_factory=list)
+    event_ids: list[str] = field(default_factory=list)
+    cells: list[str] = field(default_factory=list)
 
     @property
     def artifact_ids(self) -> set[str]:
         return {f.artifact_id for f in self.facts}
+
+
+def boxes_intersect(a: dict[str, float], b: dict[str, float]) -> bool:
+    """Do two WGS84 bounding boxes overlap? Touching edges count.
+
+    A selection dragged flush against an AOI edge is a real selection; treating
+    it as a miss would make the boundary behave differently from either side.
+    """
+    return (
+        a["min_lat"] <= b["max_lat"]
+        and b["min_lat"] <= a["max_lat"]
+        and a["min_lon"] <= b["max_lon"]
+        and b["min_lon"] <= a["max_lon"]
+    )
 
 
 def _scalar_items(props: dict[str, Any]) -> str:
@@ -149,4 +165,101 @@ class EvidenceStore:
                         source_path="event_record.json",
                     )
                 )
+        return evidence
+
+    def locate_area(self, bbox: dict[str, float]) -> list[str]:
+        """Every event whose AOI meets the rectangle.
+
+        `locate` returns on its first match, which is right for a point — it can
+        sit in only one deep case — and wrong for a rectangle, which can span two.
+        """
+        hits = []
+        for event_id, entry in self.events.items():
+            boxes = self._aoi_boxes(entry["record"])
+            if any(boxes_intersect(bbox, box) for box in boxes):
+                hits.append(event_id)
+        return sorted(hits)
+
+    def evidence_for_area(self, bbox: dict[str, float]) -> EventEvidence:
+        event_ids = self.locate_area(bbox)
+        if not event_ids:
+            return EventEvidence(event_id="none", evidence_tier=1, in_aoi=False)
+
+        tiers = [
+            int(self.events[e]["record"].get("evidence_tier", 1)) for e in event_ids
+        ]
+        evidence = EventEvidence(
+            event_id="+".join(event_ids),
+            #: Weakest of the events touched, for the same reason verifiability
+            #: takes the weakest link: an answer spanning a Tier 2 case and a
+            #: Tier 3 case is not a Tier 3 answer.
+            evidence_tier=min(tiers),
+            in_aoi=True,
+            event_ids=event_ids,
+        )
+
+        for event_id in event_ids:
+            matched: set[str] = set()
+            per_grid: list[str] = []
+            for filename, index in self._grids(event_id).items():
+                aid = self._artifact_id(event_id, filename)
+                if aid is None:
+                    continue  # unhashed data never becomes citable evidence
+                hits = 0
+                for cell, props in index.items():
+                    lat, lon = h3.cell_to_latlng(cell)
+                    if not (
+                        bbox["min_lat"] <= lat <= bbox["max_lat"]
+                        and bbox["min_lon"] <= lon <= bbox["max_lon"]
+                    ):
+                        continue
+                    hits += 1
+                    matched.add(cell)
+                    unc = props.get("uncertainty")
+                    unc_note = (
+                        f" | uncertainty: {json.dumps(unc, ensure_ascii=False)}"
+                        if unc
+                        else ""
+                    )
+                    evidence.facts.append(
+                        Fact(
+                            text=f"[{event_id} / {filename} / tile {cell}] "
+                            f"{_scalar_items(props)}{unc_note}",
+                            artifact_id=aid,
+                            source_path=filename,
+                        )
+                    )
+                if hits:
+                    per_grid.append(f"{filename}: {hits}")
+
+            record = self.events[event_id]["record"]
+            record_id = self._artifact_id(event_id, "event_record.json")
+            if record_id:
+                #: Coverage travels with the evidence as a declared unknown, not
+                #: as an authorization input. What the selection did NOT cover is
+                #: not computed as a fraction: that would need a geometry of
+                #: evaluated ground the repository does not have, and inventing
+                #: one would be a claim about the world rather than the artifacts.
+                evidence.facts.append(
+                    Fact(
+                        text=(
+                            f"[{event_id} / selection coverage] "
+                            f"{len(matched)} evaluated tile(s) inside the selection "
+                            f"({'; '.join(per_grid) if per_grid else 'no grid matched'}). "
+                            "This answer speaks only for those tiles."
+                        ),
+                        artifact_id=record_id,
+                        source_path="event_record.json",
+                    )
+                )
+                for unknown in record.get("declared_unknowns", []):
+                    evidence.facts.append(
+                        Fact(
+                            text=f"[{event_id} / declared unknown] {unknown}",
+                            artifact_id=record_id,
+                            source_path="event_record.json",
+                        )
+                    )
+            evidence.cells.extend(sorted(matched))
+
         return evidence
