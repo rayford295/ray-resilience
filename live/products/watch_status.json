@@ -1,9 +1,9 @@
 {
- "generated_utc": "20260825T090409Z",
+ "generated_utc": "20260825T095644Z",
  "sources": {
   "usgs": {
    "status": "ok",
-   "events": 268,
+   "events": 266,
    "skipped": 0,
    "dropped_bounds": 0,
    "error": null
@@ -11,7 +11,7 @@
   "nws": {
    "status": "ok",
    "events": 14,
-   "skipped": 192,
+   "skipped": 196,
    "dropped_bounds": 0,
    "error": null
   },
@@ -24,7 +24,7 @@
   },
   "nifc": {
    "status": "ok",
-   "events": 627,
+   "events": 628,
    "skipped": 0,
    "dropped_bounds": 0,
    "error": null
@@ -32,7 +32,7 @@
  },
  "declared_unknowns": [
   "Watch data supports monitoring only; no damage or exposure conclusions.",
-  "192 feature(s) not displayed (no mappable geometry or malformed); 0 dropped by bounds checks."
+  "196 feature(s) not displayed (no mappable geometry or malformed); 0 dropped by bounds checks."
  ],
  "checks": [
   {
