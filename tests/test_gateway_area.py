@@ -5,6 +5,7 @@ from pathlib import Path
 
 from geosteward.gateway.context import EvidenceStore, boxes_intersect, normalise_bbox
 
+from tests.test_gateway_live import LiveGatewayTestCase
 from tests.test_gateway_steward import GatewayTestCase, MockLLM
 
 EVENTS = Path(__file__).resolve().parents[1] / "events"
@@ -179,6 +180,46 @@ class AnswerAreaContractTests(GatewayTestCase):
             self.steward.answer(
                 "planner", "how bad is it?", lat=34.19, lon=-118.1, area=EATON_BOX
             )
+
+
+# Matches `build_fixture_events`'s aoi_bbox_wgs84 in tests/test_gateway_steward.py
+# -- NOT EATON_BOX, which sits inside the real events/eaton-2025 AOI. This box has
+# to overlap the synthetic "testfire-2025" fixture that `LiveGatewayTestCase`
+# builds, or the request would be denied for being outside the AOI before it
+# ever reached the facility-context branch this test exists to exercise.
+TESTFIRE_BOX = {"min_lat": 34.0, "min_lon": -118.1, "max_lat": 34.1, "max_lon": -118.0}
+
+
+class AnswerAreaFacilityContextTests(LiveGatewayTestCase):
+    """A facility lookup needs a point; a drawn area is not one.
+
+    Before this fix, `uses_live` + `area` fell through to `_lookup`, which
+    calls `h3.latlng_to_cell(lat, lon, ...)` with `lat=lon=None` -- a
+    `TypeError` escaping to the caller. That is a fifth response type this
+    project does not have; every path through `Steward.answer` is supposed to
+    end in one of exactly four structured, audited outcomes. The fix declares
+    this as a capability gap instead, reusing the same `_live_unavailable`
+    shape the "no source configured" and "source unreachable" cases already
+    use.
+
+    Uses a real `FakeLiveSource` + `LiveEvidenceRecorder` (via
+    `LiveGatewayTestCase`, not a source-less fixture) specifically because the
+    gap must be decided from the request shape and not from whether a source
+    happens to be configured -- a source-less test would pass for the wrong
+    reason and stay green even if the shape check were deleted.
+    """
+
+    def test_facility_context_over_an_area_is_a_declared_gap_not_a_crash(self):
+        steward = self.make_live_steward(MockLLM(["should never be used"]))
+        response = steward.answer(
+            "resident", "What hospitals are near here?", area=TESTFIRE_BOX
+        )
+        self.assertEqual(response["type"], "live_source_unavailable")
+        self.assertIn("point", response["reason"])
+        # No third party was ever contacted for a request that cannot be
+        # served, live source configured or not.
+        self.assertEqual(self.source.calls, [])
+        self.assertEqual(self.live_rows(), [])
 
 
 if __name__ == "__main__":

@@ -353,6 +353,18 @@ class Steward:
         allowed_live_ids: set[str] = set()
         attribution: str | None = None
         if uses_live:
+            if area is not None:
+                # Decided from the request shape, not from whether a source is
+                # configured -- this branch must fire even when live_source is
+                # None. Checked first so the gap is never latent behind a
+                # capability check: the day a key is added, an area-shaped
+                # facility question must still get this declared gap rather
+                # than reaching `_lookup` and crashing on `lat=None`.
+                return self._live_unavailable(
+                    "Facility context needs a live point lookup; a drawn area "
+                    "selection is not a point, and no centroid or other "
+                    "substitute is used in its place."
+                )
             if not live_ready:
                 return self._live_unavailable(
                     "Facility context needs a live third-party lookup, and no live source "
