@@ -255,7 +255,8 @@ it from opposite directions rather than the same one:
   wide enough to tolerate ordinary rebuild latency would fold these into a
   single "run" and reproduce exactly the double-counting bug capability 5
   describes: nine check rows summed as though one run produced them, when
-  no six-check run ever passed and no nine-check run ever existed.
+  no six-check run ever produced nine passing checks, and no nine-check
+  run ever passed outright.
 - **A same-timestamp heuristic would split one attempt that is not two.**
   Ian's `evidence.svi_sample_density` stage, in
   `events/ian-2022/audit_log.jsonl`, writes six check rows at
@@ -287,8 +288,8 @@ add it retroactively.
 > `join_integrity` 失败），其修正后的重跑在一分五十七秒后的
 > `20260820T022620Z` 开始；任何宽到能容忍正常重建延迟的窗口都会
 > 把这两次尝试并成"一次运行"，正好复现能力 5 里讲到的那个重复计数缺陷——把九行检查
-> 当作一次运行产生的结果去求和，而实际上既不存在通过了九项检查的运行，也没有哪次
-> 六项检查的运行是从这九行里剥离出来的。反过来，一个按"时间戳完全相同"分组的启发式
+> 当作一次运行产生的结果去求和，而实际上既没有哪一次六项检查的运行产生过九项通过，
+> 也没有哪一次九项检查的运行真正整体通过过。反过来，一个按"时间戳完全相同"分组的启发式
 > 又会把本属于同一次运行的记录拆开——Ian 的 `evidence.svi_sample_density` 阶段
 > （见 `events/ian-2022/audit_log.jsonl`）先在 `20260820T033819Z` 写下六行检查
 > 记录，随后第七项检查和收尾的 `"stage"` 行落在 `20260820T033820Z`——这是一次

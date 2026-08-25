@@ -340,8 +340,8 @@ paths inside it — this chapter and `10` were written with that hole in
 mind, keeping multi-path commands in fenced code blocks and single paths in
 their own inline spans wherever the anchor gate needed to actually see them,
 but a future edit that puts two paths back into one backticked span will
-not be caught. Second, the 134,272-file dataset-registry figure `docs/
-STATUS.md` and `06` both quote could not be reconciled from artifacts in
+not be caught. Second, the 134,272-file dataset-registry figure
+`docs/STATUS.md` and `06` both quote could not be reconciled from artifacts in
 this repository before this manual's own build: the seven frozen registry
 profiles under the three events' `snapshots/registry/` sum to
 approximately 130,000, roughly 4,000 short of the stated total, and `06`

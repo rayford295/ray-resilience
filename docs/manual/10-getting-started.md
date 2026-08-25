@@ -21,8 +21,8 @@ git clone https://github.com/rayford295/GeoSteward && cd GeoSteward
 python -m pip install -e ".[deepcase]"
 ```
 
-`pyproject.toml` declares `requires-python = ">=3.10"`; CI (`.github/workflows/
-test.yml`) pins `3.11`. This chapter's commands were run on both a `3.13`
+`pyproject.toml` declares `requires-python = ">=3.10"`; CI
+(`.github/workflows/test.yml`) pins `3.11`. This chapter's commands were run on both a `3.13`
 interpreter and re-checked against what CI pins — the `deepcase` extra
 (`h3>=4.0`) is the only one needed for the steps below through "Rebuild a
 deep case"; `gateway` (`fastapi`, `uvicorn`) is added later, only for the
@@ -59,8 +59,8 @@ The app has its own suite, separate from the Python one:
 cd app && npm ci && npm test
 ```
 
-This ran **37 tests across 4 files, all green, in under 200 ms** — `src/lib/
-citations.test.js`, `coverage.test.js`, `watch.test.js`, and `data.test.js`.
+This ran **37 tests across 4 files, all green, in under 200 ms** —
+`app/src/lib/citations.test.js`, `coverage.test.js`, `watch.test.js`, and `data.test.js`.
 
 > **中文。** 这一次运行是 **232 个测试全部通过，用时 5.4 秒**，是针对本章所描述的
 > 这个状态跑出来的，不是 `README.md` 快速上手一节里还写着的 `212`——那个数字比本
@@ -72,8 +72,8 @@ citations.test.js`, `coverage.test.js`, `watch.test.js`, and `data.test.js`.
 > 存在的粗糙之处，不是你本地环境的问题；`11` 章把它记在名下。
 >
 > app 有一套独立于 Python 那套的测试：先 `cd app`，再 `npm ci && npm test`。这一次
-> 运行是 **4 个文件、37 个测试全部通过，用时不到 200 毫秒**——`src/lib/
-> citations.test.js`、`coverage.test.js`、`watch.test.js`、`data.test.js`。
+> 运行是 **4 个文件、37 个测试全部通过，用时不到 200 毫秒**——
+> `app/src/lib/citations.test.js`、`coverage.test.js`、`watch.test.js`、`data.test.js`。
 
 ## Run the app
 

@@ -623,6 +623,25 @@ monitoring-only string on every watch run, and Ian's missing exposure
 layer plus its unlabeled density grid — and they belonged to the deleted
 architecture document, not to the archived methodology one.
 
+docs/architecture.md's list actually ran to five items, and its second
+has never had an owner in this manual: *"Machine-generated records contain
+only machine-verifiable numbers; narrative facts (casualties, warnings)
+are human-curated with citations."* No file under `docs/` states that rule
+today. It is not retired, though — `TyphoonDossier`'s own docstring in
+`src/geosteward/agents/dossier.py` states the same contract in its own
+words ("Numbers here come only from captured payloads; narrative facts
+... live in the human-curated dossier document and are never
+auto-generated from unverified text"), and every artifact it writes is
+stamped `notes="machine-verifiable facts only; narrative dossier is
+curated separately"` — a string committed, unchanged, in
+`events/archive/bavi-2026/artifact_manifest.jsonl`. That stamp is the
+rule's only recorded exercise, and it belongs to the pre-rework pipeline
+chapter `09` describes as no part of building any of the three deep cases
+this chapter covers, not to `build_eaton_case.py`, `build_milton_case.py`,
+or `build_ian_case.py`, each of which writes its own
+`dossier/event_record.json` under its own notes and never calls
+`TyphoonDossier` at all.
+
 `docs/archive/methodology-bavi.md`'s own `## Claim rules` section is a separate list of
 four items, and this chapter accounts for all four rather than resting on
 the one it already leaned on. *"Forecast-conditioned vs observed products
@@ -698,6 +717,20 @@ of the three deep cases, and not in the archived Bavi case either.
 > `declared_unknowns`、每次监测运行里那句固定的"仅支持观察"声明，以及 Ian 缺失的
 > 暴露度图层和它不带标签发布的密度网格——它们属于已删除的 architecture 文档，
 > 不属于已归档的 methodology 文档。
+>
+> docs/architecture.md 那份清单其实有五条，而它的第二条至今没有在本手册里
+> 找到归属："机器生成的记录只包含可机器验证的数字；叙事性事实（伤亡、预警）
+> 由人工整理并附带引证。"目前 `docs/` 下没有任何文件写明这条规则。但它并没有
+> 退场——`src/geosteward/agents/dossier.py` 里 `TyphoonDossier` 自己的类文档字符串
+> 用它自己的措辞陈述了同一份契约（"这里的数字只来自已捕获的负载数据；叙事性事实
+> ……存在于人工整理的档案文档里，绝不会从未经核实的文本中自动生成"），它写下的
+> 每一份制品也都盖上了 `notes="machine-verifiable facts only; narrative dossier
+> is curated separately"` 的印记——这段文字原样提交在
+> `events/archive/bavi-2026/artifact_manifest.jsonl` 里。这个印记是这条规则
+> 唯一留下记录的一次实际执行，它属于 `09` 章所说"不属于三个深度案例构建工作"的
+> 那条重构前流水线，而不属于 `build_eaton_case.py`、`build_milton_case.py`、
+> `build_ian_case.py`——这三份脚本各自写下自己的 `dossier/event_record.json`、
+> 各自带着自己的 notes，从不调用 `TyphoonDossier`。
 >
 > `docs/archive/methodology-bavi.md` 自己的 `## Claim rules` 一节是另外一份独立的四条清单，
 > 本章要把四条都讲清楚，而不是只靠已经用过的那一条。"预测条件下的产物和实测产物

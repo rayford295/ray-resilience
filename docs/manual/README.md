@@ -27,7 +27,7 @@ what it will.
 > 什么结论"三个问题，是 ACM SIGSPATIAL 大会 OASIS 竞赛 Track A（灾害韧性与脆弱性
 > 分析赛道）的参赛项目。
 >
-> 系统按层级（1/2/3 级）组织证据强度：第 1 层级（Watch）覆盖全美国；第 2、3 层级
+> 系统按层级（1/2/3 级）组织证据强度：1 级（Watch）覆盖全美国；2、3 级
 > （暴露度与损毁分析）只在三个深度案例关注区域（AOI）内存在——2025 年 Eaton 火灾、
 > 2024 年 Milton 飓风、2022 年 Ian 飓风——之外的地方一律被明确告知"超出评估范围"，
 > 而不是被外推出结论。
@@ -85,10 +85,10 @@ exists.
 |---|---|
 | [README.md](README.md) | Index · one-minute version · three reading paths |
 | [01-capabilities.md](01-capabilities.md) | Capability catalogue |
-| [02-harness-outcome-audit.md](02-harness-outcome-audit.md) | Validity layers 1–2: checks, audit, manifest |
-| [03-policy-claim-plane.md](03-policy-claim-plane.md) | Layer 3a: what the agent may assert |
-| [04-policy-distribution-plane.md](04-policy-distribution-plane.md) | Layer 3b: what a build may publish |
-| [05-verifiability-and-live.md](05-verifiability-and-live.md) | Layer 4: retention, licence, content-free records |
+| [02-harness-outcome-audit.md](02-harness-outcome-audit.md) | Outcome and process validity: checks, audit, manifest |
+| [03-policy-claim-plane.md](03-policy-claim-plane.md) | Institutional validity, claim plane: what the agent may assert |
+| [04-policy-distribution-plane.md](04-policy-distribution-plane.md) | Institutional validity, distribution plane: what a build may publish |
+| [05-verifiability-and-live.md](05-verifiability-and-live.md) | Verifiability, retention, licence: the content-free record |
 | [06-data-and-evidence.md](06-data-and-evidence.md) | Tier-1 watch + three deep cases, field by field |
 | [07-gateway-and-agent.md](07-gateway-and-agent.md) | The agent request lifecycle |
 | [08-app-pwa.md](08-app-pwa.md) | The two-mode front end |
@@ -106,10 +106,10 @@ exists.
 > |---|---|
 > | [README.md](README.md) | 索引·一分钟版·三条阅读路径 |
 > | [01-capabilities.md](01-capabilities.md) | 能力目录（含每项能力的拒绝边界） |
-> | [02-harness-outcome-audit.md](02-harness-outcome-audit.md) | 有效性第 1–2 层：结果检查与审计留痕 |
-> | [03-policy-claim-plane.md](03-policy-claim-plane.md) | 第 3a 层：agent 可以断言什么 |
-> | [04-policy-distribution-plane.md](04-policy-distribution-plane.md) | 第 3b 层：构建可以发布什么 |
-> | [05-verifiability-and-live.md](05-verifiability-and-live.md) | 第 4 层：留存、许可，以及"内容为空"的实时记录 |
+> | [02-harness-outcome-audit.md](02-harness-outcome-audit.md) | 结果有效性与过程有效性：检查、审计与留痕 |
+> | [03-policy-claim-plane.md](03-policy-claim-plane.md) | 制度有效性·断言平面：agent 可以断言什么 |
+> | [04-policy-distribution-plane.md](04-policy-distribution-plane.md) | 制度有效性·发布平面：构建可以发布什么 |
+> | [05-verifiability-and-live.md](05-verifiability-and-live.md) | 可验证性、留存、许可："内容为空"的记录 |
 > | [06-data-and-evidence.md](06-data-and-evidence.md) | 全美灾害监测与三个深度案例，逐字段说明 |
 > | [07-gateway-and-agent.md](07-gateway-and-agent.md) | agent 请求的完整生命周期 |
 > | [08-app-pwa.md](08-app-pwa.md) | 双模式前端（居民模式 / 规划者模式） |

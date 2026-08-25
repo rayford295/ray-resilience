@@ -258,8 +258,8 @@ type the gateway can emit ... renders as itself; nothing is papered over."
 > 会被彻底拒绝，因为一次没有任何东西为它作证的查询，正是这套设计存在的目的所要
 > 防止的失败），或者所配置的数据源真正不可达时抛出 `LiveUnavailable`
 > （344–351 行），三种情况都通过共享的 `_live_unavailable` 辅助函数（232–236 行）
-> 返回 `{"type": "live_source_unavailable", "reason": ...}`。`app/src/
-> components/ChatPanel.jsx` 是应用自己的代码，`08` 章讲它如何把这四种形状原样
+> 返回 `{"type": "live_source_unavailable", "reason": ...}`。
+> `app/src/components/ChatPanel.jsx` 是应用自己的代码，`08` 章讲它如何把这四种形状原样
 > 渲染出来——这个文件自己的注释写的正是本章这套顺序所强制执行的同一种承诺：
 > "网关能发出的每一种响应类型……都会原样渲染；没有任何一种被掩盖过去。"
 
@@ -291,8 +291,9 @@ default source configured and has never run against a live API. Neither this
 chapter's adversarial suite nor `05`'s live-record tests need a Gemini key or
 a Google Maps Platform key to run: `tests/test_gateway_steward.py` replaces
 `self.llm` with `MockLLM`, a plain Python callable, and never instantiates
-`chat_completion` at all; the live-lookup tests in `tests/test_gateway_
-live.py` do the same for the live source with `FakeLiveSource`. No hosted
+`chat_completion` at all; the live-lookup tests in
+`tests/test_gateway_live.py` do the same for the live source with
+`FakeLiveSource`. No hosted
 credential of any kind is required for development or for the adversarial
 evaluation the next section counts.
 
@@ -311,8 +312,8 @@ evaluation the next section counts.
 > 显卡上验证过，速度约为每秒 154 个 token——这是这一台机器吞吐量的事实，不是对
 > 任何具体部署环境会看到什么速度的断言。
 >
-> 这和 `05` 章讲的实时查询机制是完全独立的两条代码路径：`src/geosteward/live/
-> grounded.py` 里的 `GroundedMapsSource` 包了一层对 Gemini `generateContent`
+> 这和 `05` 章讲的实时查询机制是完全独立的两条代码路径：
+> `src/geosteward/live/grounded.py` 里的 `GroundedMapsSource` 包了一层对 Gemini `generateContent`
 > 的调用——完全是另一个提供方——服务于 `03` 和 `05` 都提到过的那种"cited-only
 > （仅可引证）"设施回答机制，而这套机制在这个构建里默认没有配置数据源，也从未
 > 真正对接过任何实时 API。本章的对抗性测试套件、以及 `05` 章的实时记录测试，
@@ -354,8 +355,8 @@ completeness** (`TestClaimGate.test_every_path_is_audited`, checking that
 `gateway_request`, `gateway_post_check`, and `gateway_response` all appear as
 actions in the audit rows for one successful request).
 
-This count is `tests/test_gateway_steward.py` alone. `tests/test_gateway_
-live.py` — `05`'s territory, the non-retainable regime — adds its own
+This count is `tests/test_gateway_steward.py` alone.
+`tests/test_gateway_live.py` — `05`'s territory, the non-retainable regime — adds its own
 separate suite over the live-lookup code paths (attestation ordering,
 containment of poisoned test content, the weakest-link computation) and is
 not folded into the 28 above.
@@ -385,8 +386,8 @@ not folded into the 28 above.
 > `gateway_request`、`gateway_post_check`、`gateway_response` 三个动作是否都
 > 出现过）。
 >
-> 这个数字只统计 `tests/test_gateway_steward.py` 一个文件。`tests/test_gateway_
-> live.py`——属于 `05` 章讲的不可留存机制——针对实时查询相关代码路径（记录先于
+> 这个数字只统计 `tests/test_gateway_steward.py` 一个文件。
+> `tests/test_gateway_live.py`——属于 `05` 章讲的不可留存机制——针对实时查询相关代码路径（记录先于
 > 使用的顺序、对被污染测试内容的隔离性、短板原则的计算）另有一套独立测试，不计入
 > 上面的 28 这个数字。
 
@@ -401,8 +402,8 @@ origin is permitted, on a `/ask` endpoint that can trigger a keyed,
 third-party lookup once a live source is ever configured. **The audit log
 records the exact question and the exact coordinates, unredacted.** The
 `gateway_request` row `Steward.answer` writes (lines 304–310) carries `lat`,
-`lon`, and `question` verbatim; `AuditLog.record` in `src/geosteward/
-harness/audit.py` serializes whatever payload it is given straight to JSONL
+`lon`, and `question` verbatim; `AuditLog.record` in
+`src/geosteward/harness/audit.py` serializes whatever payload it is given straight to JSONL
 with no redaction step of any kind — this is a different mechanism from the
 workstation-path redaction `01` and `04` describe for artifact manifests
 (`REDACTED_PREFIX`, `redact_workstation_paths`), which scrubs local
@@ -420,8 +421,8 @@ LLM_BASE_URL` or the live facility source `03` and `05` describe as
 authorized-but-unconfigured. A keyed endpoint sitting behind an open-CORS,
 unthrottled, unredacted gateway is not a smaller version of the hosting
 problem; it is the same three defects with a bill attached. Consistent with
-this, the public site ships no chat backend at all: `app/src/components/
-ChatPanel.jsx` defaults to `http://localhost:8080` (line 6) and, when that
+this, the public site ships no chat backend at all:
+`app/src/components/ChatPanel.jsx` defaults to `http://localhost:8080` (line 6) and, when that
 endpoint cannot be reached, renders a declared-outage message telling the
 reader to run the gateway themselves (`pip install -e .[deepcase,gateway] &&
 uvicorn gateway.main:app --port 8080`) rather than silently failing or
