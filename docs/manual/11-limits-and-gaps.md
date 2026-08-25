@@ -45,13 +45,12 @@ its `declared_unknowns` list carries the line *"social-vulnerability join
 (SVI x exposure) pending: no vulnerability claims yet,"* which was true when
 written and has been false since `scripts/build_eaton_svi.py` ran — `06`
 gives the full account and the reason the file itself was not edited to fix
-it. The consequence is not confined to prose: asking the running gateway a
-damage question at an Eaton tile (see `10`) returns an LLM answer that cites
-this exact stale sentence, verbatim, because the evidence it retrieves is
-the dossier text, not this manual's correction. Do not generalize the fix
-across events — Milton's and Ian's identically-worded "pending" lines are
-current, not stale, because neither case has the file that would make them
-untrue.
+it. Do not generalize the fix across events — Milton's and Ian's
+identically-worded "pending" lines are current, not stale, because neither
+case has the file that would make them untrue. This particular staleness
+has a live consequence beyond the dossier text sitting inert on disk — see
+"Known defects and rough edges" below for what the running gateway does
+with it.
 
 > **中文。** 灾害监测覆盖全美国：任何美国地点都能拿到当前的 1 级 Watch 图层，与
 > 关注区域（AOI）无关。暴露度与损毁分析——层级（1/2/3 级）里的 2/3 级——只存在于
@@ -69,11 +68,10 @@ untrue.
 > `declared_unknowns` 列表里有一行"社会脆弱性联接（SVI × 暴露度）尚待完成：暂无
 > 脆弱性结论"——这句话在写下时是真的，但自 `scripts/build_eaton_svi.py` 跑完之后
 > 就不再是真的了；`06` 章给出了完整说明，也解释了这份档案没有被改动来修正它的原因。
-> 后果并不止于文字：按 `10` 章的方法向正在运行的网关就 Eaton 的某个 tile 提一个损毁
-> 问题，模型给出的回答会逐字引用这句已经过时的话——因为它检索到的证据是档案原文，
-> 不是本说明书里的更正。不要把这个修正方式套到别的事件上：Milton 和 Ian 措辞完全
-> 相同的"尚待完成"是当下属实的，不是过时的，因为这两个案例都还没有能让这句话变假的
-> 那份文件。
+> 不要把这个修正方式套到别的事件上：Milton 和 Ian 措辞完全相同的"尚待完成"是当下
+> 属实的，不是过时的，因为这两个案例都还没有能让这句话变假的那份文件。这一处过时
+> 声明还有一个不止于档案文字静静躺在磁盘上的现实后果——正在运行的网关会拿它做什么，
+> 见下文"已知缺陷与粗糙之处"一节。
 
 ## Implemented but never executed
 
@@ -195,6 +193,25 @@ and disclosure surface, not just a privacy one.
 
 ## Known defects and rough edges
 
+- **A stale declared-unknown is retrieved and cited exactly like a current,
+  data-backed fact.** `EventContext.evidence_for()`
+  (`src/geosteward/gateway/context.py:144`) loops over every string in a
+  dossier's `declared_unknowns` and wraps each one in the same `Fact` class
+  as every grid-derived fact — same citable artifact ID, appended to the
+  same `evidence.facts` list the model is grounded on. Nothing in that
+  loop records when a string was written or checks whether it is still
+  true, so a stale declared-unknown reads to the retrieval code exactly
+  like a current one. This is demonstrated, not hypothetical: the
+  geographic section above shows Eaton's dossier still declaring its SVI
+  join "pending" after `scripts/build_eaton_svi.py` made that false, and
+  asking the running gateway a damage question at an Eaton tile (`10`
+  records the run) returns a cited answer that repeats *"the social
+  vulnerability join is pending, so no vulnerability claims are
+  available"* verbatim. The error this produces is conservative rather
+  than fabricated — the agent under-reports vulnerability data that exists
+  rather than inventing data that does not — but it is still the
+  accountable agent asserting something untrue to a user, in a system
+  whose stated purpose is that it does not.
 - **`check_uncertainty_present` passes on `None`.** The check
   (`src/geosteward/harness/checks/outcome.py`) tests `field in payload`, so
   `{"uncertainty": None}` passes exactly as readily as a populated
@@ -242,7 +259,21 @@ and disclosure surface, not just a privacy one.
   checked, N failure(s)` lines mid-run — harmless, but not the clean output
   a test suite is otherwise expected to produce.
 
-> **中文。** **`check_uncertainty_present` 在 `None` 值上也会通过**：这项检查
+> **中文。** **一条已经过时的声明未知项，会被检索出来、像一条当下属实、有数据支撑
+> 的事实一样被引证**：`EventContext.evidence_for()`
+> （`src/geosteward/gateway/context.py:144`）遍历一份档案 `declared_unknowns`
+> 里的每一句话，把每一句都包进和每一条网格衍生事实完全相同的 `Fact` 类——同样有
+> 可引证的制品 ID，被追加进模型据以生成回答的同一份 `evidence.facts` 列表。这个循环里
+> 没有任何地方记录某句话是何时写下的，也没有检查它是否依然属实，所以在检索代码
+> 眼里，一句过时的声明未知项和一句当下的声明未知项没有任何区别。这不是假设：上文
+> 地理一节已经展示过，Eaton 档案在 `scripts/build_eaton_svi.py` 让那句话变假之后
+> 依然声明其 SVI 联接"尚待完成"；按 `10` 章记录的方法向正在运行的网关就 Eaton 的
+> 某个 tile 提一个损毁问题，得到的带引证回答会逐字重复"社会脆弱性联接尚待完成，
+> 暂无脆弱性结论"。这个错误的方向是保守的，不是捏造的——agent 少报告了确实存在的
+> 脆弱性数据，而不是编造了不存在的数据——但这仍然是这个以"不这样做"为存在理由的
+> 系统里，那个负责问责的 agent 在向用户断言一件不真实的事。
+>
+> **`check_uncertainty_present` 在 `None` 值上也会通过**：这项检查
 > （`src/geosteward/harness/checks/outcome.py`）判断的是 `field in payload`，所以
 > `{"uncertainty": None}` 和一个内容完整的不确定性对象一样能通过——`02` 章直接点明
 > 了这一点。已有一份已提交的网格实际踩在这个缺口上：三个深度案例里其余每一份
@@ -294,8 +325,8 @@ newer resolution to anything above should show up first. This chapter and
 `docs/design/specs/2026-08-23-bilingual-manual-design.md`): this chapter
 explains what the limits *are* and why; `STATUS.md` tracks whether each one
 is still open, on a date. When the two disagree, the artifacts — the
-committed data, code, and test runs — decide, the same rule `README.md`
-states for this manual as a whole.
+committed data, code, and test runs — decide, the same rule
+`docs/manual/README.md` states for this manual as a whole.
 
 Two caveats about the checking itself, not about any single limit above.
 First, `scripts/manual_anchors.py check` passing does not mean every path
@@ -321,8 +352,8 @@ defects in the specific facts they touched.
 > 一条比本章更新的进展都应该最先出现在那里。本章和 `STATUS.md` 按设计承担不同职责
 > （见 `docs/design/specs/2026-08-23-bilingual-manual-design.md` 第 8 节）：本章解释
 > 这些限制*是什么*、为什么存在；`STATUS.md` 按日期跟踪每一条是否仍然成立。两者有分歧
-> 时，以 artifact——已提交的数据、代码与测试结果——为准，这和 `README.md` 给整份
-> 说明书定下的规则一致。
+> 时，以 artifact——已提交的数据、代码与测试结果——为准，这和 `docs/manual/README.md`
+> 给整份说明书定下的规则一致。
 >
 > 关于检查机制本身，还有两点说明，与上面任何一条具体限制无关。第一，
 > `scripts/manual_anchors.py check` 跑通，并不代表本说明书引用的每一个路径至今仍然
