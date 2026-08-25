@@ -3,6 +3,7 @@ import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { EVENTS, RAMP } from "../lib/views.js";
 import { priorityScores } from "../lib/data.js";
+import { bboxFromCorners } from "../lib/area.js";
 
 const BASEMAP = "https://tiles.openfreemap.org/styles/liberty";
 const SRC = "grid";
@@ -31,10 +32,20 @@ function paintFor(view, geojson) {
   return rampExpr(["coalesce", ["get", view.metric], 0], max);
 }
 
-export default function MapView({ view, geojson, priorityT, flyTarget, onSelect, live, onCenter }) {
+export default function MapView({
+  view,
+  geojson,
+  priorityT,
+  flyTarget,
+  onSelect,
+  onAreaSelect,
+  live,
+  onCenter,
+}) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const [ready, setReady] = useState(false);
+  const [dragBox, setDragBox] = useState(null); // {left, top, width, height} px, or null
 
   useEffect(() => {
     const map = new maplibregl.Map({
@@ -128,5 +139,96 @@ export default function MapView({ view, geojson, priorityT, flyTarget, onSelect,
     map.flyTo({ center: flyTarget.center, zoom: flyTarget.zoom, essential: true });
   }, [flyTarget]);
 
-  return <div ref={containerRef} className="map" />;
+  // Shift-drag box-select for the planner's "ask about this area" flow.
+  // Plain drag must keep panning — a planner navigates far more often than
+  // they select an area — so the gesture rides on a modifier key rather than
+  // taking over the map's primary interaction.
+  useEffect(() => {
+    const map = mapRef.current;
+    const container = containerRef.current;
+    if (!map || !container || !onAreaSelect) return;
+
+    let drag = null; // {x, y} start point, in container-relative pixels
+    let suppressClick = false; // swallow the click a completed drag leaves behind
+
+    const pointerAt = (e) => {
+      const rect = container.getBoundingClientRect();
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    };
+
+    const boxStyle = (start, current) => ({
+      left: `${Math.min(start.x, current.x)}px`,
+      top: `${Math.min(start.y, current.y)}px`,
+      width: `${Math.abs(current.x - start.x)}px`,
+      height: `${Math.abs(current.y - start.y)}px`,
+    });
+
+    const endDrag = () => {
+      drag = null;
+      setDragBox(null);
+      map.dragPan.enable();
+    };
+
+    // Capture phase: must win the mousedown race against MapLibre's own
+    // handler (bound to the canvas, deeper in the tree) so dragPan can be
+    // disabled before it starts tracking a pan.
+    const onMouseDown = (e) => {
+      if (!e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      e.stopPropagation();
+      drag = { start: pointerAt(e) };
+      map.dragPan.disable();
+      setDragBox(boxStyle(drag.start, drag.start));
+    };
+
+    const onMouseMove = (e) => {
+      if (!drag) return;
+      setDragBox(boxStyle(drag.start, pointerAt(e)));
+    };
+
+    const onMouseUp = (e) => {
+      if (!drag) return;
+      const start = drag.start;
+      const end = pointerAt(e);
+      const a = map.unproject([start.x, start.y]);
+      const b = map.unproject([end.x, end.y]);
+      endDrag();
+      // Stopping propagation on `mousedown` above means MapLibre never saw a
+      // drag start, so the browser's own post-mouseup "click" still reaches
+      // the canvas. Left alone it would fire the grid-fill click handler and
+      // open a single-cell detail panel on top of the area just selected.
+      suppressClick = true;
+      onAreaSelect(bboxFromCorners({ lat: a.lat, lng: a.lng }, { lat: b.lat, lng: b.lng }));
+    };
+
+    const onClickCapture = (e) => {
+      if (!suppressClick) return;
+      suppressClick = false;
+      e.stopPropagation();
+    };
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape" && drag) endDrag();
+    };
+
+    container.addEventListener("mousedown", onMouseDown, true);
+    container.addEventListener("click", onClickCapture, true);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      container.removeEventListener("mousedown", onMouseDown, true);
+      container.removeEventListener("click", onClickCapture, true);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onAreaSelect]);
+
+  return (
+    <div className="map-wrap">
+      <div ref={containerRef} className="map" />
+      {dragBox && <div className="select-box" style={dragBox} />}
+    </div>
+  );
 }

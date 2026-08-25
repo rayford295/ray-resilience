@@ -38,7 +38,15 @@ aside {
   display: flex; flex-direction: column; gap: 0.9rem;
 }
 main { flex: 1; min-width: 0; }
+.map-wrap { position: relative; width: 100%; height: 100%; }
 .map { width: 100%; height: 100%; }
+/* Shift-drag box-select overlay: a plain div is enough, so MapLibre needs no
+   plugin for this — the dashed accent border reads as "in progress", not a
+   committed shape yet. */
+.select-box {
+  position: absolute; z-index: 2; pointer-events: none;
+  border: 2px dashed var(--accent); background: rgba(111, 211, 168, 0.18);
+}
 
 h2 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--dim); margin: 0 0 0.4rem; }
 h3 { font-size: 0.95rem; margin: 0.7rem 0 0.3rem; }

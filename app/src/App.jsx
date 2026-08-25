@@ -30,6 +30,7 @@ export default function App() {
   const [watchStatus, setWatchStatus] = useState(null);
   const [showLineage, setShowLineage] = useState(false);
   const [mapCenter, setMapCenter] = useState(null);
+  const [selection, setSelection] = useState(null); // shift-drag area bbox, or null for point mode
 
   const view = VIEWS.find((v) => v.id === viewId);
   const event = EVENTS[view.event];
@@ -68,6 +69,13 @@ export default function App() {
     setFlyTarget(view.focus ?? { center: event.center, zoom: event.zoom });
     setSelected(null);
   }, [viewId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // The box-select affordance is planner-only (residents' damage questions are
+  // refused whether point or area, so offering it would just invite a refusal
+  // they can't use) — drop any active selection when leaving planner mode.
+  useEffect(() => {
+    if (mode !== "planner") setSelection(null);
+  }, [mode]);
 
   const geojson = layers[viewId]?.error ? null : layers[viewId];
   const eventMeta = meta[view.event];
@@ -119,6 +127,20 @@ export default function App() {
       ),
     [layers]
   );
+  // Best local knowledge of what the answer could speak for: the union of
+  // cells across every layer already fetched, not just the one on screen —
+  // the gateway resolves `area` against whichever artifact covers it, not
+  // whichever layer the map happens to be showing.
+  const areaCells = useMemo(() => {
+    const ids = new Set();
+    for (const layer of Object.values(layers)) {
+      if (!layer || layer.error) continue;
+      for (const f of layer.features ?? []) {
+        if (f.properties?.h3_cell) ids.add(f.properties.h3_cell);
+      }
+    }
+    return [...ids];
+  }, [layers]);
   const records = useMemo(() => {
     const out = { ...dossiers };
     for (const [eventId, m] of Object.entries(meta)) {
@@ -225,7 +247,13 @@ export default function App() {
 
           <section>
             <h2>Ask the steward</h2>
-            <ChatPanel role={mode} location={mapCenter} />
+            <ChatPanel
+              role={mode}
+              location={mapCenter}
+              selection={selection}
+              onClearSelection={() => setSelection(null)}
+              cells={areaCells}
+            />
           </section>
 
           <section>
@@ -249,6 +277,7 @@ export default function App() {
             priorityT={t}
             flyTarget={flyTarget}
             onSelect={onSelect}
+            onAreaSelect={mode === "planner" ? setSelection : undefined}
             live={live}
             onCenter={setMapCenter}
           />

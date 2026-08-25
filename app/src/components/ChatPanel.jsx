@@ -1,6 +1,8 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { cellToLatLng } from "h3-js";
 
 import { parseCitations, verifiabilityLabel } from "../lib/citations.js";
+import { cellsInBox } from "../lib/area.js";
 
 const DEFAULT_ENDPOINT =
   localStorage.getItem("steward-endpoint") || "http://localhost:8080";
@@ -10,17 +12,24 @@ const DEFAULT_ENDPOINT =
  * the gateway can emit — cited answer, rule-ID refusal, declared
  * no-evidence, declared outage — renders as itself; nothing is papered over.
  */
-export default function ChatPanel({ role, location }) {
+export default function ChatPanel({ role, location, selection, onClearSelection, cells }) {
   const [endpoint, setEndpoint] = useState(DEFAULT_ENDPOINT);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const logRef = useRef(null);
 
+  // The same inclusive-edge rule the gateway applies to `area`, so the count
+  // shown here before asking never disagrees with the cells the answer cites.
+  const selectedCount = useMemo(
+    () => (selection ? cellsInBox(cells ?? [], selection, cellToLatLng).length : 0),
+    [selection, cells]
+  );
+
   async function send(e) {
     e.preventDefault();
     const question = input.trim();
-    if (!question || busy || !location) return;
+    if (!question || busy || (!location && !selection)) return;
     setInput("");
     setBusy(true);
     setMessages((m) => [...m, { from: "user", question, role }]);
@@ -29,12 +38,11 @@ export default function ChatPanel({ role, location }) {
       const r = await fetch(`${endpoint.replace(/\/$/, "")}/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          role,
-          lat: location.lat,
-          lon: location.lng,
-          question,
-        }),
+        body: JSON.stringify(
+          selection
+            ? { role, question, area: selection }
+            : { role, lat: location.lat, lon: location.lng, question }
+        ),
       });
       if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
       reply = await r.json();
@@ -56,11 +64,30 @@ export default function ChatPanel({ role, location }) {
   return (
     <div className="chat">
       <p className="hint">
-        Asking as <strong>{role}</strong> about the map center
-        {location && (
-          <span className="dim">
-            {" "}({location.lat.toFixed(4)}, {location.lng.toFixed(4)})
-          </span>
+        Asking as <strong>{role}</strong>{" "}
+        {selection ? (
+          <>
+            about the selected area
+            <span className="dim">
+              {" "}
+              ({selection.min_lat.toFixed(4)}, {selection.min_lon.toFixed(4)} to{" "}
+              {selection.max_lat.toFixed(4)}, {selection.max_lon.toFixed(4)}) —{" "}
+              {selectedCount} evaluated cell{selectedCount === 1 ? "" : "s"}
+            </span>
+            {" "}
+            <button type="button" className="linkish" onClick={onClearSelection}>
+              clear
+            </button>
+          </>
+        ) : (
+          <>
+            about the map center
+            {location && (
+              <span className="dim">
+                {" "}({location.lat.toFixed(4)}, {location.lng.toFixed(4)})
+              </span>
+            )}
+          </>
         )}
         . The steward answers only from committed artifacts — refusals cite the
         rule that triggered them.
