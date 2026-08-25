@@ -7,6 +7,9 @@ import { bboxFromCorners } from "../lib/area.js";
 
 const BASEMAP = "https://tiles.openfreemap.org/styles/liberty";
 const SRC = "grid";
+// Comfortably longer than the same-tick gap between mouseup and the
+// resulting synthetic click, comfortably shorter than two deliberate clicks.
+const CLICK_SUPPRESS_MS = 300;
 
 function rampExpr(input, max) {
   const stops = RAMP.flatMap((color, i) => [(max * i) / (RAMP.length - 1), color]);
@@ -149,7 +152,15 @@ export default function MapView({
     if (!map || !container || !onAreaSelect) return;
 
     let drag = null; // {x, y} start point, in container-relative pixels
-    let suppressClick = false; // swallow the click a completed drag leaves behind
+    // A deadline, not a boolean: the synthetic click after a drag fires at the
+    // nearest common ancestor of the mousedown/mouseup targets, which can sit
+    // above `container` (e.g. the drag ends over the sidebar) and never reach
+    // this capturing listener at all. A boolean armed there and only disarmed
+    // by that same listener would stay armed forever, silently swallowing the
+    // next unrelated click. A deadline needs no disarm step on any path — it
+    // is simply false again once time passes it, whether or not the click
+    // handler below ever ran.
+    let suppressClickUntil = 0;
 
     const pointerAt = (e) => {
       const rect = container.getBoundingClientRect();
@@ -196,14 +207,15 @@ export default function MapView({
       // Stopping propagation on `mousedown` above means MapLibre never saw a
       // drag start, so the browser's own post-mouseup "click" still reaches
       // the canvas. Left alone it would fire the grid-fill click handler and
-      // open a single-cell detail panel on top of the area just selected.
-      suppressClick = true;
+      // open a single-cell detail panel on top of the area just selected. The
+      // synthetic click dispatches synchronously right after this handler
+      // returns, so a short window is all the deadline needs.
+      suppressClickUntil = performance.now() + CLICK_SUPPRESS_MS;
       onAreaSelect(bboxFromCorners({ lat: a.lat, lng: a.lng }, { lat: b.lat, lng: b.lng }));
     };
 
     const onClickCapture = (e) => {
-      if (!suppressClick) return;
-      suppressClick = false;
+      if (performance.now() > suppressClickUntil) return;
       e.stopPropagation();
     };
 
@@ -211,17 +223,28 @@ export default function MapView({
       if (e.key === "Escape" && drag) endDrag();
     };
 
+    // The pointer can be released outside the window entirely (dragged past
+    // the browser's edge onto the desktop), where no mouseup ever fires. Left
+    // alone that stranded `drag` keeps dragPan disabled and the overlay drawn
+    // with no recovery but Escape. A lost window blur is the general signal
+    // that the gesture is no longer ours to track.
+    const onBlur = () => {
+      if (drag) endDrag();
+    };
+
     container.addEventListener("mousedown", onMouseDown, true);
     container.addEventListener("click", onClickCapture, true);
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
     window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("blur", onBlur);
     return () => {
       container.removeEventListener("mousedown", onMouseDown, true);
       container.removeEventListener("click", onClickCapture, true);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
       window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("blur", onBlur);
     };
   }, [onAreaSelect]);
 
