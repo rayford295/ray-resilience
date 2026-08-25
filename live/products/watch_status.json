@@ -1,16 +1,16 @@
 {
- "generated_utc": "20260825T175101Z",
+ "generated_utc": "20260825T190531Z",
  "sources": {
   "usgs": {
    "status": "ok",
-   "events": 239,
+   "events": 253,
    "skipped": 0,
    "dropped_bounds": 0,
    "error": null
   },
   "nws": {
    "status": "ok",
-   "events": 16,
+   "events": 29,
    "skipped": 166,
    "dropped_bounds": 0,
    "error": null
@@ -23,16 +23,15 @@
    "error": null
   },
   "nifc": {
-   "status": "failed",
-   "events": 0,
+   "status": "ok",
+   "events": 663,
    "skipped": 0,
    "dropped_bounds": 0,
-   "error": "ArcGIS error: {'code': 429, 'message': 'Unable to perform query. Too many requests.', 'details': ['API calls quota exceeded (116732 request units)! maximum allowed request units (115200) per Minute. Retry after 60 sec.']}"
+   "error": null
   }
  },
  "declared_unknowns": [
   "Watch data supports monitoring only; no damage or exposure conclusions.",
-  "Sources currently failed (no data, not zero hazards): nifc.",
   "166 feature(s) not displayed (no mappable geometry or malformed); 0 dropped by bounds checks."
  ],
  "checks": [
