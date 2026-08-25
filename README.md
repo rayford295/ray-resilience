@@ -127,12 +127,16 @@ uvicorn gateway.main:app --port 8080
 
 ## Repository map
 
+[`docs/manual/`](docs/manual/) is the authority on architecture and mechanism —
+this README is the entry point, not the reference.
+
 ```
 ├── app/                 # PWA frontend (WebGIS + smartphone)
 ├── gateway/             # FastAPI agent gateway (LLM-agnostic + harness middleware)
 ├── src/geosteward/      # pipeline, agents, sources, hazards, harness/, live/
 ├── events/              # eaton-2025/, milton-2024/, ian-2022/, archive/bavi-2026/
 ├── docs/                # STATUS.md, Track-A alignment, incidents/, design/
+│   ├── manual/          # the bilingual technical manual — 12 chapters + glossary
 │   └── design/          # specs (decision records) and plans (execution)
 └── tests/               # doubles as a verifiable evaluation environment
 ```

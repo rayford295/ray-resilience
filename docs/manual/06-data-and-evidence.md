@@ -559,8 +559,8 @@ tile-only, no-parcel-claims statement Milton's dossier carries.
 
 ## The methodological lineage
 
-`docs/methodology.md` — a pre-rework document scheduled to be archived
-(a later step in this manual's own build moves it under docs/archive) —
+`docs/archive/methodology-bavi.md` — a pre-rework document, archived as
+part of this manual's own build (formerly at docs/methodology.md) —
 describes a three-phase method built
 for an earlier, Bavi-era case rather than for the three deep cases this
 chapter has just walked through. Parts of it describe work this project has
@@ -570,7 +570,7 @@ plan under stops/distance budgets"* has no corresponding code anywhere in
 `src/geosteward/` or `scripts/` today, and this manual does not claim it —
 the planner mode `01` describes re-weights and ranks tiles client-side, it
 does not route an inspection vehicle. What that document is right about, and
-what this section absorbs before the file moves, is the intellectual lineage
+what this section absorbed when the file moved, is the intellectual lineage
 behind the reliability gate every cross-view evidence grid above actually
 runs:
 
@@ -607,23 +607,23 @@ runs:
   the intended shape of a future evidence product, not because a grid
   matching it exists yet.
 
-Two honesty rules this chapter has, until now, cited as
-`docs/methodology.md`'s are actually written in `docs/architecture.md`, and
-that correction is worth making precisely because both documents retire
-soon — `docs/methodology.md` moves under docs/archive, `docs/architecture.md`
-is deleted outright — and once that happens this chapter becomes the only
-surviving place a reader can check which document said what.
-`docs/architecture.md`'s own list, headed *"Honesty rules (inherited from
-the CrossViewGate research line),"* states as its third and fourth items:
-*"Unknowns are declared in every decision product, not omitted"* and *"No
-damage estimate without imagery: the evidence agent raises rather than
-interpolates."* Those are the two rules this chapter has been following
-throughout — `uncertainty` on every feature, `declared_unknowns` on every
-dossier, the fixed monitoring-only string on every watch run, and Ian's
-missing exposure layer plus its unlabeled density grid — and they belong to
-`docs/architecture.md`, not to `docs/methodology.md`.
+Two honesty rules this chapter previously cited as docs/methodology.md's
+were actually written in docs/architecture.md — worth correcting now that
+both documents have retired: the surviving one is archived at
+`docs/archive/methodology-bavi.md`; the other, docs/architecture.md, was
+deleted outright, so this chapter is now the only surviving place a reader
+can check which document said what. docs/architecture.md's own list,
+headed *"Honesty rules (inherited from the CrossViewGate research
+line),"* stated as its third and fourth items: *"Unknowns are declared in
+every decision product, not omitted"* and *"No damage estimate without
+imagery: the evidence agent raises rather than interpolates."* Those are
+the two rules this chapter has been following throughout — `uncertainty`
+on every feature, `declared_unknowns` on every dossier, the fixed
+monitoring-only string on every watch run, and Ian's missing exposure
+layer plus its unlabeled density grid — and they belonged to the deleted
+architecture document, not to the archived methodology one.
 
-`docs/methodology.md`'s own `## Claim rules` section is a separate list of
+`docs/archive/methodology-bavi.md`'s own `## Claim rules` section is a separate list of
 four items, and this chapter accounts for all four rather than resting on
 the one it already leaned on. *"Forecast-conditioned vs observed products
 are never mixed in one table"* is the rule already covered above and still
@@ -658,14 +658,14 @@ watchlist against an outcome turns up nothing anywhere in the repository.
 So this rule, like the two before it, has no code bound to it — not in any
 of the three deep cases, and not in the archived Bavi case either.
 
-> **中文。** `docs/methodology.md`——一份即将被归档的重构前文档（本手册自身构建
-> 的后续一个任务会把它移到 docs/archive 目录下）——描述的是为更早的
+> **中文。** `docs/archive/methodology-bavi.md`——一份重构前文档，已作为本手册
+> 自身构建的一部分被归档（原路径为 docs/methodology.md）——描述的是为更早的
 > Bavi 时代案例搭建的一套三阶段方法，而不是本章刚刚讲过的这三个深度案例。其中一些
 > 内容描述的是本项目后来用不同方式实现的工作，还有一部分描述的是根本从未实现过的
 > 工作：第三阶段里"预算约束路线：在停靠点/距离预算下的有序巡查计划"，在今天的
 > `src/geosteward/` 或 `scripts/` 里没有任何对应代码，本手册也不对此作出断言——
 > `01` 章描述的规划者模式在浏览器端重新加权、排序瓦片，并不为巡查车辆规划路线。
-> 这份文档讲对的部分、也是本节要在该文件迁移前吸收进来的部分，是上文每一份跨视角
+> 这份文档讲对的部分、也是本节在该文件迁移时吸收进来的部分，是上文每一份跨视角
 > 证据网格实际运行的可靠性筛选背后的思想脉络：**把视角当作能力各异的证人**——
 > 俯视（卫星或航拍）视角能证明屋顶状况与积水范围，街景视角能证明立面与水位线损毁；
 > 两者不是彼此的低配副本，它们看到的是不同的东西，一份让某一视角一律压过另一视角
@@ -686,19 +686,20 @@ of the three deep cases, and not in the archived Bavi case either.
 > 都没有发布一个专门的跨视角分歧图层；今天已提交的最接近的对应物是
 > `match_quality` 本身，它记录的是一个样本匹配得有多好，而不是两个视角是否对它
 > 产生了分歧。这条原则之所以保留在这里，是因为它仍然是未来某个证据产物应有的样子，
-> 而不是因为已经存在一份与之匹配的网格。本章此前一直把两条诚实规则算作
-> `docs/methodology.md` 里的内容，其实它们写在 `docs/architecture.md` 里——这个
-> 更正值得专门做出，正是因为这两份文档都即将退场：`docs/methodology.md` 会被移到
-> docs/archive 目录下，`docs/architecture.md` 则会被直接删除；那之后，本章就成了
-> 读者唯一能核对"哪句话出自哪份文档"的地方。`docs/architecture.md` 自己那份标题为
-> "继承自 CrossViewGate 研究脉络的诚实规则"的清单，第三条和第四条分别写着："每一份
-> 决策产物里的未知项都要被声明，不能省略"和"没有影像就没有损毁估计：证据 agent
-> 遇到这种情况会报错，而不是插值填补"。本章从头到尾遵循的正是这两条规则——每个
-> 要素上的 `uncertainty`、每份档案里的 `declared_unknowns`、每次监测运行里那句固定
-> 的"仅支持观察"声明，以及 Ian 缺失的暴露度图层和它不带标签发布的密度网格——它们
-> 属于 `docs/architecture.md`，不属于 `docs/methodology.md`。
+> 而不是因为已经存在一份与之匹配的网格。本章此前一直把两条诚实规则归到
+> docs/methodology.md 名下，其实它们写在 docs/architecture.md 里——这个更正
+> 值得专门做出，正是因为这两份文档都已退场：幸存的一份归档为
+> `docs/archive/methodology-bavi.md`；另一份 docs/architecture.md 则被直接
+> 删除；此后，本章就成了读者唯一能核对"哪句话出自哪份文档"的地方。
+> docs/architecture.md 自己那份标题为"继承自 CrossViewGate 研究脉络的诚实规则"
+> 的清单，第三条和第四条分别写着："每一份决策产物里的未知项都要被声明，不能省略"
+> 和"没有影像就没有损毁估计：证据 agent 遇到这种情况会报错，而不是插值填补"。
+> 本章从头到尾遵循的正是这两条规则——每个要素上的 `uncertainty`、每份档案里的
+> `declared_unknowns`、每次监测运行里那句固定的"仅支持观察"声明，以及 Ian 缺失的
+> 暴露度图层和它不带标签发布的密度网格——它们属于已删除的 architecture 文档，
+> 不属于已归档的 methodology 文档。
 >
-> `docs/methodology.md` 自己的 `## Claim rules` 一节是另外一份独立的四条清单，
+> `docs/archive/methodology-bavi.md` 自己的 `## Claim rules` 一节是另外一份独立的四条清单，
 > 本章要把四条都讲清楚，而不是只靠已经用过的那一条。"预测条件下的产物和实测产物
 > 从不混进同一张表"就是上文已经讲过、且今天依然成立的那条规则：本章里没有任何一份
 > 网格把 1 级临近预报和 2/3 级实测产物混在一起。"任何统计断言都要携带其空间相关性

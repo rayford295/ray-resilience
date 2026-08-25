@@ -27,5 +27,6 @@ class CrossViewEvidence:
             )
         raise NotImplementedError(
             "Cross-view assessment activates in the post-event phase; "
-            "see docs/architecture.md and the CrossViewGate research line."
+            "see docs/manual/06-data-and-evidence.md and the CrossViewGate "
+            "research line."
         )

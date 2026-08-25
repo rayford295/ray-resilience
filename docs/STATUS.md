@@ -1,6 +1,6 @@
 # GeoSteward v1 — Project Status
 
-**Updated:** 2026-08-23 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-08-24 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -236,33 +236,34 @@ derived from it accountable?**
   code's behaviour and nothing about Google's. `events/live_evidence.jsonl` therefore
   does not exist yet outside tests.
 
-### Documentation — design landed, content not written (2026-08-23)
+### Documentation — design landed, then written and closed out (2026-08-23 → 2026-08-24)
 
 - **Design records moved** from `docs/superpowers/{specs,plans}/` to
   [`docs/design/`](design/). The old segment was named after the authoring toolchain,
   which means nothing to a reader and reads as a vendor artifact in a submission. Two of
   the nine references fixed were in *code* — a docstring in
   [`src/geosteward/live/__init__.py`](../src/geosteward/live/__init__.py) and a comment in
-  [`policy_v1.yaml`](../src/geosteward/harness/policy_v1.yaml) — the same decay that left
-  `docs/architecture.md` pointing at src/disasterpilot/.
+  [`policy_v1.yaml`](../src/geosteward/harness/policy_v1.yaml) — the same decay that had
+  left docs/architecture.md pointing at src/disasterpilot/.
 - **OASIS event portal linked** from this file, `README.md`, and
   [`track_a_alignment.md`](track_a_alignment.md). It was previously a bare unlinked string
   in one place.
-- **Bilingual manual: spec and plan committed, no content yet.**
+- **Bilingual manual written: thirteen files, 4,726 lines** (`wc -l docs/manual/*.md`).
   [Spec](design/specs/2026-08-23-bilingual-manual-design.md) ·
-  [plan](design/plans/2026-08-23-bilingual-manual.md). Thirteen files under
-  [`docs/manual/`](docs/manual/), English with a Chinese restatement per subsection, plus
-  `scripts/manual_anchors.py` to make cited paths checkable in CI. Fourteen tasks; **none
-  executed**. Tasks 1–4 form a coherent stopping point if the work is interrupted.
-- The manual's purpose is partly remedial: `docs/architecture.md` and
-  `docs/methodology.md` contradict the current architecture, and the plan retires both
-  (Task 14) *after* their surviving content is absorbed into chapters 02 and 06. Until
-  that task runs, the contradiction below stands.
+  [plan](design/plans/2026-08-23-bilingual-manual.md). [`docs/manual/`](manual/), English
+  with a Chinese restatement per subsection, gated by
+  [`scripts/manual_anchors.py`](../scripts/manual_anchors.py) in CI so a cited path that
+  stops resolving fails the build instead of aging silently. All fourteen tasks executed.
+- **The two documents the manual superseded are now retired** (Task 14, 2026-08-24):
+  docs/architecture.md and docs/methodology.md contradicted the current architecture.
+  The former is deleted outright; the latter is archived at
+  [`docs/archive/methodology-bavi.md`](archive/methodology-bavi.md) with a superseded-by
+  header — both only after their surviving content was absorbed into
+  [`02`](manual/02-harness-outcome-audit.md) and
+  [`06`](manual/06-data-and-evidence.md). The contradiction this previously left under
+  Known limitations no longer applies and has been removed from that section.
 
 ## 🔜 Next (not blocked)
-
-- **Execute the bilingual-manual plan** ([plan](design/plans/2026-08-23-bilingual-manual.md)).
-  Start with Task 1 — the anchor gate has to exist before the content it gates.
 
 - Surface `watch_status.json` in the map UI: source health, staleness, and the skipped
   features it already declares. The product is published; the app does not read it.
@@ -299,7 +300,6 @@ derived from it accountable?**
   (declared in `watch_status.json`); zone-centroid resolution is a Plan 4 candidate.
 - Legacy typhoon modules (`sources/zj_typhoon.py`, `hazards/typhoon.py`) remain until
   Plan 3 rewires the pipeline agents to the US connectors, then retire to the archive.
-- `docs/architecture.md` still describes the pre-rework pipeline.
 - Run grouping in logs written before `run_id` existed is recovered from the check
   sequence (a repeat of a run's first check marks a restart). Those logs are
   append-only and are not rewritten to suit the reader.
@@ -307,3 +307,51 @@ derived from it accountable?**
   sha256 remains the verifiable anchor. The repository copy keeps the full paths.
 - Live snapshot growth is mitigated by gzip; an archive/rotate policy will be decided in
   the Plan 4 design before consumer URLs freeze.
+
+### Found while writing the manual (2026-08-24)
+
+Ten defects surfaced during the bilingual-manual effort (implementer- and
+reviewer-verified, one independently). Recorded here, not fixed here — that
+call belongs to the project owner.
+
+- Eaton's `events/eaton-2025/dossier/event_record.json` declares a stale
+  unknown — *"social-vulnerability join (SVI x exposure) pending: no
+  vulnerability claims yet"* — while
+  `events/eaton-2025/exposure/svi_h3_r9_context.geojson` exists with 265
+  cells and full `RPL_THEME1`–`RPL_THEME4`. Milton's and Ian's identical
+  lines are still true (neither has an SVI grid) — this does not generalise
+  to them.
+- **Most consequential:** `src/geosteward/gateway/context.py:144` feeds
+  `record["declared_unknowns"]` into the agent's evidence context, so the
+  stale line above is spoken to real users while the SVI layer is published
+  and rendered. The error is conservative — the agent under-reports
+  competence rather than fabricating data — but it corrodes the
+  declared-unknowns mechanism: if the list can go stale, "not listed as
+  unknown" stops meaning "confirmed."
+- `src/geosteward/harness/publication.py:191`'s `redact()` has no callers
+  anywhere, including its own test file. Redaction is performed by
+  `app/scripts/sync-artifacts.mjs` from the `redact_workstation_paths` flag
+  `publication.py` sets.
+- `scripts/manual_anchors.py` misses any path inside a code span that also
+  contains whitespace — `_looks_like_path` rejects the whole span on the
+  no-whitespace rule, so command-shaped spans silently escape the gate.
+- The 134,272-file corpus figure this document and `06` both cite cannot be
+  reconciled from committed artifacts: the seven frozen registry profiles
+  sum to 130,111 (`n_files_hashed` under `checksums`, summed across
+  `events/*/snapshots/registry/*_profile.json`), a gap of 4,161.
+- `events/ian-2022/evidence/svi_density_h3_r9_grid.geojson` uses a `content`
+  key in `uncertainty`, a shape no other grid uses;
+  `check_uncertainty_present` asserts only that the field exists, not its
+  shape.
+- `src/geosteward/agents/evidence.py`'s `CrossViewEvidence` is instantiated
+  only in `tests/test_pipeline.py`; its `.name` `"evidence.crossview"` has
+  zero audit-log occurrences. Not to be confused with
+  `evidence.crossview_grid` / `evidence.crossview_coverage`, separate
+  build-script-local implementations.
+- `check_uncertainty_present` passes when `uncertainty` is `None`.
+- `docs/design/specs/2026-08-20-non-retainable-evidence-design.md` cites
+  gateway/steward.py and gateway/llm.py; the real paths are under
+  `src/geosteward/gateway/`. Inside `docs/design/`, which is in
+  `SKIP_PATHS`, so the anchor gate does not catch it.
+- The anchor-gate CLI tests print to stdout during the suite; this
+  repository's convention is pristine test output.

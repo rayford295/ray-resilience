@@ -1,3 +1,27 @@
+> **Superseded.** This document describes the pre-rework, three-phase
+> method built around the Super Typhoon Bavi 2026 case. It was archived
+> here on 2026-08-23, alongside `events/archive/bavi-2026/`, when
+> docs/architecture.md was deleted and both were superseded by
+> `docs/manual/`. Its cross-view methodological lineage — views as
+> witnesses with different competence; a reliability gate, not symmetric
+> fusion; abstain plus acquire/inspect, not a forced label, where neither
+> view can attest; spatially blocked splits for anything fitted,
+> cluster-aware uncertainty; disagreement between views reported as its
+> own layer — survives in
+> [`docs/manual/06-data-and-evidence.md`](../manual/06-data-and-evidence.md).
+> The budget-constrained inspection routing this document describes in
+> Phase 3 was never implemented.
+>
+> **中文。** 本文档描述的是围绕 2026 年超强台风 Bavi 案例搭建的重构前
+> 三阶段方法。它于 2026-08-23 与 `events/archive/bavi-2026/` 一同归档于此，
+> 同一天 docs/architecture.md 被删除，两者都被 `docs/manual/` 取代。
+> 其跨视角方法论脉络——把视角当作能力各异的证人；用可靠性筛选、而非对称
+> 融合来仲裁；在任何一个视角都无法证明时，弃权加"待采集/待核查"标记，而非
+> 强加一个标签；对任何拟合过的东西采用空间分块划分、并做出对聚簇敏感的
+> 不确定性估计；视角间的分歧作为独立的一层单独报告——延续于
+> [`docs/manual/06-data-and-evidence.md`](../manual/06-data-and-evidence.md)。
+> 本文档第三阶段描述的预算约束巡查路线规划从未被实现过。
+
 # Methodology
 
 Three phases, one honest loop: predict exposure before landfall, observe

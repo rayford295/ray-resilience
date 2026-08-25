@@ -75,11 +75,6 @@ SKIP_PATHS = (
     # and the specs cite `src/disasterpilot/` precisely because it no longer
     # exists. 80 correct citations would report as failures.
     "docs/design/",
-    # Scheduled for deletion in Task 14. Until then it cites
-    # src/disasterpilot/sources/, which is the very staleness this gate exists to
-    # catch — but a gate that is red for thirteen tasks is a gate people learn to
-    # override. Task 14 deletes the file AND this entry, together.
-    "docs/architecture.md",
 )
 
 # Inline code span: `like/this`. Deliberately excludes newlines so a span

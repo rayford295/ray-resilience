@@ -67,12 +67,11 @@ class TemplateAndAbsenceTests(unittest.TestCase):
         self.assertTrue(ma.resolve(anchor, REPO))
 
     def test_skipped_sources_contribute_no_anchors(self):
-        # docs/design/ cites paths it is about to create; docs/architecture.md is
-        # stale and scheduled for deletion. Neither may fail the gate.
+        # docs/design/ cites paths it is about to create, so it may not fail
+        # the gate.
         anchors = ma.collect([Path("docs")], REPO)
         sources = {str(a.source) for a in anchors}
         self.assertFalse([s for s in sources if s.startswith("docs/design/")])
-        self.assertNotIn("docs/architecture.md", sources)
 
     def test_no_stale_skips_in_this_repo(self):
         self.assertEqual(ma.stale_skips(REPO), [])
@@ -80,14 +79,13 @@ class TemplateAndAbsenceTests(unittest.TestCase):
     def test_stale_skip_is_reported_when_its_subject_is_gone(self):
         # Mirrors test_declared_absent_path_that_now_exists_is_reported: a
         # SKIP_PATHS entry that outlives its subject is a silent hole, so an
-        # empty root (naming neither docs/design/ nor docs/architecture.md)
-        # must surface both as stale.
+        # empty root (naming none of SKIP_PATHS's subjects) must surface
+        # every entry as stale.
         import tempfile
 
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             stale = ma.stale_skips(root)
-            self.assertIn("docs/architecture.md", stale)
             self.assertIn("docs/design/", stale)
 
     def test_declared_absent_path_resolves(self):

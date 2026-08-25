@@ -74,51 +74,49 @@ learn whether any of the three paths above is worth following further.
 
 ## The thirteen files
 
-`01`–`11` do not exist yet; they are listed here as plain names because the
-[anchor gate](../../scripts/manual_anchors.py) treats a linked or
-inline-code path as a claim that the file resolves. Each becomes a working
-link as its chapter is written. The bare chapter numbers used elsewhere in
-this file (`10`, `09`, `02`–`05`, `07`, `01`, `06`, `12`) are not covered by
-this rule: they are digits, not filenames, so the gate — which only extracts
-tokens containing a slash — never reads them as a claim that a file exists.
+All thirteen files now exist, so every row below is a working link — the
+[anchor gate](../../scripts/manual_anchors.py) checks that each one resolves.
+The bare chapter numbers used elsewhere in this file (`10`, `09`, `02`–`05`,
+`07`, `01`, `06`, `12`) are digits, not filenames, so the gate — which only
+extracts tokens containing a slash — never reads them as a claim that a file
+exists.
 
 | File | Subject |
 |---|---|
 | [README.md](README.md) | Index · one-minute version · three reading paths |
-| 01-capabilities.md | Capability catalogue |
-| 02-harness-outcome-audit.md | Validity layers 1–2: checks, audit, manifest |
-| 03-policy-claim-plane.md | Layer 3a: what the agent may assert |
-| 04-policy-distribution-plane.md | Layer 3b: what a build may publish |
-| 05-verifiability-and-live.md | Layer 4: retention, licence, content-free records |
-| 06-data-and-evidence.md | Tier-1 watch + three deep cases, field by field |
-| 07-gateway-and-agent.md | The agent request lifecycle |
-| 08-app-pwa.md | The two-mode front end |
-| 09-module-reference.md | File-by-file responsibilities |
-| 10-getting-started.md | Install, test, run, rebuild |
-| 11-limits-and-gaps.md | What this cannot do |
+| [01-capabilities.md](01-capabilities.md) | Capability catalogue |
+| [02-harness-outcome-audit.md](02-harness-outcome-audit.md) | Validity layers 1–2: checks, audit, manifest |
+| [03-policy-claim-plane.md](03-policy-claim-plane.md) | Layer 3a: what the agent may assert |
+| [04-policy-distribution-plane.md](04-policy-distribution-plane.md) | Layer 3b: what a build may publish |
+| [05-verifiability-and-live.md](05-verifiability-and-live.md) | Layer 4: retention, licence, content-free records |
+| [06-data-and-evidence.md](06-data-and-evidence.md) | Tier-1 watch + three deep cases, field by field |
+| [07-gateway-and-agent.md](07-gateway-and-agent.md) | The agent request lifecycle |
+| [08-app-pwa.md](08-app-pwa.md) | The two-mode front end |
+| [09-module-reference.md](09-module-reference.md) | File-by-file responsibilities |
+| [10-getting-started.md](10-getting-started.md) | Install, test, run, rebuild |
+| [11-limits-and-gaps.md](11-limits-and-gaps.md) | What this cannot do |
 | [12-glossary.md](12-glossary.md) | Bilingual terminology, binding on the other files |
 
-> **中文。** `01`–`11` 尚未写出，这里以纯文本列出文件名，因为
-> [锚点检查脚本](../../scripts/manual_anchors.py) 会把链接或行内代码形式的路径当作
-> "这个文件已存在"的断言；每一章写完后才把对应行改成可用链接。本文件其他地方出现的
-> 裸章节号（`10`、`09`、`02`–`05`、`07`、`01`、`06`、`12`）不受此规则约束——它们是
-> 数字，不是文件名，而检查脚本只提取含斜杠的文本，不会把裸数字当作"某文件存在"的断言。
+> **中文。** 十三个文件现已全部写完，下表每一行都是可用链接——
+> [锚点检查脚本](../../scripts/manual_anchors.py) 会核实每一个链接都能解析到文件。
+> 本文件其他地方出现的裸章节号（`10`、`09`、`02`–`05`、`07`、`01`、`06`、`12`）是
+> 数字，不是文件名，检查脚本只提取含斜杠的文本，不会把裸数字当作"某文件存在"的断言。
 >
 > | 文件 | 主题（中文） |
 > |---|---|
-> | README.md | 索引·一分钟版·三条阅读路径 |
-> | 01-capabilities.md | 能力目录（含每项能力的拒绝边界） |
-> | 02-harness-outcome-audit.md | 有效性第 1–2 层：结果检查与审计留痕 |
-> | 03-policy-claim-plane.md | 第 3a 层：agent 可以断言什么 |
-> | 04-policy-distribution-plane.md | 第 3b 层：构建可以发布什么 |
-> | 05-verifiability-and-live.md | 第 4 层：留存、许可，以及"内容为空"的实时记录 |
-> | 06-data-and-evidence.md | 全美灾害监测与三个深度案例，逐字段说明 |
-> | 07-gateway-and-agent.md | agent 请求的完整生命周期 |
-> | 08-app-pwa.md | 双模式前端（居民模式 / 规划者模式） |
-> | 09-module-reference.md | 逐文件职责索引 |
-> | 10-getting-started.md | 安装、测试、运行、重建 |
-> | 11-limits-and-gaps.md | 本系统做不到什么 |
-> | 12-glossary.md | 双语术语表，对其余各章具有约束力 |
+> | [README.md](README.md) | 索引·一分钟版·三条阅读路径 |
+> | [01-capabilities.md](01-capabilities.md) | 能力目录（含每项能力的拒绝边界） |
+> | [02-harness-outcome-audit.md](02-harness-outcome-audit.md) | 有效性第 1–2 层：结果检查与审计留痕 |
+> | [03-policy-claim-plane.md](03-policy-claim-plane.md) | 第 3a 层：agent 可以断言什么 |
+> | [04-policy-distribution-plane.md](04-policy-distribution-plane.md) | 第 3b 层：构建可以发布什么 |
+> | [05-verifiability-and-live.md](05-verifiability-and-live.md) | 第 4 层：留存、许可，以及"内容为空"的实时记录 |
+> | [06-data-and-evidence.md](06-data-and-evidence.md) | 全美灾害监测与三个深度案例，逐字段说明 |
+> | [07-gateway-and-agent.md](07-gateway-and-agent.md) | agent 请求的完整生命周期 |
+> | [08-app-pwa.md](08-app-pwa.md) | 双模式前端（居民模式 / 规划者模式） |
+> | [09-module-reference.md](09-module-reference.md) | 逐文件职责索引 |
+> | [10-getting-started.md](10-getting-started.md) | 安装、测试、运行、重建 |
+> | [11-limits-and-gaps.md](11-limits-and-gaps.md) | 本系统做不到什么 |
+> | [12-glossary.md](12-glossary.md) | 双语术语表，对其余各章具有约束力 |
 
 ## What this manual is not
 

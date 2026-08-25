@@ -161,8 +161,8 @@ and disclosure surface, not just a privacy one.
   data.js`) stamps every slider move `"delivery": "session-only; not
   persisted and not sent to the gateway"` — `08` describes the mechanism.
   Reloading the page discards every adjustment.
-- **Budget-constrained inspection routing.** The pre-rework
-  `docs/methodology.md` describes a *"budget-constrained route: ordered
+- **Budget-constrained inspection routing.** The pre-rework, now-archived
+  `docs/archive/methodology-bavi.md` describes a *"budget-constrained route: ordered
   inspection plan under stops/distance budgets"* with no corresponding code
   anywhere in `src/geosteward/` or `scripts/` today; the planner mode `01`
   and `08` describe re-weights and ranks tiles client-side, it does not
@@ -180,7 +180,8 @@ and disclosure surface, not just a privacy one.
 > 解析到对应的清单行、输入和检查结果上。**规划者调整的持久化**：`recordAdjustment()`
 > （`app/src/lib/data.js`）给每一次滑块操作盖上 `"delivery": "session-only; not
 > persisted and not sent to the gateway"`——`08` 章讲了这个机制；刷新页面会丢弃全部
-> 调整。**受预算约束的巡检路线规划**：重建前遗留下来的 `docs/methodology.md` 描述过
+> 调整。**受预算约束的巡检路线规划**：重建前遗留、如今已归档的
+> `docs/archive/methodology-bavi.md` 描述过
 > 一种"受站点数/距离预算约束的有序巡检路线规划"，但 `src/geosteward/` 或 `scripts/`
 > 里今天都找不到与之对应的任何代码；`01`、`08` 两章描述的规划者模式做的是在客户端
 > 给瓦片重新加权、排序，不会给车辆规划路线——`06` 章追溯过这份文档在其他地方讲对的
