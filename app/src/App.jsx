@@ -121,6 +121,30 @@ export default function App() {
     }
   }, [mode, layers, dossiers]);
 
+  // The same instinct, for the same reason, on the planner side: `areaCells`
+  // below is what the header count and the post-answer highlight both read,
+  // and the gateway's own `evidence_for_area` walks every grid of every
+  // intersecting event, not just the one the map happens to be showing. If
+  // `areaCells` only ever saw the active view, a selection over an event
+  // that isn't on screen would show a header count the answer then
+  // contradicts — not because the two sides compute coverage differently
+  // (`cellsInBox` and `evidence_for_area` apply the identical edge-inclusive
+  // rule), but because they'd be counting over different input sets. Loading
+  // every view as soon as planner mode is entered gives both sides the same
+  // universe; until they all arrive, the count is a floor that only grows,
+  // never one that overstates what a selection covers.
+  useEffect(() => {
+    if (mode !== "planner") return;
+    for (const v of VIEWS) {
+      if (layers[v.id]) continue;
+      fetchJson(v.url)
+        .then((data) => setLayers((s) => (s[v.id] ? s : { ...s, [v.id]: data })))
+        .catch((err) =>
+          setLayers((s) => (s[v.id] ? s : { ...s, [v.id]: { error: String(err) } }))
+        );
+    }
+  }, [mode, layers]);
+
   const coverage = useMemo(
     () =>
       buildCoverageIndex(

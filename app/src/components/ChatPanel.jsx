@@ -26,8 +26,13 @@ export default function ChatPanel({
   const [busy, setBusy] = useState(false);
   const logRef = useRef(null);
 
-  // The same inclusive-edge rule the gateway applies to `area`, so the count
-  // shown here before asking never disagrees with the cells the answer cites.
+  // Same edge-inclusive, centre-in-box rule the gateway applies to `area` --
+  // but a matching predicate is necessary, not sufficient. What makes this
+  // count agree with the answer's own `cells` is that both sides now walk the
+  // same input set too: the gateway's `evidence_for_area` tests every grid of
+  // every intersecting event, and `cells` here is the union of every view's
+  // layer, fetched as soon as planner mode is entered (App.jsx), not just
+  // whichever one is on screen.
   const selectedCount = useMemo(
     () => (selection ? cellsInBox(cells ?? [], selection, cellToLatLng).length : 0),
     [selection, cells]

@@ -538,8 +538,14 @@ both, each kept as its own event with its own facts, never combined into one.
 fact per touched event stating how many evaluated tiles matched inside that
 event's grids; and the same edge-inclusive, centre-in-box comparison
 implemented twice, independently — once inside that loop, once in
-`cellsInBox` (`app/src/lib/area.js`) — so the tile count the app shows before
-a question is asked never disagrees with the cells the answer ends up citing.
+`cellsInBox` (`app/src/lib/area.js`). A matching predicate on its own is not
+enough to make the tile count the app shows before a question is asked agree
+with the cells the answer ends up citing — both sides also have to test the
+same input set, which is why `App.jsx` fetches every view's layer as soon as
+planner mode is entered rather than only the one on screen: `evidence_for_area`
+walks every grid of every event the selection touches, and `areaCells` has to
+be the same union or the two counts can diverge even though the predicate
+comparing a cell's centre to the box is identical on both sides.
 
 **Implemented in** — `src/geosteward/gateway/context.py`,
 `src/geosteward/gateway/steward.py`, `gateway/main.py`, `app/src/lib/area.js`,
@@ -580,8 +586,12 @@ latent behind a capability check.
 > 事件追加一条"选区覆盖"事实，
 > 说明该事件网格里有多少已评估瓦片落在选区内；以及同一个"边界计入、以格心是否落在
 > 框内判断"的比较被独立实现了两次——一次在这个循环内部，一次在 `cellsInBox`
-> （`app/src/lib/area.js`）里——所以提问之前应用展示的瓦片数量，与回答最终引用的
-> 瓦片，永远不会互相矛盾。这项能力拒绝四件事。选区完全没有触及任何关注区域：
+> （`app/src/lib/area.js`）里。但两边用的判断规则一致，并不足以让提问之前应用
+> 展示的瓦片数量，与回答最终引用的瓦片对得上——两边还必须在同一个输入集合上做
+> 判断：`evidence_for_area` 遍历的是选区触及的每一个事件的每一张网格，所以
+> `App.jsx` 一进入规划者模式就把每个图层都取一遍，而不只是取当前屏幕上的那一个，
+> 让 `areaCells` 覆盖同一个并集——否则哪怕判断规则完全相同，两个数字也可能对不上。
+> 这项能力拒绝四件事。选区完全没有触及任何关注区域：
 > `locate_area` 返回空事件列表，`evidence_for_area` 报告 `in_aoi: false`，
 > `deny-outside-aoi`（匹配条件 `purpose: damage_assessment, in_aoi: false`）
 > 会以拒绝一个关注区域之外的点同样的方式拒绝这次请求（见能力 2）。跨事件合并

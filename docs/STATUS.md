@@ -321,7 +321,7 @@ call belongs to the project owner.
   cells and full `RPL_THEME1`–`RPL_THEME4`. Milton's and Ian's identical
   lines are still true (neither has an SVI grid) — this does not generalise
   to them.
-- **Most consequential:** `src/geosteward/gateway/context.py:144` feeds
+- **Most consequential:** `src/geosteward/gateway/context.py:183` feeds
   `record["declared_unknowns"]` into the agent's evidence context, so the
   stale line above is spoken to real users while the SVI layer is published
   and rendered. The error is conservative — the agent under-reports

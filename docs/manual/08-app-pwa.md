@@ -76,9 +76,13 @@ a selection active, the chat panel's header
 "about the selected area," names the box's corners, and states a live count
 of evaluated cells
 inside it — computed by `cellsInBox()` (`app/src/lib/area.js`) against the
-same edge-inclusive, centre-in-box rule the gateway applies server-side, so
-the number shown before asking never disagrees with the tiles the answer
-ends up citing. `App.jsx` restricts the draw tool to planner mode only —
+same edge-inclusive, centre-in-box rule the gateway applies server-side. That
+shared rule is necessary but not sufficient: it also has to run over the same
+tiles the gateway sees, so entering planner mode fetches every view's layer
+(`App.jsx`), not only the one on screen — `evidence_for_area` walks every grid
+of every event a selection touches, and the app's own cell union has to match
+that reach for the number shown before asking to agree with the tiles the
+answer ends up citing. `App.jsx` restricts the draw tool to planner mode only —
 residents' damage questions are refused whether asked by point or by area, so
 offering the affordance would just invite a refusal they cannot use — and
 drops any active selection the moment the mode switches away from planner.
@@ -143,8 +147,11 @@ strategy that makes it work offline is covered:
 > 中心点）切换成"about the selected area"（关于所选区域），点名矩形的两个角
 > 坐标，并实时给出选区内已评估瓦片的数量——由 `cellsInBox()`
 > （`app/src/lib/area.js`）计算，用的是与网关服务端完全相同的"边界计入、以格心
-> 是否落在框内判断"规则，所以提问之前展示的数字，永远不会和回答最终引用的瓦片
-> 对不上。`App.jsx` 把这个绘制工具限定在规划者模式内——居民无论按点还是按区提问
+> 是否落在框内判断"规则。但规则相同还不够，还得作用在同一批瓦片上：一进入规划者
+> 模式，`App.jsx` 就会把每个图层都取一遍，而不只是当前屏幕上的那一个——
+> `evidence_for_area` 遍历的是选区触及的每一个事件的每一张网格，应用这边的瓦片
+> 并集必须覆盖同样的范围，提问之前展示的数字才会和回答最终引用的瓦片对得上。
+> `App.jsx` 把这个绘制工具限定在规划者模式内——居民无论按点还是按区提问
 > 损毁评估都会被拒绝，提供这个功能只会引来一个他们用不上的拒绝——并且一旦模式切出
 > 规划者，就会立即丢弃任何激活中的选区。一旦一条 `answer`（回答）响应返回，它的
 > `cells` 字段（`01` 章能力 10）会被提升进 `App.jsx` 自己的状态，并由

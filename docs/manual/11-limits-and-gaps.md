@@ -190,8 +190,24 @@ and disclosure surface, not just a privacy one.
   pulled out into `isClickSuppressed()` (`app/src/lib/clickSuppression.js`)
   and exercised by `app/src/lib/clickSuppression.test.js` across the
   deadline's four states — before it, exactly at it, after it, and the
-  initial `until = 0` state, where nothing is ever suppressed. Everything
-  that decides *when* that predicate is consulted — the mouse-move tracking,
+  initial `until = 0` state, where nothing is ever suppressed. **The
+  deadline has an accepted cost worth stating rather than leaving implicit:
+  every click inside the 300 ms window is suppressed, not only the
+  synthetic one the browser fires after a drag's `mouseup`.** There is no
+  way for `onClickCapture` (`app/src/components/MapView.jsx`) to tell that
+  synthetic click apart from a genuine one a person happens to land in the
+  same window, so it cannot suppress selectively — it suppresses the whole
+  window instead. A narrower, event-shaped guard — a boolean armed on
+  `mouseup` and disarmed by the very click handler it exists to catch — is
+  the shape this project already tried and moved away from: the
+  `suppressClickUntil` variable's own comment explains that the synthetic
+  click can dispatch outside this listener's reach entirely, which would
+  leave that boolean armed forever, silently swallowing the next unrelated
+  click. Blocking the whole window structurally, at the cost of a few
+  hundred milliseconds of real clicks nobody drags and clicks fast enough to
+  land in practice, is the trade this project made instead. Everything that
+  decides *when*
+  that predicate is consulted — the mouse-move tracking,
   the `dragPan` enable/disable pairing, the `Escape`-key and window-blur
   recovery paths — is reasoned about only in the code's own comments; no
   test exercises any of it.
@@ -225,7 +241,16 @@ and disclosure surface, not just a privacy one.
 > `isClickSuppressed()`（`app/src/lib/clickSuppression.js`），由
 > `app/src/lib/clickSuppression.test.js` 覆盖了这条截止时刻的四种状态——截止之前、
 > 恰好在截止那一刻、截止之后，以及初始的 `until = 0` 状态（此时永远不会抑制任何
-> 点击）。至于*什么时候*会去查问这条判断——鼠标移动追踪、`dragPan` 的启用/禁用
+> 点击）。**这条截止时刻有一个值得写明、而不是留给读者自己猜的代价：这 300
+> 毫秒窗口里的每一次点击都会被抑制，而不只是浏览器在拖拽结束后自己派发的那次
+> 合成点击。** `onClickCapture` 没有办法把那次合成点击，和一个人恰好在同一窗口内
+> 点出来的真实点击区分开，所以它没法只挑着抑制——它抑制的是整个窗口。一种范围更窄、
+> 按事件类型判断的做法——用一个布尔值在 `mouseup` 时置位、再由它本要拦截的那个点击
+> 处理函数自己置回——正是这个项目已经试过、又主动放弃的方案：`suppressClickUntil`
+> 这个变量自己的注释解释了原因——那次合成点击完全可能派发到这个监听器根本够不着的
+> 地方，那样一来那个布尔值就会永远保持置位，悄悄吞掉下一次毫不相干的点击。把整个
+> 窗口结构性地挡住，代价是几百毫秒内没有人快得能同时完成拖拽和点击这两个动作，
+> 但这正是本项目选择付出的代价。至于*什么时候*会去查问这条判断——鼠标移动追踪、`dragPan` 的启用/禁用
 > 配对、`Escape` 键与窗口失焦的恢复路径——这些都只在代码自己的注释里被讲清楚过；
 > 没有任何测试覆盖过它们中的任何一个。**发布版本、`CHANGELOG`、`CITATION.cff`、
 > 贡献者文档**：截至本章写作时
@@ -235,7 +260,7 @@ and disclosure surface, not just a privacy one.
 
 - **A stale declared-unknown is retrieved and cited exactly like a current,
   data-backed fact.** `EventContext.evidence_for()`
-  (`src/geosteward/gateway/context.py:144`) loops over every string in a
+  (`src/geosteward/gateway/context.py:183`) loops over every string in a
   dossier's `declared_unknowns` and wraps each one in the same `Fact` class
   as every grid-derived fact — same citable artifact ID, appended to the
   same `evidence.facts` list the model is grounded on. Nothing in that
@@ -301,7 +326,7 @@ and disclosure surface, not just a privacy one.
 
 > **中文。** **一条已经过时的声明未知项，会被检索出来、像一条当下属实、有数据支撑
 > 的事实一样被引证**：`EventContext.evidence_for()`
-> （`src/geosteward/gateway/context.py:144`）遍历一份档案 `declared_unknowns`
+> （`src/geosteward/gateway/context.py:183`）遍历一份档案 `declared_unknowns`
 > 里的每一句话，把每一句都包进和每一条网格衍生事实完全相同的 `Fact` 类——同样有
 > 可引证的制品 ID，被追加进模型据以生成回答的同一份 `evidence.facts` 列表。这个循环里
 > 没有任何地方记录某句话是何时写下的，也没有检查它是否依然属实，所以在检索代码

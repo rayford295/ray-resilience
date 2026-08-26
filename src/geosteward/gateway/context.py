@@ -233,10 +233,7 @@ class EvidenceStore:
                 hits = 0
                 for cell, props in index.items():
                     lat, lon = h3.cell_to_latlng(cell)
-                    if not (
-                        bbox["min_lat"] <= lat <= bbox["max_lat"]
-                        and bbox["min_lon"] <= lon <= bbox["max_lon"]
-                    ):
+                    if not point_in_box(lat, lon, bbox):
                         continue
                     hits += 1
                     matched.add(cell)
@@ -288,3 +285,28 @@ class EvidenceStore:
             evidence.cells.extend(sorted(matched))
 
         return evidence
+
+
+#: Defined at module level, after `EvidenceStore`, rather than beside
+#: `boxes_intersect` above -- so adding it here doesn't shift any of the line
+#: numbers the manual cites into this file (`declared_unknowns` at line 183).
+#: Used by `evidence_for_area`'s per-cell loop above.
+def point_in_box(lat: float, lon: float, bbox: dict[str, float]) -> bool:
+    """Does (lat, lon) fall inside a WGS84 bounding box? Edges count, the same
+    inclusive rule `boxes_intersect` applies to whole boxes: a cell whose
+    centre sits exactly on the selection's edge is matched, not excluded.
+
+    Deliberately duplicated in `cellsInBox()` (`app/src/lib/area.js`) rather
+    than shared across the Python/JavaScript boundary: the same
+    edge-inclusive, centre-in-box predicate, implemented independently on
+    both sides as defence in depth, so a bug in one implementation cannot
+    silently make the header count the app shows before asking agree with a
+    wrong `cells` list after asking. `tests/test_gateway_area.py`'s
+    `CrossLayerAgreementTests` feeds both implementations the same shapes and
+    asserts identical accept/reject, so that "deliberately duplicated" claim
+    has a guard behind it instead of resting on this comment alone.
+    """
+    return (
+        bbox["min_lat"] <= lat <= bbox["max_lat"]
+        and bbox["min_lon"] <= lon <= bbox["max_lon"]
+    )

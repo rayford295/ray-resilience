@@ -360,14 +360,44 @@ class Steward:
                 "resolution": resolution,
             }
 
-        if not evidence.facts:
+        #: `evidence.facts` is never empty for an area selection --
+        #: `evidence_for_area` always appends a "selection coverage" fact and
+        #: the declared unknowns for every touched event, even when zero cells
+        #: matched. Gating on `facts` alone would ask the model to write a
+        #: cited answer whose only evidence is "0 evaluated tile(s) inside the
+        #: selection", so the area path is also checked on `evidence.cells`:
+        #: intersecting an AOI and landing on evaluated ground are different
+        #: questions (spec section 6), and this is the case where the first is
+        #: true and the second is not. `cells` is the right signal because it
+        #: is the one field only an area request ever populates (`07` covers
+        #: this) and it is empty only when every touched event matched zero
+        #: cells -- a selection where one event contributes tiles and another
+        #: does not still has a non-empty `cells` and is answered normally,
+        #: with the zero-tile event's own coverage fact surviving alongside it.
+        area_matched_nothing = area is not None and not evidence.cells
+        if not evidence.facts or area_matched_nothing:
             self.audit.record("gateway_no_evidence", "steward",
                               payload={"event": evidence.event_id}, rule_id=decision.rule_id)
+            if area_matched_nothing:
+                #: The coverage facts this response never reaches (no_evidence
+                #: returns before the model sees the evidence block) would have
+                #: said which events the selection touched and that none had
+                #: evaluated tiles inside it -- that content is repeated here
+                #: verbatim in the reason string so the planner loses nothing.
+                touched = ", ".join(evidence.event_ids)
+                reason = (
+                    f"The selection intersects {touched}, but matched zero "
+                    "evaluated tiles inside the drawn rectangle. Inside the "
+                    "area of interest is not the same as on evaluated ground "
+                    "-- monitoring data only, no conclusions supported."
+                )
+            else:
+                reason = ("The request is authorized, but no committed artifact covers "
+                          "this location — monitoring data only, no conclusions supported.")
             return {
                 "type": "no_evidence",
                 "rule_id": decision.rule_id,
-                "reason": "The request is authorized, but no committed artifact covers "
-                          "this location — monitoring data only, no conclusions supported.",
+                "reason": reason,
             }
 
         live_lines: list[str] = []

@@ -30,14 +30,19 @@ the LLM never decides its own authorization and never gets the last word."
 
 ## The request lifecycle
 
-One request runs through six stages in this order: `classify` → policy
-pre-check → evidence assembly from manifest-listed artifacts only → model
-generation → `check_claims` post-check → audit, with up to three generation
-attempts before a fail-closed refusal. Walking `Steward.answer` (lines
-279–435) top to bottom: `classify(question)` (line 280) turns the free-text
+One request runs through six stages in this order: `classify` → evidence
+assembly from manifest-listed artifacts only → policy pre-check → model
+generation → `check_claims` post-check → audit. That trailing "audit" is
+itself a simplification worth one clause: a `gateway_request` row is written
+as soon as the request is assembled — strictly before `policy.evaluate` runs
+— so the audit record exists even for a request the next stage is about to
+refuse, not only for the ones that make it all the way through. Up to three
+generation attempts run before a fail-closed refusal. Walking `Steward.answer`
+(lines 279–520) top to bottom: `classify(question)` (line 306) turns the
+free-text
 question into a `(purpose, resolution)` pair — ordinary Python, not a model
-call, and `03` covers exactly how the pattern order encodes policy.
-`self.store.evidence_for(lat, lon)` (line 281) then loads whatever committed,
+call, and `03` covers exactly how the pattern order encodes policy. Evidence
+assembly (lines 307–311) then loads whatever committed,
 manifest-listed artifacts cover that location — the evidence tier and
 [AOI](12-glossary.md) membership a `PolicyRequest` needs come from this call,
 which is why it runs before the policy engine can evaluate anything; reading
@@ -47,7 +52,7 @@ paragraph is about — the one that actually matters for a keyed, billable
 third-party call: that call only happens later, inside `_lookup`, strictly
 after the policy engine has authorized the request, so an unauthorized
 question never reaches a third party and never spends money. Verifiability is
-computed next (lines 283–294), in three branches keyed on whether the purpose
+computed next (lines 313–324), in three branches keyed on whether the purpose
 needs a live source at all and, if so, whether one is configured: `RETAINED`
 for any purpose that never touches a live source; the
 [weakest-link](12-glossary.md) of `RETAINED` and the configured source's own
@@ -58,11 +63,12 @@ deliberate stand-in so the policy can still tell "in an AOI, but the
 capability is absent" apart from "out of the AOI entirely," rather than
 collapsing both into the same `default-deny`. A `PolicyRequest` is built from
 `role`, `purpose`, `resolution`, the evidence's tier and AOI membership, and
-that verifiability value (lines 296–303), the whole request is written to the
-audit log as a `gateway_request` row — role, exact `lat`, `lon`, and the
+that verifiability value (lines 326–333), the whole request is written to the
+audit log as a `gateway_request` row (lines 334–349) — role, exact `lat`,
+`lon`, and the
 question's own text, unredacted; this fact returns with consequences in [Not
 safe to host yet](#not-safe-to-host-yet) — and only then does
-`self.policy.evaluate(request)` run (line 312).
+`self.policy.evaluate(request)` run (line 351).
 
 The request shape itself is either-or, and the check runs twice for the same
 request rather than once. `AskRequest.exactly_one_location`
@@ -86,12 +92,16 @@ point-shaped request's `cells` stays an empty list, because `evidence_for`
 never assigns it; a point answer has one tile to speak of and already names
 it in its own text.
 
-A refusal here (lines 313–322) returns immediately: no live lookup has been
+A refusal here (lines 352–361) returns immediately: no live lookup has been
 attempted, no evidence has been assembled into a prompt, and the model has
-not been invoked at all. An authorized request with a located tile but zero
-committed facts for it returns a declared no-evidence response just as
-quickly (lines 324–332) — again before any model call. Only past both of
-those gates does anything resembling "fetching" for a live answer happen:
+not been invoked at all. An authorized request that lands on zero evidence
+returns a declared no-evidence response just as quickly (lines 363–401) —
+again before any model call — and that check now covers two distinct ways of
+landing on nothing: a point with a located tile but zero committed facts for
+it, and an area selection that matched at least one intersecting event but
+zero cells inside any of them, which is not the same failure and gets its own
+reason string built from which events the selection touched. Only past both
+of those gates does anything resembling "fetching" for a live answer happen:
 when the classified purpose needs a live source, `self._lookup` (lines
 238–277) computes an [H3 r9](12-glossary.md) cell from the raw coordinates,
 issues the request, and calls `LiveEvidenceRecorder.record` (`05` covers what
@@ -100,29 +110,33 @@ inside `_lookup` is deliberate for the same reason the ordering inside
 `answer` is: a lookup cannot end up cited without having been attested first.
 What reaches the model is a category-count line, never the provider's raw
 content (`05` again). The retained facts and any live line are joined into one
-evidence block (lines 356–369), and only at that point does
-`self.llm(messages)` run (line 374), inside a loop bounded by
+evidence block (lines 437–450), and only at that point does
+`self.llm(messages)` run (line 455), inside a loop bounded by
 `self.max_attempts` (default 3, line 217). Every attempt is checked by
-`check_claims` (line 383) and recorded as a `gateway_post_check` audit row
-(lines 384–387) before either an answer is returned (lines 397–415) or a
+`check_claims` (line 464) and recorded as a `gateway_post_check` audit row
+(lines 465–468) before either an answer is returned (lines 469–500) or a
 correction turn is appended to the conversation and the loop retries (lines
-416–425). A third failing attempt does not relax the requirement; it produces
-the fail-closed refusal at lines 427–435, `rule_id: "claim-post-check"`,
+501–510). A third failing attempt does not relax the requirement; it produces
+the fail-closed refusal at lines 512–520, `rule_id: "claim-post-check"`,
 naming every violation the last draft still carried.
 
-> **中文。** 一次请求依次经过六个阶段：`classify`（分类）→ 策略预检查 → 只从
-> 已在制品清单里登记过的产物中组装证据 → 模型生成 → `check_claims`（断言后检查）
-> → 写入审计，生成最多允许三次尝试，仍不过关就失败即拒绝。把 `Steward.answer`
-> （279–435 行）从头看到尾：`classify(question)`（280 行）把自由文本问题转成一对
+> **中文。** 一次请求依次经过六个阶段：`classify`（分类）→ 只从已在制品清单里
+> 登记过的产物中组装证据 → 策略预检查 → 模型生成 → `check_claims`（断言后检查）
+> → 写入审计。末尾这个"写入审计"本身也是一句需要再补一句的简化说法：一条
+> `gateway_request` 记录，在请求刚组装好时就已经写下——严格早于
+> `policy.evaluate` 运行——所以哪怕这个请求马上要在下一步被拒绝，审计记录也已经
+> 存在，而不是只有走完全程的请求才有记录。生成最多允许三次尝试，仍不过关就失败
+> 即拒绝。把 `Steward.answer`
+> （279–520 行）从头看到尾：`classify(question)`（306 行）把自由文本问题转成一对
 > `(purpose, resolution)`——这是普通 Python 代码，不涉及调用模型，具体模式顺序
-> 如何编码策略，`03` 章已经讲清楚。接着 `self.store.evidence_for(lat, lon)`
-> （281 行）加载覆盖这个位置的、已提交且在制品清单里登记过的产物——`PolicyRequest`
+> 如何编码策略，`03` 章已经讲清楚。接着组装证据的那一段代码
+> （307–311 行）加载覆盖这个位置的、已提交且在制品清单里登记过的产物——`PolicyRequest`
 > 需要的证据层级和是否在关注区域（AOI）之内，正是从这次调用里来的，这也是为什么
 > 它要在策略引擎能评估任何东西之前先跑：读取一份本地的、已经哈希、已经提交的文件
 > 不花任何代价，也不向任何人披露任何东西，这和下一段要讲的那个属性是两回事——真正
 > 关乎一次带密钥、要计费的第三方调用的是另一件事：那次调用只发生在更后面，在
 > `_lookup` 内部，且严格晚于策略引擎授权这个请求之后，所以一个未获授权的问题
-> 永远不会触达第三方，也永远不会花一分钱。接下来计算可验证性（283–294 行），
+> 永远不会触达第三方，也永远不会花一分钱。接下来计算可验证性（313–324 行），
 > 分三支：是否需要实时数据源、以及若需要，是否配置了数据源——任何从不接触实时
 > 数据源的目的都取 `RETAINED`（留存）；`facility_context`（设施背景）在配置了
 > 数据源时，取 `RETAINED` 与所配置数据源自身声明的可验证性二者中的
@@ -132,10 +146,11 @@ naming every violation the last draft still carried.
 > 只是能力未配置"和"根本不在关注区域内"这两种情况，而不是把二者都归并进同一个
 > `default-deny`。`PolicyRequest` 由 `role`（角色）、
 > `purpose`（目的）、`resolution`（分辨率）、证据的层级与是否在 AOI 内、以及这个
-> 可验证性值构造出来（296–303 行），整个请求被写入审计日志、记为一条
-> `gateway_request`——角色、精确的 `lat`、`lon`、问题原文，都未经任何脱敏；这个事实
+> 可验证性值构造出来（326–333 行），整个请求被写入审计日志、记为一条
+> `gateway_request`（334–349 行）——角色、精确的 `lat`、`lon`、问题原文，都未经
+> 任何脱敏；这个事实
 > 会在下文"尚不能安全对外托管"一节里带来后果——只有到这一步之后，
-> `self.policy.evaluate(request)`（312 行）才会运行。
+> `self.policy.evaluate(request)`（351 行）才会运行。
 >
 > 请求本身的形状就是"二选一"，而且这项检查对同一个请求跑了两遍，而不是一遍。
 > `AskRequest.exactly_one_location`（`gateway/main.py`）在请求还没到达
@@ -155,22 +170,25 @@ naming every violation the last draft still carried.
 > 则始终是空列表，因为 `evidence_for` 从不给它赋值——一个点查询本来就只有一格可
 > 谈论，而且已经在回答正文里点名了它。
 >
-> 如果在这里被拒绝（313–322 行）会立即返回：没有发起过任何实时查询、没有把任何
-> 证据组装进提示词、模型压根没被调用过。一个已授权、但定位到的瓦片没有任何已提交
-> 事实的请求，同样会很快返回一个声明式的"无证据"响应（324–332 行）——同样在任何
-> 模型调用之前。只有越过这两道关卡之后，才会发生任何形似"获取"实时答案的事：当被
+> 如果在这里被拒绝（352–361 行）会立即返回：没有发起过任何实时查询、没有把任何
+> 证据组装进提示词、模型压根没被调用过。一个已授权、却什么证据都没落到的请求，
+> 同样会很快返回一个声明式的"无证据"响应（363–401 行）——同样在任何模型调用之前
+> ——而且这个判断现在覆盖两种不同的"落空"：一种是点查询定位到了瓦片，却没有任何
+> 已提交事实；另一种是区域选区确实触及了至少一个事件，但在这些事件里一格都没匹配
+> 到，这是不同的失败方式，理由字符串也是分别构造的，点名选区触及了哪些事件。只有
+> 越过这两道关卡之后，才会发生任何形似"获取"实时答案的事：当被
 > 分类出的目的需要一个实时数据源时，`self._lookup`（238–277 行）从原始经纬度计算出
 > 一个 H3 r9（分辨率 9 级网格）单元格，发出请求，并在把结果用于任何用途*之前*先
 > 调用 `LiveEvidenceRecorder.record`（这条记录具体装了什么、为什么这样设计，
 > `05` 章讲过）——`_lookup` 内部这个顺序是故意的，理由和 `answer` 内部那个顺序
 > 一样：一次查询不应该在被引用之前还没被记录下来。真正交给模型的是一行按类别计数
 > 的摘要，从不是数据源提供方的原始内容（还是 `05` 章）。留存事实和任何实时行会被
-> 合并成一个证据块（356–369 行），只有到这时 `self.llm(messages)`（374 行）才会
+> 合并成一个证据块（437–450 行），只有到这时 `self.llm(messages)`（455 行）才会
 > 运行，且运行在一个由 `self.max_attempts`（默认 3，217 行）限定次数的循环内。
-> 每一次尝试都会被 `check_claims`（383 行）检查，并作为一条 `gateway_post_check`
-> 审计记录写下来（384–387 行），然后要么返回一个回答（397–415 行），要么把一轮
-> 纠正对话追加进对话历史、循环重试（416–425 行）。第三次尝试仍然失败时不会放宽
-> 要求：而是在 427–435 行产生失败即拒绝的拒绝响应，`rule_id` 为
+> 每一次尝试都会被 `check_claims`（464 行）检查，并作为一条 `gateway_post_check`
+> 审计记录写下来（465–468 行），然后要么返回一个回答（469–500 行），要么把一轮
+> 纠正对话追加进对话历史、循环重试（501–510 行）。第三次尝试仍然失败时不会放宽
+> 要求：而是在 512–520 行产生失败即拒绝的拒绝响应，`rule_id` 为
 > `"claim-post-check"`，点名最后一份草稿仍然携带的每一项违规。
 
 ## The model never decides its own authorization
@@ -200,7 +218,7 @@ or gets sent back for.
 Sending a draft back is the visible half of what a failing check does; the
 audited half matters just as much. Every attempt's violations are recorded as
 a `gateway_post_check` row whether or not that attempt ultimately succeeds
-(lines 384–387), so a reader of the audit log — `02` covers what this log is
+(lines 465–468), so a reader of the audit log — `02` covers what this log is
 for in general — can see every draft the model produced for a request, not
 only the one that shipped. A third consecutive failure does not lower the
 bar: `check_claims` runs identically on attempt three, and a still-failing
@@ -230,7 +248,7 @@ successes to choose the better of.
 > 打回去重写。
 >
 > 打回草稿只是检查失败时可见的那一半，被记入审计的另一半同样重要。无论一次尝试
-> 最终是否通过，它的违规列表都会被记为一条 `gateway_post_check` 记录（384–387
+> 最终是否通过，它的违规列表都会被记为一条 `gateway_post_check` 记录（465–468
 > 行）——审计日志本身是干什么用的，`02` 章已经讲过——所以读审计日志的人能看到模型
 > 为这次请求写过的每一份草稿，而不只是最终发出去的那一份。第三次连续失败并不会
 > 放低标准：`check_claims` 在第三次尝试上和前两次跑的是同一套检查，仍然失败的
@@ -245,30 +263,38 @@ successes to choose the better of.
 `Steward.answer` returns exactly one of four shapes on every path, and each
 is a distinct dict `"type"` value produced at a distinct point in the file:
 
-1. **A cited answer** — `{"type": "answer", ...}`, returned at lines 397–415
+1. **A cited answer** — `{"type": "answer", ...}`, returned at lines 469–500
    once an attempt's draft passes `check_claims` with zero violations. Carries
    `citations`, `live_citations`, the answer's own `verifiability`, and an
-   `attribution` field only when a live citation is present (lines 410–414).
+   `attribution` field only when a live citation is present (lines 495–499).
 2. **A rule-ID refusal** — `{"type": "refusal", "rule_id": ..., "reason":
-   ...}`, produced two ways: a denied `PolicyDecision` (lines 313–322), naming
+   ...}`, produced two ways: a denied `PolicyDecision` (lines 352–361), naming
    whichever of the eight rules `03` covers actually fired, or `default-deny`
    when none did; and exhausting all three generation attempts (lines
-   427–435), naming the fixed `rule_id: "claim-post-check"` instead of a
+   512–520), naming the fixed `rule_id: "claim-post-check"` instead of a
    policy rule.
 3. **A declared no-evidence response** — `{"type": "no_evidence", "rule_id":
-   ..., "reason": ...}`, at lines 324–332: the request is authorized —
-   `rule_id` still names the allow rule that authorized it — but the located
-   tile carries zero committed facts, most often a watch-only area outside
-   any of the three deep cases.
+   ..., "reason": ...}`, at lines 363–401: the request is authorized —
+   `rule_id` still names the allow rule that authorized it — but the request
+   landed on zero evidence, which now happens two distinguishable ways: a
+   point request whose located tile carries zero committed facts, most often
+   a watch-only area outside any of the three deep cases; or an area request
+   that intersected one or more events (`in_aoi: true`) yet matched zero
+   cells inside any of them (`evidence.cells` empty) — inside the area of
+   interest is not the same as on evaluated ground, and this branch is what
+   keeps the two from being conflated. The second case builds its reason
+   string from `evidence.event_ids` rather than reusing the point-path
+   sentence, since the coverage facts that would have named those events
+   never reach the model on this path.
 4. **A declared outage**, in two code-level forms sharing one category: the
    model endpoint itself failing raises `LLMUnavailable`, caught at lines
-   374–382 and reported as `{"type": "agent_unavailable", "reason": ...}`; a
+   456–463 and reported as `{"type": "agent_unavailable", "reason": ...}`; a
    facility-context request needing a live source that either is not
    configured at all, or is configured without a `live_recorder` (lines
-   338–343 — a source without a recorder is refused just as completely as no
+   419–424 — a source without a recorder is refused just as completely as no
    source at all, because a lookup nothing attests is the exact failure this
    design exists to prevent), or raises `LiveUnavailable` when the configured
-   source is actually unreachable (lines 344–351), all return `{"type":
+   source is actually unreachable (lines 425–432), all return `{"type":
    "live_source_unavailable", "reason": ...}` via the shared `_live_
    unavailable` helper (lines 232–236).
 
@@ -279,25 +305,31 @@ type the gateway can emit ... renders as itself; nothing is papered over."
 
 > **中文。** `Steward.answer` 在每一条路径上都恰好返回四种形状之一，每一种都是
 > 在文件里某个确定位置产生的一个不同的 dict `"type"` 值：**带引用的回答**——
-> `{"type": "answer", ...}`，在 397–415 行返回，前提是某次尝试的草稿以零违规
+> `{"type": "answer", ...}`，在 469–500 行返回，前提是某次尝试的草稿以零违规
 > 通过了 `check_claims`；携带 `citations`（引证）、`live_citations`（实时引证）、
 > 这条回答自身的 `verifiability`（可验证性），以及仅在存在实时引证时才有的
-> `attribution`（署名）字段（410–414 行）。**带规则编号的拒绝**——
+> `attribution`（署名）字段（495–499 行）。**带规则编号的拒绝**——
 > `{"type": "refusal", "rule_id": ..., "reason": ...}`，有两种产生方式：一次
-> 被拒绝的 `PolicyDecision`（313–322 行），点名 `03` 章讲过的八条规则里究竟是
+> 被拒绝的 `PolicyDecision`（352–361 行），点名 `03` 章讲过的八条规则里究竟是
 > 哪一条生效了，若都没命中则是 `default-deny`；以及耗尽全部三次生成尝试
-> （427–435 行），这次点名的不是一条策略规则，而是固定的 `rule_id`
+> （512–520 行），这次点名的不是一条策略规则，而是固定的 `rule_id`
 > `"claim-post-check"`。**声明式的"无证据"响应**——`{"type": "no_evidence",
-> "rule_id": ..., "reason": ...}`，在 324–332 行：请求已被授权——`rule_id`
-> 仍然点名授权它的那条允许规则——但定位到的瓦片没有任何已提交事实，最常见于
-> 三个深度案例之外的、只有监测覆盖的区域。**声明式的系统不可用**，在代码层面有
+> "rule_id": ..., "reason": ...}`，在 363–401 行：请求已被授权——`rule_id`
+> 仍然点名授权它的那条允许规则——但请求落到了零证据上，现在这分两种可以区分的
+> 情况：一种是点查询定位到了瓦片，却没有任何已提交事实，最常见于三个深度案例之外、
+> 只有监测覆盖的区域；另一种是区域选区确实触及了一个或多个事件（`in_aoi: true`），
+> 却在这些事件里一格都没匹配到（`evidence.cells` 为空）——"在关注区域之内"和
+> "落在已评估地面上"是两回事，这一分支正是防止二者被混为一谈的地方。第二种情况的
+> 理由字符串是从 `evidence.event_ids` 现场拼出来的，而不是照搬点查询那句话，
+> 因为本会点名这些事件的"选区覆盖"事实，在这条路径上根本不会被交给模型看。
+> **声明式的系统不可用**，在代码层面有
 > 两种形式，共享同一个类别：模型端点本身失败会抛出 `LLMUnavailable`，在
-> 374–382 行被捕获，报告为 `{"type": "agent_unavailable", "reason": ...}`；
+> 456–463 行被捕获，报告为 `{"type": "agent_unavailable", "reason": ...}`；
 > 一个需要实时数据源的设施背景请求，若该数据源根本没有配置、或者配置了却没有
-> `live_recorder`（338–343 行——一个没有记录器的数据源，和压根没有数据源一样，
+> `live_recorder`（419–424 行——一个没有记录器的数据源，和压根没有数据源一样，
 > 会被彻底拒绝，因为一次没有任何东西为它作证的查询，正是这套设计存在的目的所要
 > 防止的失败），或者所配置的数据源真正不可达时抛出 `LiveUnavailable`
-> （344–351 行），三种情况都通过共享的 `_live_unavailable` 辅助函数（232–236 行）
+> （425–432 行），三种情况都通过共享的 `_live_unavailable` 辅助函数（232–236 行）
 > 返回 `{"type": "live_source_unavailable", "reason": ...}`。
 > `app/src/components/ChatPanel.jsx` 是应用自己的代码，`08` 章讲它如何把这四种形状原样
 > 渲染出来——这个文件自己的注释写的正是本章这套顺序所强制执行的同一种承诺：
@@ -441,7 +473,7 @@ stands: **CORS defaults to allow any origin.** `gateway/main.py`'s
 origin is permitted, on a `/ask` endpoint that can trigger a keyed,
 third-party lookup once a live source is ever configured. **The audit log
 records the exact question and the exact coordinates, unredacted.** The
-`gateway_request` row `Steward.answer` writes (lines 304–310) carries `lat`,
+`gateway_request` row `Steward.answer` writes (lines 334–349) carries `lat`,
 `lon`, and `question` verbatim; `AuditLog.record` in
 `src/geosteward/harness/audit.py` serializes whatever payload it is given straight to JSONL
 with no redaction step of any kind — this is a different mechanism from the
@@ -462,7 +494,7 @@ authorized-but-unconfigured. A keyed endpoint sitting behind an open-CORS,
 unthrottled, unredacted gateway is not a smaller version of the hosting
 problem; it is the same three defects with a bill attached. Consistent with
 this, the public site ships no chat backend at all:
-`app/src/components/ChatPanel.jsx` defaults to `http://localhost:8080` (line 6) and, when that
+`app/src/components/ChatPanel.jsx` defaults to `http://localhost:8080` (line 8) and, when that
 endpoint cannot be reached, renders a declared-outage message telling the
 reader to run the gateway themselves (`pip install -e .[deepcase,gateway] &&
 uvicorn gateway.main:app --port 8080`) rather than silently failing or
@@ -480,7 +512,7 @@ internet.
 > （31 行）——如果运维人员没有专门设置这个环境变量，任何来源都会被放行，而
 > `/ask` 这个端点一旦配置了实时数据源，就能触发一次带密钥的第三方查询。
 > **审计日志记录的是精确的问题原文和精确的经纬度，未经任何脱敏。** `Steward.answer`
-> 写下的 `gateway_request` 记录（304–310 行）原样携带 `lat`、`lon`、
+> 写下的 `gateway_request` 记录（334–349 行）原样携带 `lat`、`lon`、
 > `question`；`src/geosteward/harness/audit.py` 里的 `AuditLog.record` 把拿到的
 > payload 直接序列化写进 JSONL，不做任何形式的脱敏——这和 `01`、`04` 两章讲过的、
 > 针对制品清单的工作站路径脱敏（`REDACTED_PREFIX`、`redact_workstation_paths`）
@@ -496,7 +528,7 @@ internet.
 > 架在一个 CORS 开放、无限流、日志不脱敏的网关背后，并不是"托管问题"的一个简化
 > 版本，而是同样这三处缺陷外加一张账单。与此一致的是，公开网站目前完全没有配套的
 > 对话后端：`app/src/components/ChatPanel.jsx` 默认指向
-> `http://localhost:8080`（6 行），当这个端点无法访问时，会渲染一条声明式的
+> `http://localhost:8080`（8 行），当这个端点无法访问时，会渲染一条声明式的
 > 系统不可用消息，告诉读者自己在本地运行网关
 > （`pip install -e .[deepcase,gateway] && uvicorn gateway.main:app --port
 > 8080`），而不是悄悄失败，也不会转而连到某个并不存在的托管替身上。本章讲过的
