@@ -41,6 +41,7 @@ part of the design.
 | Steward Harness: outcome checks, append-only audit, policy pre-check, claim post-check | Working |
 | Publication boundary (distribution plane + CI gate) | Working |
 | Agent gateway | Working locally against any OpenAI-compatible endpoint (Ollama by default). **Not hosted** — the public demo has no chat backend, and the gateway has no auth, rate limiting, or log redaction yet, so it should not be exposed as-is |
+| Area query — shift-drag a rectangle in planner mode and ask about it | Working; split by what needs a backend. Drawing the rectangle and the header's count of evaluated tiles inside it are client-side and work in the public demo. The **answer** goes through the gateway, so it needs the row above: an answer covers only the evaluated tiles the selection actually contains, declares the rest rather than extrapolating, never merges statistics across two events, and highlights the tiles it cited |
 | Accountability for non-retainable evidence (`verifiability` axis, `license` attribute, content-free lookup record) | Working and policed in code; **never run against a live API** — there is no Google Maps Platform key, so both adapters are tested against an in-process stub and `events/live_evidence.jsonl` does not exist outside tests. [Design and implementation notes](docs/design/specs/2026-08-20-non-retainable-evidence-design.md) |
 | Live-watch source health surfaced in the map UI | Working — the badge reports mapped-of-total, features it could not map, failed sources, and product generation time from `watch_status.json` |
 | Citation click-through from an answer to its artifact | **Not done** — answers carry artifact IDs; the UI does not yet resolve them |
@@ -136,7 +137,7 @@ this README is the entry point, not the reference.
 ├── src/geosteward/      # pipeline, agents, sources, hazards, harness/, live/
 ├── events/              # eaton-2025/, milton-2024/, ian-2022/, archive/bavi-2026/
 ├── docs/                # STATUS.md, Track-A alignment, incidents/, design/
-│   ├── manual/          # the bilingual technical manual — 12 chapters + glossary
+│   ├── manual/          # the bilingual technical manual — 11 chapters + glossary
 │   └── design/          # specs (decision records) and plans (execution)
 └── tests/               # doubles as a verifiable evaluation environment
 ```
