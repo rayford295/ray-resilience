@@ -42,13 +42,17 @@ is not needed for anything in this chapter at all.
 python -m unittest discover -s tests
 ```
 
-This ran **232 tests, all green, in 5.4 seconds** against this chapter's own
-state — not the `212` `README.md`'s quick start still quotes; that number
-predates several tasks in this manual's own build and `README.md`'s own quick
-start is not this chapter's authority (see the closing note below). Expect
-two extra lines mid-run that are not a failure: `N anchor(s) checked, N
-failure(s)`, printed twice, once with one deliberately broken anchor and one
-failure, once against the whole real `docs` tree with zero. Both come from
+This ran **262 tests green with 1 skipped, in 5.0 seconds** against this
+chapter's own state. The skip is deliberate and it is the install line above
+that causes it: `AskRequestValidationTests` exercises `gateway/main.py`,
+which needs the optional `gateway` extra you do not install until the agent
+gateway section further down. Add it and the same command reports **266,
+none skipped**. A count is only meaningful next to the extras it was run
+with — that pairing is what the closing note's warning about frozen numbers
+is really about, and this one is two lines from the command it describes.
+Expect two extra lines mid-run that are not a failure: `N anchor(s) checked,
+N failure(s)`, printed twice, once with one deliberately broken anchor and
+one failure, once against the whole real `docs` tree with zero. Both come from
 `tests/test_manual_anchors.py` exercising the CLI in `scripts/manual_anchors.py`
 directly rather than importing its functions — a real rough edge, not a bug
 in your setup; `11` names it as one.
@@ -59,21 +63,28 @@ The app has its own suite, separate from the Python one:
 cd app && npm ci && npm test
 ```
 
-This ran **37 tests across 4 files, all green, in under 200 ms** —
-`app/src/lib/citations.test.js`, `coverage.test.js`, `watch.test.js`, and `data.test.js`.
+This ran **44 tests across 6 files, all green, in under 200 ms** —
+`app/src/lib/citations.test.js`, `coverage.test.js`, `watch.test.js`,
+`data.test.js`, `area.test.js`, and `clickSuppression.test.js`. It has no
+optional-extra caveat: `npm ci` installs everything it needs.
 
-> **中文。** 这一次运行是 **232 个测试全部通过，用时 5.4 秒**，是针对本章所描述的
-> 这个状态跑出来的，不是 `README.md` 快速上手一节里还写着的 `212`——那个数字比本
-> 说明书自己构建过程里的好几个任务还要老，`README.md` 的快速上手一节本身也不是本章
-> 的权威来源（见本章末尾的说明）。运行过程中会多出两行、不是失败："`N anchor(s)
+> **中文。** 这一次运行是 **262 个测试通过、1 个被跳过，用时 5.0 秒**，是针对本章
+> 所描述的这个状态跑出来的。这个跳过是刻意的，而且正是上面那条安装命令造成的：
+> `AskRequestValidationTests` 检验的是 `gateway/main.py`，它需要可选依赖组
+> `gateway`，而你要到本章后面的智能体网关一节才会装它。装上之后同一条命令报的是
+> **266 个、一个都不跳**。一个计数只有和它当时装了哪些可选依赖放在一起才有意义——
+> 本章末尾关于"把具体数字冻在文字里"的告诫，真正说的就是这种成对关系，而这一处离
+> 它所描述的那条命令只隔了两行。运行过程中会多出两行、不是失败："`N anchor(s)
 > checked, N failure(s)`"会打印两次，一次针对一个故意造出来的坏锚点、一次失败，
 > 一次针对真实的整棵 `docs` 树、零次失败。这两行都来自 `tests/test_manual_anchors.py`
 > 直接跑 `scripts/manual_anchors.py` 的命令行入口，而不是导入它的函数——这是一个真实
 > 存在的粗糙之处，不是你本地环境的问题；`11` 章把它记在名下。
 >
 > app 有一套独立于 Python 那套的测试：先 `cd app`，再 `npm ci && npm test`。这一次
-> 运行是 **4 个文件、37 个测试全部通过，用时不到 200 毫秒**——
-> `app/src/lib/citations.test.js`、`coverage.test.js`、`watch.test.js`、`data.test.js`。
+> 运行是 **6 个文件、44 个测试全部通过，用时不到 200 毫秒**——
+> `app/src/lib/citations.test.js`、`coverage.test.js`、`watch.test.js`、
+> `data.test.js`、`area.test.js`、`clickSuppression.test.js`。它没有可选依赖那一层
+> 附带条件：`npm ci` 会把它需要的东西全部装齐。
 
 ## Run the app
 

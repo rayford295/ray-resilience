@@ -295,7 +295,9 @@ Four decisions shaped it, and the reasoning is the part worth keeping:
   centre-of-the-rectangle approximation — folding a selection into a point rewrites the
   question. It fires on request shape, not on whether a live source is configured.
 
-Suite: **266 Python tests**, **44 app tests**. No new dependencies.
+Suite: **266 Python tests** (262 with `.[deepcase]` alone — four need the optional
+`gateway` extra and skip without it, which is why CI now installs it), **44 app tests**.
+No new dependencies.
 
 **Known issues, recorded not fixed — the owner's call:**
 
