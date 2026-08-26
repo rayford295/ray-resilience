@@ -47,6 +47,15 @@ main { flex: 1; min-width: 0; }
   position: absolute; z-index: 2; pointer-events: none;
   border: 2px dashed var(--accent); background: rgba(111, 211, 168, 0.18);
 }
+/* The tiles an answer drew on, once it has returned — a distinct warm color
+   from the in-progress drag box above, so "still selecting" and "this is
+   what the answer was about" never read as the same state. */
+.highlight-note {
+  position: absolute; z-index: 3; left: 0.6rem; bottom: 0.6rem; pointer-events: none;
+  background: rgba(11, 28, 48, 0.85); color: var(--warn);
+  border: 1px solid #6b5d15; border-radius: 999px;
+  padding: 0.28rem 0.75rem; font-size: 0.78rem;
+}
 
 h2 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--dim); margin: 0 0 0.4rem; }
 h3 { font-size: 0.95rem; margin: 0.7rem 0 0.3rem; }

@@ -12,7 +12,14 @@ const DEFAULT_ENDPOINT =
  * the gateway can emit — cited answer, rule-ID refusal, declared
  * no-evidence, declared outage — renders as itself; nothing is papered over.
  */
-export default function ChatPanel({ role, location, selection, onClearSelection, cells }) {
+export default function ChatPanel({
+  role,
+  location,
+  selection,
+  onClearSelection,
+  cells,
+  onAnswerCells,
+}) {
   const [endpoint, setEndpoint] = useState(DEFAULT_ENDPOINT);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -55,6 +62,11 @@ export default function ChatPanel({ role, location, selection, onClearSelection,
       };
     }
     setMessages((m) => [...m, { from: "steward", ...reply }]);
+    // A refusal, a no_evidence, or an outage carries no cells — clearing the
+    // highlight here, not just skipping the update, keeps a stale highlight
+    // from sitting on the map beside a refusal it would misleadingly seem to
+    // be about.
+    onAnswerCells?.(reply.type === "answer" ? reply.cells ?? [] : null);
     setBusy(false);
     queueMicrotask(() =>
       logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: "smooth" })
@@ -171,6 +183,9 @@ function StewardMessage({ reply }) {
           {reply.citations.length > 1 ? "s" : ""} cited
           {live.length > 0 && (
             <> · {live.length} live lookup{live.length > 1 ? "s" : ""}</>
+          )}
+          {reply.cells?.length > 0 && (
+            <> · {reply.cells.length} tile{reply.cells.length > 1 ? "s" : ""} highlighted on the map</>
           )}
           {verifiability && (
             <>

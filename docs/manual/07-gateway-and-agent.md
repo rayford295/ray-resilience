@@ -64,6 +64,28 @@ question's own text, unredacted; this fact returns with consequences in [Not
 safe to host yet](#not-safe-to-host-yet) — and only then does
 `self.policy.evaluate(request)` run (line 312).
 
+The request shape itself is either-or, and the check runs twice for the same
+request rather than once. `AskRequest.exactly_one_location`
+(`gateway/main.py`) rejects a request carrying both `lat`/`lon` and `area`,
+or neither, before it ever reaches `Steward.answer`; `answer()` repeats the
+identical
+`has_area` / `has_point` / `has_any_coord` logic on its own keyword
+arguments, so a caller that skips the HTTP layer entirely still cannot skip
+the guard. The area branch sits exactly where the point lookup used to sit
+alone, at the same point in this six-stage sequence: `self.store.
+evidence_for_area(area) if area is not None else self.store.evidence_for(lat,
+lon)` runs before `classify(question)`'s purpose ever reaches the policy
+engine, so an area-shaped request is decided by the same pre-check ordering a
+point-shaped one is — a rectangle touching none of the three deep-case AOIs
+comes back `in_aoi: false` exactly as an out-of-bounds point would, and
+`deny-outside-aoi` denies it the same way. One field only an area request
+ever populates: `EventEvidence.cells`, the H3 r9 tile IDs `evidence_for_area`
+actually matched, which rides through unchanged into the returned `answer`'s
+own `cells` field — `08` covers the app rendering those as a highlight. A
+point-shaped request's `cells` stays an empty list, because `evidence_for`
+never assigns it; a point answer has one tile to speak of and already names
+it in its own text.
+
 A refusal here (lines 313–322) returns immediately: no live lookup has been
 attempted, no evidence has been assembled into a prompt, and the model has
 not been invoked at all. An authorized request with a located tile but zero
@@ -114,6 +136,24 @@ naming every violation the last draft still carried.
 > `gateway_request`——角色、精确的 `lat`、`lon`、问题原文，都未经任何脱敏；这个事实
 > 会在下文"尚不能安全对外托管"一节里带来后果——只有到这一步之后，
 > `self.policy.evaluate(request)`（312 行）才会运行。
+>
+> 请求本身的形状就是"二选一"，而且这项检查对同一个请求跑了两遍，而不是一遍。
+> `AskRequest.exactly_one_location`（`gateway/main.py`）在请求还没到达
+> `Steward.answer` 之前，就会拒绝一个同时带着 `lat`/`lon` 和 `area`、或者二者都
+> 没带的请求；`answer()` 内部又对自己收到的关键字参数重复了一遍完全相同的
+> `has_area` / `has_point` / `has_any_coord` 判断逻辑，所以哪怕调用方绕开
+> HTTP 这一层直接调用，也躲不开这道检查。区域分支所处的位置，正是原来只有点查询时
+> 那一步所在的位置，落在这六个阶段里同样的次序上：`self.store.
+> evidence_for_area(area) if area is not None else self.store.evidence_for(lat,
+> lon)` 在 `classify(question)` 分类出的目的送进策略引擎之前就已经跑完，所以一个
+> 区域形状的请求，走的是和一个点形状的请求完全相同的预检查顺序——一个完全没有
+> 触及三个深度案例关注区域中任何一个的矩形，得到的 `in_aoi: false` 和一个界外的点
+> 得到的结果一模一样，`deny-outside-aoi` 拒绝它们的方式也一样。只有区域请求才会
+> 填充的一个字段是 `EventEvidence.cells`——`evidence_for_area` 实际匹配到的
+> H3 r9 瓦片 ID，会原样一路带进最终返回的 `answer` 响应自己的 `cells` 字段里——
+> `08` 章讲了应用如何把这些格子渲染成一个高亮图层。一个点形状请求的 `cells`
+> 则始终是空列表，因为 `evidence_for` 从不给它赋值——一个点查询本来就只有一格可
+> 谈论，而且已经在回答正文里点名了它。
 >
 > 如果在这里被拒绝（313–322 行）会立即返回：没有发起过任何实时查询、没有把任何
 > 证据组装进提示词、模型压根没被调用过。一个已授权、但定位到的瓦片没有任何已提交

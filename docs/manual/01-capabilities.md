@@ -1,10 +1,11 @@
 # 1. Capabilities
 
-Nine things this system does, in the order a reader meets them: a nationwide
+Ten things this system does, in the order a reader meets them: a nationwide
 hazard watch; three real disasters analyzed in depth; the two front-end modes
 built on top of that analysis; three surfaces that make every claim checkable;
-and the operating properties that let the whole thing run without a key or a
-live network connection. Every entry carries five fields in the same order —
+the operating properties that let the whole thing run without a key or a live
+network connection; and a way to ask about a drawn rectangle rather than only
+a point. Every entry carries five fields in the same order —
 what it does, where it is valid, what backs it, where it is implemented, and
 what it refuses — because the fifth is the point of this catalogue, not an
 afterthought to it.
@@ -15,9 +16,10 @@ enforcement mechanism exists — a policy rule, a declared-unknown string, a
 regex check — this chapter quotes or names it, so the refusal is something a
 reader can go and find rather than take on faith.
 
-> **中文。** 本章按读者遇到它们的顺序列出九项能力：全美灾害监测；三个被深入分析的
+> **中文。** 本章按读者遇到它们的顺序列出十项能力：全美灾害监测；三个被深入分析的
 > 真实灾害案例；建立在这些分析之上的两种前端模式；让每条结论都可核查的三个界面；
-> 以及让整套系统无需密钥、无需实时联网即可运行的运行特性。每一项都按同样的顺序携带
+> 让整套系统无需密钥、无需实时联网即可运行的运行特性；以及一种针对一整块画出的
+> 矩形区域、而不只是单个点提问的方式。每一项都按同样的顺序携带
 > 五个字段——**Does（做什么）**、**Valid where（在哪里有效）**、
 > **Backed by（凭什么支撑）**、**Implemented in（代码位置）**、
 > **Refuses（拒绝什么）**——因为第五项才是这份目录存在的理由，而不是聊备一格的
@@ -509,8 +511,87 @@ and runs with no keys and no services" (`README.md`) true at all.
 > 对底图瓦片采用"优先用缓存"、缓存 30 天的策略。只要应用曾经被加载过一次，此后在
 > 地图与分析功能上，任何地方都无需账号、无需 API 密钥、也无需后端服务器即可使用；
 > 唯一的例外是可选的 agent 对话功能（见能力 7），它需要本地运行一个网关服务。
-> 这项能力在运行时不拒绝任何请求——是九项能力里唯一一个"项目自身策略从不回绝"的
+> 这项能力在运行时不拒绝任何请求——是十项能力里唯一一个"项目自身策略从不回绝"的
 > 能力。但它有一个值得记录、而非被当作缺陷带过的代价：本系统没有提供需要密钥、
 > 精度更高的商业底图选项，因为"无需密钥即可运行"是这个项目主动选择要具备的特性，
 > 而不是退而求其次的将就。选择 OpenFreeMap 而非需要密钥的底图供应商，正是让
 > `README.md` 里"无需密钥、无需任何外部服务即可安装运行"这句话成立的那个取舍。
+
+### 10. Asking about a drawn area, not just a point
+
+**Does** — Answers a question about a rectangle rather than only a point:
+`/ask` accepts either `{lat, lon}` or `{area}` (a WGS84 bounding box), never
+both and never neither (`gateway/main.py`'s `AskRequest.exactly_one_location`
+validator, and the same check again inside `Steward.answer` itself). For an
+area, evidence retrieval walks every deep-case AOI the rectangle touches —
+`EvidenceStore.locate_area` — retrieves tile-level facts from each event
+independently, and returns the H3 r9 cell IDs the answer actually drew on in
+an `answer` response's `cells` field, so a client can show exactly which
+tiles the words are about rather than the whole rectangle that was drawn.
+
+**Valid where** — Wherever the rectangle intersects at least one of the three
+deep-case AOIs capability 2 describes; a rectangle spanning two AOIs draws on
+both, each kept as its own event with its own facts, never combined into one.
+
+**Backed by** — `EvidenceStore.evidence_for_area()`'s per-event loop
+(`src/geosteward/gateway/context.py`), which appends one "selection coverage"
+fact per touched event stating how many evaluated tiles matched inside that
+event's grids; and the same edge-inclusive, centre-in-box comparison
+implemented twice, independently — once inside that loop, once in
+`cellsInBox` (`app/src/lib/area.js`) — so the tile count the app shows before
+a question is asked never disagrees with the cells the answer ends up citing.
+
+**Implemented in** — `src/geosteward/gateway/context.py`,
+`src/geosteward/gateway/steward.py`, `gateway/main.py`, `app/src/lib/area.js`,
+`app/src/components/MapView.jsx`.
+
+**Refuses** — Four things. A selection touching no AOI at all: `locate_area`
+returns no events, `evidence_for_area` reports `in_aoi: false`, and
+`deny-outside-aoi` (`purpose: damage_assessment, in_aoi: false`) denies the
+request the same way it denies an out-of-AOI point (capability 2). Merged
+statistics across events: each touched event keeps its own facts and its own
+"selection coverage" count in the evidence block handed to the model — no two
+disasters' tile counts are ever folded into one number. Anything past the
+matched tiles: the "selection coverage" fact states in words that the answer
+speaks only for the tiles matched inside the selection, not the whole
+rectangle drawn — no coverage fraction of the drawn area is computed or
+implied, because doing so would need a geometry of evaluated ground this
+project does not have; `context.py`'s own comment states this reasoning
+directly rather than leaving it to be inferred. And `facility_context` asked
+over an area: a
+rectangle has no single point for a live radius lookup, and no centroid or
+other substitute stands in for one — `Steward.answer` returns a declared
+`live_source_unavailable` response before ever reaching `_lookup`, checked
+ahead of whether a live source is even configured, so the gap is never
+latent behind a capability check.
+
+> **中文。** 本项能力回答的是关于一整块矩形区域的问题，而不只是一个点：`/ask`
+> 接口接受 `{lat, lon}` 或 `{area}`（一个 WGS84 经纬度矩形框）二者之一，绝不
+> 同时给出两者，也绝不两者都不给（`gateway/main.py` 里的
+> `AskRequest.exactly_one_location` 校验器，以及 `Steward.answer` 内部再次执行
+> 的同一项检查）。对于一次区域提问，证据检索会遍历这个矩形所触及的每一个深度案例
+> 关注区域——`EvidenceStore.locate_area`——分别独立地从每个事件里检索瓦片级事实，
+> 并把这条回答实际用到的 H3 r9 格 ID 写进 `answer` 响应的 `cells` 字段，让客户端
+> 能够准确展示这些话是关于哪些瓦片的，而不是整个被画出的矩形。这项能力在这个矩形
+> 与能力 2 所述三个深度案例关注区域中至少一个相交的地方有效；一个跨越两个关注
+> 区域的矩形会同时用到两者，各自作为独立事件、携带各自的事实，绝不合并成一个。
+> 其支撑是 `EvidenceStore.evidence_for_area()`
+> （`src/geosteward/gateway/context.py`）里逐事件执行的循环，它为每一个被触及的
+> 事件追加一条"选区覆盖"事实，
+> 说明该事件网格里有多少已评估瓦片落在选区内；以及同一个"边界计入、以格心是否落在
+> 框内判断"的比较被独立实现了两次——一次在这个循环内部，一次在 `cellsInBox`
+> （`app/src/lib/area.js`）里——所以提问之前应用展示的瓦片数量，与回答最终引用的
+> 瓦片，永远不会互相矛盾。这项能力拒绝四件事。选区完全没有触及任何关注区域：
+> `locate_area` 返回空事件列表，`evidence_for_area` 报告 `in_aoi: false`，
+> `deny-outside-aoi`（匹配条件 `purpose: damage_assessment, in_aoi: false`）
+> 会以拒绝一个关注区域之外的点同样的方式拒绝这次请求（见能力 2）。跨事件合并
+> 统计：每个被触及的事件在交给模型的证据块里，都保留各自的事实和各自的"选区覆盖"
+> 计数——两场灾害的瓦片计数永远不会被并成一个数字。超出已匹配瓦片范围的结论："选区
+> 覆盖"这条事实用文字明确声明，这条回答只能代表选区内已匹配的瓦片，不代表整个被
+> 画出的矩形——不计算、也不暗示所画区域的任何覆盖比例，因为这样做需要一份本项目
+> 并不掌握的"已评估地面"几何数据；`context.py` 自己的注释直接写明了这个理由，而不是
+> 留给读者去推断。以及对一片区域提出的 `facility_context`（设施背景）
+> 问题：一个矩形没有单一的点可供实时半径查询使用，也没有用质心或其他替代物顶替这个
+> 点——`Steward.answer` 会在触达 `_lookup` 之前就返回一条声明式的
+> `live_source_unavailable`（实时数据源不可用）响应，且这项检查先于"是否配置了
+> 实时数据源"本身，所以这个能力缺口不会藏在一项能力检查的背后不被发现。

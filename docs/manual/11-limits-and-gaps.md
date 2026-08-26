@@ -171,8 +171,30 @@ and disclosure surface, not just a privacy one.
 - **PMTiles / vector tiles.** The Milton debris layer ships as one plain
   GeoJSON file, `events/milton-2024/exposure/debris_h3_r9_grid.geojson`
   (measured at 5.7 MB) — workable at this scale, not a tiled pipeline.
-- **Playwright smoke tests.** The app's automated coverage is the 37 unit
-  tests `10` runs; nothing drives a real browser against a running instance.
+- **Playwright smoke tests.** The app's automated coverage is unit tests
+  only — `10` walks through running them — 44 tests across six files as of
+  this chapter's last check, re-verifiable at any time with
+  `cd app && npm test`; nothing drives a real browser against a running
+  instance.
+- **The box-select gesture has no automated coverage.** The drag handling,
+  click suppression, and blur/`Escape` cleanup inside
+  `app/src/components/MapView.jsx`'s shift-drag effect run against a live
+  MapLibre instance and real DOM mouse, keyboard, and window-blur events; no
+  test in this repository drives any of it, because there is no browser
+  interaction harness here, and adding one would mean new dependencies —
+  `app/package.json` lists no browser-automation package or headless-browser
+  binary today, for the app or for anything else. What the gesture calls out
+  to is covered instead of the gesture itself: the box geometry,
+  `bboxFromCorners()` and `cellsInBox()` (`app/src/lib/area.js`, exercised by
+  `app/src/lib/area.test.js`), and the click-suppression boundary check,
+  pulled out into `isClickSuppressed()` (`app/src/lib/clickSuppression.js`)
+  and exercised by `app/src/lib/clickSuppression.test.js` across the
+  deadline's four states — before it, exactly at it, after it, and the
+  initial `until = 0` state, where nothing is ever suppressed. Everything
+  that decides *when* that predicate is consulted — the mouse-move tracking,
+  the `dragPan` enable/disable pairing, the `Escape`-key and window-blur
+  recovery paths — is reasoned about only in the code's own comments; no
+  test exercises any of it.
 - **Releases, `CHANGELOG`, `CITATION.cff`, contributor docs.** None exist in
   this repository as of this chapter.
 
@@ -188,8 +210,25 @@ and disclosure surface, not just a privacy one.
 > 那部分脉络。**PMTiles / 矢量瓦片**：Milton 的债砾层是以单一 GeoJSON 文件形式发布的
 > （`events/milton-2024/exposure/debris_h3_r9_grid.geojson`，实测 5.7 MB）——在目前
 > 这个规模下能用，但不是一套瓦片化流水线。**Playwright 端到端冒烟测试**：应用的自动化
-> 覆盖就是 `10` 章跑的那 37 个单元测试；没有任何测试真正驱动一个浏览器去对接一个正在
-> 运行的实例。**发布版本、`CHANGELOG`、`CITATION.cff`、贡献者文档**：截至本章写作时
+> 覆盖仅限于单元测试——`10` 章走过一遍如何运行它们——截至本章最近一次核实，一共是
+> 六个文件、44 个测试，随时可以用 `cd app && npm test` 重新核实；没有任何测试真正
+> 驱动一个浏览器去对接一个正在运行的实例。**框选手势没有任何自动化测试覆盖**：
+> `app/src/components/MapView.jsx` 里 shift-drag（按住 Shift 拖拽）逻辑内部的拖拽
+> 处理、点击抑制、失焦/`Escape` 清理，运行时依赖的是一个真实的 MapLibre 实例和真实
+> 的 DOM 鼠标、键盘、窗口失焦事件；本仓库里没有任何测试驱动过这部分逻辑，原因是
+> 这里根本没有浏览器交互测试框架，而添加一个就意味着引入新的依赖——
+> `app/package.json` 目前无论是给这个应用还是给别的任何东西，都没有列出任何浏览器
+> 自动化包或无头浏览器二进制文件。真正被覆盖的是这个手势所调用的东西，而不是手势
+> 本身：
+> 矩形几何计算——`bboxFromCorners()` 与 `cellsInBox()`（`app/src/lib/area.js`，由
+> `app/src/lib/area.test.js` 覆盖）——以及点击抑制这条边界判断，它被抽取成了
+> `isClickSuppressed()`（`app/src/lib/clickSuppression.js`），由
+> `app/src/lib/clickSuppression.test.js` 覆盖了这条截止时刻的四种状态——截止之前、
+> 恰好在截止那一刻、截止之后，以及初始的 `until = 0` 状态（此时永远不会抑制任何
+> 点击）。至于*什么时候*会去查问这条判断——鼠标移动追踪、`dragPan` 的启用/禁用
+> 配对、`Escape` 键与窗口失焦的恢复路径——这些都只在代码自己的注释里被讲清楚过；
+> 没有任何测试覆盖过它们中的任何一个。**发布版本、`CHANGELOG`、`CITATION.cff`、
+> 贡献者文档**：截至本章写作时
 > 本仓库里一个都不存在。
 
 ## Known defects and rough edges

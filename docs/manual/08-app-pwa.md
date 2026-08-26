@@ -67,6 +67,32 @@ what the layer can claim, either: the claim plane's `deny-parcel-any-role`
 rule matches on resolution alone, so no value of `t` produces an output
 finer than the H3 r9 tile the grid was built at.
 
+Planner mode also carries a draw tool the resident mode does not: shift-drag
+on the map (`app/src/components/MapView.jsx`) draws a rectangle instead of
+panning, normalised into a WGS84 bounding box by `bboxFromCorners()`
+(`app/src/lib/area.js`) and handed up as `selection` state in `App.jsx`. With
+a selection active, the chat panel's header
+(`app/src/components/ChatPanel.jsx`) switches from "about the map center" to
+"about the selected area," names the box's corners, and states a live count
+of evaluated cells
+inside it — computed by `cellsInBox()` (`app/src/lib/area.js`) against the
+same edge-inclusive, centre-in-box rule the gateway applies server-side, so
+the number shown before asking never disagrees with the tiles the answer
+ends up citing. `App.jsx` restricts the draw tool to planner mode only —
+residents' damage questions are refused whether asked by point or by area, so
+offering the affordance would just invite a refusal they cannot use — and
+drops any active selection the moment the mode switches away from planner.
+Once an `answer` response comes back, its `cells` field (capability 10 in
+`01`) is lifted into `App.jsx`'s own state and drawn by `MapView.jsx` as a
+highlight layer above whichever grid is on screen, independent of the active
+layer's own geometry — the highlight is built straight from the cell IDs via
+H3's own cell-to-boundary conversion, not filtered out of the visible grid,
+so it still renders correctly for a selection that spans an event the map
+happens not to be showing. A refusal, a declared no-evidence response, or a
+declared outage carries no `cells`, and the panel clears the highlight on
+every one of those responses rather than leaving the previous answer's tiles
+lit beside a refusal that was never about them.
+
 Both modes share three more things beneath the panel: the tile detail view
 (properties of whatever feature was last clicked on the map, plus its
 mandatory `uncertainty` field verbatim), the chat panel covered in
@@ -107,7 +133,29 @@ strategy that makes it work offline is covered:
 > 页面就会丢失这些记录；这里的任何东西都不会写入磁盘或网关。滑杆的任何取值也
 > 不会扩大图层能断言的精度：断言平面里的 `deny-parcel-any-role` 规则只看分辨率
 > 本身，所以无论 `t` 取何值，输出精度都不可能细于该网格本身构建时所用的
-> H3 r9 瓦片。两种模式在面板下方还共享三样东西：瓦片详情视图（最近一次点击的
+> H3 r9 瓦片。
+>
+> 规划者模式还带有一个居民模式没有的绘制工具：在地图上按住 Shift 拖拽
+> （`app/src/components/MapView.jsx`）会画出一个矩形而不是平移地图，由
+> `bboxFromCorners()`（`app/src/lib/area.js`）归一化成一个 WGS84 经纬度矩形框，
+> 并作为 `selection` 状态交给 `App.jsx`。一旦存在选区，对话面板的提示语
+> （`app/src/components/ChatPanel.jsx`）会从"about the map center"（关于地图
+> 中心点）切换成"about the selected area"（关于所选区域），点名矩形的两个角
+> 坐标，并实时给出选区内已评估瓦片的数量——由 `cellsInBox()`
+> （`app/src/lib/area.js`）计算，用的是与网关服务端完全相同的"边界计入、以格心
+> 是否落在框内判断"规则，所以提问之前展示的数字，永远不会和回答最终引用的瓦片
+> 对不上。`App.jsx` 把这个绘制工具限定在规划者模式内——居民无论按点还是按区提问
+> 损毁评估都会被拒绝，提供这个功能只会引来一个他们用不上的拒绝——并且一旦模式切出
+> 规划者，就会立即丢弃任何激活中的选区。一旦一条 `answer`（回答）响应返回，它的
+> `cells` 字段（`01` 章能力 10）会被提升进 `App.jsx` 自己的状态，并由
+> `MapView.jsx` 在当前屏幕上无论显示哪个网格之上，都绘制成一个高亮图层——这个
+> 高亮直接由格 ID 通过 H3 自身的"格转边界"换算构建出来，而不是从可见网格里筛选
+> 出来的，所以哪怕选区跨到了地图当前并未展示的某个事件，也依然能正确渲染。一次
+> 拒绝、一次声明式的无证据响应，或一次声明式的系统不可用响应都不携带 `cells`，
+> 面板会在这些响应的每一种上清空高亮，而不是让上一条回答的瓦片继续亮着，好像和
+> 一条与它们毫不相干的拒绝有关系似的。
+>
+> 两种模式在面板下方还共享三样东西：瓦片详情视图（最近一次点击的
 > 地图要素的属性，外加其强制性的 `uncertainty` 字段原文）、下文
 > "Citations, and how a live chip differs" 一节讲的对话面板，以及
 > "Validity badges and the lineage panel" 一节讲的溯源开关。地图本身建立在

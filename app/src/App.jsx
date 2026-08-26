@@ -31,6 +31,7 @@ export default function App() {
   const [showLineage, setShowLineage] = useState(false);
   const [mapCenter, setMapCenter] = useState(null);
   const [selection, setSelection] = useState(null); // shift-drag area bbox, or null for point mode
+  const [highlightCells, setHighlightCells] = useState(null); // last answer's cells, or null
 
   const view = VIEWS.find((v) => v.id === viewId);
   const event = EVENTS[view.event];
@@ -73,8 +74,13 @@ export default function App() {
   // The box-select affordance is planner-only (residents' damage questions are
   // refused whether point or area, so offering it would just invite a refusal
   // they can't use) — drop any active selection when leaving planner mode.
+  // The highlight is downstream of an area answer, so it goes stale the same
+  // way the selection that produced it does.
   useEffect(() => {
-    if (mode !== "planner") setSelection(null);
+    if (mode !== "planner") {
+      setSelection(null);
+      setHighlightCells(null);
+    }
   }, [mode]);
 
   const geojson = layers[viewId]?.error ? null : layers[viewId];
@@ -253,6 +259,7 @@ export default function App() {
               selection={selection}
               onClearSelection={() => setSelection(null)}
               cells={areaCells}
+              onAnswerCells={setHighlightCells}
             />
           </section>
 
@@ -280,6 +287,7 @@ export default function App() {
             onAreaSelect={mode === "planner" ? setSelection : undefined}
             live={live}
             onCenter={setMapCenter}
+            highlightCells={highlightCells}
           />
         </main>
       </div>

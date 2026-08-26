@@ -1,15 +1,34 @@
 import { useEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
+import { cellToBoundary } from "h3-js";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { EVENTS, RAMP } from "../lib/views.js";
 import { priorityScores } from "../lib/data.js";
 import { bboxFromCorners } from "../lib/area.js";
+import { isClickSuppressed } from "../lib/clickSuppression.js";
 
 const BASEMAP = "https://tiles.openfreemap.org/styles/liberty";
 const SRC = "grid";
+const HIGHLIGHT_SRC = "answer-highlight";
+const HIGHLIGHT_FILL = "answer-highlight-fill";
+const HIGHLIGHT_LINE = "answer-highlight-line";
 // Comfortably longer than the same-tick gap between mouseup and the
 // resulting synthetic click, comfortably shorter than two deliberate clicks.
 const CLICK_SUPPRESS_MS = 300;
+
+/** The cells an answer drew on, as a GeoJSON polygon per cell — independent
+ * of whichever layer is on screen, since an area answer can draw on tiles
+ * from an event the map is not currently displaying. */
+function highlightGeojson(cells) {
+  return {
+    type: "FeatureCollection",
+    features: (cells ?? []).map((cell) => ({
+      type: "Feature",
+      properties: { h3_cell: cell },
+      geometry: { type: "Polygon", coordinates: [cellToBoundary(cell, true)] },
+    })),
+  };
+}
 
 function rampExpr(input, max) {
   const stops = RAMP.flatMap((color, i) => [(max * i) / (RAMP.length - 1), color]);
@@ -44,6 +63,7 @@ export default function MapView({
   onAreaSelect,
   live,
   onCenter,
+  highlightCells,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -97,8 +117,43 @@ export default function MapView({
     map.on("click", "grid-fill", click);
     map.on("mouseenter", "grid-fill", () => (map.getCanvas().style.cursor = "pointer"));
     map.on("mouseleave", "grid-fill", () => (map.getCanvas().style.cursor = ""));
+    // Rebuilding grid-fill/grid-line re-adds them at the top of the paint
+    // order, which would bury an already-added highlight layer beneath the
+    // new grid. Re-assert the highlight's position rather than the grid's,
+    // since the highlight is what a stale layer order would visually hide.
+    if (map.getLayer(HIGHLIGHT_FILL)) map.moveLayer(HIGHLIGHT_FILL);
+    if (map.getLayer(HIGHLIGHT_LINE)) map.moveLayer(HIGHLIGHT_LINE);
     return () => map.off("click", "grid-fill", click);
   }, [ready, geojson, view, onSelect]);
+
+  // Highlight the tiles the last answer drew on, above the active view. A
+  // refusal, a no_evidence, or an outage carries no cells (App.jsx clears
+  // `highlightCells` on every reply that isn't a cited answer), so this
+  // renders an empty layer rather than leaving a stale highlight beside a
+  // refusal it would misleadingly seem to be about.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    const data = highlightGeojson(highlightCells);
+    const existing = map.getSource(HIGHLIGHT_SRC);
+    if (existing) {
+      existing.setData(data);
+      return;
+    }
+    map.addSource(HIGHLIGHT_SRC, { type: "geojson", data });
+    map.addLayer({
+      id: HIGHLIGHT_FILL,
+      type: "fill",
+      source: HIGHLIGHT_SRC,
+      paint: { "fill-color": "#e6c229", "fill-opacity": 0.22 },
+    });
+    map.addLayer({
+      id: HIGHLIGHT_LINE,
+      type: "line",
+      source: HIGHLIGHT_SRC,
+      paint: { "line-color": "#e6c229", "line-width": 2.5 },
+    });
+  }, [ready, highlightCells]);
 
   // Planner slider: recompute priority scores client-side (feature-state,
   // no layer rebuild) — the instant-response requirement from the design.
@@ -215,7 +270,7 @@ export default function MapView({
     };
 
     const onClickCapture = (e) => {
-      if (performance.now() > suppressClickUntil) return;
+      if (!isClickSuppressed(performance.now(), suppressClickUntil)) return;
       e.stopPropagation();
     };
 
@@ -252,6 +307,12 @@ export default function MapView({
     <div className="map-wrap">
       <div ref={containerRef} className="map" />
       {dragBox && <div className="select-box" style={dragBox} />}
+      {highlightCells?.length > 0 && (
+        <div className="highlight-note">
+          {highlightCells.length} tile{highlightCells.length > 1 ? "s" : ""} highlighted —
+          last answer
+        </div>
+      )}
     </div>
   );
 }
