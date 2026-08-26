@@ -1,4 +1,5 @@
 import hashlib
+import importlib.util
 import json
 import shutil
 import subprocess
@@ -437,6 +438,22 @@ class GatewayRequestAuditPayloadTests(GatewayTestCase):
 
 
 class AskRequestValidationTests(unittest.TestCase):
+    """`gateway/main.py` is the only module in the tree that needs the
+    optional `gateway` extra, and the README tells a reader to install
+    `.[deepcase]` -- so without a guard these four fail for someone who
+    followed the instructions, which reads as a broken repository rather
+    than an absent extra. CI installs `.[deepcase,gateway]` precisely so the
+    guard never fires there: a contract nothing checks is the defect this
+    project keeps finding, and skipping everywhere would be exactly that."""
+
+    @classmethod
+    def setUpClass(cls):
+        if importlib.util.find_spec("fastapi") is None:
+            raise unittest.SkipTest(
+                "the 'gateway' extra is not installed; "
+                "run `pip install -e .[deepcase,gateway]` to exercise gateway/main.py"
+            )
+
     def test_area_only_validates(self):
         from gateway.main import AskRequest
         r = AskRequest(role="planner", question="how bad?", area=EATON_BOX)

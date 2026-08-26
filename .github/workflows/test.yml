@@ -13,7 +13,10 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install package
-        run: python -m pip install -e .[deepcase]
+        # The gateway extra is here so gateway/main.py's request contract is
+        # actually exercised: it is the only module needing it, and until the
+        # area query landed nothing in CI imported it at all.
+        run: python -m pip install -e .[deepcase,gateway]
       - name: Run unit tests
         run: python -m unittest discover -s tests
       - name: Publication allowlist matches the distribution policy
