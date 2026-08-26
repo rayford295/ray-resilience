@@ -1,39 +1,38 @@
 {
- "generated_utc": "20260826T132948Z",
+ "generated_utc": "20260826T155614Z",
  "sources": {
   "usgs": {
    "status": "ok",
-   "events": 233,
+   "events": 231,
    "skipped": 0,
    "dropped_bounds": 0,
    "error": null
   },
   "nws": {
    "status": "ok",
-   "events": 22,
-   "skipped": 190,
+   "events": 14,
+   "skipped": 185,
+   "dropped_bounds": 0,
+   "error": null
+  },
+  "nhc": {
+   "status": "ok",
+   "events": 2,
+   "skipped": 0,
    "dropped_bounds": 0,
    "error": null
   },
   "nifc": {
    "status": "ok",
-   "events": 650,
+   "events": 657,
    "skipped": 0,
    "dropped_bounds": 0,
    "error": null
-  },
-  "nhc": {
-   "status": "failed",
-   "events": 0,
-   "skipped": 0,
-   "dropped_bounds": 0,
-   "error": "<urlopen error [Errno 104] Connection reset by peer>"
   }
  },
  "declared_unknowns": [
   "Watch data supports monitoring only; no damage or exposure conclusions.",
-  "Sources currently failed (no data, not zero hazards): nhc.",
-  "190 feature(s) not displayed (no mappable geometry or malformed); 0 dropped by bounds checks."
+  "185 feature(s) not displayed (no mappable geometry or malformed); 0 dropped by bounds checks."
  ],
  "checks": [
   {
