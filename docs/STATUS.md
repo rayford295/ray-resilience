@@ -1,6 +1,6 @@
 # GeoSteward v1 — Project Status
 
-**Updated:** 2026-08-24 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-08-26 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -262,6 +262,63 @@ derived from it accountable?**
   [`02`](manual/02-harness-outcome-audit.md) and
   [`06`](manual/06-data-and-evidence.md). The contradiction this previously left under
   Known limitations no longer applies and has been removed from that section.
+
+### Area query — draw a rectangle and ask about it (2026-08-26)
+
+Design: [`design/specs/2026-08-25-area-query-design.md`](design/specs/2026-08-25-area-query-design.md) ·
+plan: [`design/plans/2026-08-25-area-query.md`](design/plans/2026-08-25-area-query.md).
+Prompted by `terraquery.ai` and a Frankfurt chat-with-your-map demonstration; only the second
+was a fit, because TerraQuery is an ingestion product whose answers cite nothing.
+
+A planner shift-drags a rectangle, sees how many evaluated tiles it contains **before** asking,
+and gets an answer that covers the selection and says which parts of it were evaluated.
+`EvidenceStore.evidence_for_area` walks the committed grids across every intersecting event;
+`Steward.answer` takes a point **or** an area, exactly one, and returns the tiles it used;
+`/ask` enforces the same either-or at the transport. The app highlights what comes back.
+
+Four decisions shaped it, and the reasoning is the part worth keeping:
+
+- **Coverage fraction stays out of the claim plane.** A match key like `aoi_coverage_at_least`
+  would invent a threshold somebody has to defend, and would confuse the two questions the
+  planes exist to separate. `in_aoi` stays boolean and widens to "intersects";
+  [`policy_v1.yaml`](../src/geosteward/harness/policy_v1.yaml), `PolicyRequest`, and
+  `_KNOWN_MATCH_KEYS` are untouched. A selection intersecting nothing is still refused by
+  `deny-outside-aoi` — no new rule was needed, and two policy-matrix rows now pin that.
+- **Enumerate the grids, not the polygon.** `h3.polygon_to_cells` over a continent-sized
+  rectangle would force a maximum-selection-area cap. Iterating the 6,875 committed cells and
+  testing each centre removes the problem instead of capping it, and the bound is structural:
+  a selection cannot match more cells than exist. A subset property test pins it.
+- **An area sees every intersecting event, and statistics are never merged across them.**
+  Eaton damage and Milton debris measure different things; one count spanning both would be a
+  fabricated quantity.
+- **A `facility_context` question over an area is a declared capability gap**, not a
+  centre-of-the-rectangle approximation — folding a selection into a point rewrites the
+  question. It fires on request shape, not on whether a live source is configured.
+
+Suite: **266 Python tests**, **44 app tests**. No new dependencies.
+
+**Known issues, recorded not fixed — the owner's call:**
+
+- **Planner mode now eagerly fetches every view on first paint.** This is the fix for a real
+  defect: the header's pre-ask count and the answer's cells walked different input sets, so a
+  Milton-AOI selection showed **0** evaluated tiles and returned **5,618**. Loading every view
+  closes it, mirroring what resident mode already did for the same reason. The cost went
+  unnamed in the prose that argued for it: the default page load goes from roughly 312 KB to
+  **~6.7 MB**, dominated by the 5.5 MB Pinellas debris grid. Planner is the default mode, so
+  this is every first visit. The PMTiles item under Known limitations is the standing fix.
+- **[`11-limits-and-gaps.md`](manual/11-limits-and-gaps.md) names the wrong class**: it
+  attributes a path to `EventContext.evidence_for()`, but `evidence_for` belongs to
+  `EvidenceStore` ([`context.py`](../src/geosteward/gateway/context.py)); `EventContext` is a
+  different class in [`agents/base.py`](../src/geosteward/agents/base.py). Pre-existing.
+- **The box-select gesture has no automated coverage.** The drag handling, click suppression,
+  and blur cleanup are reasoned, not tested — this repository has no browser interaction
+  harness and adding one means dependencies the design forbids. What *is* covered: the
+  geometry in [`area.js`](../app/src/lib/area.js) and the suppression predicate in
+  [`clickSuppression.js`](../app/src/lib/clickSuppression.js).
+- **The audit row now carries the drawn area unredacted**, alongside the exact coordinates and
+  verbatim question it already stored. Deliberate: redacting one field of a row already
+  recorded here as unsafe to host would make it inconsistent without making it safe. It makes
+  the gateway-hardening item below slightly larger.
 
 ## 🔜 Next (not blocked)
 
