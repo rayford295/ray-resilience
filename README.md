@@ -25,6 +25,21 @@ the evaluated areas, and an address the app cannot yet resolve is told that inst
 of being guessed at. Competence is conditional on place, and saying where it ends is
 part of the design.
 
+**Where this is going.** The accountability machinery — the two policy planes, the
+`verifiability` axis, the hashed append-only manifests — is general; only the coverage
+is not. The project's core direction is a **global, cross-region, cross-hazard,
+multi-source disaster catalog**: an event-level accountability record that lets the
+agent answer *is this place covered, by what evidence, to what depth, and may I keep
+it* for somewhere it has never been asked about before. The field does not lack
+disaster data — EM-DAT, GDACS, Copernicus EMS, ReliefWeb and the national agencies all
+hold it. What none of them carries in the row itself is the thing this project already
+computes per artifact: at what resolution a statement is authorised, whether a reader
+can check the support, and whether the evidence is ours to redistribute. That gap is
+the design in
+[`docs/design/specs/2026-08-30-global-disaster-catalog-design.md`](docs/design/specs/2026-08-30-global-disaster-catalog-design.md).
+**It is a design, not a capability:** the schema is global from the first row, the
+coverage today is four events.
+
 > 🚧 **Rework in progress.** This repository (formerly *DisasterPilot*) is being
 > rebuilt around the design in
 > [`docs/design/specs/2026-08-19-geosteward-design.md`](docs/design/specs/2026-08-19-geosteward-design.md).
@@ -37,6 +52,7 @@ part of the design.
 |---|---|
 | Tier-1 nationwide watch (USGS, NWS, NHC, NIFC) | Working; refreshed hourly by CI, per-source failures declared not hidden |
 | Three deep cases (Eaton 2025, Milton 2024, Ian 2022) | Working; tile-level exposure, SVI, and cross-view evidence |
+| Global disaster catalog (cross-region, cross-hazard, multi-source) | **Design only** — record schema, hazard vocabulary, region/time conventions, and the source-conflict rule are fixed in [the spec](docs/design/specs/2026-08-30-global-disaster-catalog-design.md); no `catalog.jsonl`, no schema file, and no global connector exists yet. The seed set is the four events already in `events/` — three US deep cases plus the archived non-US Bavi case |
 | PWA, installable, offline-caching | Working |
 | Steward Harness: outcome checks, append-only audit, policy pre-check, claim post-check | Working |
 | Publication boundary (distribution plane + CI gate) | Working |
@@ -105,6 +121,14 @@ append-only raw snapshots under `live/snapshots/`.
 Events with only Tier-1 data get an explicit "monitoring data only — no damage
 conclusions supported." Declared unknowns are rendered with the same prominence as
 findings.
+
+The three tiers describe **evidence depth**. A global catalog needs a second, orthogonal
+axis — `verifiability` (`retained` > `re-derivable` > `cited-only`, weakest-link) — because
+an event can be well-established and still rest on evidence no reader can check and this
+repository may not keep. The two axes together type a bare global registration honestly
+(`evidence_tier: 1`, `verifiability: cited-only`) without inventing a field for it, and they
+keep a restrictively-licensed high-quality product from borrowing the standing of the hashed
+evidence beside it.
 
 ## Quick start
 

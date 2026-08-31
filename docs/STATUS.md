@@ -1,6 +1,6 @@
 # GeoSteward v1 — Project Status
 
-**Updated:** 2026-08-26 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-08-30 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -322,6 +322,24 @@ No new dependencies.
   recorded here as unsafe to host would make it inconsistent without making it safe. It makes
   the gateway-hardening item below slightly larger.
 
+### Design record — global disaster catalog (2026-08-30)
+- **Documentation only, no code.**
+  [`design/specs/2026-08-30-global-disaster-catalog-design.md`](design/specs/2026-08-30-global-disaster-catalog-design.md)
+  fixes the record schema, hazard vocabulary, region/time conventions, and source-conflict
+  rule for a **global, cross-region, cross-hazard, multi-source** catalog over `events/` —
+  positioned as the project's core direction rather than a sixth plan, because the harness
+  is already general and only the coverage is not.
+- Three decisions: identity carries **GLIDE** as a foreign key with `null` where none is
+  assigned (never a constructed one); `evidence_tier` and `verifiability` stay **orthogonal**,
+  so a bare global registration types honestly as `tier 1 / cited-only` with no new field;
+  and the catalog **never merges conflicting source values** — each is kept with its source,
+  and the row either names the policy rule that selected one or declares the conflict.
+- Consumes the claim plane without amending it: `policy_v1.yaml`, `PolicyRequest`, and
+  `_KNOWN_MATCH_KEYS` are untouched. Publication would require a new `event_catalog`
+  artifact class, which does not exist yet — so the catalog is fail-closed by absence.
+- **Structure global, coverage four events.** Stated in the spec's §3 and in the README's
+  what-works table.
+
 ## 🔜 Next (not blocked)
 
 - Surface `watch_status.json` in the map UI: source health, staleness, and the skipped
@@ -335,6 +353,13 @@ No new dependencies.
   is the same class of billing-abuse surface, and the live-evidence audit record has to
   be written server-side.
 - Persist planner adjustments past the session.
+- **Catalog S0** (from the 2026-08-30 spec): a JSON Schema, a catalog build script under
+  `scripts/`, a generated catalog JSONL under `events/` covering the four existing events,
+  the `event_catalog` distribution class in `src/geosteward/harness/policy_v1.yaml`, and a
+  test asserting a row's `claims_supported` never exceeds what its `evidence_tier` and
+  `verifiability` permit. Not started; sequenced after 09-04. (Paths deliberately unwritten
+  here: `scripts/manual_anchors.py` resolves every path-shaped span against disk, and a
+  roadmap entry must not be spelled like a file that already exists.)
 - Deferred from that design and worth doing for the 2026-11-03 demo rather than the
   paper: **Routes API for budget-constrained inspection routing** (the README lists
   inspection routing as not implemented, and Track A asks for decision relevance), plus
