@@ -135,7 +135,7 @@ evidence beside it.
 ```bash
 git clone https://github.com/rayford295/GeoSteward && cd GeoSteward
 python -m pip install -e ".[deepcase]"
-python -m unittest discover -s tests          # 262 pass, 1 skips without [gateway]
+python -m unittest discover -s tests          # 266 pass, 1 skips without [gateway]
 
 python scripts/publication_boundary.py plan   # which artifacts may be published
 cd app && npm ci && npm test && npm run dev   # PWA at http://localhost:5173

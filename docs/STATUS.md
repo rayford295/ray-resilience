@@ -352,6 +352,13 @@ No new dependencies.
 - Verified with headless-browser screenshots at desktop and phone widths, both modes,
   with the geocoder mocked to exercise the dossier; 44 JS tests and the production
   build pass unchanged.
+- The landing page followed: teal is now the action/identity color on both surfaces,
+  with amber reserved for caution semantics (matching what amber means inside the app),
+  a Launch-the-app button in the nav that survives phone widths, and two content
+  corrections — the pipeline section no longer describes its five stages as five
+  *agents* (the same misdescription that retired the old architecture doc), and the
+  stale test count is corrected to the verified 266 in both the landing page and the
+  README quickstart.
 
 ## 🔜 Next (not blocked)
 
