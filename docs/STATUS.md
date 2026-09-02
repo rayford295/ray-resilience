@@ -1,6 +1,6 @@
 # GeoSteward v1 — Project Status
 
-**Updated:** 2026-08-30 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-09-01 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -366,6 +366,38 @@ No new dependencies.
   **Air Quality** (wildfire smoke, Eaton) and **Elevation** (surge and flood, Ian and
   Milton) — two real hazard dimensions currently absent, both fitting the `re-derivable`
   regime once it exists.
+
+### Competitive review: TDIS portal (2026-09-01)
+
+Reviewed the [Texas Disaster Information System portal](https://portal.cloud.tdis.io/)
+(Texas A&M IDRT / GLO), an operational state platform whose "Impact Forecast" tab is the
+closest fielded analogue to our watch layer: flash-flood outlook on H3 hexes, an ordinal
+1–5 severity scale, per-run population-exposure estimates, and a county roll-up that
+lists only the top two severity classes. Candidate adoptions, all sequenced **after
+09-04** and to be re-prioritized against the GMP items above for the 11-03 demo:
+
+1. **Population exposure on the watch layer** — the most decision-relevant gap. Join
+   hazard footprints against a static population layer (Kontur Population is CC BY and
+   already H3-gridded) at watch-product build time, with declared uncertainty. Fits
+   `verifiability: retained`; no key, no service. Ranks **ahead of** the GMP demo items:
+   it answers Track A's vulnerability question directly.
+2. **A forward-looking outlook layer** — NOAA WPC Excessive Rainfall Outlook is public
+   domain and keyless: a Tier-1 connector away from a flash-flood outlook of our own,
+   carrying the declared boundary "outlook only — no damage conclusions supported."
+   Cheaper first step: render NWS *warnings/watches* (already collected) visually
+   distinct from hazards *occurring now*.
+3. **High-severity roll-up list** — a client-side "most affected counties/areas now"
+   ranking from the existing watch product, with name/FIPS search. TDIS lists only the
+   top severities to reduce noise; the same editing choice applies here.
+4. **Plain-language ordinal severity labels** in resident mode ("potentially high"
+   rather than a bare index), consistent with declared-unknowns phrasing.
+5. **Critical-facility exposure context** — HIFLD open data (hospitals, schools) as a
+   static, retainable exposure layer inside deep-case AOIs; context, not live status.
+
+Deliberately **not** adopted: real-time infrastructure status (the open data does not
+exist; TDIS relies on commercial outage feeds, incompatible with the keyless/verifiable
+positioning), and a hosted conversational assistant (TDIS AI confirms the auth + quota
+pattern, which is exactly the gateway hardening this roadmap already sequences first).
 
 ## 🚧 Blocked / needs the project owner
 
