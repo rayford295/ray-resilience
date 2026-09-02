@@ -14,14 +14,16 @@ import json
 from pathlib import Path
 
 from geosteward.harness.audit import AuditLog
-from geosteward.sources import nhc, nifc, nws, usgs
+from geosteward.sources import nhc, nifc, nws, usgs, wpc_ero
 from geosteward.sources.watchbase import save_snapshot, utc_stamp
 from geosteward.watch import build_watch_product
 
 CONNECTORS = [usgs, nws, nhc, nifc]
 
 
-def run_watch(connectors: list, live_root: Path, timeout: int = 30) -> dict:
+def run_watch(
+    connectors: list, live_root: Path, timeout: int = 30, outlook_connector=None
+) -> dict:
     live_root.mkdir(parents=True, exist_ok=True)
     audit = AuditLog(live_root / "audit_log.jsonl")
     parsed: dict = {}
@@ -47,6 +49,38 @@ def run_watch(connectors: list, live_root: Path, timeout: int = 30) -> dict:
     collection, status = build_watch_product(parsed, failures, generated)
     products = live_root / "products"
     products.mkdir(parents=True, exist_ok=True)
+
+    # The Day-1 flash-flood outlook is a separate product with its own status
+    # key: polygons and a forecast, so it never mixes into the point watch —
+    # and its failure is recorded exactly like a watch source's, never fatal.
+    if outlook_connector is not None:
+        try:
+            payload = outlook_connector.fetch(timeout=timeout)
+            snapshot = save_snapshot(live_root, outlook_connector.SOURCE, payload)
+            outlook_features, outlook_skipped = outlook_connector.parse(payload)
+            outlook = outlook_connector.build_flood_outlook(
+                outlook_features, outlook_skipped, generated
+            )
+            (products / "flood_outlook.geojson").write_text(
+                json.dumps(outlook, ensure_ascii=False) + "\n", encoding="utf-8"
+            )
+            status["flood_outlook"] = {
+                "status": "ok", "areas": len(outlook_features),
+                "skipped": outlook_skipped, "error": None,
+            }
+            audit.record(
+                "source_ok", f"watch.{outlook_connector.SOURCE}",
+                payload={"snapshot": snapshot.name, "areas": len(outlook_features),
+                         "skipped": outlook_skipped},
+            )
+        except Exception as error:  # noqa: BLE001 - recorded, never swallowed
+            status["flood_outlook"] = {
+                "status": "failed", "areas": 0, "skipped": 0, "error": str(error),
+            }
+            audit.record(
+                "source_failed", f"watch.{outlook_connector.SOURCE}",
+                payload={"error": str(error)},
+            )
     (products / "national_watch.geojson").write_text(
         json.dumps(collection, ensure_ascii=False) + "\n", encoding="utf-8"
     )
@@ -70,7 +104,7 @@ def main() -> None:
     parser.add_argument("--live-root", type=Path, default=Path("live"))
     parser.add_argument("--timeout", type=int, default=30)
     args = parser.parse_args()
-    status = run_watch(CONNECTORS, args.live_root, timeout=args.timeout)
+    status = run_watch(CONNECTORS, args.live_root, timeout=args.timeout, outlook_connector=wpc_ero)
     ok = sum(1 for row in status["sources"].values() if row["status"] == "ok")
     print(f"watch run complete: {ok}/{len(status['sources'])} sources ok")
 

@@ -213,6 +213,15 @@ export function fetchWatchStatus() {
   });
 }
 
+/** Day-1 flash-flood outlook (WPC ERO) — a forecast product, published
+ * beside the watch layer but never merged into it. Unavailable degrades to
+ * "not shown", exactly like the watch. */
+export function fetchFloodOutlook() {
+  return fetchFirst("flood_outlook.geojson", (data) => {
+    if (!Array.isArray(data.features)) throw new Error("not a FeatureCollection");
+  });
+}
+
 /** Audit trail for HITL adjustments. The gateway exists, but nothing posts
  * these to it yet, so they live for the length of the session and say so —
  * "audited" would overstate a record that a page reload discards. */

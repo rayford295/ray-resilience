@@ -3,6 +3,7 @@ import maplibregl from "maplibre-gl";
 import { cellToBoundary } from "h3-js";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { EVENTS, RAMP } from "../lib/views.js";
+import { HAZARD_TYPES, outlookColor } from "../lib/outlook.js";
 import { rampMax } from "../lib/legend.js";
 import { priorityScores } from "../lib/data.js";
 import { bboxFromCorners } from "../lib/area.js";
@@ -15,6 +16,9 @@ const HIGHLIGHT_FILL = "answer-highlight-fill";
 const HIGHLIGHT_LINE = "answer-highlight-line";
 const FACILITY_SRC = "facilities";
 const FACILITY_LAYER = "facility-points";
+const OUTLOOK_SRC = "flood-outlook";
+const OUTLOOK_FILL = "flood-outlook-fill";
+const OUTLOOK_LINE = "flood-outlook-line";
 // Comfortably longer than the same-tick gap between mouseup and the
 // resulting synthetic click, comfortably shorter than two deliberate clicks.
 const CLICK_SUPPRESS_MS = 300;
@@ -62,6 +66,9 @@ export default function MapView({
   highlightCells,
   facilities,
   showFacilities,
+  floodOutlook,
+  showOutlook,
+  liveTypes,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -119,8 +126,10 @@ export default function MapView({
     // order, which would bury an already-added highlight layer beneath the
     // new grid. Re-assert the highlight's position rather than the grid's,
     // since the highlight is what a stale layer order would visually hide.
-    if (map.getLayer(HIGHLIGHT_FILL)) map.moveLayer(HIGHLIGHT_FILL);
-    if (map.getLayer(HIGHLIGHT_LINE)) map.moveLayer(HIGHLIGHT_LINE);
+    for (const id of [OUTLOOK_FILL, OUTLOOK_LINE, FACILITY_LAYER, "live-points",
+                      HIGHLIGHT_FILL, HIGHLIGHT_LINE]) {
+      if (map.getLayer(id)) map.moveLayer(id);
+    }
     return () => map.off("click", "grid-fill", click);
   }, [ready, geojson, view, onSelect]);
 
@@ -234,16 +243,24 @@ export default function MapView({
     if (!map || !ready || live?.status !== "ok") return;
     if (map.getSource("live")) return;
     map.addSource("live", { type: "geojson", data: live.data });
+    const hazardColor = [
+      "match", ["get", "hazard"],
+      ...HAZARD_TYPES.flatMap((t) => [t.key, t.color]),
+      "#64748b",
+    ];
     map.addLayer({
       id: "live-points",
       type: "circle",
       source: "live",
       paint: {
         "circle-radius": ["interpolate", ["linear"], ["zoom"], 3, 2.5, 10, 6],
-        "circle-color": "#6fd3a8",
-        "circle-opacity": 0.75,
-        "circle-stroke-color": "#0b1c30",
-        "circle-stroke-width": 0.8,
+        // An NWS alert is an advisory about what may come; the other three
+        // sources report what is happening. Hollow vs filled keeps the two
+        // claims visually distinct at any zoom.
+        "circle-color": hazardColor,
+        "circle-opacity": ["case", ["==", ["get", "hazard"], "weather_alert"], 0.12, 0.8],
+        "circle-stroke-color": hazardColor,
+        "circle-stroke-width": ["case", ["==", ["get", "hazard"], "weather_alert"], 2, 0.8],
       },
     });
     map.on("click", "live-points", (e) => {
@@ -251,6 +268,61 @@ export default function MapView({
       if (f) onSelect(f.properties);
     });
   }, [ready, live, onSelect]);
+
+  // Hazard-type filter for the live layer: chips in the sidebar toggle
+  // which sources' points render; an empty selection is an explicit choice
+  // and renders nothing rather than everything.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready || !map.getLayer("live-points")) return;
+    const active = Object.entries(liveTypes ?? {})
+      .filter(([, on]) => on)
+      .map(([k]) => k);
+    map.setFilter("live-points", ["in", ["get", "hazard"], ["literal", active]]);
+  }, [ready, liveTypes, live]);
+
+  // Day-1 flash-flood outlook polygons, under every point layer. Absent or
+  // unreadable product -> empty source, never a stale or invented layer.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    const data =
+      floodOutlook?.status === "ok"
+        ? floodOutlook.data
+        : { type: "FeatureCollection", features: [] };
+    const src = map.getSource(OUTLOOK_SRC);
+    if (src) {
+      src.setData(data);
+    } else {
+      map.addSource(OUTLOOK_SRC, { type: "geojson", data });
+      const levelColor = [
+        "match", ["get", "level"],
+        1, outlookColor(1), 2, outlookColor(2), 3, outlookColor(3), 4, outlookColor(4),
+        "#64748b",
+      ];
+      map.addLayer({
+        id: OUTLOOK_FILL,
+        type: "fill",
+        source: OUTLOOK_SRC,
+        paint: { "fill-color": levelColor, "fill-opacity": 0.18 },
+      });
+      map.addLayer({
+        id: OUTLOOK_LINE,
+        type: "line",
+        source: OUTLOOK_SRC,
+        paint: { "line-color": levelColor, "line-width": 1.2, "line-opacity": 0.7 },
+      });
+      // Points stay above the forecast wash.
+      for (const id of [FACILITY_LAYER, "live-points", HIGHLIGHT_FILL, HIGHLIGHT_LINE]) {
+        if (map.getLayer(id)) map.moveLayer(id);
+      }
+    }
+    for (const id of [OUTLOOK_FILL, OUTLOOK_LINE]) {
+      if (map.getLayer(id)) {
+        map.setLayoutProperty(id, "visibility", showOutlook ? "visible" : "none");
+      }
+    }
+  }, [ready, floodOutlook, showOutlook]);
 
   useEffect(() => {
     const map = mapRef.current;

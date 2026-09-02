@@ -50,7 +50,8 @@ coverage today is four events.
 
 | | State |
 |---|---|
-| Tier-1 nationwide watch (USGS, NWS, NHC, NIFC) | Working; refreshed hourly by CI, per-source failures declared not hidden |
+| Tier-1 nationwide watch (USGS, NWS, NHC, NIFC) | Working; refreshed hourly by CI, per-source failures declared not hidden; rendered per hazard type with NWS advisories drawn hollow — an advisory about what may come never looks like an occurrence |
+| Day-1 flash-flood outlook (NOAA/WPC Excessive Rainfall Outlook) | Working — the project's first forward-looking layer, kept as a separate product from the watch (polygons and a forecast, never merged into the point layer); carries its own declared boundary: outlook only, not observed flooding, no damage conclusions, does not replace NWS warnings |
 | Three deep cases (Eaton 2025, Milton 2024, Ian 2022) | Working; tile-level exposure, SVI, and cross-view evidence |
 | Global disaster catalog (cross-region, cross-hazard, multi-source) | **Design only** — record schema, hazard vocabulary, region/time conventions, and the source-conflict rule are fixed in [the spec](docs/design/specs/2026-08-30-global-disaster-catalog-design.md); no `catalog.jsonl`, no schema file, and no global connector exists yet. The seed set is the four events already in `events/` — three US deep cases plus the archived non-US Bavi case |
 | PWA, installable, offline-caching | Working |

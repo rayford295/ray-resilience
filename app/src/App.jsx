@@ -10,10 +10,12 @@ import WelcomeCard, { EXAMPLE_ADDRESS } from "./components/WelcomeCard.jsx";
 import { LiveWatchBadge, TierBadge, ValidityBadge } from "./components/Badges.jsx";
 import { EVENTS, VIEWS } from "./lib/views.js";
 import { buildCoverageIndex } from "./lib/coverage.js";
+import { HAZARD_TYPES, hazardCounts, outlookSummary } from "./lib/outlook.js";
 import { resolveCitation } from "./lib/citations.js";
 import { watchSummary } from "./lib/watch.js";
 import {
   artifactLineage,
+  fetchFloodOutlook,
   fetchJson,
   fetchJsonl,
   fetchLiveWatch,
@@ -55,6 +57,13 @@ export default function App() {
   const [citeManifests, setCiteManifests] = useState({});
   const [facilityLayers, setFacilityLayers] = useState({}); // eventId -> geojson | {error}
   const [showFacilities, setShowFacilities] = useState(true);
+  const [floodOutlook, setFloodOutlook] = useState(null);
+  const [showOutlook, setShowOutlook] = useState(true);
+  // Which live hazard types render; all on by default — hiding a type is a
+  // reader's choice, never the map's.
+  const [liveTypes, setLiveTypes] = useState(() =>
+    Object.fromEntries(HAZARD_TYPES.map((t) => [t.key, true]))
+  );
 
   const view = VIEWS.find((v) => v.id === viewId);
   const event = EVENTS[view.event];
@@ -64,6 +73,7 @@ export default function App() {
   useEffect(() => {
     fetchLiveWatch().then(setLive);
     fetchWatchStatus().then(setWatchStatus);
+    fetchFloodOutlook().then(setFloodOutlook);
   }, []);
 
   // Lazy-load the active view's artifact; failures render as failures.
@@ -227,6 +237,12 @@ export default function App() {
     }
   }, [mode, view.event, facilityLayers]);
 
+  const liveCounts = useMemo(() => hazardCounts(live), [live]);
+  const outlook = useMemo(
+    () => (floodOutlook?.status === "ok" ? outlookSummary(floodOutlook.data) : null),
+    [floodOutlook]
+  );
+
   const onSelect = useCallback((props) => setSelected(props), []);
 
   const onCite = useCallback((token) => setCitation(token), []);
@@ -351,6 +367,58 @@ export default function App() {
                 OSM presence, not operational status · © OpenStreetMap contributors (ODbL)
               </p>
             )}
+            {liveCounts && (
+              <div className="live-filter">
+                <h2>Live hazards</h2>
+                <div className="chips">
+                  {HAZARD_TYPES.map((t) => (
+                    <button
+                      key={t.key}
+                      type="button"
+                      className={`chip hazard ${liveTypes[t.key] ? "on" : ""}`}
+                      style={liveTypes[t.key] ? { borderColor: t.color, color: t.color } : undefined}
+                      onClick={() =>
+                        setLiveTypes((s) => ({ ...s, [t.key]: !s[t.key] }))
+                      }
+                    >
+                      <span className="dot" style={{ background: t.color, opacity: t.occurring ? 1 : 0.25, border: `2px solid ${t.color}` }} />
+                      {t.label} ({liveCounts.get(t.key) ?? 0})
+                    </button>
+                  ))}
+                </div>
+                <p className="hint">
+                  filled = occurring now · hollow = NWS advisory of what may come
+                </p>
+              </div>
+            )}
+            {outlook && (
+              <div className="outlook-block">
+                <label className="facility-toggle">
+                  <input
+                    type="checkbox"
+                    checked={showOutlook}
+                    onChange={(e) => setShowOutlook(e.target.checked)}
+                  />
+                  <span>flash-flood outlook — Day 1 (WPC ERO)</span>
+                </label>
+                {showOutlook && (
+                  <>
+                    <div className="chips">
+                      {outlook.levels.map((l) => (
+                        <span key={l.level} className="chip" style={{ borderColor: l.color, color: l.color }}>
+                          {l.label} ({l.count})
+                        </span>
+                      ))}
+                    </div>
+                    <p className="hint">
+                      outlook only — not observed flooding, no damage conclusions;
+                      does not replace NWS warnings
+                      {outlook.issueTime && <> · issued {outlook.issueTime}Z</>}
+                    </p>
+                  </>
+                )}
+              </div>
+            )}
             {layers[viewId]?.error && (
               <p className="fail-text">layer failed to load: {layers[viewId].error}</p>
             )}
@@ -459,6 +527,9 @@ export default function App() {
             highlightCells={highlightCells}
             facilities={facilityLayers[view.event]}
             showFacilities={showFacilities}
+            floodOutlook={floodOutlook}
+            showOutlook={showOutlook}
+            liveTypes={liveTypes}
           />
         </main>
       </div>

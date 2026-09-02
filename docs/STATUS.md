@@ -379,6 +379,29 @@ No new dependencies.
   row. App tests 44 → **57** (legend scale, citation resolution); verified end-to-end
   in a headless browser with the gateway and geocoder mocked.
 
+### Typed live watch + Day-1 flash-flood outlook (2026-09-02)
+- The remaining implementable halves of the TDIS review's tabs, prompted by the owner's
+  screenshot walkthrough. Live Weather: the watch layer now renders **per hazard type**
+  (color per source class) with one distinction that outranks color — **NWS alerts are
+  drawn hollow**, because an advisory about what may come must never look like an
+  occurrence; sidebar chips filter types and carry live counts. Infrastructure Status
+  and the HSI severity index remain non-adoptions (commercial/partner data; recorded).
+- **WPC Excessive Rainfall Outlook connector** (`wpc_ero` — NOAA public domain, keyless,
+  same fail-closed ArcGIS pattern as NIFC): Day-1 polygons with the four WPC ordinal
+  categories; an unrecognized outlook label is skipped and counted, never guessed into
+  a level. Published as a **separate product**, `flood_outlook.geojson`, beside the
+  watch — polygons and a forecast, never merged into the point layer, so neither
+  borrows the other's meaning. Status lands under its own `flood_outlook` key; a
+  failure is recorded and never blocks the watch (injectable connector keeps the
+  orchestration tests hermetic). The product carries its own declared boundary:
+  outlook only, not observed flooding, no damage conclusions, does not replace NWS
+  warnings — and the app renders that sentence beside the legend.
+- App: outlook polygons under every point layer (amber → fuchsia by level; not
+  starting at green, which under a flood outlook would read as "safe"), a toggle with
+  per-level counts and the issue time, and the live-hazards chip row. Verified against
+  the real products end-to-end: 864 live features, 7 Day-1 ERO areas including the
+  Texas Moderate. Python tests 288 → **295**; app tests 61 → **67**.
+
 ### Gateway hardening (2026-09-02)
 - The four items the roadmap gated hosting on, landed as code (hosting itself still
   waits on blocked items 1–2):

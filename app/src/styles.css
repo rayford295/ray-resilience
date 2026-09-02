@@ -260,3 +260,12 @@ button.cite.live:hover { border-color: var(--warn); }
 .attribution-line { margin-top: 0.2rem; }
 .facility-near { margin-top: 0.6rem; }
 .facility-near ul { padding-left: 1.1rem; margin: 0.3rem 0; font-size: 0.84rem; line-height: 1.5; }
+
+.live-filter { margin-top: 0.6rem; }
+.live-filter h2 { margin-bottom: 0.3rem; }
+.chip .dot {
+  display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+  margin-right: 0.35rem; vertical-align: -1px; box-sizing: border-box;
+}
+.chip.hazard:not(.on) { opacity: 0.45; }
+.outlook-block { margin-top: 0.6rem; border-top: 1px solid var(--line); padding-top: 0.55rem; }
