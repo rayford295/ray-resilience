@@ -4,9 +4,13 @@ import PlannerPanel from "./components/PlannerPanel.jsx";
 import ResidentPanel from "./components/ResidentPanel.jsx";
 import LineagePanel from "./components/LineagePanel.jsx";
 import ChatPanel from "./components/ChatPanel.jsx";
+import CitationCard from "./components/CitationCard.jsx";
+import Legend from "./components/Legend.jsx";
+import WelcomeCard, { EXAMPLE_ADDRESS } from "./components/WelcomeCard.jsx";
 import { LiveWatchBadge, TierBadge, ValidityBadge } from "./components/Badges.jsx";
 import { EVENTS, VIEWS } from "./lib/views.js";
 import { buildCoverageIndex } from "./lib/coverage.js";
+import { resolveCitation } from "./lib/citations.js";
 import { watchSummary } from "./lib/watch.js";
 import {
   artifactLineage,
@@ -16,6 +20,16 @@ import {
   fetchWatchStatus,
   stageValidity,
 } from "./lib/data.js";
+
+const WELCOME_KEY = "gs-welcome-dismissed";
+
+function welcomeDismissed() {
+  try {
+    return localStorage.getItem(WELCOME_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
 
 export default function App() {
   const [mode, setMode] = useState("planner");
@@ -32,6 +46,13 @@ export default function App() {
   const [mapCenter, setMapCenter] = useState(null);
   const [selection, setSelection] = useState(null); // shift-drag area bbox, or null for point mode
   const [highlightCells, setHighlightCells] = useState(null); // last answer's cells, or null
+  const [showWelcome, setShowWelcome] = useState(() => !welcomeDismissed());
+  const [exampleAddress, setExampleAddress] = useState(null);
+  const [citation, setCitation] = useState(null); // clicked citation token, or null
+  // Manifests fetched only to resolve citations — kept OUT of `meta`, whose
+  // entries must stay the full manifest+audit+record triple (a partial entry
+  // there would short-circuit the lineage/validity fetch and empty both panels).
+  const [citeManifests, setCiteManifests] = useState({});
 
   const view = VIEWS.find((v) => v.id === viewId);
   const event = EVENTS[view.event];
@@ -181,6 +202,45 @@ export default function App() {
 
   const onSelect = useCallback((props) => setSelected(props), []);
 
+  const onCite = useCallback((token) => setCitation(token), []);
+
+  // A citation can point into any event, not just the one on screen, so an
+  // open citation backfills every event's manifest not already fetched.
+  // `null` marks a fetch in flight; a failed fetch settles to [] so the card
+  // reports "searched and absent" rather than spinning forever.
+  useEffect(() => {
+    if (!citation) return;
+    for (const [eventId, ev] of Object.entries(EVENTS)) {
+      if (citeManifests[eventId] !== undefined) continue;
+      setCiteManifests((c) => ({ ...c, [eventId]: c[eventId] ?? null }));
+      fetchJsonl(ev.manifest)
+        .then((rows) => setCiteManifests((c) => ({ ...c, [eventId]: rows })))
+        .catch(() => setCiteManifests((c) => ({ ...c, [eventId]: [] })));
+    }
+  }, [citation]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const citationResolution = useMemo(() => {
+    if (!citation) return null;
+    const manifests = { ...citeManifests };
+    for (const [eventId, m] of Object.entries(meta)) {
+      if (m?.manifest) manifests[eventId] = m.manifest;
+    }
+    return resolveCitation(manifests, citation.id);
+  }, [citation, citeManifests, meta]);
+  const citationLoading =
+    citation != null &&
+    citationResolution?.status !== "found" &&
+    Object.values(citeManifests).some((rows) => rows === null);
+
+  const dismissWelcome = () => {
+    setShowWelcome(false);
+    try {
+      localStorage.setItem(WELCOME_KEY, "1");
+    } catch {
+      // best-effort: a browser without storage just sees the card next visit
+    }
+  };
+
   return (
     <div className="shell">
       <header>
@@ -190,6 +250,15 @@ export default function App() {
         </div>
         <div className="header-right">
           <LiveWatchBadge summary={live && watchStatus ? watchSummary(live, watchStatus) : null} />
+          <button
+            type="button"
+            className="help-btn"
+            title="show the getting-started card"
+            aria-label="show the getting-started card"
+            onClick={() => setShowWelcome(true)}
+          >
+            ?
+          </button>
           <nav className="mode-switch" role="tablist">
             {["resident", "planner"].map((m) => (
               <button
@@ -208,6 +277,15 @@ export default function App() {
 
       <div className="body">
         <aside>
+          {showWelcome && (
+            <WelcomeCard
+              onTryAddress={() => {
+                setMode("resident");
+                setExampleAddress(EXAMPLE_ADDRESS);
+              }}
+              onDismiss={dismissWelcome}
+            />
+          )}
           <section>
             <h2>Layer</h2>
             <select value={viewId} onChange={(e) => setViewId(e.target.value)}>
@@ -225,7 +303,7 @@ export default function App() {
               <TierBadge tier={view.tier} />
               <ValidityBadge validity={validity} />
             </div>
-            {view.legend && <p className="hint">{view.legend}</p>}
+            <Legend view={view} geojson={geojson} />
             {layers[viewId]?.error && (
               <p className="fail-text">layer failed to load: {layers[viewId].error}</p>
             )}
@@ -241,7 +319,13 @@ export default function App() {
                 onFlyToCell={setFlyTarget}
               />
             ) : (
-              <ResidentPanel coverage={coverage} records={records} onFly={setFlyTarget} />
+              <ResidentPanel
+                coverage={coverage}
+                records={records}
+                onFly={setFlyTarget}
+                exampleQuery={exampleAddress}
+                onExampleConsumed={() => setExampleAddress(null)}
+              />
             )}
           </section>
 
@@ -284,8 +368,20 @@ export default function App() {
               onClearSelection={() => setSelection(null)}
               cells={areaCells}
               onAnswerCells={setHighlightCells}
+              onCite={onCite}
             />
           </section>
+
+          {citation && (
+            <section>
+              <CitationCard
+                citation={citation}
+                resolution={citationResolution}
+                loading={citationLoading}
+                onClose={() => setCitation(null)}
+              />
+            </section>
+          )}
 
           <section>
             <button className="linkish" onClick={() => setShowLineage((s) => !s)}>

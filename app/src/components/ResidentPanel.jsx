@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { latLngToCell } from "h3-js";
 import { geocodeAddress } from "../lib/data.js";
 import { eventsOf, lookupCoverage, mergedProps } from "../lib/coverage.js";
@@ -13,16 +13,15 @@ import { eventsOf, lookupCoverage, mergedProps } from "../lib/coverage.js";
  * is an admission, and collapsing the second into the first is how a resident
  * gets told their covered address was never evaluated.
  */
-export default function ResidentPanel({ coverage, records, onFly }) {
+export default function ResidentPanel({ coverage, records, onFly, exampleQuery, onExampleConsumed }) {
   const [query, setQuery] = useState("");
   const [state, setState] = useState({ status: "idle" });
 
-  async function search(e) {
-    e.preventDefault();
-    if (!query.trim()) return;
+  async function doSearch(q) {
+    if (!q.trim()) return;
     setState({ status: "loading" });
     try {
-      const hit = await geocodeAddress(query.trim());
+      const hit = await geocodeAddress(q.trim());
       if (!hit) {
         setState({ status: "nomatch" });
         return;
@@ -33,6 +32,21 @@ export default function ResidentPanel({ coverage, records, onFly }) {
       setState({ status: "error", error: String(err) });
     }
   }
+
+  function search(e) {
+    e.preventDefault();
+    doSearch(query);
+  }
+
+  // The welcome card's one-click example: fill the box and run the same
+  // lookup the user would have run — nothing bespoke, so what the example
+  // shows is exactly what a typed address gets.
+  useEffect(() => {
+    if (!exampleQuery) return;
+    setQuery(exampleQuery);
+    doSearch(exampleQuery);
+    onExampleConsumed?.();
+  }, [exampleQuery]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Resolved at render, not at submit: layers still arriving upgrade an
   // "unknown" answer to a real one without the resident searching again.

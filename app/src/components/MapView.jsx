@@ -3,6 +3,7 @@ import maplibregl from "maplibre-gl";
 import { cellToBoundary } from "h3-js";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { EVENTS, RAMP } from "../lib/views.js";
+import { rampMax } from "../lib/legend.js";
 import { priorityScores } from "../lib/data.js";
 import { bboxFromCorners } from "../lib/area.js";
 import { isClickSuppressed } from "../lib/clickSuppression.js";
@@ -35,11 +36,8 @@ function rampExpr(input, max) {
   return ["interpolate", ["linear"], input, ...stops];
 }
 
-function percentile(values, p) {
-  const sorted = [...values].sort((a, b) => a - b);
-  return sorted.length ? sorted[Math.floor((sorted.length - 1) * p)] : 1;
-}
-
+// The ramp's upper bound comes from lib/legend.js so the Legend component
+// labels exactly the scale this paint uses — one code path, no drift.
 function paintFor(view, geojson) {
   if (view.kind === "priority") {
     return rampExpr(["coalesce", ["feature-state", "score"], 0], 1);
@@ -47,11 +45,7 @@ function paintFor(view, geojson) {
   if (view.kind === "rate") {
     return rampExpr(["coalesce", ["get", view.metric], 0], 1);
   }
-  const values = geojson.features
-    .map((f) => f.properties[view.metric])
-    .filter((v) => typeof v === "number");
-  const max = view.kind === "volume" ? percentile(values, 0.95) : Math.max(...values, 1);
-  return rampExpr(["coalesce", ["get", view.metric], 0], max);
+  return rampExpr(["coalesce", ["get", view.metric], 0], rampMax(view, geojson));
 }
 
 export default function MapView({

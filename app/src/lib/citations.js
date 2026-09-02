@@ -71,3 +71,35 @@ export function verifiabilityLabel(verifiability) {
       return null;
   }
 }
+
+/**
+ * Resolve a citation id against every loaded manifest.
+ *
+ * A citation is the first 12 hex characters of an artifact's sha256; a
+ * manifest row is the artifact's provenance record. Returns every match
+ * across events (an artifact rebuilt over time appears once per manifest
+ * row, newest last — append-only history is the feature, so all rows are
+ * returned rather than silently keeping one).
+ *
+ * The two empty outcomes are different claims and are kept distinct:
+ * `{ status: "no_manifests" }` means nothing was loaded to search, while
+ * `{ status: "not_found" }` means every loaded manifest was searched and
+ * the id is in none of them.
+ */
+export function resolveCitation(manifestsByEvent, id) {
+  const entries = Object.entries(manifestsByEvent ?? {}).filter(
+    ([, rows]) => Array.isArray(rows) && rows.length > 0
+  );
+  if (!entries.length) return { status: "no_manifests", matches: [] };
+  const matches = [];
+  for (const [eventId, rows] of entries) {
+    for (const row of rows) {
+      if (typeof row?.sha256 === "string" && row.sha256.startsWith(id)) {
+        matches.push({ eventId, row });
+      }
+    }
+  }
+  return matches.length
+    ? { status: "found", matches }
+    : { status: "not_found", matches: [] };
+}

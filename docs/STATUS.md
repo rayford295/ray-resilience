@@ -360,6 +360,25 @@ No new dependencies.
   stale test count is corrected to the verified 266 in both the landing page and the
   README quickstart.
 
+### App usability pass (2026-09-01)
+- Three additions aimed at a first-time visitor, requested by the owner after the
+  TDIS review: a **getting-started card** (three one-click steps; dismissal remembered
+  per browser, best-effort, reopenable from a header "?"), **example chips** (an example
+  address that runs the exact lookup a typed address gets, and role-appropriate example
+  questions that fill the ask box), and a **color legend** for the active layer.
+- The legend's scale is computed by the same function the map paint now imports
+  (a shared lib module), so the legend cannot drift from the fill — a volume layer's
+  p95 cap is labeled "N+" and says it is capped.
+- **Citation click-through** (previously listed as not done in the README): citation
+  chips in an answer are now buttons; clicking one resolves the 12-hex id against every
+  event's manifest (backfilled on demand, kept out of the lineage panel's `meta` triple)
+  and shows the artifact's provenance — path, event, agent, timestamp, full sha256,
+  inputs, notes, with every manifest row shown for a rebuilt artifact. The two empty
+  outcomes stay distinct claims: "no manifests loaded" vs "searched and absent"; a live
+  citation explains the content-free lookup record instead of pretending to a manifest
+  row. App tests 44 → **57** (legend scale, citation resolution); verified end-to-end
+  in a headless browser with the gateway and geocoder mocked.
+
 ### OASIS short-paper draft (2026-09-01)
 - **First full draft committed** under `paper/` (ACM `sigconf`, builds locally with the
   repository's TinyTeX via the bundled build script; currently 3 pages + references).

@@ -12,6 +12,11 @@ const DEFAULT_ENDPOINT =
  * the gateway can emit — cited answer, rule-ID refusal, declared
  * no-evidence, declared outage — renders as itself; nothing is papered over.
  */
+const EXAMPLE_QUESTIONS = {
+  resident: ["How safe is this area?", "What evidence covers this address?"],
+  planner: ["How severe is the damage here?", "Which tiles should be prioritized?"],
+};
+
 export default function ChatPanel({
   role,
   location,
@@ -19,6 +24,7 @@ export default function ChatPanel({
   onClearSelection,
   cells,
   onAnswerCells,
+  onCite,
 }) {
   const [endpoint, setEndpoint] = useState(DEFAULT_ENDPOINT);
   const [messages, setMessages] = useState([]);
@@ -109,12 +115,21 @@ export default function ChatPanel({
         . The steward answers only from committed artifacts — refusals cite the
         rule that triggered them.
       </p>
+      {messages.length === 0 && !busy && (
+        <div className="chips">
+          {(EXAMPLE_QUESTIONS[role] ?? []).map((q) => (
+            <button key={q} type="button" className="chip" onClick={() => setInput(q)}>
+              {q}
+            </button>
+          ))}
+        </div>
+      )}
       <div className="chat-log" ref={logRef}>
         {messages.map((m, i) =>
           m.from === "user" ? (
             <div key={i} className="msg user">{m.question}</div>
           ) : (
-            <StewardMessage key={i} reply={m} />
+            <StewardMessage key={i} reply={m} onCite={onCite} />
           )
         )}
         {busy && (
@@ -148,41 +163,49 @@ export default function ChatPanel({
   );
 }
 
-function renderCitations(text) {
+function renderCitations(text, onCite) {
   return parseCitations(text).map((token, i) => {
     if (token.kind === "artifact") {
       return (
-        <span key={i} className="cite" title="cites a committed, hashed artifact">
+        <button
+          key={i}
+          type="button"
+          className="cite"
+          title="cites a committed, hashed artifact — click to see its provenance"
+          onClick={() => onCite?.(token)}
+        >
           {token.id.slice(0, 6)}
-        </span>
+        </button>
       );
     }
     if (token.kind === "live") {
       return (
-        <span
+        <button
           key={i}
+          type="button"
           className="cite live"
           title={
             "cites a live third-party lookup — re-derivable, not retained. " +
             "No copy of the response is kept; the recorded request and its " +
-            "response hash are in events/live_evidence.jsonl."
+            "response hash are in events/live_evidence.jsonl. Click for details."
           }
+          onClick={() => onCite?.(token)}
         >
           ↻ {token.id.slice(0, 6)}
-        </span>
+        </button>
       );
     }
     return <span key={i}>{token.value}</span>;
   });
 }
 
-function StewardMessage({ reply }) {
+function StewardMessage({ reply, onCite }) {
   if (reply.type === "answer") {
     const live = reply.live_citations ?? [];
     const verifiability = verifiabilityLabel(reply.verifiability);
     return (
       <div className="msg steward">
-        <div>{renderCitations(reply.text)}</div>
+        <div>{renderCitations(reply.text, onCite)}</div>
         <div className="msg-meta">
           rule {reply.rule_id} · {reply.event} · {reply.citations.length} artifact
           {reply.citations.length > 1 ? "s" : ""} cited

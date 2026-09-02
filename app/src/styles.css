@@ -214,3 +214,40 @@ footer { font-size: 0.72rem; padding-top: 0.2rem; }
      instead of running off the right edge of the screen. */
   header .badge { white-space: normal; line-height: 1.35; }
 }
+
+/* ---- Getting-started card, legend, citation chips (2026-09-01) ---- */
+
+.help-btn {
+  width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--panel-2); color: var(--dim); font-weight: 700; cursor: pointer;
+}
+.help-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+aside > section.welcome { border-left: 4px solid var(--accent); }
+.welcome-steps { padding-left: 1.15rem; margin: 0 0 0.5rem; }
+.welcome-steps li { font-size: 0.85rem; line-height: 1.5; margin: 0 0 0.55rem; }
+
+.legend { margin-top: 0.55rem; }
+.legend-bar {
+  height: 8px; border-radius: 4px; border: 1px solid var(--line);
+}
+.legend-labels {
+  display: flex; justify-content: space-between; gap: 0.5rem;
+  font-size: 0.72rem; color: var(--dim); margin-top: 0.2rem;
+  font-variant-numeric: tabular-nums;
+}
+.legend-unit { text-align: center; flex: 1; min-width: 0; }
+.legend-note { margin-top: 0.3rem; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+.chip {
+  border: 1px solid var(--line); background: var(--panel-2); color: var(--text);
+  border-radius: 999px; padding: 0.28rem 0.7rem; font-size: 0.78rem; cursor: pointer;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Citation chips are buttons now (click-through to provenance); keep the
+   chip look, add the affordance. */
+button.cite { cursor: pointer; }
+button.cite:hover { border-color: var(--accent); }
+button.cite.live:hover { border-color: var(--warn); }
