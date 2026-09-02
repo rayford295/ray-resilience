@@ -66,6 +66,17 @@ export const VIEWS = [
     tier: 3,
   },
   {
+    id: "eaton-population",
+    event: "eaton-2025",
+    label: "Population (2020 Census)",
+    url: "/events/eaton-2025/exposure/population_h3_r9.geojson",
+    stage: "exposure.population",
+    kind: "count",
+    metric: "pop_2020",
+    legend: "residents per tile — 2020 blocks, centroid-allocated (pre-event)",
+    tier: 2,
+  },
+  {
     id: "milton-evidence",
     event: "milton-2024",
     label: "Street-view evidence (Horseshoe Beach)",
@@ -90,6 +101,17 @@ export const VIEWS = [
     focus: { center: [-82.72, 27.9], zoom: 10.5 },
   },
   {
+    id: "milton-population",
+    event: "milton-2024",
+    label: "Population (2020 Census)",
+    url: "/events/milton-2024/exposure/population_h3_r9.geojson",
+    stage: "exposure.population",
+    kind: "count",
+    metric: "pop_2020",
+    legend: "residents per tile — 2020 blocks, centroid-allocated (pre-event)",
+    tier: 2,
+  },
+  {
     id: "ian-evidence",
     event: "ian-2022",
     label: "Cross-view evidence (Fort Myers)",
@@ -110,6 +132,17 @@ export const VIEWS = [
     metric: "n_samples",
     legend: "unlabeled sample positions per tile — where evidence exists, not what it concludes",
     tier: 3,
+  },
+  {
+    id: "ian-population",
+    event: "ian-2022",
+    label: "Population (2020 Census)",
+    url: "/events/ian-2022/exposure/population_h3_r9.geojson",
+    stage: "exposure.population",
+    kind: "count",
+    metric: "pop_2020",
+    legend: "residents per tile — 2020 blocks, centroid-allocated (pre-event)",
+    tier: 2,
   },
 ];
 

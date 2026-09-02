@@ -1,0 +1,8758 @@
+{
+ "type": "FeatureCollection",
+ "crs_declared": "EPSG:4326",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.00380496184336,
+       26.483525157193945
+      ],
+      [
+       -82.00249109532948,
+       26.484820051167112
+      ],
+      [
+       -82.00297788306904,
+       26.486576397541562
+      ],
+      [
+       -82.00477860283458,
+       26.487037873740956
+      ],
+      [
+       -82.00609251016171,
+       26.485742957744687
+      ],
+      [
+       -82.00560565691013,
+       26.483986587572545
+      ],
+      [
+       -82.00380496184336,
+       26.483525157193945
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413042d3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.02808867842592,
+       26.4685325316416
+      ],
+      [
+       -82.02677482577218,
+       26.469827993437164
+      ],
+      [
+       -82.02726208774776,
+       26.471584492872662
+      ],
+      [
+       -82.02906326788403,
+       26.47204555426504
+      ],
+      [
+       -82.03037716130515,
+       26.470750070408805
+      ],
+      [
+       -82.02988983382271,
+       26.468993547221253
+      ],
+      [
+       -82.02808867842592,
+       26.4685325316416
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441304447ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03056823951896,
+       26.45937642705334
+      ],
+      [
+       -82.02925447670455,
+       26.46067201277947
+      ],
+      [
+       -82.0297417543096,
+       26.46242849871337
+      ],
+      [
+       -82.03154286022668,
+       26.462889422664443
+      ],
+      [
+       -82.03285666379834,
+       26.461593814865335
+      ],
+      [
+       -82.03236932069576,
+       26.459837305188543
+      ],
+      [
+       -82.03056823951896,
+       26.45937642705334
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413044c3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03285666379834,
+       26.461593814865335
+      ],
+      [
+       -82.03154286022668,
+       26.462889422664443
+      ],
+      [
+       -82.03203019812365,
+       26.464645936854623
+      ],
+      [
+       -82.03383140509357,
+       26.465106866986854
+      ],
+      [
+       -82.03514524942078,
+       26.463811237115284
+      ],
+      [
+       -82.03465784602258,
+       26.46205469918436
+      ],
+      [
+       -82.03285666379834,
+       26.461593814865335
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413044c7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03368309431922,
+       26.458541656092688
+      ],
+      [
+       -82.03236932069576,
+       26.459837305188543
+      ],
+      [
+       -82.03285666379834,
+       26.461593814865335
+      ],
+      [
+       -82.03465784602258,
+       26.46205469918436
+      ],
+      [
+       -82.03597166039819,
+       26.460759028011914
+      ],
+      [
+       -82.03548425179748,
+       26.459002494597442
+      ],
+      [
+       -82.03368309431922,
+       26.458541656092688
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413044d7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.00691953430224,
+       26.482691630194424
+      ],
+      [
+       -82.00560565691013,
+       26.483986587572545
+      ],
+      [
+       -82.00609251016171,
+       26.485742957744687
+      ],
+      [
+       -82.0078933063181,
+       26.486204394331576
+      ],
+      [
+       -82.00920722451833,
+       26.484909414926737
+      ],
+      [
+       -82.00872030575415,
+       26.483153020962124
+      ],
+      [
+       -82.00691953430224,
+       26.482691630194424
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130466fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.97183641490322,
+       26.494905130041733
+      ],
+      [
+       -81.97052262768675,
+       26.49619934847547
+      ],
+      [
+       -81.97100875507131,
+       26.49795546098638
+      ],
+      [
+       -81.97280873518147,
+       26.49841737891674
+      ],
+      [
+       -81.97412256326542,
+       26.49712313850014
+      ],
+      [
+       -81.97363637037182,
+       26.495367002136447
+      ],
+      [
+       -81.97183641490322,
+       26.494905130041733
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130502fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.95563947935022,
+       26.490747782055468
+      ],
+      [
+       -81.95432584771042,
+       26.492041744304345
+      ],
+      [
+       -81.9548115979109,
+       26.49379770041562
+      ],
+      [
+       -81.95661104524731,
+       26.4942597181533
+      ],
+      [
+       -81.95792471777487,
+       26.492965733930905
+      ],
+      [
+       -81.95743890207837,
+       26.491209753944773
+      ],
+      [
+       -81.95563947935022,
+       26.490747782055468
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413052a3ffff",
+    "pop_2020": 206,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.95792471777487,
+       26.492965733930905
+      ],
+      [
+       -81.95661104524731,
+       26.4942597181533
+      ],
+      [
+       -81.95709685566227,
+       26.496015702543495
+      ],
+      [
+       -81.9588964041046,
+       26.49647772658443
+      ],
+      [
+       -81.96021011751827,
+       26.495183720389026
+      ],
+      [
+       -81.95972424160357,
+       26.49342771212612
+      ],
+      [
+       -81.95792471777487,
+       26.492965733930905
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413052a7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.95252650147594,
+       26.491579732878353
+      ],
+      [
+       -81.95121288083945,
+       26.492873631714115
+      ],
+      [
+       -81.95169856554458,
+       26.494629563945335
+      ],
+      [
+       -81.95349793638162,
+       26.495091621221274
+      ],
+      [
+       -81.9548115979109,
+       26.49379770041562
+      ],
+      [
+       -81.95432584771042,
+       26.492041744304345
+      ],
+      [
+       -81.95252650147594,
+       26.491579732878353
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413052abffff",
+    "pop_2020": 19,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.9548115979109,
+       26.49379770041562
+      ],
+      [
+       -81.95349793638162,
+       26.495091621221274
+      ],
+      [
+       -81.95398368129746,
+       26.496847581733565
+      ],
+      [
+       -81.95578315324181,
+       26.497309645318534
+      ],
+      [
+       -81.95709685566227,
+       26.496015702543495
+      ],
+      [
+       -81.95661104524731,
+       26.4942597181533
+      ],
+      [
+       -81.9548115979109,
+       26.49379770041562
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413052afffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.95378505543776,
+       26.508215206277736
+      ],
+      [
+       -81.9524712334377,
+       26.509508983176058
+      ],
+      [
+       -81.95295701742864,
+       26.51126498943963
+      ],
+      [
+       -81.95475668893499,
+       26.511727242693212
+      ],
+      [
+       -81.95607055183811,
+       26.51043344384242
+      ],
+      [
+       -81.95558470233188,
+       26.508677413690926
+      ],
+      [
+       -81.95378505543776,
+       26.508215206277736
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130534fffff",
+    "pop_2020": 100,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.96872274868663,
+       26.49573743681422
+      ],
+      [
+       -81.96740897243532,
+       26.497031591827035
+      ],
+      [
+       -81.96789503431145,
+       26.498787680479943
+      ],
+      [
+       -81.96969493794744,
+       26.49924963797845
+      ],
+      [
+       -81.97100875507131,
+       26.49795546098638
+      ],
+      [
+       -81.97052262768675,
+       26.49619934847547
+      ],
+      [
+       -81.96872274868663,
+       26.49573743681422
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441305393ffff",
+    "pop_2020": 18,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.99446176814844,
+       26.486025120134837
+      ],
+      [
+       -81.99314793431527,
+       26.487319823886853
+      ],
+      [
+       -81.99363452552238,
+       26.48907609883701
+      ],
+      [
+       -81.99543501607296,
+       26.489537693848863
+      ],
+      [
+       -81.99674889073465,
+       26.48824296808458
+      ],
+      [
+       -81.99626223401734,
+       26.486486669321117
+      ],
+      [
+       -81.99446176814844,
+       26.486025120134837
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441305523ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.9913475448598,
+       26.486858235106364
+      ],
+      [
+       -81.99003372193555,
+       26.488152875449273
+      ],
+      [
+       -81.99052024763306,
+       26.489909126580912
+      ],
+      [
+       -81.99232066176452,
+       26.490370761188565
+      ],
+      [
+       -81.99363452552238,
+       26.48907609883701
+      ],
+      [
+       -81.99314793431527,
+       26.487319823886853
+      ],
+      [
+       -81.9913475448598,
+       26.486858235106364
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130552bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.99217480691684,
+       26.48380730666324
+      ],
+      [
+       -81.99086101391387,
+       26.485101988402494
+      ],
+      [
+       -81.9913475448598,
+       26.486858235106364
+      ],
+      [
+       -81.99314793431527,
+       26.487319823886853
+      ],
+      [
+       -81.99446176814844,
+       26.486025120134837
+      ],
+      [
+       -81.99397517169602,
+       26.484268849615493
+      ],
+      [
+       -81.99217480691684,
+       26.48380730666324
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130553bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.01491539171846,
+       26.559798274084443
+      ],
+      [
+       -82.0136005667561,
+       26.56109270475717
+      ],
+      [
+       -82.01408792907125,
+       26.562849433894833
+      ],
+      [
+       -82.01589018195476,
+       26.563311756185676
+      ],
+      [
+       -82.01720504776932,
+       26.562017303565
+      ],
+      [
+       -82.01671761984827,
+       26.56026055060183
+      ],
+      [
+       -82.01491539171846,
+       26.559798274084443
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441305923ffff",
+    "pop_2020": 46,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.98000158628061,
+       26.560626277775
+      ],
+      [
+       -81.97868698216317,
+       26.56192007094067
+      ],
+      [
+       -81.97917357306011,
+       26.56367650124922
+      ],
+      [
+       -81.98097483366382,
+       26.56413916227137
+      ],
+      [
+       -81.98228947868444,
+       26.562845347188805
+      ],
+      [
+       -81.98180282219823,
+       26.561088893001386
+      ],
+      [
+       -81.98000158628061,
+       26.560626277775
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441305b4fffff",
+    "pop_2020": 169,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.05567810916165,
+       26.441319774972637
+      ],
+      [
+       -82.05436439069159,
+       26.442615969252127
+      ],
+      [
+       -82.05485214752856,
+       26.444372603051722
+      ],
+      [
+       -82.05665368832486,
+       26.444833066266366
+      ],
+      [
+       -82.0579674475029,
+       26.443536849872256
+      ],
+      [
+       -82.05747962517675,
+       26.441780192378527
+      ],
+      [
+       -82.05567810916165,
+       26.441319774972637
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306047ffff",
+    "pop_2020": 36,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.05650403565365,
+       26.43826691024943
+      ],
+      [
+       -82.05519034714318,
+       26.439563145753834
+      ],
+      [
+       -82.05567810916165,
+       26.441319774972637
+      ],
+      [
+       -82.05747962517675,
+       26.441780192378527
+      ],
+      [
+       -82.05879335439182,
+       26.440483934755395
+      ],
+      [
+       -82.05830552688731,
+       26.438727281845505
+      ],
+      [
+       -82.05650403565365,
+       26.43826691024943
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306057ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.06750128703494,
+       26.42965245815893
+      ],
+      [
+       -82.06618762625234,
+       26.430948966072474
+      ],
+      [
+       -82.06667559507179,
+       26.432705657139493
+      ],
+      [
+       -82.06847729015549,
+       26.43316586396268
+      ],
+      [
+       -82.0697909916206,
+       26.431869333911415
+      ],
+      [
+       -82.0693029573196,
+       26.43011261917509
+      ],
+      [
+       -82.06750128703494,
+       26.42965245815893
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306093ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.06438603216552,
+       26.430488765399772
+      ],
+      [
+       -82.06307238210486,
+       26.43178520998586
+      ],
+      [
+       -82.06356028544332,
+       26.43354187737835
+      ],
+      [
+       -82.06536190432352,
+       26.434002123859706
+      ],
+      [
+       -82.06667559507179,
+       26.432705657139493
+      ],
+      [
+       -82.06618762625234,
+       26.430948966072474
+      ],
+      [
+       -82.06438603216552,
+       26.430488765399772
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130609bffff",
+    "pop_2020": 11,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07125520482882,
+       26.437139543898883
+      ],
+      [
+       -82.06994143271051,
+       26.438436054885862
+      ],
+      [
+       -82.07042951699917,
+       26.440192807103926
+      ],
+      [
+       -82.07223143889829,
+       26.440653072003435
+      ],
+      [
+       -82.07354525169903,
+       26.439356538883825
+      ],
+      [
+       -82.07305710191831,
+       26.437599762997735
+      ],
+      [
+       -82.07125520482882,
+       26.437139543898883
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413060b3ffff",
+    "pop_2020": 36,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.05815578322199,
+       26.432161070944943
+      ],
+      [
+       -82.05684215462823,
+       26.43345738887287
+      ],
+      [
+       -82.05732992700648,
+       26.435214008900658
+      ],
+      [
+       -82.05913139345837,
+       26.435674334685896
+      ],
+      [
+       -82.06044506274995,
+       26.434377994631053
+      ],
+      [
+       -82.0599572248919,
+       26.432621350918293
+      ],
+      [
+       -82.05815578322199,
+       26.432161070944943
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413060c3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.05732992700648,
+       26.435214008900658
+      ],
+      [
+       -82.05601626845475,
+       26.436510285621218
+      ],
+      [
+       -82.05650403565365,
+       26.43826691024943
+      ],
+      [
+       -82.05830552688731,
+       26.438727281845505
+      ],
+      [
+       -82.0596192261402,
+       26.437430983002123
+      ],
+      [
+       -82.05913139345837,
+       26.435674334685896
+      ],
+      [
+       -82.05732992700648,
+       26.435214008900658
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413060cfffff",
+    "pop_2020": 11,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.06127086422295,
+       26.431324969660757
+      ],
+      [
+       -82.0599572248919,
+       26.432621350918293
+      ],
+      [
+       -82.06044506274995,
+       26.434377994631053
+      ],
+      [
+       -82.06224660541956,
+       26.43483828076642
+      ],
+      [
+       -82.06356028544332,
+       26.43354187737835
+      ],
+      [
+       -82.06307238210486,
+       26.43178520998586
+      ],
+      [
+       -82.06127086422295,
+       26.431324969660757
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413060d7ffff",
+    "pop_2020": 19,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.0369884649024,
+       26.446332653539834
+      ],
+      [
+       -82.03567481106364,
+       26.44762846773512
+      ],
+      [
+       -82.03616217497785,
+       26.449384959260232
+      ],
+      [
+       -82.03796325821659,
+       26.449845660315923
+      ],
+      [
+       -82.03927695279397,
+       26.44854982402767
+      ],
+      [
+       -82.0387895233941,
+       26.4467933087771
+      ],
+      [
+       -82.0369884649024,
+       26.446332653539834
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130620bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03387382885066,
+       26.44716777287384
+      ],
+      [
+       -82.03256018581062,
+       26.448463523718054
+      ],
+      [
+       -82.03304748423977,
+       26.45021999151248
+      ],
+      [
+       -82.03484849119414,
+       26.450680732193806
+      ],
+      [
+       -82.03616217497785,
+       26.449384959260232
+      ],
+      [
+       -82.03567481106364,
+       26.44762846773512
+      ],
+      [
+       -82.03387382885066,
+       26.44716777287384
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306247ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03075927988345,
+       26.448002789236927
+      ],
+      [
+       -82.02944564764984,
+       26.44929847672898
+      ],
+      [
+       -82.02993288059453,
+       26.451054920787513
+      ],
+      [
+       -82.03173381125738,
+       26.4515157010903
+      ],
+      [
+       -82.03304748423977,
+       26.45021999151248
+      ],
+      [
+       -82.03256018581062,
+       26.448463523718054
+      ],
+      [
+       -82.03075927988345,
+       26.448002789236927
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130624fffff",
+    "pop_2020": 220,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03533584990707,
+       26.452437228271553
+      ],
+      [
+       -82.03402213617758,
+       26.45373295993467
+      ],
+      [
+       -82.03450948968816,
+       26.455489460555228
+      ],
+      [
+       -82.0363106224202,
+       26.455950253244676
+      ],
+      [
+       -82.03762437689505,
+       26.454654499496804
+      ],
+      [
+       -82.03713695789261,
+       26.45289797514466
+      ],
+      [
+       -82.03533584990707,
+       26.452437228271553
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306263ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03450948968816,
+       26.455489460555228
+      ],
+      [
+       -82.0331957460121,
+       26.456785150939098
+      ],
+      [
+       -82.03368309431922,
+       26.458541656092688
+      ],
+      [
+       -82.03548425179748,
+       26.459002494597442
+      ],
+      [
+       -82.03679803622232,
+       26.457706782132902
+      ],
+      [
+       -82.0363106224202,
+       26.455950253244676
+      ],
+      [
+       -82.03450948968816,
+       26.455489460555228
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130626fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03616217497785,
+       26.449384959260232
+      ],
+      [
+       -82.03484849119414,
+       26.450680732193806
+      ],
+      [
+       -82.03533584990707,
+       26.452437228271553
+      ],
+      [
+       -82.03713695789261,
+       26.45289797514466
+      ],
+      [
+       -82.03845068241831,
+       26.45160218012219
+      ],
+      [
+       -82.03796325821659,
+       26.449845660315923
+      ],
+      [
+       -82.03616217497785,
+       26.449384959260232
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306273ffff",
+    "pop_2020": 102,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.06832694386435,
+       26.426599222613206
+      ],
+      [
+       -82.06701331304662,
+       26.427895771711302
+      ],
+      [
+       -82.06750128703494,
+       26.42965245815893
+      ],
+      [
+       -82.0693029573196,
+       26.43011261917509
+      ],
+      [
+       -82.07061662881644,
+       26.428816047935147
+      ],
+      [
+       -82.07012858934964,
+       26.427059337821287
+      ],
+      [
+       -82.06832694386435,
+       26.426599222613206
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130642bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07226779781041,
+       26.42270936632898
+      ],
+      [
+       -82.07095418624758,
+       26.4240060199199
+      ],
+      [
+       -82.07144223087907,
+       26.42576272540148
+      ],
+      [
+       -82.07324395254939,
+       26.426222800950494
+      ],
+      [
+       -82.07455760478281,
+       26.42492612521005
+      ],
+      [
+       -82.07406949467543,
+       26.42316939607052
+      ],
+      [
+       -82.07226779781041,
+       26.42270936632898
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306433ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.0691525655619,
+       26.42354595052093
+      ],
+      [
+       -82.06783896470819,
+       26.424842540794813
+      ],
+      [
+       -82.06832694386435,
+       26.426599222613206
+      ],
+      [
+       -82.07012858934964,
+       26.427059337821287
+      ],
+      [
+       -82.07144223087907,
+       26.42576272540148
+      ],
+      [
+       -82.07095418624758,
+       26.4240060199199
+      ],
+      [
+       -82.0691525655619,
+       26.42354595052093
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130643bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07849852293494,
+       26.421035889021873
+      ],
+      [
+       -82.07718488997693,
+       26.422332669243595
+      ],
+      [
+       -82.0776730655608,
+       26.424089422035852
+      ],
+      [
+       -82.07947493957985,
+       26.424549418254283
+      ],
+      [
+       -82.08078861319822,
+       26.423252615875814
+      ],
+      [
+       -82.0803003721373,
+       26.421495839436066
+      ],
+      [
+       -82.07849852293494,
+       26.421035889021873
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413064a7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07538311693968,
+       26.42187267916366
+      ],
+      [
+       -82.07406949467543,
+       26.42316939607052
+      ],
+      [
+       -82.07455760478281,
+       26.42492612521005
+      ],
+      [
+       -82.07635940263106,
+       26.425386161095844
+      ],
+      [
+       -82.0776730655608,
+       26.424089422035852
+      ],
+      [
+       -82.07718488997693,
+       26.422332669243595
+      ],
+      [
+       -82.07538311693968,
+       26.42187267916366
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413064afffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.08600905935795,
+       26.436010435799066
+      ],
+      [
+       -82.08469520379737,
+       26.43730722227974
+      ],
+      [
+       -82.08518361040073,
+       26.439064097387185
+      ],
+      [
+       -82.08698593806284,
+       26.439524209659304
+      ],
+      [
+       -82.08829983428366,
+       26.438227401032073
+      ],
+      [
+       -82.08781136218222,
+       26.43647050227969
+      ],
+      [
+       -82.08600905935795,
+       26.436010435799066
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306507ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.08060250523465,
+       26.43463016918342
+      ],
+      [
+       -82.07928870101958,
+       26.435926870182016
+      ],
+      [
+       -82.07977698178618,
+       26.437683693388458
+      ],
+      [
+       -82.08157913226174,
+       26.43814383924908
+      ],
+      [
+       -82.08289297714389,
+       26.43684711610705
+      ],
+      [
+       -82.08240463088347,
+       26.43509026924826
+      ],
+      [
+       -82.08060250523465,
+       26.43463016918342
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130650bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.08289297714389,
+       26.43684711610705
+      ],
+      [
+       -82.08157913226174,
+       26.43814383924908
+      ],
+      [
+       -82.08206747336762,
+       26.43990069070635
+      ],
+      [
+       -82.08386972485324,
+       26.440360842672177
+      ],
+      [
+       -82.08518361040073,
+       26.439064097387185
+      ],
+      [
+       -82.08469520379737,
+       26.43730722227974
+      ],
+      [
+       -82.08289297714389,
+       26.43684711610705
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130650fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.08142799354638,
+       26.431576608396163
+      ],
+      [
+       -82.08011421931147,
+       26.432873350582234
+      ],
+      [
+       -82.08060250523465,
+       26.43463016918342
+      ],
+      [
+       -82.08240463088347,
+       26.43509026924826
+      ],
+      [
+       -82.0837184457821,
+       26.43379350491464
+      ],
+      [
+       -82.08323009436825,
+       26.432036662664153
+      ],
+      [
+       -82.08142799354638,
+       26.431576608396163
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130651bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07748665155007,
+       26.435466730435024
+      ],
+      [
+       -82.07617285802625,
+       26.43676336809748
+      ],
+      [
+       -82.07666107329962,
+       26.43852016764635
+      ],
+      [
+       -82.07846314759016,
+       26.438980353190765
+      ],
+      [
+       -82.07977698178618,
+       26.437683693388458
+      ],
+      [
+       -82.07928870101958,
+       26.435926870182016
+      ],
+      [
+       -82.07748665155007,
+       26.435466730435024
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306547ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.0720808575201,
+       26.434086244088384
+      ],
+      [
+       -82.07076711537422,
+       26.43538279627689
+      ],
+      [
+       -82.07125520482882,
+       26.437139543898883
+      ],
+      [
+       -82.07305710191831,
+       26.437599762997735
+      ],
+      [
+       -82.0743708847432,
+       26.436303188672483
+      ],
+      [
+       -82.07388272979968,
+       26.434546417385526
+      ],
+      [
+       -82.0720808575201,
+       26.434086244088384
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130654bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.0743708847432,
+       26.436303188672483
+      ],
+      [
+       -82.07305710191831,
+       26.437599762997735
+      ],
+      [
+       -82.07354525169903,
+       26.439356538883825
+      ],
+      [
+       -82.07534724979742,
+       26.439816764107857
+      ],
+      [
+       -82.07666107329962,
+       26.43852016764635
+      ],
+      [
+       -82.07617285802625,
+       26.43676336809748
+      ],
+      [
+       -82.0743708847432,
+       26.436303188672483
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130654fffff",
+    "pop_2020": 27,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07831219466325,
+       26.432413256633705
+      ],
+      [
+       -82.076998431117,
+       26.433709935488327
+      ],
+      [
+       -82.07748665155007,
+       26.435466730435024
+      ],
+      [
+       -82.07928870101958,
+       26.435926870182016
+      ],
+      [
+       -82.08060250523465,
+       26.43463016918342
+      ],
+      [
+       -82.08011421931147,
+       26.432873350582234
+      ],
+      [
+       -82.07831219466325,
+       26.432413256633705
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306557ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07977698178618,
+       26.437683693388458
+      ],
+      [
+       -82.07846314759016,
+       26.438980353190765
+      ],
+      [
+       -82.07895142319911,
+       26.440737180992635
+      ],
+      [
+       -82.08075359850112,
+       26.44119737264801
+      ],
+      [
+       -82.08206747336762,
+       26.43990069070635
+      ],
+      [
+       -82.08157913226174,
+       26.43814383924908
+      ],
+      [
+       -82.07977698178618,
+       26.437683693388458
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441306573ffff",
+    "pop_2020": 16,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07666107329962,
+       26.43852016764635
+      ],
+      [
+       -82.07534724979742,
+       26.439816764107857
+      ],
+      [
+       -82.07583545991002,
+       26.4415735682491
+      ],
+      [
+       -82.0776375590213,
+       26.44203379958988
+      ],
+      [
+       -82.07895142319911,
+       26.440737180992635
+      ],
+      [
+       -82.07846314759016,
+       26.438980353190765
+      ],
+      [
+       -82.07666107329962,
+       26.43852016764635
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130657bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.08912522841355,
+       26.435173652461458
+      ],
+      [
+       -82.08781136218222,
+       26.43647050227969
+      ],
+      [
+       -82.08829983428366,
+       26.438227401032073
+      ],
+      [
+       -82.09010223811515,
+       26.438687473606343
+      ],
+      [
+       -82.09141614500159,
+       26.437390601637944
+      ],
+      [
+       -82.0909276074015,
+       26.435633679245843
+      ],
+      [
+       -82.08912522841355,
+       26.435173652461458
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413065abffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.09141614500159,
+       26.437390601637944
+      ],
+      [
+       -82.09010223811515,
+       26.438687473606343
+      ],
+      [
+       -82.09059077056897,
+       26.44044440059627
+      ],
+      [
+       -82.09239327541165,
+       26.44090447925575
+      ],
+      [
+       -82.09370722295148,
+       26.439607585137672
+      ],
+      [
+       -82.09321862499533,
+       26.437850634510212
+      ],
+      [
+       -82.09141614500159,
+       26.437390601637944
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413065afffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07996317548545,
+       26.426306199335496
+      ],
+      [
+       -82.07864947189191,
+       26.427602960548125
+      ],
+      [
+       -82.07913770264108,
+       26.429359746260996
+      ],
+      [
+       -82.08093970246773,
+       26.429819794410026
+      ],
+      [
+       -82.0822534467233,
+       26.428523011045243
+      ],
+      [
+       -82.08176515049027,
+       26.426766201683993
+      ],
+      [
+       -82.07996317548545,
+       26.426306199335496
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413065c3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.07913770264108,
+       26.429359746260996
+      ],
+      [
+       -82.0778239690716,
+       26.430656466299013
+      ],
+      [
+       -82.07831219466325,
+       26.432413256633705
+      ],
+      [
+       -82.08011421931147,
+       26.432873350582234
+      ],
+      [
+       -82.08142799354638,
+       26.431576608396163
+      ],
+      [
+       -82.08093970246773,
+       26.429819794410026
+      ],
+      [
+       -82.07913770264108,
+       26.429359746260996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413065cfffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.08078861319822,
+       26.423252615875814
+      ],
+      [
+       -82.07947493957985,
+       26.424549418254283
+      ],
+      [
+       -82.07996317548545,
+       26.426306199335496
+      ],
+      [
+       -82.08176515049027,
+       26.426766201683993
+      ],
+      [
+       -82.08307886476732,
+       26.425469377149295
+      ],
+      [
+       -82.08259056338099,
+       26.423712572422733
+      ],
+      [
+       -82.08078861319822,
+       26.423252615875814
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413065d3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.01912853792597,
+       26.44829000516936
+      ],
+      [
+       -82.01781497892341,
+       26.449585480523215
+      ],
+      [
+       -82.01830195515504,
+       26.451341825041894
+      ],
+      [
+       -82.02010255586825,
+       26.45180271796084
+      ],
+      [
+       -82.02141615563657,
+       26.45050722053154
+      ],
+      [
+       -82.02092911392599,
+       26.448750852259156
+      ],
+      [
+       -82.01912853792597,
+       26.44829000516936
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441307113ffff",
+    "pop_2020": 26,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.02764481801553,
+       26.44883770263217
+      ],
+      [
+       -82.026331196596,
+       26.450133326771017
+      ],
+      [
+       -82.02681836405682,
+       26.451889747088448
+      ],
+      [
+       -82.02861921842111,
+       26.45235056700854
+      ],
+      [
+       -82.02993288059453,
+       26.451054920787513
+      ],
+      [
+       -82.02944564764984,
+       26.44929847672898
+      ],
+      [
+       -82.02764481801553,
+       26.44883770263217
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413071b3ffff",
+    "pop_2020": 17,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.02453044326165,
+       26.449672513062662
+      ],
+      [
+       -82.0232168326639,
+       26.45096807384726
+      ],
+      [
+       -82.02370393464142,
+       26.45272447041836
+      ],
+      [
+       -82.02550471270007,
+       26.453185329951594
+      ],
+      [
+       -82.02681836405682,
+       26.451889747088448
+      ],
+      [
+       -82.026331196596,
+       26.450133326771017
+      ],
+      [
+       -82.02453044326165,
+       26.449672513062662
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413071bbffff",
+    "pop_2020": 6,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.88262397200292,
+       26.589391120532245
+      ],
+      [
+       -81.88130968128586,
+       26.59068290227775
+      ],
+      [
+       -81.88179423386174,
+       26.59243859385166
+      ],
+      [
+       -81.88359314272758,
+       26.59290252772332
+      ],
+      [
+       -81.8849074745085,
+       26.591610724177272
+      ],
+      [
+       -81.8844228563598,
+       26.589855008560484
+      ],
+      [
+       -81.88262397200292,
+       26.589391120532245
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130ca07ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.88345367491057,
+       26.586343609548813
+      ],
+      [
+       -81.88213941406319,
+       26.587635433046525
+      ],
+      [
+       -81.88262397200292,
+       26.589391120532245
+      ],
+      [
+       -81.8844228563598,
+       26.589855008560484
+      ],
+      [
+       -81.88573715826762,
+       26.5885631632581
+      ],
+      [
+       -81.88525253475818,
+       26.586807451732536
+      ],
+      [
+       -81.88345367491057,
+       26.586343609548813
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130ca17ffff",
+    "pop_2020": 33,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.88719113850193,
+       26.593830362268697
+      ],
+      [
+       -81.88587676565882,
+       26.595122187614823
+      ],
+      [
+       -81.88636143866242,
+       26.596877935428445
+      ],
+      [
+       -81.88816055008947,
+       26.597341881934895
+      ],
+      [
+       -81.8894749639931,
+       26.596050034789208
+      ],
+      [
+       -81.8889902254092,
+       26.59429426293703
+      ],
+      [
+       -81.88719113850193,
+       26.593830362268697
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130ca37ffff",
+    "pop_2020": 4,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.88179423386174,
+       26.59243859385166
+      ],
+      [
+       -81.88047991327414,
+       26.593730333836252
+      ],
+      [
+       -81.8809644604851,
+       26.595486029488562
+      ],
+      [
+       -81.8827633938596,
+       26.59595000920258
+      ],
+      [
+       -81.88407775551443,
+       26.59465824742154
+      ],
+      [
+       -81.88359314272758,
+       26.59290252772332
+      ],
+      [
+       -81.88179423386174,
+       26.59243859385166
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130ca3bffff",
+    "pop_2020": 474,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.88200003984257,
+       26.581076591639647
+      ],
+      [
+       -81.88068584992278,
+       26.58236843507163
+      ],
+      [
+       -81.88117035302409,
+       26.58412409031265
+      ],
+      [
+       -81.88296911160809,
+       26.584587926161067
+      ],
+      [
+       -81.88428334258657,
+       26.583296060919814
+      ],
+      [
+       -81.88379877392244,
+       26.581540381639815
+      ],
+      [
+       -81.88200003984257,
+       26.581076591639647
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130ca8bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.87971689855185,
+       26.57885715685934
+      ],
+      [
+       -81.87840274969243,
+       26.58014897848158
+      ],
+      [
+       -81.87888719259831,
+       26.581904605566944
+      ],
+      [
+       -81.88068584992278,
+       26.58236843507163
+      ],
+      [
+       -81.88200003984257,
+       26.581076591639647
+      ],
+      [
+       -81.88151553137762,
+       26.579320940513135
+      ],
+      [
+       -81.87971689855185,
+       26.57885715685934
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cad7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.89798655012234,
+       26.596613600127377
+      ],
+      [
+       -81.89667207282646,
+       26.597905596213934
+      ],
+      [
+       -81.89715699745707,
+       26.59966144829494
+      ],
+      [
+       -81.89895646497276,
+       26.600125328313652
+      ],
+      [
+       -81.90027098331574,
+       26.598833310421238
+      ],
+      [
+       -81.899785993096,
+       26.59707743431637
+      ],
+      [
+       -81.89798655012234,
+       26.596613600127377
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cb8bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.8894749639931,
+       26.596050034789208
+      ],
+      [
+       -81.88816055008947,
+       26.597341881934895
+      ],
+      [
+       -81.88864528331555,
+       26.599097657855
+      ],
+      [
+       -81.89044449602937,
+       26.599561610666232
+      ],
+      [
+       -81.8917589509919,
+       26.598269741721438
+      ],
+      [
+       -81.89127415218177,
+       26.596513941764933
+      ],
+      [
+       -81.8894749639931,
+       26.596050034789208
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cbcbffff",
+    "pop_2020": 23,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.89030460943295,
+       26.593002374026785
+      ],
+      [
+       -81.8889902254092,
+       26.59429426293703
+      ],
+      [
+       -81.8894749639931,
+       26.596050034789208
+      ],
+      [
+       -81.89127415218177,
+       26.596513941764933
+      ],
+      [
+       -81.89258857726097,
+       26.595222031051485
+      ],
+      [
+       -81.89210377309612,
+       26.593466235165927
+      ],
+      [
+       -81.89030460943295,
+       26.593002374026785
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cbdbffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.90793843407745,
+       26.560036487404865
+      ],
+      [
+       -81.90662431539059,
+       26.56132898403114
+      ],
+      [
+       -81.90710930414402,
+       26.56308478665989
+      ],
+      [
+       -81.90890847713624,
+       26.56354811665031
+      ],
+      [
+       -81.91022263682945,
+       26.56225559816886
+      ],
+      [
+       -81.90973758252419,
+       26.560499771552564
+      ],
+      [
+       -81.90793843407745,
+       26.560036487404865
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cc03ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.90710930414402,
+       26.56308478665989
+      ],
+      [
+       -81.90579515557747,
+       26.56437724162238
+      ],
+      [
+       -81.90628013899334,
+       26.56613304842596
+      ],
+      [
+       -81.90807933653079,
+       26.566596424258027
+      ],
+      [
+       -81.90939352610705,
+       26.56530394744447
+      ],
+      [
+       -81.90890847713624,
+       26.56354811665031
+      ],
+      [
+       -81.90710930414402,
+       26.56308478665989
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cc0fffff",
+    "pop_2020": 183,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.9087675287956,
+       26.5569881506794
+      ],
+      [
+       -81.90745343998758,
+       26.55828068896074
+      ],
+      [
+       -81.90793843407745,
+       26.560036487404865
+      ],
+      [
+       -81.90973758252419,
+       26.560499771552564
+      ],
+      [
+       -81.9110517123351,
+       26.55920721141194
+      ],
+      [
+       -81.91056665269649,
+       26.5574513889833
+      ],
+      [
+       -81.9087675287956,
+       26.5569881506794
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cc13ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.9023375849078,
+       26.570010183089902
+      ],
+      [
+       -81.90102338771898,
+       26.571302491169615
+      ],
+      [
+       -81.90150829489598,
+       26.57305828229167
+      ],
+      [
+       -81.90330746482239,
+       26.573521789336247
+      ],
+      [
+       -81.90462170303277,
+       26.572229459417315
+      ],
+      [
+       -81.90413673029526,
+       26.570473644293426
+      ],
+      [
+       -81.9023375849078,
+       26.570010183089902
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cc6fffff",
+    "pop_2020": 205,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.90959658830029,
+       26.553939776501966
+      ],
+      [
+       -81.90828252937034,
+       26.555232356429677
+      ],
+      [
+       -81.9087675287956,
+       26.5569881506794
+      ],
+      [
+       -81.91056665269649,
+       26.5574513889833
+      ],
+      [
+       -81.91188075262595,
+       26.556158787192203
+      ],
+      [
+       -81.91139568765509,
+       26.55440296896099
+      ],
+      [
+       -81.90959658830029,
+       26.553939776501966
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cc8bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.90648350668197,
+       26.554769124447567
+      ],
+      [
+       -81.90516945887852,
+       26.556061640869142
+      ],
+      [
+       -81.9056543927588,
+       26.5578174111322
+      ],
+      [
+       -81.90745343998758,
+       26.55828068896074
+      ],
+      [
+       -81.9087675287956,
+       26.5569881506794
+      ],
+      [
+       -81.90828252937034,
+       26.555232356429677
+      ],
+      [
+       -81.90648350668197,
+       26.554769124447567
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130ccc7ffff",
+    "pop_2020": 29,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.90108679438198,
+       26.553379362130126
+      ],
+      [
+       -81.899772798724,
+       26.55467179318796
+      ],
+      [
+       -81.90025760685984,
+       26.55642751126701
+      ],
+      [
+       -81.9020564761943,
+       26.556890822282647
+      ],
+      [
+       -81.90337051286359,
+       26.55559836936817
+      ],
+      [
+       -81.90288563918719,
+       26.553842627295104
+      ],
+      [
+       -81.90108679438198,
+       26.553379362130126
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cccbffff",
+    "pop_2020": 397,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.90337051286359,
+       26.55559836936817
+      ],
+      [
+       -81.9020564761943,
+       26.556890822282647
+      ],
+      [
+       -81.90254134453025,
+       26.55864656855383
+      ],
+      [
+       -81.90434031507989,
+       26.559109885902817
+      ],
+      [
+       -81.9056543927588,
+       26.5578174111322
+      ],
+      [
+       -81.90516945887852,
+       26.556061640869142
+      ],
+      [
+       -81.90337051286359,
+       26.55559836936817
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130cccfffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.88054656927845,
+       26.575809670546377
+      ],
+      [
+       -81.87923245028033,
+       26.57710153389522
+      ],
+      [
+       -81.87971689855185,
+       26.57885715685934
+      ],
+      [
+       -81.88151553137762,
+       26.579320940513135
+      ],
+      [
+       -81.8828296914327,
+       26.57802905535044
+      ],
+      [
+       -81.88234517760519,
+       26.576273408348207
+      ],
+      [
+       -81.88054656927845,
+       26.575809670546377
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130ce6fffff",
+    "pop_2020": 317,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.86788933500674,
+       26.59048228798354
+      ],
+      [
+       -81.86657513021483,
+       26.59177379370545
+      ],
+      [
+       -81.86705936031588,
+       26.593529360914197
+      ],
+      [
+       -81.86885786077534,
+       26.593993446467184
+      ],
+      [
+       -81.87017210665292,
+       26.592701918958745
+      ],
+      [
+       -81.86968781098545,
+       26.590946327684243
+      ],
+      [
+       -81.86788933500674,
+       26.59048228798354
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130d9b3ffff",
+    "pop_2020": 8,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.92390899766202,
+       26.533158509795513
+      ],
+      [
+       -81.9225950846967,
+       26.534451529848138
+      ],
+      [
+       -81.923080312694,
+       26.536207370600223
+      ],
+      [
+       -81.92487951918562,
+       26.536670215247796
+      ],
+      [
+       -81.92619347311492,
+       26.535377173296283
+      ],
+      [
+       -81.92570817958871,
+       26.533621308596484
+      ],
+      [
+       -81.92390899766202,
+       26.533158509795513
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130e84bffff",
+    "pop_2020": 124,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.92785069895578,
+       26.52927923955042
+      ],
+      [
+       -81.92653680479292,
+       26.53057236464456
+      ],
+      [
+       -81.92702210363439,
+       26.532328225069303
+      ],
+      [
+       -81.92882136216524,
+       26.532790984339794
+      ],
+      [
+       -81.9301352972836,
+       26.53149783733902
+      ],
+      [
+       -81.9296499329157,
+       26.529741952974803
+      ],
+      [
+       -81.92785069895578,
+       26.52927923955042
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130e853ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.92473764743144,
+       26.530109611691284
+      ],
+      [
+       -81.92342376434632,
+       26.53140267331545
+      ],
+      [
+       -81.92390899766202,
+       26.533158509795513
+      ],
+      [
+       -81.92570817958871,
+       26.533621308596484
+      ],
+      [
+       -81.92702210363439,
+       26.532328225069303
+      ],
+      [
+       -81.92653680479292,
+       26.53057236464456
+      ],
+      [
+       -81.92473764743144,
+       26.530109611691284
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130e85bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.931792343818,
+       26.525399654218624
+      ],
+      [
+       -81.93047846846964,
+       26.526692884335354
+      ],
+      [
+       -81.93096383814864,
+       26.52844876441169
+      ],
+      [
+       -81.9327631487,
+       26.52891143830297
+      ],
+      [
+       -81.93407706499538,
+       26.52761818627189
+      ],
+      [
+       -81.93359162979245,
+       26.52586228226429
+      ],
+      [
+       -81.931792343818,
+       26.525399654218624
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130e8c3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.93096383814864,
+       26.52844876441169
+      ],
+      [
+       -81.9296499329157,
+       26.529741952974803
+      ],
+      [
+       -81.9301352972836,
+       26.53149783733902
+      ],
+      [
+       -81.93193463241158,
+       26.531960557074836
+      ],
+      [
+       -81.93324857859496,
+       26.530667346601483
+      ],
+      [
+       -81.9327631487,
+       26.52891143830297
+      ],
+      [
+       -81.93096383814864,
+       26.52844876441169
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130e8cfffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.93490551620066,
+       26.52456898868421
+      ],
+      [
+       -81.93359162979245,
+       26.52586228226429
+      ],
+      [
+       -81.93407706499538,
+       26.52761818627189
+      ],
+      [
+       -81.93587645213115,
+       26.528080820625863
+      ],
+      [
+       -81.93719037948134,
+       26.526787505127807
+      ],
+      [
+       -81.93670487875383,
+       26.525031577194145
+      ],
+      [
+       -81.93490551620066,
+       26.52456898868421
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130e8d7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.94278870277356,
+       26.516808492246945
+      ],
+      [
+       -81.94147485405097,
+       26.51810199580413
+      ],
+      [
+       -81.94196043090393,
+       26.519857939035298
+      ],
+      [
+       -81.94375992199919,
+       26.520320402619266
+      ],
+      [
+       -81.94507381164681,
+       26.519026877128653
+      ],
+      [
+       -81.94458816927423,
+       26.51727090998789
+      ],
+      [
+       -81.94278870277356,
+       26.516808492246945
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130ec3bffff",
+    "pop_2020": 34,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.93967546410357,
+       26.517639538522236
+      ],
+      [
+       -81.93836162642035,
+       26.518932978627298
+      ],
+      [
+       -81.93884713775432,
+       26.52068889794366
+      ],
+      [
+       -81.94064655229059,
+       26.521151401070167
+      ],
+      [
+       -81.94196043090393,
+       26.519857939035298
+      ],
+      [
+       -81.94147485405097,
+       26.51810199580413
+      ],
+      [
+       -81.93967546410357,
+       26.517639538522236
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944130ec77ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.09242645358248,
+       26.422958292588806
+      ],
+      [
+       -82.09111270730097,
+       26.42425530708322
+      ],
+      [
+       -82.09160119998903,
+       26.426012187358285
+      ],
+      [
+       -82.09340350444485,
+       26.426472076766814
+      ],
+      [
+       -82.09471729136794,
+       26.425175040105852
+      ],
+      [
+       -82.09422873319373,
+       26.423418136203317
+      ],
+      [
+       -82.09242645358248,
+       26.422958292588806
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441314b2fffff",
+    "pop_2020": 235,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1879562392553,
+       26.519147078051052
+      ],
+      [
+       -82.18664075740458,
+       26.520444981787062
+      ],
+      [
+       -82.187131784424,
+       26.522203045815207
+      ],
+      [
+       -82.18893835893819,
+       26.522663229646362
+      ],
+      [
+       -82.19025388136012,
+       26.52136530376864
+      ],
+      [
+       -82.18976278869677,
+       26.51960721620189
+      ],
+      [
+       -82.1879562392553,
+       26.519147078051052
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441332497ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18942944654457,
+       26.524421321555774
+      ],
+      [
+       -82.1881138939898,
+       26.525719206092777
+      ],
+      [
+       -82.18860497653812,
+       26.527477302335004
+      ],
+      [
+       -82.19041167729208,
+       26.527937537580097
+      ],
+      [
+       -82.19172727041966,
+       26.52663963090597
+      ],
+      [
+       -82.19123612222059,
+       26.524881511124295
+      ],
+      [
+       -82.18942944654457,
+       26.524421321555774
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413324b3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19172727041966,
+       26.52663963090597
+      ],
+      [
+       -82.19041167729208,
+       26.527937537580097
+      ],
+      [
+       -82.19090282043514,
+       26.529695661687796
+      ],
+      [
+       -82.19270962236033,
+       26.530155902659043
+      ],
+      [
+       -82.19402525605896,
+       26.52885797384829
+      ],
+      [
+       -82.19353404726147,
+       26.527099826203333
+      ],
+      [
+       -82.19172727041966,
+       26.52663963090597
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413324b7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19614843745167,
+       26.542463191408395
+      ],
+      [
+       -82.19483263217207,
+       26.54376104036696
+      ],
+      [
+       -82.19532394197783,
+       26.545519260874993
+      ],
+      [
+       -82.19713112273823,
+       26.5459796559646
+      ],
+      [
+       -82.19844696859371,
+       26.544681784883178
+      ],
+      [
+       -82.19795559311306,
+       26.542923540835393
+      ],
+      [
+       -82.19614843745167,
+       26.542463191408395
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441332503ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19844696859371,
+       26.544681784883178
+      ],
+      [
+       -82.19713112273823,
+       26.5459796559646
+      ],
+      [
+       -82.19762249316788,
+       26.547737904281725
+      ],
+      [
+       -82.1994297751317,
+       26.54819830505533
+      ],
+      [
+       -82.20074566156131,
+       26.5469004118515
+      ],
+      [
+       -82.2002542254531,
+       26.545142139996862
+      ],
+      [
+       -82.19844696859371,
+       26.544681784883178
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441332507ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19385006812546,
+       26.540244631444693
+      ],
+      [
+       -82.19253430342351,
+       26.541542458279874
+      ],
+      [
+       -82.19302555261118,
+       26.543300650969826
+      ],
+      [
+       -82.19483263217207,
+       26.54376104036696
+      ],
+      [
+       -82.19614843745167,
+       26.542463191408395
+      ],
+      [
+       -82.19565712259283,
+       26.540704975176492
+      ],
+      [
+       -82.19385006812546,
+       26.540244631444693
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133251bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19762249316788,
+       26.547737904281725
+      ],
+      [
+       -82.19630661715925,
+       26.549035733966832
+      ],
+      [
+       -82.19679798253682,
+       26.550793986543436
+      ],
+      [
+       -82.19860528960484,
+       26.551254432975917
+      ],
+      [
+       -82.19992120619098,
+       26.549956581172495
+      ],
+      [
+       -82.1994297751317,
+       26.54819830505533
+      ],
+      [
+       -82.19762249316788,
+       26.547737904281725
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133253bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19237636095332,
+       26.53497009834987
+      ],
+      [
+       -82.19106066697296,
+       26.536267944436464
+      ],
+      [
+       -82.19155186060539,
+       26.538026105009596
+      ],
+      [
+       -82.19335881388268,
+       26.538486443037677
+      ],
+      [
+       -82.19467454843911,
+       26.53718857482312
+      ],
+      [
+       -82.1941832891423,
+       26.53543039070887
+      ],
+      [
+       -82.19237636095332,
+       26.53497009834987
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413325c3ffff",
+    "pop_2020": 114,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19467454843911,
+       26.53718857482312
+      ],
+      [
+       -82.19335881388268,
+       26.538486443037677
+      ],
+      [
+       -82.19385006812546,
+       26.540244631444693
+      ],
+      [
+       -82.19565712259283,
+       26.540704975176492
+      ],
+      [
+       -82.19697289772353,
+       26.539407084834483
+      ],
+      [
+       -82.1964815778127,
+       26.537648872888553
+      ],
+      [
+       -82.19467454843911,
+       26.53718857482312
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413325c7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19320082610388,
+       26.531914054623233
+      ],
+      [
+       -82.19188516226478,
+       26.533211942076292
+      ],
+      [
+       -82.19237636095332,
+       26.53497009834987
+      ],
+      [
+       -82.1941832891423,
+       26.53543039070887
+      ],
+      [
+       -82.19549899355405,
+       26.534132481123756
+      ],
+      [
+       -82.19500772920429,
+       26.532374301312093
+      ],
+      [
+       -82.19320082610388,
+       26.531914054623233
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413325d3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.93890285598629,
+       26.6055227290609
+      ],
+      [
+       -81.93758800265246,
+       26.60681538650954
+      ],
+      [
+       -81.93807387403565,
+       26.608571626918167
+      ],
+      [
+       -81.93987466437318,
+       26.609035233845738
+      ],
+      [
+       -81.94118955870185,
+       26.607742554565665
+      ],
+      [
+       -81.94070362169822,
+       26.605986290189847
+      ],
+      [
+       -81.93890285598629,
+       26.6055227290609
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441339483ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.93038560250952,
+       26.60496091666862
+      ],
+      [
+       -81.92907081232214,
+       26.606253425115597
+      ],
+      [
+       -81.92955649216772,
+       26.6080095895564
+      ],
+      [
+       -81.93135702781618,
+       26.608473269530407
+      ],
+      [
+       -81.93267185901023,
+       26.607180739258787
+      ],
+      [
+       -81.93218611354921,
+       26.605424550838205
+      ],
+      [
+       -81.93038560250952,
+       26.60496091666862
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413394c3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.93267185901023,
+       26.607180739258787
+      ],
+      [
+       -81.93135702781618,
+       26.608473269530407
+      ],
+      [
+       -81.93184276796036,
+       26.610229461989004
+      ],
+      [
+       -81.93364340491786,
+       26.610693148153988
+      ],
+      [
+       -81.9349582771169,
+       26.609400596058194
+      ],
+      [
+       -81.93447247135356,
+       26.607644379621984
+      ],
+      [
+       -81.93267185901023,
+       26.607180739258787
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413394c7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.02451867306607,
+       26.588369884463685
+      ],
+      [
+       -82.0232034529881,
+       26.58966423870497
+      ],
+      [
+       -82.02369115152777,
+       26.59142115645812
+      ],
+      [
+       -82.02549413578936,
+       26.591883743797954
+      ],
+      [
+       -82.02680939672629,
+       26.59058936763218
+      ],
+      [
+       -82.02632163254276,
+       26.588832426051468
+      ],
+      [
+       -82.02451867306607,
+       26.588369884463685
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a017ffff",
+    "pop_2020": 99,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.02432678508613,
+       26.599743220480388
+      ],
+      [
+       -82.02301143411243,
+       26.601037471662014
+      ],
+      [
+       -82.02349917739576,
+       26.602794429593647
+      ],
+      [
+       -82.02530233730984,
+       26.603257160178522
+      ],
+      [
+       -82.02661772915097,
+       26.601962887085193
+      ],
+      [
+       -82.02612992021068,
+       26.60020590531909
+      ],
+      [
+       -82.02432678508613,
+       26.599743220480388
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a02fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.02305561695896,
+       26.583099175596246
+      ],
+      [
+       -82.02174046774545,
+       26.584393549548263
+      ],
+      [
+       -82.02222811109792,
+       26.58615043524645
+      ],
+      [
+       -82.02403096930097,
+       26.58661297081976
+      ],
+      [
+       -82.02534615937172,
+       26.585318574938647
+      ],
+      [
+       -82.02485845038225,
+       26.583561665413736
+      ],
+      [
+       -82.02305561695896,
+       26.583099175596246
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a08bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.02388308759059,
+       26.58004787844485
+      ],
+      [
+       -82.02256796838012,
+       26.581342294023855
+      ],
+      [
+       -82.02305561695896,
+       26.583099175596246
+      ],
+      [
+       -82.02485845038225,
+       26.583561665413736
+      ],
+      [
+       -82.0261736104466,
+       26.58226722790154
+      ],
+      [
+       -82.02568589623387,
+       26.58051032250546
+      ],
+      [
+       -82.02388308759059,
+       26.58004787844485
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a09bffff",
+    "pop_2020": 53,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03431902592988,
+       26.605570644211216
+      ],
+      [
+       -82.0330035415234,
+       26.60686502472323
+      ],
+      [
+       -82.03349153178904,
+       26.608622090158008
+      ],
+      [
+       -82.03529507212997,
+       26.609084798903844
+      ],
+      [
+       -82.03661059739362,
+       26.60779039647799
+      ],
+      [
+       -82.03612254145925,
+       26.606033307220528
+      ],
+      [
+       -82.03431902592988,
+       26.605570644211216
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a10bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03661059739362,
+       26.60779039647799
+      ],
+      [
+       -82.03529507212997,
+       26.609084798903844
+      ],
+      [
+       -82.0357831228489,
+       26.610841892210235
+      ],
+      [
+       -82.03758676450403,
+       26.611304606911666
+      ],
+      [
+       -82.03890233062312,
+       26.61001018257244
+      ],
+      [
+       -82.03841421423175,
+       26.608253065445552
+      ],
+      [
+       -82.03661059739362,
+       26.60779039647799
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a10fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03807487568203,
+       26.613061728080698
+      ],
+      [
+       -82.03675927952945,
+       26.614356110725193
+      ],
+      [
+       -82.03724738549298,
+       26.616113235926584
+      ],
+      [
+       -82.03905115328845,
+       26.616576002305205
+      ],
+      [
+       -82.04036679029818,
+       26.615281597751927
+      ],
+      [
+       -82.03987861865537,
+       26.613524448729226
+      ],
+      [
+       -82.03807487568203,
+       26.613061728080698
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a12bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.02890883494986,
+       26.604182587578027
+      ],
+      [
+       -82.02759340224303,
+       26.605476882582572
+      ],
+      [
+       -82.02808126639674,
+       26.607233896306667
+      ],
+      [
+       -82.02988462892178,
+       26.607696638856712
+      ],
+      [
+       -82.03120010249262,
+       26.606402321941452
+      ],
+      [
+       -82.03071217267453,
+       26.604645284387267
+      ],
+      [
+       -82.02890883494986,
+       26.604182587578027
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a143ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03120010249262,
+       26.606402321941452
+      ],
+      [
+       -82.02988462892178,
+       26.607696638856712
+      ],
+      [
+       -82.03037255351929,
+       26.609453680463588
+      ],
+      [
+       -82.0321760173559,
+       26.609916428983503
+      ],
+      [
+       -82.03349153178904,
+       26.608622090158008
+      ],
+      [
+       -82.0330035415234,
+       26.60686502472323
+      ],
+      [
+       -82.03120010249262,
+       26.606402321941452
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a147ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.02579014102548,
+       26.605014146010877
+      ],
+      [
+       -82.02447471916709,
+       26.60630837742126
+      ],
+      [
+       -82.02496251765697,
+       26.608065367310054
+      ],
+      [
+       -82.02676580366919,
+       26.608528149624167
+      ],
+      [
+       -82.02808126639674,
+       26.607233896306667
+      ],
+      [
+       -82.02759340224303,
+       26.605476882582572
+      ],
+      [
+       -82.02579014102548,
+       26.605014146010877
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a14bffff",
+    "pop_2020": 79,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.0357831228489,
+       26.610841892210235
+      ],
+      [
+       -82.03446756755518,
+       26.612136252945472
+      ],
+      [
+       -82.03495561305763,
+       26.613893350290997
+      ],
+      [
+       -82.03675927952945,
+       26.614356110725193
+      ],
+      [
+       -82.03807487568203,
+       26.613061728080698
+      ],
+      [
+       -82.03758676450403,
+       26.611304606911666
+      ],
+      [
+       -82.0357831228489,
+       26.610841892210235
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a177ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.01555012630378,
+       26.568119685714823
+      ],
+      [
+       -82.01423520051445,
+       26.569414055158017
+      ],
+      [
+       -82.01472261274176,
+       26.57117082066808
+      ],
+      [
+       -82.0165250163744,
+       26.57163324056474
+      ],
+      [
+       -82.01783998302102,
+       26.570338849182296
+      ],
+      [
+       -82.01735250517783,
+       26.568582059842846
+      ],
+      [
+       -82.01555012630378,
+       26.568119685714823
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a44bffff",
+    "pop_2020": 90,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.01637760464565,
+       26.565068513340943
+      ],
+      [
+       -82.01506270884411,
+       26.566362924377255
+      ],
+      [
+       -82.01555012630378,
+       26.568119685714823
+      ],
+      [
+       -82.01735250517783,
+       26.568582059842846
+      ],
+      [
+       -82.01866744183326,
+       26.56728762686319
+      ],
+      [
+       -82.01817995876085,
+       26.565530841699264
+      ],
+      [
+       -82.01637760464565,
+       26.565068513340943
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133a45bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.03769363210745,
+       26.63581057938197
+      ],
+      [
+       -82.03637777398343,
+       26.63710475544267
+      ],
+      [
+       -82.03686596960118,
+       26.638861960235626
+      ],
+      [
+       -82.03867008904854,
+       26.63932501280337
+      ],
+      [
+       -82.03998598804665,
+       26.638030814859476
+      ],
+      [
+       -82.03949772672343,
+       26.636273586231457
+      ],
+      [
+       -82.03769363210745,
+       26.63581057938197
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133ae27ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.9407607925863,
+       26.58805813261113
+      ],
+      [
+       -81.93944612988933,
+       26.589350976877927
+      ],
+      [
+       -81.93993196751852,
+       26.59110716892099
+      ],
+      [
+       -81.94173253344593,
+       26.591570540651915
+      ],
+      [
+       -81.94304723712244,
+       26.590277674532683
+      ],
+      [
+       -81.9425613338921,
+       26.588521458535357
+      ],
+      [
+       -81.9407607925863,
+       26.58805813261113
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b213ffff",
+    "pop_2020": 52,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.94138959038378,
+       26.596375809318356
+      ],
+      [
+       -81.94007482684677,
+       26.597668591995486
+      ],
+      [
+       -81.94056071415845,
+       26.599424820242497
+      ],
+      [
+       -81.94236143061833,
+       26.59988828977094
+      ],
+      [
+       -81.94367623513999,
+       26.598595485250083
+      ],
+      [
+       -81.9431902822172,
+       26.596839233044925
+      ],
+      [
+       -81.94138959038378,
+       26.596375809318356
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b23bffff",
+    "pop_2020": 88,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.94158958242132,
+       26.585009058697185
+      ],
+      [
+       -81.94027494964996,
+       26.586301944667856
+      ],
+      [
+       -81.9407607925863,
+       26.58805813261113
+      ],
+      [
+       -81.9425613338921,
+       26.588521458535357
+      ],
+      [
+       -81.94387600763957,
+       26.587228550708133
+      ],
+      [
+       -81.9433900991052,
+       26.58547233881363
+      ],
+      [
+       -81.94158958242132,
+       26.585009058697185
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b28bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.96836725388334,
+       26.560900300760547
+      ],
+      [
+       -81.96705272358368,
+       26.562193881448163
+      ],
+      [
+       -81.96753905740844,
+       26.56395021200936
+      ],
+      [
+       -81.96933998711668,
+       26.564412985780024
+      ],
+      [
+       -81.97065455833649,
+       26.563119383185903
+      ],
+      [
+       -81.97016815892802,
+       26.56136302872803
+      ],
+      [
+       -81.96836725388334,
+       26.560900300760547
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b413ffff",
+    "pop_2020": 169,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.95984976525386,
+       26.560342744224226
+      ],
+      [
+       -81.9585352978665,
+       26.5616361759666
+      ],
+      [
+       -81.95902144023091,
+       26.563392430626156
+      ],
+      [
+       -81.96082211556153,
+       26.56385527745297
+      ],
+      [
+       -81.96213662388092,
+       26.56256182381084
+      ],
+      [
+       -81.96165041593777,
+       26.560805545242047
+      ],
+      [
+       -81.95984976525386,
+       26.560342744224226
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b453ffff",
+    "pop_2020": 327,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.95673472376235,
+       26.561173335338975
+      ],
+      [
+       -81.9554202673817,
+       26.562466703560744
+      ],
+      [
+       -81.95590634416803,
+       26.564222934305853
+      ],
+      [
+       -81.95770694291319,
+       26.564685820744053
+      ],
+      [
+       -81.95902144023091,
+       26.563392430626156
+      ],
+      [
+       -81.9585352978665,
+       26.5616361759666
+      ],
+      [
+       -81.95673472376235,
+       26.561173335338975
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b45bffff",
+    "pop_2020": 16,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.97148270020631,
+       26.560069384519178
+      ],
+      [
+       -81.97016815892802,
+       26.56136302872803
+      ],
+      [
+       -81.97065455833649,
+       26.563119383185903
+      ],
+      [
+       -81.97245556460766,
+       26.563582117326792
+      ],
+      [
+       -81.97377014680102,
+       26.56228845120782
+      ],
+      [
+       -81.97328368180824,
+       26.56053207285849
+      ],
+      [
+       -81.97148270020631,
+       26.560069384519178
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b48fffff",
+    "pop_2020": 92,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.94261820306505,
+       26.570593129415418
+      ],
+      [
+       -81.94130373095241,
+       26.571886160241068
+      ],
+      [
+       -81.94178953482624,
+       26.57364230359726
+      ],
+      [
+       -81.94358987639461,
+       26.57410544006951
+      ],
+      [
+       -81.94490438947146,
+       26.57281238737039
+      ],
+      [
+       -81.9444185200158,
+       26.571056220072908
+      ],
+      [
+       -81.94261820306505,
+       26.570593129415418
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b60bffff",
+    "pop_2020": 53,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.94096083136363,
+       26.576691440259896
+      ],
+      [
+       -81.93964629941215,
+       26.57798438774696
+      ],
+      [
+       -81.9401320926753,
+       26.579740539384787
+      ],
+      [
+       -81.94193248347807,
+       26.580203767483297
+      ],
+      [
+       -81.94324705640055,
+       26.578910798130973
+      ],
+      [
+       -81.94276119754933,
+       26.577154622545805
+      ],
+      [
+       -81.94096083136363,
+       26.576691440259896
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b663ffff",
+    "pop_2020": 116,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.94324705640055,
+       26.578910798130973
+      ],
+      [
+       -81.94193248347807,
+       26.580203767483297
+      ],
+      [
+       -81.94241833702543,
+       26.58195994719763
+      ],
+      [
+       -81.94421882908713,
+       26.582423181505213
+      ],
+      [
+       -81.94553344297896,
+       26.58113019028813
+      ],
+      [
+       -81.9450475238398,
+       26.57937398662862
+      ],
+      [
+       -81.94324705640055,
+       26.578910798130973
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b667ffff",
+    "pop_2020": 85,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.9440757405486,
+       26.575861611515727
+      ],
+      [
+       -81.94276119754933,
+       26.577154622545805
+      ],
+      [
+       -81.94324705640055,
+       26.578910798130973
+      ],
+      [
+       -81.9450475238398,
+       26.57937398662862
+      ],
+      [
+       -81.94636210780499,
+       26.578080953729682
+      ],
+      [
+       -81.94587618336507,
+       26.576324754202357
+      ],
+      [
+       -81.9440757405486,
+       26.575861611515727
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b677ffff",
+    "pop_2020": 51,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.94198944761031,
+       26.562275544913764
+      ],
+      [
+       -81.9406750762924,
+       26.56356863716097
+      ],
+      [
+       -81.94116083050216,
+       26.56532474408391
+      ],
+      [
+       -81.94296102160182,
+       26.565787782697445
+      ],
+      [
+       -81.94427543387883,
+       26.56449466856807
+      ],
+      [
+       -81.94378961409718,
+       26.562738537707745
+      ],
+      [
+       -81.94198944761031,
+       26.562275544913764
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b6c3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.94427543387883,
+       26.56449466856807
+      ],
+      [
+       -81.94296102160182,
+       26.565787782697445
+      ],
+      [
+       -81.94344683608195,
+       26.56754391773285
+      ],
+      [
+       -81.94524712841478,
+       26.568006962574515
+      ],
+      [
+       -81.9465615816492,
+       26.56671382656346
+      ],
+      [
+       -81.94607570159346,
+       26.564957667592825
+      ],
+      [
+       -81.94427543387883,
+       26.56449466856807
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944133b6c7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.84422506251947,
+       26.65611394383091
+      ],
+      [
+       -81.84291025315419,
+       26.657404443143427
+      ],
+      [
+       -81.84339423879696,
+       26.659160045560043
+      ],
+      [
+       -81.84519309943538,
+       26.65962517280399
+      ],
+      [
+       -81.84650794996791,
+       26.65833465179856
+      ],
+      [
+       -81.84602389869485,
+       26.656579025242475
+      ],
+      [
+       -81.84422506251947,
+       26.65611394383091
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441374417ffff",
+    "pop_2020": 21,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.84733871935651,
+       26.65528846227512
+      ],
+      [
+       -81.84602389869485,
+       26.656579025242475
+      ],
+      [
+       -81.84650794996791,
+       26.65833465179856
+      ],
+      [
+       -81.84830688753367,
+       26.658799739521992
+      ],
+      [
+       -81.84962174935752,
+       26.657509154858104
+      ],
+      [
+       -81.8491376324535,
+       26.655753504167713
+      ],
+      [
+       -81.84733871935651,
+       26.65528846227512
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413744bbffff",
+    "pop_2020": 36,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.83010920033865,
+       26.66550630123874
+      ],
+      [
+       -81.82879437651893,
+       26.666796461944717
+      ],
+      [
+       -81.82927808880402,
+       26.668551975441414
+      ],
+      [
+       -81.83107669054274,
+       26.66901735239872
+      ],
+      [
+       -81.83239155555671,
+       26.66772717002259
+      ],
+      [
+       -81.83190777763778,
+       26.665971632359714
+      ],
+      [
+       -81.83010920033865,
+       26.66550630123874
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413746a7ffff",
+    "pop_2020": 211,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.86622996407992,
+       26.63897261299886
+      ],
+      [
+       -81.86491520657883,
+       26.64026366189627
+      ],
+      [
+       -81.86539960756227,
+       26.64201939345497
+      ],
+      [
+       -81.86719883166873,
+       26.642484100213064
+      ],
+      [
+       -81.86851363029314,
+       26.641193029584525
+      ],
+      [
+       -81.86802916368786,
+       26.639437273929442
+      ],
+      [
+       -81.86622996407992,
+       26.63897261299886
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441376067ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.86270123766782,
+       26.620124665474286
+      ],
+      [
+       -81.86138672302056,
+       26.62141581665702
+      ],
+      [
+       -81.86187096487608,
+       26.623171448252474
+      ],
+      [
+       -81.86366978697707,
+       26.623635952756384
+      ],
+      [
+       -81.86498434273899,
+       26.622344779824623
+      ],
+      [
+       -81.86450003528535,
+       26.620589124138377
+      ],
+      [
+       -81.86270123766782,
+       26.620124665474286
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413760dbffff",
+    "pop_2020": 171,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.85522751322003,
+       26.64754434528187
+      ],
+      [
+       -81.85391272973835,
+       26.648835119435724
+      ],
+      [
+       -81.8543969230693,
+       26.650590786484276
+      ],
+      [
+       -81.85619596550809,
+       26.651055703497324
+      ],
+      [
+       -81.85751079013505,
+       26.649764907631457
+      ],
+      [
+       -81.85702653117802,
+       26.648009216464953
+      ],
+      [
+       -81.85522751322003,
+       26.64754434528187
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441376353ffff",
+    "pop_2020": 58,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.85211378867655,
+       26.648370208728245
+      ],
+      [
+       -81.85079901647073,
+       26.64966091923824
+      ],
+      [
+       -81.85128314417628,
+       26.651416562163682
+      ],
+      [
+       -81.85308210971314,
+       26.65188151870266
+      ],
+      [
+       -81.8543969230693,
+       26.650590786484276
+      ],
+      [
+       -81.85391272973835,
+       26.648835119435724
+      ],
+      [
+       -81.85211378867655,
+       26.648370208728245
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944137635bffff",
+    "pop_2020": 23,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.86539960756227,
+       26.64201939345497
+      ],
+      [
+       -81.86408482018044,
+       26.643310400447948
+      ],
+      [
+       -81.8645692157783,
+       26.64506613592561
+      ],
+      [
+       -81.86636846438297,
+       26.645530888510116
+      ],
+      [
+       -81.8676832928915,
+       26.644239859790133
+      ],
+      [
+       -81.86719883166873,
+       26.642484100213064
+      ],
+      [
+       -81.86539960756227,
+       26.64201939345497
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8944137639bffff",
+    "pop_2020": 18,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.87079513157943,
+       26.601015892261675
+      ],
+      [
+       -81.86948078488999,
+       26.602307357980813
+      ],
+      [
+       -81.86996512462535,
+       26.60406298957367
+      ],
+      [
+       -81.87176387663037,
+       26.604527179515284
+      ],
+      [
+       -81.87307826440902,
+       26.603235692018803
+      ],
+      [
+       -81.8725938590935,
+       26.60148003635846
+      ],
+      [
+       -81.87079513157943,
+       26.601015892261675
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413764c3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -81.88824373456278,
+       26.66422559797531
+      ],
+      [
+       -81.88692853598802,
+       26.665516822216606
+      ],
+      [
+       -81.88741353425931,
+       26.66727283740857
+      ],
+      [
+       -81.88921379676805,
+       26.667737652437385
+      ],
+      [
+       -81.890529036453,
+       26.666446406473924
+      ],
+      [
+       -81.89004397251912,
+       26.664690367204216
+      ],
+      [
+       -81.88824373456278,
+       26.66422559797531
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "89441376eb3ffff",
+    "pop_2020": 12,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.15157447367955,
+       26.460893617783952
+      ],
+      [
+       -82.15025990280647,
+       26.46219137027801
+      ],
+      [
+       -82.15074987080082,
+       26.463948903929325
+      ],
+      [
+       -82.15255447522732,
+       26.4644087086469
+      ],
+      [
+       -82.15386908668314,
+       26.463110933977692
+      ],
+      [
+       -82.15337905312983,
+       26.461353376766493
+      ],
+      [
+       -82.15157447367955,
+       26.460893617783952
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a826bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.15386908668314,
+       26.463110933977692
+      ],
+      [
+       -82.15255447522732,
+       26.4644087086469
+      ],
+      [
+       -82.1530445036932,
+       26.466166270381873
+      ],
+      [
+       -82.15484920917756,
+       26.46662608100577
+      ],
+      [
+       -82.1561638612143,
+       26.465328284161917
+      ],
+      [
+       -82.15567376718583,
+       26.46357069886924
+      ],
+      [
+       -82.15386908668314,
+       26.463110933977692
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a826fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.17929704241162,
+       26.47611822642898
+      ],
+      [
+       -82.177982115523,
+       26.47741634653544
+      ],
+      [
+       -82.1784727642162,
+       26.47917417521613
+      ],
+      [
+       -82.1802784053881,
+       26.479633907317368
+      ],
+      [
+       -82.18159337282981,
+       26.47833576502891
+      ],
+      [
+       -82.18110265854668,
+       26.476577912821643
+      ],
+      [
+       -82.17929704241162,
+       26.47611822642898
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8323ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18159337282981,
+       26.47833576502891
+      ],
+      [
+       -82.1802784053881,
+       26.479633907317368
+      ],
+      [
+       -82.1807691146096,
+       26.48139176400333
+      ],
+      [
+       -82.1825748568666,
+       26.48185150192567
+      ],
+      [
+       -82.18388986485967,
+       26.480553337455724
+      ],
+      [
+       -82.1833990900445,
+       26.478795457245365
+      ],
+      [
+       -82.18159337282981,
+       26.47833576502891
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8327ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.17617657543225,
+       26.47695662026378
+      ],
+      [
+       -82.17486165900364,
+       26.478254676962987
+      ],
+      [
+       -82.17535224210741,
+       26.480012482111842
+      ],
+      [
+       -82.17715780722932,
+       26.480472254093737
+      ],
+      [
+       -82.1784727642162,
+       26.47917417521613
+      ],
+      [
+       -82.177982115523,
+       26.47741634653544
+      ],
+      [
+       -82.17617657543225,
+       26.47695662026378
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a832bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.16387362227127,
+       26.468924964412935
+      ],
+      [
+       -82.1625588785818,
+       26.470222868999674
+      ],
+      [
+       -82.1630491540701,
+       26.471980538482942
+      ],
+      [
+       -82.1648542388221,
+       26.47244032692573
+      ],
+      [
+       -82.16616902308205,
+       26.471142400162226
+      ],
+      [
+       -82.1656786820196,
+       26.4693847071331
+      ],
+      [
+       -82.16387362227127,
+       26.468924964412935
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a834bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.16616902308205,
+       26.471142400162226
+      ],
+      [
+       -82.1648542388221,
+       26.47244032692573
+      ],
+      [
+       -82.16534457480844,
+       26.47419802445459
+      ],
+      [
+       -82.1671497606327,
+       26.47465781876402
+      ],
+      [
+       -82.16846458546138,
+       26.47335986982421
+      ],
+      [
+       -82.16797418389719,
+       26.471602148751693
+      ],
+      [
+       -82.16616902308205,
+       26.471142400162226
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a834fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.17305619496436,
+       26.477794910816485
+      ],
+      [
+       -82.17174128900352,
+       26.479092904107354
+      ],
+      [
+       -82.1722318065184,
+       26.480850685719115
+      ],
+      [
+       -82.17403729558312,
+       26.48131049757751
+      ],
+      [
+       -82.17535224210741,
+       26.480012482111842
+      ],
+      [
+       -82.17486165900364,
+       26.478254676962987
+      ],
+      [
+       -82.17305619496436,
+       26.477794910816485
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8367ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.17158468265403,
+       26.472521611933583
+      ],
+      [
+       -82.17026984734726,
+       26.47381962427452
+      ],
+      [
+       -82.17076030941892,
+       26.47557737338146
+      ],
+      [
+       -82.17256567237952,
+       26.476037133684105
+      ],
+      [
+       -82.17388054824808,
+       26.474739099163777
+      ],
+      [
+       -82.17339002059434,
+       26.472981326520603
+      ],
+      [
+       -82.17158468265403,
+       26.472521611933583
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8373ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.17388054824808,
+       26.474739099163777
+      ],
+      [
+       -82.17256567237952,
+       26.476037133684105
+      ],
+      [
+       -82.17305619496436,
+       26.477794910816485
+      ],
+      [
+       -82.17486165900364,
+       26.478254676962987
+      ],
+      [
+       -82.17617657543225,
+       26.47695662026378
+      ],
+      [
+       -82.17568598726164,
+       26.475198819597356
+      ],
+      [
+       -82.17388054824808,
+       26.474739099163777
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8377ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.16846458546138,
+       26.47335986982421
+      ],
+      [
+       -82.1671497606327,
+       26.47465781876402
+      ],
+      [
+       -82.1676401571228,
+       26.476415544329473
+      ],
+      [
+       -82.16944544402327,
+       26.47687534449703
+      ],
+      [
+       -82.17076030941892,
+       26.47557737338146
+      ],
+      [
+       -82.17026984734726,
+       26.47381962427452
+      ],
+      [
+       -82.16846458546138,
+       26.47335986982421
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a837bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18813197229622,
+       26.507760911044464
+      ],
+      [
+       -82.18681662139163,
+       26.509058916583125
+      ],
+      [
+       -82.18730760300986,
+       26.5108169396228
+      ],
+      [
+       -82.18911400116362,
+       26.5112769806559
+      ],
+      [
+       -82.19042939263099,
+       26.509978952962744
+      ],
+      [
+       -82.18993834538193,
+       26.508220906391387
+      ],
+      [
+       -82.18813197229622,
+       26.507760911044464
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8a07ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18665906777838,
+       26.50248688740429
+      ],
+      [
+       -82.18534378755773,
+       26.503784912081272
+      ],
+      [
+       -82.18583471366654,
+       26.505542902808774
+      ],
+      [
+       -82.18764098562013,
+       26.50600289239054
+      ],
+      [
+       -82.18895630640198,
+       26.5047048455545
+      ],
+      [
+       -82.18846531466916,
+       26.502946831296153
+      ],
+      [
+       -82.18665906777838,
+       26.50248688740429
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8a13ffff",
+    "pop_2020": 51,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18895630640198,
+       26.5047048455545
+      ],
+      [
+       -82.18764098562013,
+       26.50600289239054
+      ],
+      [
+       -82.18813197229622,
+       26.507760911044464
+      ],
+      [
+       -82.18993834538193,
+       26.508220906391387
+      ],
+      [
+       -82.1912537067232,
+       26.50692283739678
+      ],
+      [
+       -82.19076265441943,
+       26.50516479521422
+      ],
+      [
+       -82.18895630640198,
+       26.5047048455545
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8a17ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18960504335689,
+       26.513035031606183
+      ],
+      [
+       -82.18828962176255,
+       26.514333017989088
+      ],
+      [
+       -82.18878065889896,
+       26.516091073308505
+      ],
+      [
+       -82.19058718326747,
+       26.51655116577797
+      ],
+      [
+       -82.19190264542621,
+       26.51525315724518
+      ],
+      [
+       -82.19141154265215,
+       26.51349507839323
+      ],
+      [
+       -82.18960504335689,
+       26.513035031606183
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8a23ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19190264542621,
+       26.51525315724518
+      ],
+      [
+       -82.19058718326747,
+       26.51655116577797
+      ],
+      [
+       -82.1910782809867,
+       26.51830924899223
+      ],
+      [
+       -82.19288490650612,
+       26.51876934720445
+      ],
+      [
+       -82.19420040922752,
+       26.517471316522272
+      ],
+      [
+       -82.19370924586696,
+       26.51571320977768
+      ],
+      [
+       -82.19190264542621,
+       26.51525315724518
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8a27ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18878065889896,
+       26.516091073308505
+      ],
+      [
+       -82.18746520717684,
+       26.517389018372356
+      ],
+      [
+       -82.1879562392553,
+       26.519147078051052
+      ],
+      [
+       -82.18976278869677,
+       26.51960721620189
+      ],
+      [
+       -82.1910782809867,
+       26.51830924899223
+      ],
+      [
+       -82.19058718326747,
+       26.51655116577797
+      ],
+      [
+       -82.18878065889896,
+       26.516091073308505
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8a2fffff",
+    "pop_2020": 5,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19042939263099,
+       26.509978952962744
+      ],
+      [
+       -82.18911400116362,
+       26.5112769806559
+      ],
+      [
+       -82.18960504335689,
+       26.513035031606183
+      ],
+      [
+       -82.19141154265215,
+       26.51349507839323
+      ],
+      [
+       -82.19272697468057,
+       26.512197028546105
+      ],
+      [
+       -82.1922358668528,
+       26.51043895406632
+      ],
+      [
+       -82.19042939263099,
+       26.509978952962744
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8a33ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1874833867129,
+       26.49943083511769
+      ],
+      [
+       -82.18616813661076,
+       26.500728901079157
+      ],
+      [
+       -82.18665906777838,
+       26.50248688740429
+      ],
+      [
+       -82.18846531466916,
+       26.502946831296153
+      ],
+      [
+       -82.1897806053291,
+       26.501648743171536
+      ],
+      [
+       -82.1892896085406,
+       26.499890733318612
+      ],
+      [
+       -82.1874833867129,
+       26.49943083511769
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8a8bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18518632977708,
+       26.49721296078288
+      ],
+      [
+       -82.18387112023451,
+       26.498511004580717
+      ],
+      [
+       -82.18436199084269,
+       26.500268962963645
+      ],
+      [
+       -82.18616813661076,
+       26.500728901079157
+      ],
+      [
+       -82.1874833867129,
+       26.49943083511769
+      ],
+      [
+       -82.18699245048752,
+       26.497672853204765
+      ],
+      [
+       -82.18518632977708,
+       26.49721296078288
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8ad7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19337606481393,
+       26.52052745830458
+      ],
+      [
+       -82.19206053195798,
+       26.52182544765953
+      ],
+      [
+       -82.19255168521194,
+       26.52358356310535
+      ],
+      [
+       -82.19435843697016,
+       26.524043712727792
+      ],
+      [
+       -82.19567401039038,
+       26.52274570122801
+      ],
+      [
+       -82.19518279148825,
+       26.520987562251047
+      ],
+      [
+       -82.19337606481393,
+       26.52052745830458
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8b43ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19025388136012,
+       26.52136530376864
+      ],
+      [
+       -82.18893835893819,
+       26.522663229646362
+      ],
+      [
+       -82.18942944654457,
+       26.524421321555774
+      ],
+      [
+       -82.19123612222059,
+       26.524881511124295
+      ],
+      [
+       -82.19255168521194,
+       26.52358356310535
+      ],
+      [
+       -82.19206053195798,
+       26.52182544765953
+      ],
+      [
+       -82.19025388136012,
+       26.52136530376864
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8b4bffff",
+    "pop_2020": 4,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19255168521194,
+       26.52358356310535
+      ],
+      [
+       -82.19123612222059,
+       26.524881511124295
+      ],
+      [
+       -82.19172727041966,
+       26.52663963090597
+      ],
+      [
+       -82.19353404726147,
+       26.527099826203333
+      ],
+      [
+       -82.19484965082049,
+       26.52580185604368
+      ],
+      [
+       -82.19435843697016,
+       26.524043712727792
+      ],
+      [
+       -82.19255168521194,
+       26.52358356310535
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8b4fffff",
+    "pop_2020": 67,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.19402525605896,
+       26.52885797384829
+      ],
+      [
+       -82.19270962236033,
+       26.530155902659043
+      ],
+      [
+       -82.19320082610388,
+       26.531914054623233
+      ],
+      [
+       -82.19500772920429,
+       26.532374301312093
+      ],
+      [
+       -82.19632340347218,
+       26.5310763503652
+      ],
+      [
+       -82.19583213407054,
+       26.529318174865985
+      ],
+      [
+       -82.19402525605896,
+       26.52885797384829
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8b6bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18306562662215,
+       26.48360938660796
+      ],
+      [
+       -82.18175058852407,
+       26.48490750984087
+      ],
+      [
+       -82.18224135321898,
+       26.486665398985227
+      ],
+      [
+       -82.18404722161253,
+       26.487125188422333
+      ],
+      [
+       -82.18536230026355,
+       26.4858270430125
+      ],
+      [
+       -82.18487146996821,
+       26.484069130342906
+      ],
+      [
+       -82.18306562662215,
+       26.48360938660796
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8e43ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18224135321898,
+       26.486665398985227
+      ],
+      [
+       -82.18092628501505,
+       26.48796348097231
+      ],
+      [
+       -82.18141704464821,
+       26.4897213745689
+      ],
+      [
+       -82.18322293808899,
+       26.490181209707128
+      ],
+      [
+       -82.18453804684926,
+       26.488883105547217
+      ],
+      [
+       -82.18404722161253,
+       26.487125188422333
+      ],
+      [
+       -82.18224135321898,
+       26.486665398985227
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8e4fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18388986485967,
+       26.480553337455724
+      ],
+      [
+       -82.1825748568666,
+       26.48185150192567
+      ],
+      [
+       -82.18306562662215,
+       26.48360938660796
+      ],
+      [
+       -82.18487146996821,
+       26.484069130342906
+      ],
+      [
+       -82.18618651851082,
+       26.482770943691953
+      ],
+      [
+       -82.18569568315796,
+       26.481013035487482
+      ],
+      [
+       -82.18388986485967,
+       26.480553337455724
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8e53ffff",
+    "pop_2020": 3,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1807691146096,
+       26.48139176400333
+      ],
+      [
+       -82.17945411706624,
+       26.482689865058845
+      ],
+      [
+       -82.17994482122504,
+       26.484447726213688
+      ],
+      [
+       -82.18175058852407,
+       26.48490750984087
+      ],
+      [
+       -82.18306562662215,
+       26.48360938660796
+      ],
+      [
+       -82.1825748568666,
+       26.48185150192567
+      ],
+      [
+       -82.1807691146096,
+       26.48139176400333
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8e5bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18371375826605,
+       26.491939131277473
+      ],
+      [
+       -82.18239861939571,
+       26.493237194178654
+      ],
+      [
+       -82.182889434512,
+       26.49499512018462
+      ],
+      [
+       -82.18469545410912,
+       26.495455006818958
+      ],
+      [
+       -82.18601063353742,
+       26.49415692174953
+      ],
+      [
+       -82.18551975281073,
+       26.492398972214424
+      ],
+      [
+       -82.18371375826605,
+       26.491939131277473
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8e6bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18601063353742,
+       26.49415692174953
+      ],
+      [
+       -82.18469545410912,
+       26.495455006818958
+      ],
+      [
+       -82.18518632977708,
+       26.49721296078288
+      ],
+      [
+       -82.18699245048752,
+       26.497672853204765
+      ],
+      [
+       -82.188307670472,
+       26.496374745967596
+      ],
+      [
+       -82.18781672918998,
+       26.494616768476718
+      ],
+      [
+       -82.18601063353742,
+       26.49415692174953
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8e6fffff",
+    "pop_2020": 47,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.18453804684926,
+       26.488883105547217
+      ],
+      [
+       -82.18322293808899,
+       26.490181209707128
+      ],
+      [
+       -82.18371375826605,
+       26.491939131277473
+      ],
+      [
+       -82.18551975281073,
+       26.492398972214424
+      ],
+      [
+       -82.18683490212557,
+       26.491100845882187
+      ],
+      [
+       -82.18634401634127,
+       26.48934290078575
+      ],
+      [
+       -82.18453804684926,
+       26.488883105547217
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a8e7bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1184595453955,
+       26.444289916646163
+      ],
+      [
+       -82.1171453821749,
+       26.445587216137547
+      ],
+      [
+       -82.11763454408609,
+       26.447344402262136
+      ],
+      [
+       -82.11943793474155,
+       26.447804312496245
+      ],
+      [
+       -82.1207521385812,
+       26.446506990839644
+      ],
+      [
+       -82.12026291114644,
+       26.444749781114556
+      ],
+      [
+       -82.1184595453955,
+       26.444289916646163
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a900bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1207521385812,
+       26.446506990839644
+      ],
+      [
+       -82.11943793474155,
+       26.447804312496245
+      ],
+      [
+       -82.11992715705793,
+       26.449561526793833
+      ],
+      [
+       -82.12173064874133,
+       26.450021443033567
+      ],
+      [
+       -82.12304489319828,
+       26.44872409921226
+      ],
+      [
+       -82.12255560535463,
+       26.446966861316348
+      ],
+      [
+       -82.1207521385812,
+       26.446506990839644
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a900fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1261627160387,
+       26.44788656850767
+      ],
+      [
+       -82.1248484609982,
+       26.449183975688815
+      ],
+      [
+       -82.12533780925645,
+       26.450941241746627
+      ],
+      [
+       -82.12714147808681,
+       26.451401124214573
+      ],
+      [
+       -82.12845577373776,
+       26.450103694865604
+      ],
+      [
+       -82.12796635994798,
+       26.448346405216906
+      ],
+      [
+       -82.1261627160387,
+       26.44788656850767
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9033ffff",
+    "pop_2020": 19,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.12845577373776,
+       26.450103694865604
+      ],
+      [
+       -82.12714147808681,
+       26.451401124214573
+      ],
+      [
+       -82.12763088676542,
+       26.45315841842531
+      ],
+      [
+       -82.12943465663021,
+       26.45361830687619
+      ],
+      [
+       -82.1307489928898,
+       26.4523208553599
+      ],
+      [
+       -82.13025951867603,
+       26.450563537560456
+      ],
+      [
+       -82.12845577373776,
+       26.450103694865604
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9037ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.12304489319828,
+       26.44872409921226
+      ],
+      [
+       -82.12173064874133,
+       26.450021443033567
+      ],
+      [
+       -82.12221993146863,
+       26.451778685495228
+      ],
+      [
+       -82.12402352418393,
+       26.452238607732138
+      ],
+      [
+       -82.12533780925645,
+       26.450941241746627
+      ],
+      [
+       -82.1248484609982,
+       26.449183975688815
+      ],
+      [
+       -82.12304489319828,
+       26.44872409921226
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a903bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1130498024201,
+       26.442910255777438
+      ],
+      [
+       -82.11173569042694,
+       26.444207469752996
+      ],
+      [
+       -82.11222472641933,
+       26.44596460408771
+      ],
+      [
+       -82.1140279399243,
+       26.446424548055198
+      ],
+      [
+       -82.11534209254337,
+       26.445127311917545
+      ],
+      [
+       -82.11485299103165,
+       26.443370153974914
+      ],
+      [
+       -82.1130498024201,
+       26.442910255777438
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9043ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.11534209254337,
+       26.445127311917545
+      ],
+      [
+       -82.1140279399243,
+       26.446424548055198
+      ],
+      [
+       -82.11451703631246,
+       26.448181710574048
+      ],
+      [
+       -82.11632035084281,
+       26.448641660561396
+      ],
+      [
+       -82.11763454408609,
+       26.447344402262136
+      ],
+      [
+       -82.1171453821749,
+       26.445587216137547
+      ],
+      [
+       -82.11534209254337,
+       26.445127311917545
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9047ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.11075767370653,
+       26.44069323385925
+      ],
+      [
+       -82.10944360234106,
+       26.44199042567221
+      ],
+      [
+       -82.10993257794338,
+       26.44374753181384
+      ],
+      [
+       -82.11173569042694,
+       26.444207469752996
+      ],
+      [
+       -82.1130498024201,
+       26.442910255777438
+      ],
+      [
+       -82.1125607613021,
+       26.441153126025732
+      ],
+      [
+       -82.11075767370653,
+       26.44069323385925
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a905bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1392791290255,
+       26.45286258199193
+      ],
+      [
+       -82.13796473104583,
+       26.454160182413062
+      ],
+      [
+       -82.13845439166795,
+       26.455917580066256
+      ],
+      [
+       -82.14025851581349,
+       26.456377400872583
+      ],
+      [
+       -82.14157295438802,
+       26.45507977827793
+      ],
+      [
+       -82.14108322822226,
+       26.45332235705087
+      ],
+      [
+       -82.1392791290255,
+       26.45286258199193
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a918bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.14157295438802,
+       26.45507977827793
+      ],
+      [
+       -82.14025851581349,
+       26.456377400872583
+      ],
+      [
+       -82.14074823688047,
+       26.458134826647463
+      ],
+      [
+       -82.14255246206946,
+       26.45859465339979
+      ],
+      [
+       -82.14386694123714,
+       26.457297008632086
+      ],
+      [
+       -82.14337715462281,
+       26.455539559285523
+      ],
+      [
+       -82.14157295438802,
+       26.45507977827793
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a918fffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1461610895825,
+       26.459514273037
+      ],
+      [
+       -82.14484656982346,
+       26.46081193997724
+      ],
+      [
+       -82.14533641179739,
+       26.46256942196863
+      ],
+      [
+       -82.14714083908518,
+       26.46302926058751
+      ],
+      [
+       -82.14845539943384,
+       26.46173157147523
+      ],
+      [
+       -82.14796549190521,
+       26.45997406591652
+      ],
+      [
+       -82.1461610895825,
+       26.459514273037
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a91a3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.14845539943384,
+       26.46173157147523
+      ],
+      [
+       -82.14714083908518,
+       26.46302926058751
+      ],
+      [
+       -82.14763074152117,
+       26.464786770673708
+      ],
+      [
+       -82.14943526986433,
+       26.465246615213168
+      ],
+      [
+       -82.15074987080082,
+       26.463948903929325
+      ],
+      [
+       -82.15025990280647,
+       26.46219137027801
+      ],
+      [
+       -82.14845539943384,
+       26.46173157147523
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a91a7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.14386694123714,
+       26.457297008632086
+      ],
+      [
+       -82.14255246206946,
+       26.45859465339979
+      ],
+      [
+       -82.14304224358705,
+       26.460352107287406
+      ],
+      [
+       -82.14484656982346,
+       26.46081193997724
+      ],
+      [
+       -82.1461610895825,
+       26.459514273037
+      ],
+      [
+       -82.14567124251388,
+       26.457756795579886
+      ],
+      [
+       -82.14386694123714,
+       26.457297008632086
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a91bbffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.13386718568624,
+       26.451483189149663
+      ],
+      [
+       -82.13255283886106,
+       26.452780704031905
+      ],
+      [
+       -82.1330423735046,
+       26.45453804997315
+      ],
+      [
+       -82.13484632051282,
+       26.454997904613844
+      ],
+      [
+       -82.13616070793977,
+       26.45370036756118
+      ],
+      [
+       -82.1356711077568,
+       26.451942998038643
+      ],
+      [
+       -82.13386718568624,
+       26.451483189149663
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a91c3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.13698546513984,
+       26.450645419791535
+      ],
+      [
+       -82.1356711077568,
+       26.451942998038643
+      ],
+      [
+       -82.13616070793977,
+       26.45370036756118
+      ],
+      [
+       -82.13796473104583,
+       26.454160182413062
+      ],
+      [
+       -82.1392791290255,
+       26.45286258199193
+      ],
+      [
+       -82.13878946330254,
+       26.451105188893344
+      ],
+      [
+       -82.13698546513984,
+       26.450645419791535
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a91d7ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.13157382489766,
+       26.44926604484912
+      ],
+      [
+       -82.13025951867603,
+       26.450563537560456
+      ],
+      [
+       -82.1307489928898,
+       26.4523208553599
+      ],
+      [
+       -82.13255283886106,
+       26.452780704031905
+      ],
+      [
+       -82.13386718568624,
+       26.451483189149663
+      ],
+      [
+       -82.13337764593672,
+       26.44972584776674
+      ],
+      [
+       -82.13157382489766,
+       26.44926604484912
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a91dbffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.10534876520423,
+       26.43931348997304
+      ],
+      [
+       -82.10403474509276,
+       26.440610596278898
+      ],
+      [
+       -82.10452359479935,
+       26.442367650601
+      ],
+      [
+       -82.10632653012891,
+       26.442827622235146
+      ],
+      [
+       -82.10764059087491,
+       26.441530493769815
+      ],
+      [
+       -82.10715167565692,
+       26.43977341583023
+      ],
+      [
+       -82.10534876520423,
+       26.43931348997304
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9293ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.10764059087491,
+       26.441530493769815
+      ],
+      [
+       -82.10632653012891,
+       26.442827622235146
+      ],
+      [
+       -82.10681544021617,
+       26.444584704761464
+      ],
+      [
+       -82.10861847656459,
+       26.44504468243816
+      ],
+      [
+       -82.10993257794338,
+       26.44374753181384
+      ],
+      [
+       -82.10944360234106,
+       26.44199042567221
+      ],
+      [
+       -82.10764059087491,
+       26.441530493769815
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9297ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.10223191077807,
+       26.44015063069573
+      ],
+      [
+       -82.10091790129891,
+       26.441447673656466
+      ],
+      [
+       -82.10140668549468,
+       26.443204704355836
+      ],
+      [
+       -82.10320954468054,
+       26.44366471571761
+      ],
+      [
+       -82.10452359479935,
+       26.442367650601
+      ],
+      [
+       -82.10403474509276,
+       26.440610596278898
+      ],
+      [
+       -82.10223191077807,
+       26.44015063069573
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a929bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1001246102743,
+       26.42655455563507
+      ],
+      [
+       -82.09881077206883,
+       26.427851677787018
+      ],
+      [
+       -82.09929945094463,
+       26.42960863820548
+      ],
+      [
+       -82.10110203352009,
+       26.430068500090293
+      ],
+      [
+       -82.10241591235854,
+       26.42877135576918
+      ],
+      [
+       -82.10192716798863,
+       26.427014371732824
+      ],
+      [
+       -82.1001246102743,
+       26.42655455563507
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9657ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.09994038814258,
+       26.43793364506306
+      ],
+      [
+       -82.09862641930484,
+       26.439230665867417
+      ],
+      [
+       -82.09911514312938,
+       26.44098766835146
+      ],
+      [
+       -82.10091790129891,
+       26.441447673656466
+      ],
+      [
+       -82.10223191077807,
+       26.44015063069573
+      ],
+      [
+       -82.10174312144639,
+       26.43839360458679
+      ],
+      [
+       -82.09994038814258,
+       26.43793364506306
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a966fffff",
+    "pop_2020": 17,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1584587972827,
+       26.467545668319154
+      ],
+      [
+       -82.15714410466678,
+       26.468843487337164
+      ],
+      [
+       -82.15763425409277,
+       26.47060110521257
+      ],
+      [
+       -82.15943916170473,
+       26.471060927623668
+      ],
+      [
+       -82.16075389489806,
+       26.46976308643198
+      ],
+      [
+       -82.16026367990213,
+       26.468005445003282
+      ],
+      [
+       -82.1584587972827,
+       26.467545668319154
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9c83ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.16075389489806,
+       26.46976308643198
+      ],
+      [
+       -82.15943916170473,
+       26.471060927623668
+      ],
+      [
+       -82.15992937161937,
+       26.47281857355582
+      ],
+      [
+       -82.1617343803011,
+       26.473278401847804
+      ],
+      [
+       -82.1630491540701,
+       26.471980538482942
+      ],
+      [
+       -82.1625588785818,
+       26.470222868999674
+      ],
+      [
+       -82.16075389489806,
+       26.46976308643198
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9c87ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1553392981206,
+       26.468383670815445
+      ],
+      [
+       -82.15402461601366,
+       26.469681426440896
+      ],
+      [
+       -82.15451469987022,
+       26.47143902075775
+      ],
+      [
+       -82.15631953140326,
+       26.4718988830081
+      ],
+      [
+       -82.15763425409277,
+       26.47060110521257
+      ],
+      [
+       -82.15714410466678,
+       26.468843487337164
+      ],
+      [
+       -82.1553392981206,
+       26.468383670815445
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9c8bffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.15074987080082,
+       26.463948903929325
+      ],
+      [
+       -82.14943526986433,
+       26.465246615213168
+      ],
+      [
+       -82.14992523276811,
+       26.46700415338522
+      ],
+      [
+       -82.15172986217058,
+       26.467464003836778
+      ],
+      [
+       -82.1530445036932,
+       26.466166270381873
+      ],
+      [
+       -82.15255447522732,
+       26.4644087086469
+      ],
+      [
+       -82.15074987080082,
+       26.463948903929325
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9cd3ffff",
+    "pop_2020": 0,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -82.1530445036932,
+       26.466166270381873
+      ],
+      [
+       -82.15172986217058,
+       26.467464003836778
+      ],
+      [
+       -82.1522198855479,
+       26.46922157008571
+      ],
+      [
+       -82.15402461601366,
+       26.469681426440896
+      ],
+      [
+       -82.1553392981206,
+       26.468383670815445
+      ],
+      [
+       -82.15484920917756,
+       26.46662608100577
+      ],
+      [
+       -82.1530445036932,
+       26.466166270381873
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "894413a9cd7ffff",
+    "pop_2020": 30,
+    "uncertainty": {
+     "allocation": "block centroid -> tile; a block straddling tile edges is wholly assigned to its centroid's tile",
+     "vintage": "2020 decennial count — pre-event population, not presence at event time"
+    }
+   }
+  }
+ ],
+ "properties": {
+  "source": "US Census 2020 PL blocks via TIGERweb (POP100, block centroids)",
+  "h3_resolution": 9,
+  "n_cells": 190,
+  "pop_assigned": 5428,
+  "pop_in_envelope_unassigned": 427917,
+  "n_blocks_without_centroid": 0,
+  "resolution_cap": "tile",
+  "aoi_from": [
+   "crossview_h3_r9_grid.geojson"
+  ]
+ }
+}

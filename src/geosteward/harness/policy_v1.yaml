@@ -98,6 +98,7 @@ published_events: [eaton-2025, milton-2024, ian-2022]
 artifact_classes:
   # Tile products — the public evidence surface.
   damage_grid:               {resolution_cap: tile,    audience: public,   license: project}
+  population_grid:           {resolution_cap: tile,    audience: public,   license: project}
   svi_context_grid:          {resolution_cap: tile,    audience: public,   license: project}
   debris_exposure_grid:      {resolution_cap: tile,    audience: public,   license: project}
   evidence_grid:             {resolution_cap: tile,    audience: public,   license: project}

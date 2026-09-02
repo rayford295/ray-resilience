@@ -23,6 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from geosteward.agents.base import Artifact, EventContext, utc_stamp
+from geosteward.deepcase.aoi import EVENT_GRIDS
 from geosteward.deepcase.facilities import (
     AMENITIES,
     DECLARED_UNKNOWNS,
@@ -41,28 +42,6 @@ from geosteward.harness.checks.outcome import (
 )
 
 STAGE = "exposure.facility_context"
-
-# The grids whose envelopes define each event's AOI(s). Multiple grids give
-# multiple bboxes (Milton's two AOIs sit 200 km apart; their union envelope
-# would cover open gulf and is deliberately not used).
-EVENT_GRIDS: dict[str, dict[str, list[str]]] = {
-    "eaton-2025": {
-        "hazard": "wildfire",
-        "grids": ["exposure/dins_h3_r9_damage_grid.geojson"],
-    },
-    "milton-2024": {
-        "hazard": "hurricane",
-        "grids": [
-            "evidence/bitemporal_h3_r9_grid.geojson",
-            "exposure/debris_h3_r9_grid.geojson",
-        ],
-    },
-    "ian-2022": {
-        "hazard": "hurricane",
-        "grids": ["evidence/crossview_h3_r9_grid.geojson"],
-    },
-}
-
 
 def fail_closed(audit: AuditLog, results) -> None:
     for r in results:

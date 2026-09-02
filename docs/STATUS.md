@@ -379,6 +379,28 @@ No new dependencies.
   row. App tests 44 → **57** (legend scale, citation resolution); verified end-to-end
   in a headless browser with the gateway and geocoder mocked.
 
+### Population exposure layer (2026-09-01)
+- Adoption #1 from the TDIS review, pulled forward with the facility layer: the watch
+  question TDIS answers per forecast run — *how many people* — answered inside the
+  three deep-case AOIs from **2020 Census blocks via TIGERweb** (public domain,
+  already in this repo's lineage from the Eaton SVI join). Chosen over Kontur: exact
+  decennial counts, no license burden, attributes-only queries (POP100 + block
+  centroid), no polygon downloads.
+- `scripts/build_population.py` allocates blocks to evaluated H3 r9 tiles by centroid
+  containment. **Eaton 46,341 · Ian 5,428 · Milton 772,293** residents assigned; the
+  envelope population landing outside evaluated tiles is declared as a total (never
+  dropped, never mapped into tiles the event has no evidence for). Fails closed on
+  ArcGIS error envelopes and on `exceededTransferLimit` truncation — a partial block
+  set would silently undercount. Two declared boundaries per feature: centroid
+  allocation, and 2020 vintage = *pre-event population, not presence at event time*.
+- Shared `deepcase/aoi.py` now holds the event→grids mapping both the facility and
+  population builders import — one AOI definition, no drift.
+- App: a "Population (2020 Census)" choropleth per event; a Residents stat card in
+  the dossier; and the planner's area selection header now reads
+  "N evaluated cells · ~M residents (2020)" from the same tile values the layer
+  shows. New artifact class `population_grid` (tile/public/project); allowlist
+  19 → 22. Python tests 273 → **279**.
+
 ### Critical-facility context layer (2026-09-01)
 - Adoption #5 from the TDIS review below, pulled forward at the owner's request. TDIS's
   Infrastructure Status tab shows *live* facility status from commercial feeds; this

@@ -23,6 +23,7 @@ export default function ChatPanel({
   selection,
   onClearSelection,
   cells,
+  cellPop,
   onAnswerCells,
   onCite,
 }) {
@@ -39,10 +40,24 @@ export default function ChatPanel({
   // every intersecting event, and `cells` here is the union of every view's
   // layer, fetched as soon as planner mode is entered (App.jsx), not just
   // whichever one is on screen.
-  const selectedCount = useMemo(
-    () => (selection ? cellsInBox(cells ?? [], selection, cellToLatLng).length : 0),
+  const selectedCells = useMemo(
+    () => (selection ? cellsInBox(cells ?? [], selection, cellToLatLng) : []),
     [selection, cells]
   );
+  const selectedCount = selectedCells.length;
+  // Sum of 2020 census population over the selected evaluated cells — the
+  // same tile values the population layer shows, so the header and the map
+  // can never disagree about what a selection contains.
+  const selectedPop = useMemo(() => {
+    if (!cellPop) return null;
+    let sum = 0;
+    let any = false;
+    for (const cell of selectedCells) {
+      const v = cellPop.get(cell);
+      if (typeof v === "number") { sum += v; any = true; }
+    }
+    return any ? sum : null;
+  }, [selectedCells, cellPop]);
 
   async function send(e) {
     e.preventDefault();
@@ -96,6 +111,7 @@ export default function ChatPanel({
               ({selection.min_lat.toFixed(4)}, {selection.min_lon.toFixed(4)} to{" "}
               {selection.max_lat.toFixed(4)}, {selection.max_lon.toFixed(4)}) —{" "}
               {selectedCount} evaluated cell{selectedCount === 1 ? "" : "s"}
+              {selectedPop != null && <> · ~{selectedPop.toLocaleString()} residents (2020)</>}
             </span>
             {" "}
             <button type="button" className="linkish" onClick={onClearSelection}>

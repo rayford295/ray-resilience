@@ -184,6 +184,13 @@ function DossierFacts({ props }) {
   // keeps its qualifier in the same card, so a value never reads without the
   // scope that authorizes it.
   const stats = [];
+  if (typeof props.pop_2020 === "number") {
+    stats.push({
+      k: "Residents (2020)",
+      v: props.pop_2020.toLocaleString(),
+      u: "pre-event census · this tile",
+    });
+  }
   if (typeof props.n_structures === "number") {
     stats.push({ k: "Structures assessed", v: props.n_structures, u: "in this tile" });
   }

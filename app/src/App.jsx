@@ -194,6 +194,19 @@ export default function App() {
     }
     return [...ids];
   }, [layers]);
+  // Tile -> 2020 population, from whichever population layers have loaded.
+  const cellPop = useMemo(() => {
+    const m = new Map();
+    for (const layer of Object.values(layers)) {
+      if (!layer || layer.error) continue;
+      for (const f of layer.features ?? []) {
+        const p = f.properties;
+        if (p?.h3_cell && typeof p.pop_2020 === "number") m.set(p.h3_cell, p.pop_2020);
+      }
+    }
+    return m;
+  }, [layers]);
+
   const records = useMemo(() => {
     const out = { ...dossiers };
     for (const [eventId, m] of Object.entries(meta)) {
@@ -402,6 +415,7 @@ export default function App() {
               selection={selection}
               onClearSelection={() => setSelection(null)}
               cells={areaCells}
+              cellPop={cellPop}
               onAnswerCells={setHighlightCells}
               onCite={onCite}
             />
