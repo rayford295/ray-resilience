@@ -12,10 +12,17 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, model_validator
 
+from geosteward.gateway.hardening import (
+    SlidingWindowLimiter,
+    authorize,
+    client_key,
+    parse_rate_limit,
+)
 from geosteward.gateway.steward import Steward
 from geosteward.harness.audit import AuditLog
 from geosteward.harness.policy import PolicyEngine
@@ -25,13 +32,49 @@ POLICY = REPO_ROOT / "src" / "geosteward" / "harness" / "policy_v1.yaml"
 EVENTS_ROOT = Path(os.environ.get("STEWARD_EVENTS_ROOT", REPO_ROOT / "events"))
 AUDIT_PATH = Path(os.environ.get("STEWARD_AUDIT_PATH", EVENTS_ROOT / "gateway_audit.jsonl"))
 
+#: Fail-closed deployment posture, mirroring the policy planes:
+#:  - No STEWARD_API_TOKEN  -> loopback callers only. Local dev works out of
+#:    the box; network exposure requires an explicit decision.
+#:  - CORS defaults to the local dev origins, never `*`; a public deploy sets
+#:    STEWARD_CORS_ORIGINS to the Pages origin.
+#:  - Rate limit is per client (peer address; first X-Forwarded-For entry
+#:    only when STEWARD_TRUST_PROXY=1, e.g. behind Cloud Run).
+API_TOKEN = os.environ.get("STEWARD_API_TOKEN") or None
+TRUST_PROXY = os.environ.get("STEWARD_TRUST_PROXY") == "1"
+_RATE_MAX, _RATE_WINDOW = parse_rate_limit(os.environ.get("STEWARD_RATE_LIMIT", "20/60"))
+_limiter = SlidingWindowLimiter(_RATE_MAX, _RATE_WINDOW)
+_DEFAULT_CORS = "http://localhost:5173,http://127.0.0.1:5173"
+
 app = FastAPI(title="GeoSteward agent gateway", version="1.0.0-dev")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.environ.get("STEWARD_CORS_ORIGINS", "*").split(","),
+    allow_origins=os.environ.get("STEWARD_CORS_ORIGINS", _DEFAULT_CORS).split(","),
     allow_methods=["POST", "GET"],
-    allow_headers=["*"],
+    allow_headers=["Authorization", "Content-Type"],
 )
+
+
+@app.middleware("http")
+async def guard(request: Request, call_next):
+    """Authorization and rate limiting for /ask. /health stays open — it
+    reveals only the event list the public site already serves."""
+    if request.url.path == "/ask":
+        peer = request.client.host if request.client else None
+        auth_header = request.headers.get("authorization", "")
+        presented = auth_header.removeprefix("Bearer ").strip() or None
+        allowed, reason = authorize(API_TOKEN, presented, peer)
+        if not allowed:
+            return JSONResponse(status_code=401, content={"type": "unauthorized", "reason": reason})
+        key = client_key(peer, request.headers.get("x-forwarded-for"), TRUST_PROXY)
+        ok, retry_after = _limiter.allow(key)
+        if not ok:
+            return JSONResponse(
+                status_code=429,
+                content={"type": "rate_limited",
+                         "reason": f"rate limit {_RATE_MAX}/{_RATE_WINDOW:g}s exceeded"},
+                headers={"Retry-After": str(max(1, int(retry_after + 0.999)))},
+            )
+    return await call_next(request)
 
 steward = Steward(
     events_root=EVENTS_ROOT,

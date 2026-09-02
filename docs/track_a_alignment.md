@@ -34,8 +34,11 @@ nothing to point at is listed as absent rather than described.
 
 Listed so a reviewer does not have to discover it:
 
-- No hosted agent gateway. The public site has no chat backend, and the gateway
-  has no auth, rate limiting, or log redaction (see `Next` in [`STATUS.md`](STATUS.md)).
+- No hosted agent gateway. The public site has no chat backend; the gateway itself
+  is hardened (fail-closed auth, per-client rate limiting, locked-down CORS, and a
+  redacted audit that stores a tile id and a question hash rather than coordinates
+  and text), and hosting waits on deployment decisions (see `Next` in
+  [`STATUS.md`](STATUS.md)).
 - No live third-party lookup has ever run. The `re-derivable` regime is
   implemented, policed, and tested against a stub; `events/live_evidence.jsonl`
   does not exist outside tests because there is no API key. The mechanism is

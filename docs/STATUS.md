@@ -1,6 +1,6 @@
 # GeoSteward v1 — Project Status
 
-**Updated:** 2026-09-01 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-09-02 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -379,6 +379,30 @@ No new dependencies.
   row. App tests 44 → **57** (legend scale, citation resolution); verified end-to-end
   in a headless browser with the gateway and geocoder mocked.
 
+### Gateway hardening (2026-09-02)
+- The four items the roadmap gated hosting on, landed as code (hosting itself still
+  waits on blocked items 1–2):
+  - **Fail-closed authorization**: with no `STEWARD_API_TOKEN` configured the gateway
+    serves loopback callers only — local dev works out of the box, and network
+    exposure can only happen by an explicit decision, never by forgetting one. With a
+    token set, `Authorization: Bearer` gates every caller (constant-time comparison).
+  - **Per-client rate limiting**: in-memory sliding window (`STEWARD_RATE_LIMIT`,
+    default 20/60s), 429 + Retry-After; `X-Forwarded-For` is honored only when
+    `STEWARD_TRUST_PROXY=1`, because that header is attacker-writable without a proxy.
+  - **CORS** defaults to the local dev origins, never `*`; a public deploy sets
+    `STEWARD_CORS_ORIGINS` to the Pages origin.
+  - **Audit redaction**, applied as the one-rule whole-audit change the old
+    in-code comment insisted on: the `gateway_request` row now stores a point as its
+    **H3 r9 cell** (the exact resolution the claim plane caps tile answers at), an
+    area's corners rounded to 3 decimals (~110 m), and the question as **sha256 +
+    length** — the same verifiable-anchor pattern as the manifests, so a caller can
+    prove their question produced a row without the log keeping what a resident
+    typed about their own home. Raw coordinates and verbatim text no longer appear.
+- Pure-logic policies live in `src/geosteward/gateway/hardening.py` (importable
+  without FastAPI); Python tests 279 → **288**. Verified live over HTTP: loopback
+  default, 401 without/200 with bearer, 429 with Retry-After, and a redacted
+  `gateway_request` row.
+
 ### Population exposure layer (2026-09-01)
 - Adoption #1 from the TDIS review, pulled forward with the facility layer: the watch
   question TDIS answers per forecast run — *how many people* — answered inside the
@@ -447,16 +471,12 @@ No new dependencies.
 
 ## 🔜 Next (not blocked)
 
-- Surface `watch_status.json` in the map UI: source health, staleness, and the skipped
-  features it already declares. The product is published; the app does not read it.
-- Citation click-through: resolve an answer's `[artifact:…]` id to its manifest row,
-  inputs, and check results.
-- Gateway hardening before any hosted deployment — origin allowlist, rate limiting,
-  and coordinate/question redaction in the audit (`gateway/main.py` defaults CORS to
-  `*`, and `steward.py` records exact lat/lon and the verbatim question). **Now also a
-  prerequisite** for the Google Maps Platform work below: a keyed API in a public demo
-  is the same class of billing-abuse surface, and the live-evidence audit record has to
-  be written server-side.
+- **Gateway hosting** (Cloud Run) — the hardening that used to sit here landed
+  2026-09-02 (see Done); what remains is the deployment itself, blocked on the GCP
+  project and a hosted LLM endpoint (blocked items 1–2). Still the prerequisite for
+  the Google Maps Platform work below: a keyed API in a public demo is the same class
+  of billing-abuse surface, and the live-evidence audit record has to be written
+  server-side.
 - Persist planner adjustments past the session.
 - **Catalog S0** (from the 2026-08-30 spec): a JSON Schema, a catalog build script under
   `scripts/`, a generated catalog JSONL under `events/` covering the four existing events,

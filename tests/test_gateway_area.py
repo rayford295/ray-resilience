@@ -402,11 +402,13 @@ class AnswerAreaFacilityContextTests(LiveGatewayTestCase):
 
 
 class GatewayRequestAuditPayloadTests(GatewayTestCase):
-    """Addition 1: the `gateway_request` audit row must record the area for
-    an area query -- both are `None` there today, and the bounding box is
-    recorded nowhere, so every area query in the audit log looks identical to
-    every other one. Existing fields (`lat`, `lon`, and the rest) must stay
-    exactly as they are; this is an addition, not a reshaping.
+    """The `gateway_request` audit row records WHERE and WHAT at redacted
+    precision (2026-09-02 hardening): a point becomes its H3 r9 cell -- the
+    resolution the claim plane caps tile answers at -- an area's corners are
+    rounded to 3 decimals, and the question is stored as sha256 + length.
+    Raw coordinates and verbatim question text must never appear: the log is
+    published thinking-out-loud, and a resident's typed question about their
+    own home is not the log's to keep.
     """
 
     QUESTION = "How severe is the damage in this area?"
@@ -416,25 +418,39 @@ class GatewayRequestAuditPayloadTests(GatewayTestCase):
         self.assertEqual(len(rows), 1)
         return rows[0]["payload"]
 
-    def test_area_query_audit_payload_records_the_bounding_box(self):
+    def test_area_query_audit_payload_records_a_rounded_box_only(self):
         llm = MockLLM([f"5 of 10 structures destroyed [artifact:{GRID_ID}]."])
         self.make_steward(llm).answer("planner", self.QUESTION, area=TESTFIRE_BOX)
         payload = self._gateway_request_payload()
-        self.assertEqual(payload["area"], TESTFIRE_BOX)
-        # Unchanged from a point query: no coordinates were given, so both
-        # stay None rather than being repurposed to carry box edges.
-        self.assertIsNone(payload["lat"])
-        self.assertIsNone(payload["lon"])
+        expected = {k: round(v, 3) for k, v in TESTFIRE_BOX.items()}
+        self.assertEqual(payload["area_3dp"], expected)
+        self.assertIsNone(payload["cell_r9"])
+        for raw in ("lat", "lon", "area", "question"):
+            self.assertNotIn(raw, payload)
 
-    def test_point_query_audit_payload_is_unchanged_apart_from_a_null_area(self):
+    def test_point_query_audit_payload_holds_the_tile_not_the_point(self):
+        import h3 as _h3
         llm = MockLLM([f"5 of 10 structures destroyed [artifact:{GRID_ID}]."])
         self.make_steward(llm).answer(
             "planner", self.QUESTION, lat=IN_AOI[0], lon=IN_AOI[1]
         )
         payload = self._gateway_request_payload()
-        self.assertEqual(payload["lat"], IN_AOI[0])
-        self.assertEqual(payload["lon"], IN_AOI[1])
-        self.assertIsNone(payload["area"])
+        self.assertEqual(payload["cell_r9"], _h3.latlng_to_cell(IN_AOI[0], IN_AOI[1], 9))
+        self.assertIsNone(payload["area_3dp"])
+        for raw in ("lat", "lon", "area", "question"):
+            self.assertNotIn(raw, payload)
+
+    def test_question_is_stored_as_hash_and_length_never_text(self):
+        import hashlib as _hashlib
+        llm = MockLLM([f"5 of 10 structures destroyed [artifact:{GRID_ID}]."])
+        self.make_steward(llm).answer("planner", self.QUESTION, area=TESTFIRE_BOX)
+        payload = self._gateway_request_payload()
+        self.assertEqual(
+            payload["question_sha256"],
+            _hashlib.sha256(self.QUESTION.encode("utf-8")).hexdigest(),
+        )
+        self.assertEqual(payload["question_chars"], len(self.QUESTION))
+        self.assertNotIn(self.QUESTION, str(payload))
 
 
 class AskRequestValidationTests(unittest.TestCase):

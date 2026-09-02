@@ -8,6 +8,7 @@ never decides its own authorization and never gets the last word.
 
 from __future__ import annotations
 
+import hashlib
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -27,6 +28,24 @@ from geosteward.harness.policy import (
 )
 from geosteward.live.base import LiveSource, LiveUnavailable
 from geosteward.live.record import LiveEvidenceRecorder
+
+
+def _sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _point_cell(lat, lon):
+    """A point's H3 r9 cell, or None for area queries — the audit's location
+    field carries tile resolution, never raw coordinates."""
+    if lat is None or lon is None:
+        return None
+    return h3.latlng_to_cell(lat, lon, RESOLUTION)
+
+
+def _round_area(area):
+    if not area:
+        return None
+    return {k: round(v, 3) for k, v in area.items()}
 
 # --- deterministic request classification (auditable, testable) -----------
 
@@ -333,16 +352,20 @@ class Steward:
         )
         self.audit.record(
             "gateway_request", "steward",
-            #: `area` is an addition alongside `lat`/`lon`, not a replacement:
-            #: this project's product is a defensible record of why it said
-            #: what it said, and a record that cannot answer "about where"
-            #: for an area query is not that. Recorded exactly as received --
-            #: full precision, not redacted or coarsened -- matching the
-            #: exact coordinates and verbatim question this row already
-            #: stores; redaction is a separately tracked, whole-audit concern
-            #: (docs/STATUS.md), and solving half of it here would make the
-            #: record inconsistent without making it safe.
-            payload={"role": role, "lat": lat, "lon": lon, "area": area, "question": question,
+            #: The whole-audit redaction STATUS.md tracked, applied in one
+            #: place with one rule: the audit holds no finer location than
+            #: the claim plane lets any answer use. A point becomes its H3 r9
+            #: cell — the exact resolution tile-level authorization caps at —
+            #: and an area's corners are rounded to 3 decimals (~110 m, tile
+            #: scale). The question is stored as sha256 + length: the hash is
+            #: the same verifiable anchor the manifests use, so a caller can
+            #: still prove *their* question produced *this* row without the
+            #: log retaining what a resident typed about their own home.
+            payload={"role": role,
+                     "cell_r9": _point_cell(lat, lon),
+                     "area_3dp": _round_area(area),
+                     "question_sha256": _sha256_text(question),
+                     "question_chars": len(question),
                      "purpose": purpose, "resolution": resolution,
                      "verifiability": verifiability,
                      "event": evidence.event_id, "tier": evidence.evidence_tier},
