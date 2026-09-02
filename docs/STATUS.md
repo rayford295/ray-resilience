@@ -340,6 +340,19 @@ No new dependencies.
 - **Structure global, coverage four events.** Stated in the spec's §3 and in the README's
   what-works table.
 
+### PWA light-theme restyle (2026-09-01)
+- The app moved from the dark ops-console palette to a light professional theme
+  (off-white ground, white cards, teal accent), prompted by the TDIS portal review
+  below. Styling layer only: design tokens in the app's stylesheet plus one
+  presentational change — the resident dossier's numeric facts now render as
+  stat callouts, each number keeping its qualifier in the same card.
+- Every semantic encoding survives in light-tinted form: refusal red, declared-unknown
+  amber, validity green, the dashed live-citation chip, the three `verifiability` hues.
+  No new fonts and no external requests — the PWA stays keyless and offline-cacheable.
+- Verified with headless-browser screenshots at desktop and phone widths, both modes,
+  with the geocoder mocked to exercise the dossier; 44 JS tests and the production
+  build pass unchanged.
+
 ## 🔜 Next (not blocked)
 
 - Surface `watch_status.json` in the map UI: source health, staleness, and the skipped

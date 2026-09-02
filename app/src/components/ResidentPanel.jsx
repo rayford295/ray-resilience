@@ -118,29 +118,44 @@ export default function ResidentPanel({ coverage, records, onFly }) {
 }
 
 function DossierFacts({ props }) {
-  const facts = [];
+  // Same facts as before, presented as glanceable stat callouts. Each number
+  // keeps its qualifier in the same card, so a value never reads without the
+  // scope that authorizes it.
+  const stats = [];
   if (typeof props.n_structures === "number") {
-    facts.push(`${props.n_structures} structures were assessed in this tile`);
+    stats.push({ k: "Structures assessed", v: props.n_structures, u: "in this tile" });
   }
   if (typeof props.destroyed_rate === "number") {
-    facts.push(`${Math.round(props.destroyed_rate * 100)}% of assessed structures destroyed`);
+    stats.push({
+      k: "Destroyed",
+      v: `${Math.round(props.destroyed_rate * 100)}%`,
+      u: "of assessed structures",
+    });
   }
   if (typeof props.RPL_THEMES === "number") {
-    facts.push(
-      `social vulnerability rank ${props.RPL_THEMES.toFixed(2)} (0 = lowest, 1 = highest, CDC SVI 2022)`
-    );
+    stats.push({
+      k: "Social vulnerability",
+      v: props.RPL_THEMES.toFixed(2),
+      u: "0 low – 1 high · CDC SVI 2022",
+    });
   }
   if (typeof props.n_matched_samples === "number") {
-    facts.push(`${props.n_matched_samples} cross-view evidence samples cover this tile`);
+    stats.push({ k: "Evidence samples", v: props.n_matched_samples, u: "cross-view, this tile" });
   }
   return (
-    <ul>
-      {facts.map((f) => (
-        <li key={f}>{f}</li>
-      ))}
-      <li className="dim">
+    <>
+      <div className="stats">
+        {stats.map((s) => (
+          <div className="stat" key={s.k}>
+            <div className="k">{s.k}</div>
+            <div className="v">{s.v}</div>
+            <div className="u">{s.u}</div>
+          </div>
+        ))}
+      </div>
+      <p className="hint">
         tile resolution: H3 r9 (~0.1 km²) — statements never narrow to a single parcel
-      </li>
-    </ul>
+      </p>
+    </>
   );
 }
