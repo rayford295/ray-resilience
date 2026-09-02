@@ -379,6 +379,20 @@ No new dependencies.
   row. App tests 44 → **57** (legend scale, citation resolution); verified end-to-end
   in a headless browser with the gateway and geocoder mocked.
 
+### Paper synced to the shipped system; repo-wide consistency pass (2026-09-02)
+- The short paper now describes what is actually deployed: population and facility
+  numbers in all three deep cases, the exercised `open-license-attribution` value,
+  the one-rule audit redaction, the typed watch and the separate Day-1 outlook
+  product, the hardened-but-not-hosted gateway, and the verified counts (295 Python +
+  67 app = 362 tests). Still 3 pages + references; owner decisions at the top of the
+  `.tex` remain open (authors, emails, format vs. the Track A brief).
+- Test counts synced everywhere they are quoted (README quickstart, landing page,
+  `track_a_alignment.md`); the README quickstart's skip note now describes the
+  gateway-extra dependency instead of pinning a count that drifts.
+- `CITATION.cff` added for the software (Yifan Yang; the paper's author list is a
+  separate, still-open owner decision). The README's not-done row shrinks to
+  releases/CHANGELOG/contributor docs.
+
 ### Typed live watch + Day-1 flash-flood outlook (2026-09-02)
 - The remaining implementable halves of the TDIS review's tabs, prompted by the owner's
   screenshot walkthrough. Live Weather: the watch layer now renders **per hazard type**

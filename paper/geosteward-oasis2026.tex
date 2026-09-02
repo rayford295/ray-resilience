@@ -52,10 +52,10 @@ retaining the evidence at all. We exercise the harness on a nationwide
 hourly hazard watch (USGS, NWS, NHC, NIFC) and three deep cases across
 two hazard types --- the 2025 Eaton Fire, Hurricane Milton (2024), and
 Hurricane Ian (2022) --- joining ground-truth structure damage, county
-debris volumes, social vulnerability, and reliability-gated cross-view
-street imagery on H3 grids, delivered through an installable, keyless
+debris volumes, social vulnerability, 2020 census population, and
+reliability-gated cross-view street imagery on H3 grids, delivered through an installable, keyless
 web app with resident and planner modes. The test suite doubles as a
-verifiable evaluation environment (310 tests in CI), and the audit
+verifiable evaluation environment (362 tests in CI), and the audit
 record preserves two incidents where the harness caught the system
 violating its own rules --- evidence, we argue, that the mechanism does
 work that documentation alone does not.
@@ -137,7 +137,12 @@ timestamp. Failures are recorded, never erased; the app renders lineage
 from any map layer back to timestamped source snapshots. Audit logs are
 treated as immutable: when run-grouping logic later changed, the reader
 was taught to recover runs from structural markers rather than the logs
-being rewritten.
+being rewritten. The gateway's own audit is redacted by one rule --- it
+holds no finer location than the claim plane lets any answer use: a
+point is stored as its H3 r9 cell, an area's corners rounded to
+$\sim$110\,m, and the question as sha256 plus length, so a caller can
+prove their question produced a row without the log retaining what a
+resident typed about their own home.
 
 \textbf{Institutional validity.} A single YAML policy file carries two
 planes of ordered, first-match rules with default deny, validated at
@@ -169,7 +174,11 @@ resolves this by attesting to the \emph{request} plus a response digest
 content --- and a containment property test enforces that no response
 payload ever reaches the audit record. Grounded free-text generation is
 not reproducible even at temperature zero, so it falls through to
-default-deny: the citable unit is the citation, never the prose.
+default-deny: the citable unit is the citation, never the prose. The
+\texttt{license} attribute is exercised in production by a fourth value
+--- \texttt{open-license-attribution} --- for OSM-derived facility
+context (ODbL): redistributable, but only with its attribution, which
+therefore travels inside the artifact itself.
 
 \section{System and Deep Cases}
 
@@ -188,7 +197,13 @@ wildfires) refresh hourly in CI, writing append-only gzip snapshots and
 a national watch product. Per-source failures are declared, not hidden:
 the map badge reports \emph{mapped-of-total} features and names sources
 that failed, and an ArcGIS error envelope fails the wildfire connector
-closed instead of reporting zero fires.
+closed instead of reporting zero fires. NWS alerts render hollow ---
+an advisory about what may come never looks like an occurrence. A
+Day-1 flash-flood outlook (NOAA/WPC Excessive Rainfall Outlook, public
+domain) publishes as a \emph{separate} product beside the watch ---
+polygons and a forecast, never merged into the point layer --- carrying
+its own declared boundary: outlook only, no damage conclusions, never a
+replacement for official warnings.
 
 \textbf{Tier 2/3 --- three deep cases, one harness.} Exposure,
 vulnerability, and damage analysis exist only inside three areas of
@@ -199,22 +214,30 @@ interest, and the app says so rather than extrapolating:
   counts and mandatory uncertainty; CDC SVI 2022 joined across 20 Census
   tracts with the downscaling approximation declared per feature;
   2{,}244 reliability-gated cross-view street-imagery samples
-  $\rightarrow$ a 109-cell evidence grid. A damage class with $n{=}30$
+  $\rightarrow$ a 109-cell evidence grid; 46{,}341 residents (2020
+  census blocks, centroid-allocated with the pre-event vintage declared)
+  and 27 OSM critical facilities. A damage class with $n{=}30$
   is declared as lacking statistical power rather than hidden.
 \item \emph{Hurricane Milton 2024 (FL):} 2{,}556 labeled pre/post
   street-view pairs $\rightarrow$ a 15-cell grid at Horseshoe Beach,
   each feature carrying the attribution caveat that post-imagery is
   season-cumulative (Debby, Helene, Milton); 5{,}618 Pinellas County
   cells with county debris-program volumes and wind/rain covariates.
-  A generated-imagery dataset was excluded, and the exclusion itself is
+  772{,}293 residents and 200 OSM facilities across the two AOIs. A
+  generated-imagery dataset was excluded, and the exclusion itself is
   auditable in the event dossier.
 \item \emph{Hurricane Ian 2022 (FL):} 886 matched samples $\rightarrow$
   a 190-cell evidence grid; 4{,}121 further street-view positions ship
   as a \emph{density-only} layer because no verifiable per-point
-  severity link exists --- candor over coverage.
+  severity link exists --- candor over coverage; 5{,}428 residents and
+  79 OSM facilities.
 \end{itemize}
 All source imagery traces to a hashed dataset registry (134{,}272
-files, $\sim$33\,GB, SHA-256).
+files, $\sim$33\,GB, SHA-256). Facility context declares OSM
+\emph{presence, never operational status}; population outside the
+evaluated tiles is declared as a total, never mapped into tiles the
+event has no evidence for; and no claim-plane rule authorizes facility
+claims, so the agent's answers about them default-deny.
 
 \textbf{Two modes.} Residents geocode an address and receive a
 plain-language dossier --- stat callouts with their qualifiers attached,
@@ -261,7 +284,7 @@ append-only history, including of our own mistakes.
 
 Following \citet{yang2026accountable}, the test suite is designed as the
 paper's verifiable evaluation environment rather than an afterthought:
-266 Python tests and 44 app tests run in CI on every push, including a
+295 Python tests and 67 app tests run in CI on every push, including a
 cell-by-cell policy-matrix sweep (every role $\times$ tier $\times$
 resolution combination against expected authorization), adversarial
 claim-check cases, fail-closed connector tests against real error

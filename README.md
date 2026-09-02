@@ -65,7 +65,7 @@ coverage today is four events.
 | Population exposure inside the three AOIs (2020 Census blocks → H3 r9 tiles) | Working — harness-built per-tile resident counts (Eaton 46,341 · Ian 5,428 · Milton 772,293 assigned), centroid allocation and pre-event vintage declared per feature, envelope population outside evaluated tiles declared as a total; a choropleth view per event, a resident-dossier stat, and an area-selection population sum in planner mode |
 | Critical-facility context inside the three AOIs (hospitals, clinics, fire stations, police from OpenStreetMap) | Working — harness-built points with frozen Overpass snapshots; declares OSM *presence, never operational status*, carries its ODbL attribution in the artifact, and the resident dossier lists facilities within 1 km of a covered address. The agent makes no facility claims: no claim-plane rule authorizes them, so they default-deny |
 | Planner slider adjustments persisted | **Not done** — recorded in session memory only |
-| Releases, CHANGELOG, CITATION.cff, contributor docs | **Not done** |
+| Releases, CHANGELOG, contributor docs | **Not done** — `CITATION.cff` exists; the rest does not |
 
 ## Why "Steward"?
 
@@ -138,7 +138,7 @@ evidence beside it.
 ```bash
 git clone https://github.com/rayford295/GeoSteward && cd GeoSteward
 python -m pip install -e ".[deepcase]"
-python -m unittest discover -s tests          # 266 pass, 1 skips without [gateway]
+python -m unittest discover -s tests          # 295 pass (tests needing the [gateway] extra skip without it)
 
 python scripts/publication_boundary.py plan   # which artifacts may be published
 cd app && npm ci && npm test && npm run dev   # PWA at http://localhost:5173
