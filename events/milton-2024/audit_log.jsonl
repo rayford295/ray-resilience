@@ -30,3 +30,6 @@
 {"action": "check", "actor": "exposure.debris_grid", "utc": "20260820T024020Z", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
 {"action": "stage", "actor": "exposure.debris_grid", "utc": "20260820T024021Z", "payload": {"status": "ok", "n_cells": 5618}, "rule_id": null}
 {"action": "stage", "actor": "dossier.event_record", "utc": "20260820T024021Z", "payload": {"status": "ok"}, "rule_id": null}
+{"action": "check", "actor": "exposure.facility_context", "utc": "20260902T032609Z", "run_id": "20153b5611a0", "payload": {"check": "crs", "passed": true, "detail": "CRS EPSG:4326 matches expected"}, "rule_id": null}
+{"action": "check", "actor": "exposure.facility_context", "utc": "20260902T032609Z", "run_id": "20153b5611a0", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
+{"action": "stage", "actor": "exposure.facility_context", "utc": "20260902T032609Z", "run_id": "20153b5611a0", "payload": {"status": "ok", "n_facilities": 200, "counts": {"clinic": 69, "fire_station": 72, "hospital": 24, "police": 35}, "n_aoi_bboxes": 2}, "rule_id": null}

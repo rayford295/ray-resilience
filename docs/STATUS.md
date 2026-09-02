@@ -379,6 +379,35 @@ No new dependencies.
   row. App tests 44 → **57** (legend scale, citation resolution); verified end-to-end
   in a headless browser with the gateway and geocoder mocked.
 
+### Critical-facility context layer (2026-09-01)
+- Adoption #5 from the TDIS review below, pulled forward at the owner's request. TDIS's
+  Infrastructure Status tab shows *live* facility status from commercial feeds; this
+  layer deliberately claims the opposite and weaker thing — **presence in OpenStreetMap,
+  never operational status** — because that is what open data can support, and every
+  feature carries that boundary in its own uncertainty field.
+- Pipeline: `scripts/build_facilities.py` derives each event's AOI envelope(s) from grids
+  the event has already committed (Milton's two AOIs stay two bboxes — their union would
+  cover open gulf), freezes the raw Overpass response (gzip, hashed), fails closed on
+  Overpass `remark` truncations and on any point outside its envelope, and emits
+  `critical_facilities.geojson` per event: Eaton 27, Ian 79, Milton 200 facilities
+  (hospital / clinic / fire_station / police; shelters and schools excluded in v1 —
+  OSM tagging for them is inconsistent enough that an extract would understate).
+- Governance: `KNOWN_LICENSES` gained a fourth value, **`open-license-attribution`** —
+  third-party content whose license *permits* redistribution with attribution (ODbL).
+  Two new artifact classes: `facility_context_points` (tile / public) and
+  `source_snapshot_odbl` (internal — same audience as `source_snapshot`, separate kind
+  so the license attribute never lies even where it is unread). Allowlist 16 → 19 files;
+  the Overpass snapshots are correctly denied. No claim-plane change: the agent still
+  has no rule authorizing facility claims, so they default-deny.
+- App: facility points with per-category colors and a popup carrying name, the
+  presence-not-status line, and the ODbL attribution (DOM-built — OSM names are
+  third-party text); a layer toggle with attribution; the resident dossier lists
+  facilities within 1 km, nearest first, with "layer unreadable", "none recorded"
+  (plus "absence from OSM is not evidence of absence"), and results as three distinct
+  renderings.
+- Tests: Python 266 → **273** (bbox/query/conversion/fail-closed fixtures), app 57 →
+  **61** (haversine, proximity, null-vs-empty). Verified headless end-to-end.
+
 ### OASIS short-paper draft (2026-09-01)
 - **First full draft committed** under `paper/` (ACM `sigconf`, builds locally with the
   repository's TinyTeX via the bundled build script; currently 3 pages + references).

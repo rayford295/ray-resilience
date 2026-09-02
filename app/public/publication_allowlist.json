@@ -27,6 +27,12 @@
       "redact_workstation_paths": false
     },
     {
+      "path": "events/eaton-2025/exposure/critical_facilities.geojson",
+      "kind": "facility_context_points",
+      "rule_id": "allow-publish-tile-products",
+      "redact_workstation_paths": false
+    },
+    {
       "path": "events/eaton-2025/exposure/dins_h3_r9_damage_grid.geojson",
       "kind": "damage_grid",
       "rule_id": "allow-publish-tile-products",
@@ -69,6 +75,12 @@
       "redact_workstation_paths": false
     },
     {
+      "path": "events/ian-2022/exposure/critical_facilities.geojson",
+      "kind": "facility_context_points",
+      "rule_id": "allow-publish-tile-products",
+      "redact_workstation_paths": false
+    },
+    {
       "path": "events/milton-2024/artifact_manifest.jsonl",
       "kind": "artifact_manifest",
       "rule_id": "allow-publish-event-accountability-records",
@@ -93,6 +105,12 @@
       "redact_workstation_paths": false
     },
     {
+      "path": "events/milton-2024/exposure/critical_facilities.geojson",
+      "kind": "facility_context_points",
+      "rule_id": "allow-publish-tile-products",
+      "redact_workstation_paths": false
+    },
+    {
       "path": "events/milton-2024/exposure/debris_h3_r9_grid.geojson",
       "kind": "debris_exposure_grid",
       "rule_id": "allow-publish-tile-products",
@@ -105,6 +123,12 @@
       "kind": "damage_points_restricted",
       "rule_id": "deny-publish-parcel-resolution",
       "reason": "Parcel-resolution artifacts are lineage-only and are never served."
+    },
+    {
+      "path": "events/eaton-2025/snapshots/facilities/overpass_20260902T032603Z.json.gz",
+      "kind": "source_snapshot_odbl",
+      "rule_id": "deny-publish-internal-audience",
+      "reason": "Internal snapshots support reproduction on the maintainer's workstation, not publication."
     },
     {
       "path": "events/eaton-2025/snapshots/registry/Altadena_Images_profile.json",
@@ -143,6 +167,12 @@
       "reason": "Internal snapshots support reproduction on the maintainer's workstation, not publication."
     },
     {
+      "path": "events/ian-2022/snapshots/facilities/overpass_20260902T032605Z.json.gz",
+      "kind": "source_snapshot_odbl",
+      "rule_id": "deny-publish-internal-audience",
+      "reason": "Internal snapshots support reproduction on the maintainer's workstation, not publication."
+    },
+    {
       "path": "events/ian-2022/snapshots/registry/IAN_hurricane_mapillary_matched_profile.json",
       "kind": "dataset_registry_snapshot",
       "rule_id": "deny-publish-internal-audience",
@@ -163,6 +193,12 @@
     {
       "path": "events/milton-2024/snapshots/debris/h9_debris_baseline.csv.gz",
       "kind": "source_snapshot",
+      "rule_id": "deny-publish-internal-audience",
+      "reason": "Internal snapshots support reproduction on the maintainer's workstation, not publication."
+    },
+    {
+      "path": "events/milton-2024/snapshots/facilities/overpass_20260902T032609Z.json.gz",
+      "kind": "source_snapshot_odbl",
       "rule_id": "deny-publish-internal-audience",
       "reason": "Internal snapshots support reproduction on the maintainer's workstation, not publication."
     },

@@ -24,3 +24,6 @@
 {"action": "check", "actor": "exposure.svi_context", "utc": "20260820T022620Z", "payload": {"check": "bounds", "passed": true, "detail": "svi_rank_max=0.9323 within [0.0, 1.0]"}, "rule_id": null}
 {"action": "check", "actor": "exposure.svi_context", "utc": "20260820T022620Z", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
 {"action": "stage", "actor": "exposure.svi_context", "utc": "20260820T022620Z", "payload": {"status": "ok", "n_cells": 265, "n_tracts": 20, "n_svi_missing": 0}, "rule_id": null}
+{"action": "check", "actor": "exposure.facility_context", "utc": "20260902T032603Z", "run_id": "7c2d940f932c", "payload": {"check": "crs", "passed": true, "detail": "CRS EPSG:4326 matches expected"}, "rule_id": null}
+{"action": "check", "actor": "exposure.facility_context", "utc": "20260902T032603Z", "run_id": "7c2d940f932c", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
+{"action": "stage", "actor": "exposure.facility_context", "utc": "20260902T032603Z", "run_id": "7c2d940f932c", "payload": {"status": "ok", "n_facilities": 27, "counts": {"clinic": 6, "fire_station": 12, "hospital": 2, "police": 7}, "n_aoi_bboxes": 1}, "rule_id": null}

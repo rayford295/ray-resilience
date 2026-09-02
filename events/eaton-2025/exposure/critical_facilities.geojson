@@ -1,0 +1,545 @@
+{
+ "type": "FeatureCollection",
+ "crs_declared": "EPSG:4326",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1511343,
+     34.1775836
+    ]
+   },
+   "properties": {
+    "name": "ChapCare Fair Oaks",
+    "category": "clinic",
+    "osm_ref": "node/358808494",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1217523,
+     34.1502341
+    ]
+   },
+   "properties": {
+    "name": "DaVita Rose City Dialysis",
+    "category": "clinic",
+    "osm_ref": "node/3209503165",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1256046,
+     34.1443901
+    ]
+   },
+   "properties": {
+    "name": "Hsin Yi Grace Huang, M.D.",
+    "category": "clinic",
+    "osm_ref": "node/4458970799",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1516211,
+     34.1426889
+    ]
+   },
+   "properties": {
+    "name": "Pasadena Endoscopy Center",
+    "category": "clinic",
+    "osm_ref": "node/13478199220",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1142944,
+     34.1457364
+    ]
+   },
+   "properties": {
+    "name": "Saint George's Medical Clinic",
+    "category": "clinic",
+    "osm_ref": "node/13523296565",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.129784,
+     34.144409
+    ]
+   },
+   "properties": {
+    "name": "Thatcher Medical Center",
+    "category": "clinic",
+    "osm_ref": "node/13478064621",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1722999,
+     34.2016018
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "fire_station",
+    "osm_ref": "way/377238619",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1839335,
+     34.2343138
+    ]
+   },
+   "properties": {
+    "name": "Angeles Crest Station",
+    "category": "fire_station",
+    "osm_ref": "way/429610792",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1743965,
+     34.1976739
+    ]
+   },
+   "properties": {
+    "name": "Los Angeles County Fire Department Camp #2",
+    "category": "fire_station",
+    "osm_ref": "way/922220514",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.158525,
+     34.1929618
+    ]
+   },
+   "properties": {
+    "name": "Los Angeles County Fire Department Station #12",
+    "category": "fire_station",
+    "osm_ref": "node/368167685",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.093784,
+     34.174449
+    ]
+   },
+   "properties": {
+    "name": "Los Angeles County Fire Department Station #66",
+    "category": "fire_station",
+    "osm_ref": "node/368168519",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1329558,
+     34.1885462
+    ]
+   },
+   "properties": {
+    "name": "Los Angeles County Fire Department Station 11",
+    "category": "fire_station",
+    "osm_ref": "way/1353638773",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.9996062,
+     34.1471949
+    ]
+   },
+   "properties": {
+    "name": "Monrovia Fire Department",
+    "category": "fire_station",
+    "osm_ref": "node/539322207",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.150785,
+     34.1432166
+    ]
+   },
+   "properties": {
+    "name": "Pasadena Fire Department Station 31",
+    "category": "fire_station",
+    "osm_ref": "node/13482229070",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1503484,
+     34.1654229
+    ]
+   },
+   "properties": {
+    "name": "Pasadena Fire Department Station 36",
+    "category": "fire_station",
+    "osm_ref": "node/7185705823",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1761273,
+     34.1667887
+    ]
+   },
+   "properties": {
+    "name": "Pasadena Fire Department Station 38",
+    "category": "fire_station",
+    "osm_ref": "node/7185685983",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.122436,
+     34.1412568
+    ]
+   },
+   "properties": {
+    "name": "Pasadena Fire Station 34",
+    "category": "fire_station",
+    "osm_ref": "way/1224939074",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.0584632,
+     34.161593
+    ]
+   },
+   "properties": {
+    "name": "Sierra Madre Fire Department",
+    "category": "fire_station",
+    "osm_ref": "node/1666861741",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1659446,
+     34.1962016
+    ]
+   },
+   "properties": {
+    "name": "Hathaway-Sycamores",
+    "category": "hospital",
+    "osm_ref": "way/272245253",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.0912498,
+     34.1408821
+    ]
+   },
+   "properties": {
+    "name": "Las Encinas Hospital",
+    "category": "hospital",
+    "osm_ref": "way/571991516",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1680365,
+     34.1824437
+    ]
+   },
+   "properties": {
+    "name": "Altadena Area CHP",
+    "category": "police",
+    "osm_ref": "way/71320334",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1325116,
+     34.1896215
+    ]
+   },
+   "properties": {
+    "name": "Altadena Sheriffs Station",
+    "category": "police",
+    "osm_ref": "way/471771825",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1439749,
+     34.1492472
+    ]
+   },
+   "properties": {
+    "name": "LA County Sheriff's Department",
+    "category": "police",
+    "osm_ref": "node/4367205671",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.9990398,
+     34.1479762
+    ]
+   },
+   "properties": {
+    "name": "Monrovia Police Department",
+    "category": "police",
+    "osm_ref": "node/539321027",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1448597,
+     34.1491358
+    ]
+   },
+   "properties": {
+    "name": "Pasadena Police Department",
+    "category": "police",
+    "osm_ref": "way/32825834",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.1202522,
+     34.1445106
+    ]
+   },
+   "properties": {
+    "name": "Police & College Safety",
+    "category": "police",
+    "osm_ref": "node/2412277974",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.0583398,
+     34.1616241
+    ]
+   },
+   "properties": {
+    "name": "Sierra Madre Police Department",
+    "category": "police",
+    "osm_ref": "node/1666862474",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  }
+ ],
+ "properties": {
+  "source": "OpenStreetMap via Overpass API",
+  "attribution": "© OpenStreetMap contributors (ODbL 1.0)",
+  "license": "ODbL-1.0",
+  "amenities_in_scope": [
+   "hospital",
+   "clinic",
+   "fire_station",
+   "police"
+  ],
+  "n_facilities": 27,
+  "counts_by_category": {
+   "clinic": 6,
+   "fire_station": 12,
+   "hospital": 2,
+   "police": 7
+  },
+  "resolution_cap": "tile",
+  "declared_unknowns": [
+   "OSM presence only: whether a facility is open, staffed, or intact after the event is not claimed and cannot be read from this layer",
+   "OSM completeness varies by place: a facility absent here may exist on the ground"
+  ],
+  "aoi_from": [
+   "dins_h3_r9_damage_grid.geojson"
+  ]
+ }
+}

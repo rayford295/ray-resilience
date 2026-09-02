@@ -251,3 +251,12 @@ aside > section.welcome { border-left: 4px solid var(--accent); }
 button.cite { cursor: pointer; }
 button.cite:hover { border-color: var(--accent); }
 button.cite.live:hover { border-color: var(--warn); }
+
+.facility-toggle {
+  display: flex; align-items: center; gap: 0.45rem; margin-top: 0.55rem;
+  font-size: 0.82rem; cursor: pointer;
+}
+.facility-toggle input { accent-color: var(--accent); }
+.attribution-line { margin-top: 0.2rem; }
+.facility-near { margin-top: 0.6rem; }
+.facility-near ul { padding-left: 1.1rem; margin: 0.3rem 0; font-size: 0.84rem; line-height: 1.5; }

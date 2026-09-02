@@ -116,6 +116,14 @@ artifact_classes:
   # 2026-08-20-non-retainable-evidence-design.md.
   live_lookup_record:        {resolution_cap: tile,    audience: public,   license: project}
 
+  # Critical-facility points extracted from OpenStreetMap inside a deep-case
+  # AOI. Third-party content whose license (ODbL) permits redistribution with
+  # attribution — the fourth license value exists for exactly this case:
+  # neither ours, nor public domain, nor forbidden. The artifact declares
+  # presence in OSM, never operational status, and carries its attribution
+  # and that boundary in its own properties.
+  facility_context_points:   {resolution_cap: tile,    audience: public,   license: open-license-attribution}
+
   # Parcel-level ground truth: lineage only, never served. CAL FIRE DINS is
   # public-domain data; `parcel` is a disclosure judgment, not a licence one,
   # and the two attributes are kept separate so neither excuses the other.
@@ -125,6 +133,10 @@ artifact_classes:
   # registry profiles describe a private 33 GB corpus, so they stay internal.
   dataset_registry_snapshot: {resolution_cap: dataset, audience: internal, license: project}
   source_snapshot:           {resolution_cap: source,  audience: internal, license: public-domain-source}
+  # An internal snapshot of ODbL-licensed upstream state (Overpass responses).
+  # Same audience as source_snapshot; a separate kind because its license is
+  # not public-domain and the attribute must not lie even where it is unread.
+  source_snapshot_odbl:      {resolution_cap: source,  audience: internal, license: open-license-attribution}
 
 distribution:
   # --- hard denials (checked first) ---

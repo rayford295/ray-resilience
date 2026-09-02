@@ -16,3 +16,6 @@
 {"action": "check", "actor": "evidence.svi_sample_density", "utc": "20260820T033820Z", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
 {"action": "stage", "actor": "evidence.svi_sample_density", "utc": "20260820T033820Z", "payload": {"status": "ok", "n_samples": 4121, "n_cells": 413}, "rule_id": null}
 {"action": "stage", "actor": "dossier.event_record", "utc": "20260820T033820Z", "payload": {"status": "ok"}, "rule_id": null}
+{"action": "check", "actor": "exposure.facility_context", "utc": "20260902T032605Z", "run_id": "6fbd159fc60b", "payload": {"check": "crs", "passed": true, "detail": "CRS EPSG:4326 matches expected"}, "rule_id": null}
+{"action": "check", "actor": "exposure.facility_context", "utc": "20260902T032605Z", "run_id": "6fbd159fc60b", "payload": {"check": "uncertainty", "passed": true, "detail": "field 'uncertainty' present"}, "rule_id": null}
+{"action": "stage", "actor": "exposure.facility_context", "utc": "20260902T032605Z", "run_id": "6fbd159fc60b", "payload": {"status": "ok", "n_facilities": 79, "counts": {"clinic": 16, "fire_station": 38, "hospital": 9, "police": 16}, "n_aoi_bboxes": 1}, "rule_id": null}

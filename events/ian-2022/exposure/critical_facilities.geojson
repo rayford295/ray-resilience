@@ -1,0 +1,1533 @@
+{
+ "type": "FeatureCollection",
+ "crs_declared": "EPSG:4326",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8634289,
+     26.6091749
+    ]
+   },
+   "properties": {
+    "name": "360 Medical Centers",
+    "category": "clinic",
+    "osm_ref": "node/10862057001",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9400464,
+     26.6263741
+    ]
+   },
+   "properties": {
+    "name": "Advanced Physical Therapy & Rehabilitation",
+    "category": "clinic",
+    "osm_ref": "node/4732720205",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9806903,
+     26.4941881
+    ]
+   },
+   "properties": {
+    "name": "Barbour Medical Clinic",
+    "category": "clinic",
+    "osm_ref": "node/10176319942",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9413108,
+     26.665415
+    ]
+   },
+   "properties": {
+    "name": "Cambio Dermatology",
+    "category": "clinic",
+    "osm_ref": "node/6013076985",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9404835,
+     26.6373089
+    ]
+   },
+   "properties": {
+    "name": "Coastal Urgent Care",
+    "category": "clinic",
+    "osm_ref": "way/1098530533",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9414116,
+     26.6272715
+    ]
+   },
+   "properties": {
+    "name": "D'Agostino Family Chiropractic",
+    "category": "clinic",
+    "osm_ref": "node/4732700572",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9009786,
+     26.5210199
+    ]
+   },
+   "properties": {
+    "name": "DaVita Dialysis",
+    "category": "clinic",
+    "osm_ref": "way/502799848",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9413869,
+     26.6236565
+    ]
+   },
+   "properties": {
+    "name": "Internal Medicine Associates",
+    "category": "clinic",
+    "osm_ref": "way/480287282",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9967885,
+     26.5177684
+    ]
+   },
+   "properties": {
+    "name": "J. Howard Wood Medical Center",
+    "category": "clinic",
+    "osm_ref": "way/177404887",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8200511,
+     26.6097116
+    ]
+   },
+   "properties": {
+    "name": "Johns Hopkins All Children's Hospital",
+    "category": "clinic",
+    "osm_ref": "node/6801258670",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9376486,
+     26.6101319
+    ]
+   },
+   "properties": {
+    "name": "K&M Aesthetics",
+    "category": "clinic",
+    "osm_ref": "node/13351939318",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9103115,
+     26.5088747
+    ]
+   },
+   "properties": {
+    "name": "LabCorp",
+    "category": "clinic",
+    "osm_ref": "node/5001792231",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.817468,
+     26.4488354
+    ]
+   },
+   "properties": {
+    "name": "MD Now Urgent Care",
+    "category": "clinic",
+    "osm_ref": "way/725409936",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9814642,
+     26.6498574
+    ]
+   },
+   "properties": {
+    "name": "MD Now Urgent Care",
+    "category": "clinic",
+    "osm_ref": "way/1066608971",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8766438,
+     26.5965139
+    ]
+   },
+   "properties": {
+    "name": "Passport Health Fort Myers Travel Clinic",
+    "category": "clinic",
+    "osm_ref": "node/13131975334",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9986759,
+     26.517085
+    ]
+   },
+   "properties": {
+    "name": "Shell Point Employee Health & Wellness Center",
+    "category": "clinic",
+    "osm_ref": "node/10176331925",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.0456479,
+     26.6372403
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "fire_station",
+    "osm_ref": "way/887817258",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9562524,
+     26.5619991
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Fire Department Station 1",
+    "category": "fire_station",
+    "osm_ref": "node/367820624",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9631639,
+     26.6299479
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Fire Department Station 2",
+    "category": "fire_station",
+    "osm_ref": "node/367820619",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9513588,
+     26.683187
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Fire Department Station 5",
+    "category": "fire_station",
+    "osm_ref": "node/367820610",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9390974,
+     26.6068906
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Fire Station #3",
+    "category": "fire_station",
+    "osm_ref": "way/552246203",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9737082,
+     26.6147745
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Fire Station #4",
+    "category": "fire_station",
+    "osm_ref": "way/552246401",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.0072615,
+     26.5664389
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Fire Station #6",
+    "category": "fire_station",
+    "osm_ref": "way/1089866036",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9892095,
+     26.6506439
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Fire Station #8",
+    "category": "fire_station",
+    "osm_ref": "way/552247641",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9819888,
+     26.5760365
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Fire Station 9",
+    "category": "fire_station",
+    "osm_ref": "way/551749121",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.1894282,
+     26.52279
+    ]
+   },
+   "properties": {
+    "name": "Captiva Fire Control District Stn 181",
+    "category": "fire_station",
+    "osm_ref": "node/367819019",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8404367,
+     26.609831
+    ]
+   },
+   "properties": {
+    "name": "City of Fort Myers Fire Department Station 16",
+    "category": "fire_station",
+    "osm_ref": "node/3567915294",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8102666,
+     26.4372394
+    ]
+   },
+   "properties": {
+    "name": "Estero Fire Department Station 1",
+    "category": "fire_station",
+    "osm_ref": "node/367820964",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8101866,
+     26.4115135
+    ]
+   },
+   "properties": {
+    "name": "Estero Fire Dept. Station 43",
+    "category": "fire_station",
+    "osm_ref": "way/175765926",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.958462,
+     26.5665969
+    ]
+   },
+   "properties": {
+    "name": "Fire Station 1",
+    "category": "fire_station",
+    "osm_ref": "way/552242980",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9352815,
+     26.4451742
+    ]
+   },
+   "properties": {
+    "name": "Fort Myers Beach Fire Control District",
+    "category": "fire_station",
+    "osm_ref": "way/604711926",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9480211,
+     26.4816178
+    ]
+   },
+   "properties": {
+    "name": "Fort Myers Beach Fire Department Station 2",
+    "category": "fire_station",
+    "osm_ref": "node/367820825",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.866354,
+     26.6392233
+    ]
+   },
+   "properties": {
+    "name": "Fort Myers Fire Department Station 11",
+    "category": "fire_station",
+    "osm_ref": "node/367820604",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8442361,
+     26.65759
+    ]
+   },
+   "properties": {
+    "name": "Fort Myers Fire Department Station 12",
+    "category": "fire_station",
+    "osm_ref": "node/367820602",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8211579,
+     26.6423645
+    ]
+   },
+   "properties": {
+    "name": "Fort Myers Fire Department Station 14",
+    "category": "fire_station",
+    "osm_ref": "node/367820956",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8734106,
+     26.6072799
+    ]
+   },
+   "properties": {
+    "name": "Fort Myers Fire Dept. Station 13",
+    "category": "fire_station",
+    "osm_ref": "node/367820600",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9631221,
+     26.502347
+    ]
+   },
+   "properties": {
+    "name": "Iona McGregor Fire Department Station 2",
+    "category": "fire_station",
+    "osm_ref": "way/515604210",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8984394,
+     26.5102941
+    ]
+   },
+   "properties": {
+    "name": "Iona McGregor Fire Department Station 3",
+    "category": "fire_station",
+    "osm_ref": "node/367820805",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9365069,
+     26.513996
+    ]
+   },
+   "properties": {
+    "name": "Iona McGregor Fire Department Station 5",
+    "category": "fire_station",
+    "osm_ref": "way/289543056",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9048091,
+     26.5547054
+    ]
+   },
+   "properties": {
+    "name": "Iona McGregor Fire Station #74",
+    "category": "fire_station",
+    "osm_ref": "node/2160206294",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8991092,
+     26.5748258
+    ]
+   },
+   "properties": {
+    "name": "Iona McGregor Fire Station 71",
+    "category": "fire_station",
+    "osm_ref": "node/367820803",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8641601,
+     26.5908893
+    ]
+   },
+   "properties": {
+    "name": "Lee County Port Authority Fire Department Station 91",
+    "category": "fire_station",
+    "osm_ref": "way/136287990",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.1198405,
+     26.6138344
+    ]
+   },
+   "properties": {
+    "name": "Matlacha - Pine Island Fire Department Station 1",
+    "category": "fire_station",
+    "osm_ref": "node/367820397",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.0885758,
+     26.532968
+    ]
+   },
+   "properties": {
+    "name": "Matlacha - Pine Island Fire Department Station 2",
+    "category": "fire_station",
+    "osm_ref": "node/367820809",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9098117,
+     26.6712895
+    ]
+   },
+   "properties": {
+    "name": "North Fort Myers Fire Department Station 2",
+    "category": "fire_station",
+    "osm_ref": "node/367820538",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8232615,
+     26.4682108
+    ]
+   },
+   "properties": {
+    "name": "San Carlos Park Fire Department Station 51",
+    "category": "fire_station",
+    "osm_ref": "node/367820542",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8579737,
+     26.4978096
+    ]
+   },
+   "properties": {
+    "name": "San Carlos Park Fire Department Station 52",
+    "category": "fire_station",
+    "osm_ref": "way/1132813684",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.0779294,
+     26.4377512
+    ]
+   },
+   "properties": {
+    "name": "Sanibel Fire / Rescue District Station 171",
+    "category": "fire_station",
+    "osm_ref": "node/367820821",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.1522343,
+     26.4654178
+    ]
+   },
+   "properties": {
+    "name": "Sanibel Fire / Rescue District Station 172",
+    "category": "fire_station",
+    "osm_ref": "node/367820598",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8705562,
+     26.5641648
+    ]
+   },
+   "properties": {
+    "name": "South Trail Fire / Rescue Station 61",
+    "category": "fire_station",
+    "osm_ref": "node/367820593",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8171596,
+     26.5464488
+    ]
+   },
+   "properties": {
+    "name": "South Trail Fire / Rescue Station 62",
+    "category": "fire_station",
+    "osm_ref": "node/367820594",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8619209,
+     26.5313154
+    ]
+   },
+   "properties": {
+    "name": "South Trail Fire / Rescue Station 63",
+    "category": "fire_station",
+    "osm_ref": "node/367820820",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.2204366,
+     26.6012527
+    ]
+   },
+   "properties": {
+    "name": "Upper Captiva Fire Station #191",
+    "category": "fire_station",
+    "osm_ref": "node/1856867230",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.2124373,
+     26.6616296
+    ]
+   },
+   "properties": {
+    "name": "Useppa Island Volunteer Fire Department",
+    "category": "fire_station",
+    "osm_ref": "way/1098885613",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9432762,
+     26.6395173
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Hospital",
+    "category": "hospital",
+    "osm_ref": "way/508227815",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9119717,
+     26.5070753
+    ]
+   },
+   "properties": {
+    "name": "Golisano Children's Hospital of Southwest Florida",
+    "category": "hospital",
+    "osm_ref": "node/4218556654",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8503324,
+     26.5436398
+    ]
+   },
+   "properties": {
+    "name": "Gulf Coast Medical Center",
+    "category": "hospital",
+    "osm_ref": "way/508218783",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8479133,
+     26.539582
+    ]
+   },
+   "properties": {
+    "name": "Gulf Coast Medical Center Skilled Nursing Unit",
+    "category": "hospital",
+    "osm_ref": "way/713141686",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9131607,
+     26.5071924
+    ]
+   },
+   "properties": {
+    "name": "HealthPark Medical Center",
+    "category": "hospital",
+    "osm_ref": "way/435541964",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9198923,
+     26.6854929
+    ]
+   },
+   "properties": {
+    "name": "Lee County VA Healthcare Center",
+    "category": "hospital",
+    "osm_ref": "way/186572882",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8740254,
+     26.6279283
+    ]
+   },
+   "properties": {
+    "name": "Lee Memorial Hospital",
+    "category": "hospital",
+    "osm_ref": "way/587334283",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9094556,
+     26.5104466
+    ]
+   },
+   "properties": {
+    "name": "Park Royal Hospital",
+    "category": "hospital",
+    "osm_ref": "way/435541965",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8740593,
+     26.6282139
+    ]
+   },
+   "properties": {
+    "name": "The Rehabilitation Hospital",
+    "category": "hospital",
+    "osm_ref": "node/5610314055",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.0743303,
+     26.440536
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "police",
+    "osm_ref": "node/7836343111",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9606629,
+     26.6310603
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Police Department",
+    "category": "police",
+    "osm_ref": "node/367825726",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9608895,
+     26.6307545
+    ]
+   },
+   "properties": {
+    "name": "Cape Coral Police Department",
+    "category": "police",
+    "osm_ref": "way/1085228238",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8682054,
+     26.6395205
+    ]
+   },
+   "properties": {
+    "name": "Fort Myers Police Department",
+    "category": "police",
+    "osm_ref": "node/367825789",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8709365,
+     26.6419578
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office",
+    "category": "police",
+    "osm_ref": "node/367825748",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8849077,
+     26.6667533
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office Alpha North District",
+    "category": "police",
+    "osm_ref": "node/367825593",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.9365462,
+     26.5138947
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office Charlie West District",
+    "category": "police",
+    "osm_ref": "node/367825599",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8104303,
+     26.633281
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office Community Programs Unit",
+    "category": "police",
+    "osm_ref": "node/367826247",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8096661,
+     26.6340665
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office Core Division",
+    "category": "police",
+    "osm_ref": "node/367826251",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8705395,
+     26.6411974
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office Corrections Bureau Jail",
+    "category": "police",
+    "osm_ref": "node/367826262",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8370177,
+     26.6414453
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office Dunbar Community Policing Annex",
+    "category": "police",
+    "osm_ref": "node/367826265",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8697851,
+     26.552402
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office Echo Central District",
+    "category": "police",
+    "osm_ref": "node/367825595",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8622799,
+     26.52885
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office Main",
+    "category": "police",
+    "osm_ref": "node/367825102",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8100387,
+     26.6332954
+    ]
+   },
+   "properties": {
+    "name": "Lee County Sheriff's Office Stockade",
+    "category": "police",
+    "osm_ref": "node/367826263",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8797543,
+     26.637155
+    ]
+   },
+   "properties": {
+    "name": "US Marshals Service",
+    "category": "police",
+    "osm_ref": "node/367825761",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -81.8712888,
+     26.6434067
+    ]
+   },
+   "properties": {
+    "name": "US Marshals Service",
+    "category": "police",
+    "osm_ref": "node/367825763",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  }
+ ],
+ "properties": {
+  "source": "OpenStreetMap via Overpass API",
+  "attribution": "© OpenStreetMap contributors (ODbL 1.0)",
+  "license": "ODbL-1.0",
+  "amenities_in_scope": [
+   "hospital",
+   "clinic",
+   "fire_station",
+   "police"
+  ],
+  "n_facilities": 79,
+  "counts_by_category": {
+   "clinic": 16,
+   "fire_station": 38,
+   "hospital": 9,
+   "police": 16
+  },
+  "resolution_cap": "tile",
+  "declared_unknowns": [
+   "OSM presence only: whether a facility is open, staffed, or intact after the event is not claimed and cannot be read from this layer",
+   "OSM completeness varies by place: a facility absent here may exist on the ground"
+  ],
+  "aoi_from": [
+   "crossview_h3_r9_grid.geojson"
+  ]
+ }
+}

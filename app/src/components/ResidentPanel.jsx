@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { latLngToCell } from "h3-js";
 import { geocodeAddress } from "../lib/data.js";
 import { eventsOf, lookupCoverage, mergedProps } from "../lib/coverage.js";
+import { facilitiesNear } from "../lib/facilities.js";
 
 /**
  * Resident mode: address -> plain-language resilience dossier.
@@ -13,7 +14,7 @@ import { eventsOf, lookupCoverage, mergedProps } from "../lib/coverage.js";
  * is an admission, and collapsing the second into the first is how a resident
  * gets told their covered address was never evaluated.
  */
-export default function ResidentPanel({ coverage, records, onFly, exampleQuery, onExampleConsumed }) {
+export default function ResidentPanel({ coverage, records, onFly, exampleQuery, onExampleConsumed, facilityLayers }) {
   const [query, setQuery] = useState("");
   const [state, setState] = useState({ status: "idle" });
 
@@ -84,6 +85,11 @@ export default function ResidentPanel({ coverage, records, onFly, exampleQuery, 
                 <strong>{events.join(", ")}</strong>.
               </p>
               <DossierFacts props={mergedProps(result.hits)} />
+              <NearbyFacilities
+                layers={facilityLayers}
+                lat={state.hit.lat}
+                lon={state.hit.lon}
+              />
               {result.incomplete && (
                 <p className="hint">
                   Some other layers are still unread, so more may apply here than is
@@ -127,6 +133,48 @@ export default function ResidentPanel({ coverage, records, onFly, exampleQuery, 
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+function NearbyFacilities({ layers, lat, lon }) {
+  // Union of every readable facility layer — the AOIs are disjoint, so at
+  // most one contributes near any address. All-unreadable and none-loaded
+  // both mean "cannot say", which is a different sentence from "none
+  // recorded", and the three cases render as three different sentences.
+  const loaded = Object.values(layers ?? {});
+  const readable = loaded.filter((l) => l && !l.error && Array.isArray(l.features));
+  if (!readable.length) {
+    return (
+      <p className="hint">
+        Facility layer {loaded.length ? "could not be read" : "still loading"} — nearby
+        critical facilities not determined.
+      </p>
+    );
+  }
+  const merged = { features: readable.flatMap((l) => l.features) };
+  const near = facilitiesNear(merged, lat, lon, 1);
+  return (
+    <div className="facility-near">
+      <h4>Critical facilities within 1 km</h4>
+      {near.length === 0 ? (
+        <p className="hint">
+          None recorded in OpenStreetMap within 1 km. Absence from OSM is not evidence
+          of absence on the ground.
+        </p>
+      ) : (
+        <ul>
+          {near.slice(0, 4).map((f) => (
+            <li key={`${f.name}-${f.km}`}>
+              {f.name} <span className="dim">· {f.category} · {f.km.toFixed(2)} km</span>
+            </li>
+          ))}
+          {near.length > 4 && <li className="dim">+{near.length - 4} more</li>}
+        </ul>
+      )}
+      <p className="hint">
+        OSM presence, not operational status · © OpenStreetMap contributors (ODbL)
+      </p>
     </div>
   );
 }

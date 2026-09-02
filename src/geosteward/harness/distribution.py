@@ -49,9 +49,16 @@ KNOWN_MATCH_KEYS = KNOWN_CLASS_ATTRIBUTES
 #:                            redistribute; the public evidence surface.
 #:   public-domain-source     Frozen upstream state from a public-domain
 #:                            provider (US government APIs and datasets).
+#:   open-license-attribution Third-party content whose license PERMITS
+#:                            redistribution subject to attribution (and, for
+#:                            ODbL, share-alike). Publishable — but the
+#:                            attribution obligation travels with the artifact,
+#:                            so the artifact itself must carry it.
 #:   third-party-restricted   Content under third-party terms that forbid
 #:                            redistribution. Never published, by rule.
-KNOWN_LICENSES = frozenset({"project", "public-domain-source", "third-party-restricted"})
+KNOWN_LICENSES = frozenset(
+    {"project", "public-domain-source", "open-license-attribution", "third-party-restricted"}
+)
 
 
 @dataclass(frozen=True)

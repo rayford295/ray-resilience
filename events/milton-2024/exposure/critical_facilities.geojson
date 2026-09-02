@@ -1,0 +1,3833 @@
+{
+ "type": "FeatureCollection",
+ "crs_declared": "EPSG:4326",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6670861,
+     28.1901716
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "clinic",
+    "osm_ref": "way/835284709",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6381584,
+     27.8443639
+    ]
+   },
+   "properties": {
+    "name": "A Path to Wellness",
+    "category": "clinic",
+    "osm_ref": "node/6026616627",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7145104,
+     27.7787086
+    ]
+   },
+   "properties": {
+    "name": "AFC Urgent Care",
+    "category": "clinic",
+    "osm_ref": "node/7006964185",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7279338,
+     27.7913627
+    ]
+   },
+   "properties": {
+    "name": "AFC Urgent Care",
+    "category": "clinic",
+    "osm_ref": "node/13446942002",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7947023,
+     27.8417306
+    ]
+   },
+   "properties": {
+    "name": "AFC Urgent Care",
+    "category": "clinic",
+    "osm_ref": "way/1547657305",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.726566,
+     27.916688
+    ]
+   },
+   "properties": {
+    "name": "AFC Urgent Care Clearwater",
+    "category": "clinic",
+    "osm_ref": "node/1921826074",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7485319,
+     27.9175064
+    ]
+   },
+   "properties": {
+    "name": "Advanced Rehabilitation",
+    "category": "clinic",
+    "osm_ref": "node/13321387291",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6196556,
+     28.1894076
+    ]
+   },
+   "properties": {
+    "name": "Advent Health Centra Care",
+    "category": "clinic",
+    "osm_ref": "way/901769510",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6389955,
+     27.814379
+    ]
+   },
+   "properties": {
+    "name": "All Florida Orthopaedic Associates",
+    "category": "clinic",
+    "osm_ref": "node/1767691730",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.638305,
+     27.812402
+    ]
+   },
+   "properties": {
+    "name": "Allergy & Asthma Center",
+    "category": "clinic",
+    "osm_ref": "node/1767739116",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6507897,
+     27.828815
+    ]
+   },
+   "properties": {
+    "name": "Amcare Family Clinic",
+    "category": "clinic",
+    "osm_ref": "way/43885325",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7443858,
+     27.8949639
+    ]
+   },
+   "properties": {
+    "name": "Apollo Hair Loss Clinic",
+    "category": "clinic",
+    "osm_ref": "node/1990971508",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6764591,
+     28.1902736
+    ]
+   },
+   "properties": {
+    "name": "BayCare Outpatient Center",
+    "category": "clinic",
+    "osm_ref": "way/640074658",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6764869,
+     28.1894347
+    ]
+   },
+   "properties": {
+    "name": "BayCare Outpatient Medical Park",
+    "category": "clinic",
+    "osm_ref": "way/640074659",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6766551,
+     28.1881839
+    ]
+   },
+   "properties": {
+    "name": "BayCare Surgery Center",
+    "category": "clinic",
+    "osm_ref": "way/640074657",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.74691,
+     27.7358268
+    ]
+   },
+   "properties": {
+    "name": "BayCare Urgent Care",
+    "category": "clinic",
+    "osm_ref": "way/237310002",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6299999,
+     28.1911744
+    ]
+   },
+   "properties": {
+    "name": "BayCare Urgent Care",
+    "category": "clinic",
+    "osm_ref": "way/1046332239",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7085342,
+     28.0428334
+    ]
+   },
+   "properties": {
+    "name": "BayCare Urgent Care (Countryside)",
+    "category": "clinic",
+    "osm_ref": "way/734831737",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7281406,
+     27.7862083
+    ]
+   },
+   "properties": {
+    "name": "BayCare Urgent Care (Tyrone)",
+    "category": "clinic",
+    "osm_ref": "way/493347126",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6435787,
+     27.7635737
+    ]
+   },
+   "properties": {
+    "name": "Bayfront Ambulatory Surgery Center",
+    "category": "clinic",
+    "osm_ref": "node/358757950",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7382339,
+     27.7521269
+    ]
+   },
+   "properties": {
+    "name": "Bayfront Health Walk-In Clinic",
+    "category": "clinic",
+    "osm_ref": "way/243780454",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7867266,
+     27.8418232
+    ]
+   },
+   "properties": {
+    "name": "Bayfront Health Walk-In Clinic",
+    "category": "clinic",
+    "osm_ref": "way/367432081",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6392345,
+     27.8522526
+    ]
+   },
+   "properties": {
+    "name": "Bayfront Primary Care",
+    "category": "clinic",
+    "osm_ref": "way/258706920",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7214795,
+     27.8394218
+    ]
+   },
+   "properties": {
+    "name": "Center for Men's Health",
+    "category": "clinic",
+    "osm_ref": "node/2784419208",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6313044,
+     27.7577419
+    ]
+   },
+   "properties": {
+    "name": "Coast Guard Medical Clinic",
+    "category": "clinic",
+    "osm_ref": "node/7947626888",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6470293,
+     27.7868157
+    ]
+   },
+   "properties": {
+    "name": "Coastal Pulmonary & Critical Care",
+    "category": "clinic",
+    "osm_ref": "way/216799977",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6471746,
+     27.8225504
+    ]
+   },
+   "properties": {
+    "name": "Community Care Medical Center",
+    "category": "clinic",
+    "osm_ref": "node/1766936444",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6625174,
+     27.7568972
+    ]
+   },
+   "properties": {
+    "name": "Community Health Centers of Pinellas at Johnnie Ruth Clarke",
+    "category": "clinic",
+    "osm_ref": "node/358700210",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7551945,
+     27.9609428
+    ]
+   },
+   "properties": {
+    "name": "Comprehensive Spine Institute",
+    "category": "clinic",
+    "osm_ref": "node/2403811861",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.63826,
+     27.786954
+    ]
+   },
+   "properties": {
+    "name": "Cool-U",
+    "category": "clinic",
+    "osm_ref": "node/2129779752",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6383196,
+     27.8264357
+    ]
+   },
+   "properties": {
+    "name": "Cosmetic Facial Eye Plastic Surgery",
+    "category": "clinic",
+    "osm_ref": "way/129038255",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7338125,
+     27.7668404
+    ]
+   },
+   "properties": {
+    "name": "Dr. Jenna Elwart & Associates, PLLC",
+    "category": "clinic",
+    "osm_ref": "node/12149770003",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.74727,
+     27.916889
+    ]
+   },
+   "properties": {
+    "name": "East Bay Medical Center",
+    "category": "clinic",
+    "osm_ref": "node/1991044847",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7317906,
+     27.9609998
+    ]
+   },
+   "properties": {
+    "name": "Eye Site Clearwater",
+    "category": "clinic",
+    "osm_ref": "way/879304024",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6485235,
+     27.8625959
+    ]
+   },
+   "properties": {
+    "name": "Florida Blood Services Donor Center",
+    "category": "clinic",
+    "osm_ref": "way/135774185",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7005572,
+     27.8578846
+    ]
+   },
+   "properties": {
+    "name": "Florida Medical Center",
+    "category": "clinic",
+    "osm_ref": "way/523087135",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6545771,
+     27.7857934
+    ]
+   },
+   "properties": {
+    "name": "Foot & Ankle Care",
+    "category": "clinic",
+    "osm_ref": "way/216803769",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6884186,
+     27.8439754
+    ]
+   },
+   "properties": {
+    "name": "Fresenius Medical Care",
+    "category": "clinic",
+    "osm_ref": "node/1739860161",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7994023,
+     27.9547449
+    ]
+   },
+   "properties": {
+    "name": "Fresenius Medical Care",
+    "category": "clinic",
+    "osm_ref": "way/525434142",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7399158,
+     28.0483314
+    ]
+   },
+   "properties": {
+    "name": "Guidewell",
+    "category": "clinic",
+    "osm_ref": "node/4676434991",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.737064,
+     27.754384
+    ]
+   },
+   "properties": {
+    "name": "Gulfport Rehabilitation Center",
+    "category": "clinic",
+    "osm_ref": "way/253875275",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7333893,
+     27.7655937
+    ]
+   },
+   "properties": {
+    "name": "Hear Here Audiology",
+    "category": "clinic",
+    "osm_ref": "node/4940512641",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8001425,
+     27.9564853
+    ]
+   },
+   "properties": {
+    "name": "Hearing Care",
+    "category": "clinic",
+    "osm_ref": "way/192150674",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.637505,
+     27.801382
+    ]
+   },
+   "properties": {
+    "name": "Hess Spinal and Medical Center",
+    "category": "clinic",
+    "osm_ref": "node/2391969707",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6427352,
+     27.7645594
+    ]
+   },
+   "properties": {
+    "name": "James Heart Center",
+    "category": "clinic",
+    "osm_ref": "node/10816276381",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6362779,
+     27.7731575
+    ]
+   },
+   "properties": {
+    "name": "JÜV Health & Wellness",
+    "category": "clinic",
+    "osm_ref": "node/12949217162",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.666403,
+     27.89279
+    ]
+   },
+   "properties": {
+    "name": "Lakeside Occupational Medical Center",
+    "category": "clinic",
+    "osm_ref": "node/2369798840",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8202941,
+     27.851579
+    ]
+   },
+   "properties": {
+    "name": "Living Young Center for Health",
+    "category": "clinic",
+    "osm_ref": "way/218127812",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6992341,
+     27.8322218
+    ]
+   },
+   "properties": {
+    "name": "Maximum Health Clinic of Chiropractic",
+    "category": "clinic",
+    "osm_ref": "node/9397585689",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7381645,
+     28.0159183
+    ]
+   },
+   "properties": {
+    "name": "MedExpress",
+    "category": "clinic",
+    "osm_ref": "way/172417537",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7846631,
+     27.8936376
+    ]
+   },
+   "properties": {
+    "name": "Medexpress",
+    "category": "clinic",
+    "osm_ref": "node/2027081640",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7598602,
+     27.8959248
+    ]
+   },
+   "properties": {
+    "name": "Mid-County Health Center",
+    "category": "clinic",
+    "osm_ref": "way/525258080",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7117357,
+     27.8953866
+    ]
+   },
+   "properties": {
+    "name": "Passport Health Clearwater Travel Clinic",
+    "category": "clinic",
+    "osm_ref": "node/13131974872",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6422368,
+     27.770618
+    ]
+   },
+   "properties": {
+    "name": "Planned Parenthood",
+    "category": "clinic",
+    "osm_ref": "node/7508068133",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6470962,
+     27.8008935
+    ]
+   },
+   "properties": {
+    "name": "Reinhart Chiropractic Clinic",
+    "category": "clinic",
+    "osm_ref": "way/206039444",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6383041,
+     27.813747
+    ]
+   },
+   "properties": {
+    "name": "Rose Radiology",
+    "category": "clinic",
+    "osm_ref": "way/135475990",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.693191,
+     27.8535546
+    ]
+   },
+   "properties": {
+    "name": "Sai Medical Centre",
+    "category": "clinic",
+    "osm_ref": "way/161970016",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6667775,
+     27.8929456
+    ]
+   },
+   "properties": {
+    "name": "Saint Anthony's Outpatient Center",
+    "category": "clinic",
+    "osm_ref": "node/1720445835",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.634214,
+     27.772612
+    ]
+   },
+   "properties": {
+    "name": "Saint Anthony's Primary Care",
+    "category": "clinic",
+    "osm_ref": "node/3833505369",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7395523,
+     28.1657174
+    ]
+   },
+   "properties": {
+    "name": "Saint Luke's Cataract & Laser Center",
+    "category": "clinic",
+    "osm_ref": "node/1905968111",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6452774,
+     27.7678138
+    ]
+   },
+   "properties": {
+    "name": "Saint Petersburg Kidney Center",
+    "category": "clinic",
+    "osm_ref": "node/6728344119",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7427293,
+     27.8396295
+    ]
+   },
+   "properties": {
+    "name": "SandBay Primary and Urgent Care",
+    "category": "clinic",
+    "osm_ref": "node/3708426835",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.769703,
+     27.9198929
+    ]
+   },
+   "properties": {
+    "name": "Senior Helpers",
+    "category": "clinic",
+    "osm_ref": "node/11283147572",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7653717,
+     27.8396768
+    ]
+   },
+   "properties": {
+    "name": "Statone Urgent Care Center",
+    "category": "clinic",
+    "osm_ref": "node/2851326037",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6362985,
+     28.191948
+    ]
+   },
+   "properties": {
+    "name": "Suncoast Urgent Care",
+    "category": "clinic",
+    "osm_ref": "node/8485988075",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.5990283,
+     28.0051331
+    ]
+   },
+   "properties": {
+    "name": "TLC Urgent Care Center",
+    "category": "clinic",
+    "osm_ref": "way/172598205",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6458948,
+     27.7678478
+    ]
+   },
+   "properties": {
+    "name": "The Kidz Club",
+    "category": "clinic",
+    "osm_ref": "node/6736574894",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6389099,
+     27.7841218
+    ]
+   },
+   "properties": {
+    "name": "Therapy and Sports Center",
+    "category": "clinic",
+    "osm_ref": "way/192562236",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6906194,
+     27.9907108
+    ]
+   },
+   "properties": {
+    "name": "Tonicity Health & Wellness",
+    "category": "clinic",
+    "osm_ref": "node/13337237501",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6992453,
+     27.7811623
+    ]
+   },
+   "properties": {
+    "name": "Central Oak Park Fire Department Station 6",
+    "category": "fire_station",
+    "osm_ref": "way/238863609",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6891571,
+     27.8439142
+    ]
+   },
+   "properties": {
+    "name": "City of Pinellas Park Fire Station 36",
+    "category": "fire_station",
+    "osm_ref": "way/1388011723",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7948314,
+     27.8370668
+    ]
+   },
+   "properties": {
+    "name": "City of Seminole Fire Rescue Station 29",
+    "category": "fire_station",
+    "osm_ref": "way/227011950",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7940269,
+     27.8364468
+    ]
+   },
+   "properties": {
+    "name": "City of Seminole Fire Rescue Station 29",
+    "category": "fire_station",
+    "osm_ref": "way/525780238",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7942242,
+     27.8371875
+    ]
+   },
+   "properties": {
+    "name": "City of Seminole Fire Rescue Station 29",
+    "category": "fire_station",
+    "osm_ref": "way/525780267",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8196421,
+     27.8535582
+    ]
+   },
+   "properties": {
+    "name": "City of Seminole Fire Station #31",
+    "category": "fire_station",
+    "osm_ref": "way/995250820",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7706619,
+     28.0125837
+    ]
+   },
+   "properties": {
+    "name": "Dunedin Fire Department",
+    "category": "fire_station",
+    "osm_ref": "way/192574626",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7020876,
+     28.1000461
+    ]
+   },
+   "properties": {
+    "name": "East Lake Fire / Rescue Station 57",
+    "category": "fire_station",
+    "osm_ref": "node/367820444",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6865909,
+     28.1446996
+    ]
+   },
+   "properties": {
+    "name": "East Lake Fire Department Station 58",
+    "category": "fire_station",
+    "osm_ref": "node/367820688",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7024311,
+     28.077447
+    ]
+   },
+   "properties": {
+    "name": "East Lake Woodlands Station 56",
+    "category": "fire_station",
+    "osm_ref": "node/6353280092",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.82629,
+     27.9564478
+    ]
+   },
+   "properties": {
+    "name": "Fire Station #44",
+    "category": "fire_station",
+    "osm_ref": "way/165303858",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7899738,
+     27.9611957
+    ]
+   },
+   "properties": {
+    "name": "Fire Station #45",
+    "category": "fire_station",
+    "osm_ref": "way/525433681",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.826917,
+     27.9846083
+    ]
+   },
+   "properties": {
+    "name": "Fire Station #46",
+    "category": "fire_station",
+    "osm_ref": "way/1224662102",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7540413,
+     27.9583396
+    ]
+   },
+   "properties": {
+    "name": "Fire Station #47",
+    "category": "fire_station",
+    "osm_ref": "way/1413913135",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7227799,
+     27.9584761
+    ]
+   },
+   "properties": {
+    "name": "Fire Station #49",
+    "category": "fire_station",
+    "osm_ref": "way/230611046",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7244561,
+     28.0187572
+    ]
+   },
+   "properties": {
+    "name": "Fire Station #50",
+    "category": "fire_station",
+    "osm_ref": "way/172417565",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7847163,
+     27.9830643
+    ]
+   },
+   "properties": {
+    "name": "Fire Station #51",
+    "category": "fire_station",
+    "osm_ref": "way/301467132",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7083244,
+     28.0340431
+    ]
+   },
+   "properties": {
+    "name": "Fire Station #53",
+    "category": "fire_station",
+    "osm_ref": "way/192574890",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7463037,
+     28.0240586
+    ]
+   },
+   "properties": {
+    "name": "Fire Station #62",
+    "category": "fire_station",
+    "osm_ref": "way/526245494",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6452469,
+     27.7666395
+    ]
+   },
+   "properties": {
+    "name": "Fire Station 1 Downtown",
+    "category": "fire_station",
+    "osm_ref": "way/180075197",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7266183,
+     27.6739554
+    ]
+   },
+   "properties": {
+    "name": "Fire Station 2 Tierra Verde",
+    "category": "fire_station",
+    "osm_ref": "node/367820728",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8011471,
+     27.8043915
+    ]
+   },
+   "properties": {
+    "name": "Fire Station 25",
+    "category": "fire_station",
+    "osm_ref": "way/575732893",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7025129,
+     27.8460945
+    ]
+   },
+   "properties": {
+    "name": "Fire Station 33",
+    "category": "fire_station",
+    "osm_ref": "way/522692964",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7280578,
+     27.8577547
+    ]
+   },
+   "properties": {
+    "name": "Fire Station 34",
+    "category": "fire_station",
+    "osm_ref": "way/189296698",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7468081,
+     27.9830372
+    ]
+   },
+   "properties": {
+    "name": "Fire Station 48",
+    "category": "fire_station",
+    "osm_ref": "way/253360210",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6464755,
+     27.8353711
+    ]
+   },
+   "properties": {
+    "name": "Fire Station No. 7",
+    "category": "fire_station",
+    "osm_ref": "node/557442172",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7056923,
+     27.747056
+    ]
+   },
+   "properties": {
+    "name": "Gulfport Fire Department",
+    "category": "fire_station",
+    "osm_ref": "node/367820462",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7057077,
+     27.7470707
+    ]
+   },
+   "properties": {
+    "name": "Gulfport Fire Department",
+    "category": "fire_station",
+    "osm_ref": "way/471187101",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.5704307,
+     28.0755214
+    ]
+   },
+   "properties": {
+    "name": "Gunn Highway Fire Department Station 13",
+    "category": "fire_station",
+    "osm_ref": "way/260223995",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6105648,
+     28.0178673
+    ]
+   },
+   "properties": {
+    "name": "Hillsborough County Fire Station 39",
+    "category": "fire_station",
+    "osm_ref": "way/227068879",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6455863,
+     27.7266235
+    ]
+   },
+   "properties": {
+    "name": "Lake Maggoire Fire Department Station 8",
+    "category": "fire_station",
+    "osm_ref": "way/189420200",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7279212,
+     27.776831
+    ]
+   },
+   "properties": {
+    "name": "Lake Pasadena Fire Department Station 9",
+    "category": "fire_station",
+    "osm_ref": "way/523417921",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6747528,
+     27.721486
+    ]
+   },
+   "properties": {
+    "name": "Lakewood Fire Department Station 11",
+    "category": "fire_station",
+    "osm_ref": "node/367820751",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7752983,
+     27.9209201
+    ]
+   },
+   "properties": {
+    "name": "Largo Fire Rescue",
+    "category": "fire_station",
+    "osm_ref": "way/189868461",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7433336,
+     27.8936585
+    ]
+   },
+   "properties": {
+    "name": "Largo Fire Rescue Station 38",
+    "category": "fire_station",
+    "osm_ref": "way/525265964",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8094887,
+     27.8944237
+    ]
+   },
+   "properties": {
+    "name": "Largo Fire Rescue Station 39",
+    "category": "fire_station",
+    "osm_ref": "way/525018531",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7140151,
+     27.9241246
+    ]
+   },
+   "properties": {
+    "name": "Largo Fire Rescue Station 40",
+    "category": "fire_station",
+    "osm_ref": "way/534912384",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7917291,
+     27.9149417
+    ]
+   },
+   "properties": {
+    "name": "Largo Fire Rescue Station 41",
+    "category": "fire_station",
+    "osm_ref": "way/315541913",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7463757,
+     27.9178083
+    ]
+   },
+   "properties": {
+    "name": "Largo Fire Rescue Station 42",
+    "category": "fire_station",
+    "osm_ref": "way/524993628",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8166909,
+     27.9198122
+    ]
+   },
+   "properties": {
+    "name": "Largo Fire Rescue Station 43",
+    "category": "fire_station",
+    "osm_ref": "way/1003293321",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6879716,
+     27.8231514
+    ]
+   },
+   "properties": {
+    "name": "Lealman Fire / Rescue",
+    "category": "fire_station",
+    "osm_ref": "way/135565976",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6925458,
+     27.8214842
+    ]
+   },
+   "properties": {
+    "name": "Lealman Fire Rescue Station 18",
+    "category": "fire_station",
+    "osm_ref": "way/135565996",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6879,
+     27.8234
+    ]
+   },
+   "properties": {
+    "name": "Lealman Fire and Rescue Center",
+    "category": "fire_station",
+    "osm_ref": "node/367822360",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.638153,
+     27.7951099
+    ]
+   },
+   "properties": {
+    "name": "North Shore Fire Department Station 4",
+    "category": "fire_station",
+    "osm_ref": "way/128952494",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6705754,
+     28.0440461
+    ]
+   },
+   "properties": {
+    "name": "Oldsmar Fire Department",
+    "category": "fire_station",
+    "osm_ref": "node/367820465",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7721196,
+     28.0963326
+    ]
+   },
+   "properties": {
+    "name": "Palm Harbor Fire Department",
+    "category": "fire_station",
+    "osm_ref": "node/367820425",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7351089,
+     28.0656593
+    ]
+   },
+   "properties": {
+    "name": "Palm Harbor Fire Department Station 65",
+    "category": "fire_station",
+    "osm_ref": "way/523190633",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7651631,
+     28.0747624
+    ]
+   },
+   "properties": {
+    "name": "Palm Harbor Fire Rescue Station 66",
+    "category": "fire_station",
+    "osm_ref": "way/523149583",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6757287,
+     27.7668513
+    ]
+   },
+   "properties": {
+    "name": "Palmetto Park Fire Department Station 3",
+    "category": "fire_station",
+    "osm_ref": "way/209699978",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7362243,
+     28.188558
+    ]
+   },
+   "properties": {
+    "name": "Pasco County Fire Rescue - Station 12",
+    "category": "fire_station",
+    "osm_ref": "way/1257087700",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6239548,
+     28.1869052
+    ]
+   },
+   "properties": {
+    "name": "Pasco County Fire Rescue - Station 15",
+    "category": "fire_station",
+    "osm_ref": "way/297192116",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6929209,
+     27.8753657
+    ]
+   },
+   "properties": {
+    "name": "Pinellas Park Fire Department Station 35",
+    "category": "fire_station",
+    "osm_ref": "way/243823915",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8498881,
+     27.8810378
+    ]
+   },
+   "properties": {
+    "name": "Pinellas Suncoast Fire & Rescue #27",
+    "category": "fire_station",
+    "osm_ref": "way/523596226",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8254139,
+     27.8586316
+    ]
+   },
+   "properties": {
+    "name": "Pinellas Suncoast Fire & Rescue #28",
+    "category": "fire_station",
+    "osm_ref": "way/522743608",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8500581,
+     27.8807642
+    ]
+   },
+   "properties": {
+    "name": "Pinellas Suncoast Fire / Rescue",
+    "category": "fire_station",
+    "osm_ref": "node/367820404",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6717173,
+     27.7988267
+    ]
+   },
+   "properties": {
+    "name": "Ponce de Leon Fire Department Station 10",
+    "category": "fire_station",
+    "osm_ref": "way/192560657",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.5822607,
+     28.0374086
+    ]
+   },
+   "properties": {
+    "name": "River Oaks Fire Department Station 38",
+    "category": "fire_station",
+    "osm_ref": "node/367821017",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6945064,
+     27.9905451
+    ]
+   },
+   "properties": {
+    "name": "Safety Harbor Fire Department Station 52",
+    "category": "fire_station",
+    "osm_ref": "node/367820301",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7770855,
+     27.9501262
+    ]
+   },
+   "properties": {
+    "name": "Safety Village",
+    "category": "fire_station",
+    "osm_ref": "way/524129853",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.736088,
+     27.6963505
+    ]
+   },
+   "properties": {
+    "name": "Saint Pete Beach Fire Department Station 22",
+    "category": "fire_station",
+    "osm_ref": "node/367820411",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7505556,
+     27.7411311
+    ]
+   },
+   "properties": {
+    "name": "Saint Petersburg Beach Fire Department Station 23",
+    "category": "fire_station",
+    "osm_ref": "way/237304913",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6463108,
+     27.7667209
+    ]
+   },
+   "properties": {
+    "name": "Saint Petersburg Fire Codes Enforcement",
+    "category": "fire_station",
+    "osm_ref": "way/189263390",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6548471,
+     27.8748907
+    ]
+   },
+   "properties": {
+    "name": "Saint Petersburg Fire and Rescue Station 13",
+    "category": "fire_station",
+    "osm_ref": "way/525973972",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.794193,
+     27.8358075
+    ]
+   },
+   "properties": {
+    "name": "Seminole Fire Department",
+    "category": "fire_station",
+    "osm_ref": "node/367820330",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7329825,
+     27.7599109
+    ]
+   },
+   "properties": {
+    "name": "South Pasadena Fire Department",
+    "category": "fire_station",
+    "osm_ref": "way/401649242",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6051952,
+     27.8215703
+    ]
+   },
+   "properties": {
+    "name": "St. Petersburg Fire Rescue Station 12",
+    "category": "fire_station",
+    "osm_ref": "way/473860739",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.744915,
+     28.1425173
+    ]
+   },
+   "properties": {
+    "name": "Tarpon Springs Fire Station 69",
+    "category": "fire_station",
+    "osm_ref": "node/6886550731",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7724969,
+     28.1447979
+    ]
+   },
+   "properties": {
+    "name": "Tarpon Springs Fire Station 70",
+    "category": "fire_station",
+    "osm_ref": "node/6886579329",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7646462,
+     28.1664032
+    ]
+   },
+   "properties": {
+    "name": "Tarpon Springs Fire Station 71",
+    "category": "fire_station",
+    "osm_ref": "node/6886579327",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7679125,
+     27.771006
+    ]
+   },
+   "properties": {
+    "name": "Treasure Island Fire Department",
+    "category": "fire_station",
+    "osm_ref": "node/367820434",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.5845338,
+     27.9996874
+    ]
+   },
+   "properties": {
+    "name": "West Hillsborough Volunteer Fire Department Station 31",
+    "category": "fire_station",
+    "osm_ref": "node/367820985",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.626549,
+     28.0517566
+    ]
+   },
+   "properties": {
+    "name": "Westchase Fire Department Station 35",
+    "category": "fire_station",
+    "osm_ref": "node/367821024",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.73476,
+     27.960966
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "hospital",
+    "osm_ref": "node/2012666218",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7979614,
+     27.9542993
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "hospital",
+    "osm_ref": "way/784219310",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7569055,
+     28.1325959
+    ]
+   },
+   "properties": {
+    "name": "AdventHealth North Pinellas",
+    "category": "hospital",
+    "osm_ref": "way/509485512",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7158646,
+     27.9666881
+    ]
+   },
+   "properties": {
+    "name": "BayCare Health System",
+    "category": "hospital",
+    "osm_ref": "way/1485874962",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7456263,
+     27.9572583
+    ]
+   },
+   "properties": {
+    "name": "BayCare Urgent Care",
+    "category": "hospital",
+    "osm_ref": "way/230876613",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7772178,
+     27.8094912
+    ]
+   },
+   "properties": {
+    "name": "C.W. Bill Young VA Medical Center",
+    "category": "hospital",
+    "osm_ref": "way/509998601",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8037351,
+     27.9148702
+    ]
+   },
+   "properties": {
+    "name": "HCA Florida - Largo Hospital",
+    "category": "hospital",
+    "osm_ref": "way/509950902",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8247248,
+     27.8978648
+    ]
+   },
+   "properties": {
+    "name": "HCA Florida - Largo West Hospital",
+    "category": "hospital",
+    "osm_ref": "way/509953014",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7020244,
+     27.8261172
+    ]
+   },
+   "properties": {
+    "name": "HCA Florida - Northside Hospital",
+    "category": "hospital",
+    "osm_ref": "way/469171353",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7400104,
+     27.7525503
+    ]
+   },
+   "properties": {
+    "name": "HCA Florida - Pasadena Hospital",
+    "category": "hospital",
+    "osm_ref": "way/307169565",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7262381,
+     27.8052007
+    ]
+   },
+   "properties": {
+    "name": "HCA Florida - Saint Petersburg Hospital",
+    "category": "hospital",
+    "osm_ref": "way/509997160",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.5737893,
+     28.0022973
+    ]
+   },
+   "properties": {
+    "name": "HCA Florida - West Tampa Hospital",
+    "category": "hospital",
+    "osm_ref": "way/509872005",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.5834693,
+     28.0658884
+    ]
+   },
+   "properties": {
+    "name": "HCA Florida Citrus Park Emergency",
+    "category": "hospital",
+    "osm_ref": "way/462390426",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7413133,
+     27.9598771
+    ]
+   },
+   "properties": {
+    "name": "HCA Florida Clearwater Emergency",
+    "category": "hospital",
+    "osm_ref": "way/733078510",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7972979,
+     27.9254467
+    ]
+   },
+   "properties": {
+    "name": "HealthSouth Rehabilitation Hospital of Largo",
+    "category": "hospital",
+    "osm_ref": "way/509945468",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6395617,
+     27.7407783
+    ]
+   },
+   "properties": {
+    "name": "Kindred Hospital - Bay Area Saint Petersburg",
+    "category": "hospital",
+    "osm_ref": "way/510046528",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7373878,
+     27.9610024
+    ]
+   },
+   "properties": {
+    "name": "MD Now",
+    "category": "hospital",
+    "osm_ref": "node/14021132924",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7066279,
+     28.0413355
+    ]
+   },
+   "properties": {
+    "name": "Mease Countryside Hospital",
+    "category": "hospital",
+    "osm_ref": "way/509883849",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7822293,
+     28.0140044
+    ]
+   },
+   "properties": {
+    "name": "Mease Dunedin Hospital",
+    "category": "hospital",
+    "osm_ref": "way/1161183806",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8025789,
+     27.9521008
+    ]
+   },
+   "properties": {
+    "name": "Morton Plant Hospital",
+    "category": "hospital",
+    "osm_ref": "way/509943116",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6427786,
+     27.7635425
+    ]
+   },
+   "properties": {
+    "name": "Orlando Health Bayfront Hospital",
+    "category": "hospital",
+    "osm_ref": "way/510194602",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6502057,
+     27.7781779
+    ]
+   },
+   "properties": {
+    "name": "Saint Anthony's Hospital",
+    "category": "hospital",
+    "osm_ref": "way/510239317",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6150207,
+     28.1915944
+    ]
+   },
+   "properties": {
+    "name": "Starkey Ranch ER & Hospital",
+    "category": "hospital",
+    "osm_ref": "way/1350980678",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7111373,
+     27.8748579
+    ]
+   },
+   "properties": {
+    "name": "Windmoor Healthcare",
+    "category": "hospital",
+    "osm_ref": "way/509974391",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7720637,
+     27.8111449
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "police",
+    "osm_ref": "node/1212608021",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8414239,
+     27.847719
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "police",
+    "osm_ref": "way/560132643",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6242975,
+     28.186688
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "police",
+    "osm_ref": "way/775146549",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7449764,
+     28.1427201
+    ]
+   },
+   "properties": {
+    "name": "(unnamed in OSM)",
+    "category": "police",
+    "osm_ref": "way/1264232012",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8041956,
+     27.9349029
+    ]
+   },
+   "properties": {
+    "name": "Belleair Police Department",
+    "category": "police",
+    "osm_ref": "node/367825700",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7808709,
+     27.9648135
+    ]
+   },
+   "properties": {
+    "name": "Clearwater Police Department Bicycle Team Patrol Office",
+    "category": "police",
+    "osm_ref": "node/367825697",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8235242,
+     27.9672943
+    ]
+   },
+   "properties": {
+    "name": "Clearwater Police Department District 1 Station",
+    "category": "police",
+    "osm_ref": "way/243116314",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7079486,
+     28.0253649
+    ]
+   },
+   "properties": {
+    "name": "Clearwater Police Department District 3 Station",
+    "category": "police",
+    "osm_ref": "way/172417670",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7920265,
+     27.9792795
+    ]
+   },
+   "properties": {
+    "name": "Clearwater Police Department North Greenwood Patrol Office",
+    "category": "police",
+    "osm_ref": "node/367825707",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7975974,
+     27.9796717
+    ]
+   },
+   "properties": {
+    "name": "Clearwater Police Department Old Clearwater Bay Patrol Office",
+    "category": "police",
+    "osm_ref": "node/367825695",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.791799,
+     27.9428114
+    ]
+   },
+   "properties": {
+    "name": "Clearwater Police Department South Greenwood Patrol Office",
+    "category": "police",
+    "osm_ref": "node/367825706",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.721314,
+     27.9762921
+    ]
+   },
+   "properties": {
+    "name": "Clearwater Police Department Wood Valley Community Substation",
+    "category": "police",
+    "osm_ref": "node/367825704",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7974027,
+     27.963441
+    ]
+   },
+   "properties": {
+    "name": "Clearwater Police Headquarters",
+    "category": "police",
+    "osm_ref": "way/230612683",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6848239,
+     27.8416524
+    ]
+   },
+   "properties": {
+    "name": "Florida Highway Patrol Station",
+    "category": "police",
+    "osm_ref": "way/161968440",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7057011,
+     27.7464409
+    ]
+   },
+   "properties": {
+    "name": "Gulfport Police Department",
+    "category": "police",
+    "osm_ref": "node/367825867",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7057112,
+     27.7464327
+    ]
+   },
+   "properties": {
+    "name": "Gulfport Police Department",
+    "category": "police",
+    "osm_ref": "way/471187103",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6453807,
+     28.0600848
+    ]
+   },
+   "properties": {
+    "name": "Hillsborough County Sheriff's Office Community Substation Northwest",
+    "category": "police",
+    "osm_ref": "node/367825511",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.5837253,
+     28.0365657
+    ]
+   },
+   "properties": {
+    "name": "Hillsborough County Sheriff's Office Community Substation Sheldon Road",
+    "category": "police",
+    "osm_ref": "way/1043786629",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.5707841,
+     28.0704895
+    ]
+   },
+   "properties": {
+    "name": "Hillsborough County Sheriff's Office District 3 Office",
+    "category": "police",
+    "osm_ref": "way/522994103",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8459343,
+     27.8980094
+    ]
+   },
+   "properties": {
+    "name": "Indian Rocks Beach_Pinellas County Sheriff's Substation ",
+    "category": "police",
+    "osm_ref": "node/2356113091",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.8424689,
+     27.8478929
+    ]
+   },
+   "properties": {
+    "name": "Indian Shores Police Department",
+    "category": "police",
+    "osm_ref": "node/367825803",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7126002,
+     27.8138805
+    ]
+   },
+   "properties": {
+    "name": "Kenneth City Police Department",
+    "category": "police",
+    "osm_ref": "way/238509050",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7764773,
+     27.9201859
+    ]
+   },
+   "properties": {
+    "name": "Largo Police",
+    "category": "police",
+    "osm_ref": "way/243967504",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6361842,
+     27.7576445
+    ]
+   },
+   "properties": {
+    "name": "NOAA",
+    "category": "police",
+    "osm_ref": "way/1491435923",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6241816,
+     28.1868804
+    ]
+   },
+   "properties": {
+    "name": "Pasco Sheriff Office - District 3 Office",
+    "category": "police",
+    "osm_ref": "way/297192062",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6783792,
+     27.7385468
+    ]
+   },
+   "properties": {
+    "name": "Pinellas County Police Screening Services",
+    "category": "police",
+    "osm_ref": "node/367825070",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7439806,
+     27.8744866
+    ]
+   },
+   "properties": {
+    "name": "Pinellas County Schools Police Department",
+    "category": "police",
+    "osm_ref": "node/367825452",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6802123,
+     27.8781396
+    ]
+   },
+   "properties": {
+    "name": "Pinellas County Sheriff",
+    "category": "police",
+    "osm_ref": "way/291501507",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7811224,
+     28.0484839
+    ]
+   },
+   "properties": {
+    "name": "Pinellas County Sheriff",
+    "category": "police",
+    "osm_ref": "way/523234277",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7902447,
+     27.8934515
+    ]
+   },
+   "properties": {
+    "name": "Pinellas County Sheriff's Office",
+    "category": "police",
+    "osm_ref": "way/295729711",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7147711,
+     27.8416722
+    ]
+   },
+   "properties": {
+    "name": "Pinellas Park Police Department",
+    "category": "police",
+    "osm_ref": "way/192508098",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6524711,
+     27.7726632
+    ]
+   },
+   "properties": {
+    "name": "Saint Petersburg Police",
+    "category": "police",
+    "osm_ref": "way/799467583",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6104171,
+     27.7422374
+    ]
+   },
+   "properties": {
+    "name": "Saint Petersburg Police Department Recruiting",
+    "category": "police",
+    "osm_ref": "node/367825838",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.7679634,
+     27.7711531
+    ]
+   },
+   "properties": {
+    "name": "Treasure Island Police Department",
+    "category": "police",
+    "osm_ref": "node/367825638",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -82.6368182,
+     27.7648881
+    ]
+   },
+   "properties": {
+    "name": "University Police Services (POL)",
+    "category": "police",
+    "osm_ref": "node/367824901",
+    "uncertainty": {
+     "operational_status": "unknown — OSM records presence, not status",
+     "position": "way/relation centers are footprint centroids"
+    }
+   }
+  }
+ ],
+ "properties": {
+  "source": "OpenStreetMap via Overpass API",
+  "attribution": "© OpenStreetMap contributors (ODbL 1.0)",
+  "license": "ODbL-1.0",
+  "amenities_in_scope": [
+   "hospital",
+   "clinic",
+   "fire_station",
+   "police"
+  ],
+  "n_facilities": 200,
+  "counts_by_category": {
+   "clinic": 69,
+   "fire_station": 72,
+   "hospital": 24,
+   "police": 35
+  },
+  "resolution_cap": "tile",
+  "declared_unknowns": [
+   "OSM presence only: whether a facility is open, staffed, or intact after the event is not claimed and cannot be read from this layer",
+   "OSM completeness varies by place: a facility absent here may exist on the ground"
+  ],
+  "aoi_from": [
+   "bitemporal_h3_r9_grid.geojson",
+   "debris_h3_r9_grid.geojson"
+  ]
+ }
+}

@@ -53,6 +53,8 @@ export default function App() {
   // entries must stay the full manifest+audit+record triple (a partial entry
   // there would short-circuit the lineage/validity fetch and empty both panels).
   const [citeManifests, setCiteManifests] = useState({});
+  const [facilityLayers, setFacilityLayers] = useState({}); // eventId -> geojson | {error}
+  const [showFacilities, setShowFacilities] = useState(true);
 
   const view = VIEWS.find((v) => v.id === viewId);
   const event = EVENTS[view.event];
@@ -200,6 +202,18 @@ export default function App() {
     return out;
   }, [meta, dossiers]);
 
+  useEffect(() => {
+    const wanted = mode === "resident" ? Object.keys(EVENTS) : [view.event];
+    for (const eventId of wanted) {
+      if (facilityLayers[eventId]) continue;
+      fetchJson(EVENTS[eventId].facilities)
+        .then((data) => setFacilityLayers((s) => (s[eventId] ? s : { ...s, [eventId]: data })))
+        .catch((err) =>
+          setFacilityLayers((s) => (s[eventId] ? s : { ...s, [eventId]: { error: String(err) } }))
+        );
+    }
+  }, [mode, view.event, facilityLayers]);
+
   const onSelect = useCallback((props) => setSelected(props), []);
 
   const onCite = useCallback((token) => setCitation(token), []);
@@ -304,6 +318,26 @@ export default function App() {
               <ValidityBadge validity={validity} />
             </div>
             <Legend view={view} geojson={geojson} />
+            <label className="facility-toggle">
+              <input
+                type="checkbox"
+                checked={showFacilities}
+                onChange={(e) => setShowFacilities(e.target.checked)}
+              />
+              <span>
+                critical facilities{" "}
+                {facilityLayers[view.event]?.features
+                  ? `(${facilityLayers[view.event].features.length})`
+                  : facilityLayers[view.event]?.error
+                    ? "(layer unreadable)"
+                    : ""}
+              </span>
+            </label>
+            {showFacilities && (
+              <p className="hint attribution-line">
+                OSM presence, not operational status · © OpenStreetMap contributors (ODbL)
+              </p>
+            )}
             {layers[viewId]?.error && (
               <p className="fail-text">layer failed to load: {layers[viewId].error}</p>
             )}
@@ -325,6 +359,7 @@ export default function App() {
                 onFly={setFlyTarget}
                 exampleQuery={exampleAddress}
                 onExampleConsumed={() => setExampleAddress(null)}
+                facilityLayers={facilityLayers}
               />
             )}
           </section>
@@ -408,6 +443,8 @@ export default function App() {
             live={live}
             onCenter={setMapCenter}
             highlightCells={highlightCells}
+            facilities={facilityLayers[view.event]}
+            showFacilities={showFacilities}
           />
         </main>
       </div>

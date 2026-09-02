@@ -13,6 +13,8 @@ const SRC = "grid";
 const HIGHLIGHT_SRC = "answer-highlight";
 const HIGHLIGHT_FILL = "answer-highlight-fill";
 const HIGHLIGHT_LINE = "answer-highlight-line";
+const FACILITY_SRC = "facilities";
+const FACILITY_LAYER = "facility-points";
 // Comfortably longer than the same-tick gap between mouseup and the
 // resulting synthetic click, comfortably shorter than two deliberate clicks.
 const CLICK_SUPPRESS_MS = 300;
@@ -58,6 +60,8 @@ export default function MapView({
   live,
   onCenter,
   highlightCells,
+  facilities,
+  showFacilities,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -160,6 +164,69 @@ export default function MapView({
       map.setFeatureState({ source: SRC, id: cell }, { score: v.score });
     }
   }, [ready, geojson, view, priorityT]);
+
+  // Critical-facility context points (OSM presence, never operational
+  // status) over the active event's AOI. The name in the popup is
+  // contributor-written text from OSM, so the popup is built from DOM nodes
+  // rather than an HTML string.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    const data =
+      facilities && !facilities.error
+        ? facilities
+        : { type: "FeatureCollection", features: [] };
+    const src = map.getSource(FACILITY_SRC);
+    if (src) {
+      src.setData(data);
+    } else {
+      map.addSource(FACILITY_SRC, { type: "geojson", data });
+      map.addLayer({
+        id: FACILITY_LAYER,
+        type: "circle",
+        source: FACILITY_SRC,
+        paint: {
+          "circle-radius": ["interpolate", ["linear"], ["zoom"], 8, 3, 13, 7],
+          "circle-color": [
+            "match", ["get", "category"],
+            "hospital", "#dc2626",
+            "clinic", "#7c3aed",
+            "fire_station", "#ea580c",
+            "police", "#1d4ed8",
+            "#64748b",
+          ],
+          "circle-opacity": 0.9,
+          "circle-stroke-color": "#ffffff",
+          "circle-stroke-width": 1.2,
+        },
+      });
+      map.on("click", FACILITY_LAYER, (e) => {
+        const f = e.features?.[0];
+        if (!f) return;
+        const el = document.createElement("div");
+        const name = document.createElement("strong");
+        name.textContent = f.properties.name;
+        const cat = document.createElement("div");
+        cat.textContent = `${f.properties.category} — OSM presence, not operational status`;
+        cat.style.fontSize = "0.75rem";
+        const attribution = document.createElement("div");
+        attribution.textContent = "© OpenStreetMap contributors (ODbL)";
+        attribution.style.cssText = "font-size:0.7rem;color:#64748b;margin-top:2px";
+        el.append(name, cat, attribution);
+        new maplibregl.Popup({ closeButton: true, maxWidth: "260px" })
+          .setLngLat(f.geometry.coordinates)
+          .setDOMContent(el)
+          .addTo(map);
+      });
+      map.on("mouseenter", FACILITY_LAYER, () => (map.getCanvas().style.cursor = "pointer"));
+      map.on("mouseleave", FACILITY_LAYER, () => (map.getCanvas().style.cursor = ""));
+    }
+    if (map.getLayer(FACILITY_LAYER)) {
+      map.setLayoutProperty(
+        FACILITY_LAYER, "visibility", showFacilities ? "visible" : "none"
+      );
+    }
+  }, [ready, facilities, showFacilities]);
 
   // Tier-1 national watch: live hazard points over whatever view is active.
   useEffect(() => {

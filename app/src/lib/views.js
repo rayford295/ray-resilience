@@ -10,6 +10,7 @@ export const EVENTS = {
     zoom: 12.2,
     record: "/events/eaton-2025/dossier/event_record.json",
     manifest: "/events/eaton-2025/artifact_manifest.jsonl",
+    facilities: "/events/eaton-2025/exposure/critical_facilities.geojson",
     audit: "/events/eaton-2025/audit_log.jsonl",
   },
   "milton-2024": {
@@ -18,6 +19,7 @@ export const EVENTS = {
     zoom: 7.2,
     record: "/events/milton-2024/dossier/event_record.json",
     manifest: "/events/milton-2024/artifact_manifest.jsonl",
+    facilities: "/events/milton-2024/exposure/critical_facilities.geojson",
     audit: "/events/milton-2024/audit_log.jsonl",
   },
   "ian-2022": {
@@ -26,6 +28,7 @@ export const EVENTS = {
     zoom: 10.3,
     record: "/events/ian-2022/dossier/event_record.json",
     manifest: "/events/ian-2022/artifact_manifest.jsonl",
+    facilities: "/events/ian-2022/exposure/critical_facilities.geojson",
     audit: "/events/ian-2022/audit_log.jsonl",
   },
 };
