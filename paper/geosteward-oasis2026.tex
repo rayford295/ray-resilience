@@ -1,0 +1,308 @@
+% GeoSteward — OASIS @ ACM SIGSPATIAL 2026, Track A short paper.
+% Build: pdflatex -> bibtex -> pdflatex x2 (see build.sh).
+%
+% OWNER DECISIONS PENDING (do not submit before resolving):
+%   1. Author list and order — Lei Zou is listed from the Yang & Zou
+%      abstract this system implements; confirm co-authorship for THIS
+%      paper and add anyone missing.
+%   2. Institutional email addresses below are placeholders.
+%   3. Page limit and template variant are assumed (sigconf, 4 pages +
+%      references) — reconcile with the Track A brief behind the event
+%      login before submission.
+\documentclass[sigconf,screen]{acmart}
+
+\setcopyright{rightsretained}
+\copyrightyear{2026}
+\acmYear{2026}
+\acmConference[OASIS '26]{OASIS Challenge @ ACM SIGSPATIAL}{November 2026}{Minneapolis, MN, USA}
+\acmBooktitle{OASIS Challenge at ACM SIGSPATIAL 2026, Track A: Disaster Resilience \& Vulnerability Analysis}
+\settopmatter{printacmref=false}
+
+\begin{document}
+
+\title{GeoSteward: An Accountable GeoAI Risk Analyst\\ That Declares Where Its Competence Ends}
+
+\author{Yifan Yang}
+\affiliation{%
+  \institution{Department of Geography, Texas A\&M University}
+  \city{College Station}\state{TX}\country{USA}}
+\email{yyang295@tamu.edu} % PLACEHOLDER — verify before submission
+
+\author{Lei Zou}
+\affiliation{%
+  \institution{Department of Geography, Texas A\&M University}
+  \city{College Station}\state{TX}\country{USA}}
+\email{lzou@tamu.edu} % PLACEHOLDER — verify before submission
+
+\begin{abstract}
+Most GeoAI disaster systems demonstrate autonomy: a language model that
+runs a spatial pipeline. GeoSteward demonstrates \emph{accountability}: a
+risk-analyst agent that operates inside the \emph{Steward Harness}, a
+technical layer that enforces outcome, process, and institutional
+validity during operation rather than promising them in prose. Every
+artifact is hashed into an append-only audit log; a declarative claim
+policy scopes what the agent may assert by role, evidence tier, spatial
+resolution, and geographic authority; a separate distribution policy
+scopes what a build may publish, verified by a CI gate that fails the
+deploy on violation; and every factual sentence must cite an artifact
+identifier or be refused. A third axis, \emph{verifiability}
+(retained $>$ re-derivable $>$ cited-only), states what a reader can do
+to check a claim, including the case where license terms forbid
+retaining the evidence at all. We exercise the harness on a nationwide
+hourly hazard watch (USGS, NWS, NHC, NIFC) and three deep cases across
+two hazard types --- the 2025 Eaton Fire, Hurricane Milton (2024), and
+Hurricane Ian (2022) --- joining ground-truth structure damage, county
+debris volumes, social vulnerability, and reliability-gated cross-view
+street imagery on H3 grids, delivered through an installable, keyless
+web app with resident and planner modes. The test suite doubles as a
+verifiable evaluation environment (310 tests in CI), and the audit
+record preserves two incidents where the harness caught the system
+violating its own rules --- evidence, we argue, that the mechanism does
+work that documentation alone does not.
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10010147.10010178</concept_id>
+<concept_desc>Computing methodologies~Artificial intelligence</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10002951.10003227.10003236</concept_id>
+<concept_desc>Information systems~Geographic information systems</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+\ccsdesc[500]{Information systems~Geographic information systems}
+\ccsdesc[500]{Computing methodologies~Artificial intelligence}
+
+\keywords{GeoAI agents, accountability, disaster resilience, social
+vulnerability, provenance, policy enforcement, H3}
+
+\maketitle
+
+\section{Introduction}
+
+Large-language-model agents can now operate geographic information
+systems: they select tools, write spatial queries, and produce maps and
+narratives with little human intervention
+\cite{li2023autonomous,zhang2024geogpt}. In disaster response this
+capability meets an unforgiving audience. An emergency manager acting on
+a tile-level damage estimate, or a resident reading a sentence about
+their own street, cannot audit a transformer. The prevailing answer is
+disclaimers --- operational platforms ship forecasts with the caveat that
+they ``complement, do not replace'' official warnings --- which locates
+accountability in the reader rather than in the system.
+
+GeoSteward locates it in the system. Following the framing of
+\citet{yang2026accountable}, we treat an agent's claim as valid only
+when three conditions hold at once: the \emph{outcome} passes executable
+spatial checks, the \emph{process} that produced it is preserved and
+inspectable, and the claim is \emph{institutionally} authorized --- the
+right actor asserting the right thing at the right resolution. The
+\emph{Steward Harness} enforces all three in code, and adds a fourth
+question that arises the moment third-party data enters: what can a
+\emph{reader} do to check this, and may the evidence be kept at all?
+
+This paper describes the deployed system\footnote{Live site, app, and
+repository: \url{https://rayford295.github.io/GeoSteward/}} and reports
+what its enforcement actually caught. Our contributions are:
+(1)~a harness architecture with two declarative policy planes --- claim
+and distribution --- that fail closed, plus a per-claim
+\emph{verifiability} axis with weakest-link semantics;
+(2)~three harness-built deep cases across two hazard types, joining
+structure-level damage ground truth, debris volumes, CDC social
+vulnerability, and cross-view street imagery on H3 r9 grids, behind a
+nationwide hourly watch;
+(3)~a test suite designed as a verifiable evaluation environment, and an
+append-only audit record that preserves two self-caught violations ---
+including one where the deployed site violated the project's own written
+distribution constraint and the fix was a new policy plane, not a patch.
+
+\section{The Steward Harness}
+
+The harness sits between every pipeline stage, and between the language
+model and every sentence it emits.
+
+\textbf{Outcome validity.} Executable spatial checks run inside each
+build: CRS assertions, raster$\times$vector and tract-join integrity,
+sanity bounds, and \emph{mandatory} per-tile uncertainty fields --- a
+grid cell without a declared uncertainty structure fails the build.
+
+\textbf{Process validity.} Every registered artifact receives a SHA-256
+digest and an append-only audit row naming its agent, inputs, and UTC
+timestamp. Failures are recorded, never erased; the app renders lineage
+from any map layer back to timestamped source snapshots. Audit logs are
+treated as immutable: when run-grouping logic later changed, the reader
+was taught to recover runs from structural markers rather than the logs
+being rewritten.
+
+\textbf{Institutional validity.} A single YAML policy file carries two
+planes of ordered, first-match rules with default deny, validated at
+construction time --- an unknown match key fails loudly at load rather
+than silently broadening authorization. The \emph{claim plane} scopes
+what may be asserted, by role (resident vs.\ planner), evidence tier,
+spatial resolution, and geography: tile-level evidence never yields
+parcel-level claims. The \emph{distribution plane} scopes what a build
+may \emph{publish}, by artifact class, resolution cap, and audience; CI
+verifies the assembled public site against it and fails the deploy on
+violation. Section~\ref{sec:incidents} explains why the second plane
+exists.
+
+\textbf{Citation by default.} Every factual sentence the agent produces
+must cite an artifact identifier. The exemption set is closed
+(questions, imperative safety advice, statements about what the answer
+cannot say), so a sentence form nobody anticipated costs a refusal, not
+an uncited claim. Refusals name the policy rule that triggered them.
+
+\textbf{Verifiability.} Evidence tiers describe depth; they do not say
+whether a reader can \emph{check} a claim. Each artifact therefore
+carries \texttt{verifiability} $\in$ \{\texttt{retained},
+\texttt{re-derivable}, \texttt{cited-only}\} with weakest-link
+aggregation, and a \texttt{license} attribute gates redistribution by
+rule. The axis earns its keep where retention is forbidden: map-platform terms disallow storing map content, which is structurally
+incompatible with proving traceability by hashing inputs. The harness
+resolves this by attesting to the \emph{request} plus a response digest
+--- a lookup record that is publishable precisely because it holds no
+content --- and a containment property test enforces that no response
+payload ever reaches the audit record. Grounded free-text generation is
+not reproducible even at temperature zero, so it falls through to
+default-deny: the citable unit is the citation, never the prose.
+
+\section{System and Deep Cases}
+
+GeoSteward is three loosely coupled planes: a data plane (GitHub Actions
+pipelines through the harness, publishing hashed artifacts), a
+presentation plane (an installable React + MapLibre PWA, keyless and
+offline-cacheable), and an agent plane (any OpenAI-compatible endpoint
+wrapped in policy pre-check $\rightarrow$ grounded generation
+$\rightarrow$ claim post-check $\rightarrow$ audit). If the agent plane
+is down, the maps and analysis keep working --- graceful degradation as
+fail-closed design made visible.
+
+\textbf{Tier 1 --- nationwide watch.} Four keyless federal connectors
+(USGS earthquakes, NWS alerts, NHC tropical cyclones, NIFC/WFIGS
+wildfires) refresh hourly in CI, writing append-only gzip snapshots and
+a national watch product. Per-source failures are declared, not hidden:
+the map badge reports \emph{mapped-of-total} features and names sources
+that failed, and an ArcGIS error envelope fails the wildfire connector
+closed instead of reporting zero fires.
+
+\textbf{Tier 2/3 --- three deep cases, one harness.} Exposure,
+vulnerability, and damage analysis exist only inside three areas of
+interest, and the app says so rather than extrapolating:
+\begin{itemize}
+\item \emph{Eaton Fire 2025 (CA):} 18{,}428 CAL FIRE DINS structure
+  points $\rightarrow$ a 265-cell H3 r9 damage grid with per-severity
+  counts and mandatory uncertainty; CDC SVI 2022 joined across 20 Census
+  tracts with the downscaling approximation declared per feature;
+  2{,}244 reliability-gated cross-view street-imagery samples
+  $\rightarrow$ a 109-cell evidence grid. A damage class with $n{=}30$
+  is declared as lacking statistical power rather than hidden.
+\item \emph{Hurricane Milton 2024 (FL):} 2{,}556 labeled pre/post
+  street-view pairs $\rightarrow$ a 15-cell grid at Horseshoe Beach,
+  each feature carrying the attribution caveat that post-imagery is
+  season-cumulative (Debby, Helene, Milton); 5{,}618 Pinellas County
+  cells with county debris-program volumes and wind/rain covariates.
+  A generated-imagery dataset was excluded, and the exclusion itself is
+  auditable in the event dossier.
+\item \emph{Hurricane Ian 2022 (FL):} 886 matched samples $\rightarrow$
+  a 190-cell evidence grid; 4{,}121 further street-view positions ship
+  as a \emph{density-only} layer because no verifiable per-point
+  severity link exists --- candor over coverage.
+\end{itemize}
+All source imagery traces to a hashed dataset registry (134{,}272
+files, $\sim$33\,GB, SHA-256).
+
+\textbf{Two modes.} Residents geocode an address and receive a
+plain-language dossier --- stat callouts with their qualifiers attached,
+declared unknowns rendered as prominently as findings, and one of three
+coverage answers: covered, outside the evaluated areas, or
+\emph{not determined} when a layer could not be read (the system will
+not claim an address is outside areas it failed to look at). Planners
+weight structural damage against social vulnerability on a live slider
+(every adjustment audit-logged), inspect lineage, and can draw an area
+and ask about it; the answer covers only the evaluated tiles the
+selection contains, never merges statistics across events, and
+highlights the tiles it cited.
+
+\section{The Harness Catching Its Own System}
+\label{sec:incidents}
+
+Two preserved incidents are, we believe, the strongest evidence the
+mechanism does real work.
+
+\textbf{The publication boundary.} A parcel-level DINS file (18{,}428
+points with per-structure damage) reached the public site through an
+asset-copying script, violating four written statements in the
+repository --- while breaking zero policy rules, because the claim plane
+governs what the agent \emph{asserts} and nothing had asserted the file.
+The fix was structural: a distribution plane in the same policy file,
+a publication-boundary planner, and a CI gate that verifies the
+assembled site; the public surface dropped from 30 files to 16. The
+incident report is committed alongside the code it indicts.
+
+\textbf{Citation by default, inverted.} The claim post-check originally
+required citations only on sentences containing digits, so
+``\emph{Your neighborhood was not significantly affected}'' passed
+uncited. The check was inverted to citation-by-default with a closed
+exemption set; acceptance on a representative draft set fell from 9/13
+to 7/13 sentences --- the two newly refused sentences being exactly the
+uncited reassurances a resident should not receive.
+
+The audit log also preserves an over-strict join assertion the harness
+rejected during the Eaton SVI build (envelope tracts vs.\ burn-area
+tracts), recorded as a failure and corrected in a subsequent run ---
+append-only history, including of our own mistakes.
+
+\section{Evaluation Environment}
+
+Following \citet{yang2026accountable}, the test suite is designed as the
+paper's verifiable evaluation environment rather than an afterthought:
+266 Python tests and 44 app tests run in CI on every push, including a
+cell-by-cell policy-matrix sweep (every role $\times$ tier $\times$
+resolution combination against expected authorization), adversarial
+claim-check cases, fail-closed connector tests against real error
+envelopes, and the containment property test for content-free lookup
+records. Anchor checks resolve every path-shaped reference in the
+documentation against the repository, so the manual cannot silently rot.
+Judges can run the environment in two commands from the README.
+
+\section{Related Work}
+
+Autonomous-GIS agents demonstrate that LLMs can operate spatial tooling
+\cite{li2023autonomous,zhang2024geogpt}; our contribution is orthogonal
+--- a harness that constrains any such agent's claims to its evidence.
+Operational platforms such as the Texas Disaster Information
+System~\cite{tdis2026} field forecast-forward flash-flood impact and exposure summaries at
+state scale; accountability there rests on interface disclaimers,
+whereas GeoSteward binds each sentence to a hashed artifact and a policy
+rule. Global registries (EM-DAT~\cite{delforge2025emdat}, GDACS~\cite{gdacs}) record that events happened;
+none carries, per row, what resolution of claim the evidence authorizes
+or whether a reader may keep it --- the two fields this system computes
+for every artifact.
+
+\section{Limitations}
+
+The deep-case builders read a $\sim$33\,GB corpus on the maintainer's
+workstation, so third parties can verify the committed artifacts,
+hashes, and audit logs but not regenerate them. The agent gateway runs
+locally (no hosted endpoint; no auth or rate limiting yet), so the
+public demo ships without chat. The re-derivable regime is implemented
+and tested against a stub but has never run against a live commercial
+API. Inspection routing is not implemented. Nationwide coverage is
+Tier-1 watch only; the app declares this boundary instead of smoothing
+over it, which we consider a feature, but reviewers should not mistake
+three deep cases for national analysis capability.
+
+\begin{acks}
+GeoSteward is an MIT-licensed research prototype. It is not an official
+forecasting or warning service.
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}

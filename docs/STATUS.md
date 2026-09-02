@@ -360,6 +360,21 @@ No new dependencies.
   stale test count is corrected to the verified 266 in both the landing page and the
   README quickstart.
 
+### OASIS short-paper draft (2026-09-01)
+- **First full draft committed** under `paper/` (ACM `sigconf`, builds locally with the
+  repository's TinyTeX via the bundled build script; currently 3 pages + references).
+  Structure follows `track_a_alignment.md`: harness (three validity layers +
+  `verifiability`), system and the three deep cases, the two self-caught incidents as
+  evidence the mechanism works, the test suite as the verifiable evaluation
+  environment, related work (autonomous-GIS agents, TDIS, EM-DAT/GDACS), limitations.
+  Every number was verified against the repository this session (suite re-run: 266
+  Python + 44 app tests; stale counts in the README, landing page, and
+  `track_a_alignment.md` corrected to match).
+- **Owner decisions before submission** (also flagged at the top of the `.tex`):
+  author list and order (Lei Zou is listed from the Yang & Zou abstract — confirm),
+  both email addresses are placeholders, and the assumed format (sigconf, 4 pages)
+  must be reconciled with the Track A brief behind the event login (blocked item 5).
+
 ## 🔜 Next (not blocked)
 
 - Surface `watch_status.json` in the map UI: source health, staleness, and the skipped
