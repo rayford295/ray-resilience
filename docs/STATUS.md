@@ -678,7 +678,10 @@ What the RTX 3090 (24 GB) holds, measured with a one-token probe before the swee
 the model disk; qwen3-vl:32b-ctx8k grades a Palisades image in ~8 s (qwen2.5vl:7b: ~3.2 s). Order: the two 32B
 models first, then 27B, 24B, 11B, 12B, 8B; Palisades (295) → Milton (300 pairs) → Eaton (630) per model.
 Each model's three cases are committed and pushed as they finish; the comparison page is regenerated at each push.
-Partial prediction files of a case still running are **not** committed.
+Partial prediction files of a case still running are **not** committed. The first launch (15:46) died with its shell
+at 42 / 295 of the first case; the relaunch (16:45) runs as a Windows scheduled task (`RayVlmSweep`), detached from
+any terminal, with the driver's `--commit-push` doing the per-model commit and push itself (commit `72ccab4`) —
+the rule above was a promise the first driver could not keep because it never touched git.
 
 ### Still to do (from the 2026-09-03 review, in priority order)
 
