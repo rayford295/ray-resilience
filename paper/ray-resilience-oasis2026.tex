@@ -1,4 +1,4 @@
-% Ray Resilience — OASIS @ ACM SIGSPATIAL 2026, Track A short paper.
+% RAY (Resilience Assistant for You) — OASIS @ ACM SIGSPATIAL 2026, Track A short paper.
 % Build: pdflatex -> bibtex -> pdflatex x2 (see build.sh).
 %
 % OWNER DECISIONS PENDING (do not submit before resolving):
@@ -20,7 +20,8 @@
 
 \begin{document}
 
-\title{Ray Resilience v0 --- An Accountable GeoAI System\\ for Place-Based Disaster Intelligence}
+\title{RAY: Resilience Assistant for You}
+\subtitle{An Accountable GeoAI System for Place-Based Disaster Intelligence}
 
 \author{Yifan Yang}
 \affiliation{%
@@ -36,7 +37,7 @@
 
 \begin{abstract}
 Most GeoAI disaster systems demonstrate autonomy: a language model that
-runs a spatial pipeline. Ray Resilience demonstrates \emph{accountability}: a
+runs a spatial pipeline. RAY (Resilience Assistant for You) demonstrates \emph{accountability}: a
 risk-analyst agent that operates inside the \emph{Steward Harness}, a
 technical layer that enforces outcome, process, and institutional
 validity during operation rather than promising them in prose. Every
@@ -96,7 +97,7 @@ disclaimers --- operational platforms ship forecasts with the caveat that
 they ``complement, do not replace'' official warnings --- which locates
 accountability in the reader rather than in the system.
 
-Ray Resilience locates it in the system. Following the framing of
+RAY locates it in the system. Following the framing of
 \citet{yang2026accountable}, we treat an agent's claim as valid only
 when three conditions hold at once: the \emph{outcome} passes executable
 spatial checks, the \emph{process} that produced it is preserved and
@@ -182,7 +183,7 @@ therefore travels inside the artifact itself.
 
 \section{System and Deep Cases}
 
-Ray Resilience is three loosely coupled planes: a data plane (GitHub Actions
+RAY is three loosely coupled planes: a data plane (GitHub Actions
 pipelines through the harness, publishing hashed artifacts), a
 presentation plane (an installable React + MapLibre PWA, keyless and
 offline-cacheable), and an agent plane (any OpenAI-compatible endpoint
@@ -301,7 +302,7 @@ Autonomous-GIS agents demonstrate that LLMs can operate spatial tooling
 Operational platforms such as the Texas Disaster Information
 System~\cite{tdis2026} field forecast-forward flash-flood impact and exposure summaries at
 state scale; accountability there rests on interface disclaimers,
-whereas Ray Resilience binds each sentence to a hashed artifact and a policy
+whereas RAY binds each sentence to a hashed artifact and a policy
 rule. Global registries (EM-DAT~\cite{delforge2025emdat}, GDACS~\cite{gdacs}) record that events happened;
 none carries, per row, what resolution of claim the evidence authorizes
 or whether a reader may keep it --- the two fields this system computes
@@ -321,7 +322,7 @@ over it, which we consider a feature, but reviewers should not mistake
 three deep cases for national analysis capability.
 
 \begin{acks}
-Ray Resilience is an MIT-licensed research prototype. It is not an official
+RAY is an MIT-licensed research prototype. It is not an official
 forecasting or warning service.
 \end{acks}
 

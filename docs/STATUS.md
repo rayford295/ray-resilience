@@ -18,8 +18,8 @@ Roadmap: five sequential plans under [`docs/design/plans/`](design/plans/), all 
   the system is a v0, and v0 is not part of the brand name.
 - Renamed in README, CITATION, landing page, PWA (title, header, manifest, chat panel),
   gateway system prompt, user-agent strings, manual, and the paper (now
-  `paper/ray-resilience-oasis2026.tex`, title *Ray Resilience v0 — An Accountable GeoAI
-  System for Place-Based Disaster Intelligence*). The Python package stays `geosteward`
+  `paper/ray-resilience-oasis2026.tex`, title *RAY: Resilience Assistant for You — An Accountable
+  GeoAI System for Place-Based Disaster Intelligence*; RAY is the paper's acronym, Ray Resilience the product). The Python package stays `geosteward`
   to avoid a v0 code migration; dated design records and the incident report keep their
   historical wording; hashed artifacts under `events/` are untouched.
 
