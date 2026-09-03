@@ -1,6 +1,6 @@
 # Ray Resilience v0.1 — Project Status
 
-**Updated:** 2026-09-03 (late) · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-09-03 (Windows, evening) · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -555,8 +555,10 @@ agents) into the Steward Harness on **open models**. Decision from the
 2026-09-03 review: keep the *mechanisms*, not the agents — RAPID's prompts,
 schemas, NCSE metric and acceptance rules become harness stages; its LLM
 TaskPlanner is **not** adopted (an LLM choosing which agents run conflicts
-with the policy plane). The branch is pushed to both remotes and **must not
-merge before the 09-04 submission**; the Windows workstation finishes it.
+with the policy plane). The branch is pushed and **must not merge before the 09-04
+submission** (Mac decision, not revisited); the Windows workstation finished the handover
+list the same day, and merged the renamed `main` (`cda24cf`) into the branch so the merge
+back is a fast-forward of evidence, not a rename conflict.
 
 ### Landed on the branch (commits `9059bac`, `254feed`)
 
@@ -582,85 +584,90 @@ merge before the 09-04 submission**; the Windows workstation finishes it.
   (parcel, lineage — records carry coordinates), `source_snapshot_ccby` (internal). Manual
   `09` rows. Python tests 295 → 321; anchors 827/0; publication gate green.
 
-### Running on the Mac when this was written — NOT committed
+### Windows workstation, 2026-09-03 — what landed after the handover
 
-`build_palisades_vlm.py` full run (Apple M5, Ollama, qwen2.5vl:7b): ~65/295 at the
-time of writing, ~12 s/image (1280×960 images take ~20 s, 640×480 ~4 s). Smoke sample
-(5 images) scored 3/5, both misses grading a damaged structure as `0_No_Damage`.
-**It finished** (295/295, ~60 min). Reference numbers for the Windows re-run, from the
-uncommitted `evidence/vlm_severity_eval.json`: qwen2.5vl:7b (digest `5ced39dfa4ba…`),
-prompt `70d933265e16…`, temperature 0 — **accuracy 0.495, NCSE 0.206**, adjacent-error
-0.285, 0 unparseable / 0 off-schema, 253/295 images had GPS → 108 H3 r9 cells. Per-class
-recall 0.93 / **0.00** / 0.30 / 0.25 / 0.97: the open 7B model separates intact from
-destroyed well and **never predicts `1_Affected_1_9`** (all 58 go to class 0 or 2–4).
-That sits between the paper's Gemini-3-Pro (0.442) and GPT-5-mini (0.573) on the same
-295 images. Whatever it wrote stays in the Mac working tree as untracked
-`events/palisades-2025/`; **re-run from scratch on Windows** (the builder is resumable but the record's
-`model_digest` should come from one machine). Kill on the Mac with
-`pkill -f build_palisades_vlm`.
+Commits `8d2b14b`, `dab315a`, `f8f9c8a`, `5d81803` (merge of the renamed main), `8ff812f`,
+then the Milton and Eaton evidence commits below. Branch CI green from `8ff812f`.
 
-### To do on the Windows workstation (in this order)
+- **Gateway governance (the blocking item) — fixed first.** `PolicyEngine.from_yaml` now
+  reads `published_events`, so the claim plane and the distribution plane publish from one
+  list; `EvidenceStore` takes that scope, skips any dossier or grid collection flagged
+  `model_derived`, and records every exclusion (`excluded_events`, `excluded_grids`) instead
+  of staying silent; `Steward` defaults the scope to the policy's list and **refuses to
+  start with none**. Gateway test fixtures declare their synthetic events' scope explicitly.
+  20 tests in `tests/test_gateway_governance.py`, including one over the committed tree:
+  `events/palisades-2025/` is on disk, has an AOI, and is not served.
+- **`scripts/build_eaton_vlm.py` — written and run.** Grades each sample's post-event field
+  image with RAPID Prompt C verbatim (same `prompt_sha256` as Palisades), collapses the five
+  DINS classes onto the set's three repairability labels by DINS semantics
+  (`vlm_severity.DINS5_TO_REPAIRABILITY3`: Affected 1–9 % → trace, Minor/Major → repairable,
+  Destroyed → destroyed) before scoring, keeps both predictions per record, takes location
+  from the manifest's post-event point (declared per cell via `aggregate_h3`'s new
+  `location_source`), and fails closed unless ≥ 95 % of graded samples fall in the committed
+  `crossview_h3_r9_coverage.geojson` cells. The pre-event Mapillary image is **not** shown to
+  the model: Prompt C is single-image, and that is declared rather than worked around with a
+  new prompt. 12 tests in `tests/test_deepcase_vlm_eaton.py`.
+- **Milton builder reads the original release layout.** The owner's local
+  `Bi-temporal_hurricane` set is the pre-Hugging-Face tree
+  (`folder_k/<pre>_vs_<post>(n)/<pre>_2023.png, <post>_2024.png` + `Location.csv` with a BOM);
+  `load_pairs` resolves that first and falls back to the HF layout. 2,555 / 2,556 pairs resolve.
+- **Prompt artifacts moved from `snapshots/vlm/` to `evidence/`.** `vlm_prompt` is public,
+  and nothing under `snapshots/` ships — a structural rule of the distribution plane the Mac
+  never tripped because it never ran a builder into a *published* event. Bytes and sha256
+  unchanged; manifest rows repointed. The SVI staleness guard in `tests/test_deepcase_dossier.py`
+  skips `model_derived` dossiers (an evaluation case has no exposure line to be pending on).
 
-1. **Gateway governance first — blocking.** `src/geosteward/gateway/context.py` loads
-   *every* `events/*/dossier/event_record.json` (line 97) and *every* `*/*.geojson` grid
-   outside `snapshots/` (line 138), ignoring `published_events` and `model_derived`. As
-   soon as `events/palisades-2025/` exists with an `aoi_bbox_wgs84`, or Milton gains
-   `evidence/vlm_bitemporal_h3_r9_grid.geojson`, the agent will cite zero-shot model
-   predictions as tile facts. Fix shape: scope the store to `policy.published_events`,
-   skip grids whose collection `properties.model_derived` is true unless a claim-plane
-   rule authorises `model_derived` evidence (none does today — that is correct), and add
-   a test that a `model_derived` grid never reaches `evidence.facts`. Do this **before**
-   running either builder into `events/`.
-2. Environment: Ollama for Windows (GPU), `ollama pull qwen2.5vl:7b`;
-   `pip install -e ".[deepcase]"`; `set STEWARD_LLM_MODEL=qwen2.5vl:7b`. Optional second
-   model for a two-model comparison: `gemma3:12b` or `llama3.2-vision:11b`.
-3. Data: Palisades images = RAPID clone `I-guide/Dataset/SVI_PalisadesFireImages/`.
-   Bi-Temporal images = Hugging Face `Rayford295/BiTemporal-StreetView-Damage`
-   `final_label_image.zip` (356 MB, 4,807 PNG 1024×512); pair table = Figshare
-   10.6084/m9.figshare.28801208.v2 file `LLM(GPT-4o-mini).csv` (5 MB) — its `root`
-   column is the pairing key `<pre_id>_vs_<post_id>(k)` and carries lat/lon + label.
-4. Run `python scripts/build_palisades_vlm.py --images <RAPID>/I-guide/Dataset/SVI_PalisadesFireImages`
-   (295 images), then `python scripts/build_milton_vlm_bitemporal.py --images <dir>/final_label_image --pairs-csv <dir>/LLM(GPT-4o-mini).csv --sample 100`
-   (300 pairs). Then `python scripts/publication_boundary.py plan` (Milton's allowlist
-   changes — commit the regenerated `app/public/publication_allowlist.json`), full tests,
-   both gates.
-5. Read `evidence/*_eval.json` before anything else: if accuracy is not clearly above the
-   paper's closed-model band, that *is* the result — record it, do not tune the prompt
-   (a prompt change is a new `prompt_sha256` and a new run, never an edit).
-6. **The real prize on that machine: Eaton.** `disaster-dataset-Yifan-all` holds the
-   EATON_wildfire_mapillary_matched set (6,732 images, 3 classes, 2,244 samples, `good` /
-   `usable` match quality) that `evidence.crossview_coverage` only counted. A
-   `build_eaton_vlm.py` mirroring the Milton builder (cross-view pre/post or post-only,
-   truth = `label_name`, gate on `match_quality`) would fill the `CrossViewEvidence`
-   shell for the case that has DINS ground truth at the parcel level. Not written yet.
-7. Then, from the 2026-09-03 review, in priority order: IRA's Q-score acceptance check
-   (OpenCV-only; **never** the generative enhancement branch), RAPID's label-logic
-   Consistent / Contradictory / Unsupported annotator as an offline evaluation in `tests/`,
-   DPA hazard-type consistency check on samples. TaskPlanner: never.
+### Results (qwen2.5vl:7b, digest `5ced39dfa4ba…`, temperature 0, one pass each)
+
+| Case | Set | n | in-schema | accuracy | NCSE | adjacent-error | per-class recall | grid |
+|---|---|---:|---:|---:|---:|---:|---|---|
+| `events/palisades-2025/` | RAPID C2, 5 DINS classes | 295 | 295 | **0.4746** | **0.2127** | 0.2881 | 0.97 / **0.00** / 0.20 / 0.18 / 1.00 | 253 GPS images → 108 cells |
+| `events/milton-2024/` (`vlm_bitemporal`) | Bi-Temporal pairs, 3 classes, 100/class seed 2026 | 300 | 300 | **0.5967** | **0.2383** | 0.33 | 0.53 / 0.31 / 0.95 | 300 / 300 pairs in the committed grid → 13 cells | |
+| `events/eaton-2025/` (`vlm_crossview`) | matched set, 3 repairability classes, 300/class seed 2026 | {{EATON_ROW}} |
+
+- Palisades sits between the paper's Gemini-3-Pro (0.442) and GPT-5-mini (0.573) on the same
+  295 images, as on the Mac. The open 7B model separates intact from destroyed and **never
+  predicts `1_Affected_1_9`**; that class's 58 images go to 0 (25), 2 (21), 3 (2) and 4 (10).
+- **Reproducibility across machines.** Same weights (digest), same prompt (sha), temperature 0:
+  the Mac reference was 0.495 / 0.206, this run 0.4746 / 0.2127 — six of 295 images graded
+  differently. The digest pins the weights, not the arithmetic (Metal vs CUDA kernels,
+  quantised matmul order). Recorded, not tuned away; a reason the record carries
+  `model_digest` *and* the run is committed rather than only described.
+- **Milton pairs: the open 7B model matches the paper's best closed model on this sample.**
+  0.5967 against GPT-5.1 0.591 / GPT-5-mini 0.503 / Gemini-3-Pro 0.493 (the paper graded 150
+  pairs; this run 300, seeded stratified, so the numbers are indicative, not a ranking). The
+  errors are one-directional: 56 of 100 `Moderate` pairs are graded `Severe`, 25 of 100 `Mild`
+  are graded `Moderate`; `Severe` recall 0.95. Object indicators (no ground truth here,
+  descriptive only): debris_pile 0.76, damaged_building 0.60, fallen_tree 0.53, downed_lines
+  0.40, flooded_road 0.01 — consistent with the 2024-season cumulative damage the companion
+  grid declares.
+{{EATON_NOTES}}
+
+### Still to do (from the 2026-09-03 review, in priority order)
+
+1. IRA's Q-score acceptance check (OpenCV-only; **never** the generative enhancement branch).
+2. RAPID's label-logic Consistent / Contradictory / Unsupported annotator as an offline
+   evaluation in `tests/`.
+3. DPA hazard-type consistency check on samples.
+4. Optional second model for a two-model comparison (`gemma3:12b` or `llama3.2-vision:11b`);
+   a full Eaton run (all 2,244 samples, ~2 h on the 3090; the builder resumes by image sha256).
+5. TaskPlanner: never.
 
 ### Problems found (owner should know)
 
-- **Label disagreement in the Bi-Temporal set.** Hugging Face folder labels and the
-  Figshare pair table's `human_damage_perception` disagree on **182 of 2,555** pairs. The
-  committed Milton grid was built from the table (657 / 1,196 / 703 match it exactly), so
-  the table is truth here and the folder label is recorded per pair. Which release is
-  authoritative, and whether the HF card should be corrected, is the owner's call.
-- **Licence mismatch between releases of the same data.** HF card says CC BY-NC 4.0;
-  Figshare says CC BY 4.0. Nothing is redistributed by this branch (predictions and
-  aggregates only; the pair-table snapshot is internal), but the two statements should
-  agree.
-- **The HF zip alone cannot be paired.** Pre (`no_damage/<id>_2023.png`) and post
-  (`folder_k/<id>_2024.png`) ids differ; only the Figshare `root` column links them, and
-  that column contains workstation paths (`C:/Users/yyang295/...`) — the builder drops
-  them before writing anything.
-- **Latency on Apple silicon** makes full Bi-Temporal (2,555 pairs × 2 images) a ~7 h
-  job; hence the stratified sample. A declared downscale (RAPID used
-  `thumbnail(1024)`) would be legitimate preprocessing if recorded per record — not done,
-  to keep the evidence bytes untouched.
-- **Palisades truth is folder-level**, not per-structure DINS records, and some images
-  lack EXIF GPS (38/50 in a sample had it); the tile grid covers photographed structures,
-  not the perimeter. Both declared in the dossier.
-- **Gateway ingests unpublished / model-derived events** — see to-do 1.
+- **The Hugging Face repackaging is what disagrees, not the release.** On the Mac, HF folder
+  labels and the Figshare pair table disagreed on 182 of 2,555 pairs. The owner's local
+  original tree agrees with `Location.csv` on **every** pair (657 / 1,196 / 703). So the
+  table is the truth and the HF zip's folder assignment drifted in repackaging; the HF card
+  is the thing to correct.
+- **Licence mismatch between releases of the same data** (HF card CC BY-NC 4.0 vs Figshare
+  CC BY 4.0) still stands; nothing is redistributed by this branch.
+- **`Location.csv` carries workstation paths in `root`** (`C:/Users/yyang295/...`); the
+  builder consumes them for pairing and never writes them.
+- **Palisades truth is folder-level**, some images lack EXIF GPS (42 / 295 here); the tile
+  grid covers photographed structures, not the perimeter. Both declared in the dossier.
+- **The gateway used to ingest unpublished / model-derived events** — fixed above; the
+  publication planner already excluded them, the *agent* did not.
 
 ## 🔜 Next (not blocked)
 
