@@ -60,12 +60,15 @@ from geosteward.deepcase.vlm_severity import (  # noqa: E402
     REPAIRABILITY_TO_CANONICAL,
     WILDFIRE_CLASSES,
     WILDFIRE_PROMPT,
+    # noqa: E402,
     aggregate_h3,
     classify_image,
     collapse_wildfire_prediction,
+    model_slug,
     record_to_row,
     sha256_text,
     summarize,
+    tagged_path,
 )
 from geosteward.gateway.llm import chat_completion  # noqa: E402
 from geosteward.harness.audit import AuditLog, sha256_file  # noqa: E402
@@ -166,6 +169,9 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=None, help="only the first N of the chosen samples (smoke run)")
     ap.add_argument("--resolution", type=int, default=9)
     ap.add_argument("--timeout", type=float, default=180.0)
+    ap.add_argument("--run-tag", default=None,
+                    help="suffix for every output of this run (predictions, grid, eval) so several models' runs "
+                         "coexist; 'auto' derives it from the served model name. Untagged files are the reference run")
     args = ap.parse_args()
 
     import h3
@@ -200,9 +206,11 @@ def main() -> int:
 
     # --- grading ---------------------------------------------------------------
     identity = model_identity()
+    tag = model_slug(identity["model"]) if args.run_tag == "auto" else (args.run_tag or None)
     run_meta = {
         "model": identity["model"], "model_digest": identity["digest"],
         "prompt_sha256": sha256_text(WILDFIRE_PROMPT), "temperature": 0.0, "run_id": audit.run_id,
+        "run_tag": tag,
         "view": args.view, "quality_gate": list(quality),
         "sample_per_class": args.sample, "seed": args.seed if args.sample else None,
     }
@@ -210,7 +218,7 @@ def main() -> int:
     def call(messages, response_format):
         return chat_completion(messages, timeout=args.timeout, response_format=response_format, temperature=0.0)
 
-    pred_path = ctx.event_dir / "evidence" / "vlm_crossview_predictions.jsonl"
+    pred_path = ctx.event_dir / tagged_path("evidence/vlm_crossview_predictions.jsonl", tag)
     pred_path.parent.mkdir(parents=True, exist_ok=True)
     existing = load_existing(pred_path)
     records, n_new = [], 0
@@ -264,7 +272,7 @@ def main() -> int:
         },
     }
     fail_closed(audit, [check_crs("EPSG:4326"), check_uncertainty_present(features[0]["properties"])])
-    grid_rel = f"evidence/vlm_crossview_h3_r{args.resolution}_grid.geojson"
+    grid_rel = tagged_path(f"evidence/vlm_crossview_h3_r{args.resolution}_grid.geojson", tag)
     ctx.write_json(grid_rel, collection, kind="evidence_grid", agent=STAGE, inputs=[pred_path.name, COMPANION_GRID],
                    notes=f"{len(features)} cells; per-tile agreement of a zero-shot model with the matched set's labels")
 
@@ -293,7 +301,7 @@ def main() -> int:
         },
     }
     fail_closed(audit, [check_uncertainty_present(eval_doc)])
-    ctx.write_json("evidence/vlm_crossview_eval.json", eval_doc, kind="vlm_eval_summary", agent=STAGE,
+    ctx.write_json(tagged_path("evidence/vlm_crossview_eval.json", tag), eval_doc, kind="vlm_eval_summary", agent=STAGE,
                    inputs=[pred_path.name], notes="accuracy / NCSE / confusion for the run, on the collapsed 3-class scale")
     audit.record("stage", STAGE, payload={
         "status": "ok", "n_samples": summary["n_images"], "n_scored": summary["n_scored"],

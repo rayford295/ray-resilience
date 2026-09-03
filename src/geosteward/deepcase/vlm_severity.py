@@ -25,7 +25,7 @@ import json
 import re
 import time
 from dataclasses import asdict, dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Callable, Iterable
 
 from geosteward.deepcase.dins import CANONICAL_SCALE
@@ -161,6 +161,25 @@ def sha256_text(text: str) -> str:
 
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def model_slug(model: str) -> str:
+    """Filesystem-safe tag for a served model name: 'qwen3-vl:32b' -> 'qwen3-vl-32b'."""
+    slug = re.sub(r"[^a-z0-9.-]+", "-", model.lower()).strip("-.")
+    if not slug:
+        raise ValueError(f"model name {model!r} leaves no usable tag")
+    return slug
+
+
+def tagged_path(rel: str, tag: str | None) -> str:
+    """Insert a run tag before the suffix so several models' runs of the same
+    stage live side by side: ('evidence/x.jsonl', 'gemma3-27b') ->
+    'evidence/x.gemma3-27b.jsonl'. No tag returns the path unchanged: the
+    untagged files are the reference run."""
+    if not tag:
+        return rel
+    p = PurePosixPath(rel)
+    return str(p.with_name(f"{p.stem}.{tag}{p.suffix}"))
 
 
 # --------------------------------------------------------------------------
