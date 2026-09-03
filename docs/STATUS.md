@@ -1,6 +1,6 @@
 # GeoSteward v1 — Project Status
 
-**Updated:** 2026-09-03 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-09-03 (late) · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -534,6 +534,113 @@ No new dependencies.
   author list and order (Lei Zou is listed from the Yang & Zou abstract — confirm),
   both email addresses are placeholders, and the assumed format (sigconf, 4 pages)
   must be reconciled with the Track A brief behind the event login (blocked item 5).
+
+## 🔧 In progress — branch `evidence/vlm-severity` (2026-09-03, not merged)
+
+Porting the RAPID line (Yang et al. 2026, arXiv 2606.21819 — four closed-API
+agents) into the Steward Harness on **open models**. Decision from the
+2026-09-03 review: keep the *mechanisms*, not the agents — RAPID's prompts,
+schemas, NCSE metric and acceptance rules become harness stages; its LLM
+TaskPlanner is **not** adopted (an LLM choosing which agents run conflicts
+with the policy plane). The branch is pushed to both remotes and **must not
+merge before the 09-04 submission**; the Windows workstation finishes it.
+
+### Landed on the branch (commits `9059bac`, `254feed`)
+
+- `src/geosteward/gateway/llm.py` — `image_part()` / `text_part()` content parts,
+  `response_format`, `temperature`, `model` overrides. Any OpenAI-compatible vision
+  endpoint works; verified live against local Ollama `qwen2.5vl:7b` (JSON mode honoured;
+  fenced JSON without it — both parse).
+- `src/geosteward/deepcase/vlm_severity.py` — RAPID Prompt C (wildfire 0–4) and Prompt B
+  (pre/post 3-class) **verbatim, sha256 in every record**; strict parsing where an
+  off-schema answer is a recorded `unparseable` / `unknown_label`, never a coerced class;
+  NCSE + confusion; EXIF-GPS; H3 r9 aggregation of truth-vs-prediction histograms; the
+  five binary object indicators kept only when actually 0/1; model prose hashed, not
+  stored. 20 tests, no model needed.
+- `scripts/build_palisades_vlm.py` — `events/palisades-2025/` evaluation case over RAPID's
+  295-image LA DINS set (RAPID Dataset C2; paper: GPT-5-mini 0.573, GPT-5.1 0.570,
+  Gemini-3-Pro 0.442). Resumable by image sha256; aborts above 20 % unanswered. **Not in
+  `published_events`.**
+- `scripts/build_milton_vlm_bitemporal.py` — pre/post pair grading for `events/milton-2024/`
+  from the public Bi-Temporal set; seeded stratified `--sample` per class; fails closed
+  unless ≥ 95 % of graded pairs fall in the committed `bitemporal_h3_r9_grid` cells. Pair
+  loading dry-run on real data: 2,555 / 2,556 pairs resolve.
+- Policy classes: `vlm_prompt`, `vlm_eval_summary` (event, public), `vlm_prediction_records`
+  (parcel, lineage — records carry coordinates), `source_snapshot_ccby` (internal). Manual
+  `09` rows. Python tests 295 → 321; anchors 827/0; publication gate green.
+
+### Running on the Mac when this was written — NOT committed
+
+`build_palisades_vlm.py` full run (Apple M5, Ollama, qwen2.5vl:7b): ~65/295 at the
+time of writing, ~12 s/image (1280×960 images take ~20 s, 640×480 ~4 s). Smoke sample
+(5 images) scored 3/5, both misses grading a damaged structure as `0_No_Damage`.
+Whatever it writes stays in the Mac working tree as untracked `events/palisades-2025/`;
+**re-run from scratch on Windows** (the builder is resumable but the record's
+`model_digest` should come from one machine). Kill on the Mac with
+`pkill -f build_palisades_vlm`.
+
+### To do on the Windows workstation (in this order)
+
+1. **Gateway governance first — blocking.** `src/geosteward/gateway/context.py` loads
+   *every* `events/*/dossier/event_record.json` (line 97) and *every* `*/*.geojson` grid
+   outside `snapshots/` (line 138), ignoring `published_events` and `model_derived`. As
+   soon as `events/palisades-2025/` exists with an `aoi_bbox_wgs84`, or Milton gains
+   `evidence/vlm_bitemporal_h3_r9_grid.geojson`, the agent will cite zero-shot model
+   predictions as tile facts. Fix shape: scope the store to `policy.published_events`,
+   skip grids whose collection `properties.model_derived` is true unless a claim-plane
+   rule authorises `model_derived` evidence (none does today — that is correct), and add
+   a test that a `model_derived` grid never reaches `evidence.facts`. Do this **before**
+   running either builder into `events/`.
+2. Environment: Ollama for Windows (GPU), `ollama pull qwen2.5vl:7b`;
+   `pip install -e ".[deepcase]"`; `set STEWARD_LLM_MODEL=qwen2.5vl:7b`. Optional second
+   model for a two-model comparison: `gemma3:12b` or `llama3.2-vision:11b`.
+3. Data: Palisades images = RAPID clone `I-guide/Dataset/SVI_PalisadesFireImages/`.
+   Bi-Temporal images = Hugging Face `Rayford295/BiTemporal-StreetView-Damage`
+   `final_label_image.zip` (356 MB, 4,807 PNG 1024×512); pair table = Figshare
+   10.6084/m9.figshare.28801208.v2 file `LLM(GPT-4o-mini).csv` (5 MB) — its `root`
+   column is the pairing key `<pre_id>_vs_<post_id>(k)` and carries lat/lon + label.
+4. Run `python scripts/build_palisades_vlm.py --images <RAPID>/I-guide/Dataset/SVI_PalisadesFireImages`
+   (295 images), then `python scripts/build_milton_vlm_bitemporal.py --images <dir>/final_label_image --pairs-csv <dir>/LLM(GPT-4o-mini).csv --sample 100`
+   (300 pairs). Then `python scripts/publication_boundary.py plan` (Milton's allowlist
+   changes — commit the regenerated `app/public/publication_allowlist.json`), full tests,
+   both gates.
+5. Read `evidence/*_eval.json` before anything else: if accuracy is not clearly above the
+   paper's closed-model band, that *is* the result — record it, do not tune the prompt
+   (a prompt change is a new `prompt_sha256` and a new run, never an edit).
+6. **The real prize on that machine: Eaton.** `disaster-dataset-Yifan-all` holds the
+   EATON_wildfire_mapillary_matched set (6,732 images, 3 classes, 2,244 samples, `good` /
+   `usable` match quality) that `evidence.crossview_coverage` only counted. A
+   `build_eaton_vlm.py` mirroring the Milton builder (cross-view pre/post or post-only,
+   truth = `label_name`, gate on `match_quality`) would fill the `CrossViewEvidence`
+   shell for the case that has DINS ground truth at the parcel level. Not written yet.
+7. Then, from the 2026-09-03 review, in priority order: IRA's Q-score acceptance check
+   (OpenCV-only; **never** the generative enhancement branch), RAPID's label-logic
+   Consistent / Contradictory / Unsupported annotator as an offline evaluation in `tests/`,
+   DPA hazard-type consistency check on samples. TaskPlanner: never.
+
+### Problems found (owner should know)
+
+- **Label disagreement in the Bi-Temporal set.** Hugging Face folder labels and the
+  Figshare pair table's `human_damage_perception` disagree on **182 of 2,555** pairs. The
+  committed Milton grid was built from the table (657 / 1,196 / 703 match it exactly), so
+  the table is truth here and the folder label is recorded per pair. Which release is
+  authoritative, and whether the HF card should be corrected, is the owner's call.
+- **Licence mismatch between releases of the same data.** HF card says CC BY-NC 4.0;
+  Figshare says CC BY 4.0. Nothing is redistributed by this branch (predictions and
+  aggregates only; the pair-table snapshot is internal), but the two statements should
+  agree.
+- **The HF zip alone cannot be paired.** Pre (`no_damage/<id>_2023.png`) and post
+  (`folder_k/<id>_2024.png`) ids differ; only the Figshare `root` column links them, and
+  that column contains workstation paths (`C:/Users/yyang295/...`) — the builder drops
+  them before writing anything.
+- **Latency on Apple silicon** makes full Bi-Temporal (2,555 pairs × 2 images) a ~7 h
+  job; hence the stratified sample. A declared downscale (RAPID used
+  `thumbnail(1024)`) would be legitimate preprocessing if recorded per record — not done,
+  to keep the evidence bytes untouched.
+- **Palisades truth is folder-level**, not per-structure DINS records, and some images
+  lack EXIF GPS (38/50 in a sample had it); the tile grid covers photographed structures,
+  not the perimeter. Both declared in the dossier.
+- **Gateway ingests unpublished / model-derived events** — see to-do 1.
 
 ## 🔜 Next (not blocked)
 
