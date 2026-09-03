@@ -1,0 +1,27 @@
+{
+ "event_id": "palisades-2025",
+ "name": "Palisades Fire",
+ "hazard": "wildfire",
+ "start_date": "2025-01-07",
+ "location": "Pacific Palisades, Los Angeles, CA",
+ "aoi_bbox_wgs84": {
+  "min_lat": 34.031,
+  "max_lat": 34.101,
+  "min_lon": -118.667,
+  "max_lon": -118.502
+ },
+ "evidence_tier": 3,
+ "model_derived": true,
+ "data_sources": [
+  "SVI_PalisadesFireImages labelled street-view set (RAPID Dataset C2; labels from CAL FIRE DINS)"
+ ],
+ "declared_unknowns": [
+  "all severity values are zero-shot vision-model predictions evaluated against dataset labels: evaluation only, no damage claim is supported from them",
+  "no exposure layer, no SVI join, no population layer: no exposure or vulnerability claims",
+  "truth labels come from the folder each image was filed under, not from per-structure DINS records: no parcel-level claims",
+  "images without EXIF GPS are absent from the tile grid; the grid covers photographed structures, not the fire perimeter"
+ ],
+ "uncertainty": {
+  "label_crosswalk": "DINS percent-loss classes mapped to the canonical scale as in snapshots/registry profile"
+ }
+}
