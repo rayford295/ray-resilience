@@ -97,8 +97,8 @@ class TestMergePages(unittest.TestCase):
 
 class TestHeaders(unittest.TestCase):
     def test_user_agent_identifies_geosteward(self) -> None:
-        self.assertIn("GeoSteward-watch", HEADERS["User-Agent"])
-        self.assertIn("github.com/rayford295/GeoSteward", HEADERS["User-Agent"])
+        self.assertIn("RayResilience-watch", HEADERS["User-Agent"])
+        self.assertIn("github.com/rayford295/ray-resilience", HEADERS["User-Agent"])
         self.assertNotIn("@", HEADERS["User-Agent"])
 
 

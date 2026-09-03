@@ -8,7 +8,7 @@ import { facilitiesNear } from "../lib/facilities.js";
  * Resident mode: address -> plain-language resilience dossier.
  *
  * The lookup resolves against the coverage index over every layer, so an
- * address is judged by what GeoSteward has evaluated rather than by which
+ * address is judged by what Ray Resilience has evaluated rather than by which
  * layer the map is currently drawing. And it has three answers, not two:
  * "no evidence covers you" is a claim, while "some evidence is unreadable"
  * is an admission, and collapsing the second into the first is how a resident
@@ -102,7 +102,7 @@ export default function ResidentPanel({ coverage, records, onFly, exampleQuery, 
           {result.status === "not_covered" && (
             <p className="outside">
               This location is <strong>outside the evaluated deep-case areas</strong>.
-              GeoSteward makes no damage or vulnerability claims here — competence is
+              Ray Resilience makes no damage or vulnerability claims here — competence is
               conditional on place. Every evaluated layer was read to establish this.
             </p>
           )}
@@ -113,7 +113,7 @@ export default function ResidentPanel({ coverage, records, onFly, exampleQuery, 
               {result.unreadable.length > 0
                 ? `${result.unreadable.length} evaluated layer(s) could not be read, so`
                 : "The evaluated layers are still loading, so"}{" "}
-              GeoSteward cannot yet tell whether this address is covered. It will not
+              Ray Resilience cannot yet tell whether this address is covered. It will not
               guess that it is outside the evaluated areas — that would be a claim
               about a place it has not managed to look at.
             </p>

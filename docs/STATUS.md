@@ -1,4 +1,4 @@
-# GeoSteward v1 — Project Status
+# Ray Resilience v0.1 — Project Status
 
 **Updated:** 2026-09-03 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
@@ -10,8 +10,21 @@ Roadmap: five sequential plans under [`docs/design/plans/`](design/plans/), all 
 
 ## ✅ Done
 
+### Rename: GeoSteward → Ray Resilience (2026-09-03)
+- Product display name is **Ray Resilience** ("Resilience intelligence for every place." /
+  面向每一个地点的灾害韧性智能), the assistant is **Ray** ("Ask Ray"), the accountability
+  engine keeps its name, **Steward Harness**. Brand hierarchy: Rayford AI → Ray Resilience →
+  Ray; repository `rayford295/ray-resilience`. Version renumbered to v0.1 (`0.1.0.dev1`):
+  the system is a v0, and v0 is not part of the brand name.
+- Renamed in README, CITATION, landing page, PWA (title, header, manifest, chat panel),
+  gateway system prompt, user-agent strings, manual, and the paper (now
+  `paper/ray-resilience-oasis2026.tex`, title *Ray Resilience v0 — An Accountable GeoAI
+  System for Place-Based Disaster Intelligence*). The Python package stays `geosteward`
+  to avoid a v0 code migration; dated design records and the incident report keep their
+  historical wording; hashed artifacts under `events/` are untouched.
+
 ### Plan 1 — Foundation (2026-08-19)
-- Package renamed `disasterpilot` → `geosteward` (v1.0.0.dev1); Bavi case archived under
+- Package renamed `disasterpilot` → `geosteward` (then v1.0.0.dev1; renumbered 0.1.0.dev1 with the 2026-09-03 rename to Ray Resilience); Bavi case archived under
   `events/archive/` (append-only, full git history preserved).
 - **Steward Harness core** landed: outcome-validity checks (CRS assertions, join
   integrity, bounds, mandatory uncertainty), append-only audit log + SHA-256 hashing of
@@ -28,7 +41,7 @@ Roadmap: five sequential plans under [`docs/design/plans/`](design/plans/), all 
 - Fail-closed national watch product with harness checks and declared unknowns; per-source
   audit; gzip append-only snapshots.
 - **Live loop is running:** hourly GitHub Actions publish to the
-  [`live-data`](https://github.com/rayford295/GeoSteward/tree/live-data) branch —
+  [`live-data`](https://github.com/rayford295/ray-resilience/tree/live-data) branch —
   `live/products/national_watch.geojson` + `watch_status.json`. Verified end-to-end in CI
   (4/4 sources ok; ~970 live features at last run).
 - Test suite: **71 tests green**; every task independently reviewed, final whole-branch
@@ -99,7 +112,7 @@ Roadmap: five sequential plans under [`docs/design/plans/`](design/plans/), all 
   for now), Playwright smoke tests, agent chat (Plan 5).
 
 ### Plan 4 — deployment + third deep case (2026-08-20)
-- **Live site:** https://rayford295.github.io/GeoSteward/ — landing page at root
+- **Live site:** https://rayford295.github.io/ray-resilience/ — landing page at root
   (content refreshed from the Bavi narrative to the current three-case state), PWA at
   `/app/`, and `/live/` republished hourly (`:40`, trailing `live.yml` at `:23`) via
   the new `deploy-pages` workflow — the Tier-1 national watch layer works publicly
@@ -134,7 +147,7 @@ Roadmap: five sequential plans under [`docs/design/plans/`](design/plans/), all 
 - Thin FastAPI skin (`gateway/main.py`, `.[gateway]` extra) for Cloud Run later;
   Gemini/GCP now needed only for the hosted judge-facing deployment, not for Plan 5
   functionality.
-- **PWA chat panel wired to the gateway** ("Ask the steward", both modes): role
+- **PWA chat panel wired to the gateway** ("Ask Ray", both modes): role
   follows the mode switch, location follows the map center, citations render as
   artifact chips, and all four gateway response types render as themselves —
   cited answer, rule-ID refusal, declared no-evidence, declared outage (with the
@@ -185,7 +198,7 @@ workstation:
 Design: [`design/specs/2026-08-20-non-retainable-evidence-design.md`](design/specs/2026-08-20-non-retainable-evidence-design.md)
 (§11 rulings and §13 implementation notes). Investigating Google Maps Platform surfaced
 a structural problem worth more than the capabilities: GMP terms forbid retaining Maps
-Content, while GeoSteward proves traceability by hashing and freezing every input. So —
+Content, while Ray Resilience proves traceability by hashing and freezing every input. So —
 **when you are contractually forbidden from retaining the evidence, what makes a claim
 derived from it accountable?**
 

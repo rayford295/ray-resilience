@@ -29,7 +29,7 @@ TIGERWEB_BLOCKS_URL = (
     "Tracts_Blocks/MapServer/12/query"
 )
 
-_UA = "GeoSteward/1.0 (research prototype; github.com/rayford295/GeoSteward)"
+_UA = "RayResilience/0.1 (research prototype; github.com/rayford295/ray-resilience)"
 
 
 def blocks_query_params(bbox: tuple[float, float, float, float]) -> dict[str, str]:

@@ -274,7 +274,7 @@ distinguished from absence); this table is the files.
 | `app/src/App.jsx` | Top-level component: mode/view state, data-fetching orchestration; wires the map and every panel together. | `app/src/components/`, `app/src/lib/` | no direct test |
 | `app/src/main.jsx` | React root mount. | `app/src/App.jsx` | no direct test |
 | `app/src/components/Badges.jsx` | `ValidityBadge` / `TierBadge` / `LiveWatchBadge`: renders harness state (checks recorded, tier, live-watch staleness) with the same visual prominence as the data itself. | — | no direct test |
-| `app/src/components/ChatPanel.jsx` | "Ask the Steward" panel: renders every gateway response type — cited answer, rule-ID refusal, declared no-evidence, declared outage — as itself, nothing papered over. | `app/src/lib/citations.js` | no direct test |
+| `app/src/components/ChatPanel.jsx` | "Ask Ray" panel: renders every gateway response type — cited answer, rule-ID refusal, declared no-evidence, declared outage — as itself, nothing papered over. | `app/src/lib/citations.js` | no direct test |
 | `app/src/components/LineagePanel.jsx` | Lineage viewer: the visible layer traced back to timestamped, hashed manifest rows, plus any local human-in-the-loop adjustments. | `app/src/lib/data.js` (`getLocalAudit`) | no direct test |
 | `app/src/components/MapView.jsx` | MapLibre map: paints each layer's choropleth from its committed GeoJSON. | `app/src/lib/views.js`, `app/src/lib/data.js` | no direct test |
 | `app/src/components/PlannerPanel.jsx` | Planner-mode trade-off sliders over the Damage × SVI priority layer. | `app/src/lib/data.js` | no direct test |

@@ -1,4 +1,4 @@
-// Where GeoSteward has evaluated, as an index over every layer at once.
+// Where Ray Resilience has evaluated, as an index over every layer at once.
 //
 // Resident lookup used to search whatever layers happened to be loaded, in a
 // map keyed by event — so within one event the last layer in the catalog

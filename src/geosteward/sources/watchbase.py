@@ -15,7 +15,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-HEADERS = {"User-Agent": "GeoSteward-watch/1.0 (https://github.com/rayford295/GeoSteward)"}
+HEADERS = {"User-Agent": "RayResilience-watch/0.1 (https://github.com/rayford295/ray-resilience)"}
 
 
 def utc_stamp() -> str:

@@ -1,7 +1,7 @@
 {
-  "name": "geosteward-app",
+  "name": "ray-resilience-app",
   "private": true,
-  "version": "1.0.0-dev.1",
+  "version": "0.1.0-dev.1",
   "type": "module",
   "scripts": {
     "sync-artifacts": "node scripts/sync-artifacts.mjs",

@@ -25,7 +25,7 @@ export default function WelcomeCard({ onTryAddress, onDismiss }) {
           with its validity badge and lineage.
         </li>
         <li>
-          <strong>Ask the steward.</strong> Planner mode adds a
+          <strong>Ask Ray.</strong> Planner mode adds a
           damage-vs-vulnerability slider, and shift-drag draws an area to ask
           about. Every answer cites the artifacts it rests on.
         </li>

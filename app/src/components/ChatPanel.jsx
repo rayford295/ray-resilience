@@ -8,7 +8,7 @@ const DEFAULT_ENDPOINT =
   localStorage.getItem("steward-endpoint") || "http://localhost:8080";
 
 /**
- * Ask the Steward: the PWA face of the agent gateway. Every response type
+ * Ask Ray: the PWA face of the agent gateway. Every response type
  * the gateway can emit — cited answer, rule-ID refusal, declared
  * no-evidence, declared outage — renders as itself; nothing is papered over.
  */
@@ -128,7 +128,7 @@ export default function ChatPanel({
             )}
           </>
         )}
-        . The steward answers only from committed artifacts — refusals cite the
+        . Ray answers only from committed artifacts — refusals cite the
         rule that triggered them.
       </p>
       {messages.length === 0 && !busy && (
@@ -161,7 +161,7 @@ export default function ChatPanel({
           placeholder={
             role === "resident" ? "How safe is this area?" : "How severe is the damage here?"
           }
-          aria-label="question for the steward"
+          aria-label="question for Ray"
         />
         <button type="submit" disabled={busy}>Ask</button>
       </form>

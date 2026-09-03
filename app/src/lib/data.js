@@ -5,7 +5,7 @@
 const cache = new Map();
 
 /** App-internal artifact paths resolve against the deploy base ("./" on
- * GitHub Pages under /GeoSteward/); absolute http(s) URLs pass through. */
+ * GitHub Pages under /ray-resilience/); absolute http(s) URLs pass through. */
 export function resolveUrl(url) {
   if (/^https?:/.test(url)) return url;
   return import.meta.env.BASE_URL.replace(/\/$/, "") + url;
@@ -177,7 +177,7 @@ export async function geocodeAddress(oneline) {
  */
 const LIVE_ROOTS = [
   "../live/products",
-  "https://raw.githubusercontent.com/rayford295/GeoSteward/live-data/live/products",
+  "https://raw.githubusercontent.com/rayford295/ray-resilience/live-data/live/products",
 ];
 
 async function fetchFirst(filename, validate) {

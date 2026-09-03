@@ -288,8 +288,8 @@ export default function App() {
     <div className="shell">
       <header>
         <div className="brand">
-          <strong>GeoSteward</strong>
-          <span className="dim"> · accountable GeoAI risk analyst</span>
+          <strong>Ray Resilience</strong>
+          <span className="dim"> · resilience intelligence for every place</span>
         </div>
         <div className="header-right">
           <LiveWatchBadge summary={live && watchStatus ? watchSummary(live, watchStatus) : null} />
@@ -476,7 +476,7 @@ export default function App() {
           )}
 
           <section>
-            <h2>Ask the steward</h2>
+            <h2>Ask Ray</h2>
             <ChatPanel
               role={mode}
               location={mapCenter}

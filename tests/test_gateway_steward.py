@@ -202,7 +202,7 @@ class TestUncitedAssertions(unittest.TestCase):
 
     def test_declared_limit_of_competence_needs_no_citation(self):
         for sentence in (
-            "GeoSteward makes no claim about this location.",
+            "Ray Resilience makes no claim about this location.",
             "The evidence does not answer that question.",
             "This location is outside the evaluated areas.",
             "I cannot assess an individual property.",

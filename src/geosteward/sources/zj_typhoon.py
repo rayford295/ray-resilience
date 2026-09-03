@@ -2,7 +2,7 @@
 
 Free, unauthenticated, near-real-time western-Pacific typhoon tracks with
 quadrant wind radii and multi-agency forecasts. One of the source connectors
-GeoSteward's watcher polls; additional connectors (GDACS, USGS, CMA best
+Ray Resilience's watcher polls; additional connectors (GDACS, USGS, CMA best
 track) register the same interface.
 """
 
@@ -15,7 +15,7 @@ from typing import Any
 BASE = "https://typhoon.slt.zj.gov.cn/Api"
 HEADERS = {
     "Referer": "https://typhoon.slt.zj.gov.cn/",
-    "User-Agent": "Mozilla/5.0 (GeoSteward research snapshot)",
+    "User-Agent": "Mozilla/5.0 (Ray Resilience research snapshot)",
 }
 
 

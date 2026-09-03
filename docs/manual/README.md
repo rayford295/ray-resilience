@@ -1,8 +1,8 @@
-# GeoSteward Manual · 使用与机制说明书
+# Ray Resilience Manual · 使用与机制说明书
 
 ## The one-minute version
 
-GeoSteward is an accountable GeoAI risk-analyst agent: a WebGIS and
+Ray Resilience is an accountable GeoAI system — resilience intelligence for every place — whose assistant, Ray, is an accountable GeoAI risk-analyst agent: a WebGIS and
 installable smartphone app (PWA) that answers what hazards threaten a place,
 how exposed and vulnerable it is, and what the evidence actually supports —
 an entry for OASIS @ ACM SIGSPATIAL 2026, Track A.
@@ -22,7 +22,7 @@ parcel-level claim, and a factual sentence the agent cannot cite is refused
 rather than softened. What this system will not say is as load-bearing as
 what it will.
 
-> **中文。** GeoSteward 是一个具备问责能力的 GeoAI 风险分析智能体——一套可安装到
+> **中文。** Ray Resilience（面向每一个地点的灾害韧性智能）是一套具备问责能力的 GeoAI 系统，其助手 Ray 是一个 GeoAI 风险分析智能体——一套可安装到
 > 手机的网页地图应用（PWA），回答"受哪些灾害威胁""暴露度与脆弱性如何""证据能支持
 > 什么结论"三个问题，是 ACM SIGSPATIAL 大会 OASIS 竞赛 Track A（灾害韧性与脆弱性
 > 分析赛道）的参赛项目。
