@@ -545,7 +545,7 @@ No new dependencies.
   `track_a_alignment.md` corrected to match).
 - **Owner decisions before submission** (also flagged at the top of the `.tex`):
   author list and order (Lei Zou is listed from the Yang & Zou abstract — confirm),
-  the author emails are placeholders (four authors as of 2026-09-03: Yang, Zou, Gong, Wang; Gong's address still TODO), and the assumed format (sigconf, 4 pages)
+  the author emails are placeholders (four authors as of 2026-09-03: Yang, Zou, Gong, Wang; all four confirmed), and the assumed format (sigconf, 4 pages)
   must be reconciled with the Track A brief behind the event login (blocked item 5).
 
 ## 🔜 Next (not blocked)
