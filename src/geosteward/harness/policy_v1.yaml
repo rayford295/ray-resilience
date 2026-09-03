@@ -117,6 +117,17 @@ artifact_classes:
   # 2026-08-20-non-retainable-evidence-design.md.
   live_lookup_record:        {resolution_cap: tile,    audience: public,   license: project}
 
+  # Model-derived evidence (2026-09-03, RAPID line). A zero-shot vision model
+  # grades imagery; the run is published as an EVALUATION — the frozen prompt
+  # and the accuracy/NCSE summary — because a model-derived number is only
+  # accountable next to the number that says how often it is wrong. The
+  # per-image records carry EXIF coordinates and are parcel-resolution, so
+  # they are lineage-only like the DINS points: reachable by hash, never by
+  # URL. Tile aggregates reuse `evidence_grid`.
+  vlm_prompt:                {resolution_cap: event,   audience: public,   license: project}
+  vlm_eval_summary:          {resolution_cap: event,   audience: public,   license: project}
+  vlm_prediction_records:    {resolution_cap: parcel,  audience: lineage,  license: project}
+
   # Critical-facility points extracted from OpenStreetMap inside a deep-case
   # AOI. Third-party content whose license (ODbL) permits redistribution with
   # attribution — the fourth license value exists for exactly this case:
