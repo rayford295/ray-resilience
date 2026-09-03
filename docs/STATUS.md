@@ -1,6 +1,6 @@
 # Ray Resilience v0.1 — Project Status
 
-**Updated:** 2026-09-03 (Windows, evening) · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-09-03 (Windows, night — multi-model sweep running) · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -653,14 +653,41 @@ then the Milton and Eaton evidence commits below. Branch CI green from `8ff812f`
   the builder's sha256 skip. Every record carries the `run_id` that produced it; the eval summary
   carries the finishing run's. Same weights digest, same prompt sha, temperature 0 throughout.
 
+### Multi-model comparison — sweep running on the Windows workstation (started 2026-09-03 15:46 CDT)
+
+The three builders take `--run-tag auto` (commit `0946193`): every output of a tagged run carries the served
+model's slug before its suffix, so seven models' runs sit beside the qwen2.5vl:7b reference files without
+overwriting them and each resumes independently. `scripts/run_vlm_sweep.py` runs the cases model by model and
+records, next to each eval summary, how the server placed the model (bytes in VRAM vs total, context length):
+a model spilled to CPU is a different run and the summary says so. `scripts/compare_vlm_models.py` renders
+[`docs/vlm_model_comparison.md`](vlm_model_comparison.md) from whatever eval files are committed.
+
+What the RTX 3090 (24 GB) holds, measured with a one-token probe before the sweep:
+
+| served model | weights | placement | note |
+|---|---:|---|---|
+| `qwen3-vl:32b` (Q4_K_M, 33.4B) | 20 GB | 32k context: 22.6 of 29.2 GB in VRAM (77 %) | **not used** — spills |
+| `qwen3-vl:32b-ctx8k` (same weights, `num_ctx 8192`) | 20 GB | 22.1 / 22.1 GB (100 %) | the run uses this; derived-model digest recorded |
+| `qwen2.5vl:32b-ctx8k` (`num_ctx 8192`) | 21 GB | 22.2 / 23.3 GB (95 %) | ~1 GB on CPU, accepted and recorded |
+| `gemma3:27b` | 17 GB | 17.5 / 17.5 GB (100 %) at 32k | |
+| `mistral-small3.2:24b` | 15 GB | 19.6 / 19.6 GB (100 %) at 32k | |
+| `llama3.2-vision:11b` | 7.8 GB | fits | single-image model: the Milton pair case is expected to fail closed and be recorded |
+| `gemma3:12b`, `qwen3-vl:8b` | 8.1 / 6.1 GB | fit | |
+
+32B at Q4 is the ceiling for this card; 72B-class vision models do not fit. Cold load is 110–160 s per model from
+the model disk; qwen3-vl:32b-ctx8k grades a Palisades image in ~8 s (qwen2.5vl:7b: ~3.2 s). Order: the two 32B
+models first, then 27B, 24B, 11B, 12B, 8B; Palisades (295) → Milton (300 pairs) → Eaton (630) per model.
+Each model's three cases are committed and pushed as they finish; the comparison page is regenerated at each push.
+Partial prediction files of a case still running are **not** committed.
+
 ### Still to do (from the 2026-09-03 review, in priority order)
 
 1. IRA's Q-score acceptance check (OpenCV-only; **never** the generative enhancement branch).
 2. RAPID's label-logic Consistent / Contradictory / Unsupported annotator as an offline
    evaluation in `tests/`.
 3. DPA hazard-type consistency check on samples.
-4. Optional second model for a two-model comparison (`gemma3:12b` or `llama3.2-vision:11b`);
-   a full Eaton run (all 2,244 samples, ~2 h on the 3090; the builder resumes by image sha256).
+4. ~~Optional second model~~ → the seven-model sweep above is running; still open: a full Eaton run
+   (all 2,244 samples, ~2 h on the 3090 with the 7B model; the builder resumes by image sha256).
 5. TaskPlanner: never.
 
 ### Problems found (owner should know)
