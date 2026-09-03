@@ -20,7 +20,7 @@ scale because that is the scale the truth is on.
 
 Writes, through the Steward Harness:
 
-  snapshots/vlm/prompt_wildfire_5class.txt            vlm_prompt (public)
+  evidence/prompt_wildfire_5class.txt                 vlm_prompt (public)
   evidence/vlm_crossview_predictions.jsonl            vlm_prediction_records (lineage: sample coordinates)
   evidence/vlm_crossview_eval.json                    vlm_eval_summary (public)
   evidence/vlm_crossview_h3_r9_grid.geojson           evidence_grid (tile, public, model_derived)
@@ -188,7 +188,8 @@ def main() -> int:
         chosen = picked[: args.limit]
 
     # --- prompt snapshot (same bytes, same sha256, as the Palisades run) ---
-    prompt_path = ctx.event_dir / "snapshots" / "vlm" / "prompt_wildfire_5class.txt"
+    # evidence/, not snapshots/: the prompt is public, and nothing under snapshots/ ships.
+    prompt_path = ctx.event_dir / "evidence" / "prompt_wildfire_5class.txt"
     prompt_path.parent.mkdir(parents=True, exist_ok=True)
     prompt_path.write_text(WILDFIRE_PROMPT, encoding="utf-8")
     prompt_artifact = ctx.register(Artifact(

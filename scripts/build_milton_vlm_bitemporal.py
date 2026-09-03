@@ -21,7 +21,7 @@ Writes, through the Steward Harness:
 
   snapshots/registry/BiTemporal_StreetView_Damage_profile.json   dataset_registry_snapshot (internal)
   snapshots/bitemporal/pair_table.json.gz                        source_snapshot_ccby (internal: coordinates)
-  snapshots/vlm/prompt_bitemporal_3class.txt                     vlm_prompt (public)
+  evidence/prompt_bitemporal_3class.txt                          vlm_prompt (public)
   evidence/vlm_bitemporal_predictions.jsonl                      vlm_prediction_records (lineage)
   evidence/vlm_bitemporal_eval.json                              vlm_eval_summary (public)
   evidence/vlm_bitemporal_h3_r9_grid.geojson                     evidence_grid (tile, public)
@@ -247,7 +247,8 @@ def main() -> int:
         inputs=[f"doi:{FIGSHARE_DOI}"],
         notes="pair ids, coordinates and labels only; the table's workstation paths are dropped. CC BY 4.0, attribution in the registry profile",
     ))
-    prompt_path = ctx.event_dir / "snapshots" / "vlm" / "prompt_bitemporal_3class.txt"
+    # evidence/, not snapshots/: the prompt is public, and nothing under snapshots/ ships.
+    prompt_path = ctx.event_dir / "evidence" / "prompt_bitemporal_3class.txt"
     prompt_path.parent.mkdir(parents=True, exist_ok=True)
     prompt_path.write_text(BITEMPORAL_PROMPT, encoding="utf-8")
     prompt_artifact = ctx.register(Artifact(

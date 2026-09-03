@@ -11,7 +11,7 @@ the whole run is keyless and reproducible from a laptop.
 What this stage writes, all through the Steward Harness:
 
   snapshots/registry/SVI_PalisadesFireImages_profile.json  dataset_registry_snapshot (internal)
-  snapshots/vlm/prompt_wildfire_5class.txt                  vlm_prompt (public)
+  evidence/prompt_wildfire_5class.txt                       vlm_prompt (public)
   evidence/vlm_predictions.jsonl                            vlm_prediction_records (lineage: has EXIF coords)
   evidence/vlm_severity_eval.json                           vlm_eval_summary (public)
   evidence/vlm_severity_h3_r9_grid.geojson                  evidence_grid (tile, public) — only if images carry GPS
@@ -139,7 +139,10 @@ def stage_registry_snapshot(ctx: EventContext, images: list[tuple[Path, str]], i
 
 
 def stage_prompt_snapshot(ctx: EventContext) -> Artifact:
-    path = ctx.event_dir / "snapshots" / "vlm" / "prompt_wildfire_5class.txt"
+    # Under evidence/, not snapshots/: the prompt ships (it is RAPID's published
+    # text and every record cites its sha256), and nothing under snapshots/ ever
+    # does -- that is a structural rule of the distribution plane, not a per-file one.
+    path = ctx.event_dir / "evidence" / "prompt_wildfire_5class.txt"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(WILDFIRE_PROMPT, encoding="utf-8")
     return ctx.register(
