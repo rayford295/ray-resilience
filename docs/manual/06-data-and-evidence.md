@@ -282,21 +282,28 @@ specifically, and the same 30 appears in the dossier's own
 `declared_unknowns` for a reader who never opens the grid at all.
 
 **Declared unknowns** (`events/eaton-2025/dossier/event_record.json`) list
-three items: the 40 `Inaccessible` DINS points already covered above; the
-`damaged_repairable` n=30 caveat already covered above; and *"social-vulnerability
-join (SVI x exposure) pending: no vulnerability claims yet."* That third
-line is stale, and this chapter says so plainly rather than repeating it:
-`events/eaton-2025/exposure/svi_h3_r9_context.geojson` exists, is committed,
-carries 265 features with `RPL_THEME1`–`RPL_THEME4` populated as described
-above, and was built by `scripts/build_eaton_svi.py` — work the dossier's
-own text still describes as not yet done. The dossier was written before
-that join landed and was never revised afterward; the artifact on disk, not
-the sentence in the dossier, is the current fact, and a reader relying on
-this manual rather than the raw dossier file gets the corrected statement.
-No file was edited to produce this correction — `event_record.json` is a
-published artifact, and rewriting it retroactively would itself be a
-provenance problem; the fix belongs to whoever next rebuilds the dossier
-stage, and until then this manual is where the correction lives.
+two items: the 40 `Inaccessible` DINS points already covered above and the
+`damaged_repairable` n=30 caveat already covered above. A third line —
+*"social-vulnerability join (SVI x exposure) pending: no vulnerability claims
+yet"* — was declared when the dossier was first written on 2026-08-20 and
+became untrue the same day, when `scripts/build_eaton_svi.py` landed
+`events/eaton-2025/exposure/svi_h3_r9_context.geojson` (265 features,
+`RPL_THEME1`–`RPL_THEME4` populated as described above). The dossier was
+never reissued, so for two weeks its text described as not yet done work
+that the artifact beside it had finished; `11` records what the running
+gateway did with that sentence. On 2026-09-03 the line was **retired, not
+deleted**: the dossier now carries a `resolved_unknowns` list whose single
+entry holds the retired sentence, the resolving artifact's path and sha256,
+the time, and the stage that did it. The correction went through the same
+machinery that declared the line — `src/geosteward/deepcase/dossier.py`
+reissued `event_record.json` via `EventContext.write_json`, so the manifest
+gained a second row for that path (the 2026-08-20 row is still there, and
+readers take the latest row per path) and the audit log gained a `stage` row
+for `dossier.retire_unknown`. Nothing was hand-edited and no history was
+rewritten. `scripts/build_eaton_svi.py` now performs the same retirement
+itself when it lands the grid, so a full rebuild cannot recreate the gap,
+and `tests/test_deepcase_dossier.py` fails if any event with a registered
+SVI grid still declares the join pending.
 
 > **中文。** **关注区域**：`min_lat: 34.10, max_lat: 34.30, min_lon: -118.20,
 > max_lon: -117.95`（加州洛杉矶县 Altadena/Pasadena），这个边界是对每一个加载进来
@@ -348,16 +355,21 @@ stage, and until then this manual is where the correction lives.
 > 也出现在档案自己的声明未知项里，供从不打开网格文件的读者看到。**声明未知项**
 > （`events/eaton-2025/dossier/event_record.json`）列了三项：上文已经讲过的 40 个
 > "不可达" DINS 点；上文已经讲过的 `damaged_repairable` n=30 说明；以及"社会脆弱性
-> 联接（SVI×暴露度）尚待完成：暂无脆弱性结论"。第三项已经过时，本章在这里明确
-> 指出，而不是照抄一遍：`events/eaton-2025/exposure/svi_h3_r9_context.geojson`
-> 确实存在、已提交，携带 265 个要素、如上文所述已填充
-> `RPL_THEME1`–`RPL_THEME4`，由 `scripts/build_eaton_svi.py` 构建完成——这正是
-> 档案文字仍然描述为"尚未完成"的那项工作。档案是在这次联接落地之前写的，此后再未
-> 更新过；磁盘上的产物、而非档案里的那句话，才是当前的事实，依赖本手册而非直接读
-> 原始档案文件的读者，看到的是这里更正后的说法。这里没有为了这次更正去编辑任何
-> 文件——`event_record.json` 是一份已发布的产物，事后回改它本身就会造成一个溯源
-> 问题；这项修复应该留给下一次重建档案阶段的人去做，在那之前，这份更正就先记在
-> 本手册里。
+> 联接（SVI×暴露度）尚待完成：暂无脆弱性结论"。第三项在 2026-08-20 写下当天就
+> 失效了：同一天 `scripts/build_eaton_svi.py` 生成了
+> `events/eaton-2025/exposure/svi_h3_r9_context.geojson`（265 个要素、如上文所述
+> 已填充 `RPL_THEME1`–`RPL_THEME4`），但档案没有随之重发，于是两周里档案文字一直把
+> 旁边那份产物已经完成的工作描述为"尚未完成"；正在运行的网关拿这句话做了什么，见
+> `11` 章。2026-09-03 这一行被**解除，而不是删除**：档案现在多了一个
+> `resolved_unknowns`（已解除的未知项）列表，唯一一条记录着被解除的原句、解除它的
+> 产物路径与 sha256、时间，以及执行解除的阶段。这次更正走的是当初声明这句话时的
+> 同一套机制——`src/geosteward/deepcase/dossier.py` 通过 `EventContext.write_json`
+> 重发了 `event_record.json`，因此清单里该路径多了第二行（2026-08-20 那一行仍在，
+> 读取方取同一路径的最后一行），审计日志里多了一条 `dossier.retire_unknown` 的
+> `stage` 记录。没有任何手改，也没有改写任何历史。`scripts/build_eaton_svi.py` 现在
+> 在生成网格时会自己执行同样的解除，所以完整重建不会再复现这个缺口；
+> `tests/test_deepcase_dossier.py` 会在任何已登记 SVI 网格的事件仍声明"尚待完成"时
+> 失败。
 
 ### Hurricane Milton, 2024
 
@@ -429,8 +441,9 @@ own right rather than a footnote to Milton specifically.
 Horseshoe Beach attribution caveat already covered above; *"no parcel-level
 claims anywhere: all products are tile (H3 r9) resolution"*; and a
 social-vulnerability join stated as pending — unlike Eaton's equivalent
-line, this one is current: no SVI-joined grid exists anywhere under
-`events/milton-2024/`, so nothing here corrects it.
+line, retired on 2026-09-03 once its grid was recognised, this one is
+current: no SVI-joined grid exists anywhere under `events/milton-2024/`, so
+nothing here corrects it.
 
 > **中文。** **两个关注区域，一个案例。** Horseshoe Beach（`min_lat: 29.35,
 > max_lat: 29.55, min_lon: -83.40, max_lon: -83.20`，Big Bend 地区）承载街景证据；
@@ -467,8 +480,8 @@ line, this one is current: no SVI-joined grid exists anywhere under
 > 案例里的一条脚注。**声明未知项**（`events/milton-2024/dossier/event_record.json`）
 > 列了三项：上文已讲过的 Horseshoe Beach 归因说明；"任何地方都没有地块级断言：
 > 全部产物都是 H3 r9 瓦片分辨率"；以及一项声明为"尚待完成"的社会脆弱性联接——与
-> Eaton 那条同类声明不同，这一条目前仍然属实：`events/milton-2024/` 下不存在任何
-> 已联接 SVI 的网格，因此这里没有需要更正的地方。
+> Eaton 那条已于 2026-09-03 解除的同类声明不同，这一条目前仍然属实：
+> `events/milton-2024/` 下不存在任何已联接 SVI 的网格，因此这里没有需要更正的地方。
 
 ### Hurricane Ian, 2022
 
@@ -877,16 +890,19 @@ evidence that passed the same check cleanly.
 
 **The Eaton SVI join's stale declared unknown**, covered in full in this
 chapter's Eaton section above, belongs here too, from the opposite
-direction: it is not a source this project excluded, but a source this
-project's own dossier still incorrectly describes as not yet included. A
-reader checking "what was left out and how would I verify that" against the
-raw dossier file alone would conclude the SVI join never happened; checking
-the same claim against `events/eaton-2025/exposure/svi_h3_r9_context.geojson`
-directly shows it did. The lesson this chapter draws from placing both
-findings under one heading is that "excluded" and "not yet correctly
-recorded as included" can look identical from a dossier's text alone, and
-the only way to tell them apart is to check the artifact the dossier claims
-does not exist.
+direction: it was not a source this project excluded, but a source this
+project's own dossier incorrectly described as not yet included, from
+2026-08-20 until it was retired on 2026-09-03. During that window a reader
+checking "what was left out and how would I verify that" against the raw
+dossier file alone would have concluded the SVI join never happened;
+checking the same claim against
+`events/eaton-2025/exposure/svi_h3_r9_context.geojson` directly showed it
+did. The lesson this chapter draws from placing both findings under one
+heading survives the fix: "excluded" and "not yet correctly recorded as
+included" can look identical from a dossier's text alone, and the only way
+to tell them apart is to check the artifact the dossier claims does not
+exist — which is exactly the check the retirement machinery now performs
+before it will retire anything.
 
 **NOAA post-event orthoimagery** for Eaton (dated 2025-01-28, listed in
 `events/eaton-2025/dossier/event_record.json`'s `data_sources` as
@@ -926,12 +942,14 @@ level of one named imagery collection.
 > 卫星影像部分不是，如果因为一个数据集里某一部分未通过溯源核查就把整个数据集当作
 > 受污染处理，等于把另一部分明明干净通过了同样核查的证据也一并扔掉。**Eaton SVI
 > 联接那条已过时的声明未知项**，本章前面 Eaton 一节已经完整讲过，从另一个方向看
-> 也属于这里：它不是本项目排除的一个来源，而是本项目自己的档案至今仍然错误地描述
-> 为"尚未纳入"的一个来源。一个只依据原始档案文件去核对"哪些内容被排除在外、又该
-> 如何核实"的读者，会得出"SVI 联接从未做过"的结论；直接核对
+> 也属于这里：它不是本项目排除的一个来源，而是本项目自己的档案从 2026-08-20 到
+> 2026-09-03 被解除之前一直错误地描述为"尚未纳入"的一个来源。在那段时间里，一个
+> 只依据原始档案文件去核对"哪些内容被排除在外、又该如何核实"的读者，会得出"SVI
+> 联接从未做过"的结论；直接核对
 > `events/eaton-2025/exposure/svi_h3_r9_context.geojson` 就会发现它确实做过。把这两个
-> 发现放在同一个标题下，本章想说明的道理是："被排除"和"已被纳入却尚未被正确记录"
-> 单看档案文字可能长得一模一样，唯一的区分办法是去核对档案声称不存在的那份产物。
+> 发现放在同一个标题下，本章想说明的道理在修复之后依然成立："被排除"和"已被纳入
+> 却尚未被正确记录"单看档案文字可能长得一模一样，唯一的区分办法是去核对档案声称
+> 不存在的那份产物——而这正是解除机制在同意解除任何一条之前，如今必做的那项核对。
 > **NOAA 灾后正射影像**（Eaton 案例的，拍摄于 2025-01-28，在
 > `events/eaton-2025/dossier/event_record.json` 的 `data_sources` 里被列为
 > "verified_official；影像本身未提交"）是第三种、规模更小、但值得专门点名的情况，

@@ -102,15 +102,14 @@ told so, not extrapolated to.
 
 **Backed by** — Committed, hashed H3 r9 GeoJSON grids recorded in each event's
 artifact manifest, plus each event's dossier (`event_record.json`) declaring
-uncertainty and gaps with the same prominence as findings. One dossier is
-worth flagging here rather than silently trusting: Eaton's `event_record.json`
-still lists *"social-vulnerability join (SVI x exposure) pending: no
-vulnerability claims yet"* under `declared_unknowns`, but the joined artifact
-it describes as pending — `events/eaton-2025/exposure/svi_h3_r9_context.geojson`,
-265 cells, `RPL_THEME1`–`RPL_THEME4` populated — already exists, built by
-`scripts/build_eaton_svi.py`. The dossier predates that join and was never
-updated; the artifact on disk is the current fact, and this chapter describes
-the artifact rather than repeating the stale sentence.
+uncertainty and gaps with the same prominence as findings. Dossiers can also
+carry a `resolved_unknowns` list: a declared unknown that a later, registered
+artifact has made untrue is moved there with the resolver's path and sha256
+rather than deleted. Eaton's dossier has one such entry — its *"social-vulnerability
+join (SVI x exposure) pending"* line outlived
+`events/eaton-2025/exposure/svi_h3_r9_context.geojson` (265 cells,
+`RPL_THEME1`–`RPL_THEME4` populated, built by `scripts/build_eaton_svi.py`)
+by two weeks before being retired on 2026-09-03; `06` and `11` give the account.
 
 **Implemented in** — `events/eaton-2025/`, `events/milton-2024/`,
 `events/ian-2022/`, `scripts/build_eaton_case.py`,
@@ -145,12 +144,14 @@ evaluated.
 >
 > 以上每个数字都是直接对已提交的 GeoJSON 文件重新计数验证过的，而不是照抄
 > `README.md` 或 `docs/STATUS.md`。这项能力只在这三个关注区域（AOI）内有效，之外
-> 的地方会被明确告知超出范围，而不是被外推出结论。这里要特别指出一处过时记录：
-> Eaton 的 `event_record.json` 仍把"社会脆弱性联接（SVI×暴露度）尚待完成"列为
+> 的地方会被明确告知超出范围，而不是被外推出结论。档案还可以带一个
+> `resolved_unknowns`（已解除的未知项）列表：某条声明未知项一旦被后来登记的产物
+> 证伪，就连同解除它的产物路径与 sha256 一起移到这里，而不是被删掉。Eaton 的档案
+> 有这样一条：它把"社会脆弱性联接（SVI×暴露度）尚待完成"列为
 > 声明未知项，但它描述为"尚待完成"的联接产物——265 格、已填充
 > `RPL_THEME1`–`RPL_THEME4` 字段的 SVI 关联网格——其实已经存在，由
-> `scripts/build_eaton_svi.py` 生成；这份档案文件的文字早于该联接完成、此后未再
-> 更新，本章以磁盘上的实际产物为准，而不重复这句已经过时的声明。任何"损毁评估"
+> `scripts/build_eaton_svi.py` 生成；这句话比那份产物多活了两周，直到 2026-09-03
+> 被解除——完整经过见 `06` 与 `11` 章。任何"损毁评估"
 > 类请求只要落在关注区域之外，就会在断言平面（`policy_v1.yaml`）里先于其他规则命中
 > `deny-outside-aoi` 而被拒绝；应用自身的覆盖查询（见能力 3）也会用平实语言告诉
 > 居民同样的结论，而不是对一个从未评估过的地方妄加猜测。

@@ -18,10 +18,19 @@
  ],
  "declared_unknowns": [
   "40 DINS points are Inaccessible: no damage conclusion supported there",
-  "damaged_repairable evidence class has n=30 — no tile-level rate claims from it",
-  "social-vulnerability join (SVI x exposure) pending: no vulnerability claims yet"
+  "damaged_repairable evidence class has n=30 — no tile-level rate claims from it"
  ],
  "uncertainty": {
   "label_crosswalk": "percent-loss to perception mapping is approximate; see snapshots/registry/label_crosswalk.json"
- }
+ },
+ "resolved_unknowns": [
+  {
+   "unknown": "social-vulnerability join (SVI x exposure) pending: no vulnerability claims yet",
+   "resolved_by": "exposure/svi_h3_r9_context.geojson",
+   "resolved_by_sha256": "efbedce4cfd340684495ef8c4e503347f9b1dc0568552050c34b97b3342a7d8a",
+   "resolved_utc": "20260903T052023Z",
+   "resolved_by_stage": "dossier.retire_unknown",
+   "note": "SVI grid landed 2026-08-20 (exposure.svi_context); the dossier predates it and was never reissued — found 2026-08-24 while writing docs/manual, retired 2026-09-03"
+  }
+ ]
 }

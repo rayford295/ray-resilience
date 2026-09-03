@@ -1,6 +1,6 @@
 # GeoSteward v1 — Project Status
 
-**Updated:** 2026-09-02 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-09-03 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -379,6 +379,35 @@ No new dependencies.
   row. App tests 44 → **57** (legend scale, citation resolution); verified end-to-end
   in a headless browser with the gateway and geocoder mocked.
 
+### Dossier reissue — a declared unknown that outlived its resolution (2026-09-03)
+- Fixes the most consequential of the ten 2026-08-24 manual findings (below, now
+  struck through). Eaton's dossier kept declaring *"social-vulnerability join (SVI x
+  exposure) pending"* after `scripts/build_eaton_svi.py` landed the SVI grid on
+  2026-08-20, and the gateway fed that line to users as evidence.
+- Mechanism, not a hand edit: `src/geosteward/deepcase/dossier.py` `retire_unknown()`
+  moves the line to a new `resolved_unknowns` list (resolver path + sha256 + time +
+  stage — the record keeps saying what it once could not support and why that
+  changed), refuses resolvers that are not registered in the manifest and lines that
+  were never declared, and reissues `event_record.json` through `EventContext.write_json`
+  so the manifest gains a new row while the old one stays. Readers already take the
+  latest row per path. Idempotent on re-run. Manifest and audit log remain append-only.
+- `scripts/build_eaton_svi.py` now retires the line itself when it lands the grid, so a
+  full rebuild cannot recreate the staleness. `scripts/retire_dossier_unknown.py` is the
+  retroactive form for artifacts that landed before that behaviour did and cannot be
+  rebuilt on this machine; it was run once, on `events/eaton-2025/` (new dossier sha256
+  `bd2c7996a7f9…`, stage `dossier.retire_unknown`).
+- Regression guard over the committed events in `tests/test_deepcase_dossier.py`: an
+  event with a registered `svi_context_grid` must not declare the join pending, and
+  every `resolved_unknowns` entry must point at a registered, on-disk artifact whose
+  sha256 matches. Milton's and Ian's "pending" lines stay — both are still true.
+- Not changed: the gateway loop in `src/geosteward/gateway/context.py` still cannot tell
+  a stale unknown from a current one by itself; the guarantee now rests on stages
+  retiring what they resolve plus the guard, and the manual (`11`) says so.
+- Also today: `npm audit fix` (one transitive `fast-uri` high, `package-lock.json` only);
+  the README and landing quickstart now quote the count the plain
+  `python -m unittest discover -s tests` actually produces without the gateway extra.
+  Python tests 295 → **301**; app tests 67.
+
 ### Paper synced to the shipped system; repo-wide consistency pass (2026-09-02)
 - The short paper now describes what is actually deployed: population and facility
   numbers in all three deep cases, the exercised `open-license-attribution` value,
@@ -592,20 +621,24 @@ Ten defects surfaced during the bilingual-manual effort (implementer- and
 reviewer-verified, one independently). Recorded here, not fixed here — that
 call belongs to the project owner.
 
-- Eaton's `events/eaton-2025/dossier/event_record.json` declares a stale
+- ~~Eaton's `events/eaton-2025/dossier/event_record.json` declares a stale
   unknown — *"social-vulnerability join (SVI x exposure) pending: no
   vulnerability claims yet"* — while
   `events/eaton-2025/exposure/svi_h3_r9_context.geojson` exists with 265
-  cells and full `RPL_THEME1`–`RPL_THEME4`. Milton's and Ian's identical
-  lines are still true (neither has an SVI grid) — this does not generalise
-  to them.
+  cells and full `RPL_THEME1`–`RPL_THEME4`.~~ **Fixed 2026-09-03** (see
+  "Dossier reissue" under Done): the line now sits in `resolved_unknowns`
+  with its resolver's sha256, and a regression test guards every event.
+  Milton's and Ian's identical lines are still true (neither has an SVI
+  grid) — the fix deliberately does not generalise to them.
 - **Most consequential:** `src/geosteward/gateway/context.py:183` feeds
   `record["declared_unknowns"]` into the agent's evidence context, so the
-  stale line above is spoken to real users while the SVI layer is published
-  and rendered. The error is conservative — the agent under-reports
+  stale line above ~~is~~ was spoken to real users while the SVI layer is
+  published and rendered. The error is conservative — the agent under-reports
   competence rather than fabricating data — but it corrodes the
   declared-unknowns mechanism: if the list can go stale, "not listed as
-  unknown" stops meaning "confirmed."
+  unknown" stops meaning "confirmed." **Mitigated 2026-09-03:** the instance
+  is gone and stages now retire what they resolve; the loop itself still has
+  no freshness check of its own (recorded in the manual's `11`).
 - `src/geosteward/harness/publication.py:191`'s `redact()` has no callers
   anywhere, including its own test file. Redaction is performed by
   `app/scripts/sync-artifacts.mjs` from the `redact_workstation_paths` flag

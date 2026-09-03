@@ -40,17 +40,18 @@ vulnerability context currently exists for exactly one of the three cases.
 `events/eaton-2025/exposure/svi_h3_r9_context.geojson` is real, committed,
 and carries 265 cells — but neither Milton nor Ian has an equivalent file,
 and both dossiers' `declared_unknowns` correctly say so today. Eaton's own
-dossier, `events/eaton-2025/dossier/event_record.json`, still says otherwise:
-its `declared_unknowns` list carries the line *"social-vulnerability join
-(SVI x exposure) pending: no vulnerability claims yet,"* which was true when
-written and has been false since `scripts/build_eaton_svi.py` ran — `06`
-gives the full account and the reason the file itself was not edited to fix
-it. Do not generalize the fix across events — Milton's and Ian's
+dossier, `events/eaton-2025/dossier/event_record.json`, said otherwise for
+two weeks: its `declared_unknowns` carried the line *"social-vulnerability
+join (SVI x exposure) pending: no vulnerability claims yet,"* true when
+written and false from the moment `scripts/build_eaton_svi.py` ran. On
+2026-09-03 the line was retired into the dossier's `resolved_unknowns` by
+reissuing the record through the harness — `06` gives the full account. The
+fix was deliberately not generalized across events: Milton's and Ian's
 identically-worded "pending" lines are current, not stale, because neither
-case has the file that would make them untrue. This particular staleness
-has a live consequence beyond the dossier text sitting inert on disk — see
-"Known defects and rough edges" below for what the running gateway does
-with it.
+case has the file that would make them untrue, and the regression test in
+`tests/test_deepcase_dossier.py` asserts exactly that asymmetry. What the
+running gateway did with the stale sentence while it stood, and what it
+still cannot do on its own, is under "Known defects and rough edges" below.
 
 > **中文。** 灾害监测覆盖全美国：任何美国地点都能拿到当前的 1 级 Watch 图层，与
 > 关注区域（AOI）无关。暴露度与损毁分析——层级（1/2/3 级）里的 2/3 级——只存在于
@@ -64,14 +65,15 @@ with it.
 > 目前只存在于三个案例中的一个。`events/eaton-2025/exposure/svi_h3_r9_context.geojson`
 > 是真实的、已提交的，装着 265 个格；但 Milton 和 Ian 都没有对应文件，两份档案的
 > `declared_unknowns` 如今都如实这样写。Eaton 自己的档案
-> （`events/eaton-2025/dossier/event_record.json`）却仍然写着相反的话：它的
+> （`events/eaton-2025/dossier/event_record.json`）曾有两周写着相反的话：它的
 > `declared_unknowns` 列表里有一行"社会脆弱性联接（SVI × 暴露度）尚待完成：暂无
-> 脆弱性结论"——这句话在写下时是真的，但自 `scripts/build_eaton_svi.py` 跑完之后
-> 就不再是真的了；`06` 章给出了完整说明，也解释了这份档案没有被改动来修正它的原因。
-> 不要把这个修正方式套到别的事件上：Milton 和 Ian 措辞完全相同的"尚待完成"是当下
-> 属实的，不是过时的，因为这两个案例都还没有能让这句话变假的那份文件。这一处过时
-> 声明还有一个不止于档案文字静静躺在磁盘上的现实后果——正在运行的网关会拿它做什么，
-> 见下文"已知缺陷与粗糙之处"一节。
+> 脆弱性结论"——写下时是真的，从 `scripts/build_eaton_svi.py` 跑完那一刻起就不再
+> 是真的。2026-09-03 这一行经由 Steward Harness 重发档案，被解除到档案的
+> `resolved_unknowns`（已解除的未知项）里——`06` 章有完整说明。这次修复刻意没有
+> 套到别的事件上：Milton 和 Ian 措辞完全相同的"尚待完成"是当下属实的，不是过时的，
+> 因为这两个案例都还没有能让这句话变假的那份文件；`tests/test_deepcase_dossier.py`
+> 里的回归测试断言的正是这种不对称。这句过时的话在存续期间被正在运行的网关拿去做了
+> 什么、以及网关至今仍然自己做不到什么，见下文"已知缺陷与粗糙之处"一节。
 
 ## Implemented but never executed
 
@@ -266,17 +268,23 @@ and disclosure surface, not just a privacy one.
   same `evidence.facts` list the model is grounded on. Nothing in that
   loop records when a string was written or checks whether it is still
   true, so a stale declared-unknown reads to the retrieval code exactly
-  like a current one. This is demonstrated, not hypothetical: the
-  geographic section above shows Eaton's dossier still declaring its SVI
-  join "pending" after `scripts/build_eaton_svi.py` made that false, and
-  asking the running gateway a damage question at an Eaton tile (`10`
-  records the run) returns a cited answer that repeats *"the social
-  vulnerability join is pending, so no vulnerability claims are
-  available"* verbatim. The error this produces is conservative rather
-  than fabricated — the agent under-reports vulnerability data that exists
-  rather than inventing data that does not — but it is still the
-  accountable agent asserting something untrue to a user, in a system
-  whose stated purpose is that it does not.
+  like a current one. This was demonstrated, not hypothetical: until
+  2026-09-03 Eaton's dossier still declared its SVI join "pending" after
+  `scripts/build_eaton_svi.py` had made that false, and asking the running
+  gateway a damage question at an Eaton tile (`10` records the run)
+  returned a cited answer that repeated *"the social vulnerability join is
+  pending, so no vulnerability claims are available"* verbatim. The error
+  was conservative rather than fabricated — the agent under-reported
+  vulnerability data that existed rather than inventing data that did not —
+  but it was still the accountable agent asserting something untrue to a
+  user, in a system whose stated purpose is that it does not. **Status:**
+  the instance is fixed (the line now sits in `resolved_unknowns`, see the
+  geographic section), and the *mechanism* is mitigated rather than
+  removed: stages now retire the unknowns their artifacts resolve
+  (`src/geosteward/deepcase/dossier.py`), and `tests/test_deepcase_dossier.py`
+  guards the committed dossiers — but the loop in `context.py` itself still
+  has no freshness check, so an unknown that goes stale for a reason no
+  stage retires would be cited exactly as before.
 - **`check_uncertainty_present` passes on `None`.** The check
   (`src/geosteward/harness/checks/outcome.py`) tests `field in payload`, so
   `{"uncertainty": None}` passes exactly as readily as a populated
@@ -330,13 +338,18 @@ and disclosure surface, not just a privacy one.
 > 里的每一句话，把每一句都包进和每一条网格衍生事实完全相同的 `Fact` 类——同样有
 > 可引证的制品 ID，被追加进模型据以生成回答的同一份 `evidence.facts` 列表。这个循环里
 > 没有任何地方记录某句话是何时写下的，也没有检查它是否依然属实，所以在检索代码
-> 眼里，一句过时的声明未知项和一句当下的声明未知项没有任何区别。这不是假设：上文
-> 地理一节已经展示过，Eaton 档案在 `scripts/build_eaton_svi.py` 让那句话变假之后
+> 眼里，一句过时的声明未知项和一句当下的声明未知项没有任何区别。这曾经不是假设：
+> 直到 2026-09-03 之前，Eaton 档案在 `scripts/build_eaton_svi.py` 让那句话变假之后
 > 依然声明其 SVI 联接"尚待完成"；按 `10` 章记录的方法向正在运行的网关就 Eaton 的
 > 某个 tile 提一个损毁问题，得到的带引证回答会逐字重复"社会脆弱性联接尚待完成，
 > 暂无脆弱性结论"。这个错误的方向是保守的，不是捏造的——agent 少报告了确实存在的
 > 脆弱性数据，而不是编造了不存在的数据——但这仍然是这个以"不这样做"为存在理由的
-> 系统里，那个负责问责的 agent 在向用户断言一件不真实的事。
+> 系统里，那个负责问责的 agent 在向用户断言一件不真实的事。**现状**：这一实例已经
+> 修复（那句话现在位于 `resolved_unknowns`（已解除的未知项）里，见上文地理一节），
+> 而*机制*层面是缓解、不是消除：各阶段现在会解除自己产物所证伪的未知项
+> （`src/geosteward/deepcase/dossier.py`），`tests/test_deepcase_dossier.py` 守着
+> 已提交的档案——但 `context.py` 里那个循环本身仍然没有任何新鲜度检查，一条因为
+> 没有任何阶段去解除它而过时的未知项，仍会和从前一样被原样引证。
 >
 > **`check_uncertainty_present` 在 `None` 值上也会通过**：这项检查
 > （`src/geosteward/harness/checks/outcome.py`）判断的是 `field in payload`，所以

@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import h3
 
 from geosteward.agents.base import Artifact, EventContext, utc_stamp
+from geosteward.deepcase.dossier import retire_unknown
 from geosteward.deepcase.svi import SVI_FIELDS, assign_points_to_tracts, load_svi_rows
 from geosteward.harness.audit import AuditLog, sha256_file
 from geosteward.harness.checks.outcome import (
@@ -43,6 +44,10 @@ TIGERWEB_URL = (
     "MapServer/10/query (Census 2020 tracts, AOI envelope, EPSG:4326)"
 )
 SVI_URL = "https://svi.cdc.gov/Documents/Data/2022/csv/states/California.csv"
+#: Must match scripts/build_eaton_case.py stage_event_record verbatim.
+SVI_PENDING_UNKNOWN = (
+    "social-vulnerability join (SVI x exposure) pending: no vulnerability claims yet"
+)
 
 
 def fail_closed(audit: AuditLog, stage: str, results) -> None:
@@ -190,6 +195,14 @@ def main() -> None:
         "stage", stage,
         payload={"status": "ok", "n_cells": len(features),
                  "n_tracts": len(set(assigned.values())), "n_svi_missing": n_missing_svi},
+    )
+    # The dossier was written before this join existed and declares it pending.
+    # Landing the grid is what makes that line untrue, so this stage retires it —
+    # a new dossier version with its own manifest row, never a hand edit.
+    retire_unknown(
+        ctx, audit, stage=stage,
+        unknown=SVI_PENDING_UNKNOWN,
+        resolved_by="exposure/svi_h3_r9_context.geojson",
     )
     print(f"svi context built: {len(features)} cells, {len(set(assigned.values()))} tracts")
 
