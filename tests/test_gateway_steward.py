@@ -89,6 +89,9 @@ class GatewayTestCase(unittest.TestCase):
             policy=PolicyEngine.from_yaml(POLICY),
             audit=AuditLog(self.audit_path),
             llm=llm,
+            # The fixture event is synthetic, so it is not in the policy's
+            # published_events; the scope is declared here, not defaulted.
+            published_events=["testfire-2025"],
         )
 
     def audit_rows(self):

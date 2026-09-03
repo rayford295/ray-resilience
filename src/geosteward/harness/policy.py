@@ -179,9 +179,20 @@ def _validate_verifiability_values(rules: list[dict[str, Any]]) -> None:
 
 
 class PolicyEngine:
-    def __init__(self, rules: list[dict[str, Any]]):
+    def __init__(
+        self, rules: list[dict[str, Any]], published_events: list[str] | None = None
+    ):
         self.rules = validate_rules(rules, _KNOWN_MATCH_KEYS)
         _validate_verifiability_values(self.rules)
+        #: The events the gateway may retrieve evidence from. The same list the
+        #: distribution plane publishes from (`published_events` in the policy
+        #: file), read here so the claim plane and the evidence store share one
+        #: source of truth: an event that is not published is not citable
+        #: either. `None` means the policy did not say -- the `Steward` refuses
+        #: to build a store from that rather than reading every event on disk.
+        self.published_events: list[str] | None = (
+            None if published_events is None else list(published_events)
+        )
 
     @classmethod
     def from_yaml(cls, path: Path) -> "PolicyEngine":
@@ -190,7 +201,14 @@ class PolicyEngine:
             raise ValueError(
                 f"Policy file {path} must be a mapping containing a 'rules' list."
             )
-        return cls(payload["rules"])
+        events = payload.get("published_events")
+        if events is not None and (
+            not isinstance(events, list) or not all(isinstance(e, str) for e in events)
+        ):
+            raise ValueError(
+                f"Policy file {path} 'published_events' must be a list of event ids."
+            )
+        return cls(payload["rules"], published_events=events)
 
     def evaluate(self, request: PolicyRequest) -> PolicyDecision:
         for rule in self.rules:

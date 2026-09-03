@@ -345,6 +345,7 @@ class AnswerAreaMixedCoverageTests(unittest.TestCase):
             policy=PolicyEngine.from_yaml(POLICY),
             audit=AuditLog(self.root / "audit.jsonl"),
             llm=llm,
+            published_events=["hascells-2025", "emptycells-2025"],
         )
         selection = {"min_lat": 34.06, "max_lat": 34.09, "min_lon": -118.06, "max_lon": -118.01}
         result = steward.answer(

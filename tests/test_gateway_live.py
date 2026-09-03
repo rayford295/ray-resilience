@@ -193,6 +193,7 @@ class LiveGatewayTestCase(GatewayTestCase):
             policy=PolicyEngine.from_yaml(POLICY),
             audit=AuditLog(self.audit_path),
             llm=llm,
+            published_events=["testfire-2025"],
             live_source=self.source,
             live_recorder=(
                 LiveEvidenceRecorder(self.live_path) if with_recorder else None
@@ -242,6 +243,7 @@ class TestDeclaredCapabilityGaps(LiveGatewayTestCase):
             policy=PolicyEngine.from_yaml(POLICY),
             audit=AuditLog(self.audit_path),
             llm=MockLLM([]),
+            published_events=["testfire-2025"],
         )
         response = steward.answer("resident", "What hospitals are near here?", lat=IN_AOI[0], lon=IN_AOI[1])
         self.assertEqual(response["type"], "live_source_unavailable")
