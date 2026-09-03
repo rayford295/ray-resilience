@@ -102,6 +102,7 @@ def model_identity() -> dict[str, str | None]:
 
 
 _ID_RE = re.compile(r"^(\d+?)(?:_(\d{4}))?(?:_\d)?\.png$")
+_PAIR_DIR_RE = re.compile(r"^(\d+)_vs_(\d+)(?:\(\d+\))?$")
 
 
 def index_images(images_root: Path) -> dict[str, list[Path]]:
@@ -113,17 +114,50 @@ def index_images(images_root: Path) -> dict[str, list[Path]]:
     return by_id
 
 
+def index_pair_dirs(images_root: Path) -> dict[str, Path]:
+    """`<pre>_vs_<post>` -> directory, for the original release layout in which
+    every pair is its own folder (`folder_k/<pre>_vs_<post>(n)/<pre>_2023.png,
+    <post>_2024.png`). The Hugging Face zip flattens this into `no_damage/`
+    and `folder_k/`; both layouts resolve through `load_pairs`."""
+    out: dict[str, Path] = {}
+    for d in images_root.rglob("*"):
+        if d.is_dir():
+            m = _PAIR_DIR_RE.match(d.name)
+            if m:
+                out.setdefault(f"{m.group(1)}_vs_{m.group(2)}", d)
+    return out
+
+
+def _is_pre(p: Path) -> bool:
+    return p.parent.name == "no_damage" or p.stem.endswith("_2023")
+
+
+def _folder_label(p: Path) -> str | None:
+    """The `folder_k` the post image sits under, at whatever depth."""
+    for parent in (p.parent, *p.parents):
+        if parent.name in FOLDER_LABEL:
+            return FOLDER_LABEL[parent.name]
+    return None
+
+
 def load_pairs(csv_path: Path, images_root: Path) -> tuple[list[dict], dict]:
     """Pair rows with resolved image paths; the `root` workstation path is
-    consumed here and never written anywhere."""
+    consumed here and never written anywhere. Resolves the pair directory
+    layout first (exact), then falls back to id lookup (Hugging Face layout)."""
     by_id = index_images(images_root)
+    pair_dirs = index_pair_dirs(images_root)
     pairs, dropped = [], {"unresolved_pre": 0, "unresolved_post": 0, "bad_label": 0}
-    with csv_path.open(encoding="utf-8", newline="") as f:
+    with csv_path.open(encoding="utf-8-sig", newline="") as f:
         for row in csv.DictReader(f):
             base = re.sub(r"\(\d+\)$", "", row["root"].rstrip("/").split("/")[-1])
             pre_id, post_id = base.split("_vs_")
-            pre = [p for p in by_id.get(pre_id, []) if p.parent.name == "no_damage"]
-            post = [p for p in by_id.get(post_id, []) if p.parent.name != "no_damage"]
+            pair_dir = pair_dirs.get(f"{pre_id}_vs_{post_id}")
+            if pair_dir is not None:
+                pre = [p for p in pair_dir.glob(f"{pre_id}_*.png") if _is_pre(p)]
+                post = [p for p in pair_dir.glob(f"{post_id}_*.png") if not _is_pre(p)]
+            else:
+                pre = [p for p in by_id.get(pre_id, []) if _is_pre(p)]
+                post = [p for p in by_id.get(post_id, []) if not _is_pre(p)]
             truth = normalise_label(row["human_damage_perception"], HURRICANE_CLASSES)
             if not pre:
                 dropped["unresolved_pre"] += 1; continue
@@ -133,7 +167,7 @@ def load_pairs(csv_path: Path, images_root: Path) -> tuple[list[dict], dict]:
                 dropped["bad_label"] += 1; continue
             pairs.append({
                 "pair_id": f"{pre_id}_vs_{post_id}", "pre": sorted(pre)[0], "post": sorted(post)[0],
-                "truth": truth, "folder_label": FOLDER_LABEL.get(sorted(post)[0].parent.name),
+                "truth": truth, "folder_label": _folder_label(sorted(post)[0]),
                 "lat": round(float(row["lat"]), 6), "lon": round(float(row["lon"]), 6),
             })
     return pairs, dropped
@@ -195,7 +229,10 @@ def main() -> int:
             "sources": {"images": HF_URL, "pair_table": f"doi:{FIGSHARE_DOI} LLM(GPT-4o-mini).csv"},
             "licenses": {"images": "CC BY-NC 4.0 (Hugging Face card)", "pair_table": "CC BY 4.0 (Figshare)"},
             "attribution": "Yang, Y. (2025). Hyperlocal disaster damage assessment using bi-temporal street-view imagery and pre-trained vision models. CEUS 121, 102335.",
+            "pair_table_file": args.pairs_csv.name,
             "pair_table_sha256": sha256_file(args.pairs_csv),
+            "images_local_layout": "pair directories" if index_pair_dirs(args.images) else "no_damage/ + folder_k/ (Hugging Face zip)",
+            "images_local_root_name": args.images.name,
         },
         kind="dataset_registry_snapshot", agent="snapshot.registry",
         inputs=[HF_URL, f"doi:{FIGSHARE_DOI}"],

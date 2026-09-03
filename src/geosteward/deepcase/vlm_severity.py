@@ -76,6 +76,41 @@ Output format:
 """
 
 
+#: The Eaton matched set's 3-class repairability labels (EATON_wildfire_
+#: mapillary_matched `label_name`), ordinal 0..2. Derived from CAL FIRE DINS
+#: by that dataset's own protocol, so the 5-class DINS prompt collapses onto
+#: it by DINS semantics rather than by a new prompt: `Affected (1-9 %)` is
+#: trace damage, `Minor` and `Major` are repairable, `Destroyed` is destroyed.
+REPAIRABILITY_CLASSES: tuple[str, ...] = ("no_or_trace_damage", "damaged_repairable", "destroyed")
+
+REPAIRABILITY_TO_CANONICAL: dict[str, str] = {
+    "no_or_trace_damage": "none",
+    "damaged_repairable": "moderate",
+    "destroyed": "destroyed",
+}
+assert set(REPAIRABILITY_TO_CANONICAL.values()) <= set(CANONICAL_SCALE)
+
+DINS5_TO_REPAIRABILITY3: dict[str, str] = {
+    "0_No_Damage": "no_or_trace_damage",
+    "1_Affected_1_9": "no_or_trace_damage",
+    "2_Minor_10_25": "damaged_repairable",
+    "3_Major_26_50": "damaged_repairable",
+    "4_Destroyed_50plus": "destroyed",
+}
+assert set(DINS5_TO_REPAIRABILITY3) == set(WILDFIRE_CLASSES)
+assert set(DINS5_TO_REPAIRABILITY3.values()) == set(REPAIRABILITY_CLASSES)
+
+
+def collapse_wildfire_prediction(label: str | None) -> str | None:
+    """A 5-class DINS prediction on the 3-class repairability scale, or None
+    for no prediction. Only the five offered names collapse; anything else is
+    a KeyError, because a label that is not one of the prompt's classes should
+    have been recorded as `unknown_label` upstream, never reached here."""
+    if label is None:
+        return None
+    return DINS5_TO_REPAIRABILITY3[label]
+
+
 #: RAPID Datasets A/B classes (CVDisaster / Bi-Temporal), ordinal 0..2.
 HURRICANE_CLASSES: tuple[str, ...] = ("Mild", "Moderate", "Severe")
 
@@ -462,9 +497,13 @@ def aggregate_h3(
     classes: tuple[str, ...] = WILDFIRE_CLASSES,
     resolution: int = 9,
     min_cell_count: int = 3,
+    location_source: str = "image EXIF GPS; images without GPS are not on this grid",
 ) -> list[dict[str, Any]]:
     """GeoJSON features: per cell, label histograms for truth and prediction
-    and the agreement rate — never a per-image location."""
+    and the agreement rate — never a per-image location. `location_source`
+    names where the records' coordinates came from (EXIF by default; a
+    dataset's own manifest for the matched sets) and is written into every
+    cell's uncertainty block."""
     import h3
 
     cells: dict[str, dict[str, Any]] = {}
@@ -505,7 +544,7 @@ def aggregate_h3(
                         "model_derived": True,
                         "low_n": c["n"] < min_cell_count,
                         "n_unanswered": c["unanswered"],
-                        "location_source": "image EXIF GPS; images without GPS are not on this grid",
+                        "location_source": location_source,
                         "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim",
                     },
                 },
