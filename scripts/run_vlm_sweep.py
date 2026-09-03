@@ -21,6 +21,10 @@ own fail-closed checks decide what counts as failed. Every case is
 resumable (the builders skip already-graded images by sha256 / pair id), so
 re-running the sweep after an interruption finishes the remainder.
 
+With `--commit-push`, each model's finished cases are committed and pushed as
+soon as its last case ends (allowlist and comparison page regenerated first),
+so a sweep that dies overnight has already published every completed model.
+
     python scripts/run_vlm_sweep.py --models gemma3:27b qwen3-vl:32b \\
         --palisades-images .../SVI_PalisadesFireImages \\
         --milton-images .../Bi-temporal_hurricane --milton-pairs-csv .../Location.csv \\
@@ -142,6 +146,66 @@ def run_case(model: str, case: str, cmd: list[str], base_url: str, log_dir: Path
             "placement": where, "eval": summary, "log": log.as_posix(), "eval_file": eval_path.relative_to(REPO).as_posix()}
 
 
+COMMIT_PATHS = ("events", "app/public/publication_allowlist.json",
+                "docs/vlm_model_comparison.md", "docs/vlm_model_comparison.json")
+
+
+def git(*argv: str, check: bool = False) -> subprocess.CompletedProcess:
+    return subprocess.run(["git", *argv], cwd=REPO, capture_output=True, text=True, encoding="utf-8",
+                          errors="replace", check=check)
+
+
+def commit_model(model: str, model_results: list[dict]) -> dict:
+    """Commit one model's finished cases and push. Runs after the model's last
+    case, so no partial file of a case still running can be staged (the cases
+    are sequential and the next model has not started). Regenerates the
+    publication allowlist first — the tagged prediction files are new paths
+    the policy has to classify, and CI's `plan --check` fails on any file the
+    committed allowlist does not mention — then the comparison page. A
+    regeneration or push failure is recorded, never raised: the sweep goes on
+    and the next model's commit carries the backlog."""
+    py = sys.executable
+    plan_rc = subprocess.run([py, "scripts/publication_boundary.py", "plan"], cwd=REPO,
+                             capture_output=True, text=True, encoding="utf-8", errors="replace").returncode
+    subprocess.run([py, "scripts/compare_vlm_models.py", "--out", "docs/vlm_model_comparison.md",
+                    "--json", "docs/vlm_model_comparison.json"], cwd=REPO, capture_output=True)
+    check_rc = subprocess.run([py, "scripts/publication_boundary.py", "plan", "--check"], cwd=REPO,
+                              capture_output=True, text=True, encoding="utf-8", errors="replace").returncode
+    git("add", "-A", "--", *COMMIT_PATHS)
+    if git("diff", "--cached", "--quiet").returncode == 0:
+        return {"status": "nothing_to_commit", "plan_rc": plan_rc, "check_rc": check_rc}
+
+    lines = [f"evidence: {model} zero-shot VLM runs (tagged {model_slug(model)}); allowlist and comparison regenerated", ""]
+    for r in model_results:
+        ev = r.get("eval") or {}
+        pl = r.get("placement") or {}
+        gpu = pl.get("gpu_fraction")
+        if r["status"] == "ok" and ev:
+            lines.append(f"- {r['case']}: n_scored {ev.get('n_scored')}/{ev.get('n_images')}, accuracy {ev.get('accuracy')}, "
+                         f"NCSE {ev.get('ncse')}, adjacent-error {ev.get('adjacent_error_rate')}, unanswered {ev.get('unanswered_rate')}; "
+                         f"run {ev.get('run_id')}; {r.get('elapsed_s')} s")
+        elif r["status"] == "skipped_done":
+            lines.append(f"- {r['case']}: already graded before this sweep (tagged eval present)")
+        else:
+            lines.append(f"- {r['case']}: {r['status']} (builder exit {r.get('returncode')}); see the driver log, nothing "
+                         f"from this case is claimed")
+        if gpu is not None:
+            lines.append(f"  placement: {pl.get('size_vram_bytes', 0) / 1e9:.1f} of {pl.get('size_bytes', 0) / 1e9:.1f} GB in VRAM "
+                         f"({gpu:.0%}), context {pl.get('context_length')}, {pl.get('quantization')}")
+    lines += ["", "Produced by scripts/run_vlm_sweep.py --commit-push, one commit per model as its three cases finish.",
+              f"publication_boundary plan --check exit {check_rc}.", "",
+              "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"]
+    msg = Path(os.environ.get("TEMP", ".")) / f"vlm_sweep_commit_{model_slug(model)}.txt"
+    msg.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    c = git("commit", "-F", str(msg))
+    if c.returncode != 0:
+        return {"status": "commit_failed", "detail": (c.stderr or c.stdout)[-500:], "check_rc": check_rc}
+    sha = git("rev-parse", "--short", "HEAD").stdout.strip()
+    p = git("push", "origin", "HEAD")
+    return {"status": "pushed" if p.returncode == 0 else "push_failed", "commit": sha, "check_rc": check_rc,
+            "detail": None if p.returncode == 0 else (p.stderr or p.stdout)[-500:]}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--models", nargs="+", required=True, help="served Ollama model names, run in this order")
@@ -159,6 +223,8 @@ def main() -> int:
     ap.add_argument("--skip-done", action="store_true", help="skip a (model, case) whose tagged eval file already exists")
     ap.add_argument("--no-unload", action="store_true", help="leave the last model resident after each model's cases")
     ap.add_argument("--no-report", action="store_true", help="do not regenerate docs/vlm_model_comparison.md at the end")
+    ap.add_argument("--commit-push", action="store_true",
+                    help="after each model's cases: regenerate the allowlist and comparison, commit that model's tagged outputs, push")
     ap.add_argument("--dry-run", action="store_true", help="print the plan and exit")
     args = ap.parse_args()
 
@@ -178,32 +244,51 @@ def main() -> int:
 
     summary_path = args.log_dir / "sweep_summary.json"
     started = time.strftime("%Y-%m-%dT%H:%M:%S")
+
+    def checkpoint(finished: bool = False) -> None:
+        body = {"started": started, "base_url": args.base_url, "results": results}
+        if finished:
+            body["finished"] = time.strftime("%Y-%m-%dT%H:%M:%S")
+        summary_path.write_text(json.dumps(body, indent=1), encoding="utf-8")
+
     current = None
-    for model, case, cmd in plan:
-        if model not in served:
-            results.append({"model": model, "case": case, "status": "not_served", "eval": None})
-            continue
-        if args.skip_done and (REPO / tagged_path(EVAL_FILE[case], model_slug(model))).is_file():
-            results.append({"model": model, "case": case, "status": "skipped_done", "eval": None})
-            continue
-        if current and current != model and not args.no_unload:
-            unload(args.base_url, current)
-        current = model
-        print(f"[run ] {model} {case} …", flush=True)
-        r = run_case(model, case, cmd, args.base_url, args.log_dir, args.case_timeout)
-        results.append(r)
-        gpu = r["placement"] and r["placement"].get("gpu_fraction")
-        ev = r["eval"] or {}
-        print(f"[done] {model} {case}: {r['status']} in {r['elapsed_s']}s; "
-              f"GPU {gpu if gpu is not None else '?'}; acc {ev.get('accuracy')} NCSE {ev.get('ncse')}", flush=True)
-        summary_path.write_text(json.dumps({"started": started, "base_url": args.base_url, "results": results}, indent=1), encoding="utf-8")
+    for model in args.models:
+        model_results = []
+        for m, case, cmd in plan:
+            if m != model:
+                continue
+            if model not in served:
+                r = {"model": model, "slug": model_slug(model), "case": case, "status": "not_served", "eval": None}
+                results.append(r)
+                continue
+            if args.skip_done and (REPO / tagged_path(EVAL_FILE[case], model_slug(model))).is_file():
+                r = {"model": model, "slug": model_slug(model), "case": case, "status": "skipped_done", "eval": None}
+                results.append(r)
+                model_results.append(r)
+                continue
+            if current and current != model and not args.no_unload:
+                unload(args.base_url, current)
+            current = model
+            print(f"[run ] {model} {case} …", flush=True)
+            r = run_case(model, case, cmd, args.base_url, args.log_dir, args.case_timeout)
+            results.append(r)
+            model_results.append(r)
+            gpu = r["placement"] and r["placement"].get("gpu_fraction")
+            ev = r["eval"] or {}
+            print(f"[done] {model} {case}: {r['status']} in {r['elapsed_s']}s; "
+                  f"GPU {gpu if gpu is not None else '?'}; acc {ev.get('accuracy')} NCSE {ev.get('ncse')}", flush=True)
+            checkpoint()
+        if args.commit_push and any(r["status"] == "ok" for r in model_results):
+            c = commit_model(model, model_results)
+            results.append({"model": model, "slug": model_slug(model), "case": "commit", **c})
+            print(f"[git ] {model}: {c['status']} {c.get('commit') or ''} {c.get('detail') or ''}", flush=True)
+            checkpoint()
     if current and not args.no_unload:
         unload(args.base_url, current)
 
-    summary_path.write_text(json.dumps({"started": started, "finished": time.strftime("%Y-%m-%dT%H:%M:%S"),
-                                        "base_url": args.base_url, "results": results}, indent=1), encoding="utf-8")
+    checkpoint(finished=True)
     print(f"summary: {summary_path}")
-    if not args.no_report:
+    if not args.no_report and not args.commit_push:
         subprocess.run([sys.executable, "scripts/compare_vlm_models.py", "--out", "docs/vlm_model_comparison.md",
                         "--json", "docs/vlm_model_comparison.json"], cwd=REPO, check=False)
     failed = [r for r in results if r["status"] in ("failed", "timeout")]
