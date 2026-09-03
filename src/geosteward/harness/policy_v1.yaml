@@ -149,6 +149,11 @@ artifact_classes:
   # Same audience as source_snapshot; a separate kind because its license is
   # not public-domain and the attribute must not lie even where it is unread.
   source_snapshot_odbl:      {resolution_cap: source,  audience: internal, license: open-license-attribution}
+  # A frozen subset of a CC BY-licensed research dataset's own metadata (the
+  # Bi-Temporal pair table: pair ids, coordinates, human labels). Attribution
+  # is owed and recorded in the artifact; the snapshot itself stays internal
+  # because it holds per-pair coordinates.
+  source_snapshot_ccby:      {resolution_cap: source,  audience: internal, license: open-license-attribution}
 
 distribution:
   # --- hard denials (checked first) ---

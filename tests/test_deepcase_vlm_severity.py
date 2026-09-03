@@ -17,6 +17,9 @@ from geosteward.deepcase.vlm_severity import (
     gps_to_latlon,
     ncse,
     normalise_label,
+    BITEMPORAL_PROMPT,
+    HURRICANE_CLASSES,
+    classify_pair,
     parse_prediction,
     sha256_text,
     summarize,
@@ -167,7 +170,7 @@ class TestAggregate(unittest.TestCase):
         feats = aggregate_h3(recs)
         self.assertEqual(len(feats), 1)
         p = feats[0]["properties"]
-        self.assertEqual((p["n_images"], p["n_scored"], p["agreement_rate"]), (3, 2, 0.5))
+        self.assertEqual((p["n_samples"], p["n_scored"], p["agreement_rate"]), (3, 2, 0.5))
         self.assertEqual(p["labels_truth"], {"0_No_Damage": 1, "4_Destroyed_50plus": 2})
         self.assertEqual(p["labels_pred"], {"3_Major_26_50": 1, "4_Destroyed_50plus": 1})
         self.assertTrue(p["uncertainty"]["model_derived"])
@@ -175,6 +178,46 @@ class TestAggregate(unittest.TestCase):
         self.assertFalse(p["uncertainty"]["low_n"])
         self.assertNotIn("lat", json.dumps(p))
         self.assertEqual(feats[0]["geometry"]["type"], "Polygon")
+
+
+class TestPairs(unittest.TestCase):
+    RESPONSE = json.dumps({
+        "Predicted_Severity": "Severe", "Confidence_Score": 0.8,
+        "Objects_Detected": {"debris_pile": 1, "fallen_tree": "1", "flooded_road": 0, "damaged_building": True, "downed_lines": 2},
+        "Reasoning": "Roof gone, debris across the road.",
+    })
+
+    def test_severity_key_objects_and_reasoning_digest(self) -> None:
+        p = parse_prediction(self.RESPONSE, HURRICANE_CLASSES)
+        self.assertEqual((p.label, p.confidence, p.status), ("Severe", 0.8, "ok"))
+        # 2 is not a binary indicator: dropped, not coerced
+        self.assertEqual(p.objects, {"debris_pile": 1, "fallen_tree": 1, "flooded_road": 0, "damaged_building": 1})
+        self.assertEqual(len(p.reasoning_sha256), 64)
+        self.assertEqual(p.reasoning_chars, len("Roof gone, debris across the road."))
+
+    def test_truth_labels_normalise_case(self) -> None:
+        self.assertEqual(normalise_label("mild", HURRICANE_CLASSES), "Mild")
+        self.assertIsNone(normalise_label("4_Destroyed_50plus", HURRICANE_CLASSES))
+
+    def test_pair_record_orders_pre_then_post_and_keeps_given_location(self) -> None:
+        seen = {}
+
+        def fake_call(messages, response_format):
+            seen["content"] = messages[0]["content"]
+            return self.RESPONSE
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pre = Path(tmp) / "111_2023.png"; post = Path(tmp) / "222_2024.png"
+            pre.write_bytes(b"PRE" + FAKE_JPEG); post.write_bytes(b"POST" + FAKE_JPEG)
+            rec = classify_pair(fake_call, pre, post, "Severe", latlon=(29.44, -83.29), pair_id="111_vs_222")
+        self.assertEqual(len(seen["content"]), 3)
+        self.assertIn("Pre-disaster baseline (2023)", seen["content"][0]["text"])
+        self.assertEqual(seen["content"][0]["text"], BITEMPORAL_PROMPT)
+        self.assertNotEqual(seen["content"][1]["image_url"]["url"], seen["content"][2]["image_url"]["url"])
+        self.assertEqual((rec["pair_id"], rec["truth"], rec["pred"], rec["status"]), ("111_vs_222", "Severe", "Severe", "ok"))
+        self.assertEqual((rec["lat"], rec["lon"]), (29.44, -83.29))
+        self.assertNotEqual(rec["pre_sha256"], rec["post_sha256"])
+        self.assertNotIn("Reasoning", json.dumps(rec))  # prose hashed, not stored
 
 
 class TestLLMParts(unittest.TestCase):

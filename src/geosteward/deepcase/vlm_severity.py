@@ -76,6 +76,50 @@ Output format:
 """
 
 
+#: RAPID Datasets A/B classes (CVDisaster / Bi-Temporal), ordinal 0..2.
+HURRICANE_CLASSES: tuple[str, ...] = ("Mild", "Moderate", "Severe")
+
+HURRICANE_TO_CANONICAL: dict[str, str] = {"Mild": "minor", "Moderate": "moderate", "Severe": "severe"}
+assert set(HURRICANE_TO_CANONICAL.values()) <= set(CANONICAL_SCALE)
+
+#: RAPID "Damage Recognition Agent" prompt B (pre/post street-view pair), verbatim.
+BITEMPORAL_PROMPT = """You are an expert Disaster Assessment AI.
+You are provided with two Street View Images of the SAME location:
+- Image 1: Pre-disaster baseline (2023)
+- Image 2: Post-disaster scene (2024)
+
+Task 1: Comparative Damage Grading
+Assess severity of change between the pre- and post-disaster images:
+- Mild: Minimal change; branches or small debris but structures unchanged.
+- Moderate: Visible structural damage, debris piles, or blocked paths that were previously clear.
+- Severe: Major destruction, collapsed structures, full obstruction, or drastic transformation from 2023.
+
+Task 2: Object Detection (Post-disaster image only)
+Detect the following (0 = No, 1 = Yes):
+- debris_pile
+- fallen_tree
+- flooded_road
+- damaged_building
+- downed_lines
+
+Output Requirement:
+{
+  "Predicted_Severity": "Mild" or "Moderate" or "Severe",
+  "Confidence_Score": <float>,
+  "Objects_Detected": {
+    "debris_pile": 0 or 1,
+    "fallen_tree": 0 or 1,
+    "flooded_road": 0 or 1,
+    "damaged_building": 0 or 1,
+    "downed_lines": 0 or 1
+  },
+  "Reasoning": "Explain key visual differences from 2023 to 2024."
+}
+"""
+
+OBJECT_KEYS: tuple[str, ...] = ("debris_pile", "fallen_tree", "flooded_road", "damaged_building", "downed_lines")
+
+
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
@@ -93,6 +137,9 @@ class Prediction:
     label: str | None
     confidence: float | None
     status: str  # ok | unparseable | unknown_label
+    objects: dict[str, int] | None = None  # RAPID's binary object indicators, when the prompt asks for them
+    reasoning_sha256: str | None = None  # model prose is hashed, not stored, in the record
+    reasoning_chars: int = 0
 
 
 _FENCE = re.compile(r"^\s*```(?:json)?\s*|\s*```\s*$", re.IGNORECASE)
@@ -150,17 +197,46 @@ def parse_prediction(text: str, classes: Iterable[str] = WILDFIRE_CLASSES) -> Pr
     obj = _first_json_object(text)
     if obj is None:
         return Prediction(None, None, "unparseable")
-    raw_label = obj.get("Predicted_Class", obj.get("predicted_class"))
+    raw_label = None
+    for key in ("Predicted_Class", "predicted_class", "Predicted_Severity", "predicted_severity"):
+        if key in obj:
+            raw_label = obj[key]
+            break
     label = normalise_label(raw_label, classes)
-    conf_raw = obj.get("Confidence", obj.get("confidence", obj.get("Confidence_Score")))
+    conf_raw = None
+    for key in ("Confidence", "confidence", "Confidence_Score", "confidence_score"):
+        if key in obj:
+            conf_raw = obj[key]
+            break
     confidence: float | None
     try:
         confidence = None if conf_raw is None else max(0.0, min(1.0, float(conf_raw)))
     except (TypeError, ValueError):
         confidence = None
+    objects = _parse_objects(obj.get("Objects_Detected", obj.get("Objects")))
+    reasoning = obj.get("Reasoning")
+    reasoning_sha = sha256_text(str(reasoning)) if isinstance(reasoning, str) and reasoning else None
+    reasoning_chars = len(reasoning) if isinstance(reasoning, str) else 0
     if label is None:
-        return Prediction(None, confidence, "unknown_label")
-    return Prediction(label, confidence, "ok")
+        return Prediction(None, confidence, "unknown_label", objects, reasoning_sha, reasoning_chars)
+    return Prediction(label, confidence, "ok", objects, reasoning_sha, reasoning_chars)
+
+
+def _parse_objects(raw: Any) -> dict[str, int] | None:
+    """Binary indicators, strictly 0/1 per known key; anything else is dropped
+    (a missing indicator is missing, not 0)."""
+    if not isinstance(raw, dict):
+        return None
+    out: dict[str, int] = {}
+    for key in OBJECT_KEYS:
+        v = raw.get(key)
+        if isinstance(v, bool):
+            out[key] = int(v)
+        elif isinstance(v, (int, float)) and v in (0, 1):
+            out[key] = int(v)
+        elif isinstance(v, str) and v.strip() in ("0", "1"):
+            out[key] = int(v.strip())
+    return out or None
 
 
 # --------------------------------------------------------------------------
@@ -322,6 +398,61 @@ def classify_image(
     }
 
 
+def build_pair_messages(pre_bytes: bytes, post_bytes: bytes, prompt: str, mime: str = "image/png") -> list[dict[str, Any]]:
+    """Image 1 = pre, Image 2 = post, in that order — the prompt names them so."""
+    from geosteward.gateway.llm import image_part, text_part
+
+    return [{"role": "user", "content": [text_part(prompt), image_part(pre_bytes, mime), image_part(post_bytes, mime)]}]
+
+
+def classify_pair(
+    call: VisionCall,
+    pre_path: Path,
+    post_path: Path,
+    truth: str | None,
+    *,
+    latlon: tuple[float, float] | None,
+    prompt: str = BITEMPORAL_PROMPT,
+    classes: tuple[str, ...] = HURRICANE_CLASSES,
+    pair_id: str | None = None,
+    want_json: bool = True,
+) -> dict[str, Any]:
+    """One pre/post pair -> one record. Location comes from the dataset's own
+    metadata (`latlon`), not EXIF, so it is recorded as given."""
+    pre = pre_path.read_bytes()
+    post = post_path.read_bytes()
+    mime = "image/png" if post_path.suffix.lower() == ".png" else "image/jpeg"
+    messages = build_pair_messages(pre, post, prompt, mime)
+    started = time.perf_counter()
+    try:
+        text = call(messages, {"type": "json_object"} if want_json else None)
+        error = None
+    except Exception as exc:
+        text, error = "", f"{type(exc).__name__}: {exc}"
+    latency = round(time.perf_counter() - started, 3)
+    pred = parse_prediction(text, classes) if text else Prediction(None, None, "unparseable")
+    return {
+        "pair_id": pair_id or f"{pre_path.stem}_vs_{post_path.stem}",
+        "pre_image": pre_path.name,
+        "post_image": post_path.name,
+        "pre_sha256": sha256_bytes(pre),
+        "post_sha256": sha256_bytes(post),
+        "truth": truth,
+        "pred": pred.label,
+        "confidence": pred.confidence,
+        "status": pred.status,
+        "objects": pred.objects,
+        "reasoning_sha256": pred.reasoning_sha256,
+        "reasoning_chars": pred.reasoning_chars,
+        "response_sha256": sha256_text(text) if text else None,
+        "response_chars": len(text),
+        "error": error,
+        "latency_s": latency,
+        "lat": latlon[0] if latlon else None,
+        "lon": latlon[1] if latlon else None,
+    }
+
+
 # --------------------------------------------------------------------------
 # Tile aggregation (H3 r9) of truth vs prediction
 # --------------------------------------------------------------------------
@@ -365,7 +496,7 @@ def aggregate_h3(
                 "geometry": {"type": "Polygon", "coordinates": [ring]},
                 "properties": {
                     "h3_cell": cell,
-                    "n_images": c["n"],
+                    "n_samples": c["n"],
                     "n_scored": c["n_scored"],
                     "labels_truth": dict(sorted(c["truth"].items())),
                     "labels_pred": dict(sorted(c["pred"].items())),
