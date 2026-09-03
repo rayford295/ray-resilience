@@ -17,7 +17,7 @@ this chapter only tells a reader what to type.
 ## Install
 
 ```bash
-git clone https://github.com/rayford295/GeoSteward && cd GeoSteward
+git clone https://github.com/rayford295/ray-resilience && cd ray-resilience
 python -m pip install -e ".[deepcase]"
 ```
 

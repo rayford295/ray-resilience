@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 // Relative base: the app has no client-side routing, so "./" makes the same
-// build work at GitHub Pages (/GeoSteward/), locally, and anywhere else.
+// build work at GitHub Pages (/ray-resilience/), locally, and anywhere else.
 export default defineConfig({
   base: "./",
   plugins: [
@@ -31,10 +31,10 @@ export default defineConfig({
         ],
       },
       manifest: {
-        name: "GeoSteward",
-        short_name: "GeoSteward",
+        name: "Ray Resilience",
+        short_name: "Ray",
         description:
-          "An accountable GeoAI risk analyst for location-based resilience understanding.",
+          "Resilience intelligence for every place. An accountable GeoAI system for place-based disaster intelligence.",
         theme_color: "#12314f",
         background_color: "#0b1c30",
         display: "standalone",

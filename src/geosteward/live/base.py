@@ -1,6 +1,6 @@
 """The contract for a source whose content this project may not retain.
 
-Every other source in GeoSteward is proved by a stored copy: fetch it, hash it,
+Every other source in Ray Resilience is proved by a stored copy: fetch it, hash it,
 freeze it under `snapshots/`, and a reader checks the number against the file.
 A source under third-party terms cannot be proved that way, so the contract
 here splits a response into two halves that are treated completely differently:

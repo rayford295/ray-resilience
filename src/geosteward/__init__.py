@@ -1,5 +1,5 @@
-"""GeoSteward: an accountable GeoAI risk analyst for location-based resilience
+"""Ray Resilience (Python package `geosteward`): an accountable GeoAI system for place-based disaster
 understanding and decision-making.
 """
 
-__version__ = "1.0.0.dev1"
+__version__ = "0.1.0.dev1"

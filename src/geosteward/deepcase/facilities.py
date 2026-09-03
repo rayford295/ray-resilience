@@ -109,7 +109,7 @@ def _fetch_one(query: str, url: str, timeout: int) -> dict[str, Any]:
     req = _request.Request(
         url,
         data=_parse.urlencode({"data": query}).encode("utf-8"),
-        headers={"User-Agent": "GeoSteward/1.0 (research prototype; github.com/rayford295/GeoSteward)"},
+        headers={"User-Agent": "RayResilience/0.1 (research prototype; github.com/rayford295/ray-resilience)"},
     )
     data = _request.urlopen(req, timeout=timeout)  # noqa: S310 — fixed https endpoint
     payload = json.loads(data.read().decode("utf-8"))

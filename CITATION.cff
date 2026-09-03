@@ -1,16 +1,16 @@
-# Citation metadata for the GeoSteward software repository.
+# Citation metadata for the Ray Resilience software repository.
 # The OASIS short paper (in paper/) has its own author list, which the
 # owner finalizes at submission; this file describes the software.
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
-title: "GeoSteward: an accountable GeoAI risk analyst"
+title: "Ray Resilience: an accountable GeoAI system for place-based disaster intelligence"
 authors:
   - family-names: Yang
     given-names: Yifan
     affiliation: "Department of Geography, Texas A&M University"
-repository-code: "https://github.com/rayford295/GeoSteward"
-url: "https://rayford295.github.io/GeoSteward/"
+repository-code: "https://github.com/rayford295/ray-resilience"
+url: "https://rayford295.github.io/ray-resilience/"
 license: MIT
 keywords:
   - GeoAI

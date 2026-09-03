@@ -1,4 +1,4 @@
-// Resident lookup asks one question — "does GeoSteward have anything to say
+// Resident lookup asks one question — "does Ray Resilience have anything to say
 // about this address?" — and there are three honest answers, not two.
 //
 // The bug this pins down: App.jsx built its grid map keyed by event, so later

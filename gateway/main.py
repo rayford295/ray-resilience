@@ -45,7 +45,7 @@ _RATE_MAX, _RATE_WINDOW = parse_rate_limit(os.environ.get("STEWARD_RATE_LIMIT", 
 _limiter = SlidingWindowLimiter(_RATE_MAX, _RATE_WINDOW)
 _DEFAULT_CORS = "http://localhost:5173,http://127.0.0.1:5173"
 
-app = FastAPI(title="GeoSteward agent gateway", version="1.0.0-dev")
+app = FastAPI(title="Ray Resilience agent gateway (Ray)", version="0.1.0-dev")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=os.environ.get("STEWARD_CORS_ORIGINS", _DEFAULT_CORS).split(","),

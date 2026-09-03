@@ -1,1 +1,1 @@
-"""GeoSteward subpackage."""
+"""Ray Resilience subpackage (Python package `geosteward`)."""

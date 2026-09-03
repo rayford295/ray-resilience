@@ -248,7 +248,7 @@ matched nothing but some layer is still unread or failed to load
 (`index.complete` is false) — an admission that the app has not yet looked
 everywhere, not a claim about what it would find if it had. So a `not_covered`
 result does not mean the address is safe; `ResidentPanel.jsx` states this
-directly — "GeoSteward makes no damage or vulnerability claims here" — and
+directly — "Ray Resilience makes no damage or vulnerability claims here" — and
 neither this app nor `03`'s claim plane treats absence of deep-case coverage
 as evidence of anything. An `unknown` result means the app genuinely does
 not know yet, and says so rather than guessing at "outside," which is the
@@ -279,7 +279,7 @@ exact failure the fix above closed.
 > 因地而异"这句诚实陈述。当该格什么都没匹配上、但仍有图层未读到或加载失败时
 > （`index.complete` 为假），会返回 `unknown`——这是承认应用还没能看遍所有地方，
 > 而不是对"看遍之后会发现什么"下结论。所以 `not_covered` 的结果并不意味着这个
-> 地址是安全的；`ResidentPanel.jsx` 直接写明了这一点——"GeoSteward 在这里不作
+> 地址是安全的；`ResidentPanel.jsx` 直接写明了这一点——"Ray Resilience 在这里不作
 > 任何损毁或脆弱性方面的断言"——这个应用和 `03` 章讲的断言平面都不会把"没有
 > 深度案例覆盖"当作能说明任何事情的证据。`unknown` 的结果意味着应用确实还不
 > 知道，它会如实说出来，而不是去猜"超出范围"——而这正是上面那处修复所堵住的

@@ -1,7 +1,8 @@
-# GeoSteward
+# Ray Resilience
 
-**An accountable GeoAI risk analyst for location-based resilience understanding
-and decision-making.**
+**Resilience intelligence for every place.** An accountable GeoAI system for
+place-based disaster intelligence, by Rayford AI. The assistant you talk to is **Ray**;
+the accountability engine underneath is the **Steward Harness**.
 
 AI-powered WebGIS / smartphone app (PWA) for understanding a place's resilience —
 what hazards threaten it now, how exposed and vulnerable it is, and what decisions
@@ -9,8 +10,8 @@ the evidence actually supports. Entry for
 [**OASIS @ ACM SIGSPATIAL 2026**](https://rsvp.withgoogle.com/events/oasis-2026/)
 · **Track A: Disaster Resilience & Vulnerability Analysis**.
 
-**Live:** [rayford295.github.io/GeoSteward](https://rayford295.github.io/GeoSteward/)
-· [the app](https://rayford295.github.io/GeoSteward/app/)
+**Live:** [rayford295.github.io/ray-resilience](https://rayford295.github.io/ray-resilience/)
+· [the app](https://rayford295.github.io/ray-resilience/app/)
 
 **Event portal:** [rsvp.withgoogle.com/events/oasis-2026](https://rsvp.withgoogle.com/events/oasis-2026/)
 — submission dates, Track A brief, and the code-submission mechanism live behind the
@@ -70,7 +71,7 @@ coverage today is four events.
 ## Why "Steward"?
 
 Most agent submissions demonstrate autonomy: an LLM that runs a GIS pipeline.
-GeoSteward demonstrates **accountability**: a risk-analyst agent that operates inside
+Ray Resilience demonstrates **accountability**: a risk-analyst agent that operates inside
 the **Steward Harness** — a technical layer that enforces three validity conditions
 during operation, following *From Autonomous GIS to Accountable GeoAI Agents:
 Verifiable Evaluation Environments and Geospatial Harness Engineering* (Yang & Zou):
@@ -116,7 +117,7 @@ products keep working — graceful degradation is fail-closed design made visibl
   the org's [disaster-crossview-datasets](https://github.com/Rayford-AI/disaster-crossview-datasets).
 
 **Live watch data** is refreshed hourly by CI onto the
-[`live-data`](https://github.com/rayford295/GeoSteward/tree/live-data) branch:
+[`live-data`](https://github.com/rayford295/ray-resilience/tree/live-data) branch:
 `live/products/national_watch.geojson` (all active US hazards) and
 `live/products/watch_status.json` (per-source health, declared unknowns), with
 append-only raw snapshots under `live/snapshots/`.
@@ -136,7 +137,7 @@ evidence beside it.
 ## Quick start
 
 ```bash
-git clone https://github.com/rayford295/GeoSteward && cd GeoSteward
+git clone https://github.com/rayford295/ray-resilience && cd ray-resilience
 python -m pip install -e ".[deepcase]"
 python -m unittest discover -s tests          # 297 pass; 301 with the [gateway] extra (CI installs it)
 
@@ -173,5 +174,5 @@ this README is the entry point, not the reference.
 
 Yifan Yang (Texas A&M University, Geography). MIT License.
 
-GeoSteward is a research prototype. It is not an official forecasting or warning
+Ray Resilience is a research prototype. It is not an official forecasting or warning
 service — always follow official emergency guidance.

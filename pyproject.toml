@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "geosteward"
-version = "1.0.0.dev1"
-description = "GeoSteward: an accountable GeoAI risk analyst for location-based resilience understanding and decision-making. OASIS @ ACM SIGSPATIAL 2026 Track A."
+version = "0.1.0.dev1"
+description = "Ray Resilience: an accountable GeoAI system for place-based disaster intelligence (resilience intelligence for every place). The Python package keeps the geosteward name. OASIS @ ACM SIGSPATIAL 2026 Track A."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
