@@ -574,8 +574,15 @@ merge before the 09-04 submission**; the Windows workstation finishes it.
 `build_palisades_vlm.py` full run (Apple M5, Ollama, qwen2.5vl:7b): ~65/295 at the
 time of writing, ~12 s/image (1280×960 images take ~20 s, 640×480 ~4 s). Smoke sample
 (5 images) scored 3/5, both misses grading a damaged structure as `0_No_Damage`.
-Whatever it writes stays in the Mac working tree as untracked `events/palisades-2025/`;
-**re-run from scratch on Windows** (the builder is resumable but the record's
+**It finished** (295/295, ~60 min). Reference numbers for the Windows re-run, from the
+uncommitted `evidence/vlm_severity_eval.json`: qwen2.5vl:7b (digest `5ced39dfa4ba…`),
+prompt `70d933265e16…`, temperature 0 — **accuracy 0.495, NCSE 0.206**, adjacent-error
+0.285, 0 unparseable / 0 off-schema, 253/295 images had GPS → 108 H3 r9 cells. Per-class
+recall 0.93 / **0.00** / 0.30 / 0.25 / 0.97: the open 7B model separates intact from
+destroyed well and **never predicts `1_Affected_1_9`** (all 58 go to class 0 or 2–4).
+That sits between the paper's Gemini-3-Pro (0.442) and GPT-5-mini (0.573) on the same
+295 images. Whatever it wrote stays in the Mac working tree as untracked
+`events/palisades-2025/`; **re-run from scratch on Windows** (the builder is resumable but the record's
 `model_digest` should come from one machine). Kill on the Mac with
 `pkill -f build_palisades_vlm`.
 
