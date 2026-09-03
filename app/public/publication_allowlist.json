@@ -33,6 +33,18 @@
       "redact_workstation_paths": false
     },
     {
+      "path": "events/eaton-2025/evidence/vlm_crossview_eval.json",
+      "kind": "vlm_eval_summary",
+      "rule_id": "allow-publish-event-accountability-records",
+      "redact_workstation_paths": false
+    },
+    {
+      "path": "events/eaton-2025/evidence/vlm_crossview_h3_r9_grid.geojson",
+      "kind": "evidence_grid",
+      "rule_id": "allow-publish-tile-products",
+      "redact_workstation_paths": false
+    },
+    {
       "path": "events/eaton-2025/exposure/critical_facilities.geojson",
       "kind": "facility_context_points",
       "rule_id": "allow-publish-tile-products",
@@ -162,9 +174,9 @@
   "denied": [
     {
       "path": "events/eaton-2025/evidence/vlm_crossview_predictions.jsonl",
-      "kind": "unrecorded",
-      "rule_id": "default-deny-unrecorded",
-      "reason": "File is present on disk but absent from any artifact manifest; it has no provenance and is not authorised for publication."
+      "kind": "vlm_prediction_records",
+      "rule_id": "deny-publish-parcel-resolution",
+      "reason": "Parcel-resolution artifacts are lineage-only and are never served."
     },
     {
       "path": "events/eaton-2025/exposure/dins_points_restricted.csv.gz",

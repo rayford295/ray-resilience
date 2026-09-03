@@ -623,7 +623,7 @@ then the Milton and Eaton evidence commits below. Branch CI green from `8ff812f`
 |---|---|---:|---:|---:|---:|---:|---|---|
 | `events/palisades-2025/` | RAPID C2, 5 DINS classes | 295 | 295 | **0.4746** | **0.2127** | 0.2881 | 0.97 / **0.00** / 0.20 / 0.18 / 1.00 | 253 GPS images → 108 cells |
 | `events/milton-2024/` (`vlm_bitemporal`) | Bi-Temporal pairs, 3 classes, 100/class seed 2026 | 300 | 300 | **0.5967** | **0.2383** | 0.33 | 0.53 / 0.31 / 0.95 | 300 / 300 pairs in the committed grid → 13 cells | |
-| `events/eaton-2025/` (`vlm_crossview`) | matched set, 3 repairability classes, 300/class seed 2026 | {{EATON_ROW}} |
+| `events/eaton-2025/` (`vlm_crossview`) | matched set, 3 repairability classes, 300/class seed 2026 (minority class n=30, all included) | 630 | 630 | **0.9095** | **0.0492** | 0.0825 | 0.89 / 0.30 / 0.99 | 630 / 630 samples in the committed coverage grid → 90 cells |
 
 - Palisades sits between the paper's Gemini-3-Pro (0.442) and GPT-5-mini (0.573) on the same
   295 images, as on the Mac. The open 7B model separates intact from destroyed and **never
@@ -641,7 +641,17 @@ then the Milton and Eaton evidence commits below. Branch CI green from `8ff812f`
   descriptive only): debris_pile 0.76, damaged_building 0.60, fallen_tree 0.53, downed_lines
   0.40, flooded_road 0.01 — consistent with the 2024-season cumulative damage the companion
   grid declares.
-{{EATON_NOTES}}
+- **Eaton: the 3-class task is easier by construction, and the number says so.** 0.9095 on the
+  collapsed repairability scale is not comparable to Palisades' 0.4746 on five DINS classes — the
+  eval file says this in `reference.note`. The ends are almost perfect (trace recall 0.89,
+  destroyed 0.99); the middle is not: of the 30 `damaged_repairable` samples, 9 are graded
+  repairable, 15 trace, 6 destroyed (recall 0.30, from n=30, so no rate claim). 31 trace images
+  are graded Minor/Major. The model again **never answers `1_Affected_1_9`** (0 of 630) — the
+  same blind spot as Palisades; here it is harmless because Affected collapses onto trace anyway.
+- **The Eaton run is two processes, and the records say so.** The first run
+  (`run_id 097839c49e7a`) stopped at 565 / 630; the resume (`920491bdd95a`) graded the last 65 by
+  the builder's sha256 skip. Every record carries the `run_id` that produced it; the eval summary
+  carries the finishing run's. Same weights digest, same prompt sha, temperature 0 throughout.
 
 ### Still to do (from the 2026-09-03 review, in priority order)
 
