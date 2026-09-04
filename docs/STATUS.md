@@ -5,6 +5,18 @@
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
 
+**Track A evaluation rubric (owner supplied 2026-09-04; the paper is structured on it):** no accuracy
+leaderboard — an expert Program Committee reviews report + repository against four equally weighted
+criteria: (1) *Tool-Use Rigor & Autonomy* — autonomously write/execute/debug spatial analysis and
+retrieve open data without manual low-level cleaning, with user preference parameters or
+human-in-the-loop where appropriate; (2) *Architectural Robustness & Generalizability* — missing data,
+API timeouts, spatial misalignment across administrative granularities; transfer across regions and
+community settings; (3) *Social Good Alignment* — clarity and rigor of the operational definitions of
+vulnerability / equity / optimality, trade-off modelling, community perspectives; (4) *Innovation &
+Reflection* — creative agent architectures and spatial reasoning, reflection on limitations, ethics and
+the societal role of autonomous agents in public decision-making. Paper sections map 1:1
+(§2 autonomy, §3 robustness, §4 social good, §5–6 innovation and reflection).
+
 Roadmap: five sequential plans under [`docs/design/plans/`](design/plans/), all derived from the
 [design spec](design/specs/2026-08-19-geosteward-design.md).
 

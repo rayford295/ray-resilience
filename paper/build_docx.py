@@ -26,23 +26,23 @@ CSL = HERE / "figures" / "acm-sig-proceedings.csl"
 #: (section title the figure follows, figure file, caption). The figure is
 #: placed after the first paragraph of that section.
 FIGURES = [
+    ("Where the human is, on purpose.", "figures/fig2_lifecycle.png",
+     "One question through the agent gateway. Two deterministic gates bracket the model: the "
+     "claim-plane pre-check decides whether this role may ask this of this place at this resolution "
+     "before any model call, and the citation post-check refuses any factual sentence without an "
+     "artifact identifier. The audit stores the H3 cell, not the point, and the question as a digest."),
     ("The Steward Harness", "figures/fig1_architecture.png",
      "RAY is three loosely coupled planes on top of one harness. The Steward Harness sits between "
      "every pipeline stage and between the model and every sentence it emits, enforcing outcome, "
      "process, and institutional validity, plus a per-claim verifiability axis. The distribution "
      "plane is verified by a CI gate that fails the deploy on violation."),
-    ("Citation by default.", "figures/fig2_lifecycle.png",
-     "One question through the agent gateway. Two deterministic gates bracket the model: the "
-     "claim-plane pre-check decides whether this role may ask this of this place at this resolution "
-     "before any model call, and the citation post-check refuses any factual sentence without an "
-     "artifact identifier. The audit stores the H3 cell, not the point, and the question as a digest."),
-    ("Verifiability.", "figures/fig3_verifiability.png",
+    ("Real-world complications, declared.", "figures/fig3_verifiability.png",
      "The verifiability axis states what a reader can do to check a claim, with weakest-link "
      "aggregation across an answer's citations. Re-derivable evidence covers the case where license "
      "terms forbid retention: the harness attests to the request plus a response digest, a record "
      "that is publishable precisely because it holds no content. The license attribute gates "
      "redistribution by rule."),
-    ("System and Deep Cases", "figures/fig4_cases.png",
+    ("Generalizability.", "figures/fig4_cases.png",
      "Three deep cases across two hazard types, behind a nationwide hourly watch. Every number is a "
      "committed, hashed artifact; every card carries a declared unknown alongside its findings."),
     ("Model Output as Governed Evidence", "figures/fig5_governed.png",
@@ -50,12 +50,12 @@ FIGURES = [
      "every prediction is a record, the evaluation fails closed, and the resulting grid is flagged "
      "model-derived: the publication planner ships it as an evaluation, the claim plane has no rule that "
      "admits it, and the gateway's evidence store skips it and records the exclusion."),
-    ("Setup.", "figures/fig6_results.png",
+    ("What the runs say.", "figures/fig6_results.png",
      "Six open VLMs against the 7B reference on the three cases (accuracy, with NCSE inside each bar) and "
      "seconds per sample. The hatched bar is the reference run; the dashed line is the closed model's "
      "published accuracy from RAPID. Panels have different class counts and are not comparable with each "
      "other. Every value is read from the committed eval files."),
-    ("What the runs say.", "figures/fig7_milton_bias.png",
+    ("What the harness did with it.", "figures/fig7_milton_bias.png",
      "Milton pre/post pairs: row-normalised confusion for every model. Each fails in its own fixed "
      "direction (qwen3-vl:32b toward Severe; gemma3:12b and mistral toward Moderate), so no vote across "
      "models would repair the change task. Unanswered pairs are counted in the panel title, not folded "
@@ -91,8 +91,9 @@ def body_from(tex: str) -> str:
     body = re.sub(r"\\bibliographystyle\{[^}]*\}\n?", "", body)
     body = re.sub(r"\\bibliography\{[^}]*\}\n?", "", body)
     # \label after \section confuses nothing, but the docx has no cross-refs: spell them out.
-    body = body.replace("Section~\\ref{sec:vlm}", "Section 4")
-    body = body.replace("Section~\\ref{sec:incidents}", "Section 5")
+    for label, number in (("sec:autonomy", "2"), ("sec:robust", "3"), ("sec:social", "4"),
+                          ("sec:vlm", "5"), ("sec:reflect", "6")):
+        body = body.replace("\\ref{" + label + "}", number)
     body = body.replace("Table~\\ref{tab:vlm}", "Table 1")
     return body
 
