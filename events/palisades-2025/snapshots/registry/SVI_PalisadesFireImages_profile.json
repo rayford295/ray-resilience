@@ -1,0 +1,34 @@
+{
+ "schema_version": "yifan-disaster-registry-v1",
+ "dataset_name": "SVI_PalisadesFireImages",
+ "generated_utc": "20260904T121749Z",
+ "event": "Palisades Fire 2025",
+ "hazard_type": "wildfire",
+ "role": "labelled post-event street-view set for zero-shot severity evaluation (RAPID Dataset C2)",
+ "n_samples": 295,
+ "label_counts": {
+  "0_No_Damage": 60,
+  "1_Affected_1_9": 58,
+  "2_Minor_10_25": 60,
+  "3_Major_26_50": 57,
+  "4_Destroyed_50plus": 60
+ },
+ "canonical_label_field": "dins_folder_label",
+ "canonical_label_map": {
+  "0_No_Damage": "none",
+  "1_Affected_1_9": "minor",
+  "2_Minor_10_25": "moderate",
+  "3_Major_26_50": "severe",
+  "4_Destroyed_50plus": "destroyed"
+ },
+ "label_scheme": "CAL FIRE DINS percent structural loss, 5 classes (folder names)",
+ "source": "github.com/rayford295/RAPID I-guide/Dataset/SVI_PalisadesFireImages (LA DINS 2025)",
+ "files": {
+  "n_image_files": 295,
+  "total_bytes": 88216392
+ },
+ "checksums": {
+  "note": "per-image sha256 recorded in evidence/vlm_predictions.jsonl"
+ },
+ "provenance_note": "Images are per-structure street views whose truth label is the folder they were filed under by the RAPID authors from DINS records; no structure IDs are carried."
+}

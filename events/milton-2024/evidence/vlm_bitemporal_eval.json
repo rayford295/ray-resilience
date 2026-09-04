@@ -1,0 +1,84 @@
+{
+ "model": "qwen2.5vl:7b",
+ "model_digest": "5ced39dfa4bac325dc183dd1e4febaa1c46b3ea28bce48896c8e69c1e79611cc",
+ "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+ "temperature": 0.0,
+ "run_id": "0c3a210c8f67",
+ "sample_per_class": 100,
+ "seed": 2026,
+ "event_id": "milton-2024",
+ "dataset": "BiTemporal_StreetView_Damage",
+ "generated_utc": "20260903T193535Z",
+ "n_images": 300,
+ "n_scored": 300,
+ "n_unparseable": 0,
+ "n_unknown_label": 0,
+ "unanswered_rate": 0.0,
+ "accuracy": 0.5967,
+ "ncse": 0.2383,
+ "adjacent_error_rate": 0.33,
+ "classes": [
+  "Mild",
+  "Moderate",
+  "Severe"
+ ],
+ "confusion_rows_truth_cols_pred": [
+  [
+   53,
+   25,
+   22
+  ],
+  [
+   13,
+   31,
+   56
+  ],
+  [
+   0,
+   5,
+   95
+  ]
+ ],
+ "per_class": {
+  "Mild": {
+   "support": 100,
+   "recall": 0.53
+  },
+  "Moderate": {
+   "support": 100,
+   "recall": 0.31
+  },
+  "Severe": {
+   "support": 100,
+   "recall": 0.95
+  }
+ },
+ "n_pairs_available": 2555,
+ "pairs_in_committed_grid": 300,
+ "grid": "evidence/vlm_bitemporal_h3_r9_grid.geojson",
+ "object_indicator_rate": {
+  "debris_pile": 0.7567,
+  "fallen_tree": 0.5333,
+  "flooded_road": 0.0133,
+  "damaged_building": 0.5967,
+  "downed_lines": 0.4033
+ },
+ "reference": {
+  "paper": "RAPID (arXiv 2606.21819) Dataset B, 3-class bi-temporal",
+  "reported_accuracy": {
+   "GPT-5.1": 0.591,
+   "GPT-5-mini": 0.503,
+   "Gemini-3-Pro": 0.493
+  },
+  "note": "the paper graded 150 pairs of this set with closed models; this run is an open model on a seeded stratified sample, temperature 0"
+ },
+ "uncertainty": {
+  "model_derived": true,
+  "sample": "100 per class, seed 2026",
+  "single_run": "one pass at temperature 0; quantised local weights",
+  "truth_source": "Figshare pair table human_damage_perception; Hugging Face folder labels disagree on 0 of 2555 pairs and are recorded per pair, not used as truth",
+  "event_attribution": "2024-season cumulative, not Milton-specific (as the companion grid declares)",
+  "object_indicators": "model-reported presence flags with no ground truth here; rates are descriptive only",
+  "claim_support": "none — evaluation only; no policy rule authorises claims from these predictions"
+ }
+}

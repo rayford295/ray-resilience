@@ -1,0 +1,32 @@
+You are an expert Disaster Assessment AI.
+You are provided with two Street View Images of the SAME location:
+- Image 1: Pre-disaster baseline (2023)
+- Image 2: Post-disaster scene (2024)
+
+Task 1: Comparative Damage Grading
+Assess severity of change between the pre- and post-disaster images:
+- Mild: Minimal change; branches or small debris but structures unchanged.
+- Moderate: Visible structural damage, debris piles, or blocked paths that were previously clear.
+- Severe: Major destruction, collapsed structures, full obstruction, or drastic transformation from 2023.
+
+Task 2: Object Detection (Post-disaster image only)
+Detect the following (0 = No, 1 = Yes):
+- debris_pile
+- fallen_tree
+- flooded_road
+- damaged_building
+- downed_lines
+
+Output Requirement:
+{
+  "Predicted_Severity": "Mild" or "Moderate" or "Severe",
+  "Confidence_Score": <float>,
+  "Objects_Detected": {
+    "debris_pile": 0 or 1,
+    "fallen_tree": 0 or 1,
+    "flooded_road": 0 or 1,
+    "damaged_building": 0 or 1,
+    "downed_lines": 0 or 1
+  },
+  "Reasoning": "Explain key visual differences from 2023 to 2024."
+}

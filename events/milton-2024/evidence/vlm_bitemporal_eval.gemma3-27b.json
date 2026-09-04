@@ -1,0 +1,85 @@
+{
+ "model": "gemma3:27b",
+ "model_digest": "a418f5838eaf7fe2cfe0a3046c8384b68ba43a4435542c942f9db00a5f342203",
+ "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+ "temperature": 0.0,
+ "run_id": "7a1ff7588856",
+ "run_tag": "gemma3-27b",
+ "sample_per_class": 100,
+ "seed": 2026,
+ "event_id": "milton-2024",
+ "dataset": "BiTemporal_StreetView_Damage",
+ "generated_utc": "20260904T082523Z",
+ "n_images": 300,
+ "n_scored": 300,
+ "n_unparseable": 0,
+ "n_unknown_label": 0,
+ "unanswered_rate": 0.0,
+ "accuracy": 0.5,
+ "ncse": 0.2567,
+ "adjacent_error_rate": 0.4867,
+ "classes": [
+  "Mild",
+  "Moderate",
+  "Severe"
+ ],
+ "confusion_rows_truth_cols_pred": [
+  [
+   63,
+   35,
+   2
+  ],
+  [
+   32,
+   64,
+   4
+  ],
+  [
+   2,
+   75,
+   23
+  ]
+ ],
+ "per_class": {
+  "Mild": {
+   "support": 100,
+   "recall": 0.63
+  },
+  "Moderate": {
+   "support": 100,
+   "recall": 0.64
+  },
+  "Severe": {
+   "support": 100,
+   "recall": 0.23
+  }
+ },
+ "n_pairs_available": 2555,
+ "pairs_in_committed_grid": 300,
+ "grid": "evidence/vlm_bitemporal_h3_r9_grid.gemma3-27b.geojson",
+ "object_indicator_rate": {
+  "debris_pile": 0.69,
+  "fallen_tree": 0.0733,
+  "flooded_road": 0.0133,
+  "damaged_building": 0.1733,
+  "downed_lines": 0.03
+ },
+ "reference": {
+  "paper": "RAPID (arXiv 2606.21819) Dataset B, 3-class bi-temporal",
+  "reported_accuracy": {
+   "GPT-5.1": 0.591,
+   "GPT-5-mini": 0.503,
+   "Gemini-3-Pro": 0.493
+  },
+  "note": "the paper graded 150 pairs of this set with closed models; this run is an open model on a seeded stratified sample, temperature 0"
+ },
+ "uncertainty": {
+  "model_derived": true,
+  "sample": "100 per class, seed 2026",
+  "single_run": "one pass at temperature 0; quantised local weights",
+  "truth_source": "Figshare pair table human_damage_perception; Hugging Face folder labels disagree on 0 of 2555 pairs and are recorded per pair, not used as truth",
+  "event_attribution": "2024-season cumulative, not Milton-specific (as the companion grid declares)",
+  "object_indicators": "model-reported presence flags with no ground truth here; rates are descriptive only",
+  "claim_support": "none — evaluation only; no policy rule authorises claims from these predictions"
+ }
+}

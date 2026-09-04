@@ -1,0 +1,40 @@
+{
+ "schema_version": "yifan-disaster-registry-v1",
+ "dataset_name": "BiTemporal_StreetView_Damage",
+ "generated_utc": "20260904T131048Z",
+ "event": "Hurricane Milton 2024 (2024-season cumulative)",
+ "hazard_type": "hurricane",
+ "role": "public pre/post street-view pairs with human perception labels (RAPID Dataset B line)",
+ "n_pairs_in_table": 2556,
+ "n_pairs_resolved": 2555,
+ "dropped": {
+  "unresolved_pre": 0,
+  "unresolved_post": 1,
+  "bad_label": 0
+ },
+ "label_counts": {
+  "Mild": 657,
+  "Moderate": 1195,
+  "Severe": 703
+ },
+ "canonical_label_field": "human_damage_perception",
+ "canonical_label_map": {
+  "Mild": "minor",
+  "Moderate": "moderate",
+  "Severe": "severe"
+ },
+ "folder_label_disagreements": 0,
+ "sources": {
+  "images": "https://huggingface.co/datasets/Rayford295/BiTemporal-StreetView-Damage",
+  "pair_table": "doi:10.6084/m9.figshare.28801208.v2 LLM(GPT-4o-mini).csv"
+ },
+ "licenses": {
+  "images": "CC BY-NC 4.0 (Hugging Face card)",
+  "pair_table": "CC BY 4.0 (Figshare)"
+ },
+ "attribution": "Yang, Y. (2025). Hyperlocal disaster damage assessment using bi-temporal street-view imagery and pre-trained vision models. CEUS 121, 102335.",
+ "pair_table_file": "Location.csv",
+ "pair_table_sha256": "2743b7a30a5b10c22b194b445f8e2d6d17725c99ce23d1159df1c8973ded5730",
+ "images_local_layout": "pair directories",
+ "images_local_root_name": "Bi-temporal_hurricane"
+}

@@ -1,0 +1,582 @@
+{
+ "generated_utc": "20260904T183227Z",
+ "blocks": [
+  {
+   "event_id": "eaton-2025",
+   "task": "vlm_crossview_eval",
+   "title": "Eaton 2025 — single post-event field image, 3 repairability classes (Prompt C collapsed)",
+   "unit": "samples",
+   "reference_setup": {
+    "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+    "sample_per_class": 300,
+    "seed": 2026,
+    "view": "post_field"
+   },
+   "rows": [
+    {
+     "model": "mistral-small3.2:24b",
+     "model_digest": "5a408ab55df5",
+     "run_tag": "mistral-small3.2-24b",
+     "same_setup": true,
+     "n": 630,
+     "n_scored": 630,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.9349,
+     "ncse": 0.0365,
+     "adjacent_error_rate": 0.0571,
+     "per_class_recall": "0.98 / 0.03 / 0.98",
+     "classes": [
+      "no_or_trace_damage",
+      "damaged_repairable",
+      "destroyed"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": 300,
+     "seed": 2026,
+     "run_id": "5e842e54c581",
+     "generated_utc": "20260904T104401Z",
+     "file": "events/eaton-2025/evidence/vlm_crossview_eval.mistral-small3.2-24b.json"
+    },
+    {
+     "model": "qwen2.5vl:32b-ctx8k",
+     "model_digest": "fd7f6360dca6",
+     "run_tag": "qwen2.5vl-32b-ctx8k",
+     "same_setup": true,
+     "n": 630,
+     "n_scored": 626,
+     "unanswered_rate": 0.0063,
+     "accuracy": 0.9313,
+     "ncse": 0.0391,
+     "adjacent_error_rate": 0.0591,
+     "per_class_recall": "0.97 / 0.13 / 0.97",
+     "classes": [
+      "no_or_trace_damage",
+      "damaged_repairable",
+      "destroyed"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": 300,
+     "seed": 2026,
+     "run_id": "3974d6d3863a",
+     "generated_utc": "20260904T071645Z",
+     "file": "events/eaton-2025/evidence/vlm_crossview_eval.qwen2.5vl-32b-ctx8k.json"
+    },
+    {
+     "model": "qwen3-vl:8b",
+     "model_digest": "901cae732162",
+     "run_tag": "qwen3-vl-8b",
+     "same_setup": true,
+     "n": 630,
+     "n_scored": 605,
+     "unanswered_rate": 0.0397,
+     "accuracy": 0.924,
+     "ncse": 0.0413,
+     "adjacent_error_rate": 0.0694,
+     "per_class_recall": "0.94 / 0.32 / 0.96",
+     "classes": [
+      "no_or_trace_damage",
+      "damaged_repairable",
+      "destroyed"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": 300,
+     "seed": 2026,
+     "run_id": "f840f4556a4b",
+     "generated_utc": "20260904T183224Z",
+     "file": "events/eaton-2025/evidence/vlm_crossview_eval.qwen3-vl-8b.json"
+    },
+    {
+     "model": "gemma3:27b",
+     "model_digest": "a418f5838eaf",
+     "run_tag": "gemma3-27b",
+     "same_setup": true,
+     "n": 630,
+     "n_scored": 630,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.9143,
+     "ncse": 0.0492,
+     "adjacent_error_rate": 0.073,
+     "per_class_recall": "0.90 / 0.43 / 0.97",
+     "classes": [
+      "no_or_trace_damage",
+      "damaged_repairable",
+      "destroyed"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": 300,
+     "seed": 2026,
+     "run_id": "955b11c83e35",
+     "generated_utc": "20260904T091035Z",
+     "file": "events/eaton-2025/evidence/vlm_crossview_eval.gemma3-27b.json"
+    },
+    {
+     "model": "qwen2.5vl:7b",
+     "model_digest": "5ced39dfa4ba",
+     "run_tag": "reference",
+     "same_setup": true,
+     "n": 630,
+     "n_scored": 630,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.9095,
+     "ncse": 0.0492,
+     "adjacent_error_rate": 0.0825,
+     "per_class_recall": "0.89 / 0.30 / 0.99",
+     "classes": [
+      "no_or_trace_damage",
+      "damaged_repairable",
+      "destroyed"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": 300,
+     "seed": 2026,
+     "run_id": "920491bdd95a",
+     "generated_utc": "20260903T201843Z",
+     "file": "events/eaton-2025/evidence/vlm_crossview_eval.json"
+    },
+    {
+     "model": "gemma3:12b",
+     "model_digest": "f4031aab637d",
+     "run_tag": "gemma3-12b",
+     "same_setup": true,
+     "n": 630,
+     "n_scored": 630,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.9063,
+     "ncse": 0.0508,
+     "adjacent_error_rate": 0.0857,
+     "per_class_recall": "0.93 / 0.27 / 0.95",
+     "classes": [
+      "no_or_trace_damage",
+      "damaged_repairable",
+      "destroyed"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": 300,
+     "seed": 2026,
+     "run_id": "26ef2e9bd5f9",
+     "generated_utc": "20260904T121742Z",
+     "file": "events/eaton-2025/evidence/vlm_crossview_eval.gemma3-12b.json"
+    },
+    {
+     "model": "qwen3-vl:32b-ctx8k",
+     "model_digest": "d2b2007e0497",
+     "run_tag": "qwen3-vl-32b-ctx8k",
+     "same_setup": true,
+     "n": 630,
+     "n_scored": 627,
+     "unanswered_rate": 0.0048,
+     "accuracy": 0.9011,
+     "ncse": 0.0526,
+     "adjacent_error_rate": 0.0925,
+     "per_class_recall": "0.94 / 0.20 / 0.93",
+     "classes": [
+      "no_or_trace_damage",
+      "damaged_repairable",
+      "destroyed"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": 300,
+     "seed": 2026,
+     "run_id": "c38d65c8b07b",
+     "generated_utc": "20260904T041942Z",
+     "file": "events/eaton-2025/evidence/vlm_crossview_eval.qwen3-vl-32b-ctx8k.json"
+    }
+   ],
+   "paper_reference": null
+  },
+  {
+   "event_id": "milton-2024",
+   "task": "vlm_bitemporal_eval",
+   "title": "Milton 2024 — pre/post street-view pair, 3 classes (RAPID Prompt B, Bi-Temporal set)",
+   "unit": "pairs",
+   "reference_setup": {
+    "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+    "sample_per_class": 100,
+    "seed": 2026,
+    "view": null
+   },
+   "rows": [
+    {
+     "model": "qwen2.5vl:7b",
+     "model_digest": "5ced39dfa4ba",
+     "run_tag": "reference",
+     "same_setup": true,
+     "n": 300,
+     "n_scored": 300,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.5967,
+     "ncse": 0.2383,
+     "adjacent_error_rate": 0.33,
+     "per_class_recall": "0.53 / 0.31 / 0.95",
+     "classes": [
+      "Mild",
+      "Moderate",
+      "Severe"
+     ],
+     "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+     "sample_per_class": 100,
+     "seed": 2026,
+     "run_id": "0c3a210c8f67",
+     "generated_utc": "20260903T193535Z",
+     "file": "events/milton-2024/evidence/vlm_bitemporal_eval.json"
+    },
+    {
+     "model": "qwen2.5vl:32b-ctx8k",
+     "model_digest": "fd7f6360dca6",
+     "run_tag": "qwen2.5vl-32b-ctx8k",
+     "same_setup": true,
+     "n": 300,
+     "n_scored": 300,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.56,
+     "ncse": 0.24,
+     "adjacent_error_rate": 0.4,
+     "per_class_recall": "0.51 / 0.52 / 0.65",
+     "classes": [
+      "Mild",
+      "Moderate",
+      "Severe"
+     ],
+     "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+     "sample_per_class": 100,
+     "seed": 2026,
+     "run_id": "3940ff347bf6",
+     "generated_utc": "20260904T061840Z",
+     "file": "events/milton-2024/evidence/vlm_bitemporal_eval.qwen2.5vl-32b-ctx8k.json"
+    },
+    {
+     "model": "gemma3:27b",
+     "model_digest": "a418f5838eaf",
+     "run_tag": "gemma3-27b",
+     "same_setup": true,
+     "n": 300,
+     "n_scored": 300,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.5,
+     "ncse": 0.2567,
+     "adjacent_error_rate": 0.4867,
+     "per_class_recall": "0.63 / 0.64 / 0.23",
+     "classes": [
+      "Mild",
+      "Moderate",
+      "Severe"
+     ],
+     "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+     "sample_per_class": 100,
+     "seed": 2026,
+     "run_id": "7a1ff7588856",
+     "generated_utc": "20260904T082523Z",
+     "file": "events/milton-2024/evidence/vlm_bitemporal_eval.gemma3-27b.json"
+    },
+    {
+     "model": "mistral-small3.2:24b",
+     "model_digest": "5a408ab55df5",
+     "run_tag": "mistral-small3.2-24b",
+     "same_setup": true,
+     "n": 300,
+     "n_scored": 300,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.4867,
+     "ncse": 0.2583,
+     "adjacent_error_rate": 0.51,
+     "per_class_recall": "0.13 / 0.80 / 0.53",
+     "classes": [
+      "Mild",
+      "Moderate",
+      "Severe"
+     ],
+     "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+     "sample_per_class": 100,
+     "seed": 2026,
+     "run_id": "8b45bbc10edf",
+     "generated_utc": "20260904T100729Z",
+     "file": "events/milton-2024/evidence/vlm_bitemporal_eval.mistral-small3.2-24b.json"
+    },
+    {
+     "model": "qwen3-vl:8b",
+     "model_digest": "901cae732162",
+     "run_tag": "qwen3-vl-8b",
+     "same_setup": true,
+     "n": 300,
+     "n_scored": 275,
+     "unanswered_rate": 0.0833,
+     "accuracy": 0.4618,
+     "ncse": 0.3236,
+     "adjacent_error_rate": 0.4291,
+     "per_class_recall": "0.18 / 0.57 / 0.60",
+     "classes": [
+      "Mild",
+      "Moderate",
+      "Severe"
+     ],
+     "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+     "sample_per_class": 100,
+     "seed": 2026,
+     "run_id": "2d97f95b2cce",
+     "generated_utc": "20260904T162604Z",
+     "file": "events/milton-2024/evidence/vlm_bitemporal_eval.qwen3-vl-8b.json"
+    },
+    {
+     "model": "gemma3:12b",
+     "model_digest": "f4031aab637d",
+     "run_tag": "gemma3-12b",
+     "same_setup": true,
+     "n": 300,
+     "n_scored": 300,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.4267,
+     "ncse": 0.2867,
+     "adjacent_error_rate": 0.5733,
+     "per_class_recall": "0.16 / 0.95 / 0.17",
+     "classes": [
+      "Mild",
+      "Moderate",
+      "Severe"
+     ],
+     "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+     "sample_per_class": 100,
+     "seed": 2026,
+     "run_id": "8fe5a327ae09",
+     "generated_utc": "20260904T113831Z",
+     "file": "events/milton-2024/evidence/vlm_bitemporal_eval.gemma3-12b.json"
+    },
+    {
+     "model": "qwen3-vl:32b-ctx8k",
+     "model_digest": "d2b2007e0497",
+     "run_tag": "qwen3-vl-32b-ctx8k",
+     "same_setup": true,
+     "n": 300,
+     "n_scored": 299,
+     "unanswered_rate": 0.0033,
+     "accuracy": 0.3813,
+     "ncse": 0.4314,
+     "adjacent_error_rate": 0.3746,
+     "per_class_recall": "0.01 / 0.14 / 1.00",
+     "classes": [
+      "Mild",
+      "Moderate",
+      "Severe"
+     ],
+     "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+     "sample_per_class": 100,
+     "seed": 2026,
+     "run_id": "5bb8d63df5bc",
+     "generated_utc": "20260904T022702Z",
+     "file": "events/milton-2024/evidence/vlm_bitemporal_eval.qwen3-vl-32b-ctx8k.json"
+    }
+   ],
+   "paper_reference": {
+    "reported_accuracy": {
+     "GPT-5.1": 0.591,
+     "GPT-5-mini": 0.503,
+     "Gemini-3-Pro": 0.493
+    },
+    "note": "the paper graded 150 pairs of this set with closed models; this run is an open model on a seeded stratified sample, temperature 0"
+   }
+  },
+  {
+   "event_id": "palisades-2025",
+   "task": "vlm_severity_eval",
+   "title": "Palisades 2025 — single post-event image, 5 DINS classes (RAPID Prompt C, Dataset C2)",
+   "unit": "images",
+   "reference_setup": {
+    "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+    "sample_per_class": null,
+    "seed": null,
+    "view": null
+   },
+   "rows": [
+    {
+     "model": "qwen3-vl:32b-ctx8k",
+     "model_digest": "d2b2007e0497",
+     "run_tag": "qwen3-vl-32b-ctx8k",
+     "same_setup": true,
+     "n": 295,
+     "n_scored": 294,
+     "unanswered_rate": 0.0034,
+     "accuracy": 0.5544,
+     "ncse": 0.176,
+     "adjacent_error_rate": 0.2449,
+     "per_class_recall": "0.88 / 0.28 / 0.30 / 0.35 / 0.93",
+     "classes": [
+      "0_No_Damage",
+      "1_Affected_1_9",
+      "2_Minor_10_25",
+      "3_Major_26_50",
+      "4_Destroyed_50plus"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": null,
+     "seed": null,
+     "run_id": "a5bda3668001",
+     "generated_utc": "20260903T224420Z",
+     "file": "events/palisades-2025/evidence/vlm_severity_eval.qwen3-vl-32b-ctx8k.json"
+    },
+    {
+     "model": "gemma3:12b",
+     "model_digest": "f4031aab637d",
+     "run_tag": "gemma3-12b",
+     "same_setup": true,
+     "n": 295,
+     "n_scored": 295,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.5458,
+     "ncse": 0.178,
+     "adjacent_error_rate": 0.261,
+     "per_class_recall": "0.93 / 0.14 / 0.30 / 0.37 / 0.97",
+     "classes": [
+      "0_No_Damage",
+      "1_Affected_1_9",
+      "2_Minor_10_25",
+      "3_Major_26_50",
+      "4_Destroyed_50plus"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": null,
+     "seed": null,
+     "run_id": "46aff74add30",
+     "generated_utc": "20260904T110723Z",
+     "file": "events/palisades-2025/evidence/vlm_severity_eval.gemma3-12b.json"
+    },
+    {
+     "model": "gemma3:27b",
+     "model_digest": "a418f5838eaf",
+     "run_tag": "gemma3-27b",
+     "same_setup": true,
+     "n": 295,
+     "n_scored": 295,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.5288,
+     "ncse": 0.1873,
+     "adjacent_error_rate": 0.2644,
+     "per_class_recall": "0.93 / 0.07 / 0.22 / 0.44 / 0.97",
+     "classes": [
+      "0_No_Damage",
+      "1_Affected_1_9",
+      "2_Minor_10_25",
+      "3_Major_26_50",
+      "4_Destroyed_50plus"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": null,
+     "seed": null,
+     "run_id": "f0350a944514",
+     "generated_utc": "20260904T074030Z",
+     "file": "events/palisades-2025/evidence/vlm_severity_eval.gemma3-27b.json"
+    },
+    {
+     "model": "qwen3-vl:8b",
+     "model_digest": "901cae732162",
+     "run_tag": "qwen3-vl-8b",
+     "same_setup": true,
+     "n": 295,
+     "n_scored": 282,
+     "unanswered_rate": 0.0441,
+     "accuracy": 0.5142,
+     "ncse": 0.195,
+     "adjacent_error_rate": 0.2766,
+     "per_class_recall": "0.93 / 0.11 / 0.24 / 0.35 / 0.93",
+     "classes": [
+      "0_No_Damage",
+      "1_Affected_1_9",
+      "2_Minor_10_25",
+      "3_Major_26_50",
+      "4_Destroyed_50plus"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": null,
+     "seed": null,
+     "run_id": "f57109b5a654",
+     "generated_utc": "20260904T131044Z",
+     "file": "events/palisades-2025/evidence/vlm_severity_eval.qwen3-vl-8b.json"
+    },
+    {
+     "model": "qwen2.5vl:32b-ctx8k",
+     "model_digest": "fd7f6360dca6",
+     "run_tag": "qwen2.5vl-32b-ctx8k",
+     "same_setup": true,
+     "n": 295,
+     "n_scored": 294,
+     "unanswered_rate": 0.0034,
+     "accuracy": 0.5068,
+     "ncse": 0.2058,
+     "adjacent_error_rate": 0.2721,
+     "per_class_recall": "1.00 / 0.12 / 0.17 / 0.30 / 0.93",
+     "classes": [
+      "0_No_Damage",
+      "1_Affected_1_9",
+      "2_Minor_10_25",
+      "3_Major_26_50",
+      "4_Destroyed_50plus"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": null,
+     "seed": null,
+     "run_id": "054954f695bb",
+     "generated_utc": "20260904T044956Z",
+     "file": "events/palisades-2025/evidence/vlm_severity_eval.qwen2.5vl-32b-ctx8k.json"
+    },
+    {
+     "model": "mistral-small3.2:24b",
+     "model_digest": "5a408ab55df5",
+     "run_tag": "mistral-small3.2-24b",
+     "same_setup": true,
+     "n": 295,
+     "n_scored": 295,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.5051,
+     "ncse": 0.2025,
+     "adjacent_error_rate": 0.2644,
+     "per_class_recall": "0.98 / 0.17 / 0.17 / 0.21 / 0.97",
+     "classes": [
+      "0_No_Damage",
+      "1_Affected_1_9",
+      "2_Minor_10_25",
+      "3_Major_26_50",
+      "4_Destroyed_50plus"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": null,
+     "seed": null,
+     "run_id": "e04e6a95ee7f",
+     "generated_utc": "20260904T093003Z",
+     "file": "events/palisades-2025/evidence/vlm_severity_eval.mistral-small3.2-24b.json"
+    },
+    {
+     "model": "qwen2.5vl:7b",
+     "model_digest": "5ced39dfa4ba",
+     "run_tag": "reference",
+     "same_setup": true,
+     "n": 295,
+     "n_scored": 295,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.4746,
+     "ncse": 0.2127,
+     "adjacent_error_rate": 0.2881,
+     "per_class_recall": "0.97 / 0.00 / 0.20 / 0.18 / 1.00",
+     "classes": [
+      "0_No_Damage",
+      "1_Affected_1_9",
+      "2_Minor_10_25",
+      "3_Major_26_50",
+      "4_Destroyed_50plus"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": null,
+     "seed": null,
+     "run_id": "d3b45e114656",
+     "generated_utc": "20260903T191116Z",
+     "file": "events/palisades-2025/evidence/vlm_severity_eval.json"
+    }
+   ],
+   "paper_reference": {
+    "reported_accuracy": {
+     "GPT-5-mini": 0.573,
+     "GPT-5.1": 0.57,
+     "Gemini-3-Pro": 0.442
+    },
+    "note": "reported numbers are the paper's closed-model results on the same 295 images; this run is an open model, zero-shot, temperature 0"
+   }
+  }
+ ]
+}

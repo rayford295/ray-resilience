@@ -1,0 +1,85 @@
+{
+ "model": "qwen2.5vl:32b-ctx8k",
+ "model_digest": "fd7f6360dca6116bee435fcd987c1fd6f25fad49bd6db93d1ab033b92bf528ad",
+ "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+ "temperature": 0.0,
+ "run_id": "3940ff347bf6",
+ "run_tag": "qwen2.5vl-32b-ctx8k",
+ "sample_per_class": 100,
+ "seed": 2026,
+ "event_id": "milton-2024",
+ "dataset": "BiTemporal_StreetView_Damage",
+ "generated_utc": "20260904T061840Z",
+ "n_images": 300,
+ "n_scored": 300,
+ "n_unparseable": 0,
+ "n_unknown_label": 0,
+ "unanswered_rate": 0.0,
+ "accuracy": 0.56,
+ "ncse": 0.24,
+ "adjacent_error_rate": 0.4,
+ "classes": [
+  "Mild",
+  "Moderate",
+  "Severe"
+ ],
+ "confusion_rows_truth_cols_pred": [
+  [
+   51,
+   38,
+   11
+  ],
+  [
+   16,
+   52,
+   32
+  ],
+  [
+   1,
+   34,
+   65
+  ]
+ ],
+ "per_class": {
+  "Mild": {
+   "support": 100,
+   "recall": 0.51
+  },
+  "Moderate": {
+   "support": 100,
+   "recall": 0.52
+  },
+  "Severe": {
+   "support": 100,
+   "recall": 0.65
+  }
+ },
+ "n_pairs_available": 2555,
+ "pairs_in_committed_grid": 300,
+ "grid": "evidence/vlm_bitemporal_h3_r9_grid.qwen2.5vl-32b-ctx8k.geojson",
+ "object_indicator_rate": {
+  "debris_pile": 0.79,
+  "fallen_tree": 0.24,
+  "flooded_road": 0.01,
+  "damaged_building": 0.4433,
+  "downed_lines": 0.0467
+ },
+ "reference": {
+  "paper": "RAPID (arXiv 2606.21819) Dataset B, 3-class bi-temporal",
+  "reported_accuracy": {
+   "GPT-5.1": 0.591,
+   "GPT-5-mini": 0.503,
+   "Gemini-3-Pro": 0.493
+  },
+  "note": "the paper graded 150 pairs of this set with closed models; this run is an open model on a seeded stratified sample, temperature 0"
+ },
+ "uncertainty": {
+  "model_derived": true,
+  "sample": "100 per class, seed 2026",
+  "single_run": "one pass at temperature 0; quantised local weights",
+  "truth_source": "Figshare pair table human_damage_perception; Hugging Face folder labels disagree on 0 of 2555 pairs and are recorded per pair, not used as truth",
+  "event_attribution": "2024-season cumulative, not Milton-specific (as the companion grid declares)",
+  "object_indicators": "model-reported presence flags with no ground truth here; rates are descriptive only",
+  "claim_support": "none — evaluation only; no policy rule authorises claims from these predictions"
+ }
+}

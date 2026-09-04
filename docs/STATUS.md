@@ -1,6 +1,6 @@
 # Ray Resilience v0.1 — Project Status
 
-**Updated:** 2026-09-03 · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-09-04 (Windows — six-model VLM sweep finished 13:32 CDT) · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -547,6 +547,202 @@ No new dependencies.
   author list and order (Lei Zou is listed from the Yang & Zou abstract — confirm),
   the author emails are placeholders (four authors as of 2026-09-03: Yang, Zou, Gong, Wang; all four confirmed), and the assumed format (sigconf, 4 pages)
   must be reconciled with the Track A brief behind the event login (blocked item 5).
+
+## 🔧 In progress — branch `evidence/vlm-severity` (2026-09-03, not merged)
+
+Porting the RAPID line (Yang et al. 2026, arXiv 2606.21819 — four closed-API
+agents) into the Steward Harness on **open models**. Decision from the
+2026-09-03 review: keep the *mechanisms*, not the agents — RAPID's prompts,
+schemas, NCSE metric and acceptance rules become harness stages; its LLM
+TaskPlanner is **not** adopted (an LLM choosing which agents run conflicts
+with the policy plane). The branch is pushed and **must not merge before the 09-04
+submission** (Mac decision, not revisited); the Windows workstation finished the handover
+list the same day, and merged the renamed `main` (`cda24cf`) into the branch so the merge
+back is a fast-forward of evidence, not a rename conflict.
+
+### Landed on the branch (commits `9059bac`, `254feed`)
+
+- `src/geosteward/gateway/llm.py` — `image_part()` / `text_part()` content parts,
+  `response_format`, `temperature`, `model` overrides. Any OpenAI-compatible vision
+  endpoint works; verified live against local Ollama `qwen2.5vl:7b` (JSON mode honoured;
+  fenced JSON without it — both parse).
+- `src/geosteward/deepcase/vlm_severity.py` — RAPID Prompt C (wildfire 0–4) and Prompt B
+  (pre/post 3-class) **verbatim, sha256 in every record**; strict parsing where an
+  off-schema answer is a recorded `unparseable` / `unknown_label`, never a coerced class;
+  NCSE + confusion; EXIF-GPS; H3 r9 aggregation of truth-vs-prediction histograms; the
+  five binary object indicators kept only when actually 0/1; model prose hashed, not
+  stored. 20 tests, no model needed.
+- `scripts/build_palisades_vlm.py` — `events/palisades-2025/` evaluation case over RAPID's
+  295-image LA DINS set (RAPID Dataset C2; paper: GPT-5-mini 0.573, GPT-5.1 0.570,
+  Gemini-3-Pro 0.442). Resumable by image sha256; aborts above 20 % unanswered. **Not in
+  `published_events`.**
+- `scripts/build_milton_vlm_bitemporal.py` — pre/post pair grading for `events/milton-2024/`
+  from the public Bi-Temporal set; seeded stratified `--sample` per class; fails closed
+  unless ≥ 95 % of graded pairs fall in the committed `bitemporal_h3_r9_grid` cells. Pair
+  loading dry-run on real data: 2,555 / 2,556 pairs resolve.
+- Policy classes: `vlm_prompt`, `vlm_eval_summary` (event, public), `vlm_prediction_records`
+  (parcel, lineage — records carry coordinates), `source_snapshot_ccby` (internal). Manual
+  `09` rows. Python tests 295 → 321; anchors 827/0; publication gate green.
+
+### Windows workstation, 2026-09-03 — what landed after the handover
+
+Commits `8d2b14b`, `dab315a`, `f8f9c8a`, `5d81803` (merge of the renamed main), `8ff812f`,
+then the Milton and Eaton evidence commits below. Branch CI green from `8ff812f`.
+
+- **Gateway governance (the blocking item) — fixed first.** `PolicyEngine.from_yaml` now
+  reads `published_events`, so the claim plane and the distribution plane publish from one
+  list; `EvidenceStore` takes that scope, skips any dossier or grid collection flagged
+  `model_derived`, and records every exclusion (`excluded_events`, `excluded_grids`) instead
+  of staying silent; `Steward` defaults the scope to the policy's list and **refuses to
+  start with none**. Gateway test fixtures declare their synthetic events' scope explicitly.
+  20 tests in `tests/test_gateway_governance.py`, including one over the committed tree:
+  `events/palisades-2025/` is on disk, has an AOI, and is not served.
+- **`scripts/build_eaton_vlm.py` — written and run.** Grades each sample's post-event field
+  image with RAPID Prompt C verbatim (same `prompt_sha256` as Palisades), collapses the five
+  DINS classes onto the set's three repairability labels by DINS semantics
+  (`vlm_severity.DINS5_TO_REPAIRABILITY3`: Affected 1–9 % → trace, Minor/Major → repairable,
+  Destroyed → destroyed) before scoring, keeps both predictions per record, takes location
+  from the manifest's post-event point (declared per cell via `aggregate_h3`'s new
+  `location_source`), and fails closed unless ≥ 95 % of graded samples fall in the committed
+  `crossview_h3_r9_coverage.geojson` cells. The pre-event Mapillary image is **not** shown to
+  the model: Prompt C is single-image, and that is declared rather than worked around with a
+  new prompt. 12 tests in `tests/test_deepcase_vlm_eaton.py`.
+- **Milton builder reads the original release layout.** The owner's local
+  `Bi-temporal_hurricane` set is the pre-Hugging-Face tree
+  (`folder_k/<pre>_vs_<post>(n)/<pre>_2023.png, <post>_2024.png` + `Location.csv` with a BOM);
+  `load_pairs` resolves that first and falls back to the HF layout. 2,555 / 2,556 pairs resolve.
+- **Prompt artifacts moved from `snapshots/vlm/` to `evidence/`.** `vlm_prompt` is public,
+  and nothing under `snapshots/` ships — a structural rule of the distribution plane the Mac
+  never tripped because it never ran a builder into a *published* event. Bytes and sha256
+  unchanged; manifest rows repointed. The SVI staleness guard in `tests/test_deepcase_dossier.py`
+  skips `model_derived` dossiers (an evaluation case has no exposure line to be pending on).
+
+### Results (qwen2.5vl:7b, digest `5ced39dfa4ba…`, temperature 0, one pass each)
+
+| Case | Set | n | in-schema | accuracy | NCSE | adjacent-error | per-class recall | grid |
+|---|---|---:|---:|---:|---:|---:|---|---|
+| `events/palisades-2025/` | RAPID C2, 5 DINS classes | 295 | 295 | **0.4746** | **0.2127** | 0.2881 | 0.97 / **0.00** / 0.20 / 0.18 / 1.00 | 253 GPS images → 108 cells |
+| `events/milton-2024/` (`vlm_bitemporal`) | Bi-Temporal pairs, 3 classes, 100/class seed 2026 | 300 | 300 | **0.5967** | **0.2383** | 0.33 | 0.53 / 0.31 / 0.95 | 300 / 300 pairs in the committed grid → 13 cells | |
+| `events/eaton-2025/` (`vlm_crossview`) | matched set, 3 repairability classes, 300/class seed 2026 (minority class n=30, all included) | 630 | 630 | **0.9095** | **0.0492** | 0.0825 | 0.89 / 0.30 / 0.99 | 630 / 630 samples in the committed coverage grid → 90 cells |
+
+- Palisades sits between the paper's Gemini-3-Pro (0.442) and GPT-5-mini (0.573) on the same
+  295 images, as on the Mac. The open 7B model separates intact from destroyed and **never
+  predicts `1_Affected_1_9`**; that class's 58 images go to 0 (25), 2 (21), 3 (2) and 4 (10).
+- **Reproducibility across machines.** Same weights (digest), same prompt (sha), temperature 0:
+  the Mac reference was 0.495 / 0.206, this run 0.4746 / 0.2127 — six of 295 images graded
+  differently. The digest pins the weights, not the arithmetic (Metal vs CUDA kernels,
+  quantised matmul order). Recorded, not tuned away; a reason the record carries
+  `model_digest` *and* the run is committed rather than only described.
+- **Milton pairs: the open 7B model matches the paper's best closed model on this sample.**
+  0.5967 against GPT-5.1 0.591 / GPT-5-mini 0.503 / Gemini-3-Pro 0.493 (the paper graded 150
+  pairs; this run 300, seeded stratified, so the numbers are indicative, not a ranking). The
+  errors are one-directional: 56 of 100 `Moderate` pairs are graded `Severe`, 25 of 100 `Mild`
+  are graded `Moderate`; `Severe` recall 0.95. Object indicators (no ground truth here,
+  descriptive only): debris_pile 0.76, damaged_building 0.60, fallen_tree 0.53, downed_lines
+  0.40, flooded_road 0.01 — consistent with the 2024-season cumulative damage the companion
+  grid declares.
+- **Eaton: the 3-class task is easier by construction, and the number says so.** 0.9095 on the
+  collapsed repairability scale is not comparable to Palisades' 0.4746 on five DINS classes — the
+  eval file says this in `reference.note`. The ends are almost perfect (trace recall 0.89,
+  destroyed 0.99); the middle is not: of the 30 `damaged_repairable` samples, 9 are graded
+  repairable, 15 trace, 6 destroyed (recall 0.30, from n=30, so no rate claim). 31 trace images
+  are graded Minor/Major. The model again **never answers `1_Affected_1_9`** (0 of 630) — the
+  same blind spot as Palisades; here it is harmless because Affected collapses onto trace anyway.
+- **The Eaton run is two processes, and the records say so.** The first run
+  (`run_id 097839c49e7a`) stopped at 565 / 630; the resume (`920491bdd95a`) graded the last 65 by
+  the builder's sha256 skip. Every record carries the `run_id` that produced it; the eval summary
+  carries the finishing run's. Same weights digest, same prompt sha, temperature 0 throughout.
+
+### Multi-model comparison — six open models, three cases, finished 2026-09-04 13:32 CDT
+
+The three builders take `--run-tag auto` (commit `0946193`): every output of a tagged run carries the served
+model's slug before its suffix, so seven models' runs sit beside the qwen2.5vl:7b reference files without
+overwriting them and each resumes independently. `scripts/run_vlm_sweep.py` runs the cases model by model and
+records, next to each eval summary, how the server placed the model (bytes in VRAM vs total, context length):
+a model spilled to CPU is a different run and the summary says so. `scripts/compare_vlm_models.py` renders
+[`docs/vlm_model_comparison.md`](vlm_model_comparison.md) from whatever eval files are committed.
+
+What the RTX 3090 (24 GB) holds, measured with a one-token probe before the sweep:
+
+| served model | weights | placement | note |
+|---|---:|---|---|
+| `qwen3-vl:32b` (Q4_K_M, 33.4B) | 20 GB | 32k context: 22.6 of 29.2 GB in VRAM (77 %) | **not used** — spills |
+| `qwen3-vl:32b-ctx8k` (same weights, `num_ctx 8192`) | 20 GB | 22.1 / 22.1 GB (100 %) | the run uses this; derived-model digest recorded |
+| `qwen2.5vl:32b-ctx8k` (`num_ctx 8192`) | 21 GB | 22.2 / 23.3 GB (95 %) | ~1 GB on CPU, accepted and recorded |
+| `gemma3:27b` | 17 GB | 17.5 / 17.5 GB (100 %) at 32k | |
+| `mistral-small3.2:24b` | 15 GB | 19.6 / 19.6 GB (100 %) at 32k | |
+| `llama3.2-vision:11b` | 7.8 GB | **does not load** | Ollama 0.32.14 on this workstation rejects the weights (`unknown model architecture: 'mllama'`, llama-server exit 1); every call was HTTP 500 in ~4 s, recorded as `LLMUnavailable`. Re-pulling gave the same `mllama` blob. Dropped from the sweep 2026-09-04 05:50; its 25 error records were not committed. Declared unknown, not a model result. |
+| `gemma3:12b`, `qwen3-vl:8b` | 8.1 / 6.1 GB | fit | |
+
+32B at Q4 is the ceiling for this card; 72B-class vision models do not fit. Cold load is 110–160 s per model from
+the model disk; qwen3-vl:32b-ctx8k grades a Palisades image in ~8 s (qwen2.5vl:7b: ~3.2 s). Order: the two 32B
+models first, then 27B, 24B, 12B, 8B (11B removed, see the table); Palisades (295) → Milton (300 pairs) → Eaton (630) per model.
+Each model's three cases were committed and pushed as they finished (`8aafae2` qwen3-vl:32b-ctx8k, `160edde`
+qwen2.5vl:32b-ctx8k, `434ddf7` gemma3:27b, `fb6a81f` mistral-small3.2:24b, `bb51366` gemma3:12b, `b868fb1` qwen3-vl:8b;
+CI green on each). Partial prediction files of a case still running were never committed.
+
+**Results** (accuracy / NCSE; same prompt sha256, same seeded sample as the reference; full table with per-class
+recall in [`docs/vlm_model_comparison.md`](vlm_model_comparison.md)):
+
+| model | Palisades, 5 classes | Milton pairs, 3 classes | Eaton, 3 classes | wall time |
+|---|---:|---:|---:|---:|
+| `qwen2.5vl:7b` (reference) | 0.475 / 0.213 | **0.597** / 0.238 | 0.910 / 0.049 | — |
+| `qwen3-vl:32b-ctx8k` | **0.554** / 0.176 | 0.381 / 0.431 | 0.901 / 0.053 | 6 h 34 min |
+| `qwen2.5vl:32b-ctx8k` (95 % in VRAM) | 0.507 / 0.206 | 0.560 / 0.240 | 0.931 / 0.039 | 2 h 57 min |
+| `gemma3:27b` | 0.529 / 0.187 | 0.500 / 0.257 | 0.914 / 0.049 | 1 h 54 min |
+| `mistral-small3.2:24b` | 0.505 / 0.203 | 0.487 / 0.258 | **0.935** / 0.037 | 1 h 33 min |
+| `gemma3:12b` | 0.546 / 0.178 | 0.427 / 0.287 | 0.906 / 0.051 | 1 h 30 min |
+| `qwen3-vl:8b` | 0.514 / 0.195 | 0.462 / 0.324 | 0.924 / 0.041 | 6 h 15 min |
+| closed models in the RAPID paper | GPT-5-mini 0.573, GPT-5.1 0.570 | GPT-5.1 0.591 | — | — |
+
+What the table says, and what it does not:
+
+- **Single post-event image (Palisades, Eaton): every open model beats the 7B reference, and the best open model
+  is within two points of the paper's closed models.** Size is not the axis: gemma3:12b (0.546) is within one
+  point of qwen3-vl:32b (0.554) and ahead of gemma3:27b.
+- **Pre/post pairs (Milton): no open model beats the 7B reference, and the failures are systematic, not noisy.**
+  qwen3-vl:32b calls 258 of 300 pairs Severe (Mild recall 0.01); gemma3:12b calls 262 Moderate (Severe recall
+  0.17); mistral puts 213 in Moderate (Mild recall 0.13). Each model has a different fixed bias on the change
+  task, so a majority vote across them would not be a fix, and the per-class recall column is the finding.
+- **Eaton's small class is where every model is weak**: `damaged_repairable` (n = 30) recall runs 0.03 (mistral)
+  to 0.43 (gemma3:27b) while the two large classes sit at 0.9+. The headline 0.93 is the large classes.
+- **Latency is a model property here, not a hardware one.** The qwen3 family spends its time in hidden reasoning
+  before a 60-character answer: qwen3-vl:8b's median is 5 s but 9 Palisades images took over 30 s (max 182 s), and
+  on Milton 24 pairs hit the client timeout and were recorded as `LLMUnavailable` (8.3 % unanswered, under the
+  20 % fail-closed bound, so the case stands with its unanswered rate on the record). qwen3-vl:32b took 44 s per
+  pair for the same output length as the 7B model's 4.8 s.
+- One pass, temperature 0, Q4 quantised weights; the `model_digest` pins the weights, not the arithmetic. Nothing
+  here is a benchmark of the models — it is what these served weights do on these seeded samples under RAPID's
+  verbatim prompts, recorded so the gateway's `model_derived` evidence has a stated provenance. The first launch (15:46) died with its shell
+at 42 / 295 of the first case; the relaunch (16:45) runs as a Windows scheduled task (`RayVlmSweep`), detached from
+any terminal, with the driver's `--commit-push` doing the per-model commit and push itself (commit `72ccab4`) —
+the rule above was a promise the first driver could not keep because it never touched git.
+
+### Still to do (from the 2026-09-03 review, in priority order)
+
+1. IRA's Q-score acceptance check (OpenCV-only; **never** the generative enhancement branch).
+2. RAPID's label-logic Consistent / Contradictory / Unsupported annotator as an offline
+   evaluation in `tests/`.
+3. DPA hazard-type consistency check on samples.
+4. ~~Optional second model~~ → done, six models above (a seventh, llama3.2-vision, cannot load here); still open: a full Eaton run
+   (all 2,244 samples, ~2 h on the 3090 with the 7B model; the builder resumes by image sha256).
+5. TaskPlanner: never.
+
+### Problems found (owner should know)
+
+- **The Hugging Face repackaging is what disagrees, not the release.** On the Mac, HF folder
+  labels and the Figshare pair table disagreed on 182 of 2,555 pairs. The owner's local
+  original tree agrees with `Location.csv` on **every** pair (657 / 1,196 / 703). So the
+  table is the truth and the HF zip's folder assignment drifted in repackaging; the HF card
+  is the thing to correct.
+- **Licence mismatch between releases of the same data** (HF card CC BY-NC 4.0 vs Figshare
+  CC BY 4.0) still stands; nothing is redistributed by this branch.
+- **`Location.csv` carries workstation paths in `root`** (`C:/Users/yyang295/...`); the
+  builder consumes them for pairing and never writes them.
+- **Palisades truth is folder-level**, some images lack EXIF GPS (42 / 295 here); the tile
+  grid covers photographed structures, not the perimeter. Both declared in the dossier.
+- **The gateway used to ingest unpublished / model-derived events** — fixed above; the
+  publication planner already excluded them, the *agent* did not.
 
 ## 🔜 Next (not blocked)
 

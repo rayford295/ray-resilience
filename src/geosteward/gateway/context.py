@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 import h3
 
@@ -88,15 +88,45 @@ def _scalar_items(props: dict[str, Any]) -> str:
 
 
 class EvidenceStore:
-    """Loads committed deep-case artifacts and serves tile-level facts."""
+    """Loads committed deep-case artifacts and serves tile-level facts.
 
-    def __init__(self, events_root: Path):
+    Two things on disk are never evidence, however they got there:
+
+    * an event outside `published_events` -- an evaluation case such as
+      `palisades-2025` lives under `events/` with a dossier and an AOI, and
+      without this scope the point lookup would land in it and the agent
+      would cite it like a published deep case;
+    * a grid or dossier flagged `model_derived` -- zero-shot model predictions
+      evaluated against labels. No claim-plane rule authorises a claim from
+      model output, so such a grid must not reach `evidence.facts` even inside
+      a published event (Milton's VLM pair grid sits beside its human-labelled
+      companion grid in the same directory).
+
+    Both exclusions are recorded on the store (`excluded_events`,
+    `excluded_grids`) so a test, or a reader of the audit, can see what was
+    on disk and deliberately not served, rather than inferring it from silence.
+    `published_events=None` loads everything -- for unit tests that build a
+    synthetic tree; the `Steward` never passes it.
+    """
+
+    def __init__(self, events_root: Path, published_events: Iterable[str] | None = None):
         self.events_root = Path(events_root)
+        self.published_events: frozenset[str] | None = (
+            None if published_events is None else frozenset(published_events)
+        )
         self.events: dict[str, dict[str, Any]] = {}
+        self.excluded_events: dict[str, str] = {}
+        self.excluded_grids: dict[str, list[str]] = {}
         self._grid_cache: dict[str, dict[str, dict[str, Any]]] = {}
         for record_path in sorted(self.events_root.glob("*/dossier/event_record.json")):
             record = json.loads(record_path.read_text(encoding="utf-8"))
             event_id = record["event_id"]
+            if self.published_events is not None and event_id not in self.published_events:
+                self.excluded_events[event_id] = "not in published_events"
+                continue
+            if record.get("model_derived") is True:
+                self.excluded_events[event_id] = "dossier is model_derived"
+                continue
             manifest_path = record_path.parents[1] / "artifact_manifest.jsonl"
             manifest: dict[str, dict[str, Any]] = {}
             if manifest_path.exists():
@@ -139,6 +169,9 @@ class EvidenceStore:
             if "snapshots" in path.parts:
                 continue
             collection = json.loads(path.read_text(encoding="utf-8"))
+            if collection.get("properties", {}).get("model_derived") is True:
+                self.excluded_grids.setdefault(event_id, []).append(path.name)
+                continue
             index = {}
             for feature in collection.get("features", []):
                 cell = feature.get("properties", {}).get("h3_cell")
@@ -289,7 +322,7 @@ class EvidenceStore:
 
 #: Defined at module level, after `EvidenceStore`, rather than beside
 #: `boxes_intersect` above -- so adding it here doesn't shift any of the line
-#: numbers the manual cites into this file (`declared_unknowns` at line 183).
+#: numbers the manual cites into this file (`declared_unknowns` at line 216).
 #: Used by `evidence_for_area`'s per-cell loop above.
 def point_in_box(lat: float, lon: float, bbox: dict[str, float]) -> bool:
     """Does (lat, lon) fall inside a WGS84 bounding box? Edges count, the same

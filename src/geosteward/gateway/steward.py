@@ -244,9 +244,27 @@ class Steward:
     #: declares the capability unavailable instead. Accountability is not the
     #: optional part.
     live_recorder: LiveEvidenceRecorder | None = None
+    #: Which events under `events_root` may be retrieved from. Defaults to the
+    #: policy's `published_events` so the evidence store and the distribution
+    #: plane publish from one list; an explicit value exists for tests that
+    #: build a synthetic event tree. No scope at all is a configuration error,
+    #: not a reason to read every event on disk: an unpublished evaluation
+    #: case with an AOI would otherwise be cited like a deep case.
+    published_events: list[str] | None = None
 
     def __post_init__(self) -> None:
-        self.store = EvidenceStore(self.events_root)
+        scope = (
+            self.published_events
+            if self.published_events is not None
+            else self.policy.published_events
+        )
+        if scope is None:
+            raise ValueError(
+                "Steward needs a published_events scope: pass published_events=[...] "
+                "or load a policy file that declares 'published_events'. Without it the "
+                "evidence store would serve every event on disk, published or not."
+            )
+        self.store = EvidenceStore(self.events_root, published_events=scope)
 
     def _live_unavailable(self, reason: str, detail: str | None = None) -> dict[str, Any]:
         self.audit.record(

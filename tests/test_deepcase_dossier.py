@@ -128,6 +128,11 @@ class TestCommittedDossiersAreNotStale(unittest.TestCase):
                 rows = load_manifest_rows(record_path.parents[1])
                 has_svi_grid = any(r["kind"] == "svi_context_grid" for r in rows)
                 record = json.loads(record_path.read_text(encoding="utf-8"))
+                if record.get("model_derived") is True:
+                    # An evaluation case (zero-shot predictions against labels)
+                    # has no exposure line to be pending on; its dossier
+                    # declares "no exposure layer, no SVI join" outright.
+                    continue
                 declares_pending = any(
                     "social-vulnerability join" in u for u in record.get("declared_unknowns", [])
                 )

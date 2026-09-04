@@ -262,7 +262,7 @@ and disclosure surface, not just a privacy one.
 
 - **A stale declared-unknown is retrieved and cited exactly like a current,
   data-backed fact.** `EventContext.evidence_for()`
-  (`src/geosteward/gateway/context.py:183`) loops over every string in a
+  (`src/geosteward/gateway/context.py:216`) loops over every string in a
   dossier's `declared_unknowns` and wraps each one in the same `Fact` class
   as every grid-derived fact — same citable artifact ID, appended to the
   same `evidence.facts` list the model is grounded on. Nothing in that
@@ -334,7 +334,7 @@ and disclosure surface, not just a privacy one.
 
 > **中文。** **一条已经过时的声明未知项，会被检索出来、像一条当下属实、有数据支撑
 > 的事实一样被引证**：`EventContext.evidence_for()`
-> （`src/geosteward/gateway/context.py:183`）遍历一份档案 `declared_unknowns`
+> （`src/geosteward/gateway/context.py:216`）遍历一份档案 `declared_unknowns`
 > 里的每一句话，把每一句都包进和每一条网格衍生事实完全相同的 `Fact` 类——同样有
 > 可引证的制品 ID，被追加进模型据以生成回答的同一份 `evidence.facts` 列表。这个循环里
 > 没有任何地方记录某句话是何时写下的，也没有检查它是否依然属实，所以在检索代码
