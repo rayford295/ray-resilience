@@ -1,0 +1,103 @@
+{
+ "model": "qwen3-vl:32b-ctx8k",
+ "model_digest": "d2b2007e049742146cc4711873b1815aa58ddce72ce7f77c409b403fc013e5a5",
+ "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+ "temperature": 0.0,
+ "run_id": "c38d65c8b07b",
+ "run_tag": "qwen3-vl-32b-ctx8k",
+ "view": "post_field",
+ "quality_gate": [
+  "good",
+  "usable"
+ ],
+ "sample_per_class": 300,
+ "seed": 2026,
+ "event_id": "eaton-2025",
+ "dataset": "EATON_wildfire_mapillary_matched",
+ "generated_utc": "20260904T041942Z",
+ "n_images": 630,
+ "n_scored": 627,
+ "n_unparseable": 3,
+ "n_unknown_label": 0,
+ "unanswered_rate": 0.0048,
+ "accuracy": 0.9011,
+ "ncse": 0.0526,
+ "adjacent_error_rate": 0.0925,
+ "classes": [
+  "no_or_trace_damage",
+  "damaged_repairable",
+  "destroyed"
+ ],
+ "confusion_rows_truth_cols_pred": [
+  [
+   282,
+   16,
+   1
+  ],
+  [
+   21,
+   6,
+   3
+  ],
+  [
+   3,
+   18,
+   277
+  ]
+ ],
+ "per_class": {
+  "no_or_trace_damage": {
+   "support": 299,
+   "recall": 0.9431
+  },
+  "damaged_repairable": {
+   "support": 30,
+   "recall": 0.2
+  },
+  "destroyed": {
+   "support": 298,
+   "recall": 0.9295
+  }
+ },
+ "n_samples_available": 2244,
+ "dropped_at_load": {
+  "quality_gate": 0,
+  "bad_label": 0,
+  "missing_image": 0
+ },
+ "samples_in_committed_grid": 630,
+ "grid": "evidence/vlm_crossview_h3_r9_grid.qwen3-vl-32b-ctx8k.geojson",
+ "prediction_histogram_dins5": {
+  "0_No_Damage": 290,
+  "1_Affected_1_9": 16,
+  "2_Minor_10_25": 17,
+  "3_Major_26_50": 23,
+  "4_Destroyed_50plus": 281
+ },
+ "collapse_map_dins5_to_repairability3": {
+  "0_No_Damage": "no_or_trace_damage",
+  "1_Affected_1_9": "no_or_trace_damage",
+  "2_Minor_10_25": "damaged_repairable",
+  "3_Major_26_50": "damaged_repairable",
+  "4_Destroyed_50plus": "destroyed"
+ },
+ "canonical_label_map": {
+  "no_or_trace_damage": "none",
+  "damaged_repairable": "moderate",
+  "destroyed": "destroyed"
+ },
+ "reference": {
+  "same_prompt_same_model": "events/palisades-2025/evidence/vlm_severity_eval.json (5-class, RAPID Dataset C2)",
+  "note": "no published closed-model number exists for this set; the 3-class task is easier than the 5-class one by construction, so the two accuracies are not comparable as numbers"
+ },
+ "uncertainty": {
+  "model_derived": true,
+  "sample": "300 per class, seed 2026",
+  "single_run": "one pass at temperature 0; quantised local weights",
+  "view": "post_field image only; the pre-event Mapillary counterpart is not shown to the model (Prompt C is single-image)",
+  "truth_source": "dataset label_name (3-class repairability derived from CAL FIRE DINS by the matched set's protocol); the prompt's 5 DINS classes are collapsed onto it before scoring",
+  "minority_class": "damaged_repairable has n=30 in the whole set; its recall is reported, no rate claim is supported from it",
+  "match_quality": "samples admitted: good, usable; the dataset's own gate, recorded per record",
+  "claim_support": "none — evaluation only; no policy rule authorises claims from these predictions"
+ }
+}
