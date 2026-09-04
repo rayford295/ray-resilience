@@ -1,0 +1,6257 @@
+{
+ "type": "FeatureCollection",
+ "crs_declared": "EPSG:4326",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.59748545894885,
+       34.089370336260195
+      ],
+      [
+       -118.59636788096536,
+       34.091067273114234
+      ],
+      [
+       -118.59755688793497,
+       34.0926790514087
+      ],
+      [
+       -118.59986348358407,
+       34.09259386791631
+      ],
+      [
+       -118.60098100464963,
+       34.090896924414864
+      ],
+      [
+       -118.59979198698674,
+       34.08928517105299
+      ],
+      [
+       -118.59748545894885,
+       34.089370336260195
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a180043ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.59741403417833,
+       34.08606155771906
+      ],
+      [
+       -118.59629648789245,
+       34.087758517125664
+      ],
+      [
+       -118.59748545894885,
+       34.089370336260195
+      ],
+      [
+       -118.59979198698674,
+       34.08928517105299
+      ],
+      [
+       -118.60090947635823,
+       34.08758820499763
+      ],
+      [
+       -118.59972049460893,
+       34.085976410798
+      ],
+      [
+       -118.59741403417833,
+       34.08606155771906
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a180053ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.59727119728251,
+       34.079443810540006
+      ],
+      [
+       -118.59615371438647,
+       34.08114081501993
+      ],
+      [
+       -118.59734261362298,
+       34.082752715805576
+      ],
+      [
+       -118.5996490064503,
+       34.08266758717161
+      ],
+      [
+       -118.600766432439,
+       34.08097057604028
+      ],
+      [
+       -118.59957752251046,
+       34.079358700194106
+      ],
+      [
+       -118.59727119728251,
+       34.079443810540006
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1800dbffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "1_Affected_1_9": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.58707015819607,
+       34.08809863514899
+      ],
+      [
+       -118.58595237780604,
+       34.08979552946818
+      ],
+      [
+       -118.5871412808085,
+       34.09140746422812
+      ],
+      [
+       -118.58944797492897,
+       34.091322479739716
+      ],
+      [
+       -118.59056569842619,
+       34.08962557875772
+      ],
+      [
+       -118.58937678469846,
+       34.08801366892671
+      ],
+      [
+       -118.58707015819607,
+       34.08809863514899
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a180293ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.6039036504669,
+       34.06595231834954
+      ],
+      [
+       -118.60278643980295,
+       34.06764944863767
+      ],
+      [
+       -118.60397525269649,
+       34.06926142193216
+      ],
+      [
+       -118.60628128692562,
+       34.069176239986525
+      ],
+      [
+       -118.60739844068083,
+       34.06747910305147
+      ],
+      [
+       -118.60620961711837,
+       34.06586715470879
+      ],
+      [
+       -118.6039036504669,
+       34.06595231834954
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18040bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.64562501116441,
+       34.07433905605856
+      ],
+      [
+       -118.6445085789312,
+       34.07603633316892
+      ],
+      [
+       -118.64569784238117,
+       34.07764763967561
+      ],
+      [
+       -118.64800354860853,
+       34.077561644107654
+      ],
+      [
+       -118.64911992382913,
+       34.075864360413334
+      ],
+      [
+       -118.6479306498377,
+       34.07425307887072
+      ],
+      [
+       -118.64562501116441,
+       34.07433905605856
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1805a7ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.64220286216754,
+       34.07612225634627
+      ],
+      [
+       -118.64108634129752,
+       34.077819504403244
+      ],
+      [
+       -118.64227559419516,
+       34.07943083587127
+      ],
+      [
+       -118.64458137851783,
+       34.07934489432078
+      ],
+      [
+       -118.64569784238117,
+       34.07764763967561
+      ],
+      [
+       -118.6445085789312,
+       34.07603633316892
+      ],
+      [
+       -118.64220286216754,
+       34.07612225634627
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1805afffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.59391862830229,
+       34.084534772261655
+      ],
+      [
+       -118.59280102511153,
+       34.08623172501396
+      ],
+      [
+       -118.59398994955359,
+       34.08784360991328
+      ],
+      [
+       -118.59629648789245,
+       34.087758517125664
+      ],
+      [
+       -118.59741403417833,
+       34.08606155771906
+      ],
+      [
+       -118.59622509903295,
+       34.08444969775415
+      ],
+      [
+       -118.59391862830229,
+       34.084534772261655
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a180627ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.56952240247769,
+       34.077152656949735
+      ],
+      [
+       -118.56840436949484,
+       34.07884954042379
+      ],
+      [
+       -118.56959300330622,
+       34.08046184467639
+      ],
+      [
+       -118.57189968088063,
+       34.08037724052583
+      ],
+      [
+       -118.57301765702206,
+       34.07868035035977
+      ],
+      [
+       -118.5718290124332,
+       34.07706807103607
+      ],
+      [
+       -118.56952240247769,
+       34.077152656949735
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18065bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54876159451989,
+       34.07791203140022
+      ],
+      [
+       -118.54764312543726,
+       34.07960880693982
+      ],
+      [
+       -118.5488315866906,
+       34.0812213830633
+      ],
+      [
+       -118.55113852787115,
+       34.08113715872773
+      ],
+      [
+       -118.55225694015918,
+       34.07944037646667
+      ],
+      [
+       -118.55106846806399,
+       34.077827825262425
+      ],
+      [
+       -118.54876159451989,
+       34.07791203140022
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1814a7ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "1_Affected_1_9": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54519640102227,
+       34.07307407429943
+      ],
+      [
+       -118.54407790691066,
+       34.0747708656764
+      ],
+      [
+       -118.54526628554724,
+       34.07638354824279
+      ],
+      [
+       -118.54757316915004,
+       34.076299414510984
+      ],
+      [
+       -118.54869160648018,
+       34.07460261640565
+      ],
+      [
+       -118.54750321699167,
+       34.0729899587603
+      ],
+      [
+       -118.54519640102227,
+       34.07307407429943
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1814b3ffff",
+    "n_samples": 5,
+    "n_scored": 5,
+    "labels_truth": {
+     "3_Major_26_50": 5
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "3_Major_26_50": 3
+    },
+    "agreement_rate": 0.6,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54869160648018,
+       34.07460261640565
+      ],
+      [
+       -118.54757316915004,
+       34.076299414510984
+      ],
+      [
+       -118.54876159451989,
+       34.07791203140022
+      ],
+      [
+       -118.55106846806399,
+       34.077827825262425
+      ],
+      [
+       -118.55218684860303,
+       34.076131020434325
+      ],
+      [
+       -118.55099841239176,
+       34.07451842846658
+      ],
+      [
+       -118.54869160648018,
+       34.07460261640565
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1814b7ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.64133041245368,
+       34.03641437020167
+      ],
+      [
+       -118.64021427106942,
+       34.03811188712421
+      ],
+      [
+       -118.64140309301,
+       34.03972370802586
+      ],
+      [
+       -118.64370806688514,
+       34.03963798701589
+      ],
+      [
+       -118.64482415130531,
+       34.03794046348904
+      ],
+      [
+       -118.64363531881718,
+       34.03632866757626
+      ],
+      [
+       -118.64133041245368,
+       34.03641437020167
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a182027ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.63441551632921,
+       34.036671225566906
+      ],
+      [
+       -118.6332992294243,
+       34.038368706919734
+      ],
+      [
+       -118.63448799433885,
+       34.03998061851875
+      ],
+      [
+       -118.63679305672997,
+       34.03989502377909
+      ],
+      [
+       -118.63790928668635,
+       34.03819753581214
+      ],
+      [
+       -118.63672051120282,
+       34.03658564919879
+      ],
+      [
+       -118.63441551632921,
+       34.036671225566906
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18202bffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "2_Minor_10_25": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.62400658908226,
+       34.035401036905576
+      ],
+      [
+       -118.62289009975535,
+       34.037098476031545
+      ],
+      [
+       -118.62407876110993,
+       34.03871054401166
+      ],
+      [
+       -118.62638392239508,
+       34.03862514788356
+      ],
+      [
+       -118.62750035479847,
+       34.03692770212804
+      ],
+      [
+       -118.62631168284297,
+       34.03531565912998
+      ],
+      [
+       -118.62400658908226,
+       34.035401036905576
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18207bffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "2_Minor_10_25": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.65530558324326,
+       34.04251791508162
+      ],
+      [
+       -118.6541896697725,
+       34.04421545838782
+      ],
+      [
+       -118.65537867746193,
+       34.04582701636439
+      ],
+      [
+       -118.65768360913029,
+       34.04574100604394
+      ],
+      [
+       -118.65879946559883,
+       34.044043456155784
+      ],
+      [
+       -118.65761044740394,
+       34.042431923169836
+      ],
+      [
+       -118.65530558324326,
+       34.04251791508162
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18210fffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.65865308327419,
+       34.0374251826382
+      ],
+      [
+       -118.65753728999277,
+       34.03912277720207
+      ],
+      [
+       -118.65872627227802,
+       34.04073435093852
+      ],
+      [
+       -118.66103105834155,
+       34.040648305115255
+      ],
+      [
+       -118.66214679461832,
+       34.03895070397233
+      ],
+      [
+       -118.66095780183889,
+       34.03733915523154
+      ],
+      [
+       -118.65865308327419,
+       34.0374251826382
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a182117ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.65173875022995,
+       34.03768301241492
+      ],
+      [
+       -118.6506228113681,
+       34.03938057147408
+      ],
+      [
+       -118.65181173672553,
+       34.04099223593907
+      ],
+      [
+       -118.65411661146312,
+       34.04090631635224
+      ],
+      [
+       -118.65523249333586,
+       34.03920875070421
+      ],
+      [
+       -118.65404355746283,
+       34.03759711123168
+      ],
+      [
+       -118.65173875022995,
+       34.03768301241492
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18211bffff",
+    "n_samples": 7,
+    "n_scored": 7,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "3_Major_26_50": 6
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "3_Major_26_50": 2,
+     "4_Destroyed_50plus": 3
+    },
+    "agreement_rate": 0.4286,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.64831792607107,
+       34.03946641873819
+      ],
+      [
+       -118.6472018986245,
+       34.04116394886375
+      ],
+      [
+       -118.6483908134554,
+       34.042775638318496
+      ],
+      [
+       -118.6506957662621,
+       34.04268977265775
+      ],
+      [
+       -118.65181173672553,
+       34.04099223593907
+      ],
+      [
+       -118.6506228113681,
+       34.03938057147408
+      ],
+      [
+       -118.64831792607107,
+       34.03946641873819
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a182157ffff",
+    "n_samples": 5,
+    "n_scored": 5,
+    "labels_truth": {
+     "2_Minor_10_25": 2,
+     "4_Destroyed_50plus": 3
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 5
+    },
+    "agreement_rate": 0.6,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.64140309301,
+       34.03972370802586
+      ],
+      [
+       -118.64028692001176,
+       34.04142120260134
+      ],
+      [
+       -118.64147577785353,
+       34.04303298277001
+      ],
+      [
+       -118.64378081924423,
+       34.04294724337642
+      ],
+      [
+       -118.64489693527484,
+       34.04124974219799
+      ],
+      [
+       -118.64370806688514,
+       34.03963798701589
+      ],
+      [
+       -118.64140309301,
+       34.03972370802586
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18215bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.64853660112269,
+       34.049393888166364
+      ],
+      [
+       -118.64742047885007,
+       34.051091351210786
+      ],
+      [
+       -118.6486095014064,
+       34.05270291839335
+      ],
+      [
+       -118.65091465676576,
+       34.05261699754844
+      ],
+      [
+       -118.6520307220446,
+       34.05091952791492
+      ],
+      [
+       -118.65084168896055,
+       34.0493079857152
+      ],
+      [
+       -118.64853660112269,
+       34.049393888166364
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18216bffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.64824504298576,
+       34.03615713608071
+      ],
+      [
+       -118.64712904714432,
+       34.03785468854539
+      ],
+      [
+       -118.64831792607107,
+       34.03946641873819
+      ],
+      [
+       -118.6506228113681,
+       34.03938057147408
+      ],
+      [
+       -118.65173875022995,
+       34.03768301241492
+      ],
+      [
+       -118.65054986077708,
+       34.03607130721416
+      ],
+      [
+       -118.64824504298576,
+       34.03615713608071
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1821cfffff",
+    "n_samples": 5,
+    "n_scored": 5,
+    "labels_truth": {
+     "1_Affected_1_9": 2,
+     "2_Minor_10_25": 3
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "2_Minor_10_25": 1,
+     "3_Major_26_50": 2
+    },
+    "agreement_rate": 0.2,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.61716310052495,
+       34.03896647979136
+      ],
+      [
+       -118.61604643409311,
+       34.04066386091307
+      ],
+      [
+       -118.61723507421314,
+       34.04227597884899
+      ],
+      [
+       -118.61954039139044,
+       34.04219069068645
+      ],
+      [
+       -118.62065700091074,
+       34.040493302926734
+      ],
+      [
+       -118.61946835016799,
+       34.03888120996736
+      ],
+      [
+       -118.61716310052495,
+       34.03896647979136
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1822a3ffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "1_Affected_1_9": 3,
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "1_Affected_1_9": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.61723507421314,
+       34.04227597884899
+      ],
+      [
+       -118.61611837613536,
+       34.04397333759056
+      ],
+      [
+       -118.61730705214724,
+       34.04558541480646
+      ],
+      [
+       -118.61961243686274,
+       34.045500108306356
+      ],
+      [
+       -118.62072907802548,
+       34.04380274292812
+      ],
+      [
+       -118.61954039139044,
+       34.04219069068645
+      ],
+      [
+       -118.61723507421314,
+       34.04227597884899
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1822afffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.61366923626304,
+       34.037439518644675
+      ],
+      [
+       -118.61255251292924,
+       34.03913689312278
+      ],
+      [
+       -118.6137411065263,
+       34.04074907674512
+      ],
+      [
+       -118.61604643409311,
+       34.04066386091307
+      ],
+      [
+       -118.61716310052495,
+       34.03896647979136
+      ],
+      [
+       -118.61597449629463,
+       34.0373543211451
+      ],
+      [
+       -118.61366923626304,
+       34.037439518644675
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1822bbffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.6383448394704,
+       34.05805259216035
+      ],
+      [
+       -118.63722841977132,
+       34.059749945829935
+      ],
+      [
+       -118.6384174465906,
+       34.061361547161056
+      ],
+      [
+       -118.64072290367254,
+       34.06127576985004
+      ],
+      [
+       -118.64183926639221,
+       34.059578409579984
+      ],
+      [
+       -118.64065022901207,
+       34.057966833221215
+      ],
+      [
+       -118.6383448394704,
+       34.05805259216035
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a182323ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "4_Destroyed_50plus": 2
+    },
+    "labels_pred": {
+     "1_Affected_1_9": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.64162116040364,
+       34.04965134293701
+      ],
+      [
+       -118.64050489255268,
+       34.051348770407564
+      ],
+      [
+       -118.64169385811101,
+       34.05296042831929
+      ],
+      [
+       -118.64399910207213,
+       34.052874633780576
+      ],
+      [
+       -118.6451153129448,
+       34.05117719971111
+      ],
+      [
+       -118.64392633683734,
+       34.049565566779066
+      ],
+      [
+       -118.64162116040364,
+       34.04965134293701
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1823a3ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "1_Affected_1_9": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.6628065819962,
+       34.068730413184205
+      ],
+      [
+       -118.661690561353,
+       34.07042781293989
+      ],
+      [
+       -118.66287991333051,
+       34.07203895376366
+      ],
+      [
+       -118.66518529644112,
+       34.07195266985607
+      ],
+      [
+       -118.66630126003818,
+       34.070255263538996
+      ],
+      [
+       -118.66511189757348,
+       34.068644147690684
+      ],
+      [
+       -118.6628065819962,
+       34.068730413184205
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a182e23ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.66630126003818,
+       34.070255263538996
+      ],
+      [
+       -118.66518529644112,
+       34.07195266985607
+      ],
+      [
+       -118.66637469483796,
+       34.073563744861836
+      ],
+      [
+       -118.6686800673113,
+       34.073477388574425
+      ],
+      [
+       -118.66979597385271,
+       34.071779975701546
+      ],
+      [
+       -118.66860656497916,
+       34.07016892567167
+      ],
+      [
+       -118.66630126003818,
+       34.070255263538996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a182e27ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.64890114555055,
+       34.065938407515155
+      ],
+      [
+       -118.64778486519883,
+       34.067635758545364
+      ],
+      [
+       -118.64897406734083,
+       34.06924712174768
+      ],
+      [
+       -118.65127956036699,
+       34.0691611089482
+      ],
+      [
+       -118.65239578370715,
+       34.06746375133561
+      ],
+      [
+       -118.65120657103544,
+       34.06585241310467
+      ],
+      [
+       -118.64890114555055,
+       34.065938407515155
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a182e47ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55840443196159,
+       34.042781619670976
+      ],
+      [
+       -118.55728651407597,
+       34.044478685494205
+      ],
+      [
+       -118.5584746849368,
+       34.046091553333895
+      ],
+      [
+       -118.56078078449114,
+       34.046007330402084
+      ],
+      [
+       -118.56189864559586,
+       34.04431025785806
+      ],
+      [
+       -118.56071046392984,
+       34.04269741496642
+      ],
+      [
+       -118.55840443196159,
+       34.042781619670976
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183003ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "1_Affected_1_9": 2,
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.3333,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.56189864559586,
+       34.04431025785806
+      ],
+      [
+       -118.56078078449114,
+       34.046007330402084
+      ],
+      [
+       -118.56196900202508,
+       34.04762013261444
+      ],
+      [
+       -118.56427509146114,
+       34.04753583733401
+      ],
+      [
+       -118.56539289577535,
+       34.04583875807477
+      ],
+      [
+       -118.56420466744672,
+       34.044225980810964
+      ],
+      [
+       -118.56189864559586,
+       34.04431025785806
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183007ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55498040442073,
+       34.044562836079706
+      ],
+      [
+       -118.55386239803805,
+       34.04625987272499
+      ],
+      [
+       -118.55505055808274,
+       34.04787276551
+      ],
+      [
+       -118.55735673532898,
+       34.047788596704194
+      ],
+      [
+       -118.5584746849368,
+       34.046091553333895
+      ],
+      [
+       -118.55728651407597,
+       34.044478685494205
+      ],
+      [
+       -118.55498040442073,
+       34.044562836079706
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18300bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.56182829331767,
+       34.041000319978764
+      ],
+      [
+       -118.56071046392984,
+       34.04269741496642
+      ],
+      [
+       -118.56189864559586,
+       34.04431025785806
+      ],
+      [
+       -118.56420466744672,
+       34.044225980810964
+      ],
+      [
+       -118.56532244004761,
+       34.042528879106726
+      ],
+      [
+       -118.56413424758732,
+       34.04091606116593
+      ],
+      [
+       -118.56182829331767,
+       34.041000319978764
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183017ffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "1_Affected_1_9": 2,
+     "3_Major_26_50": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "1_Affected_1_9": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.25,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.56546335566024,
+       34.04914857391119
+      ],
+      [
+       -118.56434551963095,
+       34.050845630714825
+      ],
+      [
+       -118.56553381970271,
+       34.05245832659567
+      ],
+      [
+       -118.56783996659111,
+       34.05237394072594
+      ],
+      [
+       -118.56895774581682,
+       34.050676877214016
+      ],
+      [
+       -118.56776943496045,
+       34.049064206279894
+      ],
+      [
+       -118.56546335566024,
+       34.04914857391119
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183023ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 1
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.56539289577535,
+       34.04583875807477
+      ],
+      [
+       -118.56427509146114,
+       34.04753583733401
+      ],
+      [
+       -118.56546335566024,
+       34.04914857391119
+      ],
+      [
+       -118.56776943496045,
+       34.049064206279894
+      ],
+      [
+       -118.56888718247458,
+       34.04736712031101
+      ],
+      [
+       -118.56769890749132,
+       34.04575440868286
+      ],
+      [
+       -118.56539289577535,
+       34.04583875807477
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183033ffff",
+    "n_samples": 6,
+    "n_scored": 6,
+    "labels_truth": {
+     "3_Major_26_50": 6
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "2_Minor_10_25": 2,
+     "3_Major_26_50": 2
+    },
+    "agreement_rate": 0.3333,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.56888718247458,
+       34.04736712031101
+      ],
+      [
+       -118.56776943496045,
+       34.049064206279894
+      ],
+      [
+       -118.56895774581682,
+       34.050676877214016
+      ],
+      [
+       -118.57126381496371,
+       34.05059243722956
+      ],
+      [
+       -118.57238150566822,
+       34.04889534455662
+      ],
+      [
+       -118.57119318403818,
+       34.047282698571976
+      ],
+      [
+       -118.56888718247458,
+       34.04736712031101
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183037ffff",
+    "n_samples": 5,
+    "n_scored": 5,
+    "labels_truth": {
+     "3_Major_26_50": 5
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 3,
+     "3_Major_26_50": 1
+    },
+    "agreement_rate": 0.2,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54806189995703,
+       34.044815034884614
+      ],
+      [
+       -118.54694374831867,
+       34.04651203560359
+      ],
+      [
+       -118.54813185083425,
+       34.04812501894968
+      ],
+      [
+       -118.55043811582846,
+       34.048040976634525
+      ],
+      [
+       -118.55155621070752,
+       34.04634396918072
+      ],
+      [
+       -118.55036809735437,
+       34.044731010776694
+      ],
+      [
+       -118.54806189995703,
+       34.044815034884614
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183043ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54463747327422,
+       34.04659600556721
+      ],
+      [
+       -118.54351923314628,
+       34.04829297707697
+      ],
+      [
+       -118.54470732481333,
+       34.04990598536239
+      ],
+      [
+       -118.54701366745955,
+       34.04982199719851
+      ],
+      [
+       -118.54813185083425,
+       34.04812501894968
+      ],
+      [
+       -118.54694374831867,
+       34.04651203560359
+      ],
+      [
+       -118.54463747327422,
+       34.04659600556721
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18304bffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "1_Affected_1_9": 3
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "2_Minor_10_25": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54813185083425,
+       34.04812501894968
+      ],
+      [
+       -118.54701366745955,
+       34.04982199719851
+      ],
+      [
+       -118.5482018058392,
+       34.05143493986587
+      ],
+      [
+       -118.55050813843421,
+       34.051350879344405
+      ],
+      [
+       -118.55162626504608,
+       34.04965389436207
+      ],
+      [
+       -118.55043811582846,
+       34.048040976634525
+      ],
+      [
+       -118.54813185083425,
+       34.04812501894968
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18304fffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "2_Minor_10_25": 3
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "2_Minor_10_25": 2
+    },
+    "agreement_rate": 0.75,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55148616050239,
+       34.04303398086202
+      ],
+      [
+       -118.55036809735437,
+       34.044731010776694
+      ],
+      [
+       -118.55155621070752,
+       34.04634396918072
+      ],
+      [
+       -118.55386239803805,
+       34.04625987272499
+      ],
+      [
+       -118.55498040442073,
+       34.044562836079706
+      ],
+      [
+       -118.55379228024096,
+       34.04294990262054
+      ],
+      [
+       -118.55148616050239,
+       34.04303398086202
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183057ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5445676258567,
+       34.04328596263189
+      ],
+      [
+       -118.54344941746862,
+       34.044982956610454
+      ],
+      [
+       -118.54463747327422,
+       34.04659600556721
+      ],
+      [
+       -118.54694374831867,
+       34.04651203560359
+      ],
+      [
+       -118.54806189995703,
+       34.044815034884614
+      ],
+      [
+       -118.54687383330335,
+       34.04320201086947
+      ],
+      [
+       -118.5445676258567,
+       34.04328596263189
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18305bffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "4_Destroyed_50plus": 2
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55505055808274,
+       34.04787276551
+      ],
+      [
+       -118.55393251997255,
+       34.04956977969308
+      ],
+      [
+       -118.5551207158843,
+       34.051182631794234
+      ],
+      [
+       -118.55742696072555,
+       34.05109844476911
+      ],
+      [
+       -118.55854494205732,
+       34.04940142386235
+      ],
+      [
+       -118.55735673532898,
+       34.047788596704194
+      ],
+      [
+       -118.55505055808274,
+       34.04787276551
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183073ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.57224018457373,
+       34.04227575921732
+      ],
+      [
+       -118.57112255727993,
+       34.043972896774974
+      ],
+      [
+       -118.57231084303645,
+       34.04558558345136
+      ],
+      [
+       -118.57461676685182,
+       34.045501107615344
+      ],
+      [
+       -118.5757343373335,
+       34.043803963356524
+      ],
+      [
+       -118.57454604081467,
+       34.042191301634666
+      ],
+      [
+       -118.57224018457373,
+       34.04227575921732
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1830a7ffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "2_Minor_10_25": 4
+    },
+    "labels_pred": {
+     "3_Major_26_50": 3,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.56881662329567,
+       34.044057300267646
+      ],
+      [
+       -118.56769890749132,
+       34.04575440868286
+      ],
+      [
+       -118.56888718247458,
+       34.04736712031101
+      ],
+      [
+       -118.57119318403818,
+       34.047282698571976
+      ],
+      [
+       -118.57231084303645,
+       34.04558558345136
+      ],
+      [
+       -118.57112255727993,
+       34.043972896774974
+      ],
+      [
+       -118.56881662329567,
+       34.044057300267646
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1830afffff",
+    "n_samples": 5,
+    "n_scored": 5,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 2,
+     "3_Major_26_50": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 3,
+     "1_Affected_1_9": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.4,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55484010951402,
+       34.0379427878622
+      ],
+      [
+       -118.55372216658091,
+       34.03963986940002
+      ],
+      [
+       -118.55491025489795,
+       34.04125284352368
+      ],
+      [
+       -118.55721629696609,
+       34.0411687111594
+      ],
+      [
+       -118.55833418313136,
+       34.03947162289386
+      ],
+      [
+       -118.55714608399903,
+       34.03785867372011
+      ],
+      [
+       -118.55484010951402,
+       34.0379427878622
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1830c7ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "2_Minor_10_25": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5757343373335,
+       34.043803963356524
+      ],
+      [
+       -118.57461676685182,
+       34.045501107615344
+      ],
+      [
+       -118.57580509924456,
+       34.04711372864776
+      ],
+      [
+       -118.57811101287352,
+       34.04702918046614
+      ],
+      [
+       -118.57922852653356,
+       34.045332029511705
+      ],
+      [
+       -118.57804018338899,
+       34.04371943343429
+      ],
+      [
+       -118.5757343373335,
+       34.043803963356524
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1831d3ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.57231084303645,
+       34.04558558345136
+      ],
+      [
+       -118.57119318403818,
+       34.047282698571976
+      ],
+      [
+       -118.57238150566822,
+       34.04889534455662
+      ],
+      [
+       -118.57468749706196,
+       34.04881085046821
+      ],
+      [
+       -118.57580509924456,
+       34.04711372864776
+      ],
+      [
+       -118.57461676685182,
+       34.045501107615344
+      ],
+      [
+       -118.57231084303645,
+       34.04558558345136
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1831dbffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53436319652498,
+       34.051938417332266
+      ],
+      [
+       -118.53324469093256,
+       34.05363530113329
+      ],
+      [
+       -118.53443274998843,
+       34.05524838422009
+      ],
+      [
+       -118.53673932552076,
+       34.05516455857464
+      ],
+      [
+       -118.53785777437803,
+       34.05346766802185
+      ],
+      [
+       -118.53666970444084,
+       34.05185460986607
+      ],
+      [
+       -118.53436319652498,
+       34.051938417332266
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183213ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53785777437803,
+       34.05346766802185
+      ],
+      [
+       -118.53673932552076,
+       34.05516455857464
+      ],
+      [
+       -118.53792743132072,
+       34.05677757604482
+      ],
+      [
+       -118.54023399685153,
+       34.05669367803048
+      ],
+      [
+       -118.54135238896411,
+       34.05499678073151
+      ],
+      [
+       -118.54016427229334,
+       34.05338378819283
+      ],
+      [
+       -118.53785777437803,
+       34.05346766802185
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183217ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54149191392814,
+       34.061616415808224
+      ],
+      [
+       -118.54037345831256,
+       34.063313268076676
+      ],
+      [
+       -118.54156168258591,
+       34.06492613850738
+      ],
+      [
+       -118.54386837333871,
+       34.06484213174199
+      ],
+      [
+       -118.54498677219296,
+       34.063145272735596
+      ],
+      [
+       -118.54379853705845,
+       34.061532427232315
+      ],
+      [
+       -118.54149191392814,
+       34.061616415808224
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183223ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "3_Major_26_50": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54491690416387,
+       34.059835545704004
+      ],
+      [
+       -118.54379853705845,
+       34.061532427232315
+      ],
+      [
+       -118.54498677219296,
+       34.063145272735596
+      ],
+      [
+       -118.54729338528581,
+       34.06306121178017
+      ],
+      [
+       -118.54841169562388,
+       34.061364323518156
+      ],
+      [
+       -118.54722344963913,
+       34.05975150294504
+      ],
+      [
+       -118.54491690416387,
+       34.059835545704004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183237ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5240181737759,
+       34.05397006112014
+      ],
+      [
+       -118.52289943449743,
+       34.05566687961529
+      ],
+      [
+       -118.52408742498471,
+       34.057280078163664
+      ],
+      [
+       -118.52639416566694,
+       34.05719643329166
+      ],
+      [
+       -118.52751284823202,
+       34.055499608030715
+      ],
+      [
+       -118.526324846831,
+       34.05388643440736
+      ],
+      [
+       -118.5240181737759,
+       34.05397006112014
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183253ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53771847282367,
+       34.04684766244548
+      ],
+      [
+       -118.53660008746922,
+       34.048544597983614
+      ],
+      [
+       -118.53778812154583,
+       34.0501576968153
+      ],
+      [
+       -118.54009455184953,
+       34.05007383517255
+      ],
+      [
+       -118.54121288046635,
+       34.048376892885535
+      ],
+      [
+       -118.54002483551977,
+       34.04676381898992
+      ],
+      [
+       -118.53771847282367,
+       34.04684766244548
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183283ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "2_Minor_10_25": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54121288046635,
+       34.048376892885535
+      ],
+      [
+       -118.54009455184953,
+       34.05007383517255
+      ],
+      [
+       -118.54128263265714,
+       34.051686868394526
+      ],
+      [
+       -118.54358905294372,
+       34.05160293439272
+      ],
+      [
+       -118.54470732481333,
+       34.04990598536239
+      ],
+      [
+       -118.54351923314628,
+       34.04829297707697
+      ],
+      [
+       -118.54121288046635,
+       34.048376892885535
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183287ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "4_Destroyed_50plus": 2
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53429364716587,
+       34.048628387269595
+      ],
+      [
+       -118.53317517332931,
+       34.05032529356726
+      ],
+      [
+       -118.53436319652498,
+       34.051938417332266
+      ],
+      [
+       -118.53666970444084,
+       34.05185460986607
+      ],
+      [
+       -118.53778812154583,
+       34.0501576968153
+      ],
+      [
+       -118.53660008746922,
+       34.048544597983614
+      ],
+      [
+       -118.53429364716587,
+       34.048628387269595
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18328bffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "2_Minor_10_25": 1
+    },
+    "agreement_rate": 0.3333,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53778812154583,
+       34.0501576968153
+      ],
+      [
+       -118.53666970444084,
+       34.05185460986607
+      ],
+      [
+       -118.53785777437803,
+       34.05346766802185
+      ],
+      [
+       -118.54016427229334,
+       34.05338378819283
+      ],
+      [
+       -118.54128263265714,
+       34.051686868394526
+      ],
+      [
+       -118.54009455184953,
+       34.05007383517255
+      ],
+      [
+       -118.53778812154583,
+       34.0501576968153
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18328fffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53764882821125,
+       34.043537564932656
+      ],
+      [
+       -118.53653047460553,
+       34.045234522947545
+      ],
+      [
+       -118.53771847282367,
+       34.04684766244548
+      ],
+      [
+       -118.54002483551977,
+       34.04676381898992
+      ],
+      [
+       -118.54114313239143,
+       34.04506685422481
+      ],
+      [
+       -118.53995512330373,
+       34.04345373966526
+      ],
+      [
+       -118.53764882821125,
+       34.043537564932656
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183293ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "3_Major_26_50": 2,
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "3_Major_26_50": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.6667,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53422410191068,
+       34.04531829405237
+      ],
+      [
+       -118.53310565982818,
+       34.047015222836066
+      ],
+      [
+       -118.53429364716587,
+       34.048628387269595
+      ],
+      [
+       -118.53660008746922,
+       34.048544597983614
+      ],
+      [
+       -118.53771847282367,
+       34.04684766244548
+      ],
+      [
+       -118.53653047460553,
+       34.045234522947545
+      ],
+      [
+       -118.53422410191068,
+       34.04531829405237
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18329bffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54827176497218,
+       34.054744797612884
+      ],
+      [
+       -118.54715351811943,
+       34.05644173088954
+      ],
+      [
+       -118.54834172823362,
+       34.0580545921704
+      ],
+      [
+       -118.55064819604219,
+       34.05797049523916
+      ],
+      [
+       -118.55176638612508,
+       34.056273555231684
+      ],
+      [
+       -118.55057816517201,
+       34.05466071888604
+      ],
+      [
+       -118.54827176497218,
+       34.054744797612884
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1832a7ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "2_Minor_10_25": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "2_Minor_10_25": 1
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54470732481333,
+       34.04990598536239
+      ],
+      [
+       -118.54358905294372,
+       34.05160293439272
+      ],
+      [
+       -118.54477718047441,
+       34.05321590199711
+      ],
+      [
+       -118.54708359072636,
+       34.05313189563392
+      ],
+      [
+       -118.5482018058392,
+       34.05143493986587
+      ],
+      [
+       -118.54701366745955,
+       34.04982199719851
+      ],
+      [
+       -118.54470732481333,
+       34.04990598536239
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1832b3ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "4_Destroyed_50plus": 3
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 3
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52737415111959,
+       34.04887950205399
+      ],
+      [
+       -118.52625553208571,
+       34.050576372334746
+      ],
+      [
+       -118.52744349762958,
+       34.052189586631194
+      ],
+      [
+       -118.52975009311243,
+       34.0521059057166
+      ],
+      [
+       -118.53086865543037,
+       34.050409028672924
+      ],
+      [
+       -118.5296806789841,
+       34.04879583930656
+      ],
+      [
+       -118.52737415111959,
+       34.04887950205399
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1832c3ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "3_Major_26_50": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53086865543037,
+       34.050409028672924
+      ],
+      [
+       -118.52975009311243,
+       34.0521059057166
+      ],
+      [
+       -118.53093810541625,
+       34.05371905441217
+      ],
+      [
+       -118.53324469093256,
+       34.05363530113329
+      ],
+      [
+       -118.53436319652498,
+       34.051938417332266
+      ],
+      [
+       -118.53317517332931,
+       34.05032529356726
+      ],
+      [
+       -118.53086865543037,
+       34.050409028672924
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1832c7ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52394892665384,
+       34.050659980887346
+      ],
+      [
+       -118.52283021914536,
+       34.05235682189637
+      ],
+      [
+       -118.5240181737759,
+       34.05397006112014
+      ],
+      [
+       -118.526324846831,
+       34.05388643440736
+      ],
+      [
+       -118.52744349762958,
+       34.052189586631194
+      ],
+      [
+       -118.52625553208571,
+       34.050576372334746
+      ],
+      [
+       -118.52394892665384,
+       34.050659980887346
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1832cbffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "2_Minor_10_25": 2,
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "2_Minor_10_25": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.6667,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52730480870171,
+       34.04556935431938
+      ],
+      [
+       -118.52618622143072,
+       34.04726624709411
+      ],
+      [
+       -118.52737415111959,
+       34.04887950205399
+      ],
+      [
+       -118.5296806789841,
+       34.04879583930656
+      ],
+      [
+       -118.53079920954266,
+       34.04709893976755
+      ],
+      [
+       -118.52961126895184,
+       34.04548570974006
+      ],
+      [
+       -118.52730480870171,
+       34.04556935431938
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1832d3ffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "3_Major_26_50": 3
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "4_Destroyed_50plus": 2
+    },
+    "agreement_rate": 0.25,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53079920954266,
+       34.04709893976755
+      ],
+      [
+       -118.5296806789841,
+       34.04879583930656
+      ],
+      [
+       -118.53086865543037,
+       34.050409028672924
+      ],
+      [
+       -118.53317517332931,
+       34.05032529356726
+      ],
+      [
+       -118.53429364716587,
+       34.048628387269595
+      ],
+      [
+       -118.53310565982818,
+       34.047015222836066
+      ],
+      [
+       -118.53079920954266,
+       34.04709893976755
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1832d7ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52387968361809,
+       34.04734983748561
+      ],
+      [
+       -118.52276100787783,
+       34.049046700997884
+      ],
+      [
+       -118.52394892665384,
+       34.050659980887346
+      ],
+      [
+       -118.52625553208571,
+       34.050576372334746
+      ],
+      [
+       -118.52737415111959,
+       34.04887950205399
+      ],
+      [
+       -118.52618622143072,
+       34.04726624709411
+      ],
+      [
+       -118.52387968361809,
+       34.04734983748561
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1832dbffff",
+    "n_samples": 8,
+    "n_scored": 8,
+    "labels_truth": {
+     "1_Affected_1_9": 2,
+     "2_Minor_10_25": 1,
+     "3_Major_26_50": 2,
+     "4_Destroyed_50plus": 3
+    },
+    "labels_pred": {
+     "0_No_Damage": 3,
+     "4_Destroyed_50plus": 5
+    },
+    "agreement_rate": 0.375,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55896657185271,
+       34.06925932007249
+      ],
+      [
+       -118.55784840013949,
+       34.07095620597493
+      ],
+      [
+       -118.55903685800074,
+       34.07256874809138
+      ],
+      [
+       -118.56134349838655,
+       34.07248437937539
+      ],
+      [
+       -118.56246161329058,
+       34.07078748676288
+      ],
+      [
+       -118.56127314462071,
+       34.06917496957622
+      ],
+      [
+       -118.55896657185271,
+       34.06925932007249
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18330fffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5625320029416,
+       34.07409685580543
+      ],
+      [
+       -118.56141385630457,
+       34.07579372587872
+      ],
+      [
+       -118.56260239674701,
+       34.07740616154245
+      ],
+      [
+       -118.56490909462767,
+       34.07732170220471
+      ],
+      [
+       -118.56602718444239,
+       34.075624825428264
+      ],
+      [
+       -118.56483863320146,
+       34.07401241469249
+      ],
+      [
+       -118.5625320029416,
+       34.07409685580543
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18332bffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "0_No_Damage": 3
+    },
+    "labels_pred": {
+     "0_No_Damage": 3
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54862162257106,
+       34.071293138099875
+      ],
+      [
+       -118.54750321699167,
+       34.0729899587603
+      ],
+      [
+       -118.54869160648018,
+       34.07460261640565
+      ],
+      [
+       -118.55099841239176,
+       34.07451842846658
+      ],
+      [
+       -118.55211676118363,
+       34.07282160108204
+      ],
+      [
+       -118.55092836085414,
+       34.07120896836049
+      ],
+      [
+       -118.54862162257106,
+       34.071293138099875
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18334fffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55197659875363,
+       34.06620257249884
+      ],
+      [
+       -118.55085831345073,
+       34.067899444964404
+      ],
+      [
+       -118.55204667790063,
+       34.06951211843011
+      ],
+      [
+       -118.55435333848571,
+       34.069427894501224
+      ],
+      [
+       -118.55547156699859,
+       34.067731015314436
+      ],
+      [
+       -118.55428319171907,
+       34.06611836677756
+      ],
+      [
+       -118.55197659875363,
+       34.06620257249884
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183357ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55910714829703,
+       34.075878112813456
+      ],
+      [
+       -118.55798891310897,
+       34.07757495362953
+      ],
+      [
+       -118.55917744274197,
+       34.07918741421845
+      ],
+      [
+       -118.56148421837517,
+       34.07910300906591
+      ],
+      [
+       -118.56260239674701,
+       34.07740616154245
+      ],
+      [
+       -118.56141385630457,
+       34.07579372587872
+      ],
+      [
+       -118.55910714829703,
+       34.075878112813456
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183367ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55554174964527,
+       34.07104050229622
+      ],
+      [
+       -118.55442348939236,
+       34.07273735894648
+      ],
+      [
+       -118.5556119364341,
+       34.07434992598995
+      ],
+      [
+       -118.55791865455099,
+       34.074265611455935
+      ],
+      [
+       -118.55903685800074,
+       34.07256874809138
+      ],
+      [
+       -118.55784840013949,
+       34.07095620597493
+      ],
+      [
+       -118.55554174964527,
+       34.07104050229622
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183373ffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "3_Major_26_50": 4
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "3_Major_26_50": 2,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.55211676118363,
+       34.07282160108204
+      ],
+      [
+       -118.55099841239176,
+       34.07451842846658
+      ],
+      [
+       -118.55218684860303,
+       34.076131020434325
+      ],
+      [
+       -118.55449364443935,
+       34.076046760093035
+      ],
+      [
+       -118.5556119364341,
+       34.07434992598995
+      ],
+      [
+       -118.55442348939236,
+       34.07273735894648
+      ],
+      [
+       -118.55211676118363,
+       34.07282160108204
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18337bffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54834172823362,
+       34.0580545921704
+      ],
+      [
+       -118.54722344963913,
+       34.05975150294504
+      ],
+      [
+       -118.54841169562388,
+       34.061364323518156
+      ],
+      [
+       -118.55071823104512,
+       34.06128020838346
+      ],
+      [
+       -118.55183645286621,
+       34.059583290879324
+      ],
+      [
+       -118.55064819604219,
+       34.05797049523916
+      ],
+      [
+       -118.54834172823362,
+       34.0580545921704
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1833dbffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "2_Minor_10_25": 1
+    },
+    "agreement_rate": 0.3333,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.57566357959725,
+       34.04049413494806
+      ],
+      [
+       -118.57454604081467,
+       34.042191301634666
+      ],
+      [
+       -118.5757343373335,
+       34.043803963356524
+      ],
+      [
+       -118.57804018338899,
+       34.04371943343429
+      ],
+      [
+       -118.57915766535342,
+       34.042022260050764
+      ],
+      [
+       -118.57796935808322,
+       34.04040962328617
+      ],
+      [
+       -118.57566357959725,
+       34.04049413494806
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18356bffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "2_Minor_10_25": 3
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "2_Minor_10_25": 2
+    },
+    "agreement_rate": 0.6667,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5340154907654,
+       34.035387635676415
+      ],
+      [
+       -118.53289714393426,
+       34.03708463185444
+      ],
+      [
+       -118.53408502371083,
+       34.03869791823547
+      ],
+      [
+       -118.53639126120046,
+       34.03861418349579
+      ],
+      [
+       -118.53750955131412,
+       34.03691718055928
+      ],
+      [
+       -118.53632166065834,
+       34.03530391912073
+      ],
+      [
+       -118.5340154907654,
+       34.035387635676415
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18360fffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "4_Destroyed_50plus": 2
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.54100364858759,
+       34.03844658752945
+      ],
+      [
+       -118.53988541520097,
+       34.04014359721886
+      ],
+      [
+       -118.54107338843193,
+       34.04175675243268
+      ],
+      [
+       -118.5433796059104,
+       34.04167287301347
+      ],
+      [
+       -118.5444977825604,
+       34.03997585657672
+      ],
+      [
+       -118.54330979847124,
+       34.03836272630632
+      ],
+      [
+       -118.54100364858759,
+       34.03844658752945
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183623ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "4_Destroyed_50plus": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "4_Destroyed_50plus": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5444977825604,
+       34.03997585657672
+      ],
+      [
+       -118.5433796059104,
+       34.04167287301347
+      ],
+      [
+       -118.5445676258567,
+       34.04328596263189
+      ],
+      [
+       -118.54687383330335,
+       34.04320201086947
+      ],
+      [
+       -118.54799195320713,
+       34.04150498769098
+      ],
+      [
+       -118.54680392241318,
+       34.039891923016434
+      ],
+      [
+       -118.5444977825604,
+       34.03997585657672
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183627ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "2_Minor_10_25": 2,
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "3_Major_26_50": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.3333,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53757918770818,
+       34.04022740429715
+      ],
+      [
+       -118.53646086584938,
+       34.04192438477816
+      ],
+      [
+       -118.53764882821125,
+       34.043537564932656
+      ],
+      [
+       -118.53995512330373,
+       34.04345373966526
+      ],
+      [
+       -118.54107338843193,
+       34.04175675243268
+      ],
+      [
+       -118.53988541520097,
+       34.04014359721886
+      ],
+      [
+       -118.53757918770818,
+       34.04022740429715
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18362bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53750955131412,
+       34.03691718055928
+      ],
+      [
+       -118.53639126120046,
+       34.03861418349579
+      ],
+      [
+       -118.53757918770818,
+       34.04022740429715
+      ],
+      [
+       -118.53988541520097,
+       34.04014359721886
+      ],
+      [
+       -118.54100364858759,
+       34.03844658752945
+      ],
+      [
+       -118.53981571121118,
+       34.036833391671024
+      ],
+      [
+       -118.53750955131412,
+       34.03691718055928
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18363bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5236027523313,
+       34.03410863259522
+      ],
+      [
+       -118.52248420364593,
+       34.03580558601424
+      ],
+      [
+       -118.52367197902528,
+       34.037419028469714
+      ],
+      [
+       -118.52597831400388,
+       34.037335492567216
+      ],
+      [
+       -118.52709680599698,
+       34.035638532374335
+      ],
+      [
+       -118.52590901970645,
+       34.034025114857606
+      ],
+      [
+       -118.5236027523313,
+       34.03410863259522
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183643ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52709680599698,
+       34.035638532374335
+      ],
+      [
+       -118.52597831400388,
+       34.037335492567216
+      ],
+      [
+       -118.52716613614074,
+       34.03894886945923
+      ],
+      [
+       -118.52947246117405,
+       34.03886526121898
+      ],
+      [
+       -118.53059089646528,
+       34.0371682942578
+      ],
+      [
+       -118.52940306342778,
+       34.035554942304984
+      ],
+      [
+       -118.52709680599698,
+       34.035638532374335
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183647ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 1
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52017785873953,
+       34.0358890495813
+      ],
+      [
+       -118.51905922160691,
+       34.03758597376148
+      ],
+      [
+       -118.52024698606418,
+       34.039199441152924
+      ],
+      [
+       -118.52255339857889,
+       34.039115959428
+      ],
+      [
+       -118.52367197902528,
+       34.037419028469714
+      ],
+      [
+       -118.52248420364593,
+       34.03580558601424
+      ],
+      [
+       -118.52017785873953,
+       34.0358890495813
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18364bffff",
+    "n_samples": 9,
+    "n_scored": 9,
+    "labels_truth": {
+     "2_Minor_10_25": 2,
+     "3_Major_26_50": 7
+    },
+    "labels_pred": {
+     "0_No_Damage": 3,
+     "2_Minor_10_25": 3,
+     "4_Destroyed_50plus": 3
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52353352972182,
+       34.03079817365331
+      ],
+      [
+       -118.52241501279569,
+       34.03249514952246
+      ],
+      [
+       -118.5236027523313,
+       34.03410863259522
+      ],
+      [
+       -118.52590901970645,
+       34.034025114857606
+      ],
+      [
+       -118.52702747994383,
+       34.03232813221325
+      ],
+      [
+       -118.5258397294975,
+       34.03071467408152
+      ],
+      [
+       -118.52353352972182,
+       34.03079817365331
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183653ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5306603300605,
+       34.04047857253971
+      ],
+      [
+       -118.5295418630153,
+       34.042175517037435
+      ],
+      [
+       -118.53072976775283,
+       34.04378878771639
+      ],
+      [
+       -118.53303615042888,
+       34.04370508895998
+      ],
+      [
+       -118.53415456075913,
+       34.0420081377009
+      ],
+      [
+       -118.53296664513101,
+       34.040394891959345
+      ],
+      [
+       -118.5306603300605,
+       34.04047857253971
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183663ffff",
+    "n_samples": 5,
+    "n_scored": 5,
+    "labels_truth": {
+     "1_Affected_1_9": 4,
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 3,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.8,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53415456075913,
+       34.0420081377009
+      ],
+      [
+       -118.53303615042888,
+       34.04370508895998
+      ],
+      [
+       -118.53422410191068,
+       34.04531829405237
+      ],
+      [
+       -118.53653047460553,
+       34.045234522947545
+      ],
+      [
+       -118.53764882821125,
+       34.043537564932656
+      ],
+      [
+       -118.53646086584938,
+       34.04192438477816
+      ],
+      [
+       -118.53415456075913,
+       34.0420081377009
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183667ffff",
+    "n_samples": 6,
+    "n_scored": 6,
+    "labels_truth": {
+     "2_Minor_10_25": 2,
+     "3_Major_26_50": 2,
+     "4_Destroyed_50plus": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "2_Minor_10_25": 1,
+     "4_Destroyed_50plus": 3
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52723547037553,
+       34.04225914344771
+      ],
+      [
+       -118.52611691486565,
+       34.043956058705774
+      ],
+      [
+       -118.52730480870171,
+       34.04556935431938
+      ],
+      [
+       -118.52961126895184,
+       34.04548570974006
+      ],
+      [
+       -118.53072976775283,
+       34.04378878771639
+      ],
+      [
+       -118.5295418630153,
+       34.042175517037435
+      ],
+      [
+       -118.52723547037553,
+       34.04225914344771
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18366bffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "1_Affected_1_9": 3,
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 3,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.25,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53072976775283,
+       34.04378878771639
+      ],
+      [
+       -118.52961126895184,
+       34.04548570974006
+      ],
+      [
+       -118.53079920954266,
+       34.04709893976755
+      ],
+      [
+       -118.53310565982818,
+       34.047015222836066
+      ],
+      [
+       -118.53422410191068,
+       34.04531829405237
+      ],
+      [
+       -118.53303615042888,
+       34.04370508895998
+      ],
+      [
+       -118.53072976775283,
+       34.04378878771639
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18366fffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "2_Minor_10_25": 3
+    },
+    "labels_pred": {
+     "0_No_Damage": 2,
+     "2_Minor_10_25": 1
+    },
+    "agreement_rate": 0.3333,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53059089646528,
+       34.0371682942578
+      ],
+      [
+       -118.52947246117405,
+       34.03886526121898
+      ],
+      [
+       -118.5306603300605,
+       34.04047857253971
+      ],
+      [
+       -118.53296664513101,
+       34.040394891959345
+      ],
+      [
+       -118.53408502371083,
+       34.03869791823547
+      ],
+      [
+       -118.53289714393426,
+       34.03708463185444
+      ],
+      [
+       -118.53059089646528,
+       34.0371682942578
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183673ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.53408502371083,
+       34.03869791823547
+      ],
+      [
+       -118.53296664513101,
+       34.040394891959345
+      ],
+      [
+       -118.53415456075913,
+       34.0420081377009
+      ],
+      [
+       -118.53646086584938,
+       34.04192438477816
+      ],
+      [
+       -118.53757918770818,
+       34.04022740429715
+      ],
+      [
+       -118.53639126120046,
+       34.03861418349579
+      ],
+      [
+       -118.53408502371083,
+       34.03869791823547
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a183677ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "2_Minor_10_25": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52716613614074,
+       34.03894886945923
+      ],
+      [
+       -118.52604761239016,
+       34.04064580719004
+      ],
+      [
+       -118.52723547037553,
+       34.04225914344771
+      ],
+      [
+       -118.5295418630153,
+       34.042175517037435
+      ],
+      [
+       -118.5306603300605,
+       34.04047857253971
+      ],
+      [
+       -118.52947246117405,
+       34.03886526121898
+      ],
+      [
+       -118.52716613614074,
+       34.03894886945923
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18367bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.50072199218178,
+       34.099528053814495
+      ],
+      [
+       -118.49960231539266,
+       34.10122444059182
+      ],
+      [
+       -118.50079058783255,
+       34.10283740609246
+      ],
+      [
+       -118.5030985480591,
+       34.10275395993273
+      ],
+      [
+       -118.50421816814203,
+       34.10105756637333
+      ],
+      [
+       -118.50302988470735,
+       34.09944462575554
+      ],
+      [
+       -118.50072199218178,
+       34.099528053814495
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a18a5b7ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.49996770724213,
+       34.0631209939979
+      ],
+      [
+       -118.49884838043218,
+       34.06481762972639
+      ],
+      [
+       -118.50003625836302,
+       34.06643104336386
+      ],
+      [
+       -118.50234347409649,
+       34.06634779636471
+      ],
+      [
+       -118.50346274423899,
+       34.06465115383945
+      ],
+      [
+       -118.50227485531819,
+       34.06303776510991
+      ],
+      [
+       -118.49996770724213,
+       34.0631209939979
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1989cbffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.50654535457394,
+       34.04632025727875
+      ],
+      [
+       -118.50542633187209,
+       34.0480170418613
+      ],
+      [
+       -118.50661408837533,
+       34.04963056833054
+      ],
+      [
+       -118.50892087854946,
+       34.04954728529442
+      ],
+      [
+       -118.51003984458582,
+       34.047850493918205
+      ],
+      [
+       -118.50885207711629,
+       34.04623699237158
+      ],
+      [
+       -118.50654535457394,
+       34.04632025727875
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198d0bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "3_Major_26_50": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.51003984458582,
+       34.047850493918205
+      ],
+      [
+       -118.50892087854946,
+       34.04954728529442
+      ],
+      [
+       -118.51010868186533,
+       34.051160746195265
+      ],
+      [
+       -118.51241546217608,
+       34.05107739079658
+      ],
+      [
+       -118.51353437153738,
+       34.04938059263227
+      ],
+      [
+       -118.51234655726572,
+       34.04776715665454
+      ],
+      [
+       -118.51003984458582,
+       34.047850493918205
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198d0fffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "3_Major_26_50": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5133965022234,
+       34.04276001618576
+      ],
+      [
+       -118.5122776564215,
+       34.04445685935912
+      ],
+      [
+       -118.5134654348464,
+       34.04607033598038
+      ],
+      [
+       -118.51577207002032,
+       34.045986944499894
+      ],
+      [
+       -118.51689085914458,
+       34.04429009454131
+      ],
+      [
+       -118.5157030697753,
+       34.04267664284821
+      ],
+      [
+       -118.5133965022234,
+       34.04276001618576
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198d17ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "0_No_Damage": 1,
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 3
+    },
+    "agreement_rate": 0.3333,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.51702893540318,
+       34.050910553410745
+      ],
+      [
+       -118.51591008272658,
+       34.052607358357555
+      ],
+      [
+       -118.517097979644,
+       34.05422068809792
+      ],
+      [
+       -118.5194047401755,
+       34.05413718796719
+      ],
+      [
+       -118.52052353615782,
+       34.05244037624341
+      ],
+      [
+       -118.51933562830565,
+       34.05082707142712
+      ],
+      [
+       -118.51702893540318,
+       34.050910553410745
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198d23ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "4_Destroyed_50plus": 2
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.50661408837533,
+       34.04963056833054
+      ],
+      [
+       -118.505495033884,
+       34.051327330395296
+      ],
+      [
+       -118.50668282623316,
+       34.052940816216456
+      ],
+      [
+       -118.50898968404307,
+       34.05285751505233
+      ],
+      [
+       -118.51010868186533,
+       34.051160746195265
+      ],
+      [
+       -118.50892087854946,
+       34.04954728529442
+      ],
+      [
+       -118.50661408837533,
+       34.04963056833054
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198d73ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "2_Minor_10_25": 2,
+     "3_Major_26_50": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 3
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.51675279918096,
+       34.037669383147204
+      ],
+      [
+       -118.51563407360184,
+       34.039366278075036
+      ],
+      [
+       -118.5168218271261,
+       34.04097977039969
+      ],
+      [
+       -118.51912831716521,
+       34.040896342863086
+      ],
+      [
+       -118.52024698606418,
+       34.039199441152924
+      ],
+      [
+       -118.51905922160691,
+       34.03758597376148
+      ],
+      [
+       -118.51675279918096,
+       34.037669383147204
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198d87ffff",
+    "n_samples": 6,
+    "n_scored": 6,
+    "labels_truth": {
+     "2_Minor_10_25": 6
+    },
+    "labels_pred": {
+     "0_No_Damage": 5,
+     "1_Affected_1_9": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.51668377530888,
+       34.03435893280415
+      ],
+      [
+       -118.51556508149963,
+       34.03605585020068
+      ],
+      [
+       -118.51675279918096,
+       34.037669383147204
+      ],
+      [
+       -118.51905922160691,
+       34.03758597376148
+      ],
+      [
+       -118.52017785873953,
+       34.0358890495813
+      ],
+      [
+       -118.51899013012559,
+       34.034275541570274
+      ],
+      [
+       -118.51668377530888,
+       34.03435893280415
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198d97ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "1_Affected_1_9": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 1,
+     "2_Minor_10_25": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52031611746797,
+       34.042509769625255
+      ],
+      [
+       -118.51919741680086,
+       34.04420664885476
+      ],
+      [
+       -118.5203852529513,
+       34.04582003497799
+      ],
+      [
+       -118.5226918006945,
+       34.04573651694012
+      ],
+      [
+       -118.52381044466834,
+       34.04403963093522
+      ],
+      [
+       -118.52262259759497,
+       34.04242626974338
+      ],
+      [
+       -118.52031611746797,
+       34.042509769625255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198da3ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "4_Destroyed_50plus": 3
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 3
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.51689085914458,
+       34.04429009454131
+      ],
+      [
+       -118.51577207002032,
+       34.045986944499894
+      ],
+      [
+       -118.51695989523682,
+       34.04760035555177
+      ],
+      [
+       -118.51926652051424,
+       34.04751689171621
+      ],
+      [
+       -118.5203852529513,
+       34.04582003497799
+      ],
+      [
+       -118.51919741680086,
+       34.04420664885476
+      ],
+      [
+       -118.51689085914458,
+       34.04429009454131
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198dabffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5203852529513,
+       34.04582003497799
+      ],
+      [
+       -118.51926652051424,
+       34.04751689171621
+      ],
+      [
+       -118.52045439251447,
+       34.04913023719081
+      ],
+      [
+       -118.52276100787783,
+       34.049046700997884
+      ],
+      [
+       -118.52387968361809,
+       34.04734983748561
+      ],
+      [
+       -118.5226918006945,
+       34.04573651694012
+      ],
+      [
+       -118.5203852529513,
+       34.04582003497799
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198dafffff",
+    "n_samples": 6,
+    "n_scored": 6,
+    "labels_truth": {
+     "4_Destroyed_50plus": 6
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 6
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52374120980419,
+       34.04072936125649
+      ],
+      [
+       -118.52262259759497,
+       34.04242626974338
+      ],
+      [
+       -118.52381044466834,
+       34.04403963093522
+      ],
+      [
+       -118.52611691486565,
+       34.043956058705774
+      ],
+      [
+       -118.52723547037553,
+       34.04225914344771
+      ],
+      [
+       -118.52604761239016,
+       34.04064580719004
+      ],
+      [
+       -118.52374120980419,
+       34.04072936125649
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198db7ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "4_Destroyed_50plus": 1
+    },
+    "labels_pred": {
+     "4_Destroyed_50plus": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.5168218271261,
+       34.04097977039969
+      ],
+      [
+       -118.5157030697753,
+       34.04267664284821
+      ],
+      [
+       -118.51689085914458,
+       34.04429009454131
+      ],
+      [
+       -118.51919741680086,
+       34.04420664885476
+      ],
+      [
+       -118.52031611746797,
+       34.042509769625255
+      ],
+      [
+       -118.51912831716521,
+       34.040896342863086
+      ],
+      [
+       -118.5168218271261,
+       34.04097977039969
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a198dbbffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.52003961632619,
+       34.02926807722139
+      ],
+      [
+       -118.51892104272088,
+       34.03096504630975
+      ],
+      [
+       -118.52010873549365,
+       34.032578594930676
+      ],
+      [
+       -118.52241501279569,
+       34.03249514952246
+      ],
+      [
+       -118.52353352972182,
+       34.03079817365331
+      ],
+      [
+       -118.52234582602783,
+       34.02918464997295
+      ],
+      [
+       -118.52003961632619,
+       34.02926807722139
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a19ab27ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "0_No_Damage": 2
+    },
+    "labels_pred": {
+     "0_No_Damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.51661475550945,
+       34.03104841939087
+      ],
+      [
+       -118.51549609346824,
+       34.03274535924546
+      ],
+      [
+       -118.51668377530888,
+       34.03435893280415
+      ],
+      [
+       -118.51899013012559,
+       34.034275541570274
+      ],
+      [
+       -118.52010873549365,
+       34.032578594930676
+      ],
+      [
+       -118.51892104272088,
+       34.03096504630975
+      ],
+      [
+       -118.51661475550945,
+       34.03104841939087
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a19ab2fffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "0_No_Damage": 1
+    },
+    "labels_pred": {
+     "0_No_Damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "image EXIF GPS; images without GPS are not on this grid",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  }
+ ],
+ "properties": {
+  "h3_resolution": 9,
+  "n_cells": 108,
+  "n_images_located": 253,
+  "n_images_total": 295,
+  "resolution_cap": "tile",
+  "model_derived": true,
+  "model": "mistral-small3.2:24b",
+  "model_digest": "5a408ab55df5c1b5cf46533c368813b30bf9e4d8fc39263bf2a3338cfa3b895b",
+  "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+  "temperature": 0.0,
+  "run_id": "e04e6a95ee7f",
+  "run_tag": "mistral-small3.2-24b",
+  "source": "zero-shot VLM severity vs DINS folder labels, aggregated by image EXIF GPS"
+ }
+}

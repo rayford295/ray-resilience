@@ -1,0 +1,102 @@
+{
+ "model": "mistral-small3.2:24b",
+ "model_digest": "5a408ab55df5c1b5cf46533c368813b30bf9e4d8fc39263bf2a3338cfa3b895b",
+ "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+ "temperature": 0.0,
+ "run_id": "e04e6a95ee7f",
+ "run_tag": "mistral-small3.2-24b",
+ "event_id": "palisades-2025",
+ "dataset": "SVI_PalisadesFireImages",
+ "generated_utc": "20260904T093003Z",
+ "n_images": 295,
+ "n_scored": 295,
+ "n_unparseable": 0,
+ "n_unknown_label": 0,
+ "unanswered_rate": 0.0,
+ "accuracy": 0.5051,
+ "ncse": 0.2025,
+ "adjacent_error_rate": 0.2644,
+ "classes": [
+  "0_No_Damage",
+  "1_Affected_1_9",
+  "2_Minor_10_25",
+  "3_Major_26_50",
+  "4_Destroyed_50plus"
+ ],
+ "confusion_rows_truth_cols_pred": [
+  [
+   59,
+   1,
+   0,
+   0,
+   0
+  ],
+  [
+   38,
+   10,
+   6,
+   2,
+   2
+  ],
+  [
+   29,
+   5,
+   10,
+   7,
+   9
+  ],
+  [
+   20,
+   4,
+   5,
+   12,
+   16
+  ],
+  [
+   1,
+   1,
+   0,
+   0,
+   58
+  ]
+ ],
+ "per_class": {
+  "0_No_Damage": {
+   "support": 60,
+   "recall": 0.9833
+  },
+  "1_Affected_1_9": {
+   "support": 58,
+   "recall": 0.1724
+  },
+  "2_Minor_10_25": {
+   "support": 60,
+   "recall": 0.1667
+  },
+  "3_Major_26_50": {
+   "support": 57,
+   "recall": 0.2105
+  },
+  "4_Destroyed_50plus": {
+   "support": 60,
+   "recall": 0.9667
+  }
+ },
+ "n_images_with_gps": 253,
+ "grid": "evidence/vlm_severity_h3_r9_grid.mistral-small3.2-24b.geojson",
+ "reference": {
+  "paper": "RAPID (arXiv 2606.21819) Dataset C2, 5-class wildfire",
+  "reported_accuracy": {
+   "GPT-5-mini": 0.573,
+   "GPT-5.1": 0.57,
+   "Gemini-3-Pro": 0.442
+  },
+  "note": "reported numbers are the paper's closed-model results on the same 295 images; this run is an open model, zero-shot, temperature 0"
+ },
+ "uncertainty": {
+  "model_derived": true,
+  "single_run": "one pass at temperature 0; quantised local weights; no repeated sampling",
+  "truth_source": "dataset folder labels (DINS-derived), not per-structure field records",
+  "claim_support": "none — evaluation only; no policy rule authorises claims from these predictions"
+ }
+}

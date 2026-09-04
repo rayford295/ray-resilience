@@ -1,6 +1,6 @@
 # Zero-shot VLM severity grading — model comparison
 
-Generated 20260904T091038Z by `scripts/compare_vlm_models.py` from the committed eval summaries under `events/*/evidence/`. Every number is copied from a `vlm_eval_summary` file that passed its builder's fail-closed checks; nothing is recomputed here.
+Generated 20260904T104403Z by `scripts/compare_vlm_models.py` from the committed eval summaries under `events/*/evidence/`. Every number is copied from a `vlm_eval_summary` file that passed its builder's fail-closed checks; nothing is recomputed here.
 
 Blocks are **not** comparable with each other (different class counts and truth scales). Within a block, rows marked ✓ share the prompt sha256 and the seeded sample with the reference run; a ✗ row was graded on a different setup and is shown for completeness only. One pass at temperature 0 on quantised local weights each; a `model_digest` pins the weights, not the arithmetic.
 
@@ -10,6 +10,7 @@ Blocks are **not** comparable with each other (different class counts and truth 
 
 | model | weights | run | same setup | samples | in-schema | unanswered | accuracy | NCSE | adjacent-error | per-class recall (no_or_trace_damage / damaged_repairable / destroyed) |
 |---|---|---|:-:|---:|---:|---:|---:|---:|---:|---|
+| `mistral-small3.2:24b` | `5a408ab55df5` | mistral-small3.2-24b | ✓ | 630 | 630 | 0.0000 | **0.9349** | **0.0365** | 0.0571 | 0.98 / 0.03 / 0.98 |
 | `qwen2.5vl:32b-ctx8k` | `fd7f6360dca6` | qwen2.5vl-32b-ctx8k | ✓ | 630 | 626 | 0.0063 | **0.9313** | **0.0391** | 0.0591 | 0.97 / 0.13 / 0.97 |
 | `gemma3:27b` | `a418f5838eaf` | gemma3-27b | ✓ | 630 | 630 | 0.0000 | **0.9143** | **0.0492** | 0.0730 | 0.90 / 0.43 / 0.97 |
 | `qwen2.5vl:7b` | `5ced39dfa4ba` | reference | ✓ | 630 | 630 | 0.0000 | **0.9095** | **0.0492** | 0.0825 | 0.89 / 0.30 / 0.99 |
@@ -24,6 +25,7 @@ Blocks are **not** comparable with each other (different class counts and truth 
 | `qwen2.5vl:7b` | `5ced39dfa4ba` | reference | ✓ | 300 | 300 | 0.0000 | **0.5967** | **0.2383** | 0.3300 | 0.53 / 0.31 / 0.95 |
 | `qwen2.5vl:32b-ctx8k` | `fd7f6360dca6` | qwen2.5vl-32b-ctx8k | ✓ | 300 | 300 | 0.0000 | **0.5600** | **0.2400** | 0.4000 | 0.51 / 0.52 / 0.65 |
 | `gemma3:27b` | `a418f5838eaf` | gemma3-27b | ✓ | 300 | 300 | 0.0000 | **0.5000** | **0.2567** | 0.4867 | 0.63 / 0.64 / 0.23 |
+| `mistral-small3.2:24b` | `5a408ab55df5` | mistral-small3.2-24b | ✓ | 300 | 300 | 0.0000 | **0.4867** | **0.2583** | 0.5100 | 0.13 / 0.80 / 0.53 |
 | `qwen3-vl:32b-ctx8k` | `d2b2007e0497` | qwen3-vl-32b-ctx8k | ✓ | 300 | 299 | 0.0033 | **0.3813** | **0.4314** | 0.3746 | 0.01 / 0.14 / 1.00 |
 | GPT-5.1 (paper, closed API) | — | RAPID paper | ✗ | — | — | — | 0.591 | — | — | — |
 | GPT-5-mini (paper, closed API) | — | RAPID paper | ✗ | — | — | — | 0.503 | — | — | — |
@@ -40,6 +42,7 @@ Blocks are **not** comparable with each other (different class counts and truth 
 | `qwen3-vl:32b-ctx8k` | `d2b2007e0497` | qwen3-vl-32b-ctx8k | ✓ | 295 | 294 | 0.0034 | **0.5544** | **0.1760** | 0.2449 | 0.88 / 0.28 / 0.30 / 0.35 / 0.93 |
 | `gemma3:27b` | `a418f5838eaf` | gemma3-27b | ✓ | 295 | 295 | 0.0000 | **0.5288** | **0.1873** | 0.2644 | 0.93 / 0.07 / 0.22 / 0.44 / 0.97 |
 | `qwen2.5vl:32b-ctx8k` | `fd7f6360dca6` | qwen2.5vl-32b-ctx8k | ✓ | 295 | 294 | 0.0034 | **0.5068** | **0.2058** | 0.2721 | 1.00 / 0.12 / 0.17 / 0.30 / 0.93 |
+| `mistral-small3.2:24b` | `5a408ab55df5` | mistral-small3.2-24b | ✓ | 295 | 295 | 0.0000 | **0.5051** | **0.2025** | 0.2644 | 0.98 / 0.17 / 0.17 / 0.21 / 0.97 |
 | `qwen2.5vl:7b` | `5ced39dfa4ba` | reference | ✓ | 295 | 295 | 0.0000 | **0.4746** | **0.2127** | 0.2881 | 0.97 / 0.00 / 0.20 / 0.18 / 1.00 |
 | GPT-5-mini (paper, closed API) | — | RAPID paper | ✗ | — | — | — | 0.573 | — | — | — |
 | GPT-5.1 (paper, closed API) | — | RAPID paper | ✗ | — | — | — | 0.570 | — | — | — |
