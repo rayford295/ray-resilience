@@ -45,6 +45,21 @@ FIGURES = [
     ("System and Deep Cases", "figures/fig4_cases.png",
      "Three deep cases across two hazard types, behind a nationwide hourly watch. Every number is a "
      "committed, hashed artifact; every card carries a declared unknown alongside its findings."),
+    ("Model Output as Governed Evidence", "figures/fig5_governed.png",
+     "A model's guess on its way to becoming evidence, and where it stops. Prompts are frozen by digest, "
+     "every prediction is a record, the evaluation fails closed, and the resulting grid is flagged "
+     "model-derived: the publication planner ships it as an evaluation, the claim plane has no rule that "
+     "admits it, and the gateway's evidence store skips it and records the exclusion."),
+    ("Setup.", "figures/fig6_results.png",
+     "Six open VLMs against the 7B reference on the three cases (accuracy, with NCSE inside each bar) and "
+     "seconds per sample. The hatched bar is the reference run; the dashed line is the closed model's "
+     "published accuracy from RAPID. Panels have different class counts and are not comparable with each "
+     "other. Every value is read from the committed eval files."),
+    ("What the runs say.", "figures/fig7_milton_bias.png",
+     "Milton pre/post pairs: row-normalised confusion for every model. Each fails in its own fixed "
+     "direction (qwen3-vl:32b toward Severe; gemma3:12b and mistral toward Moderate), so no vote across "
+     "models would repair the change task. Unanswered pairs are counted in the panel title, not folded "
+     "into a class."),
 ]
 
 
