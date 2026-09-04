@@ -1,0 +1,5276 @@
+{
+ "type": "FeatureCollection",
+ "crs_declared": "EPSG:4326",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.10346154893176,
+       34.187799138287986
+      ],
+      [
+       -118.10233283123854,
+       34.18949287115392
+      ],
+      [
+       -118.1035185134488,
+       34.19111011051555
+      ],
+      [
+       -118.10583292560013,
+       34.19103359237166
+      ],
+      [
+       -118.10696158742238,
+       34.18933985219247
+      ],
+      [
+       -118.10577589296697,
+       34.18772263747026
+      ],
+      [
+       -118.10346154893176,
+       34.187799138287986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0007ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "destroyed": 1,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 1,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09990469326284,
+       34.18294719203333
+      ],
+      [
+       -118.09877595208472,
+       34.18464094096045
+      ],
+      [
+       -118.09996155055649,
+       34.186258286372755
+      ],
+      [
+       -118.10227590246427,
+       34.186181858216706
+      ],
+      [
+       -118.10340458778465,
+       34.18448810196952
+      ],
+      [
+       -118.10221897705777,
+       34.182870781198254
+      ],
+      [
+       -118.09990469326284,
+       34.18294719203333
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0013ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "destroyed": 1,
+     "no_or_trace_damage": 2
+    },
+    "labels_pred": {
+     "destroyed": 1,
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.10340458778465,
+       34.18448810196952
+      ],
+      [
+       -118.10227590246427,
+       34.186181858216706
+      ],
+      [
+       -118.10346154893176,
+       34.187799138287986
+      ],
+      [
+       -118.10577589296697,
+       34.18772263747026
+      ],
+      [
+       -118.10690452241985,
+       34.1860288739085
+      ],
+      [
+       -118.10571886370779,
+       34.184411618478855
+      ],
+      [
+       -118.10340458778465,
+       34.18448810196952
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0017ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.1035185134488,
+       34.19111011051555
+      ],
+      [
+       -118.10238976338093,
+       34.1928038199896
+      ],
+      [
+       -118.10357548133605,
+       34.19442101863191
+      ],
+      [
+       -118.10588996160752,
+       34.19434448316281
+      ],
+      [
+       -118.10701865580096,
+       34.1926507663768
+      ],
+      [
+       -118.10583292560013,
+       34.19103359237166
+      ],
+      [
+       -118.1035185134488,
+       34.19111011051555
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c003bffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "destroyed": 2
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 1
+    },
+    "agreement_rate": 0.5,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.08963145368519,
+       34.19156832321431
+      ],
+      [
+       -118.08850241543493,
+       34.193261956580514
+      ],
+      [
+       -118.0896880128132,
+       34.19487933518988
+      ],
+      [
+       -118.09200266073343,
+       34.19480305580261
+      ],
+      [
+       -118.0931316431415,
+       34.193109415105056
+      ],
+      [
+       -118.09194603347429,
+       34.191492061125935
+      ],
+      [
+       -118.08963145368519,
+       34.19156832321431
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c004fffff",
+    "n_samples": 2,
+    "n_scored": 1,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 1
+    },
+    "labels_pred": {
+     "destroyed": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.0931316431415,
+       34.193109415105056
+      ],
+      [
+       -118.09200266073343,
+       34.19480305580261
+      ],
+      [
+       -118.09318830614174,
+       34.19642036906535
+      ],
+      [
+       -118.09550294623928,
+       34.19634401699949
+      ],
+      [
+       -118.09663187279537,
+       34.19465036897611
+      ],
+      [
+       -118.09544621510867,
+       34.19303308034421
+      ],
+      [
+       -118.0931316431415,
+       34.193109415105056
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c007bffff",
+    "n_samples": 1,
+    "n_scored": 0,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {},
+    "agreement_rate": null,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.1033476300072,
+       34.18117700158038
+      ],
+      [
+       -118.10221897705777,
+       34.182870781198254
+      ],
+      [
+       -118.10340458778465,
+       34.18448810196952
+      ],
+      [
+       -118.10571886370779,
+       34.184411618478855
+      ],
+      [
+       -118.10684746079315,
+       34.18271783154512
+      ],
+      [
+       -118.10566183782223,
+       34.18110053541773
+      ],
+      [
+       -118.1033476300072,
+       34.18117700158038
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c008fffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "no_or_trace_damage": 3
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 3
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09979098876575,
+       34.17632481118898
+      ],
+      [
+       -118.09866231233458,
+       34.178018606844226
+      ],
+      [
+       -118.0998478393327,
+       34.179636033631986
+      ],
+      [
+       -118.10216205501877,
+       34.17955964011879
+      ],
+      [
+       -118.10329067559908,
+       34.177865837140864
+      ],
+      [
+       -118.10210513634695,
+       34.17624843499862
+      ],
+      [
+       -118.09979098876575,
+       34.17632481118898
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c009bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.11029016956888,
+       34.18094747512369
+      ],
+      [
+       -118.10916166071952,
+       34.18264129273048
+      ],
+      [
+       -118.11034733166511,
+       34.18425852351563
+      ],
+      [
+       -118.11266152368528,
+       34.184181912046476
+      ],
+      [
+       -118.11378997665446,
+       34.182488087133535
+      ],
+      [
+       -118.11260429348641,
+       34.180870880995705
+      ],
+      [
+       -118.11029016956888,
+       34.18094747512369
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c00b3ffff",
+    "n_samples": 3,
+    "n_scored": 2,
+    "labels_truth": {
+     "no_or_trace_damage": 3
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.10684746079315,
+       34.18271783154512
+      ],
+      [
+       -118.10571886370779,
+       34.184411618478855
+      ],
+      [
+       -118.10690452241985,
+       34.1860288739085
+      ],
+      [
+       -118.10921879045361,
+       34.185952317759735
+      ],
+      [
+       -118.11034733166511,
+       34.18425852351563
+      ],
+      [
+       -118.10916166071952,
+       34.18264129273048
+      ],
+      [
+       -118.10684746079315,
+       34.18271783154512
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c00bbffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "no_or_trace_damage": 2
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09640483887988,
+       34.18140614411048
+      ],
+      [
+       -118.0952760418538,
+       34.18309988571204
+      ],
+      [
+       -118.09646159232202,
+       34.18471729645732
+      ],
+      [
+       -118.09877595208472,
+       34.18464094096045
+      ],
+      [
+       -118.09990469326284,
+       34.18294719203333
+      ],
+      [
+       -118.09871913052898,
+       34.18132980592847
+      ],
+      [
+       -118.09640483887988,
+       34.18140614411048
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c00c7ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09634808879508,
+       34.17809492771046
+      ],
+      [
+       -118.09521932414685,
+       34.179788692680056
+      ],
+      [
+       -118.09640483887988,
+       34.18140614411048
+      ],
+      [
+       -118.09871913052898,
+       34.18132980592847
+      ],
+      [
+       -118.0998478393327,
+       34.179636033631986
+      ],
+      [
+       -118.09866231233458,
+       34.178018606844226
+      ],
+      [
+       -118.09634808879508,
+       34.17809492771046
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c00d7ffff",
+    "n_samples": 7,
+    "n_scored": 7,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "no_or_trace_damage": 6
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "no_or_trace_damage": 6
+    },
+    "agreement_rate": 0.7143,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12101962587404,
+       34.19881200936812
+      ],
+      [
+       -118.11989115527606,
+       34.20050575534678
+      ],
+      [
+       -118.1210771131194,
+       34.202122627089345
+      ],
+      [
+       -118.12339155375653,
+       34.2020457282129
+      ],
+      [
+       -118.1245199684312,
+       34.20035197494986
+      ],
+      [
+       -118.12333399839483,
+       34.198735127847456
+      ],
+      [
+       -118.12101962587404,
+       34.19881200936812
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c010bffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "destroyed": 2
+    },
+    "labels_pred": {
+     "destroyed": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.1245199684312,
+       34.20035197494986
+      ],
+      [
+       -118.12339155375653,
+       34.2020457282129
+      ],
+      [
+       -118.12457755955401,
+       34.20366253455147
+      ],
+      [
+       -118.12689199221141,
+       34.20358556298603
+      ],
+      [
+       -118.12802035095302,
+       34.20189180244411
+      ],
+      [
+       -118.12683433297303,
+       34.20027502074631
+      ],
+      [
+       -118.1245199684312,
+       34.20035197494986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c010fffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "destroyed": 1
+    },
+    "labels_pred": {
+     "destroyed": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.1209621420297,
+       34.19550132749207
+      ],
+      [
+       -118.1198337037891,
+       34.19719509686912
+      ],
+      [
+       -118.12101962587404,
+       34.19881200936812
+      ],
+      [
+       -118.12333399839483,
+       34.198735127847456
+      ],
+      [
+       -118.12446238071554,
+       34.19704135118469
+      ],
+      [
+       -118.12327644643814,
+       34.19542446332811
+      ],
+      [
+       -118.1209621420297,
+       34.19550132749207
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c011bffff",
+    "n_samples": 6,
+    "n_scored": 6,
+    "labels_truth": {
+     "destroyed": 3,
+     "no_or_trace_damage": 3
+    },
+    "labels_pred": {
+     "destroyed": 3,
+     "no_or_trace_damage": 3
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.13152077341407,
+       34.20343149184035
+      ],
+      [
+       -118.13039247061533,
+       34.20512525965563
+      ],
+      [
+       -118.1315785722976,
+       34.206741935162135
+      ],
+      [
+       -118.13389298894279,
+       34.2066648182112
+      ],
+      [
+       -118.13502123578888,
+       34.204971043128076
+      ],
+      [
+       -118.1338351219452,
+       34.20335439226351
+      ],
+      [
+       -118.13152077341407,
+       34.20343149184035
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0123ffff",
+    "n_samples": 6,
+    "n_scored": 5,
+    "labels_truth": {
+     "damaged_repairable": 2,
+     "destroyed": 2,
+     "no_or_trace_damage": 2
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 2,
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.13502123578888,
+       34.204971043128076
+      ],
+      [
+       -118.13389298894279,
+       34.2066648182112
+      ],
+      [
+       -118.13507913855568,
+       34.20828142828966
+      ],
+      [
+       -118.13739354716833,
+       34.20820423864224
+      ],
+      [
+       -118.13852173805205,
+       34.20651045629675
+      ],
+      [
+       -118.13733557628827,
+       34.20489387086085
+      ],
+      [
+       -118.13502123578888,
+       34.204971043128076
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0127ffff",
+    "n_samples": 14,
+    "n_scored": 14,
+    "labels_truth": {
+     "destroyed": 12,
+     "no_or_trace_damage": 2
+    },
+    "labels_pred": {
+     "destroyed": 12,
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.1315785722976,
+       34.206741935162135
+      ],
+      [
+       -118.13045023715,
+       34.20843567956448
+      ],
+      [
+       -118.13163637460093,
+       34.21005231428265
+      ],
+      [
+       -118.13395085936418,
+       34.209975179958555
+      ],
+      [
+       -118.13507913855568,
+       34.20828142828966
+      ],
+      [
+       -118.13389298894279,
+       34.2066648182112
+      ],
+      [
+       -118.1315785722976,
+       34.206741935162135
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c012fffff",
+    "n_samples": 6,
+    "n_scored": 6,
+    "labels_truth": {
+     "destroyed": 5,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 4,
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 0.8333,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12802035095302,
+       34.20189180244411
+      ],
+      [
+       -118.12689199221141,
+       34.20358556298603
+      ],
+      [
+       -118.1280780459552,
+       34.20520230391257
+      ],
+      [
+       -118.13039247061533,
+       34.20512525965563
+      ],
+      [
+       -118.13152077341407,
+       34.20343149184035
+      ],
+      [
+       -118.1303347074983,
+       34.20181477555517
+      ],
+      [
+       -118.12802035095302,
+       34.20189180244411
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c013bffff",
+    "n_samples": 8,
+    "n_scored": 8,
+    "labels_truth": {
+     "destroyed": 7,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 7,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.11401906075551,
+       34.195731663984276
+      ],
+      [
+       -118.11289047834025,
+       34.19742539537763
+      ],
+      [
+       -118.11407634025181,
+       34.19904239790416
+      ],
+      [
+       -118.11639079679549,
+       34.198965644398186
+      ],
+      [
+       -118.117519323307,
+       34.19727190570943
+      ],
+      [
+       -118.11633344918135,
+       34.195654927821856
+      ],
+      [
+       -118.11401906075551,
+       34.195731663984276
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0153ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "no_or_trace_damage": 2
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12457755955401,
+       34.20366253455147
+      ],
+      [
+       -118.12344911252355,
+       34.20535626440419
+      ],
+      [
+       -118.1246351540843,
+       34.20697302996925
+      ],
+      [
+       -118.12694965486132,
+       34.20689604104287
+      ],
+      [
+       -118.1280780459552,
+       34.20520230391257
+      ],
+      [
+       -118.12689199221141,
+       34.20358556298603
+      ],
+      [
+       -118.12457755955401,
+       34.20366253455147
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0177ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "damaged_repairable": 1
+    },
+    "labels_pred": {
+     "destroyed": 1
+    },
+    "agreement_rate": 0.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12773192713605,
+       34.18533833292246
+      ],
+      [
+       -118.1266037301283,
+       34.18703221036361
+      ],
+      [
+       -118.1277896050746,
+       34.18864915504985
+      ],
+      [
+       -118.13010368920064,
+       34.188572197642216
+      ],
+      [
+       -118.13123183028284,
+       34.186878312921145
+      ],
+      [
+       -118.13004594316732,
+       34.185261392887455
+      ],
+      [
+       -118.12773192713605,
+       34.18533833292246
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0193ffff",
+    "n_samples": 18,
+    "n_scored": 18,
+    "labels_truth": {
+     "destroyed": 18
+    },
+    "labels_pred": {
+     "destroyed": 18
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.11396178464793,
+       34.19242086592702
+      ],
+      [
+       -118.11283323459696,
+       34.194114620716164
+      ],
+      [
+       -118.11401906075551,
+       34.195731663984276
+      ],
+      [
+       -118.11633344918135,
+       34.195654927821856
+      ],
+      [
+       -118.11746194333203,
+       34.193961165736
+      ],
+      [
+       -118.1162761049599,
+       34.19234414710909
+      ],
+      [
+       -118.11396178464793,
+       34.19242086592702
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c01cbffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "destroyed": 2,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 2,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.11746194333203,
+       34.193961165736
+      ],
+      [
+       -118.11633344918135,
+       34.195654927821856
+      ],
+      [
+       -118.117519323307,
+       34.19727190570943
+      ],
+      [
+       -118.1198337037891,
+       34.19719509686912
+      ],
+      [
+       -118.1209621420297,
+       34.19550132749207
+      ],
+      [
+       -118.11977625570104,
+       34.1938843742463
+      ],
+      [
+       -118.11746194333203,
+       34.193961165736
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c01cfffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "destroyed": 2,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 2,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09612112202319,
+       34.164849421984044
+      ],
+      [
+       -118.09499248686788,
+       34.16654328031979
+      ],
+      [
+       -118.09617785868166,
+       34.16816089439405
+      ],
+      [
+       -118.09849187791637,
+       34.16808462548072
+      ],
+      [
+       -118.09962045724095,
+       34.166390759812806
+      ],
+      [
+       -118.09843507316431,
+       34.16477317039019
+      ],
+      [
+       -118.09612112202319,
+       34.164849421984044
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c040bffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "destroyed": 1,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 1,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09962045724095,
+       34.166390759812806
+      ],
+      [
+       -118.09849187791637,
+       34.16808462548072
+      ],
+      [
+       -118.09967729772015,
+       34.16970217425913
+      ],
+      [
+       -118.10199130910368,
+       34.16962583271718
+      ],
+      [
+       -118.1031198325878,
+       34.16793195972265
+      ],
+      [
+       -118.10193440053162,
+       34.16631443559648
+      ],
+      [
+       -118.09962045724095,
+       34.166390759812806
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c040fffff",
+    "n_samples": 12,
+    "n_scored": 12,
+    "labels_truth": {
+     "no_or_trace_damage": 12
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 12
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09606438872054,
+       34.161537885622224
+      ],
+      [
+       -118.09493578593384,
+       34.16323176727303
+      ],
+      [
+       -118.09612112202319,
+       34.164849421984044
+      ],
+      [
+       -118.09843507316431,
+       34.16477317039019
+      ],
+      [
+       -118.09956362012375,
+       34.16307928140594
+      ],
+      [
+       -118.09837827177206,
+       34.16146165134881
+      ],
+      [
+       -118.09606438872054,
+       34.161537885622224
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c041bffff",
+    "n_samples": 7,
+    "n_scored": 7,
+    "labels_truth": {
+     "destroyed": 1,
+     "no_or_trace_damage": 6
+    },
+    "labels_pred": {
+     "destroyed": 1,
+     "no_or_trace_damage": 6
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.1031198325878,
+       34.16793195972265
+      ],
+      [
+       -118.10199130910368,
+       34.16962583271718
+      ],
+      [
+       -118.10317677688968,
+       34.17124331619172
+      ],
+      [
+       -118.10549078040442,
+       34.17116690201867
+      ],
+      [
+       -118.1066192480383,
+       34.169473021702984
+      ],
+      [
+       -118.10543376801044,
+       34.167855562881314
+      ],
+      [
+       -118.1031198325878,
+       34.16793195972265
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c043bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.08917910109935,
+       34.16507792090874
+      ],
+      [
+       -118.08805032193463,
+       34.166771741240666
+      ],
+      [
+       -118.08923563346605,
+       34.16838944525089
+      ],
+      [
+       -118.09154973644945,
+       34.16831330428085
+      ],
+      [
+       -118.09267845979957,
+       34.166619476607075
+      ],
+      [
+       -118.09149313598365,
+       34.165001797245004
+      ],
+      [
+       -118.08917910109935,
+       34.16507792090874
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0443ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09267845979957,
+       34.166619476607075
+      ],
+      [
+       -118.09154973644945,
+       34.16831330428085
+      ],
+      [
+       -118.09273509598927,
+       34.169930943003884
+      ],
+      [
+       -118.09504919115591,
+       34.169854729404165
+      ],
+      [
+       -118.09617785868166,
+       34.16816089439405
+      ],
+      [
+       -118.09499248686788,
+       34.16654328031979
+      ],
+      [
+       -118.09267845979957,
+       34.166619476607075
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0447ffff",
+    "n_samples": 7,
+    "n_scored": 7,
+    "labels_truth": {
+     "destroyed": 1,
+     "no_or_trace_damage": 6
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 1,
+     "no_or_trace_damage": 5
+    },
+    "agreement_rate": 0.8571,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09262182695986,
+       34.16330794624691
+      ],
+      [
+       -118.09149313598365,
+       34.165001797245004
+      ],
+      [
+       -118.09267845979957,
+       34.166619476607075
+      ],
+      [
+       -118.09499248686788,
+       34.16654328031979
+      ],
+      [
+       -118.09612112202319,
+       34.164849421984044
+      ],
+      [
+       -118.09493578593384,
+       34.16323176727303
+      ],
+      [
+       -118.09262182695986,
+       34.16330794624691
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0457ffff",
+    "n_samples": 28,
+    "n_scored": 26,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 2,
+     "no_or_trace_damage": 25
+    },
+    "labels_pred": {
+     "damaged_repairable": 3,
+     "no_or_trace_damage": 23
+    },
+    "agreement_rate": 0.9231,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 2,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09623459869624,
+       34.17147230283198
+      ],
+      [
+       -118.09510589879821,
+       34.173166114505854
+      ],
+      [
+       -118.0962913420673,
+       34.174783647277536
+      ],
+      [
+       -118.09860549750121,
+       34.174707343728
+      ],
+      [
+       -118.09973414156165,
+       34.17301352472462
+      ],
+      [
+       -118.09854868602856,
+       34.171396016600085
+      ],
+      [
+       -118.09623459869624,
+       34.17147230283198
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0463ffff",
+    "n_samples": 22,
+    "n_scored": 21,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 6,
+     "no_or_trace_damage": 15
+    },
+    "labels_pred": {
+     "damaged_repairable": 2,
+     "destroyed": 6,
+     "no_or_trace_damage": 13
+    },
+    "agreement_rate": 0.9524,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09973414156165,
+       34.17301352472462
+      ],
+      [
+       -118.09860549750121,
+       34.174707343728
+      ],
+      [
+       -118.09979098876575,
+       34.17632481118898
+      ],
+      [
+       -118.10210513634695,
+       34.17624843499862
+      ],
+      [
+       -118.10323372456001,
+       34.17455460867123
+      ],
+      [
+       -118.102048221042,
+       34.172937165857995
+      ],
+      [
+       -118.09973414156165,
+       34.17301352472462
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0467ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.0962913420673,
+       34.174783647277536
+      ],
+      [
+       -118.0951626097951,
+       34.17647743560458
+      ],
+      [
+       -118.09634808879508,
+       34.17809492771046
+      ],
+      [
+       -118.09866231233458,
+       34.178018606844226
+      ],
+      [
+       -118.09979098876575,
+       34.17632481118898
+      ],
+      [
+       -118.09860549750121,
+       34.174707343728
+      ],
+      [
+       -118.0962913420673,
+       34.174783647277536
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c046fffff",
+    "n_samples": 15,
+    "n_scored": 15,
+    "labels_truth": {
+     "damaged_repairable": 3,
+     "destroyed": 1,
+     "no_or_trace_damage": 11
+    },
+    "labels_pred": {
+     "damaged_repairable": 4,
+     "destroyed": 1,
+     "no_or_trace_damage": 10
+    },
+    "agreement_rate": 0.8,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09617785868166,
+       34.16816089439405
+      ],
+      [
+       -118.09504919115591,
+       34.169854729404165
+      ],
+      [
+       -118.09623459869624,
+       34.17147230283198
+      ],
+      [
+       -118.09854868602856,
+       34.171396016600085
+      ],
+      [
+       -118.09967729772015,
+       34.16970217425913
+      ],
+      [
+       -118.09849187791637,
+       34.16808462548072
+      ],
+      [
+       -118.09617785868166,
+       34.16816089439405
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0473ffff",
+    "n_samples": 11,
+    "n_scored": 11,
+    "labels_truth": {
+     "destroyed": 2,
+     "no_or_trace_damage": 9
+    },
+    "labels_pred": {
+     "damaged_repairable": 2,
+     "destroyed": 1,
+     "no_or_trace_damage": 8
+    },
+    "agreement_rate": 0.8182,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09967729772015,
+       34.16970217425913
+      ],
+      [
+       -118.09854868602856,
+       34.171396016600085
+      ],
+      [
+       -118.09973414156165,
+       34.17301352472462
+      ],
+      [
+       -118.102048221042,
+       34.172937165857995
+      ],
+      [
+       -118.10317677688968,
+       34.17124331619172
+      ],
+      [
+       -118.10199130910368,
+       34.16962583271718
+      ],
+      [
+       -118.09967729772015,
+       34.16970217425913
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0477ffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "no_or_trace_damage": 3
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 4
+    },
+    "agreement_rate": 0.75,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.09256519746985,
+       34.15999635194372
+      ],
+      [
+       -118.0914365388657,
+       34.16169022625553
+      ],
+      [
+       -118.09262182695986,
+       34.16330794624691
+      ],
+      [
+       -118.09493578593384,
+       34.16323176727303
+      ],
+      [
+       -118.09606438872054,
+       34.161537885622224
+      ],
+      [
+       -118.09487908835351,
+       34.15992019028411
+      ],
+      [
+       -118.09256519746985,
+       34.15999635194372
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c04cfffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12755891379022,
+       34.17540548219518
+      ],
+      [
+       -118.12643081380057,
+       34.17709942964873
+      ],
+      [
+       -118.12761658149417,
+       34.178716496474856
+      ],
+      [
+       -118.12993046134787,
+       34.17863959118795
+      ],
+      [
+       -118.13105850542232,
+       34.176945636450576
+      ],
+      [
+       -118.1298727255611,
+       34.175328594283734
+      ],
+      [
+       -118.12755891379022,
+       34.17540548219518
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0507ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "no_or_trace_damage": 2
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.13111627695837,
+       34.180256592653414
+      ],
+      [
+       -118.1299882005498,
+       34.18195052406262
+      ],
+      [
+       -118.13117405191176,
+       34.18356748481703
+      ],
+      [
+       -118.13348799184264,
+       34.18349048950437
+      ],
+      [
+       -118.13461601232278,
+       34.18179655081813
+      ],
+      [
+       -118.1334301488032,
+       34.18017961472138
+      ],
+      [
+       -118.13111627695837,
+       34.180256592653414
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0523ffff",
+    "n_samples": 23,
+    "n_scored": 23,
+    "labels_truth": {
+     "destroyed": 22,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 21,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 0.9565,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12767425260934,
+       34.18202744672404
+      ],
+      [
+       -118.12654608794281,
+       34.183721347513256
+      ],
+      [
+       -118.12773192713605,
+       34.18533833292246
+      ],
+      [
+       -118.13004594316732,
+       34.185261392887455
+      ],
+      [
+       -118.13117405191176,
+       34.18356748481703
+      ],
+      [
+       -118.1299882005498,
+       34.18195052406262
+      ],
+      [
+       -118.12767425260934,
+       34.18202744672404
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c052bffff",
+    "n_samples": 15,
+    "n_scored": 15,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 9,
+     "no_or_trace_damage": 5
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 9,
+     "no_or_trace_damage": 5
+    },
+    "agreement_rate": 0.8667,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.13117405191176,
+       34.18356748481703
+      ],
+      [
+       -118.13004594316732,
+       34.185261392887455
+      ],
+      [
+       -118.13123183028284,
+       34.186878312921145
+      ],
+      [
+       -118.13354583830376,
+       34.1868013002288
+      ],
+      [
+       -118.13467389111635,
+       34.18510738488266
+      ],
+      [
+       -118.13348799184264,
+       34.18349048950437
+      ],
+      [
+       -118.13117405191176,
+       34.18356748481703
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c052fffff",
+    "n_samples": 18,
+    "n_scored": 15,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 14,
+     "no_or_trace_damage": 3
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 12,
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 3,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12761658149417,
+       34.178716496474856
+      ],
+      [
+       -118.126488449167,
+       34.18041042060153
+      ],
+      [
+       -118.12767425260934,
+       34.18202744672404
+      ],
+      [
+       -118.1299882005498,
+       34.18195052406262
+      ],
+      [
+       -118.13111627695837,
+       34.180256592653414
+      ],
+      [
+       -118.12993046134787,
+       34.17863959118795
+      ],
+      [
+       -118.12761658149417,
+       34.178716496474856
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c053bffff",
+    "n_samples": 32,
+    "n_scored": 31,
+    "labels_truth": {
+     "destroyed": 27,
+     "no_or_trace_damage": 5
+    },
+    "labels_pred": {
+     "destroyed": 25,
+     "no_or_trace_damage": 6
+    },
+    "agreement_rate": 0.9677,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.11717509436953,
+       34.1774065043862
+      ],
+      [
+       -118.1160467619953,
+       34.179100383298646
+      ],
+      [
+       -118.11723245737471,
+       34.180717564786306
+      ],
+      [
+       -118.11954649733137,
+       34.1806408427083
+      ],
+      [
+       -118.12067477381282,
+       34.178946956498095
+      ],
+      [
+       -118.11948906623314,
+       34.17732979966344
+      ],
+      [
+       -118.11717509436953,
+       34.1774065043862
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0547ffff",
+    "n_samples": 10,
+    "n_scored": 10,
+    "labels_truth": {
+     "no_or_trace_damage": 10
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 10
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12423206391881,
+       34.18379821489341
+      ],
+      [
+       -118.12310381099527,
+       34.18549208504913
+      ],
+      [
+       -118.12428963800873,
+       34.18710909511031
+      ],
+      [
+       -118.1266037301283,
+       34.18703221036361
+      ],
+      [
+       -118.12773192713605,
+       34.18533833292246
+      ],
+      [
+       -118.12654608794281,
+       34.183721347513256
+      ],
+      [
+       -118.12423206391881,
+       34.18379821489341
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0567ffff",
+    "n_samples": 9,
+    "n_scored": 9,
+    "labels_truth": {
+     "destroyed": 9
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 8
+    },
+    "agreement_rate": 0.8889,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12067477381282,
+       34.178946956498095
+      ],
+      [
+       -118.11954649733137,
+       34.1806408427083
+      ],
+      [
+       -118.12073224065657,
+       34.18225795884451
+      ],
+      [
+       -118.12304627265569,
+       34.182181164116685
+      ],
+      [
+       -118.12417449323456,
+       34.18048727061422
+      ],
+      [
+       -118.12298873771962,
+       34.17887017913163
+      ],
+      [
+       -118.12067477381282,
+       34.178946956498095
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0573ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "no_or_trace_damage": 3
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 3
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.12417449323456,
+       34.18048727061422
+      ],
+      [
+       -118.12304627265569,
+       34.182181164116685
+      ],
+      [
+       -118.12423206391881,
+       34.18379821489341
+      ],
+      [
+       -118.12654608794281,
+       34.183721347513256
+      ],
+      [
+       -118.12767425260934,
+       34.18202744672404
+      ],
+      [
+       -118.126488449167,
+       34.18041042060153
+      ],
+      [
+       -118.12417449323456,
+       34.18048727061422
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0577ffff",
+    "n_samples": 13,
+    "n_scored": 12,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 6,
+     "no_or_trace_damage": 6
+    },
+    "labels_pred": {
+     "destroyed": 5,
+     "no_or_trace_damage": 7
+    },
+    "agreement_rate": 0.9167,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.1489068576293,
+       34.20450736955872
+      ],
+      [
+       -118.14777889934895,
+       34.206201220465324
+      ],
+      [
+       -118.14896516904813,
+       34.207817650373364
+      ],
+      [
+       -118.15127940913813,
+       34.2077402047252
+      ],
+      [
+       -118.15240731142394,
+       34.2060463465757
+      ],
+      [
+       -118.15122102961706,
+       34.204429941317066
+      ],
+      [
+       -118.1489068576293,
+       34.20450736955872
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c13ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "destroyed": 3
+    },
+    "labels_pred": {
+     "destroyed": 3
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15240731142394,
+       34.2060463465757
+      ],
+      [
+       -118.15127940913813,
+       34.2077402047252
+      ],
+      [
+       -118.15246572672334,
+       34.20935656917998
+      ],
+      [
+       -118.15477995869429,
+       34.20927905083509
+      ],
+      [
+       -118.1559078049758,
+       34.207585185448195
+      ],
+      [
+       -118.15472147529344,
+       34.20596884564339
+      ],
+      [
+       -118.15240731142394,
+       34.2060463465757
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c17ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.14546465115751,
+       34.20627859341923
+      ],
+      [
+       -118.14433660456108,
+       34.20797241368042
+      ],
+      [
+       -118.14552286214155,
+       34.209588868235016
+      ],
+      [
+       -118.14783717843993,
+       34.20951147788167
+      ],
+      [
+       -118.14896516904813,
+       34.207817650373364
+      ],
+      [
+       -118.14777889934895,
+       34.206201220465324
+      ],
+      [
+       -118.14546465115751,
+       34.20627859341923
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c1bffff",
+    "n_samples": 7,
+    "n_scored": 7,
+    "labels_truth": {
+     "destroyed": 7
+    },
+    "labels_pred": {
+     "damaged_repairable": 2,
+     "destroyed": 5
+    },
+    "agreement_rate": 0.7143,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.14563929444225,
+       34.21620922519867
+      ],
+      [
+       -118.14451115084078,
+       34.217902975205405
+      ],
+      [
+       -118.14569751575958,
+       34.21951930730606
+      ],
+      [
+       -118.14801203640296,
+       34.219441864759936
+      ],
+      [
+       -118.1491401240058,
+       34.21774810751001
+      ],
+      [
+       -118.14795374696665,
+       34.21613180004921
+      ],
+      [
+       -118.14563929444225,
+       34.21620922519867
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c63ffff",
+    "n_samples": 5,
+    "n_scored": 5,
+    "labels_truth": {
+     "destroyed": 2,
+     "no_or_trace_damage": 3
+    },
+    "labels_pred": {
+     "damaged_repairable": 2,
+     "destroyed": 2,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 0.6,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.14213850469454,
+       34.21467020470977
+      ],
+      [
+       -118.14101030510423,
+       34.2163639474678
+      ],
+      [
+       -118.1421966221105,
+       34.217980345035336
+      ],
+      [
+       -118.14451115084078,
+       34.217902975205405
+      ],
+      [
+       -118.14563929444225,
+       34.21620922519867
+      ],
+      [
+       -118.14445296530506,
+       34.21459285227039
+      ],
+      [
+       -118.14213850469454,
+       34.21467020470977
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c7bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "destroyed": 1
+    },
+    "labels_pred": {
+     "destroyed": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15229049119232,
+       34.19942570880879
+      ],
+      [
+       -118.15116265354973,
+       34.20111961372572
+      ],
+      [
+       -118.15234889958037,
+       34.20273605977855
+      ],
+      [
+       -118.15466299535244,
+       34.20265857625978
+      ],
+      [
+       -118.15579077699768,
+       34.200964664102834
+      ],
+      [
+       -118.15460451887095,
+       34.19934824270448
+      ],
+      [
+       -118.15229049119232,
+       34.19942570880879
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c83ffff",
+    "n_samples": 20,
+    "n_scored": 18,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 18,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 15,
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 0.8889,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 2,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15579077699768,
+       34.200964664102834
+      ],
+      [
+       -118.15466299535244,
+       34.20265857625978
+      ],
+      [
+       -118.15584928925588,
+       34.20427495686617
+      ],
+      [
+       -118.15816337689282,
+       34.20419740066039
+      ],
+      [
+       -118.1592911025309,
+       34.202503481268955
+      ],
+      [
+       -118.15810479654195,
+       34.200887125317614
+      ],
+      [
+       -118.15579077699768,
+       34.200964664102834
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c87ffff",
+    "n_samples": 14,
+    "n_scored": 14,
+    "labels_truth": {
+     "destroyed": 13,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 13,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.14884854966016,
+       34.201197024559946
+      ],
+      [
+       -118.14772062370578,
+       34.20289089885424
+      ],
+      [
+       -118.1489068576293,
+       34.20450736955872
+      ],
+      [
+       -118.15122102961706,
+       34.204429941317066
+      ],
+      [
+       -118.15234889958037,
+       34.20273605977855
+      ],
+      [
+       -118.15116265354973,
+       34.20111961372572
+      ],
+      [
+       -118.14884854966016,
+       34.201197024559946
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c8bffff",
+    "n_samples": 31,
+    "n_scored": 31,
+    "labels_truth": {
+     "damaged_repairable": 2,
+     "destroyed": 22,
+     "no_or_trace_damage": 7
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 22,
+     "no_or_trace_damage": 8
+    },
+    "agreement_rate": 0.9032,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15234889958037,
+       34.20273605977855
+      ],
+      [
+       -118.15122102961706,
+       34.204429941317066
+      ],
+      [
+       -118.15240731142394,
+       34.2060463465757
+      ],
+      [
+       -118.15472147529344,
+       34.20596884564339
+      ],
+      [
+       -118.15584928925588,
+       34.20427495686617
+      ],
+      [
+       -118.15466299535244,
+       34.20265857625978
+      ],
+      [
+       -118.15234889958037,
+       34.20273605977855
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c8fffff",
+    "n_samples": 7,
+    "n_scored": 7,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 6
+    },
+    "labels_pred": {
+     "destroyed": 6,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 0.8571,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15573226820084,
+       34.197654307178375
+      ],
+      [
+       -118.15460451887095,
+       34.19934824270448
+      ],
+      [
+       -118.15579077699768,
+       34.200964664102834
+      ],
+      [
+       -118.15810479654195,
+       34.200887125317614
+      ],
+      [
+       -118.15923248986813,
+       34.199193182555724
+      ],
+      [
+       -118.15804621965644,
+       34.19757678581467
+      ],
+      [
+       -118.15573226820084,
+       34.197654307178375
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0c97ffff",
+    "n_samples": 5,
+    "n_scored": 5,
+    "labels_truth": {
+     "destroyed": 4,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 4
+    },
+    "agreement_rate": 0.8,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.1592911025309,
+       34.202503481268955
+      ],
+      [
+       -118.15816337689282,
+       34.20419740066039
+      ],
+      [
+       -118.15934971866125,
+       34.20581371581236
+      ],
+      [
+       -118.16166379814545,
+       34.20573608691706
+      ],
+      [
+       -118.16279146776664,
+       34.20404216029665
+      ],
+      [
+       -118.16160511392326,
+       34.202425869800315
+      ],
+      [
+       -118.1592911025309,
+       34.202503481268955
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0cb3ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15584928925588,
+       34.20427495686617
+      ],
+      [
+       -118.15472147529344,
+       34.20596884564339
+      ],
+      [
+       -118.1559078049758,
+       34.207585185448195
+      ],
+      [
+       -118.15822196070941,
+       34.20750761182277
+      ],
+      [
+       -118.15934971866125,
+       34.20581371581236
+      ],
+      [
+       -118.15816337689282,
+       34.20419740066039
+      ],
+      [
+       -118.15584928925588,
+       34.20427495686617
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0cbbffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.14540644361733,
+       34.202968254407764
+      ],
+      [
+       -118.14427842935221,
+       34.20466209806594
+      ],
+      [
+       -118.14546465115751,
+       34.20627859341923
+      ],
+      [
+       -118.14777889934895,
+       34.206201220465324
+      ],
+      [
+       -118.1489068576293,
+       34.20450736955872
+      ],
+      [
+       -118.14772062370578,
+       34.20289089885424
+      ],
+      [
+       -118.14540644361733,
+       34.202968254407764
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0cc7ffff",
+    "n_samples": 8,
+    "n_scored": 7,
+    "labels_truth": {
+     "damaged_repairable": 3,
+     "destroyed": 5
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 5,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 0.8571,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.14534823952069,
+       34.199657851220884
+      ],
+      [
+       -118.144220257585,
+       34.20135171826545
+      ],
+      [
+       -118.14540644361733,
+       34.202968254407764
+      ],
+      [
+       -118.14772062370578,
+       34.20289089885424
+      ],
+      [
+       -118.14884854966016,
+       34.201197024559946
+      ],
+      [
+       -118.14766235151014,
+       34.199580513068696
+      ],
+      [
+       -118.14534823952069,
+       34.199657851220884
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c0cd7ffff",
+    "n_samples": 6,
+    "n_scored": 6,
+    "labels_truth": {
+     "destroyed": 6
+    },
+    "labels_pred": {
+     "destroyed": 6
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.02340848731144,
+       34.17882128615983
+      ],
+      [
+       -118.02227822760366,
+       34.180514662110866
+      ],
+      [
+       -118.02346308939305,
+       34.18213307779373
+      ],
+      [
+       -118.02577822338472,
+       34.18205809291804
+      ],
+      [
+       -118.02690842741917,
+       34.18036470953761
+      ],
+      [
+       -118.02572355313805,
+       34.17874631846208
+      ],
+      [
+       -118.02340848731144,
+       34.17882128615983
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c140bffff",
+    "n_samples": 1,
+    "n_scored": 0,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {},
+    "agreement_rate": null,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.03018920138702,
+       34.16866065046776
+      ],
+      [
+       -118.02905918286464,
+       34.170354134962466
+      ],
+      [
+       -118.03024399823116,
+       34.17197258264133
+      ],
+      [
+       -118.03255884459121,
+       34.171897521207754
+      ],
+      [
+       -118.03368880743446,
+       34.17020402928944
+      ],
+      [
+       -118.03250397959951,
+       34.16858560622809
+      ],
+      [
+       -118.03018920138702,
+       34.16866065046776
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c1483ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.02674432899806,
+       34.17042912375714
+      ],
+      [
+       -118.02561422234842,
+       34.17212257741735
+      ],
+      [
+       -118.0267990252354,
+       34.17374104971087
+      ],
+      [
+       -118.02911394725433,
+       34.17366604372934
+      ],
+      [
+       -118.03024399823116,
+       34.17197258264133
+      ],
+      [
+       -118.02905918286464,
+       34.170354134962466
+      ],
+      [
+       -118.02674432899806,
+       34.17042912375714
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c148bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.14849877427137,
+       34.181333607834276
+      ],
+      [
+       -118.14737104223417,
+       34.18302762223235
+      ],
+      [
+       -118.14855706154887,
+       34.18464433751265
+      ],
+      [
+       -118.15087082500744,
+       34.184567013729556
+      ],
+      [
+       -118.15199850107437,
+       34.18287299207939
+      ],
+      [
+       -118.15081246965575,
+       34.1812563014642
+      ],
+      [
+       -118.14849877427137,
+       34.181333607834276
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a13ffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "no_or_trace_damage": 3
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 3
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15199850107437,
+       34.18287299207939
+      ],
+      [
+       -118.15087082500744,
+       34.184567013729556
+      ],
+      [
+       -118.15205689218935,
+       34.186183663608496
+      ],
+      [
+       -118.1543706475343,
+       34.1861062671714
+      ],
+      [
+       -118.15549826762114,
+       34.18441223827467
+      ],
+      [
+       -118.15431218834588,
+       34.18279561306142
+      ],
+      [
+       -118.15199850107437,
+       34.18287299207939
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a17ffff",
+    "n_samples": 13,
+    "n_scored": 13,
+    "labels_truth": {
+     "destroyed": 8,
+     "no_or_trace_damage": 5
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 8,
+     "no_or_trace_damage": 4
+    },
+    "agreement_rate": 0.9231,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15561526099005,
+       34.191033400927225
+      ],
+      [
+       -118.1544875762854,
+       34.192727383159806
+      ],
+      [
+       -118.15567376286506,
+       34.1943438861131
+      ],
+      [
+       -118.15798764623605,
+       34.19426638217182
+      ],
+      [
+       -118.15911527494396,
+       34.19257239270081
+      ],
+      [
+       -118.1579290762804,
+       34.190955914409315
+      ],
+      [
+       -118.15561526099005,
+       34.191033400927225
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a23ffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "destroyed": 3,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 2,
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 0.75,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15911527494396,
+       34.19257239270081
+      ],
+      [
+       -118.15798764623605,
+       34.19426638217182
+      ],
+      [
+       -118.15917388067258,
+       34.195882819692926
+      ],
+      [
+       -118.16148775589318,
+       34.19580524308044
+      ],
+      [
+       -118.1626153285946,
+       34.19411124637652
+      ],
+      [
+       -118.16142908208468,
+       34.1924948335178
+      ],
+      [
+       -118.15911527494396,
+       34.19257239270081
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a27ffff",
+    "n_samples": 8,
+    "n_scored": 6,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "no_or_trace_damage": 7
+    },
+    "labels_pred": {
+     "destroyed": 1,
+     "no_or_trace_damage": 5
+    },
+    "agreement_rate": 0.8333,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 2,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15567376286506,
+       34.1943438861131
+      ],
+      [
+       -118.15454604584873,
+       34.19603784499774
+      ],
+      [
+       -118.15573226820084,
+       34.197654307178375
+      ],
+      [
+       -118.15804621965644,
+       34.19757678581467
+      ],
+      [
+       -118.15917388067258,
+       34.195882819692926
+      ],
+      [
+       -118.15798764623605,
+       34.19426638217182
+      ],
+      [
+       -118.15567376286506,
+       34.1943438861131
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a2fffff",
+    "n_samples": 7,
+    "n_scored": 7,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 5,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 5,
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 0.8571,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15555676257553,
+       34.187722851641
+      ],
+      [
+       -118.15442911018069,
+       34.189416857210944
+      ],
+      [
+       -118.15561526099005,
+       34.191033400927225
+      ],
+      [
+       -118.1579290762804,
+       34.190955914409315
+      ],
+      [
+       -118.15905667268196,
+       34.18926190159962
+      ],
+      [
+       -118.1578705097892,
+       34.18764538254739
+      ],
+      [
+       -118.15555676257553,
+       34.187722851641
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a33ffff",
+    "n_samples": 11,
+    "n_scored": 11,
+    "labels_truth": {
+     "damaged_repairable": 2,
+     "destroyed": 9
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 9,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 0.9091,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15905667268196,
+       34.18926190159962
+      ],
+      [
+       -118.1579290762804,
+       34.190955914409315
+      ],
+      [
+       -118.15911527494396,
+       34.19257239270081
+      ],
+      [
+       -118.16142908208468,
+       34.1924948335178
+      ],
+      [
+       -118.16255662248318,
+       34.1908008134739
+      ],
+      [
+       -118.1613704117468,
+       34.18918435984703
+      ],
+      [
+       -118.15905667268196,
+       34.18926190159962
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a37ffff",
+    "n_samples": 10,
+    "n_scored": 10,
+    "labels_truth": {
+     "destroyed": 1,
+     "no_or_trace_damage": 9
+    },
+    "labels_pred": {
+     "destroyed": 1,
+     "no_or_trace_damage": 9
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.13817377019765,
+       34.1866471469104
+      ],
+      [
+       -118.13704577332673,
+       34.18834106952675
+      ],
+      [
+       -118.13823175626332,
+       34.18995785878534
+      ],
+      [
+       -118.14054574821073,
+       34.1898807007708
+      ],
+      [
+       -118.1416736891303,
+       34.18818677088975
+      ],
+      [
+       -118.14048769405659,
+       34.186570006287766
+      ],
+      [
+       -118.13817377019765,
+       34.1866471469104
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a43ffff",
+    "n_samples": 2,
+    "n_scored": 1,
+    "labels_truth": {
+     "destroyed": 2
+    },
+    "labels_pred": {
+     "destroyed": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.13811578756201,
+       34.18333637095851
+      ],
+      [
+       -118.13698782302005,
+       34.18503031691626
+      ],
+      [
+       -118.13817377019765,
+       34.1866471469104
+      ],
+      [
+       -118.14048769405659,
+       34.186570006287766
+      ],
+      [
+       -118.14161560265062,
+       34.18487605306402
+      ],
+      [
+       -118.14042964333645,
+       34.1832592477287
+      ],
+      [
+       -118.13811578756201,
+       34.18333637095851
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a53ffff",
+    "n_samples": 9,
+    "n_scored": 9,
+    "labels_truth": {
+     "destroyed": 3,
+     "no_or_trace_damage": 6
+    },
+    "labels_pred": {
+     "destroyed": 3,
+     "no_or_trace_damage": 6
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.14161560265062,
+       34.18487605306402
+      ],
+      [
+       -118.14048769405659,
+       34.186570006287766
+      ],
+      [
+       -118.1416736891303,
+       34.18818677088975
+      ],
+      [
+       -118.14398760492683,
+       34.18810955760837
+      ],
+      [
+       -118.14511545756318,
+       34.18641559712416
+      ],
+      [
+       -118.14392945036343,
+       34.18479885718158
+      ],
+      [
+       -118.14161560265062,
+       34.18487605306402
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a57ffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "no_or_trace_damage": 4
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "no_or_trace_damage": 3
+    },
+    "agreement_rate": 0.75,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.13467389111635,
+       34.18510738488266
+      ],
+      [
+       -118.13354583830376,
+       34.1868013002288
+      ],
+      [
+       -118.13473177333374,
+       34.188418154878946
+      ],
+      [
+       -118.13704577332673,
+       34.18834106952675
+      ],
+      [
+       -118.13817377019765,
+       34.1866471469104
+      ],
+      [
+       -118.13698782302005,
+       34.18503031691626
+      ],
+      [
+       -118.13467389111635,
+       34.18510738488266
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a5bffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15538128809162,
+       34.177790819382786
+      ],
+      [
+       -118.15425373261517,
+       34.17948489490128
+      ],
+      [
+       -118.15543977612663,
+       34.18110156084851
+      ],
+      [
+       -118.157753387199,
+       34.181024126606324
+      ],
+      [
+       -118.15888088669254,
+       34.179330043844175
+      ],
+      [
+       -118.15769483109936,
+       34.17771340256769
+      ],
+      [
+       -118.15538128809162,
+       34.177790819382786
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a87ffff",
+    "n_samples": 9,
+    "n_scored": 9,
+    "labels_truth": {
+     "no_or_trace_damage": 9
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "no_or_trace_damage": 8
+    },
+    "agreement_rate": 0.8889,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15194011341308,
+       34.17956225649918
+      ],
+      [
+       -118.15081246965575,
+       34.1812563014642
+      ],
+      [
+       -118.15199850107437,
+       34.18287299207939
+      ],
+      [
+       -118.15431218834588,
+       34.18279561306142
+      ],
+      [
+       -118.15543977612663,
+       34.18110156084851
+      ],
+      [
+       -118.15425373261517,
+       34.17948489490128
+      ],
+      [
+       -118.15194011341308,
+       34.17956225649918
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2a8fffff",
+    "n_samples": 16,
+    "n_scored": 16,
+    "labels_truth": {
+     "damaged_repairable": 1,
+     "destroyed": 2,
+     "no_or_trace_damage": 13
+    },
+    "labels_pred": {
+     "destroyed": 2,
+     "no_or_trace_damage": 14
+    },
+    "agreement_rate": 0.9375,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15893947855658,
+       34.182640727151046
+      ],
+      [
+       -118.15781194676218,
+       34.18433478660631
+      ],
+      [
+       -118.15899807388625,
+       34.18595134640962
+      ],
+      [
+       -118.16131174487921,
+       34.18587382208837
+      ],
+      [
+       -118.1624392206775,
+       34.184179755396265
+      ],
+      [
+       -118.16125308148166,
+       34.18256322026207
+      ],
+      [
+       -118.15893947855658,
+       34.182640727151046
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2aa3ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "no_or_trace_damage": 2
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15899807388625,
+       34.18595134640962
+      ],
+      [
+       -118.1578705097892,
+       34.18764538254739
+      ],
+      [
+       -118.15905667268196,
+       34.18926190159962
+      ],
+      [
+       -118.1613704117468,
+       34.18918435984703
+      ],
+      [
+       -118.16249791984428,
+       34.18749031647373
+      ],
+      [
+       -118.16131174487921,
+       34.18587382208837
+      ],
+      [
+       -118.15899807388625,
+       34.18595134640962
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2aafffff",
+    "n_samples": 17,
+    "n_scored": 15,
+    "labels_truth": {
+     "damaged_repairable": 2,
+     "destroyed": 5,
+     "no_or_trace_damage": 10
+    },
+    "labels_pred": {
+     "destroyed": 3,
+     "no_or_trace_damage": 12
+    },
+    "agreement_rate": 0.8667,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 2,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15888088669254,
+       34.179330043844175
+      ],
+      [
+       -118.157753387199,
+       34.181024126606324
+      ],
+      [
+       -118.15893947855658,
+       34.182640727151046
+      ],
+      [
+       -118.16125308148166,
+       34.18256322026207
+      ],
+      [
+       -118.16238052498255,
+       34.180869130261776
+      ],
+      [
+       -118.16119442155376,
+       34.179252554388405
+      ],
+      [
+       -118.15888088669254,
+       34.179330043844175
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2ab3ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "no_or_trace_damage": 2
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15543977612663,
+       34.18110156084851
+      ],
+      [
+       -118.15431218834588,
+       34.18279561306142
+      ],
+      [
+       -118.15549826762114,
+       34.18441223827467
+      ],
+      [
+       -118.15781194676218,
+       34.18433478660631
+      ],
+      [
+       -118.15893947855658,
+       34.182640727151046
+      ],
+      [
+       -118.157753387199,
+       34.181024126606324
+      ],
+      [
+       -118.15543977612663,
+       34.18110156084851
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2abbffff",
+    "n_samples": 11,
+    "n_scored": 10,
+    "labels_truth": {
+     "damaged_repairable": 2,
+     "destroyed": 5,
+     "no_or_trace_damage": 4
+    },
+    "labels_pred": {
+     "destroyed": 5,
+     "no_or_trace_damage": 5
+    },
+    "agreement_rate": 0.9,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.13805780835604,
+       34.18002553094992
+      ],
+      [
+       -118.13692987614121,
+       34.18171950023847
+      ],
+      [
+       -118.13811578756201,
+       34.18333637095851
+      ],
+      [
+       -118.14042964333645,
+       34.1832592477287
+      ],
+      [
+       -118.14155751960679,
+       34.18156527117284
+      ],
+      [
+       -118.14037159604996,
+       34.179948425113885
+      ],
+      [
+       -118.13805780835604,
+       34.18002553094992
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2acbffff",
+    "n_samples": 4,
+    "n_scored": 4,
+    "labels_truth": {
+     "no_or_trace_damage": 4
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "no_or_trace_damage": 3
+    },
+    "agreement_rate": 0.75,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15923248986813,
+       34.199193182555724
+      ],
+      [
+       -118.15810479654195,
+       34.200887125317614
+      ],
+      [
+       -118.1592911025309,
+       34.202503481268955
+      ],
+      [
+       -118.16160511392326,
+       34.202425869800315
+      ],
+      [
+       -118.16273275123602,
+       34.200731919808156
+      ],
+      [
+       -118.1615464331726,
+       34.1991155885147
+      ],
+      [
+       -118.15923248986813,
+       34.199193182555724
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2b4bffff",
+    "n_samples": 12,
+    "n_scored": 12,
+    "labels_truth": {
+     "destroyed": 7,
+     "no_or_trace_damage": 5
+    },
+    "labels_pred": {
+     "destroyed": 7,
+     "no_or_trace_damage": 5
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.15917388067258,
+       34.195882819692926
+      ],
+      [
+       -118.15804621965644,
+       34.19757678581467
+      ],
+      [
+       -118.15923248986813,
+       34.199193182555724
+      ],
+      [
+       -118.1615464331726,
+       34.1991155885147
+      ],
+      [
+       -118.16267403817876,
+       34.19742161516135
+      ],
+      [
+       -118.16148775589318,
+       34.19580524308044
+      ],
+      [
+       -118.15917388067258,
+       34.195882819692926
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c2b5bffff",
+    "n_samples": 18,
+    "n_scored": 16,
+    "labels_truth": {
+     "destroyed": 1,
+     "no_or_trace_damage": 17
+    },
+    "labels_pred": {
+     "damaged_repairable": 1,
+     "destroyed": 1,
+     "no_or_trace_damage": 14
+    },
+    "agreement_rate": 0.9375,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 2,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.08212418295096,
+       34.15868269169111
+      ],
+      [
+       -118.08099532457062,
+       34.16037652064317
+      ],
+      [
+       -118.08218050434608,
+       34.16199439582038
+      ],
+      [
+       -118.08449455480961,
+       34.161918417396116
+      ],
+      [
+       -118.08562335739835,
+       34.160224581089864
+      ],
+      [
+       -118.08443816531793,
+       34.15860673056187
+      ],
+      [
+       -118.08212418295096,
+       34.15868269169111
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c3123ffff",
+    "n_samples": 5,
+    "n_scored": 5,
+    "labels_truth": {
+     "no_or_trace_damage": 5
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 5
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.08562335739835,
+       34.160224581089864
+      ],
+      [
+       -118.08449455480961,
+       34.161918417396116
+      ],
+      [
+       -118.08567978260639,
+       34.163536227309656
+      ],
+      [
+       -118.08799382528909,
+       34.16346017626693
+      ],
+      [
+       -118.08912257207648,
+       34.161766332612
+      ],
+      [
+       -118.08793733198524,
+       34.160148547348285
+      ],
+      [
+       -118.08562335739835,
+       34.160224581089864
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c3127ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.0475217090577,
+       34.166440852616795
+      ],
+      [
+       -118.04639206632974,
+       34.1681344443508
+      ],
+      [
+       -118.04757701532841,
+       34.16975268772229
+      ],
+      [
+       -118.04989161947192,
+       34.16967731473221
+      ],
+      [
+       -118.05102120648202,
+       34.16798371559816
+      ],
+      [
+       -118.04983624506924,
+       34.16636549685404
+      ],
+      [
+       -118.0475217090577,
+       34.166440852616795
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c330bffff",
+    "n_samples": 6,
+    "n_scored": 5,
+    "labels_truth": {
+     "no_or_trace_damage": 6
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 5
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 1,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.06151994164506,
+       34.172611477306425
+      ],
+      [
+       -118.0603905218472,
+       34.1743050986076
+      ],
+      [
+       -118.06157566327252,
+       34.17592308098993
+      ],
+      [
+       -118.0638902368705,
+       34.17584741744106
+      ],
+      [
+       -118.06501960091137,
+       34.17415378876187
+      ],
+      [
+       -118.06383444711399,
+       34.17253583100938
+      ],
+      [
+       -118.06151994164506,
+       34.172611477306425
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c3327ffff",
+    "n_samples": 2,
+    "n_scored": 2,
+    "labels_truth": {
+     "destroyed": 1,
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "destroyed": 1,
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.06146422331389,
+       34.16929980961665
+      ],
+      [
+       -118.0603348359321,
+       34.17099345429394
+      ],
+      [
+       -118.06151994164506,
+       34.172611477306425
+      ],
+      [
+       -118.06383444711399,
+       34.17253583100938
+      ],
+      [
+       -118.06496377874221,
+       34.170842178952746
+      ],
+      [
+       -118.06377866065783,
+       34.16922418057233
+      ],
+      [
+       -118.06146422331389,
+       34.16929980961665
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c3337ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.04757701532841,
+       34.16975268772229
+      ],
+      [
+       -118.0464473401688,
+       34.17144625607481
+      ],
+      [
+       -118.04763232487117,
+       34.17306445883622
+      ],
+      [
+       -118.04994699715061,
+       34.17298906861976
+      ],
+      [
+       -118.05107661658896,
+       34.171295492868495
+      ],
+      [
+       -118.04989161947192,
+       34.16967731473221
+      ],
+      [
+       -118.04757701532841,
+       34.16975268772229
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c3373ffff",
+    "n_samples": 1,
+    "n_scored": 1,
+    "labels_truth": {
+     "no_or_trace_damage": 1
+    },
+    "labels_pred": {
+     "no_or_trace_damage": 1
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": true,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.04413266029624,
+       34.17152157365182
+      ],
+      [
+       -118.04300289698817,
+       34.17321511120936
+      ],
+      [
+       -118.04418786926477,
+       34.174833338593025
+      ],
+      [
+       -118.04650261727801,
+       34.174758003796704
+      ],
+      [
+       -118.04763232487117,
+       34.17306445883622
+      ],
+      [
+       -118.0464473401688,
+       34.17144625607481
+      ],
+      [
+       -118.04413266029624,
+       34.17152157365182
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "h3_cell": "8929a1c337bffff",
+    "n_samples": 3,
+    "n_scored": 3,
+    "labels_truth": {
+     "destroyed": 1,
+     "no_or_trace_damage": 2
+    },
+    "labels_pred": {
+     "destroyed": 1,
+     "no_or_trace_damage": 2
+    },
+    "agreement_rate": 1.0,
+    "uncertainty": {
+     "model_derived": true,
+     "low_n": false,
+     "n_unanswered": 0,
+     "location_source": "dataset manifest post-event point (post_latitude/post_longitude), not EXIF",
+     "note": "zero-shot VLM predictions evaluated against dataset folder labels; supports no damage claim"
+    }
+   }
+  }
+ ],
+ "properties": {
+  "h3_resolution": 9,
+  "n_cells": 90,
+  "n_samples": 630,
+  "resolution_cap": "tile",
+  "model_derived": true,
+  "model": "qwen3-vl:8b",
+  "model_digest": "901cae73216286ea8c5aba8b46d307ff7188f737285ec500c795a12f05225d28",
+  "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+  "temperature": 0.0,
+  "run_id": "f840f4556a4b",
+  "run_tag": "qwen3-vl-8b",
+  "view": "post_field",
+  "quality_gate": [
+   "good",
+   "usable"
+  ],
+  "sample_per_class": 300,
+  "seed": 2026,
+  "source": "zero-shot VLM grading of post_field images vs EATON_wildfire_mapillary_matched label_name, aggregated by post-event point",
+  "companion_grid": "evidence/crossview_h3_r9_coverage.geojson"
+ }
+}

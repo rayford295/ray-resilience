@@ -1,5 +1,5 @@
 {
- "generated_utc": "20260904T121744Z",
+ "generated_utc": "20260904T183227Z",
  "blocks": [
   {
    "event_id": "eaton-2025",
@@ -60,6 +60,30 @@
      "run_id": "3974d6d3863a",
      "generated_utc": "20260904T071645Z",
      "file": "events/eaton-2025/evidence/vlm_crossview_eval.qwen2.5vl-32b-ctx8k.json"
+    },
+    {
+     "model": "qwen3-vl:8b",
+     "model_digest": "901cae732162",
+     "run_tag": "qwen3-vl-8b",
+     "same_setup": true,
+     "n": 630,
+     "n_scored": 605,
+     "unanswered_rate": 0.0397,
+     "accuracy": 0.924,
+     "ncse": 0.0413,
+     "adjacent_error_rate": 0.0694,
+     "per_class_recall": "0.94 / 0.32 / 0.96",
+     "classes": [
+      "no_or_trace_damage",
+      "damaged_repairable",
+      "destroyed"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": 300,
+     "seed": 2026,
+     "run_id": "f840f4556a4b",
+     "generated_utc": "20260904T183224Z",
+     "file": "events/eaton-2025/evidence/vlm_crossview_eval.qwen3-vl-8b.json"
     },
     {
      "model": "gemma3:27b",
@@ -269,6 +293,30 @@
      "file": "events/milton-2024/evidence/vlm_bitemporal_eval.mistral-small3.2-24b.json"
     },
     {
+     "model": "qwen3-vl:8b",
+     "model_digest": "901cae732162",
+     "run_tag": "qwen3-vl-8b",
+     "same_setup": true,
+     "n": 300,
+     "n_scored": 275,
+     "unanswered_rate": 0.0833,
+     "accuracy": 0.4618,
+     "ncse": 0.3236,
+     "adjacent_error_rate": 0.4291,
+     "per_class_recall": "0.18 / 0.57 / 0.60",
+     "classes": [
+      "Mild",
+      "Moderate",
+      "Severe"
+     ],
+     "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+     "sample_per_class": 100,
+     "seed": 2026,
+     "run_id": "2d97f95b2cce",
+     "generated_utc": "20260904T162604Z",
+     "file": "events/milton-2024/evidence/vlm_bitemporal_eval.qwen3-vl-8b.json"
+    },
+    {
      "model": "gemma3:12b",
      "model_digest": "f4031aab637d",
      "run_tag": "gemma3-12b",
@@ -415,6 +463,32 @@
      "run_id": "f0350a944514",
      "generated_utc": "20260904T074030Z",
      "file": "events/palisades-2025/evidence/vlm_severity_eval.gemma3-27b.json"
+    },
+    {
+     "model": "qwen3-vl:8b",
+     "model_digest": "901cae732162",
+     "run_tag": "qwen3-vl-8b",
+     "same_setup": true,
+     "n": 295,
+     "n_scored": 282,
+     "unanswered_rate": 0.0441,
+     "accuracy": 0.5142,
+     "ncse": 0.195,
+     "adjacent_error_rate": 0.2766,
+     "per_class_recall": "0.93 / 0.11 / 0.24 / 0.35 / 0.93",
+     "classes": [
+      "0_No_Damage",
+      "1_Affected_1_9",
+      "2_Minor_10_25",
+      "3_Major_26_50",
+      "4_Destroyed_50plus"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": null,
+     "seed": null,
+     "run_id": "f57109b5a654",
+     "generated_utc": "20260904T131044Z",
+     "file": "events/palisades-2025/evidence/vlm_severity_eval.qwen3-vl-8b.json"
     },
     {
      "model": "qwen2.5vl:32b-ctx8k",
