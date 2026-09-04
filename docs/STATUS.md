@@ -1,6 +1,6 @@
 # Ray Resilience v0.1 — Project Status
 
-**Updated:** 2026-09-03 (Windows, night — multi-model sweep running) · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
+**Updated:** 2026-09-04 (Windows — six-model VLM sweep finished 13:32 CDT) · **Target:** [OASIS @ ACM SIGSPATIAL 2026](https://rsvp.withgoogle.com/events/oasis-2026/) Track A
 **Key dates (AoE):** Short Paper & Code Submission **2026-09-04** · Finalist Notification 09-20 · Camera-Ready 10-09 · Finalist Presentation & Demo 11-03
 **Event portal:** https://rsvp.withgoogle.com/events/oasis-2026/ — the authoritative source for
 dates, the Track A brief, and the code-submission mechanism (login required; see blocked item 5).
@@ -653,7 +653,7 @@ then the Milton and Eaton evidence commits below. Branch CI green from `8ff812f`
   the builder's sha256 skip. Every record carries the `run_id` that produced it; the eval summary
   carries the finishing run's. Same weights digest, same prompt sha, temperature 0 throughout.
 
-### Multi-model comparison — sweep running on the Windows workstation (started 2026-09-03 15:46 CDT)
+### Multi-model comparison — six open models, three cases, finished 2026-09-04 13:32 CDT
 
 The three builders take `--run-tag auto` (commit `0946193`): every output of a tagged run carries the served
 model's slug before its suffix, so seven models' runs sit beside the qwen2.5vl:7b reference files without
@@ -677,8 +677,43 @@ What the RTX 3090 (24 GB) holds, measured with a one-token probe before the swee
 32B at Q4 is the ceiling for this card; 72B-class vision models do not fit. Cold load is 110–160 s per model from
 the model disk; qwen3-vl:32b-ctx8k grades a Palisades image in ~8 s (qwen2.5vl:7b: ~3.2 s). Order: the two 32B
 models first, then 27B, 24B, 12B, 8B (11B removed, see the table); Palisades (295) → Milton (300 pairs) → Eaton (630) per model.
-Each model's three cases are committed and pushed as they finish; the comparison page is regenerated at each push.
-Partial prediction files of a case still running are **not** committed. The first launch (15:46) died with its shell
+Each model's three cases were committed and pushed as they finished (`8aafae2` qwen3-vl:32b-ctx8k, `160edde`
+qwen2.5vl:32b-ctx8k, `434ddf7` gemma3:27b, `fb6a81f` mistral-small3.2:24b, `bb51366` gemma3:12b, `b868fb1` qwen3-vl:8b;
+CI green on each). Partial prediction files of a case still running were never committed.
+
+**Results** (accuracy / NCSE; same prompt sha256, same seeded sample as the reference; full table with per-class
+recall in [`docs/vlm_model_comparison.md`](vlm_model_comparison.md)):
+
+| model | Palisades, 5 classes | Milton pairs, 3 classes | Eaton, 3 classes | wall time |
+|---|---:|---:|---:|---:|
+| `qwen2.5vl:7b` (reference) | 0.475 / 0.213 | **0.597** / 0.238 | 0.910 / 0.049 | — |
+| `qwen3-vl:32b-ctx8k` | **0.554** / 0.176 | 0.381 / 0.431 | 0.901 / 0.053 | 6 h 34 min |
+| `qwen2.5vl:32b-ctx8k` (95 % in VRAM) | 0.507 / 0.206 | 0.560 / 0.240 | 0.931 / 0.039 | 2 h 57 min |
+| `gemma3:27b` | 0.529 / 0.187 | 0.500 / 0.257 | 0.914 / 0.049 | 1 h 54 min |
+| `mistral-small3.2:24b` | 0.505 / 0.203 | 0.487 / 0.258 | **0.935** / 0.037 | 1 h 33 min |
+| `gemma3:12b` | 0.546 / 0.178 | 0.427 / 0.287 | 0.906 / 0.051 | 1 h 30 min |
+| `qwen3-vl:8b` | 0.514 / 0.195 | 0.462 / 0.324 | 0.924 / 0.041 | 6 h 15 min |
+| closed models in the RAPID paper | GPT-5-mini 0.573, GPT-5.1 0.570 | GPT-5.1 0.591 | — | — |
+
+What the table says, and what it does not:
+
+- **Single post-event image (Palisades, Eaton): every open model beats the 7B reference, and the best open model
+  is within two points of the paper's closed models.** Size is not the axis: gemma3:12b (0.546) is within one
+  point of qwen3-vl:32b (0.554) and ahead of gemma3:27b.
+- **Pre/post pairs (Milton): no open model beats the 7B reference, and the failures are systematic, not noisy.**
+  qwen3-vl:32b calls 258 of 300 pairs Severe (Mild recall 0.01); gemma3:12b calls 262 Moderate (Severe recall
+  0.17); mistral puts 213 in Moderate (Mild recall 0.13). Each model has a different fixed bias on the change
+  task, so a majority vote across them would not be a fix, and the per-class recall column is the finding.
+- **Eaton's small class is where every model is weak**: `damaged_repairable` (n = 30) recall runs 0.03 (mistral)
+  to 0.43 (gemma3:27b) while the two large classes sit at 0.9+. The headline 0.93 is the large classes.
+- **Latency is a model property here, not a hardware one.** The qwen3 family spends its time in hidden reasoning
+  before a 60-character answer: qwen3-vl:8b's median is 5 s but 9 Palisades images took over 30 s (max 182 s), and
+  on Milton 24 pairs hit the client timeout and were recorded as `LLMUnavailable` (8.3 % unanswered, under the
+  20 % fail-closed bound, so the case stands with its unanswered rate on the record). qwen3-vl:32b took 44 s per
+  pair for the same output length as the 7B model's 4.8 s.
+- One pass, temperature 0, Q4 quantised weights; the `model_digest` pins the weights, not the arithmetic. Nothing
+  here is a benchmark of the models — it is what these served weights do on these seeded samples under RAPID's
+  verbatim prompts, recorded so the gateway's `model_derived` evidence has a stated provenance. The first launch (15:46) died with its shell
 at 42 / 295 of the first case; the relaunch (16:45) runs as a Windows scheduled task (`RayVlmSweep`), detached from
 any terminal, with the driver's `--commit-push` doing the per-model commit and push itself (commit `72ccab4`) —
 the rule above was a promise the first driver could not keep because it never touched git.
@@ -689,7 +724,7 @@ the rule above was a promise the first driver could not keep because it never to
 2. RAPID's label-logic Consistent / Contradictory / Unsupported annotator as an offline
    evaluation in `tests/`.
 3. DPA hazard-type consistency check on samples.
-4. ~~Optional second model~~ → the seven-model sweep above is running; still open: a full Eaton run
+4. ~~Optional second model~~ → done, six models above (a seventh, llama3.2-vision, cannot load here); still open: a full Eaton run
    (all 2,244 samples, ~2 h on the 3090 with the 7B model; the builder resumes by image sha256).
 5. TaskPlanner: never.
 
