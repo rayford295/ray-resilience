@@ -2,11 +2,9 @@
 % Build: pdflatex -> bibtex -> pdflatex x2 (see build.sh).
 %
 % OWNER DECISIONS PENDING (do not submit before resolving):
-%   1. Author list and order — Lei Zou is listed from the Yang & Zou
-%      abstract this system implements; confirm co-authorship for THIS
-%      paper and add anyone missing.
-%   2. Institutional email addresses below are placeholders.
-%   3. Page limit and template variant are assumed (sigconf, 4 pages +
+%   1. Author list and order — confirmed 2026-09-03 (Yang, Zou, Gong, Wang);
+%      Ziyi Wang's address is from a public homepage, verify.
+%   2. Page limit and template variant are assumed (sigconf, 4 pages +
 %      references) — reconcile with the Track A brief behind the event
 %      login before submission.
 \documentclass[sigconf,screen]{acmart}
@@ -27,19 +25,19 @@
 \affiliation{%
   \institution{Department of Geography, Texas A\&M University}
   \city{College Station}\state{TX}\country{USA}}
-\email{yyang295@tamu.edu} % PLACEHOLDER — verify before submission
+\email{yyang295@tamu.edu}
 
 \author{Lei Zou}
 \affiliation{%
   \institution{Department of Geography, Texas A\&M University}
   \city{College Station}\state{TX}\country{USA}}
-\email{lzou@tamu.edu} % PLACEHOLDER — verify before submission
+\email{lzou@tamu.edu}
 
 \author{Wenjing Gong}
 \affiliation{%
   \institution{Department of Landscape Architecture and Urban Planning, Texas A\&M University}
   \city{College Station}\state{TX}\country{USA}}
-\email{wenjinggong@tamu.edu} % confirmed by the first author 2026-09-03
+\email{wenjinggong@tamu.edu}
 
 \author{Ziyi Wang}
 \affiliation{%
@@ -49,29 +47,34 @@
 
 \begin{abstract}
 Most GeoAI disaster systems demonstrate autonomy: a language model that
-runs a spatial pipeline. RAY (Resilience Assistant for You) demonstrates \emph{accountability}: a
-risk-analyst agent that operates inside the \emph{Steward Harness}, a
-technical layer that enforces outcome, process, and institutional
-validity during operation rather than promising them in prose. Every
-artifact is hashed into an append-only audit log; a declarative claim
-policy scopes what the agent may assert by role, evidence tier, spatial
-resolution, and geographic authority; a separate distribution policy
-scopes what a build may publish, verified by a CI gate that fails the
-deploy on violation; and every factual sentence must cite an artifact
-identifier or be refused. A third axis, \emph{verifiability}
-(retained $>$ re-derivable $>$ cited-only), states what a reader can do
-to check a claim, including the case where license terms forbid
-retaining the evidence at all. We exercise the harness on a nationwide
-hourly hazard watch (USGS, NWS, NHC, NIFC) and three deep cases across
-two hazard types --- the 2025 Eaton Fire, Hurricane Milton (2024), and
-Hurricane Ian (2022) --- joining ground-truth structure damage, county
-debris volumes, social vulnerability, 2020 census population, and
-reliability-gated cross-view street imagery on H3 grids, delivered through an installable, keyless
-web app with resident and planner modes. The test suite doubles as a
-verifiable evaluation environment (362 tests in CI), and the audit
-record preserves two incidents where the harness caught the system
-violating its own rules --- evidence, we argue, that the mechanism does
-work that documentation alone does not.
+runs a spatial pipeline. RAY (Resilience Assistant for You) demonstrates
+\emph{accountability}: a risk-analyst agent that operates inside the
+\emph{Steward Harness}, a technical layer that enforces outcome, process,
+and institutional validity during operation rather than promising them in
+prose. Every artifact is hashed into an append-only audit log; a
+declarative claim policy scopes what the agent may assert by role,
+evidence tier, spatial resolution, and geographic authority; a separate
+distribution policy scopes what a build may publish, verified by a CI
+gate that fails the deploy on violation; every factual sentence must cite
+an artifact identifier or be refused; and a \emph{verifiability} axis
+(retained $>$ re-derivable $>$ cited-only) states what a reader can do to
+check a claim. We exercise the harness on a nationwide hourly hazard
+watch and three deep cases across two hazard types --- the 2025 Eaton
+Fire, Hurricane Milton (2024), and Hurricane Ian (2022) --- delivered
+through an installable, keyless web app with resident and planner modes.
+We then ask what it takes for a vision--language model's output to count
+as evidence. Six open VLMs, served locally on one 24\,GB GPU, graded
+1{,}225 street-view images and image pairs per model across the three
+cases under verbatim published prompts; every prediction is a hashed
+record, thresholds fail closed, and the resulting grids are flagged
+\emph{model-derived}: publishable as an evaluation, unusable as a claim.
+Single-image grading comes within two points of closed commercial
+models; pre/post change grading does not, and each model fails with a
+different fixed class bias. The test suite doubles as a verifiable
+evaluation environment (363 Python and 67 app tests in CI), and the
+audit record preserves three incidents where the harness caught the
+system violating its own rules --- evidence, we argue, that the mechanism
+does work that documentation alone does not.
 \end{abstract}
 
 \begin{CCSXML}
@@ -92,7 +95,7 @@ work that documentation alone does not.
 \ccsdesc[500]{Computing methodologies~Artificial intelligence}
 
 \keywords{GeoAI agents, accountability, disaster resilience, social
-vulnerability, provenance, policy enforcement, H3}
+vulnerability, provenance, policy enforcement, vision--language models, H3}
 
 \maketitle
 
@@ -129,8 +132,12 @@ and distribution --- that fail closed, plus a per-claim
 structure-level damage ground truth, debris volumes, CDC social
 vulnerability, and cross-view street imagery on H3 r9 grids, behind a
 nationwide hourly watch;
-(3)~a test suite designed as a verifiable evaluation environment, and an
-append-only audit record that preserves two self-caught violations ---
+(3)~a treatment of model output as \emph{governed evidence}: six open
+vision--language models evaluated on 1{,}225 labelled samples per model
+across the three cases, with every prediction recorded, thresholds that
+fail closed, and results that the agent is forbidden to cite;
+(4)~a test suite designed as a verifiable evaluation environment, and an
+append-only audit record that preserves three self-caught violations ---
 including one where the deployed site violated the project's own written
 distribution constraint and the fix was a new policy plane, not a patch.
 
@@ -147,15 +154,12 @@ grid cell without a declared uncertainty structure fails the build.
 \textbf{Process validity.} Every registered artifact receives a SHA-256
 digest and an append-only audit row naming its agent, inputs, and UTC
 timestamp. Failures are recorded, never erased; the app renders lineage
-from any map layer back to timestamped source snapshots. Audit logs are
-treated as immutable: when run-grouping logic later changed, the reader
-was taught to recover runs from structural markers rather than the logs
-being rewritten. The gateway's own audit is redacted by one rule --- it
-holds no finer location than the claim plane lets any answer use: a
-point is stored as its H3 r9 cell, an area's corners rounded to
-$\sim$110\,m, and the question as sha256 plus length, so a caller can
-prove their question produced a row without the log retaining what a
-resident typed about their own home.
+from any map layer back to timestamped source snapshots. The gateway's
+own audit is redacted by one rule --- it holds no finer location than the
+claim plane lets any answer use: a point is stored as its H3 r9 cell, an
+area's corners rounded to $\sim$110\,m, and the question as sha256 plus
+length, so a caller can prove their question produced a row without the
+log retaining what a resident typed about their own home.
 
 \textbf{Institutional validity.} A single YAML policy file carries two
 planes of ordered, first-match rules with default deny, validated at
@@ -166,8 +170,10 @@ spatial resolution, and geography: tile-level evidence never yields
 parcel-level claims. The \emph{distribution plane} scopes what a build
 may \emph{publish}, by artifact class, resolution cap, and audience; CI
 verifies the assembled public site against it and fails the deploy on
-violation. Section~\ref{sec:incidents} explains why the second plane
-exists.
+violation. One \texttt{published\_events} list feeds both planes, so the
+agent cannot read what the publisher withholds.
+Section~\ref{sec:incidents} explains why the second plane and that
+shared list exist.
 
 \textbf{Citation by default.} Every factual sentence the agent produces
 must cite an artifact identifier. The exemption set is closed
@@ -180,18 +186,18 @@ whether a reader can \emph{check} a claim. Each artifact therefore
 carries \texttt{verifiability} $\in$ \{\texttt{retained},
 \texttt{re-derivable}, \texttt{cited-only}\} with weakest-link
 aggregation, and a \texttt{license} attribute gates redistribution by
-rule. The axis earns its keep where retention is forbidden: map-platform terms disallow storing map content, which is structurally
-incompatible with proving traceability by hashing inputs. The harness
-resolves this by attesting to the \emph{request} plus a response digest
---- a lookup record that is publishable precisely because it holds no
-content --- and a containment property test enforces that no response
-payload ever reaches the audit record. Grounded free-text generation is
-not reproducible even at temperature zero, so it falls through to
-default-deny: the citable unit is the citation, never the prose. The
-\texttt{license} attribute is exercised in production by a fourth value
---- \texttt{open-license-attribution} --- for OSM-derived facility
-context (ODbL): redistributable, but only with its attribution, which
-therefore travels inside the artifact itself.
+rule. The axis earns its keep where retention is forbidden: map-platform
+terms disallow storing map content, which is structurally incompatible
+with proving traceability by hashing inputs. The harness resolves this
+by attesting to the \emph{request} plus a response digest --- a lookup
+record that is publishable precisely because it holds no content --- and
+a containment property test enforces that no response payload ever
+reaches the audit record. Grounded free-text generation is not
+reproducible even at temperature zero, so it falls through to
+default-deny: the citable unit is the citation, never the prose. A
+fourth value, \texttt{open-license-attribution}, is exercised in
+production for OSM-derived facility context (ODbL): redistributable, but
+only with its attribution, which therefore travels inside the artifact.
 
 \section{System and Deep Cases}
 
@@ -212,11 +218,10 @@ the map badge reports \emph{mapped-of-total} features and names sources
 that failed, and an ArcGIS error envelope fails the wildfire connector
 closed instead of reporting zero fires. NWS alerts render hollow ---
 an advisory about what may come never looks like an occurrence. A
-Day-1 flash-flood outlook (NOAA/WPC Excessive Rainfall Outlook, public
-domain) publishes as a \emph{separate} product beside the watch ---
-polygons and a forecast, never merged into the point layer --- carrying
-its own declared boundary: outlook only, no damage conclusions, never a
-replacement for official warnings.
+Day-1 flash-flood outlook (NOAA/WPC, public domain) publishes as a
+\emph{separate} product beside the watch, carrying its own declared
+boundary: outlook only, no damage conclusions, never a replacement for
+official warnings.
 
 \textbf{Tier 2/3 --- three deep cases, one harness.} Exposure,
 vulnerability, and damage analysis exist only inside three areas of
@@ -264,10 +269,115 @@ and ask about it; the answer covers only the evaluated tiles the
 selection contains, never merges statistics across events, and
 highlights the tiles it cited.
 
+\section{Model Output as Governed Evidence}
+\label{sec:vlm}
+
+The obvious next step for any imagery-rich disaster system is to let a
+vision--language model (VLM) grade damage. The harness turns that step
+into a question: under what conditions may a model's guess become
+evidence? Our answer is mechanical. Model output is a distinct evidence
+class, \texttt{model\_derived}, that carries its own measured accuracy
+alongside it or carries nothing; no claim-plane rule authorizes a claim
+from it; and the agent's evidence store refuses to load it. The
+numbers below are therefore published as an \emph{evaluation of a
+method on labelled cases}, never as facts about places.
+
+\textbf{Setup.} We ported the Damage Recognition prompts of
+RAPID~\cite{yang2026rapid} verbatim --- Prompt~C for a single post-event
+image on the five CAL FIRE DINS classes, Prompt~B for a pre/post pair on
+three human-perception classes --- and froze each as a
+\texttt{prompt\_sha256} in every record, so a later edit is visible as a
+different prompt rather than a silent change in the numbers. The model is
+any OpenAI-compatible vision endpoint; here, open weights served by
+Ollama on one RTX~3090 (24\,GB), so the run is keyless and repeatable
+from a workstation. Three cases: \emph{Palisades 2025} (RAPID Dataset
+C2: 295 street-view images, folder-level DINS truth, all graded);
+\emph{Milton 2024} (the Bi-Temporal pair set, 100 pairs per class,
+seed 2026); \emph{Eaton 2025} (the matched cross-view set, 300 per class
+with the $n{=}30$ minority class fully included; Prompt~C sees the
+post-event field image only --- declared, not hidden --- and its five
+classes are collapsed onto the set's three repairability classes by DINS
+semantics before scoring). Every prediction is a record: image sha256,
+truth, prediction, response digest, latency, model digest. An
+unparseable answer is recorded as unparseable, never coerced into a
+class. A stage aborts if more than 20\,\% of answers are off-schema, if
+a metric leaves $[0,1]$, if fewer than 95\,\% of graded samples fall
+inside the grid the event already describes, or if any product lacks an
+uncertainty block. We report accuracy and RAPID's normalized
+cross-severity error, $\mathrm{NCSE}=\overline{|y-\hat{y}|}/(K{-}1)$.
+
+\begin{table}[t]
+\caption{Six open VLMs, one pass at temperature 0, quantised weights, on
+the same seeded samples under the same prompt digests. Accuracy / NCSE.
+Blocks are not comparable across columns (different class counts). The
+closed-model row is RAPID's published number on the same Palisades
+images and on a 150-pair subset of the Milton set.}
+\label{tab:vlm}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+model & Palisades (5 cl.) & Milton pairs (3 cl.) & Eaton (3 cl.) \\
+\midrule
+qwen2.5vl:7b (ref.)      & 0.475 / 0.213 & \textbf{0.597} / 0.238 & 0.910 / 0.049 \\
+qwen3-vl:32b$^{\dagger}$ & \textbf{0.554} / 0.176 & 0.381 / 0.431 & 0.901 / 0.053 \\
+qwen2.5vl:32b$^{\dagger\ddagger}$ & 0.507 / 0.206 & 0.560 / 0.240 & 0.931 / 0.039 \\
+gemma3:27b               & 0.529 / 0.187 & 0.500 / 0.257 & 0.914 / 0.049 \\
+mistral-small3.2:24b     & 0.505 / 0.203 & 0.487 / 0.258 & \textbf{0.935} / 0.037 \\
+gemma3:12b               & 0.546 / 0.178 & 0.427 / 0.287 & 0.906 / 0.051 \\
+qwen3-vl:8b              & 0.514 / 0.195 & 0.462 / 0.324 & 0.924 / 0.041 \\
+\midrule
+closed (RAPID)           & 0.573 GPT-5-mini & 0.591 GPT-5.1 & --- \\
+\bottomrule
+\end{tabular}
+\par\smallskip\footnotesize
+$^{\dagger}$8k context so the weights fit the card; $^{\ddagger}$95\,\% of
+the model in VRAM, the rest on CPU --- recorded in the run, because a
+spilled model is a different run. A seventh model (llama3.2-vision:11b)
+could not be loaded by the serving stack and is declared as a serving
+failure, not scored.
+\end{table}
+
+\textbf{What the runs say.} Table~\ref{tab:vlm} reports seven models
+(a 7B reference plus six candidates), each committed with its own eval
+summary, prediction records, agreement grid, and GPU placement as it
+finished. Four things hold across the table.
+(i)~\emph{On a single post-event image, every open model beats the 7B
+reference, and the best is within two points of the paper's closed
+models.} Size is not the axis: gemma3:12b (0.546) is within one point
+of qwen3-vl:32b (0.554) and ahead of gemma3:27b.
+(ii)~\emph{On pre/post pairs, no open model beats the 7B reference, and
+the failures are systematic.} qwen3-vl:32b calls 258 of 300 pairs
+Severe (Mild recall 0.01); gemma3:12b calls 262 Moderate (Severe recall
+0.17); mistral puts 213 in Moderate (Mild recall 0.13). Each model has a
+different fixed bias on the change task, so a vote across them would not
+be a fix; the per-class recall column in the committed table is the
+finding.
+(iii)~\emph{Eaton's small class is where every model is weak.}
+\texttt{damaged\_repairable} ($n{=}30$) recall runs from 0.03 to 0.43
+while the two large classes sit above 0.9; the headline 0.93 is the
+large classes.
+(iv)~\emph{Latency is a model property.} The qwen3 family spends its
+time in hidden reasoning before a 60-character answer: qwen3-vl:8b's
+median is 5\,s, but nine Palisades images took over 30\,s, and on Milton
+24 pairs hit the client timeout and were recorded as unavailable
+(8.3\,\% unanswered, under the 20\,\% bound, so the case stands with its
+unanswered rate on the record).
+
+\textbf{What the harness did with it.} The agreement grids sit beside
+the human-labelled grids they are evaluated against, flagged
+\texttt{model\_derived}; the publication planner classifies them as
+evaluation products; the claim plane has no rule that admits them; and
+the gateway's evidence store skips them and records the exclusion. A
+reader can verify every number from the committed prediction records
+and prompt digests without a GPU. What no reader can do --- and what the
+system therefore does not do --- is turn a 0.93 into a sentence about a
+street.
+
 \section{The Harness Catching Its Own System}
 \label{sec:incidents}
 
-Two preserved incidents are, we believe, the strongest evidence the
+Three preserved incidents are, we believe, the strongest evidence the
 mechanism does real work.
 
 \textbf{The publication boundary.} A parcel-level DINS file (18{,}428
@@ -288,50 +398,73 @@ exemption set; acceptance on a representative draft set fell from 9/13
 to 7/13 sentences --- the two newly refused sentences being exactly the
 uncited reassurances a resident should not receive.
 
-The audit log also preserves an over-strict join assertion the harness
-rejected during the Eaton SVI build (envelope tracts vs.\ burn-area
-tracts), recorded as a failure and corrected in a subsequent run ---
-append-only history, including of our own mistakes.
+\textbf{The agent reading what the publisher withheld.} The gateway's
+evidence store loaded every event dossier and grid on disk, ignoring
+both the \texttt{published\_events} list and the \texttt{model\_derived}
+flag. The first evaluation case written under \texttt{events/} --- the
+Palisades VLM run of Section~\ref{sec:vlm} --- would have been located by
+point and its predictions cited as tile facts, and Milton's model-graded
+pair grid would have been served beside the human-labelled grid it is
+evaluated against. The publication planner had excluded them; the agent
+had not. The fix makes both planes publish from one list, has the store
+skip model-derived products and record every exclusion, and refuses to
+start a store over ``every event on disk'' as a misconfiguration rather
+than a fallback (20 new tests). The pattern is the same as the first
+incident: a constraint written in one place and enforced in another is
+enforced nowhere.
 
 \section{Evaluation Environment}
 
 Following \citet{yang2026accountable}, the test suite is designed as the
 paper's verifiable evaluation environment rather than an afterthought:
-301 Python tests and 67 app tests run in CI on every push, including a
+363 Python tests and 67 app tests run in CI on every push, including a
 cell-by-cell policy-matrix sweep (every role $\times$ tier $\times$
 resolution combination against expected authorization), adversarial
 claim-check cases, fail-closed connector tests against real error
-envelopes, and the containment property test for content-free lookup
-records. Anchor checks resolve every path-shaped reference in the
-documentation against the repository, so the manual cannot silently rot.
-Judges can run the environment in two commands from the README.
+envelopes, the containment property test for content-free lookup
+records, the gateway-scope tests above, and the VLM stages' parsing,
+fail-closed and resume logic with the model call injected. Anchor checks
+resolve every path-shaped reference in the documentation against the
+repository, so the manual cannot silently rot. A CI check regenerates
+the publication allowlist from the policy and fails on any drift, which
+is how a hand edit cannot widen the public surface. Judges can run the
+environment in two commands from the README.
 
 \section{Related Work}
 
 Autonomous-GIS agents demonstrate that LLMs can operate spatial tooling
 \cite{li2023autonomous,zhang2024geogpt}; our contribution is orthogonal
 --- a harness that constrains any such agent's claims to its evidence.
-Operational platforms such as the Texas Disaster Information
-System~\cite{tdis2026} field forecast-forward flash-flood impact and exposure summaries at
-state scale; accountability there rests on interface disclaimers,
-whereas RAY binds each sentence to a hashed artifact and a policy
-rule. Global registries (EM-DAT~\cite{delforge2025emdat}, GDACS~\cite{gdacs}) record that events happened;
-none carries, per row, what resolution of claim the evidence authorizes
-or whether a reader may keep it --- the two fields this system computes
-for every artifact.
+RAPID~\cite{yang2026rapid} shows that a multi-agent pipeline over closed
+APIs can grade damage from imagery interpretably; we keep its prompts,
+metric and acceptance rules as harness stages, replace the closed models
+with open ones, and decline its LLM task planner, because a model
+choosing which agents run conflicts with a policy plane. Operational
+platforms such as the Texas Disaster Information System~\cite{tdis2026}
+field forecast-forward impact summaries at state scale; accountability
+there rests on interface disclaimers, whereas RAY binds each sentence to
+a hashed artifact and a policy rule. Global registries
+(EM-DAT~\cite{delforge2025emdat}, GDACS~\cite{gdacs}) record that events
+happened; none carries, per row, what resolution of claim the evidence
+authorizes or whether a reader may keep it --- the two fields this system
+computes for every artifact.
 
 \section{Limitations}
 
 The deep-case builders read a $\sim$33\,GB corpus on the maintainer's
 workstation, so third parties can verify the committed artifacts,
-hashes, and audit logs but not regenerate them. The agent gateway runs
-locally (no hosted endpoint; no auth or rate limiting yet), so the
-public demo ships without chat. The re-derivable regime is implemented
-and tested against a stub but has never run against a live commercial
-API. Inspection routing is not implemented. Nationwide coverage is
-Tier-1 watch only; the app declares this boundary instead of smoothing
-over it, which we consider a feature, but reviewers should not mistake
-three deep cases for national analysis capability.
+hashes, and audit logs but not regenerate them. The VLM results are one
+pass at temperature zero on 4-bit quantised weights; a model digest pins
+the weights, not the arithmetic, and 32B is the ceiling of a 24\,GB card.
+Milton and Eaton are seeded stratified samples, and the closed-model
+reference for Milton was graded on a different 150-pair subset. The agent
+gateway runs locally (no hosted endpoint; no auth or rate limiting yet),
+so the public demo ships without chat. The re-derivable regime is
+implemented and tested against a stub but has never run against a live
+commercial API. Nationwide coverage is Tier-1 watch only; the app
+declares this boundary instead of smoothing over it, which we consider a
+feature, but reviewers should not mistake three deep cases for national
+analysis capability.
 
 \begin{acks}
 RAY is an MIT-licensed research prototype. It is not an official

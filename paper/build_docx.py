@@ -76,7 +76,9 @@ def body_from(tex: str) -> str:
     body = re.sub(r"\\bibliographystyle\{[^}]*\}\n?", "", body)
     body = re.sub(r"\\bibliography\{[^}]*\}\n?", "", body)
     # \label after \section confuses nothing, but the docx has no cross-refs: spell them out.
-    body = body.replace("Section~\\ref{sec:incidents}", "Section 4")
+    body = body.replace("Section~\\ref{sec:vlm}", "Section 4")
+    body = body.replace("Section~\\ref{sec:incidents}", "Section 5")
+    body = body.replace("Table~\\ref{tab:vlm}", "Table 1")
     return body
 
 

@@ -548,15 +548,15 @@ No new dependencies.
   the author emails are placeholders (four authors as of 2026-09-03: Yang, Zou, Gong, Wang; all four confirmed), and the assumed format (sigconf, 4 pages)
   must be reconciled with the Track A brief behind the event login (blocked item 5).
 
-## 🔧 In progress — branch `evidence/vlm-severity` (2026-09-03, not merged)
+## ✅ VLM evidence line — branch `evidence/vlm-severity`, merged to main 2026-09-04 (`37bcb35`)
 
 Porting the RAPID line (Yang et al. 2026, arXiv 2606.21819 — four closed-API
 agents) into the Steward Harness on **open models**. Decision from the
 2026-09-03 review: keep the *mechanisms*, not the agents — RAPID's prompts,
 schemas, NCSE metric and acceptance rules become harness stages; its LLM
 TaskPlanner is **not** adopted (an LLM choosing which agents run conflicts
-with the policy plane). The branch is pushed and **must not merge before the 09-04
-submission** (Mac decision, not revisited); the Windows workstation finished the handover
+with the policy plane). The branch was merged to main on 2026-09-04 at the owner's decision (the earlier Mac
+decision not to merge before submission was revisited); the Windows workstation finished the handover
 list the same day, and merged the renamed `main` (`cda24cf`) into the branch so the merge
 back is a fast-forward of evidence, not a rename conflict.
 
