@@ -671,12 +671,12 @@ What the RTX 3090 (24 GB) holds, measured with a one-token probe before the swee
 | `qwen2.5vl:32b-ctx8k` (`num_ctx 8192`) | 21 GB | 22.2 / 23.3 GB (95 %) | ~1 GB on CPU, accepted and recorded |
 | `gemma3:27b` | 17 GB | 17.5 / 17.5 GB (100 %) at 32k | |
 | `mistral-small3.2:24b` | 15 GB | 19.6 / 19.6 GB (100 %) at 32k | |
-| `llama3.2-vision:11b` | 7.8 GB | fits | single-image model: the Milton pair case is expected to fail closed and be recorded |
+| `llama3.2-vision:11b` | 7.8 GB | **does not load** | Ollama 0.32.14 on this workstation rejects the weights (`unknown model architecture: 'mllama'`, llama-server exit 1); every call was HTTP 500 in ~4 s, recorded as `LLMUnavailable`. Re-pulling gave the same `mllama` blob. Dropped from the sweep 2026-09-04 05:50; its 25 error records were not committed. Declared unknown, not a model result. |
 | `gemma3:12b`, `qwen3-vl:8b` | 8.1 / 6.1 GB | fit | |
 
 32B at Q4 is the ceiling for this card; 72B-class vision models do not fit. Cold load is 110–160 s per model from
 the model disk; qwen3-vl:32b-ctx8k grades a Palisades image in ~8 s (qwen2.5vl:7b: ~3.2 s). Order: the two 32B
-models first, then 27B, 24B, 11B, 12B, 8B; Palisades (295) → Milton (300 pairs) → Eaton (630) per model.
+models first, then 27B, 24B, 12B, 8B (11B removed, see the table); Palisades (295) → Milton (300 pairs) → Eaton (630) per model.
 Each model's three cases are committed and pushed as they finish; the comparison page is regenerated at each push.
 Partial prediction files of a case still running are **not** committed. The first launch (15:46) died with its shell
 at 42 / 295 of the first case; the relaunch (16:45) runs as a Windows scheduled task (`RayVlmSweep`), detached from
