@@ -1,7 +1,7 @@
 {
  "schema_version": "yifan-disaster-registry-v1",
  "dataset_name": "SVI_PalisadesFireImages",
- "generated_utc": "20260904T091043Z",
+ "generated_utc": "20260904T104801Z",
  "event": "Palisades Fire 2025",
  "hazard_type": "wildfire",
  "role": "labelled post-event street-view set for zero-shot severity evaluation (RAPID Dataset C2)",
