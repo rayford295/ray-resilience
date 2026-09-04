@@ -39,6 +39,12 @@
       "redact_workstation_paths": false
     },
     {
+      "path": "events/eaton-2025/evidence/vlm_crossview_eval.qwen2.5vl-32b-ctx8k.json",
+      "kind": "vlm_eval_summary",
+      "rule_id": "allow-publish-event-accountability-records",
+      "redact_workstation_paths": false
+    },
+    {
       "path": "events/eaton-2025/evidence/vlm_crossview_eval.qwen3-vl-32b-ctx8k.json",
       "kind": "vlm_eval_summary",
       "rule_id": "allow-publish-event-accountability-records",
@@ -46,6 +52,12 @@
     },
     {
       "path": "events/eaton-2025/evidence/vlm_crossview_h3_r9_grid.geojson",
+      "kind": "evidence_grid",
+      "rule_id": "allow-publish-tile-products",
+      "redact_workstation_paths": false
+    },
+    {
+      "path": "events/eaton-2025/evidence/vlm_crossview_h3_r9_grid.qwen2.5vl-32b-ctx8k.geojson",
       "kind": "evidence_grid",
       "rule_id": "allow-publish-tile-products",
       "redact_workstation_paths": false
@@ -159,6 +171,12 @@
       "redact_workstation_paths": false
     },
     {
+      "path": "events/milton-2024/evidence/vlm_bitemporal_eval.qwen2.5vl-32b-ctx8k.json",
+      "kind": "vlm_eval_summary",
+      "rule_id": "allow-publish-event-accountability-records",
+      "redact_workstation_paths": false
+    },
+    {
       "path": "events/milton-2024/evidence/vlm_bitemporal_eval.qwen3-vl-32b-ctx8k.json",
       "kind": "vlm_eval_summary",
       "rule_id": "allow-publish-event-accountability-records",
@@ -166,6 +184,12 @@
     },
     {
       "path": "events/milton-2024/evidence/vlm_bitemporal_h3_r9_grid.geojson",
+      "kind": "evidence_grid",
+      "rule_id": "allow-publish-tile-products",
+      "redact_workstation_paths": false
+    },
+    {
+      "path": "events/milton-2024/evidence/vlm_bitemporal_h3_r9_grid.qwen2.5vl-32b-ctx8k.geojson",
       "kind": "evidence_grid",
       "rule_id": "allow-publish-tile-products",
       "redact_workstation_paths": false
@@ -198,6 +222,12 @@
   "denied": [
     {
       "path": "events/eaton-2025/evidence/vlm_crossview_predictions.jsonl",
+      "kind": "vlm_prediction_records",
+      "rule_id": "deny-publish-parcel-resolution",
+      "reason": "Parcel-resolution artifacts are lineage-only and are never served."
+    },
+    {
+      "path": "events/eaton-2025/evidence/vlm_crossview_predictions.qwen2.5vl-32b-ctx8k.jsonl",
       "kind": "vlm_prediction_records",
       "rule_id": "deny-publish-parcel-resolution",
       "reason": "Parcel-resolution artifacts are lineage-only and are never served."
@@ -294,6 +324,12 @@
     },
     {
       "path": "events/milton-2024/evidence/vlm_bitemporal_predictions.jsonl",
+      "kind": "vlm_prediction_records",
+      "rule_id": "deny-publish-parcel-resolution",
+      "reason": "Parcel-resolution artifacts are lineage-only and are never served."
+    },
+    {
+      "path": "events/milton-2024/evidence/vlm_bitemporal_predictions.qwen2.5vl-32b-ctx8k.jsonl",
       "kind": "vlm_prediction_records",
       "rule_id": "deny-publish-parcel-resolution",
       "reason": "Parcel-resolution artifacts are lineage-only and are never served."

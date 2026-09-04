@@ -1,5 +1,5 @@
 {
- "generated_utc": "20260904T041945Z",
+ "generated_utc": "20260904T071647Z",
  "blocks": [
   {
    "event_id": "eaton-2025",
@@ -13,6 +13,30 @@
     "view": "post_field"
    },
    "rows": [
+    {
+     "model": "qwen2.5vl:32b-ctx8k",
+     "model_digest": "fd7f6360dca6",
+     "run_tag": "qwen2.5vl-32b-ctx8k",
+     "same_setup": true,
+     "n": 630,
+     "n_scored": 626,
+     "unanswered_rate": 0.0063,
+     "accuracy": 0.9313,
+     "ncse": 0.0391,
+     "adjacent_error_rate": 0.0591,
+     "per_class_recall": "0.97 / 0.13 / 0.97",
+     "classes": [
+      "no_or_trace_damage",
+      "damaged_repairable",
+      "destroyed"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": 300,
+     "seed": 2026,
+     "run_id": "3974d6d3863a",
+     "generated_utc": "20260904T071645Z",
+     "file": "events/eaton-2025/evidence/vlm_crossview_eval.qwen2.5vl-32b-ctx8k.json"
+    },
     {
      "model": "qwen2.5vl:7b",
      "model_digest": "5ced39dfa4ba",
@@ -101,6 +125,30 @@
      "file": "events/milton-2024/evidence/vlm_bitemporal_eval.json"
     },
     {
+     "model": "qwen2.5vl:32b-ctx8k",
+     "model_digest": "fd7f6360dca6",
+     "run_tag": "qwen2.5vl-32b-ctx8k",
+     "same_setup": true,
+     "n": 300,
+     "n_scored": 300,
+     "unanswered_rate": 0.0,
+     "accuracy": 0.56,
+     "ncse": 0.24,
+     "adjacent_error_rate": 0.4,
+     "per_class_recall": "0.51 / 0.52 / 0.65",
+     "classes": [
+      "Mild",
+      "Moderate",
+      "Severe"
+     ],
+     "prompt_sha256": "a8df1841df157cec440335fd22e804ae7c08237a60e2b921dc3ab929daf2f9e8",
+     "sample_per_class": 100,
+     "seed": 2026,
+     "run_id": "3940ff347bf6",
+     "generated_utc": "20260904T061840Z",
+     "file": "events/milton-2024/evidence/vlm_bitemporal_eval.qwen2.5vl-32b-ctx8k.json"
+    },
+    {
      "model": "qwen3-vl:32b-ctx8k",
      "model_digest": "d2b2007e0497",
      "run_tag": "qwen3-vl-32b-ctx8k",
@@ -171,6 +219,32 @@
      "run_id": "a5bda3668001",
      "generated_utc": "20260903T224420Z",
      "file": "events/palisades-2025/evidence/vlm_severity_eval.qwen3-vl-32b-ctx8k.json"
+    },
+    {
+     "model": "qwen2.5vl:32b-ctx8k",
+     "model_digest": "fd7f6360dca6",
+     "run_tag": "qwen2.5vl-32b-ctx8k",
+     "same_setup": true,
+     "n": 295,
+     "n_scored": 294,
+     "unanswered_rate": 0.0034,
+     "accuracy": 0.5068,
+     "ncse": 0.2058,
+     "adjacent_error_rate": 0.2721,
+     "per_class_recall": "1.00 / 0.12 / 0.17 / 0.30 / 0.93",
+     "classes": [
+      "0_No_Damage",
+      "1_Affected_1_9",
+      "2_Minor_10_25",
+      "3_Major_26_50",
+      "4_Destroyed_50plus"
+     ],
+     "prompt_sha256": "70d933265e16c67a31985bce41d303781b044145df176f09ad22f73e3e5254c1",
+     "sample_per_class": null,
+     "seed": null,
+     "run_id": "054954f695bb",
+     "generated_utc": "20260904T044956Z",
+     "file": "events/palisades-2025/evidence/vlm_severity_eval.qwen2.5vl-32b-ctx8k.json"
     },
     {
      "model": "qwen2.5vl:7b",
