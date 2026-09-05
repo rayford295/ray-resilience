@@ -1,0 +1,92 @@
+% Eligibility and Contribution Statement — OASIS Challenge @ ACM SIGSPATIAL 2026, Track A.
+% Separate PDF required by the submission checklist (item 4).
+% Build: pdflatex eligibility-and-contribution-statement.tex
+%
+% Items marked \todo{} are for the owner to confirm before submission; they
+% print in red so an unconfirmed draft cannot be mistaken for a final one.
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{parskip}
+\hypersetup{colorlinks=true, urlcolor=blue!60!black, linkcolor=black}
+\newcommand{\todo}[1]{\textcolor{red!80!black}{[#1]}}
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Eligibility and Contribution Statement}\\[4pt]
+{\large OASIS Challenge @ ACM SIGSPATIAL 2026 --- Track A: Disaster Resilience \& Vulnerability Analysis}\\[8pt]
+\textbf{Submission:} \emph{RAY: Resilience Assistant for You --- An Accountable GeoAI System for Place-Based Disaster Intelligence}\\
+\textbf{Repository:} \url{https://github.com/rayford295/ray-resilience}\\
+\textbf{Date:} September 4, 2026
+\end{center}
+
+\section*{1. Team and Eligibility}
+
+The submission is student-led. The team consists of three students and one non-student faculty advisor, all at Texas A\&M University (College Station, TX, USA).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}p{1.35in}p{2.35in}p{2.6in}@{}}
+\toprule
+\textbf{Member} & \textbf{Affiliation} & \textbf{Status} \\
+\midrule
+Yifan Yang & Department of Geography & Ph.D.\ student; team lead and corresponding author \\
+Ziyi Wang & Department of Computer Science and Engineering & Ph.D.\ student \\
+Wenjing Gong & Department of Landscape Architecture and Urban Planning & \todo{confirm: Ph.D.\ student / postdoctoral researcher} \\
+Lei Zou & Department of Geography & Faculty; non-student advisor \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+We confirm that the lead author and corresponding author, Yifan Yang, is a currently enrolled doctoral student, that the students listed above are currently enrolled in degree programs at Texas A\&M University, and that the system, experiments, and report were carried out by the students under the advisor's supervision. The advisor did not write code for the submission.
+
+\section*{2. Member Contributions}
+
+Contributions follow the CRediT taxonomy. Roles are listed in order of the effort spent.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}p{1.35in}p{5.0in}@{}}
+\toprule
+\textbf{Member} & \textbf{Contributions} \\
+\midrule
+Yifan Yang (student) &
+Conceptualization; methodology; software (the Steward Harness, the claim and distribution policy planes, the deep-case builders, the agent gateway, the progressive web app, the vision--language-model evaluation stages and the multi-model sweep); data curation (the hashed dataset registry, label crosswalks, and the three event dossiers); investigation and validation (the test suite as evaluation environment; the six-model VLM evaluation); visualization; writing --- original draft, review and editing; project administration. Author of the repository's commit history. \\
+Ziyi Wang (student) &
+\todo{confirm} Investigation and validation of the agent gateway and resident/planner interaction design (human-in-the-loop points, refusal and citation presentation); writing --- review and editing. \\
+Wenjing Gong (\todo{status}) &
+\todo{confirm} Methodology and resources for the street-view damage-assessment line (the RAPID prompts, label schemas and the bi-temporal and cross-view datasets this work evaluates against); data curation; writing --- review and editing. \\
+Lei Zou (advisor) &
+Supervision; conceptualization of the accountable-GeoAI framing the system implements; funding acquisition; resources; writing --- review and editing. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{3. Use of AI Assistance}
+
+The lead author used Claude (Anthropic), including the Claude Code programming assistant, during development and writing: for drafting and refactoring code under the author's direction, for generating figures from the committed evaluation files, and for polishing the language of the manuscript. The assistant's involvement is recorded transparently in the repository: commits it contributed to carry a \texttt{Co-Authored-By} trailer. All design decisions, data-handling rules, experiments, verification, and the claims made in the report are the authors' own and were reviewed by the authors, who take full responsibility for the code and the text.
+
+\section*{4. Funding}
+
+This research is based on work supported by the National Academies of Sciences, Engineering, and Medicine (NASEM) under the Gulf Research Program (Award Nos.\ SCON-10000653 and SCON-10001536) and by the U.S.\ National Science Foundation (Award No.\ 2318206). Any opinions, findings, and conclusions expressed are those of the authors and do not necessarily reflect the views of the funders.
+
+\section*{5. Declaration}
+
+The undersigned confirm that the information above is accurate, that all listed members have approved the submission, and that the submission complies with the OASIS Challenge Track A rules.
+
+\vspace{1.2em}
+\noindent
+\begin{tabular}{@{}p{3.1in}p{3.1in}@{}}
+Yifan Yang (team lead, Ph.D.\ student) & Lei Zou (faculty advisor) \\[1.6em]
+\rule{2.8in}{0.4pt} & \rule{2.8in}{0.4pt} \\
+Signature / date & Signature / date \\
+\end{tabular}
+
+\end{document}
