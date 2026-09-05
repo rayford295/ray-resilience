@@ -20,6 +20,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import os
 import csv
 import gzip
 import shutil
@@ -309,7 +310,7 @@ def main() -> None:
     ap.add_argument(
         "--data-root",
         type=Path,
-        default=Path("C:/Users/yyang295/Desktop/disaster-dataset-Yifan-all"),
+        default=Path(os.environ.get("DISASTER_DATASET_ROOT", "disaster-dataset")),
     )
     ap.add_argument("--debris-csv", type=Path, required=True,
                     help="local copy of h9_debrisv6_matched_baseline_n5618.csv")

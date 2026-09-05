@@ -139,7 +139,7 @@ evidence beside it.
 ```bash
 git clone https://github.com/rayford295/ray-resilience && cd ray-resilience
 python -m pip install -e ".[deepcase]"
-python -m unittest discover -s tests          # 297 pass; 301 with the [gateway] extra (CI installs it)
+python -m pytest -q                           # 363 tests (CI installs the [gateway] extra too)
 
 python scripts/publication_boundary.py plan   # which artifacts may be published
 cd app && npm ci && npm test && npm run dev   # PWA at http://localhost:5173

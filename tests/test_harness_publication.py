@@ -182,7 +182,7 @@ class TestVerifySite(unittest.TestCase):
                 Path(tmp),
                 {
                     "app/events/demo-2026/artifact_manifest.jsonl": json.dumps(
-                        {"inputs": ["C:/Users/yyang295/Desktop/data/x.csv"]}
+                        {"inputs": ["C:/Users/someone/Desktop/data/x.csv"]}
                     )
                 },
             )
@@ -211,8 +211,8 @@ class TestVerifySite(unittest.TestCase):
 class TestWorkstationPathPattern(unittest.TestCase):
     def test_matches_windows_and_posix_home_paths(self) -> None:
         for sample in (
-            "C:/Users/yyang295/Desktop/x.csv",
-            r"C:\Users\yyang295\Desktop\x.csv",
+            "C:/Users/someone/Desktop/x.csv",
+            r"C:\Users\someone\Desktop\x.csv",
             "/Users/yifn/Documents/x.csv",
             "/home/runner/work/x.csv",
         ):

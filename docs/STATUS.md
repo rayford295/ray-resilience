@@ -749,7 +749,7 @@ the rule above was a promise the first driver could not keep because it never to
   is the thing to correct.
 - **Licence mismatch between releases of the same data** (HF card CC BY-NC 4.0 vs Figshare
   CC BY 4.0) still stands; nothing is redistributed by this branch.
-- **`Location.csv` carries workstation paths in `root`** (`C:/Users/yyang295/...`); the
+- **`Location.csv` carries workstation paths in `root`** (`C:/Users/<user>/...`); the
   builder consumes them for pairing and never writes them.
 - **Palisades truth is folder-level**, some images lack EXIF GPS (42 / 295 here); the tile
   grid covers photographed structures, not the perimeter. Both declared in the dossier.
@@ -820,7 +820,7 @@ pattern, which is exactly the gateway hardening this roadmap already sequences f
 | 3 | ~~**Raw imagery transfer**~~ **RESOLVED 2026-08-20** | Plan 3 evidence tier (full depth) | The full collection was located on the owner's workstation (`Desktop/disaster-dataset-Yifan-all`, ~33 GB): DINS points + 19,780 attachment photos, NOAA Altadena orthoimagery, EATON/IAN matched sets, Bi-Temporal pairs. All registered and SHA-256-hashed in `_registry/`; image-level evidence demos are now possible. Remaining sub-question: where to host raw imagery for judges (HF datasets, following the Bi-Temporal precedent). |
 | 4 | ~~**GenDisasterSVI provenance ruling**~~ **RESOLVED 2026-08-20** | Whether Milton GenDisasterSVI may be used as evidence | Street imagery: **excluded** — `dataset.csv` source paths reference `experiment2_ip2p` (InstructPix2Pix), confirming model-generated. The 2,555 `post_sat` satellite images: **owner confirmed real acquisitions (2026-08-20)** — usable as evidence, recorded in the registry profile (`component_tiers`) and the Milton dossier. The Bi-Temporal set remains the street-view evidence source. |
 | 5 | **OASIS submission portal details** | 09-04 submission | Exact paper format/page limit and code-submission mechanism from the event portal. |
-| 6 | **Repository visibility decision** | Judge access + PWA data path | Both repos are currently **private**. Judges reviewing the code, and the PWA fetching `live-data` via `raw.githubusercontent.com`, require public visibility. The timing of flipping to public is the owner's call (it also interacts with prior-disclosure considerations the owner is managing); the fallback for a private demo is token-gated access or copying products into the Pages tree. |
+| 6 | **Repository visibility decision** | Judge access + PWA data path | **Owner decision 2026-09-04: the repository goes public for the submission.** Before the flip the tracked tree was swept for workstation paths (builder defaults now read `DISASTER_DATASET_ROOT`; manifest input paths under the maintainer's dataset roots were rewritten to `<DATASET_ROOT>` / `<RAPID_ROOT>` placeholders — the sha256 in each row stays the verifiable anchor; test fixtures use a neutral username). Nothing else in the tree is a secret: the gateway is keyless, the app is keyless, and every dataset snapshot committed is public or CC-licensed. The one file to decide on is `events/eaton-2025/exposure/dins_points_restricted.csv.gz` (parcel-resolution DINS points, public CAL FIRE data but below the project's own resolution cap): it never ships to the site, but a public repository is itself a distribution channel. |
 
 ## Known limitations (tracked, not blocking)
 

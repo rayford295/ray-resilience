@@ -283,7 +283,7 @@ def main() -> None:
     ap.add_argument(
         "--data-root",
         type=Path,
-        default=Path("C:/Users/yyang295/Desktop/disaster-dataset-Yifan-all"),
+        default=Path(os.environ.get("DISASTER_DATASET_ROOT", "disaster-dataset")),
     )
     ap.add_argument("--events-root", type=Path, default=Path("events"))
     ap.add_argument("--resolution", type=int, default=9)
