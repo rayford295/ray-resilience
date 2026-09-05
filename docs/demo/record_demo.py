@@ -115,12 +115,31 @@ def s3_planner(page):
     page.wait_for_timeout(500)
 
 
-def ask(page, question: str, timeout_ms: int = 240_000):
-    page.get_by_placeholder("How ").fill(question)
-    page.wait_for_timeout(700)
-    page.get_by_role("button", name="Ask", exact=True).click()
-    page.wait_for_selector("button:has-text('Ask'):not([disabled])", timeout=timeout_ms)
-    page.wait_for_timeout(2500)
+def ask(page, question: str, timeout_ms: int = 240_000, retry_post_check: int = 0) -> str:
+    """Ask once; if the harness refused the model's draft at the citation
+    post-check (an uncited sentence), ask again up to `retry_post_check`
+    times — what a user would do, and shown as it happens. Returns the kind
+    of the last outcome: 'answer', 'refusal', or 'unknown'."""
+    for attempt in range(retry_post_check + 1):
+        page.get_by_placeholder("How ").fill(question)
+        page.wait_for_timeout(700)
+        page.get_by_role("button", name="Ask", exact=True).click()
+        page.wait_for_selector("button:has-text('Ask'):not([disabled])", timeout=timeout_ms)
+        page.wait_for_timeout(2500)
+        last = page.locator(".msg.steward").last
+        text = (last.inner_text() if last.count() else "") or ""
+        if "Refused" in text:
+            kind = "refusal"
+        elif "unavailable" in text.lower() or "unreachable" in text.lower():
+            kind = "outage"
+        else:
+            kind = "answer" if text.strip() else "unknown"
+        print(f"[ask] {question!r} attempt {attempt + 1}: {kind} :: {text[:90]!r}", flush=True)
+        retryable = (kind == "refusal" and "claim-post-check" in text) or kind == "outage"
+        if not (retryable and attempt < retry_post_check):
+            return kind
+        page.wait_for_timeout(1500)
+    return "unknown"
 
 
 def s4_ask(page):
@@ -140,13 +159,14 @@ def s4_ask(page):
     # a question the policy refuses before any model call: the refusal names the rule
     ask(page, "Was my house at this address destroyed?", timeout_ms=60_000)
     page.wait_for_timeout(3000)
-    # a question the resident may ask: grounded answer, every sentence cited
-    ask(page, "What evidence covers this address?")
+    # a question the resident may ask: grounded answer, every sentence cited (a
+    # draft with an uncited sentence is refused by the post-check; then ask again)
+    ask(page, "What evidence covers this address?", retry_post_check=2)
     page.wait_for_timeout(4000)
     page.get_by_role("tab", name="planner").click()
     page.wait_for_timeout(1500)
-    ask(page, "How severe is the damage here?")
-    page.wait_for_timeout(5000)
+    ask(page, "How severe is the damage here?", retry_post_check=1)
+    page.wait_for_timeout(6000)
 
 
 # --------------------------------------------------------------------------- post-processing
@@ -204,17 +224,19 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", type=Path, default=Path("docs/demo/out"))
     ap.add_argument("--skip-record", action="store_true", help="reuse raw clips already in <out>/raw")
+    ap.add_argument("--only", nargs="*", default=None, help="record only these scenes (s1_landing s2_resident s3_planner s4_ask); others are reused")
     ap.add_argument("--max-seconds", type=float, default=175.0, help="target total length (hard limit is 180)")
     args = ap.parse_args()
     out = args.out
     (out / "raw").mkdir(parents=True, exist_ok=True)
 
     if not args.skip_record:
+        wanted = set(args.only) if args.only else {"s1_landing", "s2_resident", "s3_planner", "s4_ask"}
         with sync_playwright() as pw:
-            scene(pw, out, "s1_landing", s1_landing)
-            scene(pw, out, "s2_resident", s2_resident)
-            scene(pw, out, "s3_planner", s3_planner)
-            scene(pw, out, "s4_ask", s4_ask)
+            for name, fn in (("s1_landing", s1_landing), ("s2_resident", s2_resident),
+                             ("s3_planner", s3_planner), ("s4_ask", s4_ask)):
+                if name in wanted:
+                    scene(pw, out, name, fn)
 
     ff = ffmpeg_exe()
     raw = {p.stem: p for p in (out / "raw").glob("s*.webm")}

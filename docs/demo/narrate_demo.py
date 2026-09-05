@@ -44,8 +44,9 @@ NARRATION = [
      "A question about a single house is refused before the model is called, and the refusal names the rule: "
      "no parcel-level claims for anyone."),
     ("s4_ask", 0.42,
-     "A question the resident may ask gets a grounded answer from a local open model, with an artifact citation "
-     "on every sentence and the declared unknowns carried along."),
+     "A question the resident may ask goes to a local open model. Every sentence must cite an artifact; a draft "
+     "that does not is refused, and the refusal says why. When the draft passes, the answer carries its citations "
+     "and the declared unknowns."),
     ("s4_ask", 0.76,
      "Switching to planner unlocks tile-level damage where Tier-3 evidence exists. The system computes more than "
      "it is allowed to say, says only what it can cite, and keeps the record, including of its own failures. "
@@ -157,10 +158,11 @@ def main() -> int:
         if len(lines) > 2:  # keep two lines: rewrap wider
             lines = textwrap.wrap(b["text"], 78)
         sub = aud / f"s{b['i']:02d}.txt"
-        sub.write_text("\n".join(lines), encoding="utf-8")
+        with open(sub, "w", encoding="utf-8", newline="\n") as fh:  # LF only: drawtext reads CR as an extra line
+            fh.write("\n".join(lines))
         filters.append(
-            f"drawtext=fontfile='C\\:/Windows/Fonts/arial.ttf':textfile='{esc_path(sub)}':fontsize=24:fontcolor=white:"
-            f"box=1:boxcolor=black@0.58:boxborderw=12:line_spacing=6:x=(w-text_w)/2:y=h-th-46:"
+            f"drawtext=fontfile='C\\:/Windows/Fonts/arial.ttf':textfile='{esc_path(sub)}':fontsize=23:fontcolor=white:"
+            f"box=1:boxcolor=black@0.6:boxborderw=10:line_spacing=5:x=(w-text_w)/2:y=h-th-40:"
             f"enable='between(t\\,{b['start']}\\,{b['end'] + 0.25})'"
         )
     vf = ",".join(filters)
