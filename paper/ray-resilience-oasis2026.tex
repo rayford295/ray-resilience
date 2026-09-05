@@ -10,6 +10,10 @@
 %   2. Page limit and template variant are assumed (sigconf, 4 pages +
 %      references) — reconcile with the Track A brief before submission.
 \documentclass[sigconf,screen]{acmart}
+\usepackage{tabularx}
+\usepackage{array}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\emergencystretch=1em
 
 \setcopyright{rightsretained}
 \copyrightyear{2026}
@@ -48,31 +52,21 @@
 \email{ziyiwang@tamu.edu} % from the author's homepage (zoe-wang.com); verify before submission
 
 \begin{abstract}
-Vulnerability, risk and priority are value-laden; a system that computes
-them for the public owes the public an account of \emph{who} decided
-\emph{what}, on \emph{which} evidence, at \emph{what} resolution. RAY
-(Resilience Assistant for You) is a disaster-resilience agent built around
-that obligation. Its pipelines run autonomously --- hourly federal hazard
-feeds, and deep-case builders that turn raw damage registries, social
-vulnerability, census population and street imagery into H3 grids across
-three events in two hazard types --- but every stage runs inside the
-\emph{Steward Harness}, which enforces outcome, process and institutional
-validity in code: spatial checks and mandatory uncertainty per tile,
-SHA-256 lineage in an append-only audit, a declarative policy of who may
-be told what at which resolution, a distribution policy verified by a CI
-gate, and citation-by-default for every sentence the agent utters. The
-value judgements are made explicit and handed back to people: vulnerability
-is CDC SVI as published, exposure is the 2020 census, priority is a
-trade-off a planner sets on a slider, and residents receive context and
-guidance rather than assessments of their own parcel. We then ask what it
-takes for a vision--language model's output to count as evidence, grading
-1{,}225 labelled samples per model with six open VLMs on one GPU under
-verbatim published prompts; the results are published as an evaluation
-and refused as a claim. The audit record preserves three incidents where
-the harness caught the system violating its own rules, and 363 Python and
-67 app tests form a verifiable evaluation environment. We close with what
-this architecture cannot do, and why we think an agent in public
-decision-making should be a steward rather than an oracle.
+RAY (Resilience Assistant for You) is a disaster-resilience GeoAI system
+designed around a simple requirement: every public claim must stay within
+the evidence and leave a record that can be checked. Hourly federal feeds
+and event builders turn hazard, damage, vulnerability, population, and
+imagery data into H3 products for three deep cases. A \emph{Steward Harness}
+checks spatial outputs, records SHA-256 lineage, enforces separate claim and
+distribution policies, and tracks whether evidence is retained,
+re-derivable, or cited-only. Residents receive context and guidance rather
+than parcel damage assessments; planners choose the trade-off between damage
+and social vulnerability. Six open vision--language models were evaluated on
+1{,}225 labelled samples per model, but their outputs remain evaluation
+products and are excluded from operational claims. Three recorded failures
+led to new publication, citation, and evidence-scope controls. The result is
+an executable accountability design for autonomous geospatial workflows,
+with explicit limits on coverage, disclosure, and evidence use.
 \end{abstract}
 
 \begin{CCSXML}
@@ -129,27 +123,54 @@ and reflection} (\S\ref{sec:vlm}--\ref{sec:reflect}): model output treated
 as governed evidence, three self-caught violations, and the limits of the
 whole approach.
 
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.98\textwidth]{figures/fig1_architecture.png}
+  \caption{RAY system architecture. The claim plane governs what the agent may
+  say; the distribution plane governs what the public build may ship. Both use
+  the same policy source and default to denial when no rule applies.}
+  \label{fig:architecture}
+\end{figure*}
+
 \section{Autonomy Under Constraint}
 \label{sec:autonomy}
 
 \textbf{What runs without a human.} The data plane is a set of GitHub
 Actions pipelines. Four keyless federal connectors (USGS earthquakes, NWS
-alerts, NHC tropical cyclones, NIFC/WFIGS wildfires) refresh hourly and
-write append-only snapshots and a national watch product. Deep-case
-builders ingest raw registries and execute the spatial logic end to end:
-18{,}428 CAL FIRE DINS structure points binned to a 265-cell H3 r9 grid
-with per-severity counts; CDC SVI tract ranks assigned to cells by
-point-in-polygon; 2020 census blocks allocated to tiles by centroid;
-2{,}244 reliability-gated cross-view street samples matched to a coverage
-grid; and, in \S\ref{sec:vlm}, six vision--language models grading 1{,}225
-labelled images per model through one endpoint contract. No low-level
-cleaning is done by hand. A hashed dataset registry (134{,}272 files,
-$\sim$33\,GB) carries a label crosswalk onto one canonical severity scale;
-CDC's $-999$ sentinel becomes a counted missing value, never a number; and
-when the Hugging Face repackaging of the Milton pair set disagreed with
-the Figshare pair table on 182 of 2{,}556 pairs, the builder took the
-table as truth and \emph{recorded} the disagreement instead of
-reconciling it.
+alerts, NHC tropical cyclones, and NIFC/WFIGS wildfires) refresh hourly and
+write append-only snapshots plus a national watch product. Deep-case builders
+ingest registered files, execute the spatial logic, validate the outputs, and
+append audit rows without manual low-level cleaning. Table~\ref{tab:cases}
+summarizes the committed products and the limits that travel with them. A
+hashed dataset registry (134{,}272 files, $\sim$33\,GB) carries a label
+crosswalk onto one severity scale. CDC's $-999$ sentinel becomes a counted
+missing value, never a number. When the Hugging Face Milton pairs disagreed
+with the Figshare table on 182 of 2{,}556 pairs, the builder used the table as
+truth and recorded the discrepancy.
+
+\begin{table}[t]
+\caption{Deep-case products and declared limits. Population is 2020 Census
+exposure; facilities are OpenStreetMap locations, not operational-status
+claims.}
+\label{tab:cases}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}lYY@{}}
+\toprule
+case & committed result & limit carried forward \\
+\midrule
+Eaton 2025 & 18{,}428 DINS points $\rightarrow$ 265 cells; 2{,}244 cross-view
+samples $\rightarrow$ 109; 46{,}341 residents; 27 facilities & 40 inaccessible
+points; repairable $n{=}30$; tract-to-cell SVI is approximate \\
+Milton 2024 & 2{,}556 image pairs $\rightarrow$ 15 cells; 5{,}618 debris
+cells; 772{,}293 residents; 200 facilities & season-cumulative imagery cannot
+isolate Milton damage \\
+Ian 2022 & 886 matched samples $\rightarrow$ 190 cells; 4{,}121 positions
+$\rightarrow$ 413 density cells; 5{,}428 residents; 79 facilities & density
+cells support coverage, not point-level severity \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \textbf{Debugging as a first-class record.} Autonomous code fails. The
 harness's answer is not a retry loop but fail-closed stages whose
@@ -223,10 +244,10 @@ Eaton Fire 2025 (CA, wildfire), Hurricane Milton 2024 (FL) and Hurricane
 Ian 2022 (FL) cases; adding an event is a dossier directory and one entry
 in \texttt{published\_events}, and the policy contains no geography. The
 Tier-1 watch is nationwide by construction. Where evidence does not
-generalize the system says so: Ian's 4{,}121 further street-view positions
-ship as a density-only layer because no verifiable per-point severity link
-exists. The test suite is the robustness evidence: 363 Python and 67 app
-tests in CI, including a cell-by-cell policy-matrix sweep (every role
+generalize the system says so; Table~\ref{tab:cases} separates verified
+severity from density-only coverage. The test suite is the robustness
+evidence: 363 Python and 67 app tests in CI, including a cell-by-cell
+policy-matrix sweep (every role
 $\times$ tier $\times$ resolution), adversarial claim checks, connector
 tests against real error envelopes, and an allowlist drift check that
 fails on any hand edit. Judges can run it in two commands from the README.
@@ -234,20 +255,33 @@ fails on any hand edit. Judges can run it in two commands from the README.
 \section{Social Good Alignment}
 \label{sec:social}
 
-\textbf{Definitions, operationalized.} \emph{Vulnerability} is the CDC/ATSDR
-SVI 2022 percentile rank (overall and four themes) of the census tract a
-cell falls in, published as a tract quantity and downscaled with the
-approximation declared; the system adds no index of its own.
-\emph{Exposure} is 2020 decennial population by block, declared as
-pre-event population, not who was present. \emph{Damage} is an official
-or human label --- CAL FIRE DINS classes, a repairability label derived
-from them, or a human perception label on a street-view pair --- never a
-model's guess (\S\ref{sec:vlm}). \emph{Priority} is
-$t\cdot\mathrm{damage}+(1-t)\cdot\mathrm{SVI}$ with $t$ chosen by the
-planner; the system computes the trade-off, it does not own it. Each
+\textbf{Operational definitions.} RAY uses established measures and
+keeps the remaining choices visible (Table~\ref{tab:definitions}). Each
 definition is a committed artifact with a hashed source snapshot, so a
-reader who disagrees with a definition can see exactly what to disagree
-with.
+reader can inspect both the measure and its limits.
+
+\begin{table}[t]
+\caption{Operational definitions used by RAY.}
+\label{tab:definitions}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}lY@{}}
+\toprule
+concept & definition and guardrail \\
+\midrule
+Vulnerability & CDC/ATSDR SVI 2022 tract percentiles; cell display is marked
+as downscaled \\
+Exposure & 2020 Census block population assigned by centroid; pre-event
+population only \\
+Damage & official DINS classes, a declared repairability mapping, or human
+perception labels; never a model guess \\
+Priority & $t\cdot\mathrm{damage}+(1-t)\cdot\mathrm{SVI}$; the planner
+chooses $t$ and the system logs it \\
+Coverage & covered, outside evaluated areas, or not determined; a failed
+layer is not ``outside'' \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \textbf{Equity as enforced rules.} Fairness here is not a metric but a set
 of institutional constraints about who may be told what, each a named
@@ -283,8 +317,8 @@ carries its own measured accuracy or carries nothing; no claim-plane rule
 admits it; the gateway's evidence store refuses to load it. We ported the
 Damage Recognition prompts of RAPID~\cite{yang2026rapid} verbatim (Prompt~C
 single image, five DINS classes; Prompt~B pre/post pair, three
-human-perception classes), froze each as a \texttt{prompt\_sha256} in every
-record, and served open weights with Ollama on one RTX~3090 (24\,GB), so
+human-perception classes), recorded a SHA-256 prompt digest in every
+prediction, and served open weights with Ollama on a 24\,GB RTX~3090, so
 the run is keyless and repeatable. Three cases: Palisades 2025 (RAPID
 Dataset C2, 295 images, all graded); Milton 2024 (100 pairs per class,
 seed 2026); Eaton 2025 (300 per class, the $n{=}30$ minority class fully
@@ -304,11 +338,11 @@ NCSE; columns are not comparable with each other. The closed-model row is
 RAPID's published number (same Palisades images; a 150-pair Milton
 subset).}
 \label{tab:vlm}
-\small
-\setlength{\tabcolsep}{4pt}
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
 \begin{tabular}{@{}lccc@{}}
 \toprule
-model & Palisades (5 cl.) & Milton pairs (3 cl.) & Eaton (3 cl.) \\
+model & Palisades (5) & Milton pairs (3) & Eaton (3) \\
 \midrule
 qwen2.5vl:7b (ref.)      & 0.475 / 0.213 & \textbf{0.597} / 0.238 & 0.910 / 0.049 \\
 qwen3-vl:32b$^{\dagger}$ & \textbf{0.554} / 0.176 & 0.381 / 0.431 & 0.901 / 0.053 \\
@@ -352,24 +386,30 @@ therefore does not do --- is turn a 0.93 into a sentence about a street.
 \section{Reflection}
 \label{sec:reflect}
 
-\textbf{Three times the harness caught its own system.} (1)~A
-parcel-level DINS file reached the public site through an asset-copying
-script, violating four written statements while breaking zero policy
-rules, because the claim plane governs what the agent \emph{asserts} and
-nothing had asserted the file. The fix was a new plane --- distribution ---
-with a planner and a CI gate; the public surface fell from 30 files to 16,
-and the incident report is committed beside the code it indicts. (2)~The
-citation check originally fired only on sentences with digits, so
-``\emph{your neighborhood was not significantly affected}'' passed
-uncited; inverted to citation-by-default, acceptance on a draft set fell
-from 9/13 to 7/13 sentences, the two refusals being exactly the uncited
-reassurances a resident should not receive. (3)~The gateway's evidence
-store read every event on disk, ignoring \texttt{published\_events} and
-\texttt{model\_derived}; the Palisades VLM run would have been cited as
-tile facts. Both planes now publish from one list, the store records
-every exclusion and refuses to start over ``everything on disk''. The
-lesson repeats: a constraint written in one place and enforced in another
-is enforced nowhere.
+\textbf{Three incidents changed the architecture.} Table~\ref{tab:incidents}
+records the gap, the fix, and the check. The repeated lesson is practical: a
+constraint written in one place and enforced in another is enforced nowhere.
+
+\begin{table}[t]
+\caption{Recorded failures and resulting controls.}
+\label{tab:incidents}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}lY@{}}
+\toprule
+failure & change and verification \\
+\midrule
+Parcel-level DINS file reached the public site & added a distribution plane,
+generated allowlist, and CI gate; public files fell from 30 to 16 and the
+restricted URL returned 404 \\
+Uncited reassurance passed the post-check & replaced the numeric heuristic
+with citation-by-default; acceptance changed from 9/13 to 7/13 because the two
+uncited reassurances were refused \\
+Gateway loaded every event on disk & load only policy-listed events, exclude
+model-derived grids, record every exclusion, and refuse unrestricted scans \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \textbf{Limitations.} The builders read a $\sim$33\,GB corpus on one
 workstation, so third parties can verify the committed artifacts and
@@ -408,9 +448,9 @@ under the Gulf Research Program (Award Nos.\ SCON-10000653 and
 SCON-10001536) and by the U.S.\ National Science Foundation (Award
 No.\ 2318206). Any opinions, findings, and conclusions expressed here are
 those of the authors and do not necessarily reflect the views of the
-funders. The authors used Claude (Anthropic) to polish the language of
-this manuscript; the system, analyses, and claims were designed, written,
-and verified by the authors, who take full responsibility for the content.
+funders. The authors used Claude (Anthropic) and OpenAI Codex for language and
+layout editing; the system, analyses, and claims were designed and verified by
+the authors, who take full responsibility for the content.
 \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
