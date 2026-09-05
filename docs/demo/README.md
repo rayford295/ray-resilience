@@ -25,7 +25,8 @@ python docs/demo/record_demo.py --out docs/demo/out
 python docs/demo/narrate_demo.py --out docs/demo/out --voice "Microsoft Zira Desktop"
 ```
 
-While the repository was private, the Tier-1 live watch badge in the recording reads
-"live watch unavailable — no nationwide layer shown (declared, not faked)": the app
-fetches the `live-data` branch, which was not yet publicly readable. That is the
-degradation the design specifies, shown as it happened.
+The Tier-1 live watch badge in the recording ("848 hazards mapped of 1061 · 213 not mappable —
+declared, not dropped quietly") is the real hourly product fetched from the `live-data` branch
+at recording time. In the one earlier take made before the repository was public, the same badge
+read "live watch unavailable — no nationwide layer shown (declared, not faked)": the degradation
+the design specifies, shown as it happened.
