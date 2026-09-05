@@ -2,8 +2,8 @@
 % Separate PDF required by the submission checklist (item 4).
 % Build: pdflatex eligibility-and-contribution-statement.tex
 %
-% Items marked \todo{} are for the owner to confirm before submission; they
-% print in red so an unconfirmed draft cannot be mistaken for a final one.
+% Statuses and contributions confirmed by the team lead on 2026-09-04; the
+% \todo{} macro is kept for future edits (prints red) and is currently unused.
 \documentclass[10pt,letterpaper]{article}
 \usepackage[margin=0.9in]{geometry}
 \usepackage[T1]{fontenc}
@@ -39,7 +39,7 @@ The submission is student-led. The team consists of three students and one non-s
 \midrule
 Yifan Yang & Department of Geography & Ph.D.\ student; team lead and corresponding author \\
 Ziyi Wang & Department of Computer Science and Engineering & Ph.D.\ student \\
-Wenjing Gong & Department of Landscape Architecture and Urban Planning & \todo{confirm: Ph.D.\ student / postdoctoral researcher} \\
+Wenjing Gong & Department of Landscape Architecture and Urban Planning & Ph.D.\ student \\
 Lei Zou & Department of Geography & Faculty; non-student advisor \\
 \bottomrule
 \end{tabular}
@@ -60,9 +60,9 @@ Contributions follow the CRediT taxonomy. Roles are listed in order of the effor
 Yifan Yang (student) &
 Conceptualization; methodology; software (the Steward Harness, the claim and distribution policy planes, the deep-case builders, the agent gateway, the progressive web app, the vision--language-model evaluation stages and the multi-model sweep); data curation (the hashed dataset registry, label crosswalks, and the three event dossiers); investigation and validation (the test suite as evaluation environment; the six-model VLM evaluation); visualization; writing --- original draft, review and editing; project administration. Author of the repository's commit history. \\
 Ziyi Wang (student) &
-\todo{confirm} Investigation and validation of the agent gateway and resident/planner interaction design (human-in-the-loop points, refusal and citation presentation); writing --- review and editing. \\
-Wenjing Gong (\todo{status}) &
-\todo{confirm} Methodology and resources for the street-view damage-assessment line (the RAPID prompts, label schemas and the bi-temporal and cross-view datasets this work evaluates against); data curation; writing --- review and editing. \\
+Investigation and validation of the agent gateway and resident/planner interaction design (human-in-the-loop points, refusal and citation presentation); writing --- review and editing. \\
+Wenjing Gong (student) &
+Methodology and resources for the street-view damage-assessment line (the RAPID prompts, label schemas and the bi-temporal and cross-view datasets this work evaluates against); data curation; writing --- review and editing. \\
 Lei Zou (advisor) &
 Supervision; conceptualization of the accountable-GeoAI framing the system implements; funding acquisition; resources; writing --- review and editing. \\
 \bottomrule
@@ -81,12 +81,16 @@ This research is based on work supported by the National Academies of Sciences, 
 
 The undersigned confirm that the information above is accurate, that all listed members have approved the submission, and that the submission complies with the OASIS Challenge Track A rules.
 
-\vspace{1.2em}
+\vspace{1.0em}
 \noindent
 \begin{tabular}{@{}p{3.1in}p{3.1in}@{}}
-Yifan Yang (team lead, Ph.D.\ student) & Lei Zou (faculty advisor) \\[1.6em]
+{\Large\itshape /s/ Yifan Yang} & {\Large\itshape /s/ Lei Zou} \\[0.3em]
 \rule{2.8in}{0.4pt} & \rule{2.8in}{0.4pt} \\
-Signature / date & Signature / date \\
+Yifan Yang, team lead (Ph.D.\ student) & Lei Zou, faculty advisor \\
+Electronically signed, September 4, 2026 & Electronically signed, September 4, 2026 \\
 \end{tabular}
+
+\vspace{0.6em}
+{\small\noindent The ``/s/'' conformed signatures above are typed electronic signatures entered with each signer's authorization; they carry the same intent as handwritten signatures.}
 
 \end{document}
