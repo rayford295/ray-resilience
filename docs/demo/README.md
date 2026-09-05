@@ -1,5 +1,8 @@
 # Demo video
 
+**Watch:** [`ray-resilience-demo.mp4`](ray-resilience-demo.mp4) (2:55, voice-over + subtitles; [`.srt`](ray-resilience-demo.srt)) — also attached to the
+[submission release](https://github.com/rayford295/ray-resilience/releases/tag/v0.1.0-oasis).
+
 `record_demo.py` produces the three-minute demo submitted to OASIS Track A. It is a
 scripted, genuine walk-through — nothing is mocked:
 
@@ -14,8 +17,8 @@ Each scene is recorded in real time with Playwright (1280×720). Post-processing
 speeds up waiting (title cards say by how much), then concatenates. `narrate_demo.py` adds
 the voice-over — synthesised offline with the Windows speech engine from the narration
 text in the script — burns the same text in as subtitles, and writes an `.srt` beside the
-video. The `out/` directory is git-ignored; the final `ray-resilience-demo.mp4` is
-published outside the repository.
+video. The `out/` directory is git-ignored; the final `ray-resilience-demo.mp4` and its `.srt`
+are committed here and attached to the release.
 
 ```bash
 uvicorn gateway.main:app --port 8080            # Ollama serving gpt-oss:20b

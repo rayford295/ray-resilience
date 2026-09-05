@@ -116,7 +116,7 @@ the committed prediction records without a GPU.
 
 - **RAY: Resilience Assistant for You — An Accountable GeoAI System for Place-Based Disaster Intelligence**, OASIS Challenge @ ACM SIGSPATIAL 2026, Track A: [`paper/ray-resilience-oasis2026.pdf`](paper/ray-resilience-oasis2026.pdf) (source and co-author Word draft alongside).
 - Eligibility and contribution statement: [`paper/eligibility-and-contribution-statement.pdf`](paper/eligibility-and-contribution-statement.pdf).
-- Demo video: produced by [`docs/demo/record_demo.py`](docs/demo/record_demo.py) as a scripted, genuine walk-through; how it is made is in [`docs/demo/README.md`](docs/demo/README.md).
+- Demo video (2:55, voice-over + subtitles): [`docs/demo/ray-resilience-demo.mp4`](docs/demo/ray-resilience-demo.mp4) — a scripted, genuine walk-through produced by [`docs/demo/record_demo.py`](docs/demo/record_demo.py); how it is made is in [`docs/demo/README.md`](docs/demo/README.md).
 - Six-model VLM comparison, regenerated from the committed evaluation files: [`docs/vlm_model_comparison.md`](docs/vlm_model_comparison.md).
 
 Built on the RAPID line ([Yang et al., 2026](https://arxiv.org/abs/2606.21819)) — its prompts,
