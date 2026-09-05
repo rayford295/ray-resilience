@@ -57,6 +57,34 @@ def scene(pw, out: Path, name: str, fn) -> Path:
 
 
 # --------------------------------------------------------------------------- scenes
+TERMINAL_HTML = """<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;height:100%;background:#0e1b2e;color:#e6ecf2;font-family:Consolas,'Cascadia Mono',monospace;font-size:19px}
+#bar{height:38px;background:#15263f;display:flex;align-items:center;padding:0 16px;color:#9fb3c8;font-size:15px;border-bottom:1px solid #223650}
+#bar b{color:#e6ecf2;margin-left:12px}
+#term{padding:18px 26px;white-space:pre;line-height:1.42;height:calc(100% - 38px);box-sizing:border-box;overflow:hidden}
+.p{color:#2A9D8F}.ok{color:#7ed3c2}.hd{color:#E9A23B}.den{color:#f0937c}.dim{color:#8ea3b8}
+</style></head><body><div id="bar">ray-resilience <b>$ python scripts/judge_demo.py</b><span style="margin-left:auto">one keyless end-to-end pass, recorded live</span></div>
+<div id="term"></div><script>
+const lines = __LINES__; const term = document.getElementById('term');
+function cls(l){ if(/^=+$/.test(l.trim())) return 'dim'; if(/^\\d\\/3 /.test(l.trim())) return 'hd'; if(/\\bok\\b/.test(l)||/ALLOW/.test(l)) return 'ok'; if(/deny /.test(l)) return 'den'; return ''; }
+let i=0; term.innerHTML='<span class="p">$</span> python scripts/judge_demo.py\\n';
+function step(){ if(i>=lines.length) return; const l=lines[i++]; const s=document.createElement('span'); s.className=cls(l); s.textContent=l+'\\n'; term.appendChild(s);
+  while(term.scrollHeight>term.clientHeight && term.childNodes.length>2){ term.removeChild(term.childNodes[1]); }
+  setTimeout(step, /^=+$/.test(l.trim())?120:360); }
+setTimeout(step, 1400);
+</script></body></html>"""
+
+
+def s0_pipeline(page):
+    """A real `judge_demo.py` transcript (captured by the maintainer moments before recording),
+    replayed line by line in a terminal-styled page so it can be read at video pace."""
+    src = Path(__file__).resolve().parent / "out" / "judge_demo.txt"
+    text = src.read_text(encoding="utf-8", errors="replace").replace("�", "—")
+    lines = [l.rstrip() for l in text.splitlines()]
+    page.set_content(TERMINAL_HTML.replace("__LINES__", json.dumps(lines)))
+    page.wait_for_timeout(1400 + sum(120 if l.strip() and set(l.strip()) == {"="} else 360 for l in lines) + 5000)
+
+
 def s1_landing(page):
     page.goto(LANDING, wait_until="networkidle")
     page.wait_for_timeout(3500)
@@ -231,9 +259,9 @@ def main() -> int:
     (out / "raw").mkdir(parents=True, exist_ok=True)
 
     if not args.skip_record:
-        wanted = set(args.only) if args.only else {"s1_landing", "s2_resident", "s3_planner", "s4_ask"}
+        wanted = set(args.only) if args.only else {"s1_landing", "s0_pipeline", "s2_resident", "s3_planner", "s4_ask"}
         with sync_playwright() as pw:
-            for name, fn in (("s1_landing", s1_landing), ("s2_resident", s2_resident),
+            for name, fn in (("s1_landing", s1_landing), ("s0_pipeline", s0_pipeline), ("s2_resident", s2_resident),
                              ("s3_planner", s3_planner), ("s4_ask", s4_ask)):
                 if name in wanted:
                     scene(pw, out, name, fn)
@@ -243,9 +271,9 @@ def main() -> int:
     durations = {k: probe_duration(ff, p) for k, p in raw.items()}
     print("raw durations", json.dumps({k: round(v, 1) for k, v in durations.items()}), flush=True)
 
-    # Budget: cards ~14 s; scenes 1-3 at 1.25x; scene 4 (model latency) absorbs the rest.
-    cards = 4 * 3.5
-    base = {"s1_landing": 1.25, "s2_resident": 1.25, "s3_planner": 1.25}
+    # Budget: cards ~17.5 s; scenes 1-3 at 1.25x, the pipeline transcript at 1.0x; scene 4 (model latency) absorbs the rest.
+    cards = 5 * 3.5
+    base = {"s1_landing": 1.25, "s0_pipeline": 1.0, "s2_resident": 1.25, "s3_planner": 1.25}
     fixed = cards + sum(durations[k] / f for k, f in base.items() if k in durations)
     remaining = max(args.max_seconds - fixed, 30.0)
     f4 = max(1.0, durations.get("s4_ask", 0.0) / remaining)
@@ -256,6 +284,9 @@ def main() -> int:
         title_card(ff, out, "c0", ["Ray Resilience", "An accountable GeoAI system for place-based disaster intelligence",
                                    "OASIS @ ACM SIGSPATIAL 2026 · Track A"], 3.5),
         speed_clip(ff, raw["s1_landing"], out, factors["s1_landing"]),
+        title_card(ff, out, "c0b", ["Autonomy, end to end", "One keyless pass: fetch federal feeds - harness checks - audit rows - distribution plan - claim-plane decisions",
+                                    "python scripts/judge_demo.py, what a judge can run in a minute"], 3.5),
+        speed_clip(ff, raw["s0_pipeline"], out, factors["s0_pipeline"]),
         title_card(ff, out, "c1", ["Resident mode", "An address gets one of three answers: covered, outside, or not determined"], 3.5),
         speed_clip(ff, raw["s2_resident"], out, factors["s2_resident"]),
         title_card(ff, out, "c2", ["Planner mode", "The trade-off is the planner's: priority = t x damage + (1-t) x SVI, every move audit-logged",

@@ -1,0 +1,83 @@
+<mxfile host="app.diagrams.net" modified="2026-09-05T03:00:00.000Z" agent="ray-resilience" version="24.7.17">
+  <diagram id="ray-architecture" name="Ray Resilience architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- title -->
+        <mxCell id="title" value="&lt;b&gt;Ray Resilience&lt;/b&gt; — three planes over one harness" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1F3A5F;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="700" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- data plane -->
+        <mxCell id="data" value="&lt;b&gt;Data plane&lt;/b&gt; — GitHub Actions&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Tier-1 watch: USGS · NWS · NHC · NIFC/WFIGS · WPC outlook (hourly)&lt;br&gt;Deep-case builders: Eaton 2025 · Milton 2024 · Ian 2022&lt;br&gt;Every artifact: SHA-256 + audit row · append-only snapshots&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fillColor=#F7F5F0;strokeColor=#2A9D8F;strokeWidth=2;fontColor=#1B1B1B;" vertex="1" parent="1">
+          <mxGeometry x="60" y="90" width="380" height="120" as="geometry" />
+        </mxCell>
+        <!-- presentation plane -->
+        <mxCell id="pres" value="&lt;b&gt;Presentation plane&lt;/b&gt; — PWA (React · Vite · MapLibre)&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Resident mode: address → covered / outside / not determined → dossier&lt;br&gt;Planner mode: t·damage + (1−t)·SVI slider (audit-logged), area query&lt;br&gt;Lineage viewer → hashed source snapshots · keyless · offline-capable&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fillColor=#F7F5F0;strokeColor=#1F3A5F;strokeWidth=2;fontColor=#1B1B1B;" vertex="1" parent="1">
+          <mxGeometry x="500" y="90" width="380" height="120" as="geometry" />
+        </mxCell>
+        <!-- agent plane -->
+        <mxCell id="agent" value="&lt;b&gt;Agent plane&lt;/b&gt; — Ray&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Any OpenAI-compatible endpoint (Ollama by default, keyless)&lt;br&gt;policy pre-check → grounded generation → citation post-check → audit&lt;br&gt;Cites [artifact:…] or refuses; every refusal names its rule&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fillColor=#F7F5F0;strokeColor=#E9A23B;strokeWidth=2;fontColor=#1B1B1B;" vertex="1" parent="1">
+          <mxGeometry x="940" y="90" width="380" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- arrows between planes -->
+        <mxCell id="e1" value="published artifacts (pass the distribution plane)" style="endArrow=block;html=1;strokeColor=#2A9D8F;strokeWidth=2;fontSize=10;fontColor=#2A9D8F;" edge="1" parent="1" source="data" target="pres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="cited answers + badges" style="endArrow=block;html=1;strokeColor=#E9A23B;strokeWidth=2;fontSize=10;fontColor=#B7761A;" edge="1" parent="1" source="agent" target="pres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="evidence store: published events only, hashed grids, model_derived skipped" style="endArrow=block;dashed=1;html=1;strokeColor=#2A9D8F;strokeWidth=2;fontSize=10;fontColor=#2A9D8F;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="data" target="agent">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="250" y="250" /><mxPoint x="1130" y="250" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CI gate -->
+        <mxCell id="gate" value="&lt;b&gt;CI gate&lt;/b&gt; — the assembled public site is verified against the distribution plane; a violating deploy fails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D95F43;strokeColor=none;fontColor=#FFFFFF;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="280" width="1260" height="34" as="geometry" />
+        </mxCell>
+
+        <!-- harness band -->
+        <mxCell id="harness" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2F6;strokeColor=#1F3A5F;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="330" width="1260" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="hlabel" value="&lt;b&gt;Steward Harness&lt;/b&gt; &amp;nbsp;&amp;nbsp;&lt;font style=&quot;font-size:11px;font-style:italic&quot; color=&quot;#5B6770&quot;&gt;enforced in code between every stage, and between the model and every sentence&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=16;fontColor=#1F3A5F;" vertex="1" parent="1">
+          <mxGeometry x="80" y="340" width="900" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c1" value="&lt;b&gt;Outcome validity&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Executable spatial checks: CRS, join integrity, bounds. Per-tile uncertainty is mandatory, or the build fails.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;spacingTop=4;verticalAlign=top;fillColor=#FFFFFF;strokeColor=#1F3A5F;fontColor=#1B1B1B;" vertex="1" parent="1">
+          <mxGeometry x="80" y="385" width="290" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="&lt;b&gt;Process validity&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;SHA-256 per artifact; append-only audit rows (agent, inputs, UTC). Failures recorded, never erased. Gateway audit: H3 cell, not the point; question as digest.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;spacingTop=4;verticalAlign=top;fillColor=#FFFFFF;strokeColor=#1F3A5F;fontColor=#1B1B1B;" vertex="1" parent="1">
+          <mxGeometry x="390" y="385" width="290" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="&lt;b&gt;Institutional validity&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;One YAML policy, two planes: claim = what may be asserted (role × tier × resolution × geography); distribution = what may ship. Ordered rules, default deny.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;spacingTop=4;verticalAlign=top;fillColor=#FFFFFF;strokeColor=#1F3A5F;fontColor=#1B1B1B;" vertex="1" parent="1">
+          <mxGeometry x="700" y="385" width="290" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="&lt;b&gt;Verifiability&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;retained &gt; re-derivable &gt; cited-only, weakest link. A license attribute gates redistribution. Model output is model_derived: carries its accuracy or nothing.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;spacingTop=4;verticalAlign=top;fillColor=#FFFFFF;strokeColor=#1F3A5F;fontColor=#1B1B1B;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="385" width="290" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- gates row -->
+        <mxCell id="g1" value="&lt;b&gt;Policy pre-check&lt;/b&gt; — before any model call; the refusal names the rule" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEDE8;strokeColor=#D95F43;fontColor=#D95F43;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="80" y="520" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" value="&lt;b&gt;Citation post-check&lt;/b&gt; — every factual sentence cites an artifact or the answer is refused (closed exemption set)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEDE8;strokeColor=#D95F43;fontColor=#D95F43;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="500" y="520" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" value="&lt;b&gt;Publication planner&lt;/b&gt; — allowlist regenerated from the policy and checked in CI; a hand edit cannot widen the public surface" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEDE8;strokeColor=#D95F43;fontColor=#D95F43;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="920" y="520" width="380" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- footer -->
+        <mxCell id="foot" value="Source for paper/figures/fig1_architecture.png (the PNG in the paper may carry later hand edits). Palette: navy #1F3A5F structure · teal #2A9D8F data/evidence · amber #E9A23B agent · coral #D95F43 deny/refusal." style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#5B6770;" vertex="1" parent="1">
+          <mxGeometry x="60" y="630" width="1260" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -22,13 +22,18 @@ import textwrap
 import wave
 from pathlib import Path
 
-PARTS = ["c0", "s1_landing", "c1", "s2_resident", "c2", "s3_planner", "c3", "s4_ask"]
+PARTS = ["c0", "s1_landing", "c0b", "s0_pipeline", "c1", "s2_resident", "c2", "s3_planner", "c3", "s4_ask"]
 
 #: (anchor part, offset as a fraction of that part's duration, narration text)
 NARRATION = [
     ("c0", 0.0,
      "Ray Resilience is an accountable GeoAI system for place-based disaster intelligence: "
      "three deep cases, one harness, and a nationwide hourly hazard watch."),
+    ("c0b", 0.0,
+     "First, one keyless end-to-end pass that a judge can run in a minute. Four federal feeds are fetched and "
+     "snapshotted; the harness builds the national watch product and appends audit rows; the distribution plane "
+     "decides which files may be published; and the claim plane decides what each role may be told, before any "
+     "model is called. Every decision names its rule."),
     ("c1", 0.0,
      "In resident mode an address gets one of three answers: covered, outside the evaluated areas, "
      "or not determined. This Altadena address is covered: residents, structures assessed, the destroyed "

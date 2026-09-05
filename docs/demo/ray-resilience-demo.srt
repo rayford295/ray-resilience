@@ -3,26 +3,30 @@
 Ray Resilience is an accountable GeoAI system for place-based disaster intelligence: three deep cases, one harness, and a nationwide hourly hazard watch.
 
 2
-00:00:13,730 --> 00:00:31,980
-In resident mode an address gets one of three answers: covered, outside the evaluated areas, or not determined. This Altadena address is covered: residents, structures assessed, the destroyed share, and the declared unknowns, never a single parcel.
+00:00:13,730 --> 00:00:36,410
+First, one keyless end-to-end pass that a judge can run in a minute. Four federal feeds are fetched and snapshotted; the harness builds the national watch product and appends audit rows; the distribution plane decides which files may be published; and the claim plane decides what each role may be told, before any model is called. Every decision names its rule.
 
 3
-00:00:34,560 --> 00:00:54,690
-In planner mode the trade-off belongs to the planner: priority is t times damage plus one minus t times social vulnerability. Moving the slider re-ranks the tiles, and every move is audit-logged. Lineage traces the layer back to hashed source snapshots, including a rejected run the harness kept.
+00:00:36,530 --> 00:00:54,780
+In resident mode an address gets one of three answers: covered, outside the evaluated areas, or not determined. This Altadena address is covered: residents, structures assessed, the destroyed share, and the declared unknowns, never a single parcel.
 
 4
-00:01:01,860 --> 00:01:11,860
-Ask Ray. The agent runs inside the Steward Harness: a policy pre-check before any model call, and a citation post-check after it.
+00:00:57,360 --> 00:01:17,490
+In planner mode the trade-off belongs to the planner: priority is t times damage plus one minus t times social vulnerability. Moving the slider re-ranks the tiles, and every move is audit-logged. Lineage traces the layer back to hashed source snapshots, including a rejected run the harness kept.
 
 5
-00:01:22,960 --> 00:01:32,040
-A question about a single house is refused before the model is called, and the refusal names the rule: no parcel-level claims for anyone.
+00:01:24,660 --> 00:01:34,660
+Ask Ray. The agent runs inside the Steward Harness: a policy pre-check before any model call, and a citation post-check after it.
 
 6
-00:01:51,520 --> 00:02:08,290
-A question the resident may ask goes to a local open model. Every sentence must cite an artifact; a draft that does not is refused, and the refusal says why. When the draft passes, the answer carries its citations and the declared unknowns.
+00:01:42,110 --> 00:01:51,180
+A question about a single house is refused before the model is called, and the refusal names the rule: no parcel-level claims for anyone.
 
 7
-00:02:28,860 --> 00:02:47,250
+00:02:04,730 --> 00:02:21,500
+A question the resident may ask goes to a local open model. Every sentence must cite an artifact; a draft that does not is refused, and the refusal says why. When the draft passes, the answer carries its citations and the declared unknowns.
+
+8
+00:02:34,310 --> 00:02:52,700
 Switching to planner unlocks tile-level damage where Tier-3 evidence exists. The system computes more than it is allowed to say, says only what it can cite, and keeps the record, including of its own failures. Ray Resilience: a steward of evidence, not an oracle.
 
