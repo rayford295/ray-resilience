@@ -11,14 +11,18 @@ scripted, genuine walk-through — nothing is mocked:
 | Ask Ray | a question the policy refuses before any model call (the refusal names the rule), then two grounded answers with an artifact citation on every sentence | the local gateway (`uvicorn gateway.main:app`) over Ollama (`gpt-oss:20b`), policy `src/geosteward/harness/policy_v1.yaml` |
 
 Each scene is recorded in real time with Playwright (1280×720). Post-processing only
-speeds up waiting (title cards say by how much), then concatenates. The `out/` directory
-is git-ignored; the final `ray-resilience-demo.mp4` is published outside the repository.
+speeds up waiting (title cards say by how much), then concatenates. `narrate_demo.py` adds
+the voice-over — synthesised offline with the Windows speech engine from the narration
+text in the script — burns the same text in as subtitles, and writes an `.srt` beside the
+video. The `out/` directory is git-ignored; the final `ray-resilience-demo.mp4` is
+published outside the repository.
 
 ```bash
 uvicorn gateway.main:app --port 8080            # Ollama serving gpt-oss:20b
 cd app && npm run dev -- --port 5173            # the PWA
 python -m pip install playwright imageio-ffmpeg && python -m playwright install chromium
 python docs/demo/record_demo.py --out docs/demo/out
+python docs/demo/narrate_demo.py --out docs/demo/out --voice "Microsoft Zira Desktop"
 ```
 
 While the repository was private, the Tier-1 live watch badge in the recording reads
