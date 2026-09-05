@@ -100,8 +100,9 @@ capability meets an unforgiving audience: an emergency manager acting on a
 tile-level damage estimate, or a resident reading a sentence about their
 own street, cannot audit a transformer. The prevailing answer is a
 disclaimer, which locates accountability in the reader. RAY locates it in
-the system. Following \citet{yang2026accountable}, we treat an agent's
-claim as valid only when the \emph{outcome} passes executable spatial
+the system. Building on recent multi-agent and multimodal disaster-mapping
+work~\cite{yang2026rapid,yang2026rapidmap,yang2026damagearbiter}, we treat an
+agent's claim as valid only when the \emph{outcome} passes executable spatial
 checks, the \emph{process} is preserved and inspectable, and the claim is
 \emph{institutionally} authorized --- the right actor asserting the right
 thing at the right resolution --- and we add a fourth question raised by
@@ -334,10 +335,11 @@ accuracy and RAPID's $\mathrm{NCSE}=\overline{|y-\hat{y}|}/(K{-}1)$.
 \begin{table}[t]
 \caption{Six open VLMs and a 7B reference, one pass at temperature 0,
 quantised weights, same seeded samples and prompt digests. Accuracy /
-NCSE; columns are not comparable with each other. The closed-model row is
-RAPID's published number (same Palisades images; a 150-pair Milton
-subset).}
+NCSE; columns are not comparable. The heatmap repeats accuracy with
+column-relative shading. The closed-model row is RAPID's published number
+(same Palisades images; a 150-pair Milton subset).}
 \label{tab:vlm}
+\centering
 \scriptsize
 \setlength{\tabcolsep}{2.2pt}
 \begin{tabular}{@{}lccc@{}}
@@ -355,6 +357,8 @@ qwen3-vl:8b              & 0.514 / 0.195 & 0.462 / 0.324 & 0.924 / 0.041 \\
 closed (RAPID)           & 0.573 GPT-5-mini & 0.591 GPT-5.1 & --- \\
 \bottomrule
 \end{tabular}
+\par\smallskip
+\includegraphics[width=\columnwidth]{figures/fig2_vlm_accuracy.png}
 \par\smallskip\footnotesize
 $^{\dagger}$8k context so the weights fit the card; $^{\ddagger}$95\,\% in
 VRAM, recorded, because a spilled model is a different run. A seventh
@@ -432,7 +436,7 @@ are handed to people, in a file they can read and a slider they can move,
 and the system records that they did. Autonomous-GIS agents
 \cite{li2023autonomous,zhang2024geogpt} and operational platforms such as
 TDIS~\cite{tdis2026} show what such systems can compute; registries
-(EM-DAT~\cite{delforge2025emdat}, GDACS~\cite{gdacs}) show what they can
+(EM-DAT~\cite{delforge2025emdat}, GDACS~\cite{gdacs2026}) show what they can
 record. What none carries, per row, is what resolution of claim the
 evidence authorizes and whether a reader may keep it. Our position is
 that an agent in public decision-making should be a steward of evidence
