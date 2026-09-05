@@ -1,178 +1,140 @@
+<div align="center">
+
 # Ray Resilience
 
-**Resilience intelligence for every place.** An accountable GeoAI system for
-place-based disaster intelligence, by Rayford AI. The assistant you talk to is **Ray**;
-the accountability engine underneath is the **Steward Harness**.
+**Resilience intelligence for every place.**
+An accountable GeoAI system for place-based disaster intelligence — a WebGIS / smartphone
+app with an assistant, **Ray**, that may only say what the evidence supports, and a
+**Steward Harness** that enforces it in code.
 
-AI-powered WebGIS / smartphone app (PWA) for understanding a place's resilience —
-what hazards threaten it now, how exposed and vulnerable it is, and what decisions
-the evidence actually supports. Entry for
-[**OASIS @ ACM SIGSPATIAL 2026**](https://rsvp.withgoogle.com/events/oasis-2026/)
-· **Track A: Disaster Resilience & Vulnerability Analysis**.
+[![tests](https://github.com/rayford295/ray-resilience/actions/workflows/test.yml/badge.svg)](https://github.com/rayford295/ray-resilience/actions/workflows/test.yml)
+[![deploy-pages](https://github.com/rayford295/ray-resilience/actions/workflows/pages.yml/badge.svg)](https://github.com/rayford295/ray-resilience/actions/workflows/pages.yml)
+[![live-watch](https://github.com/rayford295/ray-resilience/actions/workflows/live.yml/badge.svg)](https://github.com/rayford295/ray-resilience/actions/workflows/live.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2A9D8F.svg)](LICENSE)
+[![OASIS 2026 · Track A](https://img.shields.io/badge/OASIS%20%40%20SIGSPATIAL%202026-Track%20A-1F3A5F.svg)](https://rsvp.withgoogle.com/events/oasis-2026/)
 
-**Live:** [rayford295.github.io/ray-resilience](https://rayford295.github.io/ray-resilience/)
-· [the app](https://rayford295.github.io/ray-resilience/app/)
+**[Live site](https://rayford295.github.io/ray-resilience/)** · **[Open the app](https://rayford295.github.io/ray-resilience/app/)** · [Paper & submission materials](paper/) · [Technical manual](docs/manual/) · [Status](docs/STATUS.md)
 
-**Event portal:** [rsvp.withgoogle.com/events/oasis-2026](https://rsvp.withgoogle.com/events/oasis-2026/)
-— submission dates, Track A brief, and the code-submission mechanism live behind the
-event login. Key dates and their current status are tracked in
-[`docs/STATUS.md`](docs/STATUS.md).
+</div>
 
-**What "a place" means here, precisely.** Hazard monitoring is nationwide: any US
-location gets the current Tier-1 watch layer. Exposure, vulnerability, and damage
-analysis exist only inside the three deep-case AOIs below, and the app says so
-rather than extrapolating — an address outside them is told the location is outside
-the evaluated areas, and an address the app cannot yet resolve is told that instead
-of being guessed at. Competence is conditional on place, and saying where it ends is
-part of the design.
+---
 
-**Where this is going.** The accountability machinery — the two policy planes, the
-`verifiability` axis, the hashed append-only manifests — is general; only the coverage
-is not. The project's core direction is a **global, cross-region, cross-hazard,
-multi-source disaster catalog**: an event-level accountability record that lets the
-agent answer *is this place covered, by what evidence, to what depth, and may I keep
-it* for somewhere it has never been asked about before. The field does not lack
-disaster data — EM-DAT, GDACS, Copernicus EMS, ReliefWeb and the national agencies all
-hold it. What none of them carries in the row itself is the thing this project already
-computes per artifact: at what resolution a statement is authorised, whether a reader
-can check the support, and whether the evidence is ours to redistribute. That gap is
-the design in
-[`docs/design/specs/2026-08-30-global-disaster-catalog-design.md`](docs/design/specs/2026-08-30-global-disaster-catalog-design.md).
-**It is a design, not a capability:** the schema is global from the first row, the
-coverage today is four events.
+## What it is
 
-> 🚧 **Rework in progress.** This repository (formerly *DisasterPilot*) is being
-> rebuilt around the design in
-> [`docs/design/specs/2026-08-19-geosteward-design.md`](docs/design/specs/2026-08-19-geosteward-design.md).
-> The previous Super Typhoon Bavi case study is preserved under
-> `events/archive/bavi-2026/` — append-only history is a core principle here.
+Most GeoAI disaster systems demonstrate *autonomy*: a language model that runs a spatial
+pipeline. Ray Resilience demonstrates *accountability*. Every map layer traces back to a
+hashed source snapshot; every sentence the assistant produces cites an artifact or is
+refused; a declarative policy decides **who may be told what, at which resolution**; and a
+CI gate keeps the public build inside that policy. When the system does not know, it says
+so — as prominently as when it does.
 
-## What works today, and what does not
-
-| | State |
+| | |
 |---|---|
-| Tier-1 nationwide watch (USGS, NWS, NHC, NIFC) | Working; refreshed hourly by CI, per-source failures declared not hidden; rendered per hazard type with NWS advisories drawn hollow — an advisory about what may come never looks like an occurrence |
-| Day-1 flash-flood outlook (NOAA/WPC Excessive Rainfall Outlook) | Working — the project's first forward-looking layer, kept as a separate product from the watch (polygons and a forecast, never merged into the point layer); carries its own declared boundary: outlook only, not observed flooding, no damage conclusions, does not replace NWS warnings |
-| Three deep cases (Eaton 2025, Milton 2024, Ian 2022) | Working; tile-level exposure, SVI, and cross-view evidence |
-| Global disaster catalog (cross-region, cross-hazard, multi-source) | **Design only** — record schema, hazard vocabulary, region/time conventions, and the source-conflict rule are fixed in [the spec](docs/design/specs/2026-08-30-global-disaster-catalog-design.md); no `catalog.jsonl`, no schema file, and no global connector exists yet. The seed set is the four events already in `events/` — three US deep cases plus the archived non-US Bavi case |
-| PWA, installable, offline-caching | Working |
-| Steward Harness: outcome checks, append-only audit, policy pre-check, claim post-check | Working |
-| Publication boundary (distribution plane + CI gate) | Working |
-| Agent gateway | Working locally against any OpenAI-compatible endpoint (Ollama by default), **hardened but not hosted**: fail-closed auth (no token configured → loopback callers only; `STEWARD_API_TOKEN` gates network clients), per-client rate limiting, CORS defaulting to local dev origins (never `*`), and a redacted audit — a point is recorded as its H3 r9 cell, an area's corners rounded to ~110 m, the question as sha256 + length, never verbatim. The public demo still has no chat backend: hosting waits on a GCP project and an LLM endpoint |
-| Area query — shift-drag a rectangle in planner mode and ask about it | Working; split by what needs a backend. Drawing the rectangle and the header's count of evaluated tiles inside it are client-side and work in the public demo. The **answer** goes through the gateway, so it needs the row above: an answer covers only the evaluated tiles the selection actually contains, declares the rest rather than extrapolating, never merges statistics across two events, and highlights the tiles it cited |
-| Accountability for non-retainable evidence (`verifiability` axis, `license` attribute, content-free lookup record) | Working and policed in code; **never run against a live API** — there is no Google Maps Platform key, so both adapters are tested against an in-process stub and `events/live_evidence.jsonl` does not exist outside tests. [Design and implementation notes](docs/design/specs/2026-08-20-non-retainable-evidence-design.md) |
-| Live-watch source health surfaced in the map UI | Working — the badge reports mapped-of-total, features it could not map, failed sources, and product generation time from `watch_status.json` |
-| Citation click-through from an answer to its artifact | Working — a citation chip resolves against every event's manifest and shows the artifact's provenance (path, agent, timestamp, full hash, inputs); "no manifests loaded" and "searched and absent" stay distinct answers, and a live citation explains its content-free lookup record instead |
-| Population exposure inside the three AOIs (2020 Census blocks → H3 r9 tiles) | Working — harness-built per-tile resident counts (Eaton 46,341 · Ian 5,428 · Milton 772,293 assigned), centroid allocation and pre-event vintage declared per feature, envelope population outside evaluated tiles declared as a total; a choropleth view per event, a resident-dossier stat, and an area-selection population sum in planner mode |
-| Critical-facility context inside the three AOIs (hospitals, clinics, fire stations, police from OpenStreetMap) | Working — harness-built points with frozen Overpass snapshots; declares OSM *presence, never operational status*, carries its ODbL attribution in the artifact, and the resident dossier lists facilities within 1 km of a covered address. The agent makes no facility claims: no claim-plane rule authorizes them, so they default-deny |
-| Planner slider adjustments persisted | **Not done** — recorded in session memory only |
-| Releases, CHANGELOG, contributor docs | **Not done** — `CITATION.cff` exists; the rest does not |
+| ![Resident mode](docs/img/app-resident.png) | ![Planner mode](docs/img/app-planner.png) |
+| **Resident mode.** An address gets one of three answers — *covered*, *outside the evaluated areas*, or *not determined* — and, when covered, a plain-language dossier for its tile: residents, structures assessed, destroyed share, social vulnerability, critical facilities within 1 km, and the declared unknowns. Never a statement about a single parcel. | **Planner mode.** Damage × social-vulnerability priority on an H3 grid. The trade-off `t · damage + (1 − t) · SVI` is the planner's to set on a slider; every move is audit-logged. Lineage runs from any layer back to hashed source snapshots, including a rejected run the harness kept rather than erased. |
 
-## Why "Steward"?
+## Highlights
 
-Most agent submissions demonstrate autonomy: an LLM that runs a GIS pipeline.
-Ray Resilience demonstrates **accountability**: a risk-analyst agent that operates inside
-the **Steward Harness** — a technical layer that enforces three validity conditions
-during operation, following *From Autonomous GIS to Accountable GeoAI Agents:
-Verifiable Evaluation Environments and Geospatial Harness Engineering* (Yang & Zou):
+- **Nationwide hourly watch** — USGS earthquakes, NWS alerts, NHC tropical cyclones, NIFC/WFIGS wildfires, plus the NOAA/WPC Day-1 excessive-rainfall outlook as a separate, clearly bounded product. Per-source failures are declared, not hidden.
+- **Three deep cases, one harness** — the **Eaton Fire (2025, CA)**, **Hurricane Milton (2024, FL)** and **Hurricane Ian (2022, FL)**: structure-damage ground truth, county debris volumes, CDC social vulnerability, 2020 census population and reliability-gated cross-view street imagery on H3 r9 grids. Analysis exists inside these areas and nowhere else, and the app says so.
+- **Ask Ray** — a risk-analyst agent behind two deterministic gates: a policy pre-check before any model call, and a citation post-check after it. Refusals name the rule that triggered them. Works with any OpenAI-compatible endpoint; a local open model over Ollama by default, no key required.
+- **Model output as governed evidence** — six open vision–language models graded 1,225 labelled street-view samples each under RAPID's verbatim prompts. The results are published as an evaluation and refused as a claim: [`docs/vlm_model_comparison.md`](docs/vlm_model_comparison.md).
+- **The harness caught its own system three times** — a parcel-level file on the public site, an uncited reassurance that passed, an evidence store that read what the publisher withheld. Each incident is preserved and each fix is a control, not a patch: [`docs/incidents/`](docs/incidents/), [`docs/STATUS.md`](docs/STATUS.md).
+- **A verifiable evaluation environment** — 363 Python and 67 app tests run in CI on every push, including a cell-by-cell policy-matrix sweep, adversarial claim checks, connector tests against real error envelopes, and an allowlist drift check.
 
-| Validity layer | What the harness enforces |
+## How it works
+
+<p align="center"><img src="paper/figures/fig1_architecture.png" alt="Architecture: data, presentation and agent planes over the Steward Harness" width="860"></p>
+
+Three loosely coupled planes over one harness. The **data plane** (GitHub Actions) runs
+the connectors and the deep-case builders and publishes hashed artifacts. The
+**presentation plane** is an installable, keyless, offline-capable PWA (React + Vite +
+MapLibre GL). The **agent plane** wraps any OpenAI-compatible model in policy pre-check →
+grounded generation → citation post-check → audit. If the agent is down, the maps keep
+working: graceful degradation is fail-closed design made visible.
+
+The **Steward Harness** enforces four things between every stage and around every sentence:
+
+| | What is enforced |
 |---|---|
-| **Outcome** | Executable spatial checks — CRS assertions, multiscale raster×vector join integrity, sanity bounds, mandatory uncertainty fields |
-| **Process** | Append-only provenance for every artifact; fail-closed stages; clickable lineage from any map layer back to timestamped source snapshots |
-| **Institutional** | Two declarative policy planes in one file. The **claim** plane scopes what the agent may assert, by role, evidence tier, resolution, and geographic authority — tile-level evidence never yields parcel-level claims. The **distribution** plane scopes what a build may publish, by artifact resolution cap and audience; CI verifies the assembled site against it and fails the deploy on a violation. The second plane exists because the first was not enough: see [the 2026-08-20 incident](docs/incidents/2026-08-20-publication-boundary.md) |
-| **Verifiability** | Both planes answer questions about what *this project* does. A third question comes from outside it — what may be retained at all, and can a reader check it? The `verifiability` axis (`retained` > `re-derivable` > `cited-only`, weakest-link) and the `license` attribute carry it, so a claim resting partly on evidence nobody is allowed to keep says so instead of borrowing the standing of the hashed evidence beside it |
+| **Outcome validity** | Executable spatial checks — CRS assertions, join integrity, sanity bounds, and a mandatory uncertainty block on every tile (a cell without one fails the build). |
+| **Process validity** | SHA-256 lineage in an append-only audit log; failures recorded, never erased; the gateway's audit stores a point as its H3 cell and a question as a digest. |
+| **Institutional validity** | One YAML policy, two planes of ordered rules with default deny. The **claim plane** scopes what may be asserted by role, evidence tier, resolution and geography; the **distribution plane** scopes what a build may publish, and CI fails the deploy on violation. |
+| **Verifiability** | Each artifact carries `retained` > `re-derivable` > `cited-only` (weakest link) and a `license` attribute, so a claim resting on evidence nobody may keep says so. |
 
-Every factual sentence the agent produces must cite an artifact ID. Sentences that
-cannot be cited are refused, not softened — the exemptions are a closed set
-(questions, general safety advice, and statements about what the answer cannot say),
-so a form nobody anticipated costs a refusal rather than an uncited claim.
+The policy is one file: [`src/geosteward/harness/policy_v1.yaml`](src/geosteward/harness/policy_v1.yaml).
+The full mechanism is documented in the [technical manual](docs/manual/).
 
-## Architecture
+## The deep cases
 
-```
-Data plane (GitHub Actions)      Presentation plane (PWA)       Agent plane (local today)
-USGS / NIFC / NHC / NWS          React + Vite + MapLibre GL     Any OpenAI-compatible
-→ append-only snapshots          Resident mode: address →       endpoint (Ollama by
-→ pipeline through the           resilience dossier             default) wrapped in the
-  Steward Harness                Planner mode: HITL trade-off   Steward Harness: policy
-→ artifacts + manifest, gated    sliders, priority tiles,       pre-check → grounded
-  by the distribution plane      lineage viewer                 generation → claim
-  (GitHub Pages)                                                post-check → audit
-```
+| Case | Committed products | Declared limits |
+|---|---|---|
+| **Eaton Fire 2025** (CA, wildfire) | 18,428 CAL FIRE DINS points → 265-cell damage grid · CDC SVI 2022 across 20 tracts · 2,244 cross-view samples → 109-cell evidence grid · 46,341 residents · 27 OSM facilities | 40 inaccessible points; the repairable class has n = 30; tract-to-cell SVI is a declared downscaling |
+| **Hurricane Milton 2024** (FL) | 2,556 labelled pre/post street-view pairs → 15-cell grid · 5,618 Pinellas cells with county debris volumes · 772,293 residents · 200 OSM facilities | post-event imagery is season-cumulative (Debby, Helene, Milton); a generated-imagery set was excluded, auditably |
+| **Hurricane Ian 2022** (FL) | 886 matched samples → 190-cell evidence grid · 4,121 street-view positions as a density-only layer · 5,428 residents · 79 OSM facilities | density cells support coverage, not point-level severity |
 
-Three loosely coupled planes: if the agent gateway goes down, the maps and analysis
-products keep working — graceful degradation is fail-closed design made visible.
-
-## Hazard coverage (tiered)
-
-- **Tier 1 — Watch:** all active US hazards, near-real-time (earthquakes, wildfires,
-  tropical cyclones, flood alerts).
-- **Tier 2 — Analysis:** three deep cases — the **Eaton Fire (2025)**, **Hurricane
-  Milton (2024)**, and **Hurricane Ian (2022)** — tile-level exposure × social-
-  vulnerability analysis with stakeholder-adjustable value trade-offs. Analysis
-  exists inside these AOIs and nowhere else.
-- **Tier 3 — Evidence:** reliability-gated cross-view damage assessment from the
-  [CrossViewGate](https://github.com/rayford295/CrossViewGate) research line, using
-  the org's [disaster-crossview-datasets](https://github.com/Rayford-AI/disaster-crossview-datasets).
-
-**Live watch data** is refreshed hourly by CI onto the
-[`live-data`](https://github.com/rayford295/ray-resilience/tree/live-data) branch:
-`live/products/national_watch.geojson` (all active US hazards) and
-`live/products/watch_status.json` (per-source health, declared unknowns), with
-append-only raw snapshots under `live/snapshots/`.
-
-Events with only Tier-1 data get an explicit "monitoring data only — no damage
-conclusions supported." Declared unknowns are rendered with the same prominence as
-findings.
-
-The three tiers describe **evidence depth**. A global catalog needs a second, orthogonal
-axis — `verifiability` (`retained` > `re-derivable` > `cited-only`, weakest-link) — because
-an event can be well-established and still rest on evidence no reader can check and this
-repository may not keep. The two axes together type a bare global registration honestly
-(`evidence_tier: 1`, `verifiability: cited-only`) without inventing a field for it, and they
-keep a restrictively-licensed high-quality product from borrowing the standing of the hashed
-evidence beside it.
+All source imagery traces to a hashed dataset registry (134,272 files, ~33 GB, SHA-256).
+Facilities are OpenStreetMap *presence*, never operational status. Population outside the
+evaluated tiles is reported as a total, never mapped into cells the event has no evidence for.
 
 ## Quick start
 
 ```bash
 git clone https://github.com/rayford295/ray-resilience && cd ray-resilience
 python -m pip install -e ".[deepcase]"
-python -m pytest -q                           # 363 tests (CI installs the [gateway] extra too)
-
-python scripts/publication_boundary.py plan   # which artifacts may be published
-cd app && npm ci && npm test && npm run dev   # PWA at http://localhost:5173
+python -m pytest -q                            # the evaluation environment: 363 tests
+python scripts/publication_boundary.py plan    # which artifacts may be published, and why
+cd app && npm ci && npm test && npm run dev    # the PWA at http://localhost:5173
 ```
 
-The app serves the committed deep-case artifacts, so it works with no keys and no
-services. To run the agent gateway too:
+The app serves the committed artifacts — no keys, no services. To talk to Ray as well:
 
 ```bash
-ollama pull gpt-oss:20b
+ollama pull gpt-oss:20b                        # or any OpenAI-compatible endpoint
 python -m pip install -e ".[deepcase,gateway]"
 uvicorn gateway.main:app --port 8080
 ```
 
+The deep-case builders read a ~33 GB corpus that is not redistributed here; third parties can
+verify every committed artifact, hash and audit row, and can re-run the VLM evaluations from
+the committed prediction records without a GPU.
+
 ## Repository map
 
-[`docs/manual/`](docs/manual/) is the authority on architecture and mechanism —
-this README is the entry point, not the reference.
+```
+├── app/                 # PWA: resident + planner modes, lineage viewer, Ask Ray panel
+├── gateway/             # FastAPI agent gateway — LLM-agnostic, harness middleware
+├── src/geosteward/      # pipeline · connectors · deep-case builders · harness/ (policy, audit, publication)
+├── events/              # eaton-2025/ · milton-2024/ · ian-2022/ · palisades-2025/ (evaluation) · archive/
+├── docs/                # STATUS.md · manual/ · incidents/ · design/ · demo/ · vlm_model_comparison.md
+├── paper/               # OASIS Track A paper (LaTeX + Word draft), figures, eligibility statement
+├── scripts/             # builders, the publication boundary, the VLM sweep and comparison
+└── tests/               # 363 tests — doubles as the verifiable evaluation environment
+```
 
-```
-├── app/                 # PWA frontend (WebGIS + smartphone)
-├── gateway/             # FastAPI agent gateway (LLM-agnostic + harness middleware)
-├── src/geosteward/      # pipeline, agents, sources, hazards, harness/, live/
-├── events/              # eaton-2025/, milton-2024/, ian-2022/, archive/bavi-2026/
-├── docs/                # STATUS.md, Track-A alignment, incidents/, design/
-│   ├── manual/          # the bilingual technical manual — 11 chapters + glossary
-│   └── design/          # specs (decision records) and plans (execution)
-└── tests/               # doubles as a verifiable evaluation environment
-```
+## Paper and submission materials
+
+- **RAY: Resilience Assistant for You — An Accountable GeoAI System for Place-Based Disaster Intelligence**, OASIS Challenge @ ACM SIGSPATIAL 2026, Track A: [`paper/ray-resilience-oasis2026.pdf`](paper/ray-resilience-oasis2026.pdf) (source and co-author Word draft alongside).
+- Eligibility and contribution statement: [`paper/eligibility-and-contribution-statement.pdf`](paper/eligibility-and-contribution-statement.pdf).
+- Demo video: produced by [`docs/demo/record_demo.py`](docs/demo/record_demo.py) as a scripted, genuine walk-through; how it is made is in [`docs/demo/README.md`](docs/demo/README.md).
+- Six-model VLM comparison, regenerated from the committed evaluation files: [`docs/vlm_model_comparison.md`](docs/vlm_model_comparison.md).
+
+Built on the RAPID line ([Yang et al., 2026](https://arxiv.org/abs/2606.21819)) — its prompts,
+metric and acceptance rules become harness stages; its LLM task planner is deliberately not adopted.
 
 ## Team
 
-Yifan Yang (Texas A&M University, Geography). MIT License.
+**Yifan Yang** (Geography; team lead and corresponding author) · **Ziyi Wang** (Computer Science
+and Engineering) · **Wenjing Gong** (Landscape Architecture and Urban Planning) · **Lei Zou**
+(Geography; faculty advisor) — Texas A&M University.
 
-Ray Resilience is a research prototype. It is not an official forecasting or warning
-service — always follow official emergency guidance.
+This research is supported by the National Academies of Sciences, Engineering, and Medicine
+Gulf Research Program (SCON-10000653, SCON-10001536) and the U.S. National Science Foundation
+(2318206). Claude (Anthropic) was used as a coding and writing assistant; commits it contributed
+to carry a `Co-Authored-By` trailer, and the authors take full responsibility for the code and text.
+
+## License and disclaimer
+
+MIT License. Ray Resilience is a research prototype — **not an official forecasting or warning
+service**. In an emergency, follow official guidance (National Weather Service, National Hurricane
+Center, FEMA, and local emergency management).
