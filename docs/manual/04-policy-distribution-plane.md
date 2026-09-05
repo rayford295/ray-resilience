@@ -47,7 +47,7 @@ stands today confirms the fix's shape directly, rather than asking a
 reader to trust a number in prose: of the 30 files the three published
 events place under `events/`, 16 are allowed and 14 are denied — one of
 them `damage_points_restricted`'s
-`events/eaton-2025/exposure/dins_points_restricted.csv.gz`, denied by
+`dins_points_restricted.csv.gz` (Eaton exposure directory; removed from the public tree 2026-09-04), denied by
 `deny-publish-parcel-resolution`, and thirteen more are internal snapshot
 files (registry profiles, SVI tract snapshots, a debris baseline) across
 all three events, denied by `deny-publish-internal-audience`. Thirty is
@@ -73,7 +73,7 @@ authorizes.
 > 核实这次修复的形态，而不必让读者去相信一段文字里的数字：三个已发布事件在
 > `events/` 下共放着 30 个文件，其中 16 个被允许、14 个被拒绝——其中一个正是
 > `damage_points_restricted` 的
-> `events/eaton-2025/exposure/dins_points_restricted.csv.gz`，被
+> `dins_points_restricted.csv.gz` (Eaton exposure directory; removed from the public tree 2026-09-04)，被
 > `deny-publish-parcel-resolution` 拒绝；另外十三个是三个事件里的内部快照文件
 > （注册档案、SVI 普查区快照、一份废墟基线），被 `deny-publish-internal-audience`
 > 拒绝。三十，正是这套平面出现之前，一次不加区分的 `cpSync` 会发布出去的数字；

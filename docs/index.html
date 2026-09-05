@@ -148,6 +148,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
       <li><a href="#principles">Principles</a></li>
       <li><a href="#who">Who It Helps</a></li>
       <li><a href="#quickstart">Quickstart</a></li>
+      <li><a href="https://github.com/rayford295/ray-resilience" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://github.com/rayford295/ray-resilience/blob/main/paper/ray-resilience-oasis2026.pdf" target="_blank" rel="noopener">Paper</a></li>
+      <li><a href="https://github.com/rayford295/ray-resilience/blob/main/docs/demo/ray-resilience-demo.mp4" target="_blank" rel="noopener">Demo</a></li>
       <li><a class="gh-btn" href="./app/">Launch the app</a></li>
     </ul>
   </div>
@@ -303,10 +306,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.55);padding:44px 0;font-si
     </div>
     <div>
       <div class="code">
-<span class="c"># install (h3 powers the tile grids)</span><br>
-pip install -e &quot;.[deepcase]&quot;<br><br>
-<span class="c"># run the evaluation environment (297 tests; 301 with the [gateway] extra)</span><br>
-python -m unittest discover -s tests<br><br>
+<span class="c"># install (h3 powers the tile grids; dev adds pytest)</span><br>
+pip install -e &quot;.[deepcase,dev]&quot;<br><br>
+<span class="c"># run the evaluation environment (363 Python tests; the app adds 67)</span><br>
+python -m pytest -q<br><br>
 <span class="c"># capture a live national watch snapshot (keyless)</span><br>
 python scripts/run_watch.py<br><br>
 <span class="c"># rebuild a deep case from the registered datasets</span><br>

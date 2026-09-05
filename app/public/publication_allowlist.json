@@ -359,12 +359,6 @@
       "reason": "Parcel-resolution artifacts are lineage-only and are never served."
     },
     {
-      "path": "events/eaton-2025/exposure/dins_points_restricted.csv.gz",
-      "kind": "damage_points_restricted",
-      "rule_id": "deny-publish-parcel-resolution",
-      "reason": "Parcel-resolution artifacts are lineage-only and are never served."
-    },
-    {
       "path": "events/eaton-2025/snapshots/facilities/overpass_20260902T032603Z.json.gz",
       "kind": "source_snapshot_odbl",
       "rule_id": "deny-publish-internal-audience",

@@ -15,6 +15,7 @@ dependencies = ["pyyaml>=6.0"]
 [project.optional-dependencies]
 deepcase = ["h3>=4.0"]
 gateway = ["fastapi>=0.110", "uvicorn>=0.29"]
+dev = ["pytest>=8.0"]
 geo = [
   "numpy>=1.26",
   "pandas>=2.0",

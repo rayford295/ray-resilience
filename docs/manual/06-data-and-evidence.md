@@ -230,7 +230,7 @@ DINS itself marked `Inaccessible` become `n_unknown`, never folded into
 undamaged, and `destroyed_rate`'s denominator excludes them for exactly that
 reason. The parcel-level source points themselves are registered as a
 resolution-capped lineage artifact
-(`events/eaton-2025/exposure/dins_points_restricted.csv.gz`, `kind:
+(`dins_points_restricted.csv.gz` (Eaton exposure directory; removed from the public tree 2026-09-04), `kind:
 damage_points_restricted`) rather than shipped anywhere resident-facing;
 `src/geosteward/harness/policy_v1.yaml`'s `artifact_classes` table declares
 that kind `{resolution_cap: parcel, audience: lineage}`, and the
@@ -326,7 +326,7 @@ SVI grid still declares the join pending.
 > 跨数据集断言之前复核。DINS 自己标记为"不可达"的 40 个点被计入 `n_unknown`，
 > 从不并入 `none` 或被丢弃：一处无法实地核查的建筑，不能作为它"未受损"的证据，
 > `destroyed_rate` 的分母正是因此把它们排除在外。地块级源点本身被登记为一份限定了
-> 分辨率上限的溯源产物（`events/eaton-2025/exposure/dins_points_restricted.csv.gz`，
+> 分辨率上限的溯源产物（`dins_points_restricted.csv.gz` (Eaton exposure directory; removed from the public tree 2026-09-04)，
 > 种类为 `damage_points_restricted`），而不会被发到任何面向居民的界面上——
 > `src/geosteward/harness/policy_v1.yaml` 的 `artifact_classes` 表把这个种类声明为
 > `{resolution_cap: parcel, audience: lineage}`，发布平面（`04`）会拒绝发布任何

@@ -232,8 +232,15 @@ class TestShippedRepositoryPlan(unittest.TestCase):
         self.policy = DistributionPolicy.from_yaml(POLICY_V1)
         self.plan = plan_publication(EVENTS, self.policy, self.policy.published_events)
 
-    def test_restricted_dins_source_is_denied(self) -> None:
-        self.assertIn(RESTRICTED, {d.path for d in self.plan.denied})
+    def test_parcel_resolution_dins_source_is_never_public(self) -> None:
+        # Removed from the tracked tree on 2026-09-04: a public repository is a
+        # distribution channel too. If a build ever writes it back, the policy
+        # must still deny it; either way it is never in the allowed set.
+        self.assertNotIn(RESTRICTED, {a.path for a in self.plan.allowed})
+        if (REPO_ROOT / RESTRICTED).exists():
+            self.assertIn(RESTRICTED, {d.path for d in self.plan.denied})
+        else:
+            self.assertFalse(any(p.endswith("dins_points_restricted.csv.gz") for p in (a.path for a in self.plan.allowed)))
 
     def test_no_snapshot_is_published(self) -> None:
         published_snapshots = [p for p in (f.path for f in self.plan.allowed) if "/snapshots/" in p]

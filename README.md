@@ -13,7 +13,11 @@ app with an assistant, **Ray**, that may only say what the evidence supports, an
 [![License: MIT](https://img.shields.io/badge/license-MIT-2A9D8F.svg)](LICENSE)
 [![OASIS 2026 · Track A](https://img.shields.io/badge/OASIS%20%40%20SIGSPATIAL%202026-Track%20A-1F3A5F.svg)](https://rsvp.withgoogle.com/events/oasis-2026/)
 
-**[Live site](https://rayford295.github.io/ray-resilience/)** · **[Open the app](https://rayford295.github.io/ray-resilience/app/)** · [Paper & submission materials](paper/) · [Technical manual](docs/manual/) · [Status](docs/STATUS.md)
+**[Live site](https://rayford295.github.io/ray-resilience/)** · **[Open the app](https://rayford295.github.io/ray-resilience/app/)** · **[For judges: JUDGES.md](JUDGES.md)** · [Paper](paper/ray-resilience-oasis2026.pdf) · [Release v0.1.0-oasis](https://github.com/rayford295/ray-resilience/releases/tag/v0.1.0-oasis)
+
+[![Watch the 2:55 demo](docs/img/demo-poster.png)](https://github.com/rayford295/ray-resilience/blob/main/docs/demo/ray-resilience-demo.mp4)
+
+*▶ [Watch the 2:55 demo](https://github.com/rayford295/ray-resilience/blob/main/docs/demo/ray-resilience-demo.mp4) — resident mode, the planner's trade-off, lineage, and Ask Ray, recorded live with voice-over and subtitles ([how it was made](docs/demo/README.md)).*
 
 </div>
 
@@ -44,7 +48,7 @@ so — as prominently as when it does.
 
 ## How it works
 
-<p align="center"><img src="paper/figures/fig1_architecture.png" alt="Architecture: data, presentation and agent planes over the Steward Harness" width="860"></p>
+<p align="center"><img src="docs/img/architecture-web.png" alt="Architecture: data, presentation and agent planes over the Steward Harness" width="900"></p>
 
 Three loosely coupled planes over one harness. The **data plane** (GitHub Actions) runs
 the connectors and the deep-case builders and publishes hashed artifacts. The
@@ -81,8 +85,8 @@ evaluated tiles is reported as a total, never mapped into cells the event has no
 
 ```bash
 git clone https://github.com/rayford295/ray-resilience && cd ray-resilience
-python -m pip install -e ".[deepcase]"
-python -m pytest -q                            # the evaluation environment: 363 tests
+python -m pip install -e ".[deepcase,dev]"
+python -m pytest -q                            # the evaluation environment: 363 tests (CI runs the same suite with unittest)
 python scripts/publication_boundary.py plan    # which artifacts may be published, and why
 cd app && npm ci && npm test && npm run dev    # the PWA at http://localhost:5173
 ```
