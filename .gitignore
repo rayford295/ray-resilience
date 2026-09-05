@@ -16,3 +16,6 @@ app/node_modules/
 app/dist/
 app/dev-dist/
 app/public/events/
+
+# demo recordings (large; the final mp4 is published outside git)
+docs/demo/out/
