@@ -147,25 +147,61 @@ export function topCells(scores, n = 10) {
     .map(([cell, v]) => ({ cell, ...v }));
 }
 
-/** US Census geocoder (free, no key). Returns null when nothing matches. */
+/**
+ * Address -> point, keyless. Two public geocoders, tried in order, and the
+ * answer says which one spoke:
+ *
+ *   1. US Census Bureau geocoder — authoritative for US addresses, but the
+ *      service sends no CORS headers, so a browser can only reach it when
+ *      the page is served from an origin it happens to allow (in practice:
+ *      never from this app). It is kept first so a future CORS change is
+ *      picked up without a code change.
+ *   2. OpenStreetMap Nominatim — CORS-enabled, ODbL data, usage policy of
+ *      one request per second; this app makes one request per lookup.
+ *
+ * Returns null when neither has a match; throws only when both fail to
+ * answer at all, so "no match" and "no geocoder reachable" stay distinct
+ * (the resident panel renders them differently on purpose).
+ */
 export async function geocodeAddress(oneline) {
-  const url =
-    "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?" +
-    new URLSearchParams({
-      address: oneline,
-      benchmark: "Public_AR_Current",
-      format: "json",
-    });
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`geocoder ${r.status}`);
-  const data = await r.json();
-  const match = data?.result?.addressMatches?.[0];
-  if (!match) return null;
-  return {
-    lon: match.coordinates.x,
-    lat: match.coordinates.y,
-    matched: match.matchedAddress,
-  };
+  const failures = [];
+  try {
+    const url =
+      "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?" +
+      new URLSearchParams({ address: oneline, benchmark: "Public_AR_Current", format: "json" });
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`census geocoder ${r.status}`);
+    const data = await r.json();
+    const match = data?.result?.addressMatches?.[0];
+    if (match) {
+      return { lon: match.coordinates.x, lat: match.coordinates.y, matched: match.matchedAddress, source: "US Census geocoder" };
+    }
+    failures.push("census: no match");
+  } catch (err) {
+    failures.push(`census: ${err?.message ?? err}`);
+  }
+  try {
+    const url =
+      "https://nominatim.openstreetmap.org/search?" +
+      new URLSearchParams({ q: oneline, format: "jsonv2", limit: "1", countrycodes: "us" });
+    const r = await fetch(url, { headers: { Accept: "application/json" } });
+    if (!r.ok) throw new Error(`nominatim ${r.status}`);
+    const hits = await r.json();
+    const hit = Array.isArray(hits) ? hits[0] : null;
+    if (hit) {
+      return {
+        lon: Number(hit.lon),
+        lat: Number(hit.lat),
+        matched: `${hit.display_name} · via OpenStreetMap Nominatim (ODbL)`,
+        source: "OpenStreetMap Nominatim",
+      };
+    }
+    failures.push("nominatim: no match");
+  } catch (err) {
+    failures.push(`nominatim: ${err?.message ?? err}`);
+  }
+  if (failures.every((f) => f.endsWith("no match"))) return null;
+  throw new Error(failures.join("; "));
 }
 
 /**

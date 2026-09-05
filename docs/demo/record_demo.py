@@ -191,9 +191,13 @@ def speed_clip(ff: str, src: Path, out: Path, factor: float) -> Path:
 
 def concat(ff: str, parts: list[Path], target: Path) -> None:
     lst = target.with_suffix(".txt")
-    lst.write_text("".join(f"file '{p.as_posix()}'\n" for p in parts), encoding="utf-8")
-    subprocess.run([ff, "-y", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy", str(target)],
-                   check=True, capture_output=True)
+    # absolute paths: ffmpeg resolves relative entries against the list file's directory
+    lst.write_text("".join(f"file '{p.resolve().as_posix()}'\n" for p in parts), encoding="utf-8")
+    r = subprocess.run([ff, "-y", "-f", "concat", "-safe", "0", "-i", str(lst.resolve()),
+                        "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "-r", "30",
+                        "-an", "-movflags", "+faststart", str(target.resolve())], capture_output=True, text=True)
+    if r.returncode != 0:
+        raise SystemExit("ffmpeg concat failed:\n" + r.stderr[-2000:])
 
 
 def main() -> int:

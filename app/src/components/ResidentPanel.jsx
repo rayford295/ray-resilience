@@ -68,7 +68,7 @@ export default function ResidentPanel({ coverage, records, onFly, exampleQuery, 
 
       {state.status === "loading" && <p className="hint">geocoding…</p>}
       {state.status === "nomatch" && (
-        <p className="hint">No match from the Census geocoder — try adding city and state.</p>
+        <p className="hint">No match from either geocoder (US Census, then OpenStreetMap Nominatim) — try adding city and state.</p>
       )}
       {state.status === "error" && (
         <p className="hint">Geocoder unreachable ({state.error}). Nothing was guessed.</p>
