@@ -1,17 +1,17 @@
 {
- "generated_utc": "20260909T144032Z",
+ "generated_utc": "20260909T184347Z",
  "sources": {
   "usgs": {
    "status": "ok",
-   "events": 243,
+   "events": 263,
    "skipped": 0,
    "dropped_bounds": 0,
    "error": null
   },
   "nws": {
    "status": "ok",
-   "events": 10,
-   "skipped": 324,
+   "events": 12,
+   "skipped": 331,
    "dropped_bounds": 0,
    "error": null
   },
@@ -24,7 +24,7 @@
   },
   "nifc": {
    "status": "ok",
-   "events": 496,
+   "events": 546,
    "skipped": 0,
    "dropped_bounds": 0,
    "error": null
@@ -32,7 +32,7 @@
  },
  "declared_unknowns": [
   "Watch data supports monitoring only; no damage or exposure conclusions.",
-  "324 feature(s) not displayed (no mappable geometry or malformed); 0 dropped by bounds checks."
+  "331 feature(s) not displayed (no mappable geometry or malformed); 0 dropped by bounds checks."
  ],
  "checks": [
   {
@@ -42,9 +42,9 @@
   }
  ],
  "flood_outlook": {
-  "status": "ok",
-  "areas": 5,
+  "status": "failed",
+  "areas": 0,
   "skipped": 0,
-  "error": null
+  "error": "HTTP Error 502: Bad Gateway"
  }
 }
