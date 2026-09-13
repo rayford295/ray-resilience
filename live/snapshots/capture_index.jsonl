@@ -1042,3 +1042,8 @@
 {"source": "nhc", "path": "nhc_20260913T011034Z.json.gz", "utc": "20260913T011034Z"}
 {"source": "nifc", "path": "nifc_20260913T011035Z.json.gz", "utc": "20260913T011035Z"}
 {"source": "wpc_ero", "path": "wpc_ero_20260913T011035Z.json.gz", "utc": "20260913T011035Z"}
+{"source": "usgs", "path": "usgs_20260913T061950Z.json.gz", "utc": "20260913T061950Z"}
+{"source": "nws", "path": "nws_20260913T061950Z.json.gz", "utc": "20260913T061950Z"}
+{"source": "nhc", "path": "nhc_20260913T061950Z.json.gz", "utc": "20260913T061950Z"}
+{"source": "nifc", "path": "nifc_20260913T061951Z.json.gz", "utc": "20260913T061951Z"}
+{"source": "wpc_ero", "path": "wpc_ero_20260913T061951Z.json.gz", "utc": "20260913T061951Z"}
